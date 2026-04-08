@@ -1,0 +1,222 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #fff;
+    color: #1a1a1a;
+}
+
+/* ---------------- NAVBAR ---------------- */
+
+.navbar {
+    width: 100%;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+    color: #0aa26d;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #0b2456;
+    font-size: 16px;
+}
+
+.btn-green {
+    background: #D4E62F;
+    padding: 10px 20px;
+    border-radius: 6px;
+    color: white !important;
+    font-weight: bold;
+}
+
+.btn-white {
+    background: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: 2px solid white;
+    color: #070707;
+}
+
+/* ---------------- HERO ---------------- */
+
+.hero {
+    background: linear-gradient(to right, #16235a, #131d47);
+    padding: 80px 60px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hero-content {
+    max-width: 500px;
+}
+
+.hero-content h1 {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.hero-content span {
+    color: #D4E62F;
+}
+
+.hero-content p {
+    margin-bottom: 25px;
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.hero-image img {
+    width: 450px;
+    border-radius: 10px;
+}
+
+/* ---------------- COMO FUNCIONA ---------------- */
+
+.como-funciona {
+    text-align: center;
+    padding: 60px;
+}
+
+.como-funciona h2 {
+    font-size: 30px;
+}
+
+.funciona-grid {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.funciona-item {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    width: 260px;
+    text-align: center;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.funciona-item img {
+    margin-bottom: 10px;
+}
+
+/* ---------------- ENGAJAMENTO ---------------- */
+
+.engajamento {
+    background: #131d47;
+    color: white;
+    display: flex;
+    padding: 60px;
+    justify-content: space-between;
+}
+
+.engajamento-right h2 span {
+    color: #D4E62F;
+}
+
+.engajamento ul {
+    margin-top: 20px;
+    line-height: 32px;
+}
+
+/* ---------------- INSTITUIÇÕES ---------------- */
+
+.instituicoes {
+    padding: 60px;
+    text-align: center;
+}
+
+.inst-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.inst-card {
+    background: white;
+    width: 260px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.inst-card img {
+    margin-bottom: 10px;
+}
+
+/* ---------------- STATS ---------------- */
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    padding: 40px 0;
+    background: #131d47;
+    color: white;
+}
+
+.stat-box {
+    text-align: center;
+}
+
+.stat-box h3 {
+    font-size: 32px;
+    color: #D4E62F;
+}
+
+/* ---------------- FOOTER ---------------- */
+
+.footer {
+    background: #0b2456;
+    color: white;
+    padding: 60px;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.footer-col a {
+    display: block;
+    color: #ccc;
+    margin-top: 8px;
+    text-decoration: none;
+}
+
+.socials a {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.footer-stores img {
+    margin-right: 20px;
+}
