@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Monetto – Administrador – Dados da Escola</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="admin-dados-escola.css"/>
+</head>
+<body><nav class="sidebar">
+  <a class="sb-logo" href="#">
+    <svg viewBox="0 0 32 32" fill="none" width="26" height="26"><rect width="32" height="32" rx="8" fill="#1A2A8F"/><path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="10" r="3" fill="#2ECC71"/></svg>
+    onetto <span class="sb-role">Admin</span>
+  </a>
+  <span class="sb-section">Escola</span>
+  <a class="sb-link " href="../dashboard-admin-geral/dashboard-admin-geral.html"><span class="icon">🏠</span> Painel Escolar</a>
+  <a class="sb-link " href="../admin-professores/admin-professores.html"><span class="icon">👨‍🏫</span> Professores</a>
+  <a class="sb-link " href="../admin-alunos/admin-alunos.html"><span class="icon">👥</span> Alunos</a>
+  <a class="sb-link " href="../admin-tarefas/admin-tarefas.html"><span class="icon">📝</span> Tarefas</a>
+  <span class="sb-section">Análises</span>
+  <a class="sb-link " href="../admin-relatorios/admin-relatorios.html"><span class="icon">📊</span> Relatórios</a>
+  <span class="sb-section">Configurações</span>
+  <a class="sb-link active" href="../admin-dados-escola/admin-dados-escola.html"><span class="icon">🏫</span> Dados da Escola</a>
+  <a class="sb-link " href="../admin-permissoes/admin-permissoes.html"><span class="icon">🛡️</span> Permissões</a>
+  <a class="sb-link " href="../admin-configuracoes/admin-configuracoes.html"><span class="icon">⚙️</span> Configurações</a>
+  <div class="sb-bottom">
+    <a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;" onclick="if(confirm('Sair da conta?'))window.location.href='../login-principal/login-principal.html'"><span class="icon">🚪</span> Sair da conta</a>
+    <div class="sb-user">
+      <div class="sb-av">🛡️</div>
+      <div class="sb-user-info"><strong>Admin Escolar</strong><span>Administrador</span></div>
+    </div>
+  </div>
+</nav>
+<main class="main">
+  <div class="topbar">
+    <h1>Dados da <span>Escola</span></h1>
+    <div class="top-right">
+      <button class="btn btn-primary">💾 Salvar Alterações</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hd"><h3>🏫 Informações da Escola</h3></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div class="field-group"><label>Nome da Escola</label><input type="text" value="E.E. São Paulo – Unidade Centro" style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s"/></div>
+      <div class="field-group"><label>Código INEP</label><input type="text" value="35123456" style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none"/></div>
+      <div class="field-group"><label>CNPJ</label><input type="text" value="00.000.000/0001-00" style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none"/></div>
+      <div class="field-group"><label>E-mail da Escola</label><input type="email" value="contato@escola.edu.br" style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none"/></div>
+      <div class="field-group"><label>Telefone</label><input type="text" value="(11) 3456-7890" style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none"/></div>
+      <div class="field-group"><label>Cidade / Estado</label><input type="text" value="São Paulo – SP" style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none"/></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hd"><h3>📅 Ano Letivo</h3></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+      <div class="field-group"><label>Ano Letivo</label><input type="text" value="2026" style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none"/></div>
+      <div class="field-group"><label>Início do Ano</label><input type="date" value="2026-02-03" style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none"/></div>
+      <div class="field-group"><label>Fim do Ano</label><input type="date" value="2026-12-18" style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none"/></div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+    <div class="card">
+      <div class="card-hd"><h3>📊 Resumo Atual</h3></div>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:.85rem">
+        <div style="display:flex;justify-content:space-between;padding-bottom:10px;border-bottom:1px solid var(--border)"><span style="color:var(--muted)">Total de alunos</span><strong>512</strong></div>
+        <div style="display:flex;justify-content:space-between;padding-bottom:10px;border-bottom:1px solid var(--border)"><span style="color:var(--muted)">Total de professores</span><strong>12</strong></div>
+        <div style="display:flex;justify-content:space-between;padding-bottom:10px;border-bottom:1px solid var(--border)"><span style="color:var(--muted)">Total de turmas</span><strong>28</strong></div>
+        <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">Sistema ativo desde</span><strong>Fevereiro 2025</strong></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-hd"><h3>⚙️ Configurações Gerais</h3></div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div><div style="font-size:.88rem;font-weight:600">Gamificação ativada</div><div style="font-size:.75rem;color:var(--muted)">XP, níveis e rankings para alunos</div></div>
+          <div style="width:44px;height:24px;border-radius:99px;background:var(--green);cursor:pointer;position:relative;transition:background .25s"><div style="position:absolute;width:18px;height:18px;border-radius:50%;background:var(--white);top:3px;left:23px;transition:left .25s"></div></div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div><div style="font-size:.88rem;font-weight:600">E-mails automáticos</div><div style="font-size:.75rem;color:var(--muted)">Resumos semanais para pais e alunos</div></div>
+          <div style="width:44px;height:24px;border-radius:99px;background:var(--green);cursor:pointer;position:relative;transition:background .25s"><div style="position:absolute;width:18px;height:18px;border-radius:50%;background:var(--white);top:3px;left:23px;transition:left .25s"></div></div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div><div style="font-size:.88rem;font-weight:600">Modo manutenção</div><div style="font-size:.75rem;color:var(--muted)">Bloqueia acesso de alunos e professores</div></div>
+          <div style="width:44px;height:24px;border-radius:99px;background:rgba(255,255,255,.15);cursor:pointer;position:relative;transition:background .25s"><div style="position:absolute;width:18px;height:18px;border-radius:50%;background:var(--white);top:3px;left:3px;transition:left .25s"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

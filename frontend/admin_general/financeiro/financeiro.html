@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Monetto – Financeiro</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="financeiro.css"/>
+</head>
+<body>
+
+<!-- SIDEBAR (Admin Escolar) -->
+<nav class="sidebar">
+  <a class="sb-logo" href="#">
+    <svg viewBox="0 0 32 32" fill="none" width="26" height="26"><rect width="32" height="32" rx="8" fill="#1A2A8F"/><path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="10" r="3" fill="#2ECC71"/></svg>
+    onetto <span class="sb-role">Admin</span>
+  </a>
+  <span class="sb-section">Gestão</span>
+  <a class="sb-link" href="../dashboard-admin-escolar/dashboard-admin-escolar.html"><span class="icon">🏠</span> Dashboard</a>
+  <a class="sb-link" href="../gerenciar-alunos/gerenciar-alunos.html"><span class="icon">👥</span> Alunos</a>
+  <a class="sb-link" href="../gerenciar-professores/gerenciar-professores.html"><span class="icon">👨‍🏫</span> Professores</a>
+  <span class="sb-section">Análises</span>
+  <a class="sb-link" href="../relatorios/relatorios.html"><span class="icon">📊</span> Relatórios</a>
+  <a class="sb-link active" href="financeiro.html"><span class="icon">💳</span> Financeiro</a>
+  <span class="sb-section">Sistema</span>
+  <a class="sb-link" href="../gerenciar-escola/gerenciar-escola.html"><span class="icon">🏫</span> Gerenciar Escola</a>
+  <a class="sb-link" href="../configuracoes/configuracoes-prof.html"><span class="icon">⚙️</span> Configurações</a>
+  <div class="sb-bottom">
+    <a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;" onclick="sairDaConta('../login-principal/login-principal.html')"><span class="icon">🚪</span> Sair</a>
+    <div class="sb-user">
+      <div class="sb-av">🏫</div>
+      <div class="sb-user-info"><strong>Admin Escolar</strong><span style="color:#5B9BF8">E.E. São Paulo Centro</span></div>
+    </div>
+  </div>
+</nav>
+
+<main class="main">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div>
+      <h1>💳 Painel <span>Financeiro</span></h1>
+      <p>Gestão de pagamentos, plano e histórico de cobranças · Abril 2026</p>
+    </div>
+    <div class="top-actions">
+      <button class="btn-secondary">⬇ Exportar PDF</button>
+      <button class="btn-primary" onclick="openUpgrade()">⬆ Fazer Upgrade</button>
+    </div>
+  </div>
+
+  <!-- PLAN BANNER -->
+  <div class="plan-banner">
+    <div class="pb-left">
+      <div class="pb-icon">👑</div>
+      <div>
+        <div class="pb-title">Plano <strong>Premium</strong></div>
+        <div class="pb-sub">Válido até 31 de dezembro de 2026 · Renovação automática</div>
+      </div>
+      <span class="pb-badge">Ativo</span>
+    </div>
+    <div class="pb-right">
+      <div class="pb-stat"><div class="pbs-val">512</div><div class="pbs-lbl">Alunos</div></div>
+      <div class="pb-stat"><div class="pbs-val">87</div><div class="pbs-lbl">Professores</div></div>
+      <div class="pb-stat"><div class="pbs-val">Ilimitado</div><div class="pbs-lbl">Turmas</div></div>
+      <button class="btn-outline" onclick="openUpgrade()">Gerenciar Plano →</button>
+    </div>
+  </div>
+
+  <!-- KPI ROW -->
+  <div class="kpi-row">
+    <div class="kpi kpi-b">
+      <div class="kpi-icon">💰</div>
+      <div class="kpi-val">R$ 4.800</div>
+      <div class="kpi-lbl">Próxima cobrança</div>
+      <div class="kpi-date">Vence em 30 Jun 2026</div>
+    </div>
+    <div class="kpi kpi-g">
+      <div class="kpi-icon">✅</div>
+      <div class="kpi-val">R$ 19.200</div>
+      <div class="kpi-lbl">Total pago em 2026</div>
+      <div class="kpi-date">4 pagamentos realizados</div>
+    </div>
+    <div class="kpi kpi-y">
+      <div class="kpi-icon">📄</div>
+      <div class="kpi-val">4</div>
+      <div class="kpi-lbl">Faturas emitidas</div>
+      <div class="kpi-date">Todas quitadas ✅</div>
+    </div>
+    <div class="kpi kpi-p">
+      <div class="kpi-icon">🎓</div>
+      <div class="kpi-val">R$ 9,37</div>
+      <div class="kpi-lbl">Custo por aluno/mês</div>
+      <div class="kpi-date">512 alunos ativos</div>
+    </div>
+  </div>
+
+  <!-- MAIN GRID -->
+  <div class="fin-grid">
+
+    <!-- INVOICES TABLE -->
+    <div class="card" style="grid-column: span 2">
+      <div class="card-hd">
+        <h3>🧾 Histórico de Faturas</h3>
+        <div class="filter-row">
+          <button class="ftab active" onclick="setTab(this)">2026</button>
+          <button class="ftab" onclick="setTab(this)">2025</button>
+          <button class="ftab" onclick="setTab(this)">Todos</button>
+        </div>
+      </div>
+      <table class="inv-table">
+        <thead>
+          <tr>
+            <th>Fatura</th>
+            <th>Período</th>
+            <th>Valor</th>
+            <th>Status</th>
+            <th>Pagamento</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="inv-id">#INV-2026-04</div></td>
+            <td><span class="inv-period">Abr 2026</span></td>
+            <td><strong>R$ 4.800,00</strong></td>
+            <td><span class="status-badge st-green">✅ Pago</span></td>
+            <td><span class="pay-method">💳 Cartão final 4242</span></td>
+            <td><button class="btn-dl" onclick="downloadInvoice()">⬇ PDF</button></td>
+          </tr>
+          <tr>
+            <td><div class="inv-id">#INV-2026-03</div></td>
+            <td><span class="inv-period">Mar 2026</span></td>
+            <td><strong>R$ 4.800,00</strong></td>
+            <td><span class="status-badge st-green">✅ Pago</span></td>
+            <td><span class="pay-method">💳 Cartão final 4242</span></td>
+            <td><button class="btn-dl" onclick="downloadInvoice()">⬇ PDF</button></td>
+          </tr>
+          <tr>
+            <td><div class="inv-id">#INV-2026-02</div></td>
+            <td><span class="inv-period">Fev 2026</span></td>
+            <td><strong>R$ 4.800,00</strong></td>
+            <td><span class="status-badge st-green">✅ Pago</span></td>
+            <td><span class="pay-method">🏦 Boleto bancário</span></td>
+            <td><button class="btn-dl" onclick="downloadInvoice()">⬇ PDF</button></td>
+          </tr>
+          <tr>
+            <td><div class="inv-id">#INV-2026-01</div></td>
+            <td><span class="inv-period">Jan 2026</span></td>
+            <td><strong>R$ 4.800,00</strong></td>
+            <td><span class="status-badge st-green">✅ Pago</span></td>
+            <td><span class="pay-method">💳 Cartão final 4242</span></td>
+            <td><button class="btn-dl" onclick="downloadInvoice()">⬇ PDF</button></td>
+          </tr>
+          <tr class="upcoming-row">
+            <td><div class="inv-id">#INV-2026-05</div></td>
+            <td><span class="inv-period">Mai 2026</span></td>
+            <td><strong>R$ 4.800,00</strong></td>
+            <td><span class="status-badge st-yellow">⏳ Pendente</span></td>
+            <td><span class="pay-method" style="color:var(--muted)">Vence 30/05/2026</span></td>
+            <td><button class="btn-pay" onclick="showToast('Pagamento iniciado! ✅')">💳 Pagar</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- PAYMENT METHOD -->
+    <div class="card">
+      <div class="card-hd"><h3>💳 Método de Pagamento</h3><button class="btn-edit" onclick="editPayment()">Alterar</button></div>
+      <div class="card-inner">
+        <div class="credit-card">
+          <div class="cc-top">
+            <div class="cc-logo">VISA</div>
+            <div class="cc-chip">▪</div>
+          </div>
+          <div class="cc-number">•••• •••• •••• 4242</div>
+          <div class="cc-bottom">
+            <div><div class="cc-label">Titular</div><div class="cc-val">Admin Escolar SP</div></div>
+            <div><div class="cc-label">Validade</div><div class="cc-val">08/2027</div></div>
+          </div>
+        </div>
+        <div class="pay-opts">
+          <div class="pay-opt active-opt"><span class="po-icon">💳</span><span>Cartão de Crédito</span><span class="po-check">✓</span></div>
+          <div class="pay-opt"><span class="po-icon">🏦</span><span>Boleto Bancário</span></div>
+          <div class="pay-opt"><span class="po-icon">📱</span><span>PIX</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- USAGE STATS -->
+    <div class="card">
+      <div class="card-hd"><h3>📊 Uso do Plano</h3></div>
+      <div class="usage-item">
+        <div class="us-row"><span>👥 Alunos</span><span>512 / Ilimitado</span></div>
+        <div class="us-track"><div class="us-fill" style="width:51%;background:linear-gradient(90deg,#2ECC71,#27ae60)"></div></div>
+      </div>
+      <div class="usage-item">
+        <div class="us-row"><span>👨‍🏫 Professores</span><span>87 / Ilimitado</span></div>
+        <div class="us-track"><div class="us-fill" style="width:87%;background:linear-gradient(90deg,#FFD700,#f0a500)"></div></div>
+      </div>
+      <div class="usage-item">
+        <div class="us-row"><span>📚 Turmas ativas</span><span>24 / Ilimitado</span></div>
+        <div class="us-track"><div class="us-fill" style="width:24%;background:linear-gradient(90deg,#5B9BF8,#1A2A8F)"></div></div>
+      </div>
+      <div class="usage-item">
+        <div class="us-row"><span>🎮 Jogos & Quizzes</span><span>148 realizados</span></div>
+        <div class="us-track"><div class="us-fill" style="width:74%;background:linear-gradient(90deg,#9B59B6,#7d3c98)"></div></div>
+      </div>
+      <div class="usage-note">✅ Todos os limites dentro do plano Premium</div>
+    </div>
+
+  </div>
+
+  <!-- PLANS COMPARISON -->
+  <div class="card plans-card">
+    <div class="card-hd"><h3>🚀 Comparar Planos</h3></div>
+    <div class="plans-grid">
+
+      <div class="plan-col">
+        <div class="plan-name">Free</div>
+        <div class="plan-price">R$ 0<span>/mês</span></div>
+        <ul class="plan-feats">
+          <li class="yes">Até 30 alunos</li>
+          <li class="yes">1 professor</li>
+          <li class="yes">2 turmas</li>
+          <li class="no">Relatórios avançados</li>
+          <li class="no">Jogos e quizzes ilimitados</li>
+          <li class="no">Suporte prioritário</li>
+        </ul>
+        <button class="plan-btn plan-free" disabled>Plano atual não</button>
+      </div>
+
+      <div class="plan-col plan-basic">
+        <div class="plan-name">Basic</div>
+        <div class="plan-price">R$ 1.200<span>/mês</span></div>
+        <ul class="plan-feats">
+          <li class="yes">Até 150 alunos</li>
+          <li class="yes">Até 10 professores</li>
+          <li class="yes">10 turmas</li>
+          <li class="yes">Relatórios básicos</li>
+          <li class="no">Jogos ilimitados</li>
+          <li class="no">Suporte prioritário</li>
+        </ul>
+        <button class="plan-btn plan-free">Fazer downgrade</button>
+      </div>
+
+      <div class="plan-col plan-premium current-plan">
+        <div class="plan-badge-top">✅ Seu plano</div>
+        <div class="plan-name">Premium</div>
+        <div class="plan-price">R$ 4.800<span>/mês</span></div>
+        <ul class="plan-feats">
+          <li class="yes">Alunos ilimitados</li>
+          <li class="yes">Professores ilimitados</li>
+          <li class="yes">Turmas ilimitadas</li>
+          <li class="yes">Analytics avançado</li>
+          <li class="yes">Todos os jogos</li>
+          <li class="yes">Suporte 24/7</li>
+        </ul>
+        <button class="plan-btn plan-current" disabled>Plano atual ✓</button>
+      </div>
+
+      <div class="plan-col plan-enterprise">
+        <div class="plan-name">Enterprise</div>
+        <div class="plan-price">Consultar<span></span></div>
+        <ul class="plan-feats">
+          <li class="yes">Múltiplas escolas</li>
+          <li class="yes">SLA garantido</li>
+          <li class="yes">Integração ERP</li>
+          <li class="yes">Domínio customizado</li>
+          <li class="yes">Treinamento incluso</li>
+          <li class="yes">Gerente de conta</li>
+        </ul>
+        <button class="plan-btn plan-ent" onclick="showToast('Em breve! Entre em contato via suporte 📩')">Falar com vendas →</button>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<!-- UPGRADE MODAL -->
+<div class="modal-overlay" id="upgradeModal" style="display:none">
+  <div class="modal">
+    <div class="modal-hd"><h3>⬆ Gerenciar Plano</h3><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <p style="color:var(--muted);font-size:.88rem;line-height:1.6">Você está no <strong style="color:var(--accent)">Plano Premium</strong>. Para fazer upgrade para Enterprise ou alterar seu plano, entre em contato com o time de vendas.</p>
+      <div class="form-row" style="margin-top:16px">
+        <label>Mensagem para o time de vendas</label>
+        <textarea class="form-input" rows="3" placeholder="Descreva sua necessidade..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
+      <button class="btn-primary" onclick="sendContact()">📧 Enviar Mensagem</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function sairDaConta(d){if(confirm("Sair da conta?"))window.location.href=d;}
+function openUpgrade(){document.getElementById('upgradeModal').style.display='flex';}
+function closeModal(){document.getElementById('upgradeModal').style.display='none';}
+function sendContact(){closeModal();showToast('Mensagem enviada! Nossa equipe entrará em contato em breve 📧');}
+function downloadInvoice(){showToast('Fatura baixada com sucesso! ⬇');}
+function editPayment(){showToast('Redirecionando para atualização de pagamento...');}
+function setTab(el){document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('active'));el.classList.add('active');}
+function showToast(msg){
+  const t=document.createElement('div');t.className='toast';t.textContent=msg;
+  document.body.appendChild(t);setTimeout(()=>t.classList.add('show'),10);
+  setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),300);},3000);
+}
+</script>
+</body>
+</html>

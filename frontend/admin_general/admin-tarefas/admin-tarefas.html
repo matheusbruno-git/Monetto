@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Monetto – Administrador – Tarefas</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="admin-tarefas.css"/>
+</head>
+<body><nav class="sidebar">
+  <a class="sb-logo" href="#">
+    <svg viewBox="0 0 32 32" fill="none" width="26" height="26"><rect width="32" height="32" rx="8" fill="#1A2A8F"/><path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="10" r="3" fill="#2ECC71"/></svg>
+    onetto <span class="sb-role">Admin</span>
+  </a>
+  <span class="sb-section">Escola</span>
+  <a class="sb-link " href="../dashboard-admin-geral/dashboard-admin-geral.html"><span class="icon">🏠</span> Painel Escolar</a>
+  <a class="sb-link " href="../admin-professores/admin-professores.html"><span class="icon">👨‍🏫</span> Professores</a>
+  <a class="sb-link " href="../admin-alunos/admin-alunos.html"><span class="icon">👥</span> Alunos</a>
+  <a class="sb-link active" href="../admin-tarefas/admin-tarefas.html"><span class="icon">📝</span> Tarefas</a>
+  <span class="sb-section">Análises</span>
+  <a class="sb-link " href="../admin-relatorios/admin-relatorios.html"><span class="icon">📊</span> Relatórios</a>
+  <span class="sb-section">Configurações</span>
+  <a class="sb-link " href="../admin-dados-escola/admin-dados-escola.html"><span class="icon">🏫</span> Dados da Escola</a>
+  <a class="sb-link " href="../admin-permissoes/admin-permissoes.html"><span class="icon">🛡️</span> Permissões</a>
+  <a class="sb-link " href="../admin-configuracoes/admin-configuracoes.html"><span class="icon">⚙️</span> Configurações</a>
+  <div class="sb-bottom">
+    <a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;" onclick="if(confirm('Sair da conta?'))window.location.href='../login-principal/login-principal.html'"><span class="icon">🚪</span> Sair da conta</a>
+    <div class="sb-user">
+      <div class="sb-av">🛡️</div>
+      <div class="sb-user-info"><strong>Admin Escolar</strong><span>Administrador</span></div>
+    </div>
+  </div>
+</nav>
+<main class="main">
+  <div class="topbar">
+    <h1>Visão Geral de <span>Tarefas</span></h1>
+    <div class="top-right">
+      <div class="search-bar"><span>🔍</span><input type="text" placeholder="Buscar tarefa..."></div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="sc sc-y"><div class="sc-icon">📋</div><div class="sc-val">148</div><div class="sc-lbl">Tarefas publicadas</div><div class="sc-sub">Este mês</div></div>
+    <div class="sc sc-g"><div class="sc-icon">✅</div><div class="sc-val">89%</div><div class="sc-lbl">Taxa de conclusão</div><div class="sc-sub">▲ +4% vs. mês</div></div>
+    <div class="sc sc-b"><div class="sc-icon">👨‍🏫</div><div class="sc-val">12</div><div class="sc-lbl">Professores criando</div></div>
+    <div class="sc sc-r"><div class="sc-icon">⚠️</div><div class="sc-val">9</div><div class="sc-lbl">Tarefas sem entregas</div></div>
+  </div>
+
+  <div class="filter-tabs">
+    <div class="ftab active">Todas (148)</div>
+    <div class="ftab">Ativas (42)</div>
+    <div class="ftab">Encerradas (106)</div>
+    <div class="ftab">Sem entregas (9)</div>
+  </div>
+
+  <div class="card">
+    <div class="table-head" style="grid-template-columns:2fr 110px 100px 80px 90px 80px">
+      <span>Tarefa</span><span>Professor</span><span>Turma(s)</span><span>Entregas</span><span>Taxa</span><span>Status</span>
+    </div>
+    <div class="data-row" style="grid-template-columns:2fr 110px 100px 80px 90px 80px">
+      <div><div class="person-name">Exercícios de Frações</div><div class="person-sub" style="display:flex;gap:6px;margin-top:2px"><span class="badge badge-blue" style="font-size:.65rem">Matemática</span><span style="font-size:.72rem;color:var(--muted)">Vence: Hoje</span></div></div>
+      <div style="font-size:.82rem">Prof. Ricardo</div>
+      <div style="font-size:.82rem">8ºA, 8ºB</div>
+      <div style="font-size:.85rem;font-weight:600">56/68</div>
+      <div><div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:82%"></div></div><span class="prog-pct">82%</span></div></div>
+      <div><span class="badge badge-green">Ativa</span></div>
+    </div>
+    <div class="data-row" style="grid-template-columns:2fr 110px 100px 80px 90px 80px">
+      <div><div class="person-name">Redação: Redes Sociais</div><div class="person-sub" style="display:flex;gap:6px;margin-top:2px"><span class="badge badge-purple" style="font-size:.65rem">Português</span><span style="font-size:.72rem;color:var(--muted)">Vence: Amanhã</span></div></div>
+      <div style="font-size:.82rem">Profa. Carla</div>
+      <div style="font-size:.82rem">9ºA, 9ºB, 8ºA</div>
+      <div style="font-size:.85rem;font-weight:600">42/96</div>
+      <div><div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:44%;background:linear-gradient(90deg,var(--orange),#b7770d)"></div></div><span class="prog-pct" style="color:var(--orange)">44%</span></div></div>
+      <div><span class="badge badge-green">Ativa</span></div>
+    </div>
+    <div class="data-row" style="grid-template-columns:2fr 110px 100px 80px 90px 80px">
+      <div><div class="person-name">Quiz Fotossíntese</div><div class="person-sub" style="display:flex;gap:6px;margin-top:2px"><span class="badge badge-green" style="font-size:.65rem">Ciências</span><span style="font-size:.72rem;color:var(--muted)">Vence: Sex</span></div></div>
+      <div style="font-size:.82rem">Prof. Marcos</div>
+      <div style="font-size:.82rem">8ºA</div>
+      <div style="font-size:.85rem;font-weight:600">30/34</div>
+      <div><div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:88%"></div></div><span class="prog-pct">88%</span></div></div>
+      <div><span class="badge badge-green">Ativa</span></div>
+    </div>
+    <div class="data-row" style="grid-template-columns:2fr 110px 100px 80px 90px 80px">
+      <div><div class="person-name">Mapa Mental Industrial</div><div class="person-sub" style="display:flex;gap:6px;margin-top:2px"><span class="badge badge-yellow" style="font-size:.65rem">História</span><span style="font-size:.72rem;color:var(--red)">Venceu: 15/04</span></div></div>
+      <div style="font-size:.82rem">Profa. Juliana</div>
+      <div style="font-size:.82rem">8ºB</div>
+      <div style="font-size:.85rem;font-weight:600">20/31</div>
+      <div><div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:65%;background:linear-gradient(90deg,var(--orange),#b7770d)"></div></div><span class="prog-pct" style="color:var(--orange)">65%</span></div></div>
+      <div><span class="badge badge-red">Encerrada</span></div>
+    </div>
+  </div>
+</main>
+</body>
+</html>
