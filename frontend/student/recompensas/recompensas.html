@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Monetto – Recompensas</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="recompensas.css"/>
+</head>
+<body>
+
+<nav class="sidebar">
+  <a class="sb-logo" href="#">
+    <svg viewBox="0 0 32 32" fill="none" width="28" height="28"><rect width="32" height="32" rx="8" fill="#1A2A8F"/><path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="10" r="3" fill="#2ECC71"/></svg>
+    onetto
+  </a>
+  <span class="sb-section">Principal</span>
+  <a class="sb-link" href="../dashboard-aluno/dashboard-aluno.html"><span class="icon">🏠</span> Dashboard</a>
+  <a class="sb-link" href="../tarefas-aluno/tarefas-aluno.html"><span class="icon">📋</span> Minhas Tarefas</a>
+  <a class="sb-link" href="../modulo-aprendizado/modulo-aprendizado.html"><span class="icon">📚</span> Aprendizado</a>
+  <span class="sb-section">Jogos</span>
+  <a class="sb-link" href="../jogos-quiz/jogos-quiz.html"><span class="icon">🎮</span> Jogos & Quiz</a>
+  <a class="sb-link active" href="../recompensas/recompensas.html"><span class="icon">🏆</span> Recompensas</a>
+  <span class="sb-section">Conta</span>
+  <a class="sb-link" href="../configuracoes/configuracoes.html"><span class="icon">⚙️</span> Configurações</a>
+  <div class="sb-bottom"><a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;" onclick="sairDaConta('../login-principal/login-principal.html')"><span class="icon">🚪</span> Sair da conta</a>
+    <div class="sb-user">
+      <div class="sb-av"></div>
+      <div class="sb-user-info"><strong>Ana Souza</strong><span>⚡ 680 XP · Nível 5</span></div>
+    </div>
+  </div>
+</nav>
+
+<main class="main">
+
+  <!-- XP HERO -->
+  <div class="xp-hero">
+    <div class="xp-hero-left">
+      <h2>🏆 Suas Recompensas</h2>
+      <p>Continue jogando e completando tarefas para ganhar mais prêmios!</p>
+      <div class="xp-prog-row">
+        <div class="xp-prog-bg"><div class="xp-prog-f"></div></div>
+        <span class="xp-prog-label">680 / 1.000 XP → Nível 6</span>
+      </div>
+    </div>
+    <div class="xp-hero-right">
+      <div class="xp-big">680</div>
+      <div class="xp-sub">⚡ XP Total · Nível 5</div>
+    </div>
+  </div>
+
+  <!-- MEDALS -->
+  <div class="sec-header">
+    <div class="sec-title">🥇 Medalhas Conquistadas</div>
+    <span class="sec-see">Ver todas →</span>
+  </div>
+  <div class="badges-grid">
+
+    <div class="badge-item">
+      <span class="badge-icon">🔥</span>
+      <div class="badge-name">Sequência</div>
+      <div class="badge-desc">7 dias seguidos</div>
+      <div class="badge-xp">+50 XP</div>
+    </div>
+
+    <div class="badge-item">
+      <span class="badge-icon">⭐</span>
+      <div class="badge-name">Primeira Nota 10</div>
+      <div class="badge-desc">Quiz perfeito</div>
+      <div class="badge-xp">+80 XP</div>
+      <span class="new-badge">NOVO</span>
+    </div>
+
+    <div class="badge-item">
+      <span class="badge-icon">📚</span>
+      <div class="badge-name">Estudante</div>
+      <div class="badge-desc">10 tarefas feitas</div>
+      <div class="badge-xp">+60 XP</div>
+    </div>
+
+    <div class="badge-item">
+      <span class="badge-icon">🚀</span>
+      <div class="badge-name">Decolando</div>
+      <div class="badge-desc">Alcançou Nível 5</div>
+      <div class="badge-xp">+100 XP</div>
+      <span class="new-badge">NOVO</span>
+    </div>
+
+    <div class="badge-item">
+      <span class="badge-icon">💰</span>
+      <div class="badge-name">Financista Jr.</div>
+      <div class="badge-desc">3 quizzes de finanças</div>
+      <div class="badge-xp">+70 XP</div>
+    </div>
+
+    <div class="badge-item">
+      <span class="badge-icon">🎯</span>
+      <div class="badge-name">Focado</div>
+      <div class="badge-desc">5 dias 100% tarefas</div>
+      <div class="badge-xp">+90 XP</div>
+    </div>
+
+    <div class="badge-item locked">
+      <span class="badge-icon">🏆</span>
+      <div class="badge-name">Campeão</div>
+      <div class="badge-desc">#1 no ranking</div>
+      <div class="badge-xp">+200 XP</div>
+    </div>
+
+    <div class="badge-item locked">
+      <span class="badge-icon">🌟</span>
+      <div class="badge-name">Lendário</div>
+      <div class="badge-desc">Alcance Nível 10</div>
+      <div class="badge-xp">+500 XP</div>
+    </div>
+
+    <div class="badge-item locked">
+      <span class="badge-icon">💎</span>
+      <div class="badge-name">Diamante</div>
+      <div class="badge-desc">30 dias seguidos</div>
+      <div class="badge-xp">+300 XP</div>
+    </div>
+
+    <div class="badge-item locked">
+      <span class="badge-icon">🎓</span>
+      <div class="badge-name">Formando</div>
+      <div class="badge-desc">Complete o módulo</div>
+      <div class="badge-xp">+150 XP</div>
+    </div>
+
+    <div class="badge-item locked">
+      <span class="badge-icon">📈</span>
+      <div class="badge-name">Investidor</div>
+      <div class="badge-desc">Bolsa de Valores Jr.</div>
+      <div class="badge-xp">+120 XP</div>
+    </div>
+
+    <div class="badge-item locked">
+      <span class="badge-icon">🤝</span>
+      <div class="badge-name">Colaborador</div>
+      <div class="badge-desc">Ajude 5 colegas</div>
+      <div class="badge-xp">+80 XP</div>
+    </div>
+
+  </div>
+
+  <!-- SHOP -->
+  <div class="sec-header">
+    <div class="sec-title">🎁 Loja de Prêmios</div>
+    <span style="font-size:.78rem;color:var(--muted)">Troque seus XP por recompensas</span>
+  </div>
+  <div class="shop-grid">
+
+    <div class="shop-card">
+      <div class="shop-card-top">
+        <div class="shop-icon">🎒</div>
+        <div><h4>Mochila Monetto</h4><p>Mochila exclusiva da plataforma com logo</p></div>
+      </div>
+      <div class="shop-footer">
+        <span class="shop-cost">⚡ 500 XP</span>
+        <button class="shop-btn">Resgatar</button>
+      </div>
+    </div>
+
+    <div class="shop-card">
+      <div class="shop-card-top">
+        <div class="shop-icon">📓</div>
+        <div><h4>Caderno Premium</h4><p>Caderno especial para anotações escolares</p></div>
+      </div>
+      <div class="shop-footer">
+        <span class="shop-cost">⚡ 300 XP</span>
+        <button class="shop-btn">Resgatar</button>
+      </div>
+    </div>
+
+    <div class="shop-card">
+      <div class="shop-card-top">
+        <div class="shop-icon">🏅</div>
+        <div><h4>Moldura Especial</h4><p>Moldura dourada no seu perfil</p></div>
+      </div>
+      <div class="shop-footer">
+        <span class="shop-cost">⚡ 200 XP</span>
+        <button class="shop-btn claimed">✓ Resgatado</button>
+      </div>
+    </div>
+
+    <div class="shop-card">
+      <div class="shop-card-top">
+        <div class="shop-icon">🎮</div>
+        <div><h4>Jogo Bônus</h4><p>Desbloqueie o jogo secreto de investimentos</p></div>
+      </div>
+      <div class="shop-footer">
+        <span class="shop-cost">⚡ 400 XP</span>
+        <button class="shop-btn">Resgatar</button>
+      </div>
+    </div>
+
+    <div class="shop-card">
+      <div class="shop-card-top">
+        <div class="shop-icon">☕</div>
+        <div><h4>Vale Lanche</h4><p>Vale R$ 10 na cantina da escola</p></div>
+      </div>
+      <div class="shop-footer">
+        <span class="shop-cost">⚡ 600 XP</span>
+        <button class="shop-btn">Resgatar</button>
+      </div>
+    </div>
+
+    <div class="shop-card">
+      <div class="shop-card-top">
+        <div class="shop-icon">🌈</div>
+        <div><h4>Tema Exclusivo</h4><p>Personalize a cor do seu painel</p></div>
+      </div>
+      <div class="shop-footer">
+        <span class="shop-cost">⚡ 150 XP</span>
+        <button class="shop-btn">Resgatar</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- HISTORY -->
+  <div class="sec-header">
+    <div class="sec-title">📜 Histórico de XP</div>
+  </div>
+  <div class="history-list">
+    <div class="hist-item"><div class="hist-icon">⭐</div><div class="hist-body"><strong>Quiz Perfeito – Orçamento Pessoal</strong><span>Hoje, 10:32</span></div><span class="hist-xp">+100 XP</span></div>
+    <div class="hist-item"><div class="hist-icon">✅</div><div class="hist-body"><strong>Tarefa concluída – Revolução Industrial</strong><span>Ontem, 20:14</span></div><span class="hist-xp">+60 XP</span></div>
+    <div class="hist-item"><div class="hist-icon">🔥</div><div class="hist-body"><strong>Bônus de sequência – 7 dias</strong><span>Ontem, 08:00</span></div><span class="hist-xp">+50 XP</span></div>
+    <div class="hist-item"><div class="hist-icon">🎮</div><div class="hist-body"><strong>Mercado Virtual – 3ª rodada</strong><span>16/04, 15:20</span></div><span class="hist-xp">+80 XP</span></div>
+    <div class="hist-item"><div class="hist-icon">📚</div><div class="hist-body"><strong>Módulo 2 concluído – Finanças</strong><span>15/04, 11:05</span></div><span class="hist-xp">+120 XP</span></div>
+  </div>
+
+</main>
+
+<script id="logout-script">
+function sairDaConta(destino) {
+  if (confirm("Tem certeza que deseja sair da conta?")) {
+    window.location.href = destino;
+  }
+}
+</script>
+</body>
+</html>

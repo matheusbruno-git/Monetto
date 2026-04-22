@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Monetto – Dashboard do Aluno</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="dashboard-aluno.css"/>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <a class="sb-logo" href="#">
+    <svg viewBox="0 0 32 32" fill="none" width="28" height="28"><rect width="32" height="32" rx="8" fill="#1A2A8F"/><path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="10" r="3" fill="#2ECC71"/></svg>
+    onetto
+  </a>
+
+  <span class="sb-section">Principal</span>
+  <a class="sb-link active" href="../dashboard-aluno/dashboard-aluno.html"><span class="icon">🏠</span> Dashboard</a>
+  <a class="sb-link" href="../tarefas-aluno/tarefas-aluno.html"><span class="icon">📋</span> Minhas Tarefas</a>
+  <a class="sb-link" href="../modulo-aprendizado/modulo-aprendizado.html"><span class="icon">📚</span> Aprendizado</a>
+
+  <span class="sb-section">Jogos</span>
+  <a class="sb-link" href="../jogos-quiz/jogos-quiz.html"><span class="icon">🎮</span> Jogos & Quiz</a>
+  <a class="sb-link" href="../recompensas/recompensas.html"><span class="icon">🏆</span> Recompensas</a>
+
+  <span class="sb-section">Conta</span>
+  <a class="sb-link" href="../configuracoes/configuracoes.html"><span class="icon">⚙️</span> Configurações</a>
+
+  <div class="sb-bottom"><a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;" onclick="sairDaConta('../login-principal/login-principal.html')"><span class="icon">🚪</span> Sair da conta</a>
+    <div class="sb-user">
+      <div class="sb-av"></div>
+      <div class="sb-user-info">
+        <strong>Ana Souza</strong>
+        <span>⚡ 680 XP · Nível 5</span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- TOP -->
+  <div class="topbar">
+    <div>
+      <h1>Olá, <span>Ana!</span> 👋</h1>
+      <p style="color:var(--muted);font-size:.88rem;margin-top:2px">Quinta-feira, 17 de abril · Você tem 3 tarefas pendentes</p>
+    </div>
+    <div class="top-right">
+      <div class="notif-btn">🔔<div class="notif-dot"></div></div>
+      <div class="xp-topbar">⚡ <strong>680 XP</strong> &nbsp;· Nível 5</div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-card sc-gold">
+      <div class="stat-icon">⚡</div>
+      <div class="stat-val">680</div>
+      <div class="stat-lbl">XP Total</div>
+      <div class="stat-change">▲ +120 esta semana</div>
+    </div>
+    <div class="stat-card sc-green">
+      <div class="stat-icon">✅</div>
+      <div class="stat-val">24</div>
+      <div class="stat-lbl">Tarefas concluídas</div>
+      <div class="stat-change">▲ +5 esta semana</div>
+    </div>
+    <div class="stat-card sc-blue">
+      <div class="stat-icon">🔥</div>
+      <div class="stat-val">7</div>
+      <div class="stat-lbl">Dias de sequência</div>
+      <div class="stat-change">Recorde: 12 dias</div>
+    </div>
+    <div class="stat-card sc-purple">
+      <div class="stat-icon">🏅</div>
+      <div class="stat-val">8</div>
+      <div class="stat-lbl">Medalhas ganhas</div>
+      <div class="stat-change">▲ 2 novas este mês</div>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="section-row">
+
+    <!-- TASKS -->
+    <div class="card">
+      <div class="card-title">
+        Tarefas do Professor
+        <span class="badge-count">5 tarefas</span>
+      </div>
+      <div class="filter-tabs">
+        <div class="ftab active">Todas</div>
+        <div class="ftab">Pendentes</div>
+        <div class="ftab">Concluídas</div>
+        <div class="ftab">Atrasadas</div>
+      </div>
+
+      <div class="task-item">
+        <div class="priority p-high"></div>
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-name">Exercícios de Matemática – Frações</div>
+          <div class="task-meta">
+            <span class="task-subject">Matemática</span>
+            <span class="task-due">Hoje, 23:59</span>
+            <span>Prof. Ricardo</span>
+          </div>
+        </div>
+        <span class="task-xp">+50 XP</span>
+      </div>
+
+      <div class="task-item">
+        <div class="priority p-high"></div>
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-name">Redação: Impacto das Redes Sociais</div>
+          <div class="task-meta">
+            <span class="task-subject">Português</span>
+            <span class="task-due">Amanhã, 18:00</span>
+            <span>Prof. Carla</span>
+          </div>
+        </div>
+        <span class="task-xp">+80 XP</span>
+      </div>
+
+      <div class="task-item">
+        <div class="priority p-med"></div>
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-name">Quiz de Fotossíntese – Ciências</div>
+          <div class="task-meta">
+            <span class="task-subject">Ciências</span>
+            <span class="task-due ok">Sex, 19/04</span>
+            <span>Prof. Marcos</span>
+          </div>
+        </div>
+        <span class="task-xp">+40 XP</span>
+      </div>
+
+      <div class="task-item">
+        <div class="priority p-low"></div>
+        <div class="task-check done"></div>
+        <div class="task-body">
+          <div class="task-name done-text">Mapa Mental – Revolução Industrial</div>
+          <div class="task-meta">
+            <span class="task-subject">História</span>
+            <span class="task-due ok">Concluída</span>
+          </div>
+        </div>
+        <span class="task-xp" style="color:var(--green)">✓ +60 XP</span>
+      </div>
+
+      <div class="task-item">
+        <div class="priority p-low"></div>
+        <div class="task-check done"></div>
+        <div class="task-body">
+          <div class="task-name done-text">Leitura: Capítulos 3 e 4</div>
+          <div class="task-meta">
+            <span class="task-subject">Literatura</span>
+            <span class="task-due ok">Concluída</span>
+          </div>
+        </div>
+        <span class="task-xp" style="color:var(--green)">✓ +30 XP</span>
+      </div>
+
+    </div>
+
+    <!-- RIGHT SIDEBAR CARDS -->
+    <div>
+
+      <!-- XP PROGRESS -->
+      <div class="mini-card">
+        <div class="mini-title">⚡ Progresso de Nível</div>
+        <div style="text-align:center;font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;color:var(--accent);margin-bottom:4px">5</div>
+        <div style="text-align:center;font-size:.75rem;color:var(--muted);margin-bottom:14px">Nível atual</div>
+        <div class="xp-progress-wrap">
+          <div class="xp-labels"><span>680 XP</span><span>1.000 XP</span></div>
+          <div class="xp-bar-bg"><div class="xp-bar-fill"></div></div>
+        </div>
+        <div style="text-align:center;font-size:.78rem;color:var(--muted)">Faltam <strong style="color:var(--accent)">320 XP</strong> para o Nível 6</div>
+      </div>
+
+      <!-- STREAK -->
+      <div class="mini-card">
+        <div class="mini-title">🔥 Sequência de Acesso</div>
+        <div class="streak-row">
+          <div class="streak-day sd-done">Seg</div>
+          <div class="streak-day sd-done">Ter</div>
+          <div class="streak-day sd-done">Qua</div>
+          <div class="streak-day sd-today">Qui</div>
+          <div class="streak-day sd-empty">Sex</div>
+          <div class="streak-day sd-empty">Sáb</div>
+          <div class="streak-day sd-empty">Dom</div>
+        </div>
+        <div class="streak-info">Sequência de <strong>7 dias</strong> 🔥</div>
+      </div>
+
+      <!-- RANKING -->
+      <div class="mini-card">
+        <div class="mini-title">🏆 Ranking da Turma</div>
+        <div class="rank-list">
+          <div class="rank-row-item">
+            <div class="rpos rp1">1</div><div class="rav ra1"></div>
+            <span class="rname">Ana Souza <span class="me-tag">você</span></span>
+            <span class="rxp">680 XP</span>
+          </div>
+          <div class="rank-row-item">
+            <div class="rpos rp2">2</div><div class="rav ra2"></div>
+            <span class="rname">Carlos Lima</span><span class="rxp">640 XP</span>
+          </div>
+          <div class="rank-row-item">
+            <div class="rpos rp3">3</div><div class="rav ra3"></div>
+            <span class="rname">João Pedro</span><span class="rxp">590 XP</span>
+          </div>
+          <div class="rank-row-item">
+            <div class="rpos rp4">4</div><div class="rav ra4"></div>
+            <span class="rname">Maria Clara</span><span class="rxp">520 XP</span>
+          </div>
+          <div class="rank-row-item">
+            <div class="rpos rp5">5</div><div class="rav ra5"></div>
+            <span class="rname">Lucas Torres</span><span class="rxp">480 XP</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+
+<script id="logout-script">
+function sairDaConta(destino) {
+  if (confirm("Tem certeza que deseja sair da conta?")) {
+    window.location.href = destino;
+  }
+}
+</script>
+</body>
+</html>

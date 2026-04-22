@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Monetto – Minhas Tarefas</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="tarefas-aluno.css"/>
+</head>
+<body>
+
+<nav class="sidebar">
+  <a class="sb-logo" href="#">
+    <svg viewBox="0 0 32 32" fill="none" width="28" height="28"><rect width="32" height="32" rx="8" fill="#1A2A8F"/><path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="10" r="3" fill="#2ECC71"/></svg>
+    onetto
+  </a>
+  <span class="sb-section">Principal</span>
+  <a class="sb-link" href="../dashboard-aluno/dashboard-aluno.html"><span class="icon">🏠</span> Dashboard</a>
+  <a class="sb-link active" href="../tarefas-aluno/tarefas-aluno.html"><span class="icon">📋</span> Minhas Tarefas</a>
+  <a class="sb-link" href="../modulo-aprendizado/modulo-aprendizado.html"><span class="icon">📚</span> Aprendizado</a>
+  <span class="sb-section">Jogos</span>
+  <a class="sb-link" href="../jogos-quiz/jogos-quiz.html"><span class="icon">🎮</span> Jogos & Quiz</a>
+  <a class="sb-link" href="../recompensas/recompensas.html"><span class="icon">🏆</span> Recompensas</a>
+  <span class="sb-section">Conta</span>
+  <a class="sb-link" href="../configuracoes/configuracoes.html"><span class="icon">⚙️</span> Configurações</a>
+  <div class="sb-bottom"><a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;" onclick="sairDaConta('../login-principal/login-principal.html')"><span class="icon">🚪</span> Sair da conta</a>
+    <div class="sb-user">
+      <div class="sb-av"></div>
+      <div class="sb-user-info"><strong>Ana Souza</strong><span>⚡ 680 XP · Nível 5</span></div>
+    </div>
+  </div>
+</nav>
+
+<main class="main">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div>
+      <h1>📋 Minhas Tarefas</h1>
+      <p>Quinta-feira, 17 de abril · 3 tarefas pendentes hoje</p>
+    </div>
+    <div class="top-actions">
+      <div class="notif-btn">🔔<div class="notif-dot"></div></div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:50px;padding:7px 16px;font-size:.82rem;display:flex;align-items:center;gap:6px">⚡ <strong style="color:var(--accent)">680 XP</strong></div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="sc"><div class="sc-icon">📋</div><div><div class="sc-val">8</div><div class="sc-lbl">Total de tarefas</div></div></div>
+    <div class="sc"><div class="sc-icon">⏳</div><div><div class="sc-val" style="color:var(--accent)">3</div><div class="sc-lbl">Pendentes</div></div></div>
+    <div class="sc"><div class="sc-icon">✅</div><div><div class="sc-val" style="color:var(--green)">5</div><div class="sc-lbl">Concluídas</div></div></div>
+    <div class="sc"><div class="sc-icon">⚡</div><div><div class="sc-val" style="color:var(--accent)">+260</div><div class="sc-lbl">XP ganho</div></div></div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <div class="search-wrap">🔍 <input type="text" placeholder="Buscar tarefa ou professor..."/></div>
+    <select class="filter-sel"><option>Todas as matérias</option><option>Matemática</option><option>Português</option><option>Ciências</option><option>História</option></select>
+    <div class="ftab active" onclick="setTab(this,'todas')">Todas (8)</div>
+    <div class="ftab" onclick="setTab(this,'pendentes')">⏳ Pendentes (3)</div>
+    <div class="ftab" onclick="setTab(this,'hoje')">🔴 Vence hoje (2)</div>
+    <div class="ftab" onclick="setTab(this,'concluidas')">✅ Concluídas (5)</div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content-grid">
+
+    <!-- TASK LIST -->
+    <div class="task-list-card">
+      <div class="tlc-header">
+        <h3>Lista de Tarefas</h3>
+        <button class="sort-btn">↕ Ordenar por prazo</button>
+      </div>
+
+      <!-- GRUPO: VENCE HOJE -->
+      <div class="group-header"><div class="gh-dot" style="background:var(--red)"></div><span class="gh-label">Vence Hoje</span><span class="gh-count">2</span></div>
+
+      <div class="task-item" id="t1">
+        <div class="priority-bar pb-high"></div>
+        <div class="check-circle" onclick="toggleCheck(this,'t1')"></div>
+        <div class="task-body">
+          <div class="task-name">Exercícios de Matemática – Frações Cap. 5</div>
+          <div class="task-chips">
+            <span class="tchip tc-subj">Matemática</span>
+            <span class="tchip tc-prof">Prof. Ricardo</span>
+            <span class="tchip tc-type">📄 Exercício</span>
+          </div>
+          <div class="due-row"><span class="due-icon">🔴</span><span class="due-urgent">Vence hoje às 23:59</span></div>
+        </div>
+        <div class="task-right">
+          <span class="xp-badge">+50 XP</span>
+          <button class="task-expand" onclick="toggleDetail('detail-t1',this)">ver mais ▾</button>
+        </div>
+      </div>
+      <div class="task-detail" id="detail-t1">
+        <div class="td-desc">Complete os exercícios 1 ao 15 do Capítulo 5 sobre Frações. Mostre o desenvolvimento de todos os cálculos. Entregue pelo sistema até as 23h59.</div>
+        <div class="td-actions">
+          <button class="td-btn td-btn-primary">📤 Entregar tarefa</button>
+          <button class="td-btn td-btn-outline">💬 Tirar dúvida</button>
+        </div>
+      </div>
+
+      <div class="task-item" id="t2">
+        <div class="priority-bar pb-high"></div>
+        <div class="check-circle" onclick="toggleCheck(this,'t2')"></div>
+        <div class="task-body">
+          <div class="task-name">Redação: Impacto das Redes Sociais na Juventude</div>
+          <div class="task-chips">
+            <span class="tchip tc-subj">Português</span>
+            <span class="tchip tc-prof">Prof. Carla</span>
+            <span class="tchip tc-type">✍️ Redação</span>
+          </div>
+          <div class="due-row"><span class="due-icon">🔴</span><span class="due-urgent">Vence hoje às 23:59</span></div>
+        </div>
+        <div class="task-right">
+          <span class="xp-badge">+80 XP</span>
+          <button class="task-expand" onclick="toggleDetail('detail-t2',this)">ver mais ▾</button>
+        </div>
+      </div>
+      <div class="task-detail" id="detail-t2">
+        <div class="td-desc">Escreva uma redação dissertativa-argumentativa de 25 a 30 linhas sobre os impactos das redes sociais na vida dos jovens. Use pelo menos 2 argumentos e uma proposta de intervenção.</div>
+        <div class="td-actions">
+          <button class="td-btn td-btn-primary">📤 Entregar tarefa</button>
+          <button class="td-btn td-btn-outline">💬 Tirar dúvida</button>
+        </div>
+      </div>
+
+      <!-- GRUPO: PRÓXIMOS DIAS -->
+      <div class="group-header"><div class="gh-dot" style="background:var(--orange)"></div><span class="gh-label">Próximos Dias</span><span class="gh-count">1</span></div>
+
+      <div class="task-item" id="t3">
+        <div class="priority-bar pb-med"></div>
+        <div class="check-circle" onclick="toggleCheck(this,'t3')"></div>
+        <div class="task-body">
+          <div class="task-name">Quiz de Fotossíntese – Ciências</div>
+          <div class="task-chips">
+            <span class="tchip tc-subj">Ciências</span>
+            <span class="tchip tc-prof">Prof. Marcos</span>
+            <span class="tchip tc-type">🧠 Quiz</span>
+          </div>
+          <div class="due-row"><span class="due-icon">🟡</span><span class="due-soon">Vence Sexta, 19/04 às 18:00</span></div>
+        </div>
+        <div class="task-right">
+          <span class="xp-badge">+40 XP</span>
+          <button class="task-expand" onclick="toggleDetail('detail-t3',this)">ver mais ▾</button>
+        </div>
+      </div>
+      <div class="task-detail" id="detail-t3">
+        <div class="td-desc">Quiz com 10 perguntas sobre o processo de Fotossíntese e Respiração Celular. Você terá 20 minutos para concluir. Pode ser feito diretamente na plataforma.</div>
+        <div class="td-actions">
+          <button class="td-btn td-btn-primary" onclick="location.href='../jogos-quiz/jogos-quiz.html'">🎮 Iniciar Quiz</button>
+          <button class="td-btn td-btn-outline">📖 Revisar conteúdo</button>
+        </div>
+      </div>
+
+      <!-- GRUPO: CONCLUÍDAS -->
+      <div class="group-header"><div class="gh-dot" style="background:var(--green)"></div><span class="gh-label">Concluídas</span><span class="gh-count">5</span></div>
+
+      <div class="task-item done-item" id="t4">
+        <div class="priority-bar pb-low"></div>
+        <div class="check-circle checked" onclick="toggleCheck(this,'t4')"></div>
+        <div class="task-body">
+          <div class="task-name done-txt">Mapa Mental – Revolução Industrial</div>
+          <div class="task-chips">
+            <span class="tchip tc-subj">História</span>
+            <span class="tchip tc-prof">Prof. Juliana</span>
+          </div>
+          <div class="due-row"><span class="due-icon">✅</span><span class="due-done">Entregue em 15/04</span></div>
+        </div>
+        <div class="task-right">
+          <span class="xp-badge earned">✓ +60 XP</span>
+        </div>
+      </div>
+
+      <div class="task-item done-item" id="t5">
+        <div class="priority-bar pb-low"></div>
+        <div class="check-circle checked" onclick="toggleCheck(this,'t5')"></div>
+        <div class="task-body">
+          <div class="task-name done-txt">Leitura: Dom Casmurro – Capítulos 3 e 4</div>
+          <div class="task-chips">
+            <span class="tchip tc-subj">Literatura</span>
+            <span class="tchip tc-prof">Prof. Carla</span>
+          </div>
+          <div class="due-row"><span class="due-icon">✅</span><span class="due-done">Entregue em 14/04</span></div>
+        </div>
+        <div class="task-right">
+          <span class="xp-badge earned">✓ +30 XP</span>
+        </div>
+      </div>
+
+      <div class="task-item done-item" id="t6">
+        <div class="priority-bar pb-low"></div>
+        <div class="check-circle checked" onclick="toggleCheck(this,'t6')"></div>
+        <div class="task-body">
+          <div class="task-name done-txt">Exercícios de Equações – Lista 3</div>
+          <div class="task-chips">
+            <span class="tchip tc-subj">Matemática</span>
+            <span class="tchip tc-prof">Prof. Ricardo</span>
+          </div>
+          <div class="due-row"><span class="due-icon">✅</span><span class="due-done">Entregue em 12/04</span></div>
+        </div>
+        <div class="task-right">
+          <span class="xp-badge earned">✓ +50 XP</span>
+        </div>
+      </div>
+
+      <div class="task-item done-item" id="t7">
+        <div class="priority-bar pb-low"></div>
+        <div class="check-circle checked" onclick="toggleCheck(this,'t7')"></div>
+        <div class="task-body">
+          <div class="task-name done-txt">Resumo: Biomas Brasileiros</div>
+          <div class="task-chips">
+            <span class="tchip tc-subj">Ciências</span>
+            <span class="tchip tc-prof">Prof. Marcos</span>
+          </div>
+          <div class="due-row"><span class="due-icon">✅</span><span class="due-done">Entregue em 11/04</span></div>
+        </div>
+        <div class="task-right">
+          <span class="xp-badge earned">✓ +40 XP</span>
+        </div>
+      </div>
+
+      <div class="task-item done-item" id="t8">
+        <div class="priority-bar pb-low"></div>
+        <div class="check-circle checked" onclick="toggleCheck(this,'t8')"></div>
+        <div class="task-body">
+          <div class="task-name done-txt">Módulo 1 – Conceitos Básicos de Finanças</div>
+          <div class="task-chips">
+            <span class="tchip tc-subj">Ed. Financeira</span>
+            <span class="tchip tc-prof">Plataforma</span>
+            <span class="tchip tc-type">📚 Módulo</span>
+          </div>
+          <div class="due-row"><span class="due-icon">✅</span><span class="due-done">Concluído em 10/04</span></div>
+        </div>
+        <div class="task-right">
+          <span class="xp-badge earned">✓ +80 XP</span>
+        </div>
+      </div>
+
+    </div><!-- /task-list-card -->
+
+    <!-- RIGHT COL -->
+    <div class="right-col">
+
+      <!-- PROGRESS POR MATÉRIA -->
+      <div class="mini-card">
+        <div class="mc-title">📊 Progresso por Matéria</div>
+        <div class="prog-row">
+          <div class="prog-labels"><span>Matemática</span><span>2/3</span></div>
+          <div class="prog-bg"><div class="prog-f pf-green" style="width:66%"></div></div>
+        </div>
+        <div class="prog-row">
+          <div class="prog-labels"><span>Português</span><span>1/2</span></div>
+          <div class="prog-bg"><div class="prog-f pf-gold" style="width:50%"></div></div>
+        </div>
+        <div class="prog-row">
+          <div class="prog-labels"><span>Ciências</span><span>1/2</span></div>
+          <div class="prog-bg"><div class="prog-f pf-blue" style="width:50%"></div></div>
+        </div>
+        <div class="prog-row">
+          <div class="prog-labels"><span>História</span><span>1/1</span></div>
+          <div class="prog-bg"><div class="prog-f pf-green" style="width:100%"></div></div>
+        </div>
+        <div style="text-align:center;margin-top:12px;font-size:.78rem;color:var(--muted)">Total: <strong style="color:var(--accent)">5 / 8 tarefas</strong> concluídas</div>
+      </div>
+
+      <!-- CALENDÁRIO -->
+      <div class="mini-card">
+        <div class="mc-title">📅 Abril 2026</div>
+        <div class="cal-grid">
+          <div class="cal-day-hd">D</div><div class="cal-day-hd">S</div><div class="cal-day-hd">T</div><div class="cal-day-hd">Q</div><div class="cal-day-hd">Q</div><div class="cal-day-hd">S</div><div class="cal-day-hd">S</div>
+          <!-- row 1 -->
+          <div class="cal-day cal-empty"></div><div class="cal-day"></div><div class="cal-day">1</div><div class="cal-day">2</div><div class="cal-day">3</div><div class="cal-day">4</div><div class="cal-day">5</div>
+          <!-- row 2 -->
+          <div class="cal-day">6</div><div class="cal-day">7</div><div class="cal-day cal-has-task">8</div><div class="cal-day">9</div><div class="cal-day cal-has-task">10</div><div class="cal-day cal-has-task">11</div><div class="cal-day">12</div>
+          <!-- row 3 -->
+          <div class="cal-day">13</div><div class="cal-day cal-has-task">14</div><div class="cal-day cal-has-task">15</div><div class="cal-day">16</div><div class="cal-day cal-today">17</div><div class="cal-day cal-has-due">18</div><div class="cal-day">19</div>
+          <!-- row 4 -->
+          <div class="cal-day">20</div><div class="cal-day cal-has-due">21</div><div class="cal-day">22</div><div class="cal-day">23</div><div class="cal-day">24</div><div class="cal-day">25</div><div class="cal-day">26</div>
+          <!-- row 5 -->
+          <div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div><div class="cal-day">30</div>
+        </div>
+        <div class="cal-legend">
+          <div class="cl-item"><div class="cl-dot" style="background:var(--green)"></div>Entregue</div>
+          <div class="cl-item"><div class="cl-dot" style="background:var(--red)"></div>Prazo</div>
+          <div class="cl-item"><div class="cl-dot" style="background:var(--accent)"></div>Hoje</div>
+        </div>
+      </div>
+
+      <!-- PRÓXIMOS PRAZOS -->
+      <div class="mini-card">
+        <div class="mc-title">⏰ Próximos Prazos</div>
+        <div class="upcoming-item">
+          <div class="up-dot" style="background:var(--red)"></div>
+          <div class="up-body"><strong>Frações – Matemática</strong><span>Prof. Ricardo</span></div>
+          <span class="up-date up-urgent">Hoje</span>
+        </div>
+        <div class="upcoming-item">
+          <div class="up-dot" style="background:var(--red)"></div>
+          <div class="up-body"><strong>Redação – Português</strong><span>Prof. Carla</span></div>
+          <span class="up-date up-urgent">Hoje</span>
+        </div>
+        <div class="upcoming-item">
+          <div class="up-dot" style="background:var(--orange)"></div>
+          <div class="up-body"><strong>Quiz Fotossíntese</strong><span>Prof. Marcos</span></div>
+          <span class="up-date up-soon">Sex 19/04</span>
+        </div>
+        <div class="upcoming-item">
+          <div class="up-dot" style="background:var(--green)"></div>
+          <div class="up-body"><strong>Módulo 2 – Finanças</strong><span>Plataforma</span></div>
+          <span class="up-date up-ok">Seg 21/04</span>
+        </div>
+      </div>
+
+      <!-- STREAK -->
+      <div class="mini-card">
+        <div class="mc-title">🔥 Sequência de Acesso</div>
+        <div class="streak-days">
+          <div class="sd sd-done"><span style="font-size:.55rem">Seg</span>✓</div>
+          <div class="sd sd-done"><span style="font-size:.55rem">Ter</span>✓</div>
+          <div class="sd sd-done"><span style="font-size:.55rem">Qua</span>✓</div>
+          <div class="sd sd-today"><span style="font-size:.55rem">Qui</span>●</div>
+          <div class="sd sd-empty"><span style="font-size:.55rem">Sex</span></div>
+          <div class="sd sd-empty"><span style="font-size:.55rem">Sáb</span></div>
+          <div class="sd sd-empty"><span style="font-size:.55rem">Dom</span></div>
+        </div>
+        <div class="streak-sub">Sequência de <strong>7 dias</strong> 🔥 Continue assim!</div>
+      </div>
+
+    </div>
+  </div><!-- /content-grid -->
+
+</main>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✅ Tarefa marcada como concluída! <strong>+50 XP</strong></div>
+
+<script>
+function setTab(el,type){
+  document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+}
+function toggleDetail(id,btn){
+  const el=document.getElementById(id);
+  el.classList.toggle('open');
+  btn.textContent=el.classList.contains('open')?'ver menos ▴':'ver mais ▾';
+}
+function toggleCheck(circle,taskId){
+  const item=document.getElementById(taskId);
+  const wasDone=circle.classList.contains('checked');
+  circle.classList.toggle('checked');
+  item.classList.toggle('done-item');
+  const name=item.querySelector('.task-name');
+  name.classList.toggle('done-txt');
+  if(!wasDone){
+    showToast();
+    const badge=item.querySelector('.xp-badge');
+    if(badge){badge.classList.add('earned');badge.textContent='✓ '+badge.textContent.replace('✓ ','');}
+  }
+}
+function showToast(){
+  const t=document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+</script>
+
+<script id="logout-script">
+function sairDaConta(destino) {
+  if (confirm("Tem certeza que deseja sair da conta?")) {
+    window.location.href = destino;
+  }
+}
+</script>
+</body>
+</html>

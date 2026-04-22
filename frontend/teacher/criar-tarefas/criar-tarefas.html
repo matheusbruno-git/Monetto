@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Monetto – Criar & Gerenciar Tarefas</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="criar-tarefas.css"/>
+</head>
+<body>
+
+<nav class="sidebar">
+  <a class="sb-logo" href="#">
+    <svg viewBox="0 0 32 32" fill="none" width="26" height="26"><rect width="32" height="32" rx="8" fill="#1A2A8F"/><path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="10" r="3" fill="#2ECC71"/></svg>
+    onetto <span class="sb-role">Prof.</span>
+  </a>
+  <span class="sb-section">Visão Geral</span>
+  <a class="sb-link" href="../dashboard-professor/dashboard-professor.html"><span class="icon">🏠</span> Dashboard</a>
+  <a class="sb-link" href="../gerenciar-alunos/gerenciar-alunos.html"><span class="icon">👥</span> Alunos</a>
+  <a class="sb-link active" href="../criar-tarefas/criar-tarefas.html"><span class="icon">📝</span> Criar Tarefas</a>
+  <a class="sb-link" href="../pagina-tarefas-prof/pagina-tarefas-prof.html"><span class="icon">📋</span> Tarefas <span class="sb-badge">3</span></a>
+  <span class="sb-section">Análises</span>
+  <a class="sb-link" href="../relatorios/relatorios.html"><span class="icon">📊</span> Relatórios</a>
+  <span class="sb-section">Conta</span>
+  <a class="sb-link" href="../configuracoes/configuracoes-prof.html"><span class="icon">⚙️</span> Configurações</a>
+  <div class="sb-bottom"><a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;" onclick="sairDaConta('../login-principal/login-principal.html')"><span class="icon">🚪</span> Sair da conta</a>
+    <div class="sb-user">
+      <div class="sb-av">👨‍🏫</div>
+      <div class="sb-user-info"><strong>Prof. Ricardo</strong><span>4 turmas ativas</span></div>
+    </div>
+  </div>
+</nav>
+
+<div class="main">
+
+  <!-- FORM AREA -->
+  <div class="form-area">
+    <div class="form-title">📝 Criar Nova Tarefa</div>
+    <div class="form-sub">Preencha os campos abaixo e publique para suas turmas</div>
+
+    <div class="tab-row">
+      <button class="ttab active" onclick="switchTab('tarefa',this)">📋 Tarefa</button>
+      <button class="ttab" onclick="switchTab('quiz',this)">🧠 Quiz</button>
+      <button class="ttab" onclick="switchTab('jogo',this)">🎮 Jogo Financeiro</button>
+    </div>
+
+    <!-- TAREFA -->
+    <div id="tab-tarefa">
+      <div class="fg"><label>Título da Tarefa *</label><input type="text" placeholder="Ex: Exercícios de Frações – Capítulo 5"/></div>
+      <div class="fg"><label>Descrição / Instruções</label><textarea placeholder="Descreva o que o aluno deve fazer, quais materiais usar, formato de entrega..."></textarea></div>
+      <div class="fg-row">
+        <div class="fg"><label>Disciplina *</label><select><option>Matemática</option><option>Português</option><option>Ciências</option><option>História</option><option>Geografia</option><option>Educação Financeira</option></select></div>
+        <div class="fg"><label>Prazo de entrega *</label><input type="datetime-local"/></div>
+      </div>
+
+      <div class="fg"><label>Tipo de Tarefa</label>
+        <div class="tipo-grid">
+          <div class="tipo-btn selected" onclick="selTipo(this)"><div class="tipo-icon">📄</div>Texto / Redação</div>
+          <div class="tipo-btn" onclick="selTipo(this)"><div class="tipo-icon">🔢</div>Exercício</div>
+          <div class="tipo-btn" onclick="selTipo(this)"><div class="tipo-icon">📎</div>Envio de arquivo</div>
+          <div class="tipo-btn" onclick="selTipo(this)"><div class="tipo-icon">🧠</div>Quiz</div>
+          <div class="tipo-btn" onclick="selTipo(this)"><div class="tipo-icon">📖</div>Leitura</div>
+          <div class="tipo-btn" onclick="selTipo(this)"><div class="tipo-icon">🎥</div>Vídeo</div>
+        </div>
+      </div>
+
+      <div class="fg"><label>Dificuldade</label>
+        <div class="dif-row">
+          <button class="dif-btn sel-g" onclick="selDif(this,'sel-g')">🟢 Fácil</button>
+          <button class="dif-btn" onclick="selDif(this,'sel-y')">🟡 Médio</button>
+          <button class="dif-btn" onclick="selDif(this,'sel-r')">🔴 Difícil</button>
+        </div>
+      </div>
+
+      <div class="fg"><label>XP para o aluno ao concluir</label>
+        <div class="xp-row">
+          <input type="range" min="10" max="200" value="50" oninput="document.getElementById('xpval').textContent=this.value+' XP'"/>
+          <div class="xp-val" id="xpval">50 XP</div>
+        </div>
+      </div>
+
+      <div class="fg"><label>Turmas destinatárias *</label>
+        <div class="turmas-grid">
+          <div class="turma-chk selected" onclick="this.classList.toggle('selected')"><input type="checkbox" checked/><span class="turma-chk-label">📘 8º Ano A</span></div>
+          <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox"/><span class="turma-chk-label">📗 8º Ano B</span></div>
+          <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox"/><span class="turma-chk-label">📙 9º Ano A</span></div>
+          <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox"/><span class="turma-chk-label">📒 9º Ano B</span></div>
+        </div>
+      </div>
+
+      <div class="form-footer">
+        <button class="btn-draft">💾 Rascunho</button>
+        <button class="btn-acc">🚀 Publicar Tarefa</button>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div id="tab-quiz" style="display:none">
+      <div class="fg"><label>Título do Quiz *</label><input type="text" placeholder="Ex: Quiz – Fotossíntese e Respiração Celular"/></div>
+      <div class="fg-row">
+        <div class="fg"><label>Disciplina</label><select><option>Ciências</option><option>Matemática</option><option>Português</option><option>História</option></select></div>
+        <div class="fg"><label>Tempo limite (min)</label><input type="number" placeholder="15" value="20"/></div>
+      </div>
+      <div style="background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.2);border-radius:14px;padding:18px;margin-bottom:18px">
+        <div style="font-size:.82rem;font-weight:700;margin-bottom:12px;color:var(--accent)">Pergunta 1</div>
+        <div class="fg"><label>Enunciado</label><input type="text" placeholder="Digite a pergunta aqui..."/></div>
+        <div class="fg"><label>Alternativa A</label><input type="text" placeholder="Opção A"/></div>
+        <div class="fg"><label>Alternativa B</label><input type="text" placeholder="Opção B"/></div>
+        <div class="fg-row">
+          <div class="fg"><label>Alternativa C</label><input type="text" placeholder="Opção C"/></div>
+          <div class="fg"><label>Alternativa D</label><input type="text" placeholder="Opção D"/></div>
+        </div>
+        <div class="fg"><label>Resposta correta</label><select><option>A</option><option>B</option><option>C</option><option>D</option></select></div>
+      </div>
+      <button style="width:100%;padding:11px;background:rgba(255,255,255,.07);border:1.5px dashed var(--border);border-radius:12px;color:var(--muted);cursor:pointer;font-size:.88rem">+ Adicionar Pergunta</button>
+      <div class="form-footer" style="margin-top:20px">
+        <button class="btn-draft">💾 Rascunho</button>
+        <button class="btn-acc">🚀 Publicar Quiz</button>
+      </div>
+    </div>
+
+    <!-- JOGO -->
+    <div id="tab-jogo" style="display:none">
+      <div class="fg"><label>Selecione o Jogo Financeiro</label>
+        <div class="tipo-grid">
+          <div class="tipo-btn selected" onclick="selTipo(this)"><div class="tipo-icon">💰</div>Orçamento</div>
+          <div class="tipo-btn" onclick="selTipo(this)"><div class="tipo-icon">📈</div>Bolsa Jr.</div>
+          <div class="tipo-btn" onclick="selTipo(this)"><div class="tipo-icon">🏪</div>Mercado Virtual</div>
+        </div>
+      </div>
+      <div class="fg"><label>Instruções adicionais ao aluno</label><textarea placeholder="Explique o objetivo da atividade para os alunos..."></textarea></div>
+      <div class="fg-row">
+        <div class="fg"><label>Prazo</label><input type="datetime-local"/></div>
+        <div class="fg"><label>XP ao concluir</label><input type="number" placeholder="100" value="100"/></div>
+      </div>
+      <div class="fg"><label>Turmas</label>
+        <div class="turmas-grid">
+          <div class="turma-chk selected" onclick="this.classList.toggle('selected')"><input type="checkbox" checked/><span class="turma-chk-label">📘 8º Ano A</span></div>
+          <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox"/><span class="turma-chk-label">📗 8º Ano B</span></div>
+          <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox"/><span class="turma-chk-label">📙 9º Ano A</span></div>
+          <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox"/><span class="turma-chk-label">📒 9º Ano B</span></div>
+        </div>
+      </div>
+      <div class="form-footer" style="margin-top:20px">
+        <button class="btn-draft">💾 Rascunho</button>
+        <button class="btn-acc">🚀 Atribuir Jogo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIST AREA -->
+  <div class="list-area">
+    <div class="list-hd"><h3>📋 Tarefas Criadas</h3><span>12 tarefas</span></div>
+
+    <div class="task-card">
+      <div class="tc-top"><div class="tc-title">Exercícios de Frações – 8ºA</div><span class="tc-status ts-pub">● Publicada</span></div>
+      <div class="tc-meta"><span class="tc-chip">Matemática</span><span class="tc-chip">8º A</span><span class="tc-chip">⚡ 50 XP</span><span class="tc-chip">🟡 Médio</span></div>
+      <div class="tc-footer">
+        <div class="tc-prog"><div class="tc-bar"><div class="tc-bar-f" style="width:75%"></div></div><span>26/34 entregues</span></div>
+        <div>Vence hoje</div>
+        <div class="tc-actions"><button class="tca">✏️</button><button class="tca">👁</button><button class="tca">🗑</button></div>
+      </div>
+    </div>
+
+    <div class="task-card">
+      <div class="tc-top"><div class="tc-title">Redação: Redes Sociais – 9ºA</div><span class="tc-status ts-pub">● Publicada</span></div>
+      <div class="tc-meta"><span class="tc-chip">Português</span><span class="tc-chip">9º A</span><span class="tc-chip">⚡ 80 XP</span><span class="tc-chip">🔴 Difícil</span></div>
+      <div class="tc-footer">
+        <div class="tc-prog"><div class="tc-bar"><div class="tc-bar-f" style="width:42%"></div></div><span>14/33 entregues</span></div>
+        <div>Vence amanhã</div>
+        <div class="tc-actions"><button class="tca">✏️</button><button class="tca">👁</button><button class="tca">🗑</button></div>
+      </div>
+    </div>
+
+    <div class="task-card">
+      <div class="tc-top"><div class="tc-title">Quiz Fotossíntese – Ciências</div><span class="tc-status ts-pub">● Publicada</span></div>
+      <div class="tc-meta"><span class="tc-chip">Ciências</span><span class="tc-chip">Todas turmas</span><span class="tc-chip">⚡ 40 XP</span><span class="tc-chip">🟢 Fácil</span></div>
+      <div class="tc-footer">
+        <div class="tc-prog"><div class="tc-bar"><div class="tc-bar-f" style="width:30%"></div></div><span>38/128 feitos</span></div>
+        <div>Sex, 19/04</div>
+        <div class="tc-actions"><button class="tca">✏️</button><button class="tca">👁</button><button class="tca">🗑</button></div>
+      </div>
+    </div>
+
+    <div class="task-card">
+      <div class="tc-top"><div class="tc-title">Bolsa de Valores Jr. – 8ºA e 8ºB</div><span class="tc-status ts-draft">◌ Rascunho</span></div>
+      <div class="tc-meta"><span class="tc-chip">Finanças</span><span class="tc-chip">8º A · 8º B</span><span class="tc-chip">⚡ 150 XP</span></div>
+      <div class="tc-footer">
+        <div class="tc-prog"><div class="tc-bar"><div class="tc-bar-f" style="width:0%"></div></div><span>Não publicada</span></div>
+        <div>—</div>
+        <div class="tc-actions"><button class="tca">✏️</button><button class="tca">🚀</button><button class="tca">🗑</button></div>
+      </div>
+    </div>
+
+    <div class="task-card">
+      <div class="tc-top"><div class="tc-title">Mapa Mental – Rev. Industrial</div><span class="tc-status ts-exp">✕ Expirada</span></div>
+      <div class="tc-meta"><span class="tc-chip">História</span><span class="tc-chip">9º B</span><span class="tc-chip">⚡ 60 XP</span></div>
+      <div class="tc-footer">
+        <div class="tc-prog"><div class="tc-bar"><div class="tc-bar-f" style="width:90%"></div></div><span>27/30 entregues</span></div>
+        <div>Expirou 14/04</div>
+        <div class="tc-actions"><button class="tca">👁</button><button class="tca">🗑</button></div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+function switchTab(id,btn){
+  document.querySelectorAll('.ttab').forEach(b=>b.classList.remove('active'));
+  ['tab-tarefa','tab-quiz','tab-jogo'].forEach(t=>document.getElementById(t).style.display='none');
+  btn.classList.add('active');
+  document.getElementById('tab-'+id).style.display='block';
+}
+function selTipo(el){el.closest('.tipo-grid').querySelectorAll('.tipo-btn').forEach(b=>b.classList.remove('selected'));el.classList.add('selected')}
+function selDif(el,cls){el.closest('.dif-row').querySelectorAll('.dif-btn').forEach(b=>{b.classList.remove('sel-g','sel-y','sel-r')});el.classList.add(cls)}
+</script>
+
+<script id="logout-script">
+function sairDaConta(destino) {
+  if (confirm("Tem certeza que deseja sair da conta?")) {
+    window.location.href = destino;
+  }
+}
+</script>
+</body>
+</html>
