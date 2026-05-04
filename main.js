@@ -1,26 +1,12 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
-const path = require('path');
-const mysql = require('mysql2');
+const { app, BrowserWindow, ipcMain } = require("electron");
+const path = require("path");
+const Database = require("better-sqlite3");
 
-// --- 1. GLOBAL DB CONNECTION (use only ONE) ---
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',         // <-- put your real password
-  database: 'myapp'     // <-- your real database
-});
+const db = new Database("database.db");
 
-db.connect(err => {
-  if (err) {
-    console.error("❌ DB Connection Error:", err);
-  } else {
-    console.log("✅ Connected to DB");
-  }
-});
+console.log("✅ SQLite database loaded");
 
-
-// --- 2. CREATE WINDOW ---
-const createWindow = () => {
+function createWindow() {
   const win = new BrowserWindow({
     width: 900,
     height: 700,
@@ -29,14 +15,14 @@ const createWindow = () => {
     }
   });
 
-  win.loadFile('Monetto/landing_page/index.html');
-};
+  win.loadFile("Monetto/landing_page/index.html");
+}
 
 
-// --- 3. IPC: GET USERS ---
-ipcMain.handle("get-users", async () => {
+
+ipcMain.handle("get-users", () => {
   try {
-    const [rows] = await db.promise().query("SELECT * FROM users");
+    const rows = db.prepare("SELECT * FROM users").all();
     return rows;
   } catch (error) {
     console.error("❌ Query error:", error);
@@ -45,7 +31,6 @@ ipcMain.handle("get-users", async () => {
 });
 
 
-// --- 4. APP READY ---
 app.whenReady().then(createWindow);
 
 
