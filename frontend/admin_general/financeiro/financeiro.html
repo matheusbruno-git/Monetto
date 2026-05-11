@@ -8,27 +8,25 @@
 </head>
 <body>
 
-<!-- SIDEBAR (Admin Escolar) -->
 <nav class="sidebar">
   <a class="sb-logo" href="#">
     <svg viewBox="0 0 32 32" fill="none" width="26" height="26"><rect width="32" height="32" rx="8" fill="#1A2A8F"/><path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="10" r="3" fill="#2ECC71"/></svg>
     onetto <span class="sb-role">Admin</span>
   </a>
-  <span class="sb-section">Gestão</span>
-  <a class="sb-link" href="../dashboard-admin-escolar/dashboard-admin-escolar.html"><span class="icon">🏠</span> Dashboard</a>
-  <a class="sb-link" href="../gerenciar-alunos/gerenciar-alunos.html"><span class="icon">👥</span> Alunos</a>
-  <a class="sb-link" href="../gerenciar-professores/gerenciar-professores.html"><span class="icon">👨‍🏫</span> Professores</a>
+  <span class="sb-section">Escola</span>
+  <a class="sb-link" href="../dashboard-admin-geral/dashboard-admin-geral.html"><span class="icon">🏠</span> Painel Escolar</a>
+  <a class="sb-link active" href="../financeiro/financeiro.html"><span class="icon">💵</span> Financeiro</a>
   <span class="sb-section">Análises</span>
-  <a class="sb-link" href="../relatorios/relatorios.html"><span class="icon">📊</span> Relatórios</a>
-  <a class="sb-link active" href="financeiro.html"><span class="icon">💳</span> Financeiro</a>
-  <span class="sb-section">Sistema</span>
-  <a class="sb-link" href="../gerenciar-escola/gerenciar-escola.html"><span class="icon">🏫</span> Gerenciar Escola</a>
-  <a class="sb-link" href="../configuracoes/configuracoes-prof.html"><span class="icon">⚙️</span> Configurações</a>
+  <a class="sb-link " href="../admin-relatorios/admin-relatorios.html"><span class="icon">📊</span> Relatórios</a>
+  <span class="sb-section">Configurações</span>
+  <a class="sb-link " href="../admin-dados-escola/admin-dados-escola.html"><span class="icon">🏫</span> Dados da Escola</a>
+  <a class="sb-link " href="../admin-permissoes/admin-permissoes.html"><span class="icon">🛡️</span> Permissões</a>
+  <a class="sb-link " href="../admin-configuracoes/admin-configuracoes.html"><span class="icon">⚙️</span> Configurações</a>
   <div class="sb-bottom">
-    <a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;" onclick="sairDaConta('../login-principal/login-principal.html')"><span class="icon">🚪</span> Sair</a>
+    <a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;" onclick="if(confirm('Sair da conta?'))window.location.href='../../user/monetto-landing/monetto-landing.html'"><span class="icon">🚪</span> Sair da conta</a>
     <div class="sb-user">
-      <div class="sb-av">🏫</div>
-      <div class="sb-user-info"><strong>Admin Escolar</strong><span style="color:#5B9BF8">E.E. São Paulo Centro</span></div>
+      <div class="sb-av">🛡️</div>
+      <div class="sb-user-info"><strong>Admin Escolar</strong><span>Administrador</span></div>
     </div>
   </div>
 </nav>

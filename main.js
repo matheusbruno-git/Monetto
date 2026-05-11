@@ -1,10 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
-const Database = require("better-sqlite3");
-
-const db = new Database("database.db");
-
-console.log("✅ SQLite database loaded");
+const db = require("./backend/connection.js");
 
 function createWindow() {
   const win = new BrowserWindow({

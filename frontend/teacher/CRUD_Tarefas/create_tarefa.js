@@ -1,4 +1,4 @@
-const db = require("../../db");
+const db = require("../../backend/connection.js");
 const { v4: uuidv4 } = require('uuid');
 
 function createTarefa(dados) {
