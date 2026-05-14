@@ -2,6 +2,12 @@ const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const db = require("./backend/connection.js");
 
+const { registerAluno } = require("./backend/create_aluno");
+
+ipcMain.handle("registerAluno", async (event, dados) => {
+    return registerAluno(dados);
+});
+
 function createWindow() {
   const win = new BrowserWindow({
     width: 900,
