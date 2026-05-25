@@ -5,7 +5,7 @@ const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',         // <-- put your real password
-  database: 'monetto'     // <-- your real database
+  database: 'monettodb'     // <-- your real database
 });
 
 db.connect(err => {

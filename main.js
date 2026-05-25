@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const db = require("./backend/connection.js");
 
-const { registerAluno } = require("./backend/create_aluno");
+const { registerAluno } = require("./backend/create_aluno.js");
 
 ipcMain.handle("registerAluno", async (event, dados) => {
     return registerAluno(dados);
