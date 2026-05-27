@@ -89,7 +89,7 @@
 
       <div class="form-footer">
         <button class="btn-draft">💾 Rascunho</button>
-        <button class="btn-acc">🚀 Publicar Tarefa</button>
+        <button class="btn-acc" id="btn">🚀 Publicar Tarefa</button>
       </div>
     </div>
 
@@ -211,6 +211,7 @@ document.getElementById("btn").addEventListener("click", async () => {
     id_escola: 1, // Change this to real school ID later
     titulo: document.getElementById("titulo").value,
     descricao: document.getElementById("descricao").value,
+    data_criacao: new Date(),
     data_vencimento: document.getElementById("data_vencimento").value
   };
 
@@ -230,6 +231,8 @@ document.getElementById("btn").addEventListener("click", async () => {
     document.getElementById("descricao").value = "";
   }
 });
+
+
 </script>
 </body>
 </html>
