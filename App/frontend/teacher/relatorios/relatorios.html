@@ -1,0 +1,181 @@
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Monetto – Relatórios do Professor</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="relatorios.css"/>
+</head>
+<body>
+
+<nav class="sidebar">
+  <a class="sb-logo" href="#">
+    <svg viewBox="0 0 32 32" fill="none" width="26" height="26"><rect width="32" height="32" rx="8" fill="#1A2A8F"/><path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="10" r="3" fill="#2ECC71"/></svg>
+    Monetto <span class="sb-role">Prof.</span>
+  </a>
+  <span class="sb-section">Visão Geral</span>
+  <a class="sb-link" href="../dashboard-professor/dashboard-professor.html"><span class="icon">🏠</span> Dashboard</a>
+  <a class="sb-link" href="../gerenciar-alunos/gerenciar-alunos.html"><span class="icon">👥</span> Alunos</a>
+  <a class="sb-link" href="../CRUD_Tarefas/criar-tarefas.html"><span class="icon">📝</span> Criar Tarefas</a>
+  <a class="sb-link" href="../pagina-tarefas-prof/pagina-tarefas-prof.html"><span class="icon">📋</span> Tarefas <span class="sb-badge">3</span></a>
+  <span class="sb-section">Análises</span>
+  <a class="sb-link active" href="../relatorios/relatorios.html"><span class="icon">📊</span> Relatórios</a>
+  <span class="sb-section">Conta</span>
+  <a class="sb-link" href="../configuracoes/configuracoes-prof.html"><span class="icon">⚙️</span> Configurações</a>
+  <div class="sb-bottom"><a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;" onclick="sairDaConta('../login-principal/login-principal.html')"><span class="icon">🚪</span> Sair da conta</a>
+    <div class="sb-user">
+      <div class="sb-av">👨‍🏫</div>
+      <div class="sb-user-info"><strong>Prof. Ricardo</strong><span>4 turmas ativas</span></div>
+    </div>
+  </div>
+</nav>
+
+<main class="main">
+
+  <div class="topbar">
+    <div>
+      <h1>📊 Relatórios & Analytics</h1>
+      <p style="color:var(--muted);font-size:.87rem;margin-top:3px">Análise completa do desempenho das suas turmas</p>
+    </div>
+    <div class="top-right">
+      <button class="btn-export">⬇ PDF</button>
+      <button class="btn-export">📊 Excel</button>
+      <button class="btn-export">📧 Enviar</button>
+    </div>
+  </div>
+
+  <!-- PERIOD / FILTER -->
+  <div class="period-row">
+    <div class="period-tabs">
+      <button class="ptab active" onclick="setPeriod(this)">Esta semana</button>
+      <button class="ptab" onclick="setPeriod(this)">Este mês</button>
+      <button class="ptab" onclick="setPeriod(this)">Bimestre</button>
+      <button class="ptab" onclick="setPeriod(this)">Ano letivo</button>
+    </div>
+    <select class="turma-filter">
+      <option>Todas as turmas</option>
+      <option>8º Ano A</option>
+      <option>8º Ano B</option>
+      <option>9º Ano A</option>
+      <option>9º Ano B</option>
+    </select>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpi-row">
+    <div class="kpi"><div class="kpi-icon">👥</div><div class="kpi-val">128</div><div class="kpi-lbl">Alunos ativos</div><div class="kpi-delta delta-up">▲ 98% de presença</div></div>
+    <div class="kpi"><div class="kpi-icon">✅</div><div class="kpi-val">87%</div><div class="kpi-lbl">Taxa de conclusão</div><div class="kpi-delta delta-up">▲ +5% vs. semana anterior</div></div>
+    <div class="kpi"><div class="kpi-icon">⚡</div><div class="kpi-val">8.4k</div><div class="kpi-lbl">XP distribuído</div><div class="kpi-delta delta-up">▲ +27% vs. semana anterior</div></div>
+    <div class="kpi"><div class="kpi-icon">📝</div><div class="kpi-val">12</div><div class="kpi-lbl">Tarefas ativas</div><div class="kpi-delta delta-neu">3 vencendo hoje</div></div>
+    <div class="kpi"><div class="kpi-icon">⚠️</div><div class="kpi-val">11</div><div class="kpi-lbl">Alunos em risco</div><div class="kpi-delta delta-dn">▼ Atenção necessária</div></div>
+  </div>
+
+  <!-- ROW 1 -->
+  <div class="g3">
+
+    <div class="card" style="grid-column:span 2">
+      <div class="card-hd"><h3>📈 Conclusões de Tarefas por Dia</h3><span style="font-size:.75rem;color:var(--muted)">Abril 2026</span></div>
+      <div class="bar-chart">
+        <div class="bc"><div class="bc-bar blue" style="height:45px"></div><div class="bc-lbl">Seg 07</div></div>
+        <div class="bc"><div class="bc-bar blue" style="height:62px"></div><div class="bc-lbl">Ter 08</div></div>
+        <div class="bc"><div class="bc-bar blue" style="height:50px"></div><div class="bc-lbl">Qua 09</div></div>
+        <div class="bc"><div class="bc-bar blue" style="height:80px"></div><div class="bc-lbl">Qui 10</div></div>
+        <div class="bc"><div class="bc-bar blue" style="height:55px"></div><div class="bc-lbl">Sex 11</div></div>
+        <div class="bc"><div class="bc-bar blue" style="height:20px;opacity:.5"></div><div class="bc-lbl">Sáb 12</div></div>
+        <div class="bc"><div class="bc-bar gold" style="height:48px"></div><div class="bc-lbl">Seg 14</div></div>
+        <div class="bc"><div class="bc-bar gold" style="height:72px"></div><div class="bc-lbl">Ter 15</div></div>
+        <div class="bc"><div class="bc-bar gold" style="height:58px"></div><div class="bc-lbl">Qua 16</div></div>
+        <div class="bc"><div class="bc-bar gold" style="height:95px"></div><div class="bc-lbl">Qui 17</div></div>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:10px">
+        <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--muted)"><div style="width:10px;height:10px;border-radius:3px;background:#5B9BF8"></div>Semana passada</div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--muted)"><div style="width:10px;height:10px;border-radius:3px;background:var(--accent)"></div>Esta semana</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-hd"><h3>🎯 Conclusão por Turma</h3></div>
+      <div class="pie-section">
+        <div class="pie" style="background:conic-gradient(var(--green) 0% 33%,#5B9BF8 33% 57%,var(--accent) 57% 78%,var(--purple) 78% 100%)"></div>
+        <div class="pie-leg">
+          <div class="pl-row"><div class="pl-dot" style="background:var(--green)"></div><span class="pl-label">8º A</span><span class="pl-pct" style="color:var(--green)">92%</span><span class="pl-count">34</span></div>
+          <div class="pl-row"><div class="pl-dot" style="background:#5B9BF8"></div><span class="pl-label">9º B</span><span class="pl-pct" style="color:#5B9BF8">91%</span><span class="pl-count">30</span></div>
+          <div class="pl-row"><div class="pl-dot" style="background:var(--accent)"></div><span class="pl-label">8º B</span><span class="pl-pct" style="color:var(--accent)">85%</span><span class="pl-count">31</span></div>
+          <div class="pl-row"><div class="pl-dot" style="background:var(--purple)"></div><span class="pl-label">9º A</span><span class="pl-pct" style="color:var(--orange)">71%</span><span class="pl-count">33</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2 -->
+  <div class="g-wide">
+
+    <!-- ALUNOS TABLE -->
+    <div class="card">
+      <div class="card-hd"><h3>👥 Desempenho Individual dos Alunos</h3><a href="../gerenciar-alunos/gerenciar-alunos.html">Ver todos →</a></div>
+      <div class="al-table">
+        <div class="al-head"><div>Aluno</div><div>XP</div><div>Nível</div><div>Tarefas</div><div>Progresso</div><div>Status</div></div>
+        <div class="al-row"><div class="al-user"><div class="al-av av1"></div><div class="al-name">Ana Souza</div></div><div><span class="xp-chip">⚡680</span></div><div><span class="lvl-chip">Nv. 5</span></div><div style="font-size:.82rem">24/26</div><div><div class="prog-mini"><div class="prog-mini-f" style="width:92%"></div></div></div><div><span class="status-chip sc-ok">Ótimo</span></div></div>
+        <div class="al-row"><div class="al-user"><div class="al-av av2"></div><div class="al-name">Carlos Lima</div></div><div><span class="xp-chip">⚡640</span></div><div><span class="lvl-chip">Nv. 5</span></div><div style="font-size:.82rem">22/26</div><div><div class="prog-mini"><div class="prog-mini-f" style="width:85%"></div></div></div><div><span class="status-chip sc-ok">Ótimo</span></div></div>
+        <div class="al-row"><div class="al-user"><div class="al-av av3"></div><div class="al-name">João Pedro</div></div><div><span class="xp-chip">⚡590</span></div><div><span class="lvl-chip">Nv. 4</span></div><div style="font-size:.82rem">20/26</div><div><div class="prog-mini"><div class="prog-mini-f" style="width:77%"></div></div></div><div><span class="status-chip sc-ok">Bom</span></div></div>
+        <div class="al-row"><div class="al-user"><div class="al-av av4"></div><div class="al-name">Maria Clara</div></div><div><span class="xp-chip">⚡520</span></div><div><span class="lvl-chip">Nv. 4</span></div><div style="font-size:.82rem">18/26</div><div><div class="prog-mini"><div class="prog-mini-f" style="width:69%;background:var(--accent)"></div></div></div><div><span class="status-chip sc-warn">Atenção</span></div></div>
+        <div class="al-row"><div class="al-user"><div class="al-av av5"></div><div class="al-name">Lucas Torres</div></div><div><span class="xp-chip">⚡480</span></div><div><span class="lvl-chip">Nv. 4</span></div><div style="font-size:.82rem">16/26</div><div><div class="prog-mini"><div class="prog-mini-f" style="width:62%;background:var(--accent)"></div></div></div><div><span class="status-chip sc-warn">Atenção</span></div></div>
+        <div class="al-row"><div class="al-user"><div class="al-av av6"></div><div class="al-name">Fernanda Costa</div></div><div><span class="xp-chip">⚡420</span></div><div><span class="lvl-chip">Nv. 3</span></div><div style="font-size:.82rem">14/26</div><div><div class="prog-mini"><div class="prog-mini-f" style="width:54%;background:var(--accent)"></div></div></div><div><span class="status-chip sc-warn">Atenção</span></div></div>
+        <div class="al-row"><div class="al-user"><div class="al-av av7"></div><div class="al-name">Rafael Mendes</div></div><div><span class="xp-chip">⚡200</span></div><div><span class="lvl-chip">Nv. 2</span></div><div style="font-size:.82rem">7/26</div><div><div class="prog-mini"><div class="prog-mini-f" style="width:27%;background:var(--red)"></div></div></div><div><span class="status-chip sc-bad">Em risco</span></div></div>
+        <div class="al-row"><div class="al-user"><div class="al-av av8"></div><div class="al-name">Isabela Rocha</div></div><div><span class="xp-chip">⚡360</span></div><div><span class="lvl-chip">Nv. 3</span></div><div style="font-size:.82rem">12/26</div><div><div class="prog-mini"><div class="prog-mini-f" style="width:46%;background:var(--orange)"></div></div></div><div><span class="status-chip sc-warn">Atenção</span></div></div>
+      </div>
+    </div>
+
+    <!-- RIGHT COL -->
+    <div style="display:flex;flex-direction:column;gap:18px">
+
+      <!-- ANÁLISE POR TAREFA -->
+      <div class="card">
+        <div class="card-hd"><h3>📋 Taxa de Entrega por Tarefa</h3></div>
+        <div class="task-ana-item"><div class="ta-subj" style="background:var(--green)"></div><div class="ta-info"><strong>Frações – 8ºA</strong><span>Matemática · Vence hoje</span></div><div class="ta-prog"><div class="ta-bar"><div class="ta-bar-f tf-g" style="width:76%"></div></div><span class="ta-pct" style="color:var(--green)">76%</span></div></div>
+        <div class="task-ana-item"><div class="ta-subj" style="background:var(--accent)"></div><div class="ta-info"><strong>Redação – 9ºA</strong><span>Português · Vence hoje</span></div><div class="ta-prog"><div class="ta-bar"><div class="ta-bar-f tf-y" style="width:42%"></div></div><span class="ta-pct" style="color:var(--accent)">42%</span></div></div>
+        <div class="task-ana-item"><div class="ta-subj" style="background:(#5B9BF8)"></div><div class="ta-info"><strong>Quiz Fotossíntese</strong><span>Ciências · Sex 19/04</span></div><div class="ta-prog"><div class="ta-bar"><div class="ta-bar-f" style="width:30%;background:#5B9BF8"></div></div><span class="ta-pct" style="color:#5B9BF8">30%</span></div></div>
+        <div class="task-ana-item"><div class="ta-subj" style="background:var(--green)"></div><div class="ta-info"><strong>Mapa Mental – 9ºB</strong><span>História · Expirada</span></div><div class="ta-prog"><div class="ta-bar"><div class="ta-bar-f tf-g" style="width:90%"></div></div><span class="ta-pct" style="color:var(--green)">90%</span></div></div>
+      </div>
+
+      <!-- ALERTAS -->
+      <div class="card">
+        <div class="card-hd"><h3>⚠️ Alertas de Desempenho</h3></div>
+        <div class="at-item at-red"><div class="at-icon">🔴</div><div class="at-body"><strong>Rafael Mendes – 7/26 tarefas</strong><span>Inativo há 8 dias · 9ºA</span></div><button class="at-btn">Alertar</button></div>
+        <div class="at-item at-yellow"><div class="at-icon">🟡</div><div class="at-body"><strong>3 alunos com queda de engajamento</strong><span>9ºA – Taxa caiu de 85% → 71%</span></div><button class="at-btn">Ver</button></div>
+        <div class="at-item at-green"><div class="at-icon">🟢</div><div class="at-body"><strong>8ºA atingiu 92% de engajamento!</strong><span>Melhor resultado da semana</span></div><button class="at-btn">Parabéns</button></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DESTAQUES -->
+  <div class="card" style="margin-bottom:20px">
+    <div class="card-hd"><h3>🏆 Destaques da Semana</h3></div>
+    <div class="destaque-grid">
+      <div class="dest-card"><div class="dest-pos">🥇</div><div class="dest-av av1"></div><div class="dest-name">Ana Souza</div><div class="dest-xp">⚡ 680 XP</div><div class="dest-info">8ºA · 24 tarefas feitas</div></div>
+      <div class="dest-card"><div class="dest-pos">🥈</div><div class="dest-av av2"></div><div class="dest-name">Carlos Lima</div><div class="dest-xp">⚡ 640 XP</div><div class="dest-info">8ºB · 22 tarefas feitas</div></div>
+      <div class="dest-card"><div class="dest-pos">🥉</div><div class="dest-av av3"></div><div class="dest-name">João Pedro</div><div class="dest-xp">⚡ 590 XP</div><div class="dest-info">9ºA · 20 tarefas feitas</div></div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+function setPeriod(btn){
+  document.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
+
+<script id="logout-script">
+function sairDaConta(destino) {
+  if (confirm("Tem certeza que deseja sair da conta?")) {
+    window.location.href = destino;
+  }
+}
+</script>
+</body>
+</html>
