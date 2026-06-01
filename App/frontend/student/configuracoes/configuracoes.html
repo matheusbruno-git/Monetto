@@ -82,17 +82,17 @@
         <div class="form-row">
           <div class="field-group">
             <label>Nome</label>
-            <input type="text" value="Ana"/>
+            <input type="text" id="nome_usuario" value="null"/>
           </div>
           <div class="field-group">
             <label>Sobrenome</label>
-            <input type="text" value="Souza"/>
+            <input type="text" value="null"/>
           </div>
         </div>
         <div class="form-row single">
           <div class="field-group">
             <label>E-mail</label>
-            <input type="email" value="ana.souza@escola.edu.br"/>
+            <input type="email" value="null"/>
           </div>
         </div>
         <div class="form-row">
@@ -317,6 +317,10 @@ function showToast() {
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2800);
 }
+
+const nomeUsuario = document.getElementById('nome_usuario');
+
+console.log(nomeUsuario)
 
 document.querySelectorAll('.av-opt').forEach(av => {
   av.addEventListener('click', function() {
