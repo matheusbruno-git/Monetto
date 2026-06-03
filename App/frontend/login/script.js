@@ -12,3 +12,6 @@ function handleCredentialResponse(response) {
 
     window.location.href = "../dashboard-aluno/dashboard-aluno.html";
 }
+
+// in your login page JS, after result.success:
+localStorage.setItem('session', JSON.stringify(result.user));

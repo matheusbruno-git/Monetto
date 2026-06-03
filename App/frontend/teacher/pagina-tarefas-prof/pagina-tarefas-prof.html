@@ -60,103 +60,19 @@
       <div class="ftab" onclick="setFtab(this)">Expiradas</div>
     </div>
 
-    <div class="kanban">
-
-      <!-- ATIVAS -->
-      <div class="kol">
-        <div class="kol-hd"><h3><span class="kol-dot kd-g"></span>Ativas</h3><span class="kol-count">7</span></div>
-
-        <div class="tcard">
-          <div class="tcard-title">Exercícios de Frações</div>
-          <div class="tcard-meta"><span class="chip">Matemática</span><span class="chip">8º A</span><span class="chip">⚡50XP</span></div>
-          <div class="tcard-progress">
-            <div class="tprog-label"><span>26/34 entregues</span><span>76%</span></div>
-            <div class="tprog-bg"><div class="tprog-f" style="width:76%"></div></div>
-          </div>
-          <div class="tcard-footer"><span>Vence hoje 23:59</span><span style="color:var(--red)">🔴 Urgente</span></div>
-        </div>
-
-        <div class="tcard">
-          <div class="tcard-title">Quiz Fotossíntese</div>
-          <div class="tcard-meta"><span class="chip">Ciências</span><span class="chip">Todas</span><span class="chip">⚡40XP</span></div>
-          <div class="tcard-progress">
-            <div class="tprog-label"><span>38/128 feitos</span><span>30%</span></div>
-            <div class="tprog-bg"><div class="tprog-f" style="width:30%"></div></div>
-          </div>
-          <div class="tcard-footer"><span>Sex, 19/04</span><span style="color:var(--green)">🟢 OK</span></div>
-        </div>
-
-        <div class="tcard">
-          <div class="tcard-title">Leitura Cap. 5 – Dom Casmurro</div>
-          <div class="tcard-meta"><span class="chip">Português</span><span class="chip">9º A</span><span class="chip">⚡30XP</span></div>
-          <div class="tcard-progress">
-            <div class="tprog-label"><span>20/33 feitos</span><span>61%</span></div>
-            <div class="tprog-bg"><div class="tprog-f" style="width:61%"></div></div>
-          </div>
-          <div class="tcard-footer"><span>Seg, 21/04</span><span style="color:var(--green)">🟢 OK</span></div>
-        </div>
+    <div class="kanban" id="kanbanBoard">
+      <div class="kol" id="col-ativas">
+        <div class="kol-hd"><h3><span class="kol-dot kd-g"></span>Ativas</h3><span class="kol-count" id="count-ativas">0</span></div>
+        <div id="cards-ativas"></div>
       </div>
-
-      <!-- VENCENDO HOJE -->
-      <div class="kol">
-        <div class="kol-hd"><h3><span class="kol-dot kd-y"></span>Vencendo Hoje</h3><span class="kol-count">3</span></div>
-
-        <div class="tcard">
-          <div class="tcard-title">Redação: Redes Sociais</div>
-          <div class="tcard-meta"><span class="chip">Português</span><span class="chip">9º A</span><span class="chip">⚡80XP</span></div>
-          <div class="tcard-progress">
-            <div class="tprog-label"><span>14/33 entregues</span><span>42%</span></div>
-            <div class="tprog-bg"><div class="tprog-f" style="width:42%"></div></div>
-          </div>
-          <div class="tcard-footer"><span>Vence 23:59</span><span style="color:var(--accent)">🟡 Atenção</span></div>
-        </div>
-
-        <div class="tcard">
-          <div class="tcard-title">Lista de Geometria</div>
-          <div class="tcard-meta"><span class="chip">Matemática</span><span class="chip">8º B</span><span class="chip">⚡60XP</span></div>
-          <div class="tcard-progress">
-            <div class="tprog-label"><span>22/31 entregues</span><span>71%</span></div>
-            <div class="tprog-bg"><div class="tprog-f" style="width:71%"></div></div>
-          </div>
-          <div class="tcard-footer"><span>Vence 23:59</span><span style="color:var(--accent)">🟡 Atenção</span></div>
-        </div>
-
-        <div class="tcard">
-          <div class="tcard-title">Resumo: Guerras Mundiais</div>
-          <div class="tcard-meta"><span class="chip">História</span><span class="chip">9º B</span><span class="chip">⚡45XP</span></div>
-          <div class="tcard-progress">
-            <div class="tprog-label"><span>18/30 entregues</span><span>60%</span></div>
-            <div class="tprog-bg"><div class="tprog-f" style="width:60%"></div></div>
-          </div>
-          <div class="tcard-footer"><span>Vence 23:59</span><span style="color:var(--accent)">🟡 Atenção</span></div>
-        </div>
+      <div class="kol" id="col-vencendo">
+        <div class="kol-hd"><h3><span class="kol-dot kd-y"></span>Vencendo Hoje</h3><span class="kol-count" id="count-vencendo">0</span></div>
+        <div id="cards-vencendo"></div>
       </div>
-
-      <!-- EXPIRADAS -->
-      <div class="kol">
-        <div class="kol-hd"><h3><span class="kol-dot kd-r"></span>Expiradas</h3><span class="kol-count">2</span></div>
-
-        <div class="tcard" style="opacity:.7">
-          <div class="tcard-title">Mapa Mental – Rev. Industrial</div>
-          <div class="tcard-meta"><span class="chip">História</span><span class="chip">9º B</span><span class="chip">⚡60XP</span></div>
-          <div class="tcard-progress">
-            <div class="tprog-label"><span>27/30 entregues</span><span>90%</span></div>
-            <div class="tprog-bg"><div class="tprog-f" style="width:90%"></div></div>
-          </div>
-          <div class="tcard-footer"><span>Expirou 14/04</span><span style="color:var(--red)">🔴 Expirada</span></div>
-        </div>
-
-        <div class="tcard" style="opacity:.7">
-          <div class="tcard-title">Lista Frações – 8ºB</div>
-          <div class="tcard-meta"><span class="chip">Matemática</span><span class="chip">8º B</span><span class="chip">⚡50XP</span></div>
-          <div class="tcard-progress">
-            <div class="tprog-label"><span>29/31 entregues</span><span>94%</span></div>
-            <div class="tprog-bg"><div class="tprog-f" style="width:94%"></div></div>
-          </div>
-          <div class="tcard-footer"><span>Expirou 10/04</span><span style="color:var(--red)">🔴 Expirada</span></div>
-        </div>
+      <div class="kol" id="col-expiradas">
+        <div class="kol-hd"><h3><span class="kol-dot kd-r"></span>Expiradas</h3><span class="kol-count" id="count-expiradas">0</span></div>
+        <div id="cards-expiradas"></div>
       </div>
-
     </div>
   </div>
 
@@ -221,25 +137,6 @@
 
 </main>
 
-<script>
-function showPage(id,btn){
-  document.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('page-tarefas').style.display='none';
-  document.getElementById('page-relatorios').style.display='none';
-  btn.classList.add('active');
-  document.getElementById('page-'+id).style.display='block';
-  if(id==='relatorios'){document.getElementById('pageTitle').textContent='📊 Relatórios';document.getElementById('pageSub').textContent='Análises de desempenho e engajamento';document.getElementById('exportBtn').style.display='block';}
-  else{document.getElementById('pageTitle').textContent='📋 Página de Tarefas';document.getElementById('pageSub').textContent='12 tarefas · 3 vencendo hoje';document.getElementById('exportBtn').style.display='none';}
-}
-function setFtab(el){document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('active'));el.classList.add('active')}
-</script>
-
-<script id="logout-script">
-function sairDaConta(destino) {
-  if (confirm("Tem certeza que deseja sair da conta?")) {
-    window.location.href = destino;
-  }
-}
-</script>
+<script src="script.js"></script>
 </body>
 </html>

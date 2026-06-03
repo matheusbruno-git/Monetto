@@ -71,6 +71,72 @@
 </div>
 
 <footer class="page-footer">© 2026 Monetto by ML Solutions. Todos os direitos reservados.</footer>
+<script>
+async function fazerLogin() {
+  const email = document.getElementById('email').value.trim();
+  const senha = document.getElementById('senha').value.trim();
+  const msgEl = document.getElementById('msg');
 
+  if (!email || !senha) {
+    msgEl.textContent = "Preencha email e senha";
+    msgEl.className = 'message error';
+    return;
+  }
+
+  try {
+    const result = await window.api.login({ email, senha });
+    
+    msgEl.textContent = result.message;
+    msgEl.className = 'message ' + (result.success ? 'success' : 'error');
+
+    if (result.success && result.redirect) {
+      setTimeout(() => {
+        window.location.href = result.redirect;
+      }, 1500);
+    }
+  } catch (err) {
+    console.error(err);
+    msgEl.textContent = "Erro de comunicação com o servidor.";
+    msgEl.className = 'message error';
+  }
+}
+
+async function fazerCadastro() {
+  const dados = {
+    nome: document.getElementById('nome').value.trim(),
+    email: document.getElementById('reg_email').value.trim(),
+    senha: document.getElementById('reg_senha').value,
+    id_perfil: parseInt(document.getElementById('id_perfil').value)
+  };
+
+  const msgElement = document.getElementById('msg');
+
+  try {
+    const result = await window.api.registerUser(dados);
+    msgElement.textContent = result.message;
+    msgElement.className = 'message ' + (result.success ? 'success' : 'error');
+
+    if (result.success) {
+      setTimeout(() => showLogin(), 1800);
+    }
+  } catch (err) {
+    console.error(err);
+    msgElement.textContent = "Erro de comunicação com o servidor.";
+    msgElement.className = 'message error';
+  }
+}
+
+function showRegister() {
+  document.getElementById('login-form').style.display = 'none';
+  document.getElementById('register-form').style.display = 'block';
+  document.getElementById('msg').textContent = '';
+}
+
+function showLogin() {
+  document.getElementById('login-form').style.display = 'block';
+  document.getElementById('register-form').style.display = 'none';
+  document.getElementById('msg').textContent = '';
+}
+</script>
 </body>
 </html>

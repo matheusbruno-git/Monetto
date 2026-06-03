@@ -62,88 +62,8 @@
     <div class="table-head">
       <div>Aluno</div><div>Turma</div><div>XP</div><div>Nível</div><div>Tarefas</div><div>Status</div><div>Ações</div>
     </div>
-    <div class="table-body">
-
-      <div class="tr" onclick="openModal()">
-        <div class="td-aluno"><div class="ava av1"></div><div><div class="al-name">Ana Souza</div><div class="al-email">ana@escola.edu.br</div></div></div>
-        <div class="td-muted">8º A</div>
-        <div><span class="xp-chip">⚡ 680</span></div>
-        <div><span class="lvl-chip">Nível 5</span></div>
-        <div class="td-text">24/26</div>
-        <div><span class="status-chip sc-ok">✓ Ativo</span></div>
-        <div class="td-actions"><button class="act-btn" onclick="event.stopPropagation();openModal()">👁</button><button class="act-btn" onclick="event.stopPropagation()">✉️</button></div>
-      </div>
-
-      <div class="tr">
-        <div class="td-aluno"><div class="ava av2"></div><div><div class="al-name">Carlos Lima</div><div class="al-email">carlos@escola.edu.br</div></div></div>
-        <div class="td-muted">8º B</div>
-        <div><span class="xp-chip">⚡ 640</span></div>
-        <div><span class="lvl-chip">Nível 5</span></div>
-        <div class="td-text">22/26</div>
-        <div><span class="status-chip sc-ok">✓ Ativo</span></div>
-        <div class="td-actions"><button class="act-btn">👁</button><button class="act-btn">✉️</button></div>
-      </div>
-
-      <div class="tr">
-        <div class="td-aluno"><div class="ava av3"></div><div><div class="al-name">João Pedro</div><div class="al-email">joao@escola.edu.br</div></div></div>
-        <div class="td-muted">9º A</div>
-        <div><span class="xp-chip">⚡ 590</span></div>
-        <div><span class="lvl-chip">Nível 4</span></div>
-        <div class="td-text">20/26</div>
-        <div><span class="status-chip sc-ok">✓ Ativo</span></div>
-        <div class="td-actions"><button class="act-btn">👁</button><button class="act-btn">✉️</button></div>
-      </div>
-
-      <div class="tr">
-        <div class="td-aluno"><div class="ava av4"></div><div><div class="al-name">Maria Clara</div><div class="al-email">maria@escola.edu.br</div></div></div>
-        <div class="td-muted">9º B</div>
-        <div><span class="xp-chip">⚡ 520</span></div>
-        <div><span class="lvl-chip">Nível 4</span></div>
-        <div class="td-text">18/26</div>
-        <div><span class="status-chip sc-warn">⚠ Atenção</span></div>
-        <div class="td-actions"><button class="act-btn">👁</button><button class="act-btn">✉️</button></div>
-      </div>
-
-      <div class="tr">
-        <div class="td-aluno"><div class="ava av5"></div><div><div class="al-name">Lucas Torres</div><div class="al-email">lucas@escola.edu.br</div></div></div>
-        <div class="td-muted">8º A</div>
-        <div><span class="xp-chip">⚡ 480</span></div>
-        <div><span class="lvl-chip">Nível 4</span></div>
-        <div class="td-text">16/26</div>
-        <div><span class="status-chip sc-warn">⚠ Atenção</span></div>
-        <div class="td-actions"><button class="act-btn">👁</button><button class="act-btn">✉️</button></div>
-      </div>
-
-      <div class="tr">
-        <div class="td-aluno"><div class="ava av6"></div><div><div class="al-name">Fernanda Costa</div><div class="al-email">fernanda@escola.edu.br</div></div></div>
-        <div class="td-muted">8º B</div>
-        <div><span class="xp-chip">⚡ 420</span></div>
-        <div><span class="lvl-chip">Nível 3</span></div>
-        <div class="td-text">14/26</div>
-        <div><span class="status-chip sc-ok">✓ Ativo</span></div>
-        <div class="td-actions"><button class="act-btn">👁</button><button class="act-btn">✉️</button></div>
-      </div>
-
-      <div class="tr">
-        <div class="td-aluno"><div class="ava av7"></div><div><div class="al-name">Rafael Mendes</div><div class="al-email">rafael@escola.edu.br</div></div></div>
-        <div class="td-muted">9º A</div>
-        <div><span class="xp-chip">⚡ 200</span></div>
-        <div><span class="lvl-chip">Nível 2</span></div>
-        <div class="td-text">7/26</div>
-        <div><span class="status-chip sc-bad">✕ Inativo</span></div>
-        <div class="td-actions"><button class="act-btn">👁</button><button class="act-btn">✉️</button></div>
-      </div>
-
-      <div class="tr">
-        <div class="td-aluno"><div class="ava av8"></div><div><div class="al-name">Isabela Rocha</div><div class="al-email">isabela@escola.edu.br</div></div></div>
-        <div class="td-muted">9º B</div>
-        <div><span class="xp-chip">⚡ 360</span></div>
-        <div><span class="lvl-chip">Nível 3</span></div>
-        <div class="td-text">12/26</div>
-        <div><span class="status-chip sc-ok">✓ Ativo</span></div>
-        <div class="td-actions"><button class="act-btn">👁</button><button class="act-btn">✉️</button></div>
-      </div>
-
+    <div class="table-body" id="alunosContainer">
+      <div style="padding:2rem;text-align:center;color:var(--muted)">Carregando alunos...</div>
     </div>
   </div>
 </main>
@@ -155,21 +75,21 @@
       <h3>📋 Perfil do Aluno</h3>
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
+    <!-- replace the static modal-profile block with: -->
     <div class="modal-profile">
       <div class="modal-av">😊</div>
       <div class="modal-info">
-        <strong>Ana Souza</strong>
-        <span>ana.souza@escola.edu.br · 8º Ano A</span>
+        <strong id="modalName">—</strong>
+        <span id="modalEmail">—</span>
         <div style="margin-top:6px;display:flex;gap:6px">
-          <span style="background:rgba(255,215,0,.15);color:var(--accent);border-radius:50px;padding:2px 9px;font-size:.7rem;font-weight:700">Nível 5</span>
-          <span style="background:rgba(46,204,113,.15);color:var(--green);border-radius:50px;padding:2px 9px;font-size:.7rem;font-weight:700">🔥 7 dias</span>
+          <span id="modalLevel" style="background:rgba(255,215,0,.15);color:var(--accent);border-radius:50px;padding:2px 9px;font-size:.7rem;font-weight:700">Nível —</span>
         </div>
       </div>
     </div>
     <div class="modal-stats">
-      <div class="ms-card"><div class="ms-val">680</div><div class="ms-lbl">⚡ XP Total</div></div>
-      <div class="ms-card"><div class="ms-val">24</div><div class="ms-lbl">✅ Tarefas feitas</div></div>
-      <div class="ms-card"><div class="ms-val">92%</div><div class="ms-lbl">📈 Engajamento</div></div>
+      <div class="ms-card"><div class="ms-val" id="modalXP">—</div><div class="ms-lbl">⚡ XP Total</div></div>
+      <div class="ms-card"><div class="ms-val">—</div><div class="ms-lbl">✅ Tarefas feitas</div></div>
+      <div class="ms-card"><div class="ms-val">—</div><div class="ms-lbl">📈 Engajamento</div></div>
     </div>
     <div class="prog-row">
       <div class="prog-label"><span>Progresso de Nível</span><span style="color:var(--accent)">680 / 1000 XP</span></div>
@@ -188,18 +108,105 @@
 </div>
 
 <script>
-function setTab(el){document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('active'));el.classList.add('active')}
-function openModal(){document.getElementById('modalOverlay').classList.add('open')}
-function closeModal(){document.getElementById('modalOverlay').classList.remove('open')}
-document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal()})
-</script>
+// ── UI helpers ──────────────────────────────────────────────
+function setTab(el) {
+  document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
 
-<script id="logout-script">
+function openModal(aluno) {
+  if (aluno) {
+    document.getElementById('modalName').textContent   = aluno.nome;
+    document.getElementById('modalEmail').textContent  = aluno.email + ' · ' + (aluno.turma ?? '—');
+    document.getElementById('modalXP').textContent     = aluno.xp ?? '—';
+  }
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+}
+
+document.getElementById('modalOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
 function sairDaConta(destino) {
   if (confirm("Tem certeza que deseja sair da conta?")) {
     window.location.href = destino;
   }
 }
+
+// ── Rendering ────────────────────────────────────────────────
+const AV_CLASSES = ['av1','av2','av3','av4','av5','av6','av7','av8'];
+
+function xpToLevel(xp) {
+  if (!xp) return 1;
+  if (xp >= 1000) return 6;
+  if (xp >= 700)  return 5;
+  if (xp >= 500)  return 4;
+  if (xp >= 300)  return 3;
+  if (xp >= 150)  return 2;
+  return 1;
+}
+
+function statusChip(ativo) {
+  if (ativo) return '<span class="status-chip sc-ok">✓ Ativo</span>';
+  return '<span class="status-chip sc-bad">✕ Inativo</span>';
+}
+
+function renderRow(aluno, index) {
+  const avClass = AV_CLASSES[index % AV_CLASSES.length];
+  const nivel   = xpToLevel(aluno.xp);
+  const xp      = aluno.xp    ?? '—';
+  const turma   = aluno.turma ?? '—';
+
+  return `
+    <div class="tr" onclick='openModal(${JSON.stringify(aluno)})'>
+      <div class="td-aluno">
+        <div class="ava ${avClass}"></div>
+        <div>
+          <div class="al-name">${aluno.nome}</div>
+          <div class="al-email">${aluno.email}</div>
+        </div>
+      </div>
+      <div class="td-muted">${turma}</div>
+      <div><span class="xp-chip">⚡ ${xp}</span></div>
+      <div><span class="lvl-chip">Nível ${nivel}</span></div>
+      <div class="td-text">—</div>
+      <div>${statusChip(aluno.ativo)}</div>
+      <div class="td-actions">
+        <button class="act-btn" onclick="event.stopPropagation();openModal(${JSON.stringify(aluno).replace(/"/g,'&quot;')})">👁</button>
+        <button class="act-btn" onclick="event.stopPropagation()">✉️</button>
+      </div>
+    </div>`;
+}
+
+function renderAlunos(alunos) {
+  const container = document.getElementById('alunosContainer');
+
+  if (!alunos.length) {
+    container.innerHTML = '<div style="padding:2rem;text-align:center;color:var(--muted)">Nenhum aluno encontrado.</div>';
+    return;
+  }
+
+  container.innerHTML = alunos.map((a, i) => renderRow(a, i)).join('');
+}
+
+// ── Load from DB ─────────────────────────────────────────────
+async function loadAlunos() {
+  const result = await window.api.getAlunos();
+
+  if (!result.success) {
+    document.getElementById('alunosContainer').innerHTML =
+      `<div style="padding:2rem;text-align:center;color:red">${result.message}</div>`;
+    return;
+  }
+
+  renderAlunos(result.data);
+}
+
+document.addEventListener('DOMContentLoaded', loadAlunos);
 </script>
 </body>
 </html>

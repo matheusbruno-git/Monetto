@@ -48,7 +48,7 @@
       <div class="fg"><label>Título da Tarefa *</label><input type="text" placeholder="Ex: Exercícios de Frações – Capítulo 5"/></div>
       <div class="fg"><label>Descrição / Instruções</label><textarea placeholder="Descreva o que o aluno deve fazer, quais materiais usar, formato de entrega..."></textarea></div>
       <div class="fg-row">
-        <div class="fg"><label>Disciplina *</label><select><option>Matemática</option><option>Português</option><option>Ciências</option><option>História</option><option>Geografia</option><option>Educação Financeira</option></select></div>
+        <div class="fg"><label>Disciplina *</label><select data-cursos></select></div>
         <div class="fg"><label>Prazo de entrega *</label><input type="datetime-local"/></div>
       </div>
 
@@ -86,7 +86,7 @@
           <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox"/><span class="turma-chk-label">📒 9º Ano B</span></div>
         </div>
       </div>
-
+      <div id="formMsg" style="display:none;font-size:.84rem;margin-bottom:8px;font-weight:600"></div>
       <div class="form-footer">
         <button class="btn-draft">💾 Rascunho</button>
         <button class="btn-acc" id="btn">🚀 Publicar Tarefa</button>
@@ -148,91 +148,12 @@
   </div>
 
   <!-- LIST AREA -->
-  <div class="list-area">
+  <div class="list-area" id="tarefasList">
     <div class="list-hd"><h3>📋 Tarefas Criadas</h3><span>12 tarefas</span></div>
-
-    <div class="task-card">
-      <div class="tc-top"><div class="tc-title">Exercícios de Frações – 8ºA</div><span class="tc-status ts-pub">● Publicada</span></div>
-      <div class="tc-meta"><span class="tc-chip">Matemática</span><span class="tc-chip">8º A</span><span class="tc-chip">⚡ 50 XP</span><span class="tc-chip">🟡 Médio</span></div>
-      <div class="tc-footer">
-        <div class="tc-prog"><div class="tc-bar"><div class="tc-bar-f" style="width:75%"></div></div><span>26/34 entregues</span></div>
-        <div>Vence hoje</div>
-        <div class="tc-actions"><button class="tca">✏️</button><button class="tca">👁</button><button class="tca">🗑</button></div>
-      </div>
-    </div>
-
-    <div class="task-card">
-      <div class="tc-top"><div class="tc-title">Redação: Redes Sociais – 9ºA</div><span class="tc-status ts-pub">● Publicada</span></div>
-      <div class="tc-meta"><span class="tc-chip">Português</span><span class="tc-chip">9º A</span><span class="tc-chip">⚡ 80 XP</span><span class="tc-chip">🔴 Difícil</span></div>
-      <div class="tc-footer">
-        <div class="tc-prog"><div class="tc-bar"><div class="tc-bar-f" style="width:42%"></div></div><span>14/33 entregues</span></div>
-        <div>Vence amanhã</div>
-        <div class="tc-actions"><button class="tca">✏️</button><button class="tca">👁</button><button class="tca">🗑</button></div>
-      </div>
-    </div>
-
-    <div class="task-card">
-      <div class="tc-top"><div class="tc-title">Quiz Fotossíntese – Ciências</div><span class="tc-status ts-pub">● Publicada</span></div>
-      <div class="tc-meta"><span class="tc-chip">Ciências</span><span class="tc-chip">Todas turmas</span><span class="tc-chip">⚡ 40 XP</span><span class="tc-chip">🟢 Fácil</span></div>
-      <div class="tc-footer">
-        <div class="tc-prog"><div class="tc-bar"><div class="tc-bar-f" style="width:30%"></div></div><span>38/128 feitos</span></div>
-        <div>Sex, 19/04</div>
-        <div class="tc-actions"><button class="tca">✏️</button><button class="tca">👁</button><button class="tca">🗑</button></div>
-      </div>
-    </div>
-
-    <div class="task-card">
-      <div class="tc-top"><div class="tc-title">Bolsa de Valores Jr. – 8ºA e 8ºB</div><span class="tc-status ts-draft">◌ Rascunho</span></div>
-      <div class="tc-meta"><span class="tc-chip">Finanças</span><span class="tc-chip">8º A · 8º B</span><span class="tc-chip">⚡ 150 XP</span></div>
-      <div class="tc-footer">
-        <div class="tc-prog"><div class="tc-bar"><div class="tc-bar-f" style="width:0%"></div></div><span>Não publicada</span></div>
-        <div>—</div>
-        <div class="tc-actions"><button class="tca">✏️</button><button class="tca">🚀</button><button class="tca">🗑</button></div>
-      </div>
-    </div>
-
-    <div class="task-card">
-      <div class="tc-top"><div class="tc-title">Mapa Mental – Rev. Industrial</div><span class="tc-status ts-exp">✕ Expirada</span></div>
-      <div class="tc-meta"><span class="tc-chip">História</span><span class="tc-chip">9º B</span><span class="tc-chip">⚡ 60 XP</span></div>
-      <div class="tc-footer">
-        <div class="tc-prog"><div class="tc-bar"><div class="tc-bar-f" style="width:90%"></div></div><span>27/30 entregues</span></div>
-        <div>Expirou 14/04</div>
-        <div class="tc-actions"><button class="tca">👁</button><button class="tca">🗑</button></div>
-      </div>
-    </div>
 
   </div>
 
 </div>
-
-<script>
-document.getElementById("btn").addEventListener("click", async () => {
-  const dados = {
-    id_escola: 1, // Change this to real school ID later
-    titulo: document.getElementById("titulo").value,
-    descricao: document.getElementById("descricao").value,
-    data_criacao: new Date(),
-    data_vencimento: document.getElementById("data_vencimento").value
-  };
-
-  const result = await window.api.registerTarefa(dados);
-
-  const msg = document.getElementById("msg");
-  if (msg) {
-    msg.textContent = result.message;
-    msg.style.color = result.success ? "green" : "red";
-  } else {
-    alert(result.message);
-  }
-
-  // Clear form if successful
-  if (result.success) {
-    document.getElementById("titulo").value = "";
-    document.getElementById("descricao").value = "";
-  }
-});
-
-
-</script>
+<script src="script.js"></script>
 </body>
 </html>

@@ -9,7 +9,7 @@
 <body><nav class="sidebar">
   <a class="sb-logo" href="#">
     <svg viewBox="0 0 32 32" fill="none" width="26" height="26"><rect width="32" height="32" rx="8" fill="#1A2A8F"/><path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="10" r="3" fill="#2ECC71"/></svg>
-    onetto <span class="sb-role">Admin</span>
+    Monetto <span class="sb-role">Admin</span>
   </a>
   <span class="sb-section">Escola</span>
   <a class="sb-link " href="../dashboard-admin-geral/dashboard-admin-geral.html"><span class="icon">🏠</span> Painel Escolar</a>
@@ -58,46 +58,8 @@
     <div class="table-head" style="grid-template-columns:2fr 100px 80px 90px 80px 60px">
       <span>Aluno</span><span>Turma</span><span>XP</span><span>Progresso</span><span>Status</span><span>Ações</span>
     </div>
-    <div class="data-row" style="grid-template-columns:2fr 100px 80px 90px 80px 60px">
-      <div class="person-info"><div class="av av1">A</div><div><div class="person-name">Ana Souza</div><div class="person-sub">ana.s@escola.edu</div></div></div>
-      <div style="font-size:.82rem">8º Ano A</div>
-      <div class="xp-val">680</div>
-      <div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:92%"></div></div><span class="prog-pct">92%</span></div>
-      <div><span class="badge badge-green">Ativo</span></div>
-      <div class="act-btns"><div class="act-btn">👁</div><div class="act-btn">✏️</div></div>
-    </div>
-    <div class="data-row" style="grid-template-columns:2fr 100px 80px 90px 80px 60px">
-      <div class="person-info"><div class="av av2">C</div><div><div class="person-name">Carlos Lima</div><div class="person-sub">c.lima@escola.edu</div></div></div>
-      <div style="font-size:.82rem">8º Ano A</div>
-      <div class="xp-val">640</div>
-      <div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:85%"></div></div><span class="prog-pct">85%</span></div>
-      <div><span class="badge badge-green">Ativo</span></div>
-      <div class="act-btns"><div class="act-btn">👁</div><div class="act-btn">✏️</div></div>
-    </div>
-    <div class="data-row" style="grid-template-columns:2fr 100px 80px 90px 80px 60px">
-      <div class="person-info"><div class="av av3">J</div><div><div class="person-name">João Pedro</div><div class="person-sub">j.pedro@escola.edu</div></div></div>
-      <div style="font-size:.82rem">9º Ano A</div>
-      <div class="xp-val">590</div>
-      <div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:73%"></div></div><span class="prog-pct">73%</span></div>
-      <div><span class="badge badge-yellow">Atenção</span></div>
-      <div class="act-btns"><div class="act-btn">👁</div><div class="act-btn">✏️</div></div>
-    </div>
-    <div class="data-row" style="grid-template-columns:2fr 100px 80px 90px 80px 60px">
-      <div class="person-info"><div class="av av5">L</div><div><div class="person-name">Lucas Torres</div><div class="person-sub">l.torres@escola.edu</div></div></div>
-      <div style="font-size:.82rem">9º Ano A</div>
-      <div class="xp-val">480</div>
-      <div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:46%;background:linear-gradient(90deg,var(--red),#c0392b)"></div></div><span class="prog-pct" style="color:var(--red)">46%</span></div>
-      <div><span class="badge badge-red">Inativo</span></div>
-      <div class="act-btns"><div class="act-btn">👁</div><div class="act-btn">✏️</div></div>
-    </div>
-    <div class="data-row" style="grid-template-columns:2fr 100px 80px 90px 80px 60px">
-      <div class="person-info"><div class="av av6">B</div><div><div class="person-name">Beatriz Ramos</div><div class="person-sub">b.ramos@escola.edu</div></div></div>
-      <div style="font-size:.82rem">8º Ano B</div>
-      <div class="xp-val">620</div>
-      <div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:88%"></div></div><span class="prog-pct">88%</span></div>
-      <div><span class="badge badge-green">Ativo</span></div>
-      <div class="act-btns"><div class="act-btn">👁</div><div class="act-btn">✏️</div></div>
-    </div>
+    <!-- inside .card, replace all .data-row divs with: -->
+    <div id="alunosContainer"></div>
   </div>
 </main>
 
@@ -121,4 +83,65 @@
   </div>
 </div>
 </body>
+<script>
+  const AVATAR_COLORS = ['av1','av2','av3','av4','av5','av6'];
+
+  function renderAlunos(alunos) {
+    const container = document.getElementById('alunosContainer');
+
+    if (!alunos.length) {
+      container.innerHTML = '<div style="padding:2rem;text-align:center;color:#888">Nenhum aluno encontrado.</div>';
+      return;
+    }
+
+    container.innerHTML = alunos.map((aluno, i) => {
+      const inicial     = (aluno.nome || '?')[0].toUpperCase();
+      const colorClass  = AVATAR_COLORS[i % AVATAR_COLORS.length];
+      const statusLabel = aluno.ativo ? 'Ativo' : 'Inativo';
+      const badgeClass  = aluno.ativo ? 'badge-green' : 'badge-red';
+
+      // Use turma/xp if your DB has them, otherwise show fallbacks
+      const turma = aluno.turma ?? '—';
+      const xp    = aluno.xp    ?? '—';
+
+      return `
+        <div class="data-row" style="grid-template-columns:2fr 100px 80px 90px 80px 60px">
+          <div class="person-info">
+            <div class="av ${colorClass}">${inicial}</div>
+            <div>
+              <div class="person-name">${aluno.nome}</div>
+              <div class="person-sub">${aluno.email}</div>
+            </div>
+          </div>
+          <div style="font-size:.82rem">${turma}</div>
+          <div class="xp-val">${xp}</div>
+          <div class="prog-wrap">
+            <div class="prog-bar"><div class="prog-fill" style="width:0%"></div></div>
+            <span class="prog-pct">—</span>
+          </div>
+          <div><span class="badge ${badgeClass}">${statusLabel}</span></div>
+          <div class="act-btns">
+            <div class="act-btn">👁</div>
+            <div class="act-btn">✏️</div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  async function loadAlunos() {
+    const container = document.getElementById('alunosContainer');
+    container.innerHTML = '<div style="padding:2rem;text-align:center;color:#888">Carregando...</div>';
+
+    const result = await window.api.getAlunos();
+
+    if (!result.success) {
+      container.innerHTML = `<div style="padding:2rem;text-align:center;color:red">${result.message}</div>`;
+      return;
+    }
+
+    renderAlunos(result.data);
+  }
+
+  document.addEventListener('DOMContentLoaded', loadAlunos);
+</script>
 </html>

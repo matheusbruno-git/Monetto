@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Monetto – Criar & Gerenciar Turmas</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="criar-turmas.css"/>
+</head>
+<body>
+
+<nav class="sidebar">
+  <a class="sb-logo" href="#">
+    <svg viewBox="0 0 32 32" fill="none" width="26" height="26"><rect width="32" height="32" rx="8" fill="#1A2A8F"/><path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="10" r="3" fill="#2ECC71"/></svg>
+    Monetto <span class="sb-role">Prof.</span>
+  </a>
+  <span class="sb-section">Visão Geral</span>
+  <a class="sb-link" href="../dashboard-professor/dashboard-professor.html"><span class="icon">🏠</span> Dashboard</a>
+  <a class="sb-link" href="../gerenciar-alunos/gerenciar-alunos.html"><span class="icon">👥</span> Alunos</a>
+  <a class="sb-link active" href="../CRUD_Tarefas/criar-tarefas.html"><span class="icon">📝</span> Criar Tarefas</a>
+  <a class="sb-link" href="../pagina-tarefas-prof/pagina-tarefas-prof.html"><span class="icon">📋</span> Tarefas <span class="sb-badge">3</span></a>
+  <span class="sb-section">Análises</span>
+  <a class="sb-link" href="../relatorios/relatorios.html"><span class="icon">📊</span> Relatórios</a>
+  <span class="sb-section">Conta</span>
+  <a class="sb-link" href="../configuracoes/configuracoes-prof.html"><span class="icon">⚙️</span> Configurações</a>
+  <div class="sb-bottom"><a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;" onclick="sairDaConta('../login-principal/login-principal.html')"><span class="icon">🚪</span> Sair da conta</a>
+    <div class="sb-user">
+      <div class="sb-av">👨‍🏫</div>
+      <div class="sb-user-info"><strong>Prof. Ricardo</strong><span>4 turmas ativas</span></div>
+    </div>
+  </div>
+</nav>
+
+<div class="main">
+
+  <!-- FORM AREA -->
+  <div class="form-area">
+    <div class="form-title">📝 Criar Nova Turma</div>
+    <div class="form-sub">Preencha os campos abaixo e publique para suas turmas</div>
+
+
+    <div id="tab-turma">
+      <div class="fg">
+        <label>Nome da Turma *</label>
+        <input type="text" id="nomeTurma" placeholder="Ex: 8º Ano A"/>
+      </div>
+      <div class="fg">
+        <label>Nível Educacional *</label>
+        <select id="nivelSelect"><option value="">Carregando...</option></select>
+      </div>
+
+      <div id="formMsg" style="display:none;font-size:.84rem;margin-bottom:8px;font-weight:600"></div>
+      <div class="form-footer">
+        <button class="btn-acc" id="btn">🚀 Publicar Turma</button>
+      </div>
+    </div>
+
+    
+  </div>
+
+  <!-- LIST AREA -->
+  <div class="list-area" id="turmasList">
+    <div class="list-area">
+      <div class="list-hd"><h3>📋 Turmas Criadas</h3><span>0 turmas</span></div>
+      <div id="turmasListBody"></div>
+    </div>
+  </div>
+
+</div>
+<script src="script.js"></script>
+</body>
+</html>
