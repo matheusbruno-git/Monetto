@@ -4,7 +4,7 @@ const db = require("./connection.js");
 async function registerAluno(dados) {
   try {
     const sql = `
-      INSERT INTO usuarios 
+      INSERT INTO usuarios
       (id_usuario, id_perfil, id_escola, nome, data_nascimento, cpf, responsavel, 
        telefone_responsavel, email_responsavel, serie)
       VALUES (?, 1, ?, ?, ?, ?, ?, ?, ?)
