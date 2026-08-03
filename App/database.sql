@@ -28,6 +28,13 @@ CREATE TABLE perfis (
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
+
+INSERT INTO perfis (nome, descricao, permissoes, ativo) VALUES
+    ('admin', 'Administrador do sistema', '{"gerenciar_usuarios": true, "gerenciar_escolas": true, "gerenciar_cursos": true, "gerenciar_turmas": true}', 1),
+    ('aluno', 'Usuário estudante', '{"acessar_cursos": true, "visualizar_turmas": true}', 1),
+    ('professor', 'Perfil de professor', '{"acessar_cursos": true, "gerenciar_turmas": true}', 1);
+
 -- ============================================================
 -- NIVEIS EDUCACIONAIS
 -- ============================================================
@@ -87,7 +94,6 @@ CREATE TABLE turmas (
     ano_letivo INT NOT NULL,
     data_inicio DATE,
     data_fim DATE,
-    horario VARCHAR(50),
     status VARCHAR(30) DEFAULT 'ativa',
 
     FOREIGN KEY (id_escola) REFERENCES escolas(id_escola),

@@ -7,7 +7,7 @@ async function registerAluno(dados) {
       INSERT INTO usuarios 
       (id_usuario, id_perfil, id_escola, nome, data_nascimento, cpf, responsavel, 
        telefone_responsavel, email_responsavel, serie)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+      VALUES (?, 1, ?, ?, ?, ?, ?, ?, ?)
     `;
 
     const id_aluno = require('uuid').v4();
