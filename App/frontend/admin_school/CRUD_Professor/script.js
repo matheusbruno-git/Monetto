@@ -6,7 +6,8 @@ document.getElementById("btn").addEventListener("click", async () => {
     cpf: document.getElementById("cpf").value,
     telefone: document.getElementById("tel").value,
     email: document.getElementById("email").value,
-    serie: document.getElementById("serie").value
+    serie: document.getElementById("serie").value,
+    foto_url: document.getElementById("foto").value
   };
 
   const result = await window.api.registerProfessor(dados);
