@@ -1,160 +1,195 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Monetto – Acesso do Aluno</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="login-aluno.css"/>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monetto – Acesso do Aluno</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="login-aluno.css" />
+  </head>
+  <body>
+    <div class="page">
+      <!-- LEFT – FORM -->
+      <div class="left">
+        <div class="form-box">
+          <a class="form-logo" href="#">
+            <svg viewBox="0 0 32 32" fill="none" width="28" height="28">
+              <rect width="32" height="32" rx="8" fill="#1A2A8F" />
+              <path
+                d="M8 22V10l6 8 6-8v12"
+                stroke="#FFD700"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <circle cx="24" cy="10" r="3" fill="#2ECC71" />
+            </svg>
+            onetto
+          </a>
 
-<div class="page">
+          <div class="form-header">
+            <div class="hi">🎮</div>
+            <h1>Entrar e jogar!</h1>
+            <p>Acesse sua conta, complete tarefas e suba de nível</p>
+          </div>
 
-  <!-- LEFT – FORM -->
-  <div class="left">
-    <div class="form-box">
+          <div class="xp-preview">
+            <div class="xp-dot"></div>
+            Você tem recompensas esperando! ⚡
+          </div>
 
-      <a class="form-logo" href="#">
-        <svg viewBox="0 0 32 32" fill="none" width="28" height="28">
-          <rect width="32" height="32" rx="8" fill="#1A2A8F"/>
-          <path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="24" cy="10" r="3" fill="#2ECC71"/>
-        </svg>
-        onetto
-      </a>
+          <div class="form-group">
+            <label for="stu-email">E-mail ou matrícula</label>
+            <div class="input-wrap">
+              <span class="input-icon">👤</span>
+              <input
+                type="email"
+                id="stu-email"
+                placeholder="aluno@escola.edu.br"
+              />
+            </div>
+          </div>
 
-      <div class="form-header">
-        <div class="hi">🎮</div>
-        <h1>Entrar e jogar!</h1>
-        <p>Acesse sua conta, complete tarefas e suba de nível</p>
-      </div>
+          <div class="form-group">
+            <label for="stu-pass">Senha</label>
+            <div class="input-wrap">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="stu-pass" placeholder="••••••••" />
+              <button
+                class="eye-toggle"
+                onclick="togglePass('stu-pass', this)"
+                title="Ver senha"
+              >
+                👁️
+              </button>
+            </div>
+          </div>
 
-      <div class="xp-preview">
-        <div class="xp-dot"></div>
-        Você tem recompensas esperando! ⚡
-      </div>
+          <div class="form-extras">
+            <label class="remember">
+              <input type="checkbox" /> Lembrar de mim
+            </label>
+            <a class="forgot-link" href="#">Esqueci a senha</a>
+          </div>
 
-      <div class="form-group">
-        <label for="stu-email">E-mail ou matrícula</label>
-        <div class="input-wrap">
-          <span class="input-icon">👤</span>
-          <input type="email" id="stu-email" placeholder="aluno@escola.edu.br"/>
+          <button onclick="loginAluno()" class="btn-submit">
+            Entrar e jogar ⚡
+          </button>
+
+          <div class="divider">ou entre com</div>
+
+          <div
+            id="g_id_onload"
+            data-client_id="731708419688-3fmc106b98nv1lsb0vallfijb2fnfako.apps.googleusercontent.com"
+            data-callback="handleCredentialResponse"
+          ></div>
+
+          <div class="g_id_signin"></div>
+
+          <script
+            src="https://accounts.google.com/gsi/client"
+            async
+            defer
+          ></script>
+
+          <p class="register-link">
+            Ainda não tem conta? <a href="#">Cadastrar gratuitamente</a>
+          </p>
+
+          <a class="back-link" href="../login-principal/login-principal.html"
+            >← Voltar para seleção de acesso</a
+          >
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="stu-pass">Senha</label>
-        <div class="input-wrap">
-          <span class="input-icon">🔒</span>
-          <input type="password" id="stu-pass" placeholder="••••••••"/>
-          <button class="eye-toggle" onclick="togglePass('stu-pass', this)" title="Ver senha">👁️</button>
+      <script src="script.js"></script>
+
+      <!-- RIGHT – GAMIFICATION VISUAL -->
+      <div class="right">
+        <div class="stars"></div>
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+
+        <div class="right-inner">
+          <p class="right-label">Sua jornada<br /><em>te espera! 🚀</em></p>
+
+          <div class="trophy-card">
+            <div class="trophy-top">
+              <div class="trophy-icon">🏆</div>
+              <div class="trophy-info">
+                <div class="lvl">Nível atual</div>
+                <div class="lvl-val">5</div>
+              </div>
+            </div>
+
+            <div class="xp-row">
+              <div class="xp-bar"><div class="xp-fill"></div></div>
+              <span class="xp-label">⚡ 680 / 1000 XP</span>
+            </div>
+
+            <div class="badge-row">
+              <div class="badge-chip">
+                <span class="b-icon">🔥</span> Sequência 7d
+              </div>
+              <div class="badge-chip"><span class="b-icon">⭐</span> Top 3</div>
+              <div class="badge-chip"><span class="b-icon">🎯</span> 95%</div>
+            </div>
+
+            <div class="rank-row">
+              <div class="rank-title">Ranking da turma</div>
+              <div class="rank-item">
+                <div class="rank-pos rp1">1</div>
+                <div class="av av-a"></div>
+                <span class="rank-name">Ana Souza</span>
+                <span class="rank-xp">1.240 XP</span>
+              </div>
+              <div class="rank-item">
+                <div class="rank-pos rp2">2</div>
+                <div class="av av-b"></div>
+                <span class="rank-name">Carlos Lima</span>
+                <span class="rank-xp">980 XP</span>
+              </div>
+              <div class="rank-item">
+                <div class="rank-pos rp3">3</div>
+                <div class="av av-c"></div>
+                <span class="rank-name">João Pedro</span>
+                <span class="rank-xp">860 XP</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="right-sub">
+            Complete tarefas, suba no ranking<br />e ganhe medalhas exclusivas
+            🥇
+          </p>
         </div>
       </div>
-
-      <div class="form-extras">
-        <label class="remember">
-          <input type="checkbox"/> Lembrar de mim
-        </label>
-        <a class="forgot-link" href="#">Esqueci a senha</a>
-      </div>
-
-      <button onclick="loginAluno()"
-      class="btn-submit">Entrar e jogar ⚡</button>
-
-      <div class="divider">ou entre com</div>
-
-      <div id="g_id_onload"
-     data-client_id="731708419688-3fmc106b98nv1lsb0vallfijb2fnfako.apps.googleusercontent.com"
-     data-callback="handleCredentialResponse">
-      </div>
-
-      <div class="g_id_signin"></div>
-
-      <script src="https://accounts.google.com/gsi/client" async defer></script>
-
-      <p class="register-link">Ainda não tem conta? <a href="#">Cadastrar gratuitamente</a></p>
-
-      <a class="back-link" href="../login-principal/login-principal.html">← Voltar para seleção de acesso</a>
-
     </div>
-  </div>
 
-  <script src="script.js"></script>
+    <script>
+      function loginAluno() {
+        var e = document.getElementById("stu-email").value.trim();
+        var p = document.getElementById("stu-pass").value;
+        if (!e || !p) {
+          alert("Preencha e-mail e senha para continuar.");
+          return;
+        }
+        window.location.href = "./dashboard-aluno/dashboard-aluno.html";
+      }
 
-  <!-- RIGHT – GAMIFICATION VISUAL -->
-  <div class="right">
-    <div class="stars"></div>
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-
-    <div class="right-inner">
-
-      <p class="right-label">Sua jornada<br/><em>te espera! 🚀</em></p>
-
-      <div class="trophy-card">
-        <div class="trophy-top">
-          <div class="trophy-icon">🏆</div>
-          <div class="trophy-info">
-            <div class="lvl">Nível atual</div>
-            <div class="lvl-val">5</div>
-          </div>
-        </div>
-
-        <div class="xp-row">
-          <div class="xp-bar"><div class="xp-fill"></div></div>
-          <span class="xp-label">⚡ 680 / 1000 XP</span>
-        </div>
-
-        <div class="badge-row">
-          <div class="badge-chip"><span class="b-icon">🔥</span> Sequência 7d</div>
-          <div class="badge-chip"><span class="b-icon">⭐</span> Top 3</div>
-          <div class="badge-chip"><span class="b-icon">🎯</span> 95%</div>
-        </div>
-
-        <div class="rank-row">
-          <div class="rank-title">Ranking da turma</div>
-          <div class="rank-item">
-            <div class="rank-pos rp1">1</div>
-            <div class="av av-a"></div>
-            <span class="rank-name">Ana Souza</span>
-            <span class="rank-xp">1.240 XP</span>
-          </div>
-          <div class="rank-item">
-            <div class="rank-pos rp2">2</div>
-            <div class="av av-b"></div>
-            <span class="rank-name">Carlos Lima</span>
-            <span class="rank-xp">980 XP</span>
-          </div>
-          <div class="rank-item">
-            <div class="rank-pos rp3">3</div>
-            <div class="av av-c"></div>
-            <span class="rank-name">João Pedro</span>
-            <span class="rank-xp">860 XP</span>
-          </div>
-        </div>
-      </div>
-
-      <p class="right-sub">Complete tarefas, suba no ranking<br/>e ganhe medalhas exclusivas 🥇</p>
-
-    </div>
-  </div>
-
-</div>
-
-<script>
-  function loginAluno() {
-    var e = document.getElementById("stu-email").value.trim();
-    var p = document.getElementById("stu-pass").value;
-    if (!e || !p) { alert("Preencha e-mail e senha para continuar."); return; }
-    window.location.href = "../dashboard-aluno/dashboard-aluno.html";
-  }
-
-  function togglePass(id, btn) {
-    const inp = document.getElementById(id);
-    if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '🙈'; }
-    else { inp.type = 'password'; btn.textContent = '👁️'; }
-  }
-</script>
-</body>
+      function togglePass(id, btn) {
+        const inp = document.getElementById(id);
+        if (inp.type === "password") {
+          inp.type = "text";
+          btn.textContent = "🙈";
+        } else {
+          inp.type = "password";
+          btn.textContent = "👁️";
+        }
+      }
+    </script>
+  </body>
 </html>

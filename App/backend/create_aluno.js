@@ -10,19 +10,21 @@ async function registerAluno(dados) {
       VALUES (?, 1, ?, ?, ?, ?, ?, ?, ?)
     `;
 
-    const id_aluno = require('uuid').v4();
+    const id_aluno = require("uuid").v4();
 
-    await db.promise().execute(sql, [
-      id_aluno,
-      dados.id_escola,
-      dados.nome,
-      dados.data_nascimento,
-      dados.cpf,
-      dados.responsavel,
-      dados.telefone_responsavel,
-      dados.email_responsavel,
-      dados.serie
-    ]);
+    await db
+      .promise()
+      .execute(sql, [
+        id_aluno,
+        dados.id_escola,
+        dados.nome,
+        dados.data_nascimento,
+        dados.cpf,
+        dados.responsavel,
+        dados.telefone_responsavel,
+        dados.email_responsavel,
+        dados.serie,
+      ]);
 
     return { success: true, message: "Aluno cadastrado com sucesso!" };
   } catch (err) {

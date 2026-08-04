@@ -1,6 +1,6 @@
 // backend/create_user.js
 const db = require("./connection.js");
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 const { v4: uuidv4 } = require("uuid");
 
 async function registerUser(dados) {
@@ -12,10 +12,11 @@ async function registerUser(dados) {
     }
 
     // Check if email already exists
-    const [existing] = await db.promise().execute(
-      "SELECT id_usuario FROM usuarios WHERE email = ?", 
-      [dados.email]
-    );
+    const [existing] = await db
+      .promise()
+      .execute("SELECT id_usuario FROM usuarios WHERE email = ?", [
+        dados.email,
+      ]);
 
     if (existing.length > 0) {
       return { success: false, message: "Este email já está cadastrado." };
@@ -33,26 +34,27 @@ async function registerUser(dados) {
       VALUES (?, ?, ?, ?, ?, 1, NOW())
     `;
 
-    await db.promise().execute(sql, [
-      id_usuario,
-      dados.id_perfil,
-      dados.nome,
-      dados.email,
-      senha_hash
-    ]);
+    await db
+      .promise()
+      .execute(sql, [
+        id_usuario,
+        dados.id_perfil,
+        dados.nome,
+        dados.email,
+        senha_hash,
+      ]);
 
     console.log("✅ Usuário criado com sucesso!");
 
-    return { 
-      success: true, 
-      message: "Conta criada com sucesso! Você já pode fazer login." 
+    return {
+      success: true,
+      message: "Conta criada com sucesso! Você já pode fazer login.",
     };
-
   } catch (err) {
     console.error("❌ ERRO AO CADASTRAR:", err);
-    return { 
-      success: false, 
-      message: "Erro ao criar conta. Tente novamente." 
+    return {
+      success: false,
+      message: "Erro ao criar conta. Tente novamente.",
     };
   }
 }

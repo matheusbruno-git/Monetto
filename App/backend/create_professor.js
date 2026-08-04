@@ -12,19 +12,21 @@ async function registerProfessor(dados) {
       id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     `;
 
-    const id_professor = require('uuid').v4();
+    const id_professor = require("uuid").v4();
 
-    await db.promise().execute(sql, [
-      id_professor,
-      dados.id_escola,
-      dados.nome,
-      dados.data_nascimento,
-      dados.cpf,
-      dados.telefone,
-      dados.email,
-      dados.senha_hash
-      dados.foto_url
-    ]);
+    await db
+      .promise()
+      .execute(sql, [
+        id_professor,
+        dados.id_escola,
+        dados.nome,
+        dados.data_nascimento,
+        dados.cpf,
+        dados.telefone,
+        dados.email,
+        dados.senha_hash,
+        dados.foto_url,
+      ]);
 
     return { success: true, message: "Professor cadastrado com sucesso!" };
   } catch (err) {

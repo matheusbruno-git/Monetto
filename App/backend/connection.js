@@ -1,18 +1,18 @@
 // backend/connection.js
-const mysql = require('mysql2');
+const mysql = require("mysql2");
 
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',           
-  database: 'monetto'
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "monetto",
 });
 
-db.connect(err => {
+db.connect((err) => {
   if (err) {
-    console.error('❌ DB Connection Error:', err);
+    console.error("❌ DB Connection Error:", err);
   } else {
-    console.log('✅ MySQL Connected (backend)');
+    console.log("✅ MySQL Connected (backend)");
   }
 });
 

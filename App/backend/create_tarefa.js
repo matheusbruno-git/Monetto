@@ -12,22 +12,23 @@ async function registerTarefa(dados) {
 
     const id_tarefa = uuidv4();
 
-    const [result] = await db.promise().execute(sql, [
-      require('uuid').v4(),
-      id_tarefa,
-      dados.id_escola,
-      dados.titulo,
-      dados.descricao,
-      dados.data_criacao,
-      dados.data_vencimento,
-    ]);
+    const [result] = await db
+      .promise()
+      .execute(sql, [
+        require("uuid").v4(),
+        id_tarefa,
+        dados.id_escola,
+        dados.titulo,
+        dados.descricao,
+        dados.data_criacao,
+        dados.data_vencimento,
+      ]);
 
-    return { 
-      success: true, 
+    return {
+      success: true,
       message: "Tarefa criada com sucesso!",
-      id: result.insertId 
+      id: result.insertId,
     };
-
   } catch (err) {
     console.error(err);
     return { success: false, message: "Erro ao criar tarefa." };

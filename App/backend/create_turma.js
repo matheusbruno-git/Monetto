@@ -12,24 +12,25 @@ async function registerTurma(dados) {
 
     const id_turma = uuidv4();
 
-    const [result] = await db.promise().execute(sql, [
-      require('uuid').v4(),
-      id_turma,
-      dados.id_escola,
-      dados.id_professor,
-      dados.id_nivel,
-      dados.nome_turma,
-      dados.ano_letivo,
-      dados.data_inicio,
-      dados.data_fim,
-    ]);
+    const [result] = await db
+      .promise()
+      .execute(sql, [
+        require("uuid").v4(),
+        id_turma,
+        dados.id_escola,
+        dados.id_professor,
+        dados.id_nivel,
+        dados.nome_turma,
+        dados.ano_letivo,
+        dados.data_inicio,
+        dados.data_fim,
+      ]);
 
-    return { 
-      success: true, 
+    return {
+      success: true,
       message: "Turma criada com sucesso!",
-      id: result.insertId 
+      id: result.insertId,
     };
-
   } catch (err) {
     console.error(err);
     return { success: false, message: "Erro ao criar turma." };
