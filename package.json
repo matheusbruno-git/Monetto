@@ -1,0 +1,21 @@
+{
+  "name": "monetto-desktop",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron ."
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "mysql2": "^3.22.3",
+    "uuid": "^14.0.0"
+  },
+  "devDependencies": {
+    "electron": "^42.2.0"
+  }
+}

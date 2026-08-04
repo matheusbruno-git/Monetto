@@ -1,8 +1,6 @@
 function handleCredentialResponse(response) {
-  // JWT token Google returns
   const token = response.credential;
 
-  // Decode payload
   const payload = JSON.parse(atob(token.split(".")[1]));
 
   console.log("ID:", payload.sub);
@@ -13,5 +11,4 @@ function handleCredentialResponse(response) {
   window.location.href = "./student/dashboard-aluno/dashboard-aluno.html";
 }
 
-// in your login page JS, after result.success:
 localStorage.setItem("session", JSON.stringify(result.user));
