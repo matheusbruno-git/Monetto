@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const bcrypt = require('bcryptjs');
 
-const basePath = path.join(__dirname, 'Monetto/App');
+const basePath = path.join(__dirname, 'App');
 require(path.join(basePath, './backend/connection.js'));
 
 function createWindow() {
