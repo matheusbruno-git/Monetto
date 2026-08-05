@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Monetto – Gerenciamento de Professores (Admin)</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="gerenciar-professores.css"/>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Monetto – Gerenciamento de Professores (Admin)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="gerenciar-professores.css"/>
+  <script src="script.js"></script>
 </head>
-<body>
+<body x-data="dashboard">
+
+<div id="sidebar-container"></div>
 
 <nav class="sidebar">
   <a class="sb-logo" href="#">
@@ -35,7 +38,7 @@
   <div class="topbar">
     <div>
       <h1>👨‍🏫 Gerenciamento de Professores</h1>
-      <p style="color:var(--muted);font-size:.87rem;margin-top:3px">Escola Estadual São Paulo · 12 professores cadastrados</p>
+      <p style="color:var(--muted);font-size:.87rem;margin-top:3px" x-text="school.name"></p>
     </div>
     <div class="top-right">
       <button class="btn-outline">⬇ Exportar</button>
@@ -64,46 +67,6 @@
       <div>Professor</div><div>Disciplina</div><div>Turmas</div><div>Alunos</div><div>Permissão</div><div>Status</div><div>Ações</div>
     </div>
     <div class="table-body">
-
-      <div class="tr">
-        <div class="td-prof"><div class="pav pa1">👨‍🏫</div><div><div class="pf-name">Prof. Ricardo Alves</div><div class="pf-email">ricardo@escola.edu.br</div></div></div>
-        <div class="td-text">Matemática</div>
-        <div class="td-text">4</div>
-        <div class="td-text">128</div>
-        <div><span class="perm-chip perm-admin">Admin</span></div>
-        <div><span class="status-chip sc-ok">✓ Ativo</span></div>
-        <div class="td-actions"><button class="act-btn">✏️</button><button class="act-btn">🔑</button><button class="act-btn danger">🗑</button></div>
-      </div>
-
-      <div class="tr">
-        <div class="td-prof"><div class="pav pa2">👩‍🏫</div><div><div class="pf-name">Profa. Carla Mendes</div><div class="pf-email">carla@escola.edu.br</div></div></div>
-        <div class="td-text">Português</div>
-        <div class="td-text">3</div>
-        <div class="td-text">96</div>
-        <div><span class="perm-chip">Professor</span></div>
-        <div><span class="status-chip sc-ok">✓ Ativo</span></div>
-        <div class="td-actions"><button class="act-btn">✏️</button><button class="act-btn">🔑</button><button class="act-btn danger">🗑</button></div>
-      </div>
-
-      <div class="tr">
-        <div class="td-prof"><div class="pav pa3">👨‍🏫</div><div><div class="pf-name">Prof. Marcos Silva</div><div class="pf-email">marcos@escola.edu.br</div></div></div>
-        <div class="td-text">Ciências</div>
-        <div class="td-text">3</div>
-        <div class="td-text">94</div>
-        <div><span class="perm-chip">Professor</span></div>
-        <div><span class="status-chip sc-ok">✓ Ativo</span></div>
-        <div class="td-actions"><button class="act-btn">✏️</button><button class="act-btn">🔑</button><button class="act-btn danger">🗑</button></div>
-      </div>
-
-      <div class="tr">
-        <div class="td-prof"><div class="pav pa4">👩‍🏫</div><div><div class="pf-name">Profa. Juliana Ramos</div><div class="pf-email">juliana@escola.edu.br</div></div></div>
-        <div class="td-text">História</div>
-        <div class="td-text">2</div>
-        <div class="td-text">64</div>
-        <div><span class="perm-chip">Professor</span></div>
-        <div><span class="status-chip sc-warn">⚠ Pendente</span></div>
-        <div class="td-actions"><button class="act-btn">✏️</button><button class="act-btn">🔑</button><button class="act-btn danger">🗑</button></div>
-      </div>
 
       <div class="tr">
         <div class="td-prof"><div class="pav pa5">👨‍🏫</div><div><div class="pf-name">Prof. André Costa</div><div class="pf-email">andre@escola.edu.br</div></div></div>
@@ -144,21 +107,28 @@
 </div>
 
 <script>
-function setTab(el){document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('active'));el.classList.add('active')}
-function openModal(){
-  var m = document.getElementById('modalOverlay');
-  if(m){ m.classList.add('open'); m.style.display='flex'; }
-}
-function closeModal(){
-  var m = document.getElementById('modalOverlay');
-  if(m){ m.classList.remove('open'); m.style.display='none'; }
-}
-function salvarNovoAluno() {
-  closeModal();
-  if(typeof MonettoUI !== 'undefined') MonettoUI.toast('Professor cadastrado com sucesso! ✅', 'success');
-}
-var mo = document.getElementById('modalOverlay');
-if(mo) mo.addEventListener('click', function(e){ if(e.target===this) closeModal(); });
+document.addEventListener('alpine:init', () => {
+  Alpine.data('dashboard', () => ({
+    school: { name: 'Carregando…', subtitle: '', chips: [], stats: [] },
+    stats: [],
+    teachers: [],
+    alerts: [],
+    classes: [],
+    xpChart: [],
+    xpMonthValue: '0k',
+    xpMonthDelta: '—',
+    activities: [],
+
+    async init() {
+      const result = await window.api.getDashboardAdminEscolar();
+      if (!result.success) {
+        console.error(result.message);
+        return;
+      }
+      Object.assign(this, result.data);
+    }
+  }));
+});
 </script>
 
 <script id="logout-script">

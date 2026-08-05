@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Monetto – Dashboard Admin Escolar</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="dashboard-admin-escolar.css"/>
@@ -12,7 +13,7 @@
 
 <main class="main">
 
-  <!-- SCHOOL HERO -->
+  <!-- SCHOOL HERO (preenchido dinamicamente) -->
   <div class="school-hero">
     <div class="sh-left">
       <div class="sh-icon">🏫</div>
@@ -26,93 +27,36 @@
         </div>
       </div>
     </div>
-    <div class="sh-stats">
-      <div class="shs-item"><div class="shs-val">512</div><div class="shs-lbl">Alunos</div></div>
-      <div class="shs-item"><div class="shs-val">12</div><div class="shs-lbl">Professores</div></div>
-      <div class="shs-item"><div class="shs-val">28</div><div class="shs-lbl">Turmas</div></div>
-    </div>
+    <div class="sh-stats"></div>
   </div>
 
-  <!-- STATS -->
-  <div class="stats-row">
-    <div class="sc sc-b"><div class="sc-icon">👥</div><div class="sc-val">512</div><div class="sc-lbl">Alunos matriculados</div><div class="sc-sub">↑ 98% ativos</div></div>
-    <div class="sc sc-g"><div class="sc-icon">✅</div><div class="sc-val">89%</div><div class="sc-lbl">Taxa de conclusão</div><div class="sc-sub">▲ +4% vs. mês anterior</div></div>
-    <div class="sc sc-y"><div class="sc-icon">📝</div><div class="sc-val">148</div><div class="sc-lbl">Tarefas publicadas</div><div class="sc-sub">Este mês</div></div>
-    <div class="sc sc-r"><div class="sc-icon">⚡</div><div class="sc-val">34.8k</div><div class="sc-lbl">XP distribuído</div><div class="sc-sub">Total da escola</div></div>
-  </div>
+  <!-- STATS (preenchido dinamicamente) -->
+  <div class="stats-row"></div>
 
   <!-- ROW 1 -->
   <div class="g2">
-
     <div class="card" id="teachers-card">
       <div class="card-hd"><h3>👨‍🏫 Professores Ativos</h3><a href="../gerenciar-professores/gerenciar-professores.html">Gerenciar →</a></div>
-      <div class="teach-item"><div class="tav ta1">👨‍🏫</div><div class="teach-info"><strong>Prof. Ricardo Alves</strong><span>Matemática · 4 turmas · 128 alunos</span></div><div class="teach-right"><div class="eng-val">92%</div><div class="eng-lbl">engajamento</div><div class="mini-prog"><div class="mini-f" style="width:92%"></div></div></div></div>
-      <div class="teach-item"><div class="tav ta2">👩‍🏫</div><div class="teach-info"><strong>Profa. Carla Mendes</strong><span>Português · 3 turmas · 96 alunos</span></div><div class="teach-right"><div class="eng-val">87%</div><div class="eng-lbl">engajamento</div><div class="mini-prog"><div class="mini-f" style="width:87%"></div></div></div></div>
-      <div class="teach-item"><div class="tav ta3">👨‍🏫</div><div class="teach-info"><strong>Prof. Marcos Silva</strong><span>Ciências · 3 turmas · 94 alunos</span></div><div class="teach-right"><div class="eng-val">85%</div><div class="eng-lbl">engajamento</div><div class="mini-prog"><div class="mini-f" style="width:85%"></div></div></div></div>
-      <div class="teach-item"><div class="tav ta4">👩‍🏫</div><div class="teach-info"><strong>Profa. Juliana Ramos</strong><span>História · 2 turmas · 64 alunos</span></div><div class="teach-right"><div class="eng-val">79%</div><div class="eng-lbl">engajamento</div><div class="mini-prog"><div class="mini-f" style="width:79%"></div></div></div></div>
     </div>
 
     <div class="card" id="alerts-card">
       <div class="card-hd"><h3>⚠️ Alertas da Escola</h3><a>Ver todos</a></div>
-      <div class="alert-item al-red">
-        <div class="alert-icon">🔴</div>
-        <div class="alert-body"><strong>11 alunos sem acesso há +7 dias</strong><span>Turmas: 9ºA, 8ºB · Ação necessária</span></div>
-        <button class="alert-action">Alertar</button>
-      </div>
-      <div class="alert-item al-yellow">
-        <div class="alert-icon">🟡</div>
-        <div class="alert-body"><strong>Prof. André Costa inativo há 5 dias</strong><span>Disciplina: Geografia · 62 alunos afetados</span></div>
-        <button class="alert-action">Ver</button>
-      </div>
-      <div class="alert-item al-yellow">
-        <div class="alert-icon">🟡</div>
-        <div class="alert-body"><strong>Taxa de conclusão caiu em 9ºA</strong><span>De 85% → 71% esta semana</span></div>
-        <button class="alert-action">Analisar</button>
-      </div>
-      <div class="alert-item al-blue">
-        <div class="alert-icon">🔵</div>
-        <div class="alert-body"><strong>Novo professor aguardando aprovação</strong><span>Profa. Juliana Ramos · Geografia</span></div>
-        <button class="alert-action">Aprovar</button>
-      </div>
     </div>
   </div>
 
   <!-- ROW 2 -->
   <div class="g3">
-
     <div class="card" id="classes-card">
       <div class="card-hd"><h3>📚 Turmas por Engajamento</h3></div>
-      <div class="turma-row th"><div>Turma</div><div>Alunos</div><div>Conclusão</div><div>Status</div></div>
-      <div class="turma-row"><div style="font-size:.85rem;font-weight:600">8º Ano A</div><div style="color:var(--muted);font-size:.82rem">34</div><div><div class="pbar-wrap"><div class="pbar"><div class="pbar-f" style="width:92%"></div></div><span style="font-size:.72rem;color:var(--green)">92%</span></div></div><div><span class="status-dot sd-g"></span><span style="font-size:.72rem;color:var(--green)">Ótimo</span></div></div>
-      <div class="turma-row"><div style="font-size:.85rem;font-weight:600">9º Ano B</div><div style="color:var(--muted);font-size:.82rem">30</div><div><div class="pbar-wrap"><div class="pbar"><div class="pbar-f" style="width:91%"></div></div><span style="font-size:.72rem;color:var(--green)">91%</span></div></div><div><span class="status-dot sd-g"></span><span style="font-size:.72rem;color:var(--green)">Ótimo</span></div></div>
-      <div class="turma-row"><div style="font-size:.85rem;font-weight:600">8º Ano B</div><div style="color:var(--muted);font-size:.82rem">31</div><div><div class="pbar-wrap"><div class="pbar"><div class="pbar-f" style="width:85%"></div></div><span style="font-size:.72rem;color:var(--accent)">85%</span></div></div><div><span class="status-dot sd-y"></span><span style="font-size:.72rem;color:var(--accent)">Bom</span></div></div>
-      <div class="turma-row"><div style="font-size:.85rem;font-weight:600">9º Ano A</div><div style="color:var(--muted);font-size:.82rem">33</div><div><div class="pbar-wrap"><div class="pbar"><div class="pbar-f" style="width:71%"></div></div><span style="font-size:.72rem;color:var(--orange)">71%</span></div></div><div><span class="status-dot sd-r"></span><span style="font-size:.72rem;color:var(--red)">Atenção</span></div></div>
     </div>
 
     <div class="card" id="xp-card">
       <div class="card-hd"><h3>📈 XP por Semana</h3></div>
-      <div class="bar-chart">
-        <div class="bc"><div class="bc-bar blue" style="height:55px"></div><div class="bc-lbl">Sem 1</div></div>
-        <div class="bc"><div class="bc-bar blue" style="height:68px"></div><div class="bc-lbl">Sem 2</div></div>
-        <div class="bc"><div class="bc-bar blue" style="height:72px"></div><div class="bc-lbl">Sem 3</div></div>
-        <div class="bc"><div class="bc-bar gold" style="height:90px"></div><div class="bc-lbl">Sem 4</div></div>
-      </div>
-      <div style="text-align:center;font-size:.72rem;color:var(--muted);margin-top:8px">XP total distribuído por semana · Abril</div>
-      <div style="display:flex;justify-content:space-around;margin-top:12px">
-        <div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--accent)">34.8k</div><div style="font-size:.68rem;color:var(--muted)">XP este mês</div></div>
-        <div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--green)">↑27%</div><div style="font-size:.68rem;color:var(--muted)">vs. mês anterior</div></div>
-      </div>
     </div>
 
     <div class="card" id="activities-card">
       <div class="card-hd"><h3>⚡ Atividades Recentes</h3></div>
-      <div class="act-item"><div class="act-icon ai-g">✅</div><div class="act-body"><strong>Profa. Carla publicou nova tarefa</strong><span>Redação · 9ºA · 3 turmas</span></div><div class="act-time">há 5min</div></div>
-      <div class="act-item"><div class="act-icon ai-y">⭐</div><div class="act-body"><strong>Ana Souza subiu para Nível 5</strong><span>8ºA · 680 XP acumulados</span></div><div class="act-time">há 18min</div></div>
-      <div class="act-item"><div class="act-icon ai-r">⚠️</div><div class="act-body"><strong>3 alunos atrasados em tarefas</strong><span>9ºA · Ação recomendada</span></div><div class="act-time">há 1h</div></div>
-      <div class="act-item"><div class="act-icon ai-b">👨‍🏫</div><div class="act-body"><strong>Prof. Ricardo criou 2 tarefas</strong><span>Matemática · 8ºA e 8ºB</span></div><div class="act-time">há 2h</div></div>
-      <div class="act-item"><div class="act-icon ai-g">🏆</div><div class="act-body"><strong>8ºA atingiu 92% de engajamento</strong><span>Recorde da escola este ano!</span></div><div class="act-time">hoje</div></div>
     </div>
-
   </div>
 </main>
 
@@ -122,11 +66,10 @@ function sairDaConta(destino) {
     window.location.href = destino;
   }
 }
-
 </script>
+
 <script>
 (async function () {
-  const apiUrl = '/api/admin-school/dashboard';
 
   function escapeHtml(value) {
     return String(value ?? '')
@@ -179,7 +122,7 @@ function sairDaConta(destino) {
     if (!card) return;
     card.innerHTML = `
       <div class="card-hd"><h3>👨‍🏫 Professores Ativos</h3><a href="../gerenciar-professores/gerenciar-professores.html">Gerenciar →</a></div>
-      ${ (data.teachers || []).map((teacher) => `
+      ${(data.teachers || []).map((teacher) => `
         <div class="teach-item">
           <div class="tav ${escapeHtml(teacher.avatarClass || 'ta1')}">${escapeHtml(teacher.avatar || '👨‍🏫')}</div>
           <div class="teach-info">
@@ -192,7 +135,7 @@ function sairDaConta(destino) {
             <div class="mini-prog"><div class="mini-f" style="width:${escapeHtml(teacher.engagement)}%"></div></div>
           </div>
         </div>
-      `).join('') }
+      `).join('')}
     `;
   }
 
@@ -257,10 +200,10 @@ function sairDaConta(destino) {
     card.innerHTML = `
       <div class="card-hd"><h3>📈 XP por Semana</h3></div>
       <div class="bar-chart">${bars}</div>
-      <div style="text-align:center;font-size:.72rem;color:var(--muted);margin-top:8px">${escapeHtml(data.xpChartSummary || 'XP total distribuído por semana · Abril')}</div>
+      <div style="text-align:center;font-size:.72rem;color:var(--muted);margin-top:8px">${escapeHtml(data.xpChartSummary || 'XP total distribuído por semana')}</div>
       <div style="display:flex;justify-content:space-around;margin-top:12px">
-        <div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--accent)">${escapeHtml(data.xpMonthValue || '34.8k')}</div><div style="font-size:.68rem;color:var(--muted)">XP este mês</div></div>
-        <div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--green)">${escapeHtml(data.xpMonthDelta || '↑27%')}</div><div style="font-size:.68rem;color:var(--muted)">vs. mês anterior</div></div>
+        <div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--accent)">${escapeHtml(data.xpMonthValue || '0k')}</div><div style="font-size:.68rem;color:var(--muted)">XP este mês</div></div>
+        <div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--green)">${escapeHtml(data.xpMonthDelta || '—')}</div><div style="font-size:.68rem;color:var(--muted)">vs. mês anterior</div></div>
       </div>
     `;
   }
@@ -285,12 +228,17 @@ function sairDaConta(destino) {
 
   async function loadDashboardData() {
     try {
-      const response = await fetch(apiUrl, { headers: { Accept: 'application/json' } });
-      if (!response.ok) {
-        throw new Error(`Falha ao carregar os dados do backend: ${response.status}`);
+      // Electron IPC via preload.js → main.js → MySQL
+      if (!window.api || typeof window.api.getDashboardAdminEscolar !== 'function') {
+        throw new Error('window.api.getDashboardAdminEscolar não está disponível. Verifique o preload.js');
       }
 
-      const data = await response.json();
+      const result = await window.api.getDashboardAdminEscolar();
+      if (!result.success) {
+        throw new Error(result.message || 'Falha ao carregar dados');
+      }
+
+      const data = result.data;
       renderHero(data);
       renderStats(data);
       renderTeachers(data);

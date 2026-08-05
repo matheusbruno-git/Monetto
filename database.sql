@@ -1,10 +1,10 @@
-CREATE DATABASE monetto;
+CREATE DATABASE IF NOT EXISTS monetto;
 USE monetto;
 
 -- ============================================================
 -- ESCOLAS
 -- ============================================================
-CREATE TABLE escolas (
+CREATE TABLE IF NOT EXISTS escolas (
     id_escola INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(150) NOT NULL,
     cnpj VARCHAR(18) UNIQUE,
@@ -19,7 +19,7 @@ CREATE TABLE escolas (
 -- ============================================================
 -- PERFIS
 -- ============================================================
-CREATE TABLE perfis (
+CREATE TABLE IF NOT EXISTS perfis (
     id_perfil INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(50) NOT NULL UNIQUE,
     descricao TEXT,
@@ -30,7 +30,7 @@ CREATE TABLE perfis (
 
 
 
-INSERT INTO perfis (nome, descricao, permissoes, ativo) VALUES
+INSERT IGNORE INTO perfis (nome, descricao, permissoes, ativo) VALUES
     ('admin', 'Administrador do sistema', '{"gerenciar_usuarios": true, "gerenciar_escolas": true, "gerenciar_cursos": true, "gerenciar_turmas": true}', 1),
     ('aluno', 'Usuário estudante', '{"acessar_cursos": true, "visualizar_turmas": true}', 1),
     ('professor', 'Perfil de professor', '{"acessar_cursos": true, "gerenciar_turmas": true}', 1);
@@ -38,7 +38,7 @@ INSERT INTO perfis (nome, descricao, permissoes, ativo) VALUES
 -- ============================================================
 -- NIVEIS EDUCACIONAIS
 -- ============================================================
-CREATE TABLE niveis_educacionais (
+CREATE TABLE IF NOT EXISTS niveis_educacionais (
     id_nivel INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL UNIQUE,
     descricao TEXT,
@@ -50,7 +50,7 @@ CREATE TABLE niveis_educacionais (
 -- ============================================================
 -- CURSOS
 -- ============================================================
-CREATE TABLE cursos (
+CREATE TABLE IF NOT EXISTS cursos (
     id_curso INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(150) NOT NULL,
     descricao TEXT,
@@ -63,7 +63,7 @@ CREATE TABLE cursos (
 -- ============================================================
 -- USUARIOS
 -- ============================================================
-CREATE TABLE usuarios (
+CREATE TABLE IF NOT EXISTS usuarios (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     id_perfil INT NOT NULL,
     id_escola INT,
@@ -85,7 +85,7 @@ CREATE TABLE usuarios (
 -- ============================================================
 -- TURMAS
 -- ============================================================
-CREATE TABLE turmas (
+CREATE TABLE IF NOT EXISTS turmas (
     id_turma INT AUTO_INCREMENT PRIMARY KEY,
     id_escola INT NOT NULL,
     id_professor INT NOT NULL,
@@ -101,14 +101,14 @@ CREATE TABLE turmas (
     FOREIGN KEY (id_nivel) REFERENCES niveis_educacionais(id_nivel)
 );
 
-ALTER TABLE usuarios
-ADD COLUMN id_turma INT,
-ADD FOREIGN KEY (id_turma) REFERENCES turmas(id_turma);
+ALTER TABLE  IF EXISTS usuarios
+ADD  IF NOT EXISTS COLUMN id_turma INT,
+ADD FOREIGN KEY IF NOT EXISTS (id_turma) REFERENCES turmas(id_turma);
 
 -- ============================================================
 -- CONFIGURAÇÕES ESCOLA
 -- ============================================================
-CREATE TABLE configuracoes_escola (
+CREATE TABLE IF NOT EXISTS configuracoes_escola (
     id_config INT AUTO_INCREMENT PRIMARY KEY,
     id_escola INT NOT NULL UNIQUE,
     nome_moeda VARCHAR(50) DEFAULT 'Monetto',
@@ -127,7 +127,7 @@ CREATE TABLE configuracoes_escola (
 -- ============================================================
 -- RESPONSÁVEIS
 -- ============================================================
-CREATE TABLE dados_responsavel (
+CREATE TABLE IF NOT EXISTS dados_responsavel (
     id_responsavel INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
     nome VARCHAR(150) NOT NULL,
@@ -145,7 +145,7 @@ CREATE TABLE dados_responsavel (
 -- ============================================================
 -- AVALIAÇÕES
 -- ============================================================
-CREATE TABLE avaliacoes (
+CREATE TABLE IF NOT EXISTS avaliacoes (
     id_avaliacao INT AUTO_INCREMENT PRIMARY KEY,
     id_turma INT NOT NULL,
     id_curso INT NOT NULL,
@@ -162,7 +162,7 @@ CREATE TABLE avaliacoes (
 -- ============================================================
 -- NOTAS
 -- ============================================================
-CREATE TABLE notas (
+CREATE TABLE IF NOT EXISTS notas (
     id_nota INT AUTO_INCREMENT PRIMARY KEY,
     id_avaliacao INT NOT NULL,
     id_aluno INT NOT NULL,
@@ -178,7 +178,7 @@ CREATE TABLE notas (
 -- ============================================================
 -- PAGAMENTOS
 -- ============================================================
-CREATE TABLE pagamentos (
+CREATE TABLE IF NOT EXISTS pagamentos (
     id_pagamento INT AUTO_INCREMENT PRIMARY KEY,
     id_escola INT NOT NULL,
     valor DECIMAL(10,2) NOT NULL,
@@ -193,7 +193,7 @@ CREATE TABLE pagamentos (
 -- ============================================================
 -- TAREFAS
 -- ============================================================
-CREATE TABLE tarefas (
+CREATE TABLE IF NOT EXISTS tarefas (
     id_tarefa INT AUTO_INCREMENT PRIMARY KEY,
     id_escola INT NOT NULL,
     id_curso INT NOT NULL,
@@ -210,7 +210,7 @@ CREATE TABLE tarefas (
 -- ============================================================
 -- PROGRESSO ALUNO
 -- ============================================================
-CREATE TABLE progresso_aluno (
+CREATE TABLE IF NOT EXISTS progresso_aluno (
     id_progresso INT AUTO_INCREMENT PRIMARY KEY,
     id_aluno INT NOT NULL UNIQUE,
     pontos_totais INT DEFAULT 0,
@@ -228,7 +228,7 @@ CREATE TABLE progresso_aluno (
 -- ============================================================
 -- RECOMPENSAS
 -- ============================================================
-CREATE TABLE recompensas (
+CREATE TABLE IF NOT EXISTS recompensas (
     id_recompensa INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     descricao TEXT,
@@ -243,7 +243,7 @@ CREATE TABLE recompensas (
 -- ============================================================
 -- RECOMPENSAS ALUNO
 -- ============================================================
-CREATE TABLE recompensas_aluno (
+CREATE TABLE IF NOT EXISTS recompensas_aluno (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_aluno INT NOT NULL,
     id_recompensa INT NOT NULL,
@@ -259,7 +259,7 @@ CREATE TABLE recompensas_aluno (
 -- ============================================================
 -- LOGS
 -- ============================================================
-CREATE TABLE logs_atividade (
+CREATE TABLE IF NOT EXISTS logs_atividade (
     id_log INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT,
     acao VARCHAR(100) NOT NULL,
