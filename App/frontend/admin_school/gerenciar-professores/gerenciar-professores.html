@@ -11,7 +11,7 @@
 <nav class="sidebar">
   <a class="sb-logo" href="#">
     <svg viewBox="0 0 32 32" fill="none" width="26" height="26"><rect width="32" height="32" rx="8" fill="#1A2A8F"/><path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="10" r="3" fill="#2ECC71"/></svg>
-    Monetto <span class="sb-role">Admin</span>
+    onetto <span class="sb-role">Admin</span>
   </a>
   <span class="sb-section">Escola</span>
   <a class="sb-link" href="../dashboard-admin-escolar/dashboard-admin-escolar.html"><span class="icon">🏠</span> Painel Geral</a>
@@ -145,17 +145,27 @@
 
 <script>
 function setTab(el){document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('active'));el.classList.add('active')}
-function openModal(){document.getElementById('modalOverlay').classList.add('open')}
-function closeModal(){document.getElementById('modalOverlay').classList.remove('open')}
-document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal()})
+function openModal(){
+  var m = document.getElementById('modalOverlay');
+  if(m){ m.classList.add('open'); m.style.display='flex'; }
+}
+function closeModal(){
+  var m = document.getElementById('modalOverlay');
+  if(m){ m.classList.remove('open'); m.style.display='none'; }
+}
+function salvarNovoAluno() {
+  closeModal();
+  if(typeof MonettoUI !== 'undefined') MonettoUI.toast('Professor cadastrado com sucesso! ✅', 'success');
+}
+var mo = document.getElementById('modalOverlay');
+if(mo) mo.addEventListener('click', function(e){ if(e.target===this) closeModal(); });
 </script>
 
 <script id="logout-script">
-function sairDaConta(destino) {
-  if (confirm("Tem certeza que deseja sair da conta?")) {
-    window.location.href = destino;
-  }
+/* sairDaConta handled by monetto-app.js */
 }
 </script>
+
+<script src="../shared/monetto-app.js"></script>
 </body>
 </html>

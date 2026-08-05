@@ -20,3 +20,11 @@
       console.error(err);
     });
 })();
+
+const result = await window.api.getDashboardAdminEscolar();
+if (result.success) {
+  const d = result.data;
+  document.getElementById('school-name').textContent = d.school.name;
+  document.getElementById('alunos-count').textContent = d.stats[0].value;
+  // only the fields you care about
+}

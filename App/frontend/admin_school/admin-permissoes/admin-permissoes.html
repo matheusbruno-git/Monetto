@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Monetto – Administrador – Permissões</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="admin-permissoes.css"/>
+</head>
+<body><nav class="sidebar">
+  <a class="sb-logo" href="#">
+    <svg viewBox="0 0 32 32" fill="none" width="26" height="26"><rect width="32" height="32" rx="8" fill="#1A2A8F"/><path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="10" r="3" fill="#2ECC71"/></svg>
+    onetto <span class="sb-role">Admin</span>
+  </a>
+  <span class="sb-section">Escola</span>
+  <a class="sb-link " href="../dashboard-admin-escolar/dashboard-admin-escolar.html"><span class="icon">🏠</span> Painel Escolar</a>
+  <a class="sb-link " href="../admin-professores/admin-professores.html"><span class="icon">👨‍🏫</span> Professores</a>
+  <a class="sb-link " href="../admin-alunos/admin-alunos.html"><span class="icon">👥</span> Alunos</a>
+  <a class="sb-link " href="../admin-tarefas/admin-tarefas.html"><span class="icon">📝</span> Tarefas</a>
+  <span class="sb-section">Análises</span>
+  <a class="sb-link " href="../admin-relatorios/admin-relatorios.html"><span class="icon">📊</span> Relatórios</a>
+  <a class="sb-link" href="../financeiro/financeiro.html"><span class="icon">💳</span> Financeiro</a>
+  <span class="sb-section">Configurações</span>
+  <a class="sb-link " href="../admin-dados-escola/admin-dados-escola.html"><span class="icon">🏫</span> Dados da Escola</a>
+  <a class="sb-link active" href="../admin-permissoes/admin-permissoes.html"><span class="icon">🛡️</span> Permissões</a>
+  <a class="sb-link " href="../admin-configuracoes/admin-configuracoes.html"><span class="icon">⚙️</span> Configurações</a>
+  <div class="sb-bottom">
+    <a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;" onclick="if(confirm('Sair da conta?'))window.location.href='../login-principal/login-principal.html'"><span class="icon">🚪</span> Sair da conta</a>
+    <div class="sb-user">
+      <div class="sb-av">🛡️</div>
+      <div class="sb-user-info"><strong>Admin Escolar</strong><span>Administrador</span></div>
+    </div>
+  </div>
+</nav>
+<main class="main">
+  <div class="topbar">
+    <h1>Controle de <span>Permissões</span></h1>
+    <div class="top-right">
+      <button class="btn btn-primary">💾 Salvar Permissões</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hd"><h3>👨‍🏫 Permissões – Professores</h3></div>
+    <div style="display:flex;flex-direction:column;gap:0">
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:0;padding:10px 0;border-bottom:1px solid var(--border);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)">
+        <span>Recurso</span><span style="text-align:center">Visualizar</span><span style="text-align:center">Editar</span><span style="text-align:center">Criar/Deletar</span>
+      </div>
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:0;padding:12px 0;border-bottom:1px solid var(--border);align-items:center;font-size:.85rem">
+        <span>Tarefas</span>
+        <div style="text-align:center"><span style="color:var(--green);font-size:1.1rem">✅</span></div>
+        <div style="text-align:center"><span style="color:var(--green);font-size:1.1rem">✅</span></div>
+        <div style="text-align:center"><span style="color:var(--green);font-size:1.1rem">✅</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:0;padding:12px 0;border-bottom:1px solid var(--border);align-items:center;font-size:.85rem">
+        <span>Dados de Alunos</span>
+        <div style="text-align:center"><span style="color:var(--green);font-size:1.1rem">✅</span></div>
+        <div style="text-align:center"><span style="color:var(--accent);font-size:1.1rem">🟡</span></div>
+        <div style="text-align:center"><span style="color:var(--red);font-size:1.1rem">❌</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:0;padding:12px 0;border-bottom:1px solid var(--border);align-items:center;font-size:.85rem">
+        <span>Relatórios da Turma</span>
+        <div style="text-align:center"><span style="color:var(--green);font-size:1.1rem">✅</span></div>
+        <div style="text-align:center"><span style="color:var(--red);font-size:1.1rem">❌</span></div>
+        <div style="text-align:center"><span style="color:var(--red);font-size:1.1rem">❌</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:0;padding:12px 0;align-items:center;font-size:.85rem">
+        <span>Relatórios da Escola</span>
+        <div style="text-align:center"><span style="color:var(--red);font-size:1.1rem">❌</span></div>
+        <div style="text-align:center"><span style="color:var(--red);font-size:1.1rem">❌</span></div>
+        <div style="text-align:center"><span style="color:var(--red);font-size:1.1rem">❌</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hd"><h3>👥 Permissões – Alunos</h3></div>
+    <div style="display:flex;flex-direction:column;gap:0">
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:0;padding:10px 0;border-bottom:1px solid var(--border);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)">
+        <span>Recurso</span><span style="text-align:center">Acesso</span><span style="text-align:center">Configuração</span>
+      </div>
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:0;padding:12px 0;border-bottom:1px solid var(--border);align-items:center;font-size:.85rem">
+        <span>Jogos e Quiz</span>
+        <div style="text-align:center"><span style="color:var(--green)">✅ Permitido</span></div>
+        <div style="text-align:center"><span style="color:var(--muted);font-size:.75rem">Admin</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:0;padding:12px 0;border-bottom:1px solid var(--border);align-items:center;font-size:.85rem">
+        <span>Ranking da Escola</span>
+        <div style="text-align:center"><span style="color:var(--green)">✅ Permitido</span></div>
+        <div style="text-align:center"><span style="color:var(--muted);font-size:.75rem">Admin</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:0;padding:12px 0;align-items:center;font-size:.85rem">
+        <span>Módulo de Aprendizado</span>
+        <div style="text-align:center"><span style="color:var(--green)">✅ Permitido</span></div>
+        <div style="text-align:center"><span style="color:var(--muted);font-size:.75rem">Admin</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hd"><h3>🔑 Admins da Escola</h3><button class="btn btn-primary" style="font-size:.78rem;padding:7px 14px">➕ Adicionar Admin</button></div>
+    <div class="data-row" style="grid-template-columns:2fr 120px 80px 60px">
+      <div class="person-info"><div class="av" style="background:linear-gradient(135deg,#c0392b,#8b0000)">🛡️</div><div><div class="person-name">Admin Escolar</div><div class="person-sub">admin@escola.edu · Admin Principal</div></div></div>
+      <div><span class="badge badge-red">Super Admin</span></div>
+      <div style="font-size:.82rem;color:var(--muted)">Desde 2025</div>
+      <div class="act-btns"><div class="act-btn">✏️</div></div>
+    </div>
+  </div>
+</main>
+
+
+<script>
+function showToast(msg, tipo) {
+  if (typeof MonettoUI !== 'undefined') {
+    MonettoUI.toast(msg || 'Ação realizada!', tipo || 'success');
+  }
+}
+</script>
+<script src="../shared/monetto-app.js"></script>
+</body>
+</html>
