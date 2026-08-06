@@ -280,3 +280,31 @@ INSERT IGNORE INTO perfis (nome, descricao) VALUES
 ('professor', 'Professor'),
 ('escola', 'Administrador da Escola'),
 ('admin', 'Administrador Geral');
+
+CREATE TABLE IF NOT EXISTS tarefas (
+    id_tarefa INT AUTO_INCREMENT PRIMARY KEY,
+    id_escola INT NOT NULL,
+    id_curso INT NOT NULL,
+    titulo VARCHAR(100),
+    descricao VARCHAR(300),
+    data_criacao DATE,
+    data_vencimento DATE,
+    status VARCHAR(30) DEFAULT 'pendente',
+    FOREIGN KEY (id_escola) REFERENCES escolas(id_escola),
+    FOREIGN KEY (id_curso) REFERENCES cursos(id_curso)
+);
+
+-- Optional: also create progresso_aluno if it is missing
+CREATE TABLE IF NOT EXISTS progresso_aluno (
+    id_progresso INT AUTO_INCREMENT PRIMARY KEY,
+    id_aluno INT NOT NULL UNIQUE,
+    pontos_totais INT DEFAULT 0,
+    saldo_moedas DECIMAL(10,2) DEFAULT 0.00,
+    nivel_atual INT DEFAULT 1,
+    xp_atual INT DEFAULT 0,
+    xp_proximo_nivel INT DEFAULT 100,
+    percentual_conclusao DECIMAL(5,2) DEFAULT 0.00,
+    sequencia_dias INT DEFAULT 0,
+    atualizado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_aluno) REFERENCES usuarios(id_usuario)
+);

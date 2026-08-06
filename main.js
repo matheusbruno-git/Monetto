@@ -185,158 +185,52 @@ ipcMain.handle('getDashboardAdminEscolar', async () => {
   try {
     const db = require(path.join(basePath, 'backend/connection.js'));
 
-    const [[alunos]] = await db.promise().execute(
-      `SELECT COUNT(*) AS total FROM usuarios WHERE id_perfil = 1 AND ativo = 1`
-    );
-    const [[professores]] = await db.promise().execute(
-      `SELECT COUNT(*) AS total FROM usuarios WHERE id_perfil = 2 AND ativo = 1`
-    );
-    const [[turmas]] = await db.promise().execute(
-      `SELECT COUNT(*) AS total FROM turmas WHERE status = 'ativa'`
-    );
-    const [[tarefas]] = await db.promise().execute(
-      `SELECT COUNT(*) AS total FROM tarefas`
-    );
-    const [[xpTotal]] = await db.promise().execute(
-      `SELECT COALESCE(SUM(xp_atual), 0) AS total FROM progresso_aluno`
-    );
+    // Helper: run a count query, return 0 if table is missing
+    async function safeCount(sql) {
+      try {
+        const [[row]] = await db.promise().execute(sql);
+        return Number(row.total) || 0;
+      } catch (e) {
+        console.warn('safeCount failed:', e.sqlMessage || e.message);
+        return 0;
+      }
+    }
 
-    const [escolas] = await db.promise().execute(
-      `SELECT nome, cidade, estado FROM escolas LIMIT 1`
-    );
-    const escola = escolas[0] || { nome: 'Escola', cidade: '', estado: '' };
+    const alunosTotal      = await safeCount(`SELECT COUNT(*) AS total FROM usuarios WHERE id_perfil = 1 AND ativo = 1`);
+    const deactivatedAlunosTotal = await safeCount(`SELECT COUNT(*) AS total FROM usuarios WHERE id_perfil = 1 AND ativo = 0 AND DATEDIFF(CURDATE(), data_ultimo_login) > 7`);
+    const professoresTotal = await safeCount(`SELECT COUNT(*) AS total FROM usuarios WHERE id_perfil = 2 AND ativo = 1`);
+    const turmasTotal      = await safeCount(`SELECT COUNT(*) AS total FROM turmas WHERE status = 'ativa'`);
+    const tarefasTotal     = await safeCount(`SELECT COUNT(*) AS total FROM tarefas`);
+    const xpTotal          = await safeCount(`SELECT COALESCE(SUM(xp_atual), 0) AS total FROM progresso_aluno`);
 
-    const [teachersRows] = await db.promise().execute(
-      `SELECT 
-         u.id_usuario,
-         u.nome,
-         COUNT(t.id_turma) AS qtd_turmas
-       FROM usuarios u
-       LEFT JOIN turmas t ON t.id_professor = u.id_usuario AND t.status = 'ativa'
-       WHERE u.id_perfil = 2 AND u.ativo = 1
-       GROUP BY u.id_usuario, u.nome
-       ORDER BY qtd_turmas DESC
-       LIMIT 6`
-    );
+    // Escola
+    let escolaNome = 'Escola';
+    try {
+      const [escolas] = await db.promise().execute(`SELECT nome FROM escolas LIMIT 1`);
+      if (escolas[0]) escolaNome = escolas[0].nome;
+    } catch (e) {
+      console.warn('escolas table missing or empty');
+    }
 
-    const [classesRows] = await db.promise().execute(
-      `SELECT 
-         t.id_turma,
-         t.nome_turma,
-         n.nome AS nivel,
-         COUNT(u.id_usuario) AS alunos
-       FROM turmas t
-       LEFT JOIN niveis_educacionais n ON n.id_nivel = t.id_nivel
-       LEFT JOIN usuarios u ON u.id_turma = t.id_turma AND u.id_perfil = 1
-       WHERE t.status = 'ativa'
-       GROUP BY t.id_turma, t.nome_turma, n.nome
-       ORDER BY t.nome_turma
-       LIMIT 8`
-    );
-
-    const [tarefasRecentes] = await db.promise().execute(
-      `SELECT 
-         t.titulo,
-         t.data_criacao,
-         c.nome AS disciplina
-       FROM tarefas t
-       LEFT JOIN cursos c ON c.id_curso = t.id_curso
-       ORDER BY t.data_criacao DESC
-       LIMIT 5`
-    );
-
-    const data = {
-      school: {
-        name: escola.nome,
-        subtitle: `Dashboard do Administrador Escolar · ${new Date().toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' })}`,
-        chips: [
-          `📅 Ano letivo ${new Date().getFullYear()}`,
-          '🔒 Admin',
-          '● Sistema ativo'
-        ],
+    return {
+      success: true,
+      data: {
+        school: {
+          name: escolaNome,
+          stats: [
+            { value: String(alunosTotal),      label: 'Alunos' },
+            { value: String(professoresTotal), label: 'Professores' },
+            { value: String(turmasTotal),      label: 'Turmas' }
+          ]
+        },
         stats: [
-          { value: String(alunos.total), label: 'Alunos' },
-          { value: String(professores.total), label: 'Professores' },
-          { value: String(turmas.total), label: 'Turmas' }
+          { value: String(alunosTotal) },                    // 0 – alunos matriculados
+          { value: '—' },                                    // 1 – taxa
+          { value: String(tarefasTotal) },                   // 2 – tarefas
+          { value: (xpTotal / 1000).toFixed(1) + 'k' }       // 3 – XP
         ]
-      },
-      stats: [
-        {
-          className: 'sc-b',
-          icon: '👥',
-          value: String(alunos.total),
-          label: 'Alunos matriculados',
-          sub: 'ativos no sistema'
-        },
-        {
-          className: 'sc-g',
-          icon: '✅',
-          value: '—',
-          label: 'Taxa de conclusão',
-          sub: 'cálculo futuro'
-        },
-        {
-          className: 'sc-y',
-          icon: '📝',
-          value: String(tarefas.total),
-          label: 'Tarefas publicadas',
-          sub: 'total no sistema'
-        },
-        {
-          className: 'sc-r',
-          icon: '⚡',
-          value: (Number(xpTotal.total) / 1000).toFixed(1) + 'k',
-          label: 'XP distribuído',
-          sub: 'Total da escola'
-        }
-      ],
-      teachers: teachersRows.map((t, i) => ({
-        name: t.nome,
-        details: `${t.qtd_turmas} turma(s)`,
-        engagement: Math.min(95, 70 + Number(t.qtd_turmas) * 5),
-        avatar: i % 2 === 0 ? '👨‍🏫' : '👩‍🏫',
-        avatarClass: `ta${(i % 4) + 1}`
-      })),
-      alerts: [
-        {
-          className: 'al-blue',
-          icon: '🔵',
-          title: 'Dados carregados do banco',
-          subtitle: 'Dashboard conectado com sucesso',
-          actionLabel: 'OK'
-        }
-      ],
-      classes: classesRows.map(c => {
-        const completion = c.alunos > 0 ? Math.min(95, 60 + Number(c.alunos)) : 0;
-        let status = 'Ótimo';
-        if (completion < 75) status = 'Atenção';
-        else if (completion < 85) status = 'Bom';
-        return {
-          name: c.nome_turma,
-          students: c.alunos,
-          completion,
-          status
-        };
-      }),
-      xpChart: [
-        { label: 'Sem 1', height: 55, color: 'blue' },
-        { label: 'Sem 2', height: 68, color: 'blue' },
-        { label: 'Sem 3', height: 72, color: 'blue' },
-        { label: 'Sem 4', height: 90, color: 'gold' }
-      ],
-      xpChartSummary: 'XP total distribuído por semana (placeholder)',
-      xpMonthValue: (Number(xpTotal.total) / 1000).toFixed(1) + 'k',
-      xpMonthDelta: '—',
-      activities: tarefasRecentes.map(t => ({
-        icon: '📝',
-        iconClass: 'ai-y',
-        title: t.titulo || 'Tarefa',
-        subtitle: `${t.disciplina || 'Disciplina'} · ${t.data_criacao ? new Date(t.data_criacao).toLocaleDateString('pt-BR') : ''}`,
-        time: 'recente'
-      }))
+      }
     };
-
-    return { success: true, data };
   } catch (err) {
     console.error('getDashboardAdminEscolar Error:', err);
     return { success: false, message: 'Erro ao carregar dashboard: ' + err.message };

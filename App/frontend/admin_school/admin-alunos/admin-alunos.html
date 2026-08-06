@@ -40,10 +40,10 @@
   </div>
 
   <div class="stats-row">
-    <div class="sc sc-b"><div class="sc-icon">👥</div><div class="sc-val">512</div><div class="sc-lbl">Alunos matriculados</div><div class="sc-sub">↑ 98% ativos</div></div>
-    <div class="sc sc-g"><div class="sc-icon">✅</div><div class="sc-val">89%</div><div class="sc-lbl">Taxa de conclusão</div><div class="sc-sub">▲ +4% vs. mês</div></div>
-    <div class="sc sc-y"><div class="sc-icon">⚡</div><div class="sc-val">34.8k</div><div class="sc-lbl">XP distribuído</div></div>
-    <div class="sc sc-r"><div class="sc-icon">⚠️</div><div class="sc-val">11</div><div class="sc-lbl">Alunos inativos +7 dias</div><div class="sc-sub" style="color:var(--red)">Ação necessária</div></div>
+    <div class="sc sc-b"><div class="sc-icon">👥</div><div class="sc-val" id="alunos-count"></div><div class="sc-lbl">Alunos matriculados</div><div class="sc-sub">↑ 98% ativos</div></div>
+    <div class="sc sc-g"><div class="sc-icon">✅</div><div class="sc-val" id="completion-rate">89%</div><div class="sc-lbl">Taxa de conclusão</div><div class="sc-sub">▲ +4% vs. mês</div></div>
+    <div class="sc sc-y"><div class="sc-icon">⚡</div><div class="sc-val" id="xp-distributed">34.8k</div><div class="sc-lbl">XP distribuído</div></div>
+    <div class="sc sc-r"><div class="sc-icon">⚠️</div><div class="sc-val" id="deactivated-alunos-count">11</div><div class="sc-lbl">Alunos inativos +7 dias</div><div class="sc-sub" style="color:var(--red)">Ação necessária</div></div>
   </div>
 
   <div class="filter-tabs">
@@ -144,4 +144,5 @@
 
   document.addEventListener('DOMContentLoaded', loadAlunos);
 </script>
+<script src="../../shared/monetto-app.js"></script>
 </html>
