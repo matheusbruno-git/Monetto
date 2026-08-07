@@ -181,14 +181,29 @@ ipcMain.handle('getTurmas', async () => {
 // ============================================================
 // DASHBOARD ADMIN ESCOLAR – dados agregados do banco
 // ============================================================
-ipcMain.handle('getDashboardAdminEscolar', async () => {
+ipcMain.handle('getDashboardAdminEscolar', async (event, currentUserId) => {
   try {
     const db = require(path.join(basePath, 'backend/connection.js'));
 
+    if (!currentUserId) {
+      return { success: false, message: 'ID do usuário não informado.' };
+    }
+
+    const [userRows] = await db.promise().execute(
+      'SELECT id_escola FROM usuarios WHERE id_usuario = ? AND ativo = 1 LIMIT 1',
+      [currentUserId]
+    );
+
+    if (!userRows[0] || !userRows[0].id_escola) {
+      return { success: false, message: 'Usuário não está associado a uma escola.' };
+    }
+
+    const escolaId = userRows[0].id_escola;
+
     // Helper: run a count query, return 0 if table is missing
-    async function safeCount(sql) {
+    async function safeCount(sql, params = []) {
       try {
-        const [[row]] = await db.promise().execute(sql);
+        const [[row]] = await db.promise().execute(sql, params);
         return Number(row.total) || 0;
       } catch (e) {
         console.warn('safeCount failed:', e.sqlMessage || e.message);
@@ -196,12 +211,30 @@ ipcMain.handle('getDashboardAdminEscolar', async () => {
       }
     }
 
-    const alunosTotal      = await safeCount(`SELECT COUNT(*) AS total FROM usuarios WHERE id_perfil = 1 AND ativo = 1`);
-    const deactivatedAlunosTotal = await safeCount(`SELECT COUNT(*) AS total FROM usuarios WHERE id_perfil = 1 AND ativo = 0 AND DATEDIFF(CURDATE(), data_ultimo_login) > 7`);
-    const professoresTotal = await safeCount(`SELECT COUNT(*) AS total FROM usuarios WHERE id_perfil = 2 AND ativo = 1`);
-    const turmasTotal      = await safeCount(`SELECT COUNT(*) AS total FROM turmas WHERE status = 'ativa'`);
-    const tarefasTotal     = await safeCount(`SELECT COUNT(*) AS total FROM tarefas`);
-    const xpTotal          = await safeCount(`SELECT COALESCE(SUM(xp_atual), 0) AS total FROM progresso_aluno`);
+    const alunosTotal = await safeCount(
+      `SELECT COUNT(*) AS total FROM usuarios WHERE id_perfil = 1 AND ativo = 1 AND id_escola = ?`,
+      [escolaId]
+    );
+    const deactivatedAlunosTotal = await safeCount(
+      `SELECT COUNT(*) AS total FROM usuarios WHERE id_perfil = 1 AND ativo = 0 AND id_escola = ? AND DATEDIFF(CURDATE(), data_ultimo_login) > 7`,
+      [escolaId]
+    );
+    const professoresTotal = await safeCount(
+      `SELECT COUNT(*) AS total FROM usuarios WHERE id_perfil = 2 AND ativo = 1 AND id_escola = ?`,
+      [escolaId]
+    );
+    const turmasTotal = await safeCount(
+      `SELECT COUNT(*) AS total FROM turmas WHERE status = 'ativa' AND id_escola = ?`,
+      [escolaId]
+    );
+    const tarefasTotal = await safeCount(
+      `SELECT COUNT(*) AS total FROM tarefas WHERE id_escola = ?`,
+      [escolaId]
+    );
+    const xpTotal = await safeCount(
+      `SELECT COALESCE(SUM(xp_atual), 0) AS total FROM progresso_aluno WHERE id_escola = ?`,
+      [escolaId]
+    );
 
     // Escola
     let escolaNome = 'Escola';
@@ -221,13 +254,13 @@ ipcMain.handle('getDashboardAdminEscolar', async () => {
             { value: String(alunosTotal),      label: 'Alunos' },
             { value: String(professoresTotal), label: 'Professores' },
             { value: String(turmasTotal),      label: 'Turmas' }
-          ]
-        },
+          ]},
         stats: [
           { value: String(alunosTotal) },                    // 0 – alunos matriculados
           { value: '—' },                                    // 1 – taxa
           { value: String(tarefasTotal) },                   // 2 – tarefas
-          { value: (xpTotal / 1000).toFixed(1) + 'k' }       // 3 – XP
+          { value: (xpTotal / 1000).toFixed(1) + 'k' },      // 3 – XP
+          { value: String(deactivatedAlunosTotal) }          // 4 – alunos inativos +7 dias
         ]
       }
     };
