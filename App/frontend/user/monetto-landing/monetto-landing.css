@@ -92,6 +92,7 @@ nav {
   padding: 10px 24px;
   font-weight: 700;
   font-size: .9rem;
+  height: 100%;
   font-family: 'DM Sans', sans-serif;
   cursor: pointer;
   transition: transform .2s, box-shadow .2s;
@@ -156,6 +157,7 @@ nav {
 }
 
 .hero-btns {
+  height: 36px;
   display: flex;
   gap: 14px;
   flex-wrap: wrap;
@@ -173,6 +175,7 @@ nav {
   cursor: pointer;
   display: flex;
   align-items: center;
+  height: 100%;
   gap: 8px;
   transition: border-color .2s, background .2s;
 }
@@ -1228,20 +1231,21 @@ footer {
   height: 36px;
   border-radius: 50%;
   background: rgba(255, 255, 255, .08);
-  border: 1px solid rgba(255, 255, 255, .12);
+  border: 1px solid rgba(255, 255, 255, 0.082);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--white);
   font-size: .85rem;
   text-decoration: none;
-  transition: background .2s, transform .2s;
 }
 
 .social-btn:hover {
-  background: var(--accent);
-  color: var(--navy);
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.1);
+  background: rgba(255, 255, 255, .08);
+  filter: drop-shadow(1px 1px 8px rgba(5, 101, 179, 0.904));
+  color: var(--black);
+  transition: all 0.2s;
 }
 
 .footer-bottom {
@@ -1267,7 +1271,7 @@ footer {
   padding: 8px 16px;
   text-decoration: none;
   color: var(--white);
-  transition: background .2s;
+  transition: all .2s;
 }
 
 .store-btn:hover {

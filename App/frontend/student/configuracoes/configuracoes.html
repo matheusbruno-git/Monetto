@@ -81,7 +81,7 @@
           <div class="set-card-title">📸 Escolher Avatar</div>
           <div class="avatar-grid">
             <div class="av-opt av1 selected">😊</div>
-            <div class="av-opt av2">😎</div>
+            <div onclick="turnIcon()" class="av-opt av2">😎</div>
             <div class="av-opt av3">🤓</div>
             <div class="av-opt av4">😄</div>
             <div class="av-opt av5">🥳</div>
@@ -359,6 +359,17 @@
   <div class="toast" id="toast">✅ Alterações salvas com sucesso!</div>
 
   <script>
+
+    function turnIcon() {
+      const bigIcon = document.getElementById('profile-big-av');
+
+      const icon2 = document.getElementsByClassName('av-opt av2 selected')[0];
+
+      icon2.addEventListener('click', function () {
+        bigIcon.innerHTML = icon2;
+      });
+    }
+
     function showTab(id, el) {
       document.querySelectorAll('[id^="tab-"]').forEach(t => t.style.display = 'none');
       document.querySelectorAll('.set-nav-item').forEach(i => i.classList.remove('active'));
