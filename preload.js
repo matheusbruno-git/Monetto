@@ -6,6 +6,7 @@ contextBridge.exposeInMainWorld('api', {
   registerTarefa: (dados) => ipcRenderer.invoke('registerTarefa', dados),
   registerUser:  (dados) => ipcRenderer.invoke('registerUser', dados),
   registerTurma:  (dados) => ipcRenderer.invoke('registerTurma', dados),
+  registerProfessor: (dados) => ipcRenderer.invoke('registerProfessor', dados),
   login:         (dados) => ipcRenderer.invoke('login', dados),
   addAlunoToTurma: (dados) => ipcRenderer.invoke('addAlunoToTurma', dados),
   getAlunos:     () => ipcRenderer.invoke('getAlunos'),
@@ -13,5 +14,5 @@ contextBridge.exposeInMainWorld('api', {
   getCursos:     () => ipcRenderer.invoke('getCursos'),
   getTurmas:     () => ipcRenderer.invoke('getTurmas'),
   getNiveis:     () => ipcRenderer.invoke('getNiveis'),
-  getDashboardAdminEscolar: () => ipcRenderer.invoke('getDashboardAdminEscolar')
+  getDashboardAdminEscolar: (currentUserId) => ipcRenderer.invoke('getDashboardAdminEscolar', currentUserId)
 });

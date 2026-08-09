@@ -101,9 +101,28 @@ CREATE TABLE IF NOT EXISTS turmas (
     FOREIGN KEY (id_nivel) REFERENCES niveis_educacionais(id_nivel)
 );
 
-ALTER TABLE  IF EXISTS usuarios
-ADD  IF NOT EXISTS COLUMN id_turma INT,
-ADD FOREIGN KEY IF NOT EXISTS (id_turma) REFERENCES turmas(id_turma);
+ALTER TABLE usuarios ADD COLUMN IF NOT EXISTS id_turma INT;
+ALTER TABLE usuarios ADD COLUMN IF NOT EXISTS responsavel VARCHAR(150);
+ALTER TABLE usuarios ADD COLUMN IF NOT EXISTS telefone_responsavel VARCHAR(20);
+ALTER TABLE usuarios ADD COLUMN IF NOT EXISTS email_responsavel VARCHAR(100);
+ALTER TABLE usuarios ADD COLUMN IF NOT EXISTS serie VARCHAR(30);
+-- NOTE: use the existing `ultimo_acesso` column for "last seen" logic (there is no
+-- separate data_ultimo_login column — some queries used to reference one that never existed).
+
+-- Only add the FK if it doesn't already exist (MySQL has no ADD FOREIGN KEY IF NOT EXISTS)
+SET @fk_exists := (
+  SELECT COUNT(*) FROM information_schema.TABLE_CONSTRAINTS
+  WHERE CONSTRAINT_SCHEMA = DATABASE()
+    AND TABLE_NAME = 'usuarios'
+    AND CONSTRAINT_NAME = 'fk_usuarios_turma'
+);
+SET @sql := IF(@fk_exists = 0,
+  'ALTER TABLE usuarios ADD CONSTRAINT fk_usuarios_turma FOREIGN KEY (id_turma) REFERENCES turmas(id_turma)',
+  'SELECT 1'
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
 
 -- ============================================================
 -- CONFIGURAÇÕES ESCOLA

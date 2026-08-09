@@ -38,7 +38,7 @@ ipcMain.handle('login', async (event, { email, senha }) => {
   try {
     const db = require(path.join(basePath, 'backend/connection.js'));
     const [rows] = await db.promise().execute(
-      'SELECT id_usuario, nome, id_perfil, senha_hash FROM usuarios WHERE email = ? AND ativo = 1',
+      'SELECT id_usuario, nome, email, id_perfil, id_escola, senha_hash FROM usuarios WHERE email = ? AND ativo = 1',
       [email]
     );
     if (rows.length === 0) return { success: false, message: "Email ou senha incorretos." };
@@ -47,15 +47,63 @@ ipcMain.handle('login', async (event, { email, senha }) => {
     const senhaCorreta = await bcrypt.compare(senha, user.senha_hash);
     if (!senhaCorreta) return { success: false, message: "Email ou senha incorretos." };
 
+    // Track last-login time (used by the "inactive students" dashboard stat)
+    db.promise().execute('UPDATE usuarios SET ultimo_acesso = NOW() WHERE id_usuario = ?', [user.id_usuario])
+      .catch(e => console.warn('Failed to update ultimo_acesso:', e.message));
+
     let redirect = '../../admin_general/dashboard-admin-geral/dashboard-admin-geral.html';
     if (user.id_perfil === 1) redirect = '../../frontend/student/dashboard-aluno/dashboard-aluno.html';
     if (user.id_perfil === 2) redirect = '../../frontend/teacher/dashboard-professor/dashboard-professor.html';
     if (user.id_perfil === 3) redirect = '../../frontend/admin_school/dashboard-admin-escolar/dashboard-admin-escolar.html';
 
-    return { success: true, message: "Login realizado com sucesso!", redirect };
+    // Return the logged-in user's data so the frontend can save it as the "session"
+    // (id_escola in particular is required by every school-admin screen).
+    return {
+      success: true,
+      message: "Login realizado com sucesso!",
+      redirect,
+      user: {
+        id: user.id_usuario,
+        id_usuario: user.id_usuario,
+        nome: user.nome,
+        email: user.email,
+        id_perfil: user.id_perfil,
+        id_escola: user.id_escola
+      }
+    };
   } catch (err) {
     console.error("Login Error:", err);
     return { success: false, message: "Erro no servidor." };
+  }
+});
+
+ipcMain.handle('registerAluno', async (event, dados) => {
+  try {
+    const { registerAluno } = require(path.join(basePath, 'backend/create_aluno.js'));
+    return await registerAluno(dados);
+  } catch (err) {
+    console.error("registerAluno Error:", err);
+    return { success: false, message: "Erro ao cadastrar aluno." };
+  }
+});
+
+ipcMain.handle('registerProfessor', async (event, dados) => {
+  try {
+    const { registerProfessor } = require(path.join(basePath, 'backend/create_professor.js'));
+    return await registerProfessor(dados);
+  } catch (err) {
+    console.error("registerProfessor Error:", err);
+    return { success: false, message: "Erro ao cadastrar professor." };
+  }
+});
+
+ipcMain.handle('addAlunoToTurma', async (event, dados) => {
+  try {
+    const { addAlunoToTurma } = require(path.join(basePath, 'backend/add_aluno_to_turma.js'));
+    return await addAlunoToTurma(dados);
+  } catch (err) {
+    console.error("addAlunoToTurma Error:", err);
+    return { success: false, message: "Erro ao adicionar aluno à turma." };
   }
 });
 
@@ -216,7 +264,7 @@ ipcMain.handle('getDashboardAdminEscolar', async (event, currentUserId) => {
       [escolaId]
     );
     const deactivatedAlunosTotal = await safeCount(
-      `SELECT COUNT(*) AS total FROM usuarios WHERE id_perfil = 1 AND ativo = 0 AND id_escola = ? AND DATEDIFF(CURDATE(), data_ultimo_login) > 7`,
+      `SELECT COUNT(*) AS total FROM usuarios WHERE id_perfil = 1 AND ativo = 1 AND id_escola = ? AND (ultimo_acesso IS NULL OR DATEDIFF(CURDATE(), ultimo_acesso) > 7)`,
       [escolaId]
     );
     const professoresTotal = await safeCount(
@@ -231,15 +279,19 @@ ipcMain.handle('getDashboardAdminEscolar', async (event, currentUserId) => {
       `SELECT COUNT(*) AS total FROM tarefas WHERE id_escola = ?`,
       [escolaId]
     );
+    // progresso_aluno has no id_escola column of its own — join through usuarios instead
     const xpTotal = await safeCount(
-      `SELECT COALESCE(SUM(xp_atual), 0) AS total FROM progresso_aluno WHERE id_escola = ?`,
+      `SELECT COALESCE(SUM(pa.xp_atual), 0) AS total
+       FROM progresso_aluno pa
+       JOIN usuarios u ON u.id_usuario = pa.id_aluno
+       WHERE u.id_escola = ?`,
       [escolaId]
     );
 
-    // Escola
+    // Escola (was previously not filtered by the current user's school at all)
     let escolaNome = 'Escola';
     try {
-      const [escolas] = await db.promise().execute(`SELECT nome FROM escolas LIMIT 1`);
+      const [escolas] = await db.promise().execute(`SELECT nome FROM escolas WHERE id_escola = ? LIMIT 1`, [escolaId]);
       if (escolas[0]) escolaNome = escolas[0].nome;
     } catch (e) {
       console.warn('escolas table missing or empty');
