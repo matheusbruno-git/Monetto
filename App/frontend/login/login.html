@@ -1,227 +1,222 @@
 <!DOCTYPE html>
-  <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="pt-BR">
 
-    <title>Monetto - Login</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="login-principal.css" />
-  </head>
-  <body>
-    <div class="page">
-      <!-- LEFT -->
+  <title>Monetto - Login</title>
 
-      <div class="left">
-        <div class="form-box">
-          <div class="logo">
-            <div class="logo-icon">M</div>
-            Monetto
-          </div>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="login.css" />
+  <link rel="icon" type="image/x-icon" href="../Assets/Monetto Logo.ico">
 
-          <p class="subtitle">Educação Financeira Inteligente</p>
+</head>
 
-          <div id="login-form">
-            <h2>Entrar 🚀</h2>
-            <p class="desc">Acesse sua conta e continue evoluindo</p>
+<body>
 
-            <div class="form-group">
-              <label>Email</label>
+  <p class="landing-link">
+    Quer conhecer a plataforma antes? <a href="../user/monetto-landing/monetto-landing.html">Ver a Landing Page →</a>
+  </p>
 
-              <div class="input-wrap">
-                <span class="input-icon">👤</span>
-                <input type="email" id="email" placeholder="seu@email.com" />
-              </div>
-            </div>
+  <div class="page">
+    <!-- LEFT -->
 
-            <div class="form-group">
-              <label>Senha</label>
-
-              <div class="input-wrap">
-                <span class="input-icon">🔒</span>
-                <input type="password" id="senha" placeholder="••••••••" />
-              </div>
-            </div>
-
-            <button class="btn" onclick="fazerLogin()">
-              Entrar e jogar ⚡
-            </button>
-
-            <div class="toggle">
-              Não tem conta?
-              <a href="#" onclick="showRegister()">Criar conta</a>
-            </div>
-          </div>
-
-          <!-- REGISTER -->
-
-          <div id="register-form" style="display: none">
-            <h2>Criar Conta ✨</h2>
-            <p class="desc">Comece sua jornada financeira</p>
-
-            <div class="form-group">
-              <label>Nome Completo</label>
-
-              <div class="input-wrap">
-                <span class="input-icon">🧑</span>
-                <input type="text" id="nome" placeholder="Seu nome" />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label>Email</label>
-
-              <div class="input-wrap">
-                <span class="input-icon">📧</span>
-                <input
-                  type="email"
-                  id="reg_email"
-                  placeholder="seu@email.com"
-                />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label>Senha</label>
-
-              <div class="input-wrap">
-                <span class="input-icon">🔐</span>
-                <input
-                  type="password"
-                  id="reg_senha"
-                  placeholder="Crie uma senha"
-                />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label>Tipo de Usuário</label>
-
-              <div class="input-wrap">
-                <span class="input-icon">🎯</span>
-
-                <select id="id_perfil">
-                  <option value="1">Aluno</option>
-                  <option value="2">Professor</option>
-                  <option value="3">Escola</option>
-                </select>
-              </div>
-            </div>
-
-            <button class="btn" onclick="fazerCadastro()">
-              Criar conta 🚀
-            </button>
-
-            <div class="toggle">
-              Já possui conta?
-              <a href="#" onclick="showLogin()">Fazer login</a>
-            </div>
-
-            <div
-              id="g_id_onload"
-              data-client_id="731708419688-3fmc106b98nv1lsb0vallfijb2fnfako.apps.googleusercontent.com"
-              data-callback="handleCredentialResponse"
-            ></div>
-
-            <div class="g_id_signin"></div>
-
-            <script
-              src="https://accounts.google.com/gsi/client"
-              async
-              defer
-            ></script>
-          </div>
-
-          <div id="msg" class="message"></div>
+    <div class="left">
+      <div class="form-box">
+        <div class="logo">
+          <div class="logo-icon">M</div>
+          Monetto
         </div>
-      </div>
 
-      <!-- RIGHT -->
+        <p class="subtitle">Educação Financeira Inteligente</p>
+
+        <div id="login-form">
+          <h2>Entrar 🚀</h2>
+          <p class="desc">Acesse sua conta e continue evoluindo</p>
+
+          <div class="form-group">
+            <label>Email</label>
+
+            <div class="input-wrap">
+              <span class="input-icon">👤</span>
+              <input type="email" id="email" placeholder="seu@email.com" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Senha</label>
+
+            <div class="input-wrap">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="senha" placeholder="••••••••" />
+            </div>
+          </div>
+
+          <button class="btn" onclick="fazerLogin()">
+            Entrar e jogar ⚡
+          </button>
+
+          <div class="toggle">
+            Não tem conta?
+            <a href="#" onclick="showRegister()">Criar conta</a>
+          </div>
+        </div>
+
+        <!-- REGISTER -->
+
+        <div id="register-form" style="display: none">
+          <h2>Criar Conta ✨</h2>
+          <p class="desc">Comece sua jornada financeira</p>
+
+          <div class="form-group">
+            <label>Nome Completo</label>
+
+            <div class="input-wrap">
+              <span class="input-icon">🧑</span>
+              <input type="text" id="nome" placeholder="Seu nome" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Email</label>
+
+            <div class="input-wrap">
+              <span class="input-icon">📧</span>
+              <input type="email" id="reg_email" placeholder="seu@email.com" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Senha</label>
+
+            <div class="input-wrap">
+              <span class="input-icon">🔐</span>
+              <input type="password" id="reg_senha" placeholder="Crie uma senha" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Tipo de Usuário</label>
+
+            <div class="input-wrap">
+              <span class="input-icon">🎯</span>
+
+              <select id="id_perfil">
+                <option value="1">Aluno</option>
+                <option value="2">Professor</option>
+                <option value="3">Escola</option>
+              </select>
+            </div>
+          </div>
+
+          <button class="btn" onclick="fazerCadastro()">
+            Criar conta 🚀
+          </button>
+
+          <div class="toggle">
+            Já possui conta?
+            <a href="#" onclick="showLogin()">Fazer login</a>
+          </div>
+
+          <div id="g_id_onload"
+            data-client_id="731708419688-3fmc106b98nv1lsb0vallfijb2fnfako.apps.googleusercontent.com"
+            data-callback="handleCredentialResponse"></div>
+
+          <div class="g_id_signin"></div>
+
+          <script src="https://accounts.google.com/gsi/client" async defer></script>
+        </div>
+
+        <div id="msg" class="message"></div>
+      </div>
     </div>
 
-    <script>
-      async function fazerLogin() {
-        const email = document.getElementById("email").value.trim();
-        const senha = document.getElementById("senha").value.trim();
-        const msgEl = document.getElementById("msg");
+    <!-- RIGHT -->
+  </div>
 
-        if (!email || !senha) {
-          msgEl.textContent = "Preencha email e senha";
-          msgEl.className = "message error";
-          return;
+  <script>
+    async function fazerLogin() {
+      const email = document.getElementById("email").value.trim();
+      const senha = document.getElementById("senha").value.trim();
+      const msgEl = document.getElementById("msg");
+
+      if (!email || !senha) {
+        msgEl.textContent = "Preencha email e senha";
+        msgEl.className = "message error";
+        return;
+      }
+
+      try {
+        const result = await window.api.login({ email, senha });
+
+        msgEl.textContent = result.message;
+        msgEl.className = "message " + (result.success ? "success" : "error");
+
+        if (result.success && result.redirect) {
+          setTimeout(() => {
+            window.location.href = result.redirect;
+          }, 1500);
         }
+      } catch (err) {
+        console.error(err);
 
-        try {
-          const result = await window.api.login({ email, senha });
+        msgEl.textContent = "Erro de comunicação com o servidor.";
+        msgEl.className = "message error";
+      }
+    }
 
-          msgEl.textContent = result.message;
-          msgEl.className = "message " + (result.success ? "success" : "error");
+    async function fazerCadastro() {
+      const dados = {
+        nome: document.getElementById("nome").value.trim(),
+        email: document.getElementById("reg_email").value.trim(),
+        senha: document.getElementById("reg_senha").value,
+        id_perfil: parseInt(document.getElementById("id_perfil").value),
+      };
 
-          if (result.success && result.redirect) {
-            setTimeout(() => {
-              window.location.href = result.redirect;
-            }, 1500);
-          }
-        } catch (err) {
-          console.error(err);
+      const msgElement = document.getElementById("msg");
 
-          msgEl.textContent = "Erro de comunicação com o servidor.";
-          msgEl.className = "message error";
+      try {
+        const result = await window.api.registerUser(dados);
+
+        msgElement.textContent = result.message;
+
+        msgElement.className =
+          "message " + (result.success ? "success" : "error");
+
+        if (result.success) {
+          setTimeout(() => {
+            showLogin();
+          }, 1800);
         }
+      } catch (err) {
+        console.error(err);
+
+        msgElement.textContent = "Erro de comunicação com o servidor.";
+
+        msgElement.className = "message error";
       }
+    }
 
-      async function fazerCadastro() {
-        const dados = {
-          nome: document.getElementById("nome").value.trim(),
-          email: document.getElementById("reg_email").value.trim(),
-          senha: document.getElementById("reg_senha").value,
-          id_perfil: parseInt(document.getElementById("id_perfil").value),
-        };
+    function showRegister() {
+      document.getElementById("login-form").style.display = "none";
 
-        const msgElement = document.getElementById("msg");
+      document.getElementById("register-form").style.display = "block";
 
-        try {
-          const result = await window.api.registerUser(dados);
+      document.getElementById("msg").textContent = "";
+    }
 
-          msgElement.textContent = result.message;
+    function showLogin() {
+      document.getElementById("login-form").style.display = "block";
 
-          msgElement.className =
-            "message " + (result.success ? "success" : "error");
+      document.getElementById("register-form").style.display = "none";
 
-          if (result.success) {
-            setTimeout(() => {
-              showLogin();
-            }, 1800);
-          }
-        } catch (err) {
-          console.error(err);
+      document.getElementById("msg").textContent = "";
+    }
+  </script>
+  <script src="script.js"></script>
+</body>
 
-          msgElement.textContent = "Erro de comunicação com o servidor.";
-
-          msgElement.className = "message error";
-        }
-      }
-
-      function showRegister() {
-        document.getElementById("login-form").style.display = "none";
-
-        document.getElementById("register-form").style.display = "block";
-
-        document.getElementById("msg").textContent = "";
-      }
-
-      function showLogin() {
-        document.getElementById("login-form").style.display = "block";
-
-        document.getElementById("register-form").style.display = "none";
-
-        document.getElementById("msg").textContent = "";
-      }
-    </script>
-    <script src="script.js"></script>
-  </body>
 </html>

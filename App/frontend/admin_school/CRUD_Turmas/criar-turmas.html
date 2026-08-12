@@ -1,51 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Monetto – Criar & Gerenciar Turmas</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="criar-turmas.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monetto – Criar & Gerenciar Turmas</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="criar-turmas.css" />
+  <link rel="icon" type="image/x-icon" href="../../Assets/Monetto Logo.ico">
 </head>
+
 <body>
 
-<div id="sidebar-container"></div>
+  <div id="sidebar-container"></div>
 
-<div class="main">
+  <div class="main">
 
-  <!-- FORM AREA -->
-  <div class="form-area">
-    <div class="form-title">📝 Criar Nova Turma</div>
-    <div class="form-sub">Preencha os campos abaixo e publique para suas turmas</div>
+    <!-- FORM AREA -->
+    <div class="form-area">
+      <div class="form-title">📝 Criar Nova Turma</div>
+      <div class="form-sub">Preencha os campos abaixo e publique para suas turmas</div>
 
 
-    <div id="tab-turma">
-      <div class="fg">
-        <label>Nome da Turma *</label>
-        <input type="text" id="nomeTurma" placeholder="Ex: 8º Ano A"/>
+      <div id="tab-turma">
+        <div class="fg">
+          <label>Nome da Turma *</label>
+          <input type="text" id="nomeTurma" placeholder="Ex: 8º Ano A" />
+        </div>
+        <div class="fg">
+          <label>Nível Educacional *</label>
+          <select id="nivelSelect">
+            <option value="">Carregando...</option>
+          </select>
+        </div>
+
+        <div id="formMsg" style="display:none;font-size:.84rem;margin-bottom:8px;font-weight:600"></div>
+        <div class="form-footer">
+          <button class="btn-acc" id="btn">🚀 Publicar Turma</button>
+        </div>
       </div>
-      <div class="fg">
-        <label>Nível Educacional *</label>
-        <select id="nivelSelect"><option value="">Carregando...</option></select>
-      </div>
 
-      <div id="formMsg" style="display:none;font-size:.84rem;margin-bottom:8px;font-weight:600"></div>
-      <div class="form-footer">
-        <button class="btn-acc" id="btn">🚀 Publicar Turma</button>
+
+    </div>
+
+    <!-- LIST AREA -->
+    <div class="list-area" id="turmasList">
+      <div class="list-area">
+        <div class="list-hd">
+          <h3>📋 Turmas Criadas</h3><span>0 turmas</span>
+        </div>
+        <div id="turmasListBody"></div>
       </div>
     </div>
 
-    
   </div>
-
-  <!-- LIST AREA -->
-  <div class="list-area" id="turmasList">
-    <div class="list-area">
-      <div class="list-hd"><h3>📋 Turmas Criadas</h3><span>0 turmas</span></div>
-      <div id="turmasListBody"></div>
-    </div>
-  </div>
-
-</div>
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>

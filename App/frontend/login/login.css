@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+:root {
+  --accent: #FFD700;
+  --muted: rgba(255, 255, 255, .55);
+}
+
 body {
   font-family: "DM Sans", sans-serif;
   background:
@@ -22,10 +27,31 @@ body {
   margin: 0 auto;
 
   display: flex;
-  justify-content: center; /* ⬅ center horizontally */
-  align-items: flex-start; /* let it start at top instead of center */
+  justify-content: center;
+  /* ⬅ center horizontally */
+  align-items: flex-start;
+  /* let it start at top instead of center */
   padding: 40px 20px;
 }
+
+/* ── LANDING LINK ── */
+.landing-link {
+  font-size: .82rem;
+  color: var(--muted);
+  text-align: center;
+  transform: translateY(3.5vh);
+}
+
+.landing-link a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600
+}
+
+.landing-link a:hover {
+  text-decoration: underline
+}
+
 
 /* LEFT */
 
@@ -38,9 +64,12 @@ body {
   position: relative;
   z-index: 2;
 
-  height: 100vh; /* important */
-  overflow-y: auto; /* important */
-  padding-right: 12px; /* avoid cutting content */
+  height: 100vh;
+  /* important */
+  overflow-y: auto;
+  /* important */
+  padding-right: 12px;
+  /* avoid cutting content */
 }
 
 .left::-webkit-scrollbar {
@@ -198,6 +227,7 @@ input::placeholder {
 .toggle {
   text-align: center;
   margin-top: 20px;
+  margin-bottom: 10px;
   color: #d6dcff;
 }
 

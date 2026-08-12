@@ -1,90 +1,137 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Monetto – Administrador – Alunos</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="admin-alunos.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monetto – Administrador – Alunos</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="admin-alunos.css" />
+  <link rel="icon" type="image/x-icon" href="../../Assets/Monetto Logo.ico">
 </head>
-<body><nav class="sidebar">
-  <a class="sb-logo" href="#">
-    <svg viewBox="0 0 32 32" fill="none" width="26" height="26"><rect width="32" height="32" rx="8" fill="#1A2A8F"/><path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="10" r="3" fill="#2ECC71"/></svg>
-    Monetto <span class="sb-role">Admin</span>
-  </a>
-  <span class="sb-section">Escola</span>
-  <a class="sb-link " href="../dashboard-admin-geral/dashboard-admin-geral.html"><span class="icon">🏠</span> Painel Escolar</a>
-  <a class="sb-link " href="../admin-professores/admin-professores.html"><span class="icon">👨‍🏫</span> Professores</a>
-  <a class="sb-link active" href="../admin-alunos/admin-alunos.html"><span class="icon">👥</span> Alunos</a>
-  <a class="sb-link " href="../admin-tarefas/admin-tarefas.html"><span class="icon">📝</span> Tarefas</a>
-  <span class="sb-section">Análises</span>
-  <a class="sb-link " href="../admin-relatorios/admin-relatorios.html"><span class="icon">📊</span> Relatórios</a>
-  <span class="sb-section">Configurações</span>
-  <a class="sb-link " href="../admin-dados-escola/admin-dados-escola.html"><span class="icon">🏫</span> Dados da Escola</a>
-  <a class="sb-link " href="../admin-permissoes/admin-permissoes.html"><span class="icon">🛡️</span> Permissões</a>
-  <a class="sb-link " href="../admin-configuracoes/admin-configuracoes.html"><span class="icon">⚙️</span> Configurações</a>
-  <div class="sb-bottom">
-    <a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;" onclick="if(confirm('Sair da conta?'))window.location.href='../login-principal/login-principal.html'"><span class="icon">🚪</span> Sair da conta</a>
-    <div class="sb-user">
-      <div class="sb-av">🛡️</div>
-      <div class="sb-user-info"><strong>Admin Escolar</strong><span>Administrador</span></div>
-    </div>
-  </div>
-</nav>
-<main class="main">
-  <div class="topbar">
-    <h1>Gerenciar <span>Alunos</span></h1>
-    <div class="top-right">
-      <div class="search-bar"><span>🔍</span><input type="text" placeholder="Buscar aluno..."></div>
-      <button class="btn btn-primary" onclick="document.getElementById('addModal').classList.add('open')">➕ Novo Aluno</button>
-    </div>
-  </div>
 
-  <div class="stats-row">
-    <div class="sc sc-b"><div class="sc-icon">👥</div><div class="sc-val" id="alunos-count"></div><div class="sc-lbl">Alunos matriculados</div><div class="sc-sub">↑ 98% ativos</div></div>
-    <div class="sc sc-g"><div class="sc-icon">✅</div><div class="sc-val" id="completion-rate">89%</div><div class="sc-lbl">Taxa de conclusão</div><div class="sc-sub">▲ +4% vs. mês</div></div>
-    <div class="sc sc-y"><div class="sc-icon">⚡</div><div class="sc-val" id="xp-distributed">34.8k</div><div class="sc-lbl">XP distribuído</div></div>
-    <div class="sc sc-r"><div class="sc-icon">⚠️</div><div class="sc-val" id="deactivated-alunos-count">11</div><div class="sc-lbl">Alunos inativos +7 dias</div><div class="sc-sub" style="color:var(--red)">Ação necessária</div></div>
-  </div>
+<body>
+  <nav class="sidebar">
+    <a class="sb-logo" href="#">
+      <svg viewBox="0 0 32 32" fill="none" width="26" height="26">
+        <rect width="32" height="32" rx="8" fill="#1A2A8F" />
+        <path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"
+          stroke-linejoin="round" />
+        <circle cx="24" cy="10" r="3" fill="#2ECC71" />
+      </svg>
+      Monetto <span class="sb-role">Admin</span>
+    </a>
+    <span class="sb-section">Escola</span>
+    <a class="sb-link " href="../dashboard-admin-geral/dashboard-admin-geral.html"><span class="icon">🏠</span> Painel
+      Escolar</a>
+    <a class="sb-link " href="../admin-professores/admin-professores.html"><span class="icon">👨‍🏫</span>
+      Professores</a>
+    <a class="sb-link active" href="../admin-alunos/admin-alunos.html"><span class="icon">👥</span> Alunos</a>
+    <a class="sb-link " href="../admin-tarefas/admin-tarefas.html"><span class="icon">📝</span> Tarefas</a>
+    <span class="sb-section">Análises</span>
+    <a class="sb-link " href="../admin-relatorios/admin-relatorios.html"><span class="icon">📊</span> Relatórios</a>
+    <span class="sb-section">Configurações</span>
+    <a class="sb-link " href="../admin-dados-escola/admin-dados-escola.html"><span class="icon">🏫</span> Dados da
+      Escola</a>
+    <a class="sb-link " href="../admin-permissoes/admin-permissoes.html"><span class="icon">🛡️</span> Permissões</a>
+    <a class="sb-link " href="../admin-configuracoes/admin-configuracoes.html"><span class="icon">⚙️</span>
+      Configurações</a>
+    <div class="sb-bottom">
+      <a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;"
+        onclick="if(confirm('Sair da conta?'))window.location.href='../../user/login-principal/login-principal.html'"><span
+          class="icon">🚪</span> Sair da conta</a>
+      <div class="sb-user">
+        <div class="sb-av">🛡️</div>
+        <div class="sb-user-info"><strong>Admin Escolar</strong><span>Administrador</span></div>
+      </div>
+    </div>
+  </nav>
+  <main class="main">
+    <div class="topbar">
+      <h1>Gerenciar <span>Alunos</span></h1>
+      <div class="top-right">
+        <div class="search-bar"><span>🔍</span><input type="text" placeholder="Buscar aluno..."></div>
+        <button class="btn btn-primary" onclick="document.getElementById('addModal').classList.add('open')">➕ Novo
+          Aluno</button>
+      </div>
+    </div>
 
-  <div class="filter-tabs">
-    <div class="ftab active">Todos (512)</div>
-    <div class="ftab">Ativos (501)</div>
-    <div class="ftab">Inativos (11)</div>
-    <div class="ftab">8º Ano (65)</div>
-    <div class="ftab">9º Ano (63)</div>
-  </div>
+    <div class="stats-row">
+      <div class="sc sc-b">
+        <div class="sc-icon">👥</div>
+        <div class="sc-val" id="alunos-count"></div>
+        <div class="sc-lbl">Alunos matriculados</div>
+        <div class="sc-sub">↑ 98% ativos</div>
+      </div>
+      <div class="sc sc-g">
+        <div class="sc-icon">✅</div>
+        <div class="sc-val" id="completion-rate">89%</div>
+        <div class="sc-lbl">Taxa de conclusão</div>
+        <div class="sc-sub">▲ +4% vs. mês</div>
+      </div>
+      <div class="sc sc-y">
+        <div class="sc-icon">⚡</div>
+        <div class="sc-val" id="xp-distributed">34.8k</div>
+        <div class="sc-lbl">XP distribuído</div>
+      </div>
+      <div class="sc sc-r">
+        <div class="sc-icon">⚠️</div>
+        <div class="sc-val" id="deactivated-alunos-count">11</div>
+        <div class="sc-lbl">Alunos inativos +7 dias</div>
+        <div class="sc-sub" style="color:var(--red)">Ação necessária</div>
+      </div>
+    </div>
 
-  <div class="card">
-    <div class="table-head" style="grid-template-columns:2fr 100px 80px 90px 80px 60px">
-      <span>Aluno</span><span>Turma</span><span>XP</span><span>Progresso</span><span>Status</span><span>Ações</span>
+    <div class="filter-tabs">
+      <div class="ftab active">Todos (512)</div>
+      <div class="ftab">Ativos (501)</div>
+      <div class="ftab">Inativos (11)</div>
+      <div class="ftab">8º Ano (65)</div>
+      <div class="ftab">9º Ano (63)</div>
     </div>
-    <!-- inside .card, replace all .data-row divs with: -->
-    <div id="alunosContainer"></div>
-  </div>
-</main>
 
-<div class="modal-overlay" id="addModal" onclick="if(event.target===this)this.classList.remove('open')">
-  <div class="modal">
-    <div class="modal-title">👥 Novo Aluno</div>
-    <div class="modal-sub">Preencha os dados para matricular um aluno</div>
-    <div class="form-row">
-      <div class="field-group"><label>Nome</label><input type="text" placeholder="Nome"></div>
-      <div class="field-group"><label>Sobrenome</label><input type="text" placeholder="Sobrenome"></div>
+    <div class="card">
+      <div class="table-head" style="grid-template-columns:2fr 100px 80px 90px 80px 60px">
+        <span>Aluno</span><span>Turma</span><span>XP</span><span>Progresso</span><span>Status</span><span>Ações</span>
+      </div>
+      <!-- inside .card, replace all .data-row divs with: -->
+      <div id="alunosContainer"></div>
     </div>
-    <div class="field-group"><label>E-mail</label><input type="email" placeholder="email@escola.edu"></div>
-    <div class="form-row">
-      <div class="field-group"><label>Turma</label><select><option>8º Ano A</option><option>8º Ano B</option><option>9º Ano A</option><option>9º Ano B</option></select></div>
-      <div class="field-group"><label>Status</label><select><option>Ativo</option><option>Inativo</option></select></div>
-    </div>
-    <div class="modal-btns">
-      <button class="btn-modal-cancel" onclick="document.getElementById('addModal').classList.remove('open')">Cancelar</button>
-      <button class="btn-modal-ok">✅ Matricular Aluno</button>
+  </main>
+
+  <div class="modal-overlay" id="addModal" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="modal">
+      <div class="modal-title">👥 Novo Aluno</div>
+      <div class="modal-sub">Preencha os dados para matricular um aluno</div>
+      <div class="form-row">
+        <div class="field-group"><label>Nome</label><input type="text" placeholder="Nome"></div>
+        <div class="field-group"><label>Sobrenome</label><input type="text" placeholder="Sobrenome"></div>
+      </div>
+      <div class="field-group"><label>E-mail</label><input type="email" placeholder="email@escola.edu"></div>
+      <div class="form-row">
+        <div class="field-group"><label>Turma</label><select>
+            <option>8º Ano A</option>
+            <option>8º Ano B</option>
+            <option>9º Ano A</option>
+            <option>9º Ano B</option>
+          </select></div>
+        <div class="field-group"><label>Status</label><select>
+            <option>Ativo</option>
+            <option>Inativo</option>
+          </select></div>
+      </div>
+      <div class="modal-btns">
+        <button class="btn-modal-cancel"
+          onclick="document.getElementById('addModal').classList.remove('open')">Cancelar</button>
+        <button class="btn-modal-ok">✅ Matricular Aluno</button>
+      </div>
     </div>
   </div>
-</div>
 </body>
 <script>
-  const AVATAR_COLORS = ['av1','av2','av3','av4','av5','av6'];
+  const AVATAR_COLORS = ['av1', 'av2', 'av3', 'av4', 'av5', 'av6'];
 
   function renderAlunos(alunos) {
     const container = document.getElementById('alunosContainer');
@@ -95,14 +142,14 @@
     }
 
     container.innerHTML = alunos.map((aluno, i) => {
-      const inicial     = (aluno.nome || '?')[0].toUpperCase();
-      const colorClass  = AVATAR_COLORS[i % AVATAR_COLORS.length];
+      const inicial = (aluno.nome || '?')[0].toUpperCase();
+      const colorClass = AVATAR_COLORS[i % AVATAR_COLORS.length];
       const statusLabel = aluno.ativo ? 'Ativo' : 'Inativo';
-      const badgeClass  = aluno.ativo ? 'badge-green' : 'badge-red';
+      const badgeClass = aluno.ativo ? 'badge-green' : 'badge-red';
 
       // Use turma/xp if your DB has them, otherwise show fallbacks
       const turma = aluno.turma ?? '—';
-      const xp    = aluno.xp    ?? '—';
+      const xp = aluno.xp ?? '—';
 
       return `
         <div class="data-row" style="grid-template-columns:2fr 100px 80px 90px 80px 60px">
@@ -145,4 +192,5 @@
   document.addEventListener('DOMContentLoaded', loadAlunos);
 </script>
 <script src="../../shared/monetto-app.js"></script>
+
 </html>

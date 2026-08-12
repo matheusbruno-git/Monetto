@@ -1,332 +1,348 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Monetto – Jogos & Quiz de Finanças</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="jogos-quiz.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monetto – Jogos & Quiz de Finanças</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="jogos-quiz.css" />
+  <link rel="icon" type="image/x-icon" href="../../Assets/Monetto Logo.ico">
 </head>
+
 <body>
 
-<nav class="sidebar">
-  <a class="sb-logo" href="#">
-    <svg viewBox="0 0 32 32" fill="none" width="28" height="28"><rect width="32" height="32" rx="8" fill="#1A2A8F"/><path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="10" r="3" fill="#2ECC71"/></svg>
-    onetto
-  </a>
-  <span class="sb-section">Principal</span>
-  <a class="sb-link" href="../dashboard-aluno/dashboard-aluno.html"><span class="icon">🏠</span> Dashboard</a>
-  <a class="sb-link" href="../tarefas-aluno/tarefas-aluno.html"><span class="icon">📋</span> Minhas Tarefas</a>
-  <a class="sb-link" href="../modulo-aprendizado/modulo-aprendizado.html"><span class="icon">📚</span> Aprendizado</a>
-  <span class="sb-section">Jogos</span>
-  <a class="sb-link active" href="../jogos-quiz/jogos-quiz.html"><span class="icon">🎮</span> Jogos & Quiz</a>
-  <a class="sb-link" href="../recompensas/recompensas.html"><span class="icon">🏆</span> Recompensas</a>
-  <span class="sb-section">Conta</span>
-  <a class="sb-link" href="../configuracoes/configuracoes.html"><span class="icon">⚙️</span> Configurações</a>
-  <div class="sb-bottom"><a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;" onclick="sairDaConta('../login-principal/login-principal.html')"><span class="icon">🚪</span> Sair da conta</a>
-    <div class="sb-user">
-      <div class="sb-av"></div>
-      <div class="sb-user-info"><strong>Ana Souza</strong><span>⚡ 680 XP · Nível 5</span></div>
+  <nav class="sidebar">
+    <a class="sb-logo" href="#">
+      <svg viewBox="0 0 32 32" fill="none" width="28" height="28">
+        <rect width="32" height="32" rx="8" fill="#1A2A8F" />
+        <path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"
+          stroke-linejoin="round" />
+        <circle cx="24" cy="10" r="3" fill="#2ECC71" />
+      </svg>
+      onetto
+    </a>
+    <span class="sb-section">Principal</span>
+    <a class="sb-link" href="../dashboard-aluno/dashboard-aluno.html"><span class="icon">🏠</span> Dashboard</a>
+    <a class="sb-link" href="../tarefas-aluno/tarefas-aluno.html"><span class="icon">📋</span> Minhas Tarefas</a>
+    <a class="sb-link" href="../modulo-aprendizado/modulo-aprendizado.html"><span class="icon">📚</span> Aprendizado</a>
+    <span class="sb-section">Jogos</span>
+    <a class="sb-link active" href="../jogos-quiz/jogos-quiz.html"><span class="icon">🎮</span> Jogos & Quiz</a>
+    <a class="sb-link" href="../recompensas/recompensas.html"><span class="icon">🏆</span> Recompensas</a>
+    <span class="sb-section">Conta</span>
+    <a class="sb-link" href="../configuracoes/configuracoes.html"><span class="icon">⚙️</span> Configurações</a>
+    <div class="sb-bottom"><a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;"
+        onclick="sairDaConta('../login-principal/login-principal.html')"><span class="icon">🚪</span> Sair da conta</a>
+      <div class="sb-user">
+        <div class="sb-av"></div>
+        <div class="sb-user-info"><strong>Ana Souza</strong><span>⚡ 680 XP · Nível 5</span></div>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<main class="main">
-  <div class="topbar">
-    <div>
-      <h1>🎮 Jogos & Quiz de Finanças</h1>
-      <p style="color:var(--muted);font-size:.88rem;margin-top:2px">Aprenda finanças jogando e ganhando XP!</p>
-    </div>
-    <div style="display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:50px;padding:8px 18px;font-size:.82rem">
-      ⚡ <strong style="color:var(--accent)">680 XP</strong> &nbsp;· Nível 5
-    </div>
-  </div>
-
-  <!-- GAME CARDS -->
-  <div class="games-grid">
-
-    <div class="game-card gc-1" onclick="openQuiz()">
-      <div class="bg-emoji">💰</div>
-      <span class="game-tag gt-quiz">Quiz</span>
-      <h3>Quiz: Orçamento Pessoal</h3>
-      <p>Teste seus conhecimentos sobre como planejar seu dinheiro do dia a dia.</p>
-      <div class="game-meta">
-        <span class="game-xp">+100 XP</span>
-        <button class="play-btn" onclick="openQuiz()">▶ Jogar</button>
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <h1>🎮 Jogos & Quiz de Finanças</h1>
+        <p style="color:var(--muted);font-size:.88rem;margin-top:2px">Aprenda finanças jogando e ganhando XP!</p>
+      </div>
+      <div
+        style="display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:50px;padding:8px 18px;font-size:.82rem">
+        ⚡ <strong style="color:var(--accent)">680 XP</strong> &nbsp;· Nível 5
       </div>
     </div>
 
-    <div class="game-card gc-2">
-      <div class="bg-emoji">🏪</div>
-      <span class="game-tag gt-game">Jogo</span>
-      <h3>Mercado Virtual</h3>
-      <p>Compre e venda produtos num mercado simulado. Aprenda lucro e prejuízo na prática.</p>
-      <div class="game-meta">
-        <span class="game-xp">+150 XP</span>
-        <button class="play-btn">▶ Jogar</button>
-      </div>
-    </div>
+    <!-- GAME CARDS -->
+    <div class="games-grid">
 
-    <div class="game-card gc-3">
-      <div class="bg-emoji">📈</div>
-      <span class="game-tag gt-sim">Simulação</span>
-      <h3>Bolsa de Valores Jr.</h3>
-      <p>Invista R$ 1.000 virtuais em ações e veja seu dinheiro crescer ou cair.</p>
-      <div class="game-meta">
-        <span class="game-xp">+200 XP</span>
-        <button class="play-btn">▶ Jogar</button>
-      </div>
-    </div>
-
-    <div class="game-card gc-4">
-      <div class="bg-emoji">🏦</div>
-      <span class="game-tag gt-quiz">Quiz</span>
-      <h3>Quiz: Poupança & Juros</h3>
-      <p>Juros simples, juros compostos e o poder de poupar cedo. Você sabe tudo?</p>
-      <div class="game-meta">
-        <span class="game-xp">+80 XP</span>
-        <button class="play-btn">▶ Jogar</button>
-      </div>
-    </div>
-
-    <div class="game-card gc-5">
-      <div class="bg-emoji">🛒</div>
-      <span class="game-tag gt-game">Jogo</span>
-      <h3>Desafio do Consumidor</h3>
-      <p>Tome decisões de compra inteligentes. Necessidade ou desejo? Você decide!</p>
-      <div class="game-meta">
-        <span class="game-xp">+120 XP</span>
-        <button class="play-btn">▶ Jogar</button>
-      </div>
-    </div>
-
-    <div class="game-card gc-6">
-      <div class="bg-emoji">💳</div>
-      <span class="game-tag gt-quiz">Quiz</span>
-      <h3>Quiz: Crédito & Dívida</h3>
-      <p>Entenda como o crédito funciona, evite dívidas e use o cartão com sabedoria.</p>
-      <div class="game-meta">
-        <span class="game-xp">+90 XP</span>
-        <button class="play-btn">▶ Jogar</button>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- LEADERBOARD -->
-  <div class="lb-section">
-    <div class="lb-title">🏆 Top Jogadores da Semana</div>
-    <div class="lb-grid">
-      <div class="lb-card">
-        <div class="lb-pos">🥇</div>
-        <div class="lb-av la1"></div>
-        <div class="lb-info"><strong>Ana Souza</strong><span>1.240 XP nos jogos</span></div>
-      </div>
-      <div class="lb-card">
-        <div class="lb-pos">🥈</div>
-        <div class="lb-av la2"></div>
-        <div class="lb-info"><strong>Carlos Lima</strong><span>980 XP nos jogos</span></div>
-      </div>
-      <div class="lb-card">
-        <div class="lb-pos">🥉</div>
-        <div class="lb-av la3"></div>
-        <div class="lb-info"><strong>João Pedro</strong><span>860 XP nos jogos</span></div>
-      </div>
-      <div class="lb-card">
-        <div class="lb-pos" style="color:var(--muted)">4</div>
-        <div class="lb-av la4"></div>
-        <div class="lb-info"><strong>Maria Clara</strong><span>720 XP nos jogos</span></div>
-      </div>
-    </div>
-  </div>
-</main>
-
-<!-- QUIZ MODAL -->
-<div class="quiz-overlay" id="quizOverlay">
-  <div class="quiz-modal">
-
-    <!-- QUIZ SCREEN -->
-    <div id="quizScreen">
-      <div class="quiz-header">
-        <div class="quiz-title">💰 Quiz: Orçamento Pessoal</div>
-        <button class="quiz-close" onclick="closeQuiz()">✕</button>
-      </div>
-
-      <div class="quiz-progress-wrap">
-        <div class="quiz-prog-labels">
-          <span id="qLabel">Pergunta 1 de 5</span>
-          <span id="qXP">0 XP</span>
+      <div class="game-card gc-1" onclick="openQuiz()">
+        <div class="bg-emoji">💰</div>
+        <span class="game-tag gt-quiz">Quiz</span>
+        <h3>Quiz: Orçamento Pessoal</h3>
+        <p>Teste seus conhecimentos sobre como planejar seu dinheiro do dia a dia.</p>
+        <div class="game-meta">
+          <span class="game-xp">+100 XP</span>
+          <button class="play-btn" onclick="openQuiz()">▶ Jogar</button>
         </div>
-        <div class="quiz-prog-bar"><div class="quiz-prog-fill" id="qProgress" style="width:20%"></div></div>
       </div>
 
-      <div class="quiz-q-num" id="qNum">Pergunta 1 / 5</div>
-      <div class="quiz-question" id="qText"></div>
+      <div class="game-card gc-2">
+        <div class="bg-emoji">🏪</div>
+        <span class="game-tag gt-game">Jogo</span>
+        <h3>Mercado Virtual</h3>
+        <p>Compre e venda produtos num mercado simulado. Aprenda lucro e prejuízo na prática.</p>
+        <div class="game-meta">
+          <span class="game-xp">+150 XP</span>
+          <button class="play-btn">▶ Jogar</button>
+        </div>
+      </div>
 
-      <div class="quiz-options" id="qOptions"></div>
+      <div class="game-card gc-3">
+        <div class="bg-emoji">📈</div>
+        <span class="game-tag gt-sim">Simulação</span>
+        <h3>Bolsa de Valores Jr.</h3>
+        <p>Invista R$ 1.000 virtuais em ações e veja seu dinheiro crescer ou cair.</p>
+        <div class="game-meta">
+          <span class="game-xp">+200 XP</span>
+          <button class="play-btn">▶ Jogar</button>
+        </div>
+      </div>
 
-      <div class="quiz-feedback qf-correct" id="qFeedbackCorrect">✅ <span id="qFeedbackText"></span></div>
-      <div class="quiz-feedback qf-wrong" id="qFeedbackWrong">❌ <span id="qFeedbackWrongText"></span></div>
+      <div class="game-card gc-4">
+        <div class="bg-emoji">🏦</div>
+        <span class="game-tag gt-quiz">Quiz</span>
+        <h3>Quiz: Poupança & Juros</h3>
+        <p>Juros simples, juros compostos e o poder de poupar cedo. Você sabe tudo?</p>
+        <div class="game-meta">
+          <span class="game-xp">+80 XP</span>
+          <button class="play-btn">▶ Jogar</button>
+        </div>
+      </div>
 
-      <button class="quiz-next" id="qNext" onclick="nextQuestion()">Próxima pergunta →</button>
+      <div class="game-card gc-5">
+        <div class="bg-emoji">🛒</div>
+        <span class="game-tag gt-game">Jogo</span>
+        <h3>Desafio do Consumidor</h3>
+        <p>Tome decisões de compra inteligentes. Necessidade ou desejo? Você decide!</p>
+        <div class="game-meta">
+          <span class="game-xp">+120 XP</span>
+          <button class="play-btn">▶ Jogar</button>
+        </div>
+      </div>
+
+      <div class="game-card gc-6">
+        <div class="bg-emoji">💳</div>
+        <span class="game-tag gt-quiz">Quiz</span>
+        <h3>Quiz: Crédito & Dívida</h3>
+        <p>Entenda como o crédito funciona, evite dívidas e use o cartão com sabedoria.</p>
+        <div class="game-meta">
+          <span class="game-xp">+90 XP</span>
+          <button class="play-btn">▶ Jogar</button>
+        </div>
+      </div>
+
     </div>
 
-    <!-- SCORE SCREEN -->
-    <div class="score-screen" id="scoreScreen">
-      <div class="score-trophy" id="scoreTrophy">🏆</div>
-      <h2 id="scoreTitle">Quiz Concluído!</h2>
-      <p id="scoreSubtitle" style="color:var(--muted);font-size:.9rem"></p>
-      <div class="score-pct" id="scorePct">0%</div>
-      <div class="score-xp-earned">
-        Você ganhou <strong id="scoreXP">0 XP</strong> ⚡
-      </div>
-      <div class="score-actions">
-        <button class="btn-retry" onclick="restartQuiz()">🔄 Tentar novamente</button>
-        <button class="btn-finish" onclick="closeQuiz()">✓ Concluir</button>
+    <!-- LEADERBOARD -->
+    <div class="lb-section">
+      <div class="lb-title">🏆 Top Jogadores da Semana</div>
+      <div class="lb-grid">
+        <div class="lb-card">
+          <div class="lb-pos">🥇</div>
+          <div class="lb-av la1"></div>
+          <div class="lb-info"><strong>Ana Souza</strong><span>1.240 XP nos jogos</span></div>
+        </div>
+        <div class="lb-card">
+          <div class="lb-pos">🥈</div>
+          <div class="lb-av la2"></div>
+          <div class="lb-info"><strong>Carlos Lima</strong><span>980 XP nos jogos</span></div>
+        </div>
+        <div class="lb-card">
+          <div class="lb-pos">🥉</div>
+          <div class="lb-av la3"></div>
+          <div class="lb-info"><strong>João Pedro</strong><span>860 XP nos jogos</span></div>
+        </div>
+        <div class="lb-card">
+          <div class="lb-pos" style="color:var(--muted)">4</div>
+          <div class="lb-av la4"></div>
+          <div class="lb-info"><strong>Maria Clara</strong><span>720 XP nos jogos</span></div>
+        </div>
       </div>
     </div>
+  </main>
 
+  <!-- QUIZ MODAL -->
+  <div class="quiz-overlay" id="quizOverlay">
+    <div class="quiz-modal">
+
+      <!-- QUIZ SCREEN -->
+      <div id="quizScreen">
+        <div class="quiz-header">
+          <div class="quiz-title">💰 Quiz: Orçamento Pessoal</div>
+          <button class="quiz-close" onclick="closeQuiz()">✕</button>
+        </div>
+
+        <div class="quiz-progress-wrap">
+          <div class="quiz-prog-labels">
+            <span id="qLabel">Pergunta 1 de 5</span>
+            <span id="qXP">0 XP</span>
+          </div>
+          <div class="quiz-prog-bar">
+            <div class="quiz-prog-fill" id="qProgress" style="width:20%"></div>
+          </div>
+        </div>
+
+        <div class="quiz-q-num" id="qNum">Pergunta 1 / 5</div>
+        <div class="quiz-question" id="qText"></div>
+
+        <div class="quiz-options" id="qOptions"></div>
+
+        <div class="quiz-feedback qf-correct" id="qFeedbackCorrect">✅ <span id="qFeedbackText"></span></div>
+        <div class="quiz-feedback qf-wrong" id="qFeedbackWrong">❌ <span id="qFeedbackWrongText"></span></div>
+
+        <button class="quiz-next" id="qNext" onclick="nextQuestion()">Próxima pergunta →</button>
+      </div>
+
+      <!-- SCORE SCREEN -->
+      <div class="score-screen" id="scoreScreen">
+        <div class="score-trophy" id="scoreTrophy">🏆</div>
+        <h2 id="scoreTitle">Quiz Concluído!</h2>
+        <p id="scoreSubtitle" style="color:var(--muted);font-size:.9rem"></p>
+        <div class="score-pct" id="scorePct">0%</div>
+        <div class="score-xp-earned">
+          Você ganhou <strong id="scoreXP">0 XP</strong> ⚡
+        </div>
+        <div class="score-actions">
+          <button class="btn-retry" onclick="restartQuiz()">🔄 Tentar novamente</button>
+          <button class="btn-finish" onclick="closeQuiz()">✓ Concluir</button>
+        </div>
+      </div>
+
+    </div>
   </div>
-</div>
 
-<script>
-const questions = [
-  {
-    q: "João recebe R$ 1.200 por mês. Ele gasta R$ 800 com despesas fixas. Qual é a porcentagem que sobra para poupar?",
-    opts: ["20%","30%","33%","40%"],
-    correct: 2,
-    explain: "R$ 400 sobra de R$ 1.200, o que representa 400/1200 × 100 = 33,3%.",
-    wrongExplain: "A resposta correta é 33%. R$ 400 de R$ 1.200 = 33,3%."
-  },
-  {
-    q: "O que é uma despesa FIXA?",
-    opts: ["Gasto que varia todo mês","Gasto com lazer e diversão","Gasto com valor igual todo mês como aluguel","Gasto inesperado e emergencial"],
-    correct: 2,
-    explain: "Despesas fixas têm valor constante todo mês, como aluguel, escola e plano de saúde.",
-    wrongExplain: "Despesa fixa é aquela com valor constante todo mês, como aluguel."
-  },
-  {
-    q: "Qual é a regra do orçamento 50-30-20?",
-    opts: ["50% lazer, 30% poupança, 20% necessidades","50% necessidades, 30% desejos, 20% poupança","50% poupança, 30% necessidades, 20% desejos","50% desejos, 30% investimento, 20% gastos"],
-    correct: 1,
-    explain: "A regra 50-30-20 diz: 50% para necessidades, 30% para desejos e 20% para poupança/investimentos.",
-    wrongExplain: "A regra é: 50% necessidades, 30% desejos, 20% poupança."
-  },
-  {
-    q: "Maria quer comprar um celular de R$ 1.500. Ela poupa R$ 150 por mês. Em quanto tempo ela terá o dinheiro?",
-    opts: ["8 meses","10 meses","12 meses","15 meses"],
-    correct: 1,
-    explain: "R$ 1.500 ÷ R$ 150 = 10 meses. Planejamento é tudo!",
-    wrongExplain: "R$ 1.500 ÷ R$ 150 = 10 meses. Maria precisaria de 10 meses poupando."
-  },
-  {
-    q: "O que é fundo de emergência?",
-    opts: ["Dinheiro para gastar nas férias","Investimento em ações","Reserva para cobrir gastos imprevistos por 3 a 6 meses","Empréstimo bancário de emergência"],
-    correct: 2,
-    explain: "Fundo de emergência é uma reserva equivalente a 3–6 meses de despesas para cobrir imprevistos como desemprego ou doença.",
-    wrongExplain: "Fundo de emergência é uma reserva para cobrir imprevistos equivalente a 3–6 meses de despesas."
-  }
-];
+  <script>
+    const questions = [
+      {
+        q: "João recebe R$ 1.200 por mês. Ele gasta R$ 800 com despesas fixas. Qual é a porcentagem que sobra para poupar?",
+        opts: ["20%", "30%", "33%", "40%"],
+        correct: 2,
+        explain: "R$ 400 sobra de R$ 1.200, o que representa 400/1200 × 100 = 33,3%.",
+        wrongExplain: "A resposta correta é 33%. R$ 400 de R$ 1.200 = 33,3%."
+      },
+      {
+        q: "O que é uma despesa FIXA?",
+        opts: ["Gasto que varia todo mês", "Gasto com lazer e diversão", "Gasto com valor igual todo mês como aluguel", "Gasto inesperado e emergencial"],
+        correct: 2,
+        explain: "Despesas fixas têm valor constante todo mês, como aluguel, escola e plano de saúde.",
+        wrongExplain: "Despesa fixa é aquela com valor constante todo mês, como aluguel."
+      },
+      {
+        q: "Qual é a regra do orçamento 50-30-20?",
+        opts: ["50% lazer, 30% poupança, 20% necessidades", "50% necessidades, 30% desejos, 20% poupança", "50% poupança, 30% necessidades, 20% desejos", "50% desejos, 30% investimento, 20% gastos"],
+        correct: 1,
+        explain: "A regra 50-30-20 diz: 50% para necessidades, 30% para desejos e 20% para poupança/investimentos.",
+        wrongExplain: "A regra é: 50% necessidades, 30% desejos, 20% poupança."
+      },
+      {
+        q: "Maria quer comprar um celular de R$ 1.500. Ela poupa R$ 150 por mês. Em quanto tempo ela terá o dinheiro?",
+        opts: ["8 meses", "10 meses", "12 meses", "15 meses"],
+        correct: 1,
+        explain: "R$ 1.500 ÷ R$ 150 = 10 meses. Planejamento é tudo!",
+        wrongExplain: "R$ 1.500 ÷ R$ 150 = 10 meses. Maria precisaria de 10 meses poupando."
+      },
+      {
+        q: "O que é fundo de emergência?",
+        opts: ["Dinheiro para gastar nas férias", "Investimento em ações", "Reserva para cobrir gastos imprevistos por 3 a 6 meses", "Empréstimo bancário de emergência"],
+        correct: 2,
+        explain: "Fundo de emergência é uma reserva equivalente a 3–6 meses de despesas para cobrir imprevistos como desemprego ou doença.",
+        wrongExplain: "Fundo de emergência é uma reserva para cobrir imprevistos equivalente a 3–6 meses de despesas."
+      }
+    ];
 
-let current = 0, score = 0, answered = false;
+    let current = 0, score = 0, answered = false;
 
-function openQuiz() {
-  current = 0; score = 0; answered = false;
-  document.getElementById('quizScreen').style.display = 'block';
-  document.getElementById('scoreScreen').style.display = 'none';
-  document.getElementById('quizOverlay').classList.add('open');
-  renderQuestion();
-}
-function closeQuiz() {
-  document.getElementById('quizOverlay').classList.remove('open');
-}
+    function openQuiz() {
+      current = 0; score = 0; answered = false;
+      document.getElementById('quizScreen').style.display = 'block';
+      document.getElementById('scoreScreen').style.display = 'none';
+      document.getElementById('quizOverlay').classList.add('open');
+      renderQuestion();
+    }
+    function closeQuiz() {
+      document.getElementById('quizOverlay').classList.remove('open');
+    }
 
-function renderQuestion() {
-  answered = false;
-  const q = questions[current];
-  const letters = ['A','B','C','D'];
-  document.getElementById('qText').textContent = q.q;
-  document.getElementById('qNum').textContent = `Pergunta ${current+1} / ${questions.length}`;
-  document.getElementById('qLabel').textContent = `Pergunta ${current+1} de ${questions.length}`;
-  document.getElementById('qXP').textContent = `${score * 20} XP`;
-  document.getElementById('qProgress').style.width = `${((current+1)/questions.length)*100}%`;
-  document.getElementById('qFeedbackCorrect').style.display = 'none';
-  document.getElementById('qFeedbackWrong').style.display = 'none';
-  document.getElementById('qNext').style.display = 'none';
+    function renderQuestion() {
+      answered = false;
+      const q = questions[current];
+      const letters = ['A', 'B', 'C', 'D'];
+      document.getElementById('qText').textContent = q.q;
+      document.getElementById('qNum').textContent = `Pergunta ${current + 1} / ${questions.length}`;
+      document.getElementById('qLabel').textContent = `Pergunta ${current + 1} de ${questions.length}`;
+      document.getElementById('qXP').textContent = `${score * 20} XP`;
+      document.getElementById('qProgress').style.width = `${((current + 1) / questions.length) * 100}%`;
+      document.getElementById('qFeedbackCorrect').style.display = 'none';
+      document.getElementById('qFeedbackWrong').style.display = 'none';
+      document.getElementById('qNext').style.display = 'none';
 
-  const optsEl = document.getElementById('qOptions');
-  optsEl.innerHTML = '';
-  q.opts.forEach((opt, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'q-opt';
-    btn.innerHTML = `<span class="q-letter">${letters[i]}</span>${opt}`;
-    btn.onclick = () => answer(i, btn);
-    optsEl.appendChild(btn);
-  });
-}
+      const optsEl = document.getElementById('qOptions');
+      optsEl.innerHTML = '';
+      q.opts.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'q-opt';
+        btn.innerHTML = `<span class="q-letter">${letters[i]}</span>${opt}`;
+        btn.onclick = () => answer(i, btn);
+        optsEl.appendChild(btn);
+      });
+    }
 
-function answer(idx, btn) {
-  if (answered) return;
-  answered = true;
-  const q = questions[current];
-  const allOpts = document.querySelectorAll('.q-opt');
-  allOpts.forEach(b => b.classList.add('disabled'));
+    function answer(idx, btn) {
+      if (answered) return;
+      answered = true;
+      const q = questions[current];
+      const allOpts = document.querySelectorAll('.q-opt');
+      allOpts.forEach(b => b.classList.add('disabled'));
 
-  if (idx === q.correct) {
-    btn.classList.add('correct');
-    score++;
-    const fb = document.getElementById('qFeedbackCorrect');
-    document.getElementById('qFeedbackText').textContent = q.explain;
-    fb.style.display = 'block';
-  } else {
-    btn.classList.add('wrong');
-    allOpts[q.correct].classList.add('correct');
-    const fb = document.getElementById('qFeedbackWrong');
-    document.getElementById('qFeedbackWrongText').textContent = q.wrongExplain;
-    fb.style.display = 'block';
-  }
-  document.getElementById('qNext').style.display = 'block';
-  document.getElementById('qNext').textContent = current < questions.length - 1 ? 'Próxima pergunta →' : 'Ver resultado →';
-}
+      if (idx === q.correct) {
+        btn.classList.add('correct');
+        score++;
+        const fb = document.getElementById('qFeedbackCorrect');
+        document.getElementById('qFeedbackText').textContent = q.explain;
+        fb.style.display = 'block';
+      } else {
+        btn.classList.add('wrong');
+        allOpts[q.correct].classList.add('correct');
+        const fb = document.getElementById('qFeedbackWrong');
+        document.getElementById('qFeedbackWrongText').textContent = q.wrongExplain;
+        fb.style.display = 'block';
+      }
+      document.getElementById('qNext').style.display = 'block';
+      document.getElementById('qNext').textContent = current < questions.length - 1 ? 'Próxima pergunta →' : 'Ver resultado →';
+    }
 
-function nextQuestion() {
-  current++;
-  if (current >= questions.length) { showScore(); return; }
-  renderQuestion();
-}
+    function nextQuestion() {
+      current++;
+      if (current >= questions.length) { showScore(); return; }
+      renderQuestion();
+    }
 
-function showScore() {
-  document.getElementById('quizScreen').style.display = 'none';
-  const ss = document.getElementById('scoreScreen');
-  ss.style.display = 'block';
-  const pct = Math.round((score / questions.length) * 100);
-  const xp = score * 20;
-  document.getElementById('scorePct').textContent = pct + '%';
-  document.getElementById('scoreXP').textContent = xp + ' XP';
-  document.getElementById('scoreSubtitle').textContent = `Você acertou ${score} de ${questions.length} perguntas`;
-  const trophy = document.getElementById('scoreTrophy');
-  const title = document.getElementById('scoreTitle');
-  if (pct >= 80) { trophy.textContent = '🏆'; title.textContent = 'Excelente! Você arrasou!'; }
-  else if (pct >= 60) { trophy.textContent = '⭐'; title.textContent = 'Muito bom! Continue assim!'; }
-  else { trophy.textContent = '📚'; title.textContent = 'Continue estudando!'; }
-}
+    function showScore() {
+      document.getElementById('quizScreen').style.display = 'none';
+      const ss = document.getElementById('scoreScreen');
+      ss.style.display = 'block';
+      const pct = Math.round((score / questions.length) * 100);
+      const xp = score * 20;
+      document.getElementById('scorePct').textContent = pct + '%';
+      document.getElementById('scoreXP').textContent = xp + ' XP';
+      document.getElementById('scoreSubtitle').textContent = `Você acertou ${score} de ${questions.length} perguntas`;
+      const trophy = document.getElementById('scoreTrophy');
+      const title = document.getElementById('scoreTitle');
+      if (pct >= 80) { trophy.textContent = '🏆'; title.textContent = 'Excelente! Você arrasou!'; }
+      else if (pct >= 60) { trophy.textContent = '⭐'; title.textContent = 'Muito bom! Continue assim!'; }
+      else { trophy.textContent = '📚'; title.textContent = 'Continue estudando!'; }
+    }
 
-function restartQuiz() {
-  current = 0; score = 0; answered = false;
-  document.getElementById('quizScreen').style.display = 'block';
-  document.getElementById('scoreScreen').style.display = 'none';
-  renderQuestion();
-}
+    function restartQuiz() {
+      current = 0; score = 0; answered = false;
+      document.getElementById('quizScreen').style.display = 'block';
+      document.getElementById('scoreScreen').style.display = 'none';
+      renderQuestion();
+    }
 
-// init
-renderQuestion();
-</script>
+    // init
+    renderQuestion();
+  </script>
 
-<script id="logout-script">
-function sairDaConta(destino) {
-  if (confirm("Tem certeza que deseja sair da conta?")) {
-    window.location.href = destino;
-  }
-}
-</script>
+  <script id="logout-script">
+    function sairDaConta(destino) {
+      if (confirm("Tem certeza que deseja sair da conta?")) {
+        window.location.href = destino;
+      }
+    }
+  </script>
 </body>
+
 </html>

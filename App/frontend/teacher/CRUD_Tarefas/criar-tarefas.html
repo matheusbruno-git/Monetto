@@ -1,159 +1,221 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Monetto – Criar & Gerenciar Tarefas</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="criar-tarefas.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monetto – Criar & Gerenciar Tarefas</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="criar-tarefas.css" />
+  <link rel="icon" type="image/x-icon" href="../../Assets/Monetto Logo.ico">
 </head>
+
 <body>
 
-<nav class="sidebar">
-  <a class="sb-logo" href="#">
-    <svg viewBox="0 0 32 32" fill="none" width="26" height="26"><rect width="32" height="32" rx="8" fill="#1A2A8F"/><path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="10" r="3" fill="#2ECC71"/></svg>
-    Monetto <span class="sb-role">Prof.</span>
-  </a>
-  <span class="sb-section">Visão Geral</span>
-  <a class="sb-link" href="../dashboard-professor/dashboard-professor.html"><span class="icon">🏠</span> Dashboard</a>
-  <a class="sb-link" href="../gerenciar-alunos/gerenciar-alunos.html"><span class="icon">👥</span> Alunos</a>
-  <a class="sb-link active" href="../CRUD_Tarefas/criar-tarefas.html"><span class="icon">📝</span> Criar Tarefas</a>
-  <a class="sb-link" href="../pagina-tarefas-prof/pagina-tarefas-prof.html"><span class="icon">📋</span> Tarefas <span class="sb-badge">3</span></a>
-  <span class="sb-section">Análises</span>
-  <a class="sb-link" href="../relatorios/relatorios.html"><span class="icon">📊</span> Relatórios</a>
-  <span class="sb-section">Conta</span>
-  <a class="sb-link" href="../configuracoes/configuracoes-prof.html"><span class="icon">⚙️</span> Configurações</a>
-  <div class="sb-bottom"><a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;" onclick="sairDaConta('../login-principal/login-principal.html')"><span class="icon">🚪</span> Sair da conta</a>
-    <div class="sb-user">
-      <div class="sb-av">👨‍🏫</div>
-      <div class="sb-user-info"><strong>Prof. Ricardo</strong><span>4 turmas ativas</span></div>
-    </div>
-  </div>
-</nav>
-
-<div class="main">
-
-  <!-- FORM AREA -->
-  <div class="form-area">
-    <div class="form-title">📝 Criar Nova Tarefa</div>
-    <div class="form-sub">Preencha os campos abaixo e publique para suas turmas</div>
-
-    <div class="tab-row">
-      <button class="ttab active" onclick="switchTab('tarefa',this)">📋 Tarefa</button>
-      <button class="ttab" onclick="switchTab('quiz',this)">🧠 Quiz</button>
-      <button class="ttab" onclick="switchTab('jogo',this)">🎮 Jogo Financeiro</button>
-    </div>
-
-    <!-- TAREFA -->
-    <div id="tab-tarefa">
-      <div class="fg"><label>Título da Tarefa *</label><input type="text" placeholder="Ex: Exercícios de Frações – Capítulo 5"/></div>
-      <div class="fg"><label>Descrição / Instruções</label><textarea placeholder="Descreva o que o aluno deve fazer, quais materiais usar, formato de entrega..."></textarea></div>
-      <div class="fg-row">
-        <div class="fg"><label>Disciplina *</label><select data-cursos></select></div>
-        <div class="fg"><label>Prazo de entrega *</label><input type="datetime-local"/></div>
-      </div>
-
-      <div class="fg"><label>Tipo de Tarefa</label>
-        <div class="tipo-grid">
-          <div class="tipo-btn selected" onclick="selTipo(this)"><div class="tipo-icon">📄</div>Texto / Redação</div>
-          <div class="tipo-btn" onclick="selTipo(this)"><div class="tipo-icon">🔢</div>Exercício</div>
-          <div class="tipo-btn" onclick="selTipo(this)"><div class="tipo-icon">📎</div>Envio de arquivo</div>
-          <div class="tipo-btn" onclick="selTipo(this)"><div class="tipo-icon">🧠</div>Quiz</div>
-          <div class="tipo-btn" onclick="selTipo(this)"><div class="tipo-icon">📖</div>Leitura</div>
-          <div class="tipo-btn" onclick="selTipo(this)"><div class="tipo-icon">🎥</div>Vídeo</div>
-        </div>
-      </div>
-
-      <div class="fg"><label>Dificuldade</label>
-        <div class="dif-row">
-          <button class="dif-btn sel-g" onclick="selDif(this,'sel-g')">🟢 Fácil</button>
-          <button class="dif-btn" onclick="selDif(this,'sel-y')">🟡 Médio</button>
-          <button class="dif-btn" onclick="selDif(this,'sel-r')">🔴 Difícil</button>
-        </div>
-      </div>
-
-      <div class="fg"><label>XP para o aluno ao concluir</label>
-        <div class="xp-row">
-          <input type="range" min="10" max="200" value="50" oninput="document.getElementById('xpval').textContent=this.value+' XP'"/>
-          <div class="xp-val" id="xpval">50 XP</div>
-        </div>
-      </div>
-
-      <div class="fg"><label>Turmas destinatárias *</label>
-        <div class="turmas-grid">
-          <div class="turma-chk selected" onclick="this.classList.toggle('selected')"><input type="checkbox" checked/><span class="turma-chk-label">📘 8º Ano A</span></div>
-          <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox"/><span class="turma-chk-label">📗 8º Ano B</span></div>
-          <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox"/><span class="turma-chk-label">📙 9º Ano A</span></div>
-          <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox"/><span class="turma-chk-label">📒 9º Ano B</span></div>
-        </div>
-      </div>
-      <div id="formMsg" style="display:none;font-size:.84rem;margin-bottom:8px;font-weight:600"></div>
-      <div class="form-footer">
-        <button class="btn-draft">💾 Rascunho</button>
-        <button class="btn-acc" id="btn">🚀 Publicar Tarefa</button>
+  <nav class="sidebar">
+    <a class="sb-logo" href="#">
+      <svg viewBox="0 0 32 32" fill="none" width="26" height="26">
+        <rect width="32" height="32" rx="8" fill="#1A2A8F" />
+        <path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"
+          stroke-linejoin="round" />
+        <circle cx="24" cy="10" r="3" fill="#2ECC71" />
+      </svg>
+      Monetto <span class="sb-role">Prof.</span>
+    </a>
+    <span class="sb-section">Visão Geral</span>
+    <a class="sb-link" href="../dashboard-professor/dashboard-professor.html"><span class="icon">🏠</span> Dashboard</a>
+    <a class="sb-link" href="../gerenciar-alunos/gerenciar-alunos.html"><span class="icon">👥</span> Alunos</a>
+    <a class="sb-link active" href="../CRUD_Tarefas/criar-tarefas.html"><span class="icon">📝</span> Criar Tarefas</a>
+    <a class="sb-link" href="../pagina-tarefas-prof/pagina-tarefas-prof.html"><span class="icon">📋</span> Tarefas <span
+        class="sb-badge">3</span></a>
+    <span class="sb-section">Análises</span>
+    <a class="sb-link" href="../relatorios/relatorios.html"><span class="icon">📊</span> Relatórios</a>
+    <span class="sb-section">Conta</span>
+    <a class="sb-link" href="../configuracoes/configuracoes-prof.html"><span class="icon">⚙️</span> Configurações</a>
+    <div class="sb-bottom"><a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;"
+        onclick="sairDaConta('../../user/login-principal/login-principal.html')"><span class="icon">🚪</span> Sair da
+        conta</a>
+      <div class="sb-user">
+        <div class="sb-av">👨‍🏫</div>
+        <div class="sb-user-info"><strong>Prof. Ricardo</strong><span>4 turmas ativas</span></div>
       </div>
     </div>
+  </nav>
 
-    <!-- QUIZ -->
-    <div id="tab-quiz" style="display:none">
-      <div class="fg"><label>Título do Quiz *</label><input type="text" placeholder="Ex: Quiz – Fotossíntese e Respiração Celular"/></div>
-      <div class="fg-row">
-        <div class="fg"><label>Disciplina</label><select><option>Ciências</option><option>Matemática</option><option>Português</option><option>História</option></select></div>
-        <div class="fg"><label>Tempo limite (min)</label><input type="number" placeholder="15" value="20"/></div>
+  <div class="main">
+
+    <!-- FORM AREA -->
+    <div class="form-area">
+      <div class="form-title">📝 Criar Nova Tarefa</div>
+      <div class="form-sub">Preencha os campos abaixo e publique para suas turmas</div>
+
+      <div class="tab-row">
+        <button class="ttab active" onclick="switchTab('tarefa',this)">📋 Tarefa</button>
+        <button class="ttab" onclick="switchTab('quiz',this)">🧠 Quiz</button>
+        <button class="ttab" onclick="switchTab('jogo',this)">🎮 Jogo Financeiro</button>
       </div>
-      <div style="background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.2);border-radius:14px;padding:18px;margin-bottom:18px">
-        <div style="font-size:.82rem;font-weight:700;margin-bottom:12px;color:var(--accent)">Pergunta 1</div>
-        <div class="fg"><label>Enunciado</label><input type="text" placeholder="Digite a pergunta aqui..."/></div>
-        <div class="fg"><label>Alternativa A</label><input type="text" placeholder="Opção A"/></div>
-        <div class="fg"><label>Alternativa B</label><input type="text" placeholder="Opção B"/></div>
+
+      <!-- TAREFA -->
+      <div id="tab-tarefa">
+        <div class="fg"><label>Título da Tarefa *</label><input type="text"
+            placeholder="Ex: Exercícios de Frações – Capítulo 5" /></div>
+        <div class="fg"><label>Descrição / Instruções</label><textarea
+            placeholder="Descreva o que o aluno deve fazer, quais materiais usar, formato de entrega..."></textarea>
+        </div>
         <div class="fg-row">
-          <div class="fg"><label>Alternativa C</label><input type="text" placeholder="Opção C"/></div>
-          <div class="fg"><label>Alternativa D</label><input type="text" placeholder="Opção D"/></div>
+          <div class="fg"><label>Disciplina *</label><select data-cursos></select></div>
+          <div class="fg"><label>Prazo de entrega *</label><input type="datetime-local" /></div>
         </div>
-        <div class="fg"><label>Resposta correta</label><select><option>A</option><option>B</option><option>C</option><option>D</option></select></div>
+
+        <div class="fg"><label>Tipo de Tarefa</label>
+          <div class="tipo-grid">
+            <div class="tipo-btn selected" onclick="selTipo(this)">
+              <div class="tipo-icon">📄</div>Texto / Redação
+            </div>
+            <div class="tipo-btn" onclick="selTipo(this)">
+              <div class="tipo-icon">🔢</div>Exercício
+            </div>
+            <div class="tipo-btn" onclick="selTipo(this)">
+              <div class="tipo-icon">📎</div>Envio de arquivo
+            </div>
+            <div class="tipo-btn" onclick="selTipo(this)">
+              <div class="tipo-icon">🧠</div>Quiz
+            </div>
+            <div class="tipo-btn" onclick="selTipo(this)">
+              <div class="tipo-icon">📖</div>Leitura
+            </div>
+            <div class="tipo-btn" onclick="selTipo(this)">
+              <div class="tipo-icon">🎥</div>Vídeo
+            </div>
+          </div>
+        </div>
+
+        <div class="fg"><label>Dificuldade</label>
+          <div class="dif-row">
+            <button class="dif-btn sel-g" onclick="selDif(this,'sel-g')">🟢 Fácil</button>
+            <button class="dif-btn" onclick="selDif(this,'sel-y')">🟡 Médio</button>
+            <button class="dif-btn" onclick="selDif(this,'sel-r')">🔴 Difícil</button>
+          </div>
+        </div>
+
+        <div class="fg"><label>XP para o aluno ao concluir</label>
+          <div class="xp-row">
+            <input type="range" min="10" max="200" value="50"
+              oninput="document.getElementById('xpval').textContent=this.value+' XP'" />
+            <div class="xp-val" id="xpval">50 XP</div>
+          </div>
+        </div>
+
+        <div class="fg"><label>Turmas destinatárias *</label>
+          <div class="turmas-grid">
+            <div class="turma-chk selected" onclick="this.classList.toggle('selected')"><input type="checkbox"
+                checked /><span class="turma-chk-label">📘 8º Ano A</span></div>
+            <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox" /><span
+                class="turma-chk-label">📗 8º Ano B</span></div>
+            <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox" /><span
+                class="turma-chk-label">📙 9º Ano A</span></div>
+            <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox" /><span
+                class="turma-chk-label">📒 9º Ano B</span></div>
+          </div>
+        </div>
+        <div id="formMsg" style="display:none;font-size:.84rem;margin-bottom:8px;font-weight:600"></div>
+        <div class="form-footer">
+          <button class="btn-draft">💾 Rascunho</button>
+          <button class="btn-acc" id="btn">🚀 Publicar Tarefa</button>
+        </div>
       </div>
-      <button style="width:100%;padding:11px;background:rgba(255,255,255,.07);border:1.5px dashed var(--border);border-radius:12px;color:var(--muted);cursor:pointer;font-size:.88rem">+ Adicionar Pergunta</button>
-      <div class="form-footer" style="margin-top:20px">
-        <button class="btn-draft">💾 Rascunho</button>
-        <button class="btn-acc">🚀 Publicar Quiz</button>
+
+      <!-- QUIZ -->
+      <div id="tab-quiz" style="display:none">
+        <div class="fg"><label>Título do Quiz *</label><input type="text"
+            placeholder="Ex: Quiz – Fotossíntese e Respiração Celular" /></div>
+        <div class="fg-row">
+          <div class="fg"><label>Disciplina</label><select>
+              <option>Ciências</option>
+              <option>Matemática</option>
+              <option>Português</option>
+              <option>História</option>
+            </select></div>
+          <div class="fg"><label>Tempo limite (min)</label><input type="number" placeholder="15" value="20" /></div>
+        </div>
+        <div
+          style="background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.2);border-radius:14px;padding:18px;margin-bottom:18px">
+          <div style="font-size:.82rem;font-weight:700;margin-bottom:12px;color:var(--accent)">Pergunta 1</div>
+          <div class="fg"><label>Enunciado</label><input type="text" placeholder="Digite a pergunta aqui..." /></div>
+          <div class="fg"><label>Alternativa A</label><input type="text" placeholder="Opção A" /></div>
+          <div class="fg"><label>Alternativa B</label><input type="text" placeholder="Opção B" /></div>
+          <div class="fg-row">
+            <div class="fg"><label>Alternativa C</label><input type="text" placeholder="Opção C" /></div>
+            <div class="fg"><label>Alternativa D</label><input type="text" placeholder="Opção D" /></div>
+          </div>
+          <div class="fg"><label>Resposta correta</label><select>
+              <option>A</option>
+              <option>B</option>
+              <option>C</option>
+              <option>D</option>
+            </select></div>
+        </div>
+        <button
+          style="width:100%;padding:11px;background:rgba(255,255,255,.07);border:1.5px dashed var(--border);border-radius:12px;color:var(--muted);cursor:pointer;font-size:.88rem">+
+          Adicionar Pergunta</button>
+        <div class="form-footer" style="margin-top:20px">
+          <button class="btn-draft">💾 Rascunho</button>
+          <button class="btn-acc">🚀 Publicar Quiz</button>
+        </div>
+      </div>
+
+      <!-- JOGO -->
+      <div id="tab-jogo" style="display:none">
+        <div class="fg"><label>Selecione o Jogo Financeiro</label>
+          <div class="tipo-grid">
+            <div class="tipo-btn selected" onclick="selTipo(this)">
+              <div class="tipo-icon">💰</div>Orçamento
+            </div>
+            <div class="tipo-btn" onclick="selTipo(this)">
+              <div class="tipo-icon">📈</div>Bolsa Jr.
+            </div>
+            <div class="tipo-btn" onclick="selTipo(this)">
+              <div class="tipo-icon">🏪</div>Mercado Virtual
+            </div>
+          </div>
+        </div>
+        <div class="fg"><label>Instruções adicionais ao aluno</label><textarea
+            placeholder="Explique o objetivo da atividade para os alunos..."></textarea></div>
+        <div class="fg-row">
+          <div class="fg"><label>Prazo</label><input type="datetime-local" /></div>
+          <div class="fg"><label>XP ao concluir</label><input type="number" placeholder="100" value="100" /></div>
+        </div>
+        <div class="fg"><label>Turmas</label>
+          <div class="turmas-grid">
+            <div class="turma-chk selected" onclick="this.classList.toggle('selected')"><input type="checkbox"
+                checked /><span class="turma-chk-label">📘 8º Ano A</span></div>
+            <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox" /><span
+                class="turma-chk-label">📗 8º Ano B</span></div>
+            <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox" /><span
+                class="turma-chk-label">📙 9º Ano A</span></div>
+            <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox" /><span
+                class="turma-chk-label">📒 9º Ano B</span></div>
+          </div>
+        </div>
+        <div class="form-footer" style="margin-top:20px">
+          <button class="btn-draft">💾 Rascunho</button>
+          <button class="btn-acc">🚀 Atribuir Jogo</button>
+        </div>
       </div>
     </div>
 
-    <!-- JOGO -->
-    <div id="tab-jogo" style="display:none">
-      <div class="fg"><label>Selecione o Jogo Financeiro</label>
-        <div class="tipo-grid">
-          <div class="tipo-btn selected" onclick="selTipo(this)"><div class="tipo-icon">💰</div>Orçamento</div>
-          <div class="tipo-btn" onclick="selTipo(this)"><div class="tipo-icon">📈</div>Bolsa Jr.</div>
-          <div class="tipo-btn" onclick="selTipo(this)"><div class="tipo-icon">🏪</div>Mercado Virtual</div>
-        </div>
+    <!-- LIST AREA -->
+    <div class="list-area" id="tarefasList">
+      <div class="list-hd">
+        <h3>📋 Tarefas Criadas</h3><span>12 tarefas</span>
       </div>
-      <div class="fg"><label>Instruções adicionais ao aluno</label><textarea placeholder="Explique o objetivo da atividade para os alunos..."></textarea></div>
-      <div class="fg-row">
-        <div class="fg"><label>Prazo</label><input type="datetime-local"/></div>
-        <div class="fg"><label>XP ao concluir</label><input type="number" placeholder="100" value="100"/></div>
-      </div>
-      <div class="fg"><label>Turmas</label>
-        <div class="turmas-grid">
-          <div class="turma-chk selected" onclick="this.classList.toggle('selected')"><input type="checkbox" checked/><span class="turma-chk-label">📘 8º Ano A</span></div>
-          <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox"/><span class="turma-chk-label">📗 8º Ano B</span></div>
-          <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox"/><span class="turma-chk-label">📙 9º Ano A</span></div>
-          <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox"/><span class="turma-chk-label">📒 9º Ano B</span></div>
-        </div>
-      </div>
-      <div class="form-footer" style="margin-top:20px">
-        <button class="btn-draft">💾 Rascunho</button>
-        <button class="btn-acc">🚀 Atribuir Jogo</button>
-      </div>
+
     </div>
-  </div>
-
-  <!-- LIST AREA -->
-  <div class="list-area" id="tarefasList">
-    <div class="list-hd"><h3>📋 Tarefas Criadas</h3><span>12 tarefas</span></div>
 
   </div>
-
-</div>
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>

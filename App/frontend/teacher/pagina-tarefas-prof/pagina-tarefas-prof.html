@@ -1,142 +1,265 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Monetto – Tarefas & Relatórios</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="pagina-tarefas-prof.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monetto – Tarefas & Relatórios</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="pagina-tarefas-prof.css" />
+  <link rel="icon" type="image/x-icon" href="../../Assets/Monetto Logo.ico">
 </head>
+
 <body>
 
-<nav class="sidebar">
-  <a class="sb-logo" href="#">
-    <svg viewBox="0 0 32 32" fill="none" width="26" height="26"><rect width="32" height="32" rx="8" fill="#1A2A8F"/><path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="10" r="3" fill="#2ECC71"/></svg>
-    Monetto <span class="sb-role">Prof.</span>
-  </a>
-  <span class="sb-section">Visão Geral</span>
-  <a class="sb-link" href="../dashboard-professor/dashboard-professor.html"><span class="icon">🏠</span> Dashboard</a>
-  <a class="sb-link" href="../gerenciar-alunos/gerenciar-alunos.html"><span class="icon">👥</span> Alunos</a>
-  <a class="sb-link" href="../CRUD_Tarefas/criar-tarefas.html"><span class="icon">📝</span> Criar Tarefas</a>
-  <a class="sb-link active" href="../pagina-tarefas-prof/pagina-tarefas-prof.html"><span class="icon">📋</span> Tarefas <span class="sb-badge">3</span></a>
-  <span class="sb-section">Análises</span>
-  <a class="sb-link" href="../relatorios/relatorios.html"><span class="icon">📊</span> Relatórios</a>
-  <span class="sb-section">Conta</span>
-  <a class="sb-link" href="../configuracoes/configuracoes-prof.html"><span class="icon">⚙️</span> Configurações</a>
-  <div class="sb-bottom"><a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;" onclick="sairDaConta('../login-principal/login-principal.html')"><span class="icon">🚪</span> Sair da conta</a>
-    <div class="sb-user">
-      <div class="sb-av">👨‍🏫</div>
-      <div class="sb-user-info"><strong>Prof. Ricardo</strong><span>4 turmas ativas</span></div>
-    </div>
-  </div>
-</nav>
-
-<main class="main">
-  <div class="topbar">
-    <div>
-      <h1 id="pageTitle">📋 Página de Tarefas</h1>
-      <p style="color:var(--muted);font-size:.87rem;margin-top:3px" id="pageSub">12 tarefas · 3 vencendo hoje</p>
-    </div>
-    <div class="top-right">
-      <button class="btn-outline" id="exportBtn" style="display:none">⬇ Exportar PDF</button>
-      <button class="btn-primary" onclick="location.href='../CRUD_Tarefas/criar-tarefas.html'">+ Nova Tarefa</button>
-    </div>
-  </div>
-
-  <!-- PAGE TABS -->
-  <div class="page-tabs">
-    <div class="ptab active" onclick="showPage('tarefas',this)">📋 Tarefas</div>
-    <div class="ptab" onclick="showPage('relatorios',this)">📊 Relatórios</div>
-  </div>
-
-  <!-- TAREFAS PAGE -->
-  <div id="page-tarefas">
-    <div class="filter-bar">
-      <div class="search-box">🔍<input type="text" placeholder="Buscar tarefa..."/></div>
-      <select class="filter-select"><option>Todas as turmas</option><option>8º A</option><option>8º B</option><option>9º A</option><option>9º B</option></select>
-      <select class="filter-select"><option>Todas as disciplinas</option><option>Matemática</option><option>Português</option><option>Ciências</option></select>
-      <div class="ftab active" onclick="setFtab(this)">Todas (12)</div>
-      <div class="ftab" onclick="setFtab(this)">Ativas</div>
-      <div class="ftab" onclick="setFtab(this)">Vencendo hoje</div>
-      <div class="ftab" onclick="setFtab(this)">Expiradas</div>
-    </div>
-
-    <div class="kanban" id="kanbanBoard">
-      <div class="kol" id="col-ativas">
-        <div class="kol-hd"><h3><span class="kol-dot kd-g"></span>Ativas</h3><span class="kol-count" id="count-ativas">0</span></div>
-        <div id="cards-ativas"></div>
-      </div>
-      <div class="kol" id="col-vencendo">
-        <div class="kol-hd"><h3><span class="kol-dot kd-y"></span>Vencendo Hoje</h3><span class="kol-count" id="count-vencendo">0</span></div>
-        <div id="cards-vencendo"></div>
-      </div>
-      <div class="kol" id="col-expiradas">
-        <div class="kol-hd"><h3><span class="kol-dot kd-r"></span>Expiradas</h3><span class="kol-count" id="count-expiradas">0</span></div>
-        <div id="cards-expiradas"></div>
+  <nav class="sidebar">
+    <a class="sb-logo" href="#">
+      <svg viewBox="0 0 32 32" fill="none" width="26" height="26">
+        <rect width="32" height="32" rx="8" fill="#1A2A8F" />
+        <path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"
+          stroke-linejoin="round" />
+        <circle cx="24" cy="10" r="3" fill="#2ECC71" />
+      </svg>
+      Monetto <span class="sb-role">Prof.</span>
+    </a>
+    <span class="sb-section">Visão Geral</span>
+    <a class="sb-link" href="../dashboard-professor/dashboard-professor.html"><span class="icon">🏠</span> Dashboard</a>
+    <a class="sb-link" href="../gerenciar-alunos/gerenciar-alunos.html"><span class="icon">👥</span> Alunos</a>
+    <a class="sb-link" href="../CRUD_Tarefas/criar-tarefas.html"><span class="icon">📝</span> Criar Tarefas</a>
+    <a class="sb-link active" href="../pagina-tarefas-prof/pagina-tarefas-prof.html"><span class="icon">📋</span>
+      Tarefas <span class="sb-badge">3</span></a>
+    <span class="sb-section">Análises</span>
+    <a class="sb-link" href="../relatorios/relatorios.html"><span class="icon">📊</span> Relatórios</a>
+    <span class="sb-section">Conta</span>
+    <a class="sb-link" href="../configuracoes/configuracoes-prof.html"><span class="icon">⚙️</span> Configurações</a>
+    <div class="sb-bottom"><a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;"
+        onclick="sairDaConta('../../user/login-principal/login-principal.html')"><span class="icon">🚪</span> Sair da
+        conta</a>
+      <div class="sb-user">
+        <div class="sb-av">👨‍🏫</div>
+        <div class="sb-user-info"><strong>Prof. Ricardo</strong><span>4 turmas ativas</span></div>
       </div>
     </div>
-  </div>
+  </nav>
 
-  <!-- RELATÓRIOS PAGE -->
-  <div id="page-relatorios" style="display:none">
-    <div class="export-row" style="margin-bottom:20px">
-      <button class="exp-btn">⬇ PDF Completo</button>
-      <button class="exp-btn">📊 Excel / CSV</button>
-      <button class="exp-btn">📧 Enviar por e-mail</button>
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <h1 id="pageTitle">📋 Página de Tarefas</h1>
+        <p style="color:var(--muted);font-size:.87rem;margin-top:3px" id="pageSub">12 tarefas · 3 vencendo hoje</p>
+      </div>
+      <div class="top-right">
+        <button class="btn-outline" id="exportBtn" style="display:none">⬇ Exportar PDF</button>
+        <button class="btn-primary" onclick="location.href='../CRUD_Tarefas/criar-tarefas.html'">+ Nova Tarefa</button>
+      </div>
     </div>
 
-    <div class="relatorios-grid">
+    <!-- PAGE TABS -->
+    <div class="page-tabs">
+      <div class="ptab active" onclick="showPage('tarefas',this)">📋 Tarefas</div>
+      <div class="ptab" onclick="showPage('relatorios',this)">📊 Relatórios</div>
+    </div>
 
-      <div class="rcard">
-        <div class="rcard-title">📈 Conclusões por Semana</div>
-        <div class="bar-chart">
-          <div class="bc-col"><div class="bc-bar blue" style="height:55px"></div><div class="bc-label">Sem 1</div></div>
-          <div class="bc-col"><div class="bc-bar blue" style="height:72px"></div><div class="bc-label">Sem 2</div></div>
-          <div class="bc-col"><div class="bc-bar blue" style="height:63px"></div><div class="bc-label">Sem 3</div></div>
-          <div class="bc-col"><div class="bc-bar gold" style="height:88px"></div><div class="bc-label">Sem 4</div></div>
+    <!-- TAREFAS PAGE -->
+    <div id="page-tarefas">
+      <div class="filter-bar">
+        <div class="search-box">🔍<input type="text" placeholder="Buscar tarefa..." /></div>
+        <select class="filter-select">
+          <option>Todas as turmas</option>
+          <option>8º A</option>
+          <option>8º B</option>
+          <option>9º A</option>
+          <option>9º B</option>
+        </select>
+        <select class="filter-select">
+          <option>Todas as disciplinas</option>
+          <option>Matemática</option>
+          <option>Português</option>
+          <option>Ciências</option>
+        </select>
+        <div class="ftab active" onclick="setFtab(this)">Todas (12)</div>
+        <div class="ftab" onclick="setFtab(this)">Ativas</div>
+        <div class="ftab" onclick="setFtab(this)">Vencendo hoje</div>
+        <div class="ftab" onclick="setFtab(this)">Expiradas</div>
+      </div>
+
+      <div class="kanban" id="kanbanBoard">
+        <div class="kol" id="col-ativas">
+          <div class="kol-hd">
+            <h3><span class="kol-dot kd-g"></span>Ativas</h3><span class="kol-count" id="count-ativas">0</span>
+          </div>
+          <div id="cards-ativas"></div>
         </div>
-        <div style="font-size:.75rem;color:var(--muted);margin-top:10px;text-align:center">Tarefas concluídas por semana · Abril 2026</div>
+        <div class="kol" id="col-vencendo">
+          <div class="kol-hd">
+            <h3><span class="kol-dot kd-y"></span>Vencendo Hoje</h3><span class="kol-count" id="count-vencendo">0</span>
+          </div>
+          <div id="cards-vencendo"></div>
+        </div>
+        <div class="kol" id="col-expiradas">
+          <div class="kol-hd">
+            <h3><span class="kol-dot kd-r"></span>Expiradas</h3><span class="kol-count" id="count-expiradas">0</span>
+          </div>
+          <div id="cards-expiradas"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RELATÓRIOS PAGE -->
+    <div id="page-relatorios" style="display:none">
+      <div class="export-row" style="margin-bottom:20px">
+        <button class="exp-btn">⬇ PDF Completo</button>
+        <button class="exp-btn">📊 Excel / CSV</button>
+        <button class="exp-btn">📧 Enviar por e-mail</button>
       </div>
 
-      <div class="rcard">
-        <div class="rcard-title">🎯 Taxa de Conclusão por Turma</div>
-        <div class="pie-wrap">
-          <div class="pie-chart"></div>
-          <div class="pie-legend">
-            <div class="pl-item"><div class="pl-dot" style="background:var(--green)"></div><div class="pl-lbl">8º A</div><div class="pl-val">92%</div></div>
-            <div class="pl-item"><div class="pl-dot" style="background:#5B9BF8"></div><div class="pl-lbl">8º B</div><div class="pl-val">85%</div></div>
-            <div class="pl-item"><div class="pl-dot" style="background:var(--accent)"></div><div class="pl-lbl">9º A</div><div class="pl-val">78%</div></div>
-            <div class="pl-item"><div class="pl-dot" style="background:var(--purple)"></div><div class="pl-lbl">9º B</div><div class="pl-val">91%</div></div>
+      <div class="relatorios-grid">
+
+        <div class="rcard">
+          <div class="rcard-title">📈 Conclusões por Semana</div>
+          <div class="bar-chart">
+            <div class="bc-col">
+              <div class="bc-bar blue" style="height:55px"></div>
+              <div class="bc-label">Sem 1</div>
+            </div>
+            <div class="bc-col">
+              <div class="bc-bar blue" style="height:72px"></div>
+              <div class="bc-label">Sem 2</div>
+            </div>
+            <div class="bc-col">
+              <div class="bc-bar blue" style="height:63px"></div>
+              <div class="bc-label">Sem 3</div>
+            </div>
+            <div class="bc-col">
+              <div class="bc-bar gold" style="height:88px"></div>
+              <div class="bc-label">Sem 4</div>
+            </div>
+          </div>
+          <div style="font-size:.75rem;color:var(--muted);margin-top:10px;text-align:center">Tarefas concluídas por
+            semana · Abril 2026</div>
+        </div>
+
+        <div class="rcard">
+          <div class="rcard-title">🎯 Taxa de Conclusão por Turma</div>
+          <div class="pie-wrap">
+            <div class="pie-chart"></div>
+            <div class="pie-legend">
+              <div class="pl-item">
+                <div class="pl-dot" style="background:var(--green)"></div>
+                <div class="pl-lbl">8º A</div>
+                <div class="pl-val">92%</div>
+              </div>
+              <div class="pl-item">
+                <div class="pl-dot" style="background:#5B9BF8"></div>
+                <div class="pl-lbl">8º B</div>
+                <div class="pl-val">85%</div>
+              </div>
+              <div class="pl-item">
+                <div class="pl-dot" style="background:var(--accent)"></div>
+                <div class="pl-lbl">9º A</div>
+                <div class="pl-val">78%</div>
+              </div>
+              <div class="pl-item">
+                <div class="pl-dot" style="background:var(--purple)"></div>
+                <div class="pl-lbl">9º B</div>
+                <div class="pl-val">91%</div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="rcard">
-        <div class="rcard-title">🏆 Ranking de Alunos (Geral)</div>
-        <div class="top-table">
-          <div class="tt-row"><div class="tt-pos">1</div><div class="tt-av av-a"></div><div class="tt-name">Ana Souza · 8ºA</div><div class="tt-bar"><div class="tt-bf" style="width:90%"></div></div><div class="tt-val" style="color:var(--accent);margin-left:8px">680 XP</div></div>
-          <div class="tt-row"><div class="tt-pos">2</div><div class="tt-av av-b"></div><div class="tt-name">Carlos Lima · 8ºB</div><div class="tt-bar"><div class="tt-bf" style="width:84%"></div></div><div class="tt-val" style="color:var(--accent);margin-left:8px">640 XP</div></div>
-          <div class="tt-row"><div class="tt-pos">3</div><div class="tt-av av-c"></div><div class="tt-name">João Pedro · 9ºA</div><div class="tt-bar"><div class="tt-bf" style="width:77%"></div></div><div class="tt-val" style="color:var(--accent);margin-left:8px">590 XP</div></div>
-          <div class="tt-row"><div class="tt-pos">4</div><div class="tt-av av-d"></div><div class="tt-name">Maria Clara · 9ºB</div><div class="tt-bar"><div class="tt-bf" style="width:68%"></div></div><div class="tt-val" style="color:var(--accent);margin-left:8px">520 XP</div></div>
-          <div class="tt-row"><div class="tt-pos">5</div><div class="tt-av av-e"></div><div class="tt-name">Lucas Torres · 8ºA</div><div class="tt-bar"><div class="tt-bf" style="width:63%"></div></div><div class="tt-val" style="color:var(--accent);margin-left:8px">480 XP</div></div>
+        <div class="rcard">
+          <div class="rcard-title">🏆 Ranking de Alunos (Geral)</div>
+          <div class="top-table">
+            <div class="tt-row">
+              <div class="tt-pos">1</div>
+              <div class="tt-av av-a"></div>
+              <div class="tt-name">Ana Souza · 8ºA</div>
+              <div class="tt-bar">
+                <div class="tt-bf" style="width:90%"></div>
+              </div>
+              <div class="tt-val" style="color:var(--accent);margin-left:8px">680 XP</div>
+            </div>
+            <div class="tt-row">
+              <div class="tt-pos">2</div>
+              <div class="tt-av av-b"></div>
+              <div class="tt-name">Carlos Lima · 8ºB</div>
+              <div class="tt-bar">
+                <div class="tt-bf" style="width:84%"></div>
+              </div>
+              <div class="tt-val" style="color:var(--accent);margin-left:8px">640 XP</div>
+            </div>
+            <div class="tt-row">
+              <div class="tt-pos">3</div>
+              <div class="tt-av av-c"></div>
+              <div class="tt-name">João Pedro · 9ºA</div>
+              <div class="tt-bar">
+                <div class="tt-bf" style="width:77%"></div>
+              </div>
+              <div class="tt-val" style="color:var(--accent);margin-left:8px">590 XP</div>
+            </div>
+            <div class="tt-row">
+              <div class="tt-pos">4</div>
+              <div class="tt-av av-d"></div>
+              <div class="tt-name">Maria Clara · 9ºB</div>
+              <div class="tt-bar">
+                <div class="tt-bf" style="width:68%"></div>
+              </div>
+              <div class="tt-val" style="color:var(--accent);margin-left:8px">520 XP</div>
+            </div>
+            <div class="tt-row">
+              <div class="tt-pos">5</div>
+              <div class="tt-av av-e"></div>
+              <div class="tt-name">Lucas Torres · 8ºA</div>
+              <div class="tt-bar">
+                <div class="tt-bf" style="width:63%"></div>
+              </div>
+              <div class="tt-val" style="color:var(--accent);margin-left:8px">480 XP</div>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="rcard">
-        <div class="rcard-title">⚠️ Alunos que precisam de atenção</div>
-        <div class="top-table">
-          <div class="tt-row"><div class="tt-av" style="background:linear-gradient(135deg,#f60,#c00);width:26px;height:26px;border-radius:50%"></div><div class="tt-name" style="flex:1;margin-left:8px">Rafael Mendes · 9ºA</div><div style="font-size:.75rem;color:var(--red)">7/26 tarefas</div></div>
-          <div class="tt-row"><div class="tt-av" style="background:linear-gradient(135deg,#a0f,#60f);width:26px;height:26px;border-radius:50%"></div><div class="tt-name" style="flex:1;margin-left:8px">Larissa Nunes · 8ºB</div><div style="font-size:.75rem;color:var(--orange)">10/26 tarefas</div></div>
-          <div class="tt-row"><div class="tt-av" style="background:linear-gradient(135deg,#0af,#06f);width:26px;height:26px;border-radius:50%"></div><div class="tt-name" style="flex:1;margin-left:8px">Pedro Alves · 9ºB</div><div style="font-size:.75rem;color:var(--orange)">12/26 tarefas</div></div>
-          <div class="tt-row"><div class="tt-av" style="background:linear-gradient(135deg,#0f9,#0a6);width:26px;height:26px;border-radius:50%"></div><div class="tt-name" style="flex:1;margin-left:8px">Bianca Souza · 8ºA</div><div style="font-size:.75rem;color:var(--orange)">13/26 tarefas</div></div>
+        <div class="rcard">
+          <div class="rcard-title">⚠️ Alunos que precisam de atenção</div>
+          <div class="top-table">
+            <div class="tt-row">
+              <div class="tt-av"
+                style="background:linear-gradient(135deg,#f60,#c00);width:26px;height:26px;border-radius:50%"></div>
+              <div class="tt-name" style="flex:1;margin-left:8px">Rafael Mendes · 9ºA</div>
+              <div style="font-size:.75rem;color:var(--red)">7/26 tarefas</div>
+            </div>
+            <div class="tt-row">
+              <div class="tt-av"
+                style="background:linear-gradient(135deg,#a0f,#60f);width:26px;height:26px;border-radius:50%"></div>
+              <div class="tt-name" style="flex:1;margin-left:8px">Larissa Nunes · 8ºB</div>
+              <div style="font-size:.75rem;color:var(--orange)">10/26 tarefas</div>
+            </div>
+            <div class="tt-row">
+              <div class="tt-av"
+                style="background:linear-gradient(135deg,#0af,#06f);width:26px;height:26px;border-radius:50%"></div>
+              <div class="tt-name" style="flex:1;margin-left:8px">Pedro Alves · 9ºB</div>
+              <div style="font-size:.75rem;color:var(--orange)">12/26 tarefas</div>
+            </div>
+            <div class="tt-row">
+              <div class="tt-av"
+                style="background:linear-gradient(135deg,#0f9,#0a6);width:26px;height:26px;border-radius:50%"></div>
+              <div class="tt-name" style="flex:1;margin-left:8px">Bianca Souza · 8ºA</div>
+              <div style="font-size:.75rem;color:var(--orange)">13/26 tarefas</div>
+            </div>
+          </div>
+          <button
+            style="width:100%;margin-top:14px;padding:10px;background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.3);border-radius:10px;color:var(--red);font-size:.82rem;cursor:pointer">⚠️
+            Alertar responsáveis</button>
         </div>
-        <button style="width:100%;margin-top:14px;padding:10px;background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.3);border-radius:10px;color:var(--red);font-size:.82rem;cursor:pointer">⚠️ Alertar responsáveis</button>
-      </div>
 
+      </div>
     </div>
-  </div>
 
-</main>
+  </main>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>

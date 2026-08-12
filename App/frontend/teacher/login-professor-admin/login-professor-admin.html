@@ -1,197 +1,214 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Monetto – Acesso Professor / Admin</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="login-professor-admin.css"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="login-professor-admin.css" />
+  <link rel="icon" type="image/x-icon" href="../../Assets/Monetto Logo.ico">
 </head>
+
 <body>
 
-<div class="page">
+  <div class="page">
 
-  <!-- LEFT -->
-  <div class="left">
-    <div class="stars"></div>
+    <!-- LEFT -->
+    <div class="left">
+      <div class="stars"></div>
 
-    <a class="left-logo" href="#">
-      <svg viewBox="0 0 32 32" fill="none" width="30" height="30">
-        <rect width="32" height="32" rx="8" fill="#1A2A8F"/>
-        <path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="24" cy="10" r="3" fill="#2ECC71"/>
-      </svg>
-      Monetto
-    </a>
+      <a class="left-logo" href="#">
+        <svg viewBox="0 0 32 32" fill="none" width="30" height="30">
+          <rect width="32" height="32" rx="8" fill="#1A2A8F" />
+          <path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+          <circle cx="24" cy="10" r="3" fill="#2ECC71" />
+        </svg>
+        Monetto
+      </a>
 
-    <div class="left-content">
-      <div class="role-badge">
-        <div class="role-dot"></div>
-        Área Administrativa
+      <div class="left-content">
+        <div class="role-badge">
+          <div class="role-dot"></div>
+          Área Administrativa
+        </div>
+        <h2>Gerencie sua<br /><em>turma com poder</em></h2>
+        <p>Acesse o painel completo de professor ou administrador e acompanhe o desempenho dos seus alunos em tempo
+          real.</p>
+
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="info-icon ic-gold">📊</div>
+            <div class="info-card-text">
+              <strong>Dashboard Completo</strong>
+              <span>Métricas detalhadas de engajamento</span>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-icon ic-green">🎯</div>
+            <div class="info-card-text">
+              <strong>Criação de Tarefas</strong>
+              <span>Monte desafios e missões personalizadas</span>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-icon ic-blue">👥</div>
+            <div class="info-card-text">
+              <strong>Gestão de Turmas</strong>
+              <span>Organize alunos e acompanhe rankings</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <h2>Gerencie sua<br/><em>turma com poder</em></h2>
-      <p>Acesse o painel completo de professor ou administrador e acompanhe o desempenho dos seus alunos em tempo real.</p>
 
-      <div class="info-cards">
-        <div class="info-card">
-          <div class="info-icon ic-gold">📊</div>
-          <div class="info-card-text">
-            <strong>Dashboard Completo</strong>
-            <span>Métricas detalhadas de engajamento</span>
-          </div>
-        </div>
-        <div class="info-card">
-          <div class="info-icon ic-green">🎯</div>
-          <div class="info-card-text">
-            <strong>Criação de Tarefas</strong>
-            <span>Monte desafios e missões personalizadas</span>
-          </div>
-        </div>
-        <div class="info-card">
-          <div class="info-icon ic-blue">👥</div>
-          <div class="info-card-text">
-            <strong>Gestão de Turmas</strong>
-            <span>Organize alunos e acompanhe rankings</span>
-          </div>
-        </div>
+      <div class="left-footer">
+        © 2026 Monetto by ML Solutions
       </div>
     </div>
 
-    <div class="left-footer">
-      © 2026 Monetto by ML Solutions
+    <!-- RIGHT -->
+    <div class="right">
+      <div class="form-box">
+
+        <div class="form-header">
+          <h1>Bem-vindo de volta 👋</h1>
+          <p>Acesse sua conta como professor ou administrador</p>
+        </div>
+
+        <!-- Tab Switch -->
+        <div class="tab-switch">
+          <button class="tab-btn active" onclick="switchTab('professor', this)">Professor</button>
+          <button class="tab-btn" onclick="switchTab('admin', this)">Administrador</button>
+        </div>
+
+        <!-- PROFESSOR PANEL -->
+        <div id="professor" class="panel active">
+          <div class="form-group">
+            <label for="prof-email">E-mail institucional</label>
+            <div class="input-wrap">
+              <span class="input-icon">✉️</span>
+              <input type="email" id="prof-email" placeholder="professor@escola.edu.br" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="prof-pass">Senha</label>
+            <div class="input-wrap">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="prof-pass" placeholder="••••••••" />
+              <button class="eye-toggle" onclick="togglePass('prof-pass', this)" title="Mostrar senha">👁️</button>
+            </div>
+          </div>
+          <div class="form-extras">
+            <label class="remember">
+              <input type="checkbox" /> Lembrar acesso
+            </label>
+            <a class="forgot-link" target="_blank" href="https://youtu.be/dQw4w9WgXcQ?si=kFx1jJxSDxVbmOZC">Esqueci a
+              senha</a>
+          </div>
+          <button class="btn-submit" onclick="loginProfessor()">Entrar como Professor →</button>
+          <div class="divider">ou continue com</div>
+          <div id="g_id_onload"
+            data-client_id="731708419688-3fmc106b98nv1lsb0vallfijb2fnfako.apps.googleusercontent.com"
+            data-callback="handleCredentialResponse">
+          </div>
+
+          <div class="g_id_signin"></div>
+
+          <script src="https://accounts.google.com/gsi/client" async defer></script>
+          <p class="signup-link">Não tem conta? <a href="#">Solicitar acesso</a></p>
+
+          <a class="back-link" href="../../user/login-principal/login-principal.html">← Voltar para seleção de
+            acesso</a>
+        </div>
+
+        <!-- ADMIN PANEL -->
+        <div id="admin" class="panel">
+          <div class="form-group">
+            <label for="adm-user">Usuário administrador</label>
+            <div class="input-wrap">
+              <span class="input-icon">🛡️</span>
+              <input type="text" id="adm-user" placeholder="admin@monetto.com.br" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="adm-pass">Senha</label>
+            <div class="input-wrap">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="adm-pass" placeholder="••••••••" />
+              <button class="eye-toggle" onclick="togglePass('adm-pass', this)" title="Mostrar senha">👁️</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="adm-2fa">Código de autenticação (2FA)</label>
+            <div class="input-wrap">
+              <span class="input-icon">🔑</span>
+              <input type="text" id="adm-2fa" placeholder="000 000" maxlength="7" />
+            </div>
+          </div>
+          <div class="form-extras">
+            <label class="remember">
+              <input type="checkbox" /> Manter sessão ativa
+            </label>
+            <a class="forgot-link" href="#">Recuperar acesso</a>
+          </div>
+          <button class="btn-submit" style="background:linear-gradient(135deg,#c0392b,#8B0000);"
+            onclick="loginAdmin()">Entrar como Admin 🛡️</button>
+          <p class="signup-link" style="margin-top:20px;">Problemas de acesso? <a href="#">Contate o suporte</a></p>
+
+          <a class="back-link" href="../../user/login-principal/login-principal.html">← Voltar para seleção de
+            acesso</a>
+
+        </div>
+
+      </div>
     </div>
+
   </div>
 
-  <!-- RIGHT -->
-  <div class="right">
-    <div class="form-box">
+  <script>
+    function loginProfessor() {
+      var e = document.getElementById("prof-email").value.trim();
+      var p = document.getElementById("prof-pass").value;
+      if (!e || !p) { alert("Preencha e-mail e senha para continuar."); return; }
+      window.location.href = "../dashboard-professor/dashboard-professor.html";
+    }
 
-      <div class="form-header">
-        <h1>Bem-vindo de volta 👋</h1>
-        <p>Acesse sua conta como professor ou administrador</p>
-      </div>
+    function loginAdmin() {
+      var u = document.getElementById("adm-user").value.trim();
+      var p = document.getElementById("adm-pass").value;
+      if (!u || !p) { alert("Preencha usuário e senha para continuar."); return; }
+      window.location.href = "../../admin_general/dashboard-admin-geral/dashboard-admin-geral.html";
+    }
 
-      <!-- Tab Switch -->
-      <div class="tab-switch">
-        <button class="tab-btn active" onclick="switchTab('professor', this)">Professor</button>
-        <button class="tab-btn" onclick="switchTab('admin', this)">Administrador</button>
-      </div>
+    function switchTab(id, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(id).classList.add('active');
+    }
 
-      <!-- PROFESSOR PANEL -->
-      <div id="professor" class="panel active">
-        <div class="form-group">
-          <label for="prof-email">E-mail institucional</label>
-          <div class="input-wrap">
-            <span class="input-icon">✉️</span>
-            <input type="email" id="prof-email" placeholder="professor@escola.edu.br"/>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="prof-pass">Senha</label>
-          <div class="input-wrap">
-            <span class="input-icon">🔒</span>
-            <input type="password" id="prof-pass" placeholder="••••••••"/>
-            <button class="eye-toggle" onclick="togglePass('prof-pass', this)" title="Mostrar senha">👁️</button>
-          </div>
-        </div>
-        <div class="form-extras">
-          <label class="remember">
-            <input type="checkbox"/> Lembrar acesso
-          </label>
-          <a class="forgot-link" href="#">Esqueci a senha</a>
-        </div>
-        <button class="btn-submit" onclick="loginProfessor()">Entrar como Professor →</button>
-        <div class="divider">ou continue com</div>
-        <div id="g_id_onload"
-     data-client_id="731708419688-3fmc106b98nv1lsb0vallfijb2fnfako.apps.googleusercontent.com"
-     data-callback="handleCredentialResponse">
-      </div>
+    function togglePass(inputId, btn) {
+      const inp = document.getElementById(inputId);
+      if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '🙈'; }
+      else { inp.type = 'password'; btn.textContent = '👁️'; }
+    }
 
-      <div class="g_id_signin"></div>
+    function handleCredentialResponse(response) {
+      // JWT token Google returns
+      const token = response.credential;
 
-      <script src="https://accounts.google.com/gsi/client" async defer></script>
-        <p class="signup-link">Não tem conta? <a href="#">Solicitar acesso</a></p>
-      </div>
+      // Decode payload
+      const payload = JSON.parse(atob(token.split('.')[1]));
 
-      <!-- ADMIN PANEL -->
-      <div id="admin" class="panel">
-        <div class="form-group">
-          <label for="adm-user">Usuário administrador</label>
-          <div class="input-wrap">
-            <span class="input-icon">🛡️</span>
-            <input type="text" id="adm-user" placeholder="admin@monetto.com.br"/>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="adm-pass">Senha</label>
-          <div class="input-wrap">
-            <span class="input-icon">🔒</span>
-            <input type="password" id="adm-pass" placeholder="••••••••"/>
-            <button class="eye-toggle" onclick="togglePass('adm-pass', this)" title="Mostrar senha">👁️</button>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="adm-2fa">Código de autenticação (2FA)</label>
-          <div class="input-wrap">
-            <span class="input-icon">🔑</span>
-            <input type="text" id="adm-2fa" placeholder="000 000" maxlength="7"/>
-          </div>
-        </div>
-        <div class="form-extras">
-          <label class="remember">
-            <input type="checkbox"/> Manter sessão ativa
-          </label>
-          <a class="forgot-link" href="#">Recuperar acesso</a>
-        </div>
-        <button class="btn-submit" style="background:linear-gradient(135deg,#c0392b,#8B0000);" onclick="loginAdmin()">Entrar como Admin 🛡️</button>
-        <p class="signup-link" style="margin-top:20px;">Problemas de acesso? <a href="#">Contate o suporte</a></p>
-      </div>
-
-    </div>
-  </div>
-
-</div>
-
-<script>
-  function loginProfessor() {
-    var e = document.getElementById("prof-email").value.trim();
-    var p = document.getElementById("prof-pass").value;
-    if (!e || !p) { alert("Preencha e-mail e senha para continuar."); return; }
-    window.location.href = "../dashboard-professor/dashboard-professor.html";
-  }
-
-  function loginAdmin() {
-    var u = document.getElementById("adm-user").value.trim();
-    var p = document.getElementById("adm-pass").value;
-    if (!u || !p) { alert("Preencha usuário e senha para continuar."); return; }
-    window.location.href = "../dashboard-admin-escolar/dashboard-admin-escolar.html";
-  }
-
-  function switchTab(id, btn) {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById(id).classList.add('active');
-  }
-
-  function togglePass(inputId, btn) {
-    const inp = document.getElementById(inputId);
-    if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '🙈'; }
-    else { inp.type = 'password'; btn.textContent = '👁️'; }
-  }
-
-  function handleCredentialResponse(response) {
-    // JWT token Google returns
-    const token = response.credential;
-
-    // Decode payload
-    const payload = JSON.parse(atob(token.split('.')[1]));
-
-    console.log("ID:", payload.sub);
-    console.log("Name:", payload.name);
-    console.log("Email:", payload.email);
-    console.log("Picture:", payload.picture);
-}
-</script>
+      console.log("ID:", payload.sub);
+      console.log("Name:", payload.name);
+      console.log("Email:", payload.email);
+      console.log("Picture:", payload.picture);
+    }
+  </script>
 </body>
+
 </html>

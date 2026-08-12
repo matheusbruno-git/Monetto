@@ -1,167 +1,233 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Monetto – Gerenciamento de Alunos</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="gerenciar-alunos.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monetto – Gerenciamento de Alunos</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="gerenciar-alunos.css" />
+  <link rel="icon" type="image/x-icon" href="../../Assets/Monetto Logo.ico">
 </head>
+
 <body>
 
-<nav class="sidebar">
-  <a class="sb-logo" href="#">
-    <svg viewBox="0 0 32 32" fill="none" width="26" height="26"><rect width="32" height="32" rx="8" fill="#1A2A8F"/><path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="10" r="3" fill="#2ECC71"/></svg>
-    Monetto <span class="sb-role">Prof.</span>
-  </a>
-  <span class="sb-section">Visão Geral</span>
-  <a class="sb-link" href="../dashboard-professor/dashboard-professor.html"><span class="icon">🏠</span> Dashboard</a>
-  <a class="sb-link active" href="../gerenciar-alunos/gerenciar-alunos.html"><span class="icon">👥</span> Alunos</a>
-  <a class="sb-link" href="../CRUD_Tarefas/criar-tarefas.html"><span class="icon">📝</span> Criar Tarefas</a>
-  <a class="sb-link" href="../pagina-tarefas-prof/pagina-tarefas-prof.html"><span class="icon">📋</span> Tarefas <span class="sb-badge">3</span></a>
-  <span class="sb-section">Análises</span>
-  <a class="sb-link" href="../relatorios/relatorios.html"><span class="icon">📊</span> Relatórios</a>
-  <span class="sb-section">Conta</span>
-  <a class="sb-link" href="../configuracoes/configuracoes-prof.html"><span class="icon">⚙️</span> Configurações</a>
-  <div class="sb-bottom"><a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;" onclick="sairDaConta('../login-principal/login-principal.html')"><span class="icon">🚪</span> Sair da conta</a>
-    <div class="sb-user">
-      <div class="sb-av">👨‍🏫</div>
-      <div class="sb-user-info"><strong>Prof. Ricardo</strong><span>4 turmas ativas</span></div>
+  <nav class="sidebar">
+    <a class="sb-logo" href="#">
+      <svg viewBox="0 0 32 32" fill="none" width="26" height="26">
+        <rect width="32" height="32" rx="8" fill="#1A2A8F" />
+        <path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"
+          stroke-linejoin="round" />
+        <circle cx="24" cy="10" r="3" fill="#2ECC71" />
+      </svg>
+      Monetto <span class="sb-role">Prof.</span>
+    </a>
+    <span class="sb-section">Visão Geral</span>
+    <a class="sb-link" href="../dashboard-professor/dashboard-professor.html"><span class="icon">🏠</span> Dashboard</a>
+    <a class="sb-link active" href="../gerenciar-alunos/gerenciar-alunos.html"><span class="icon">👥</span> Alunos</a>
+    <a class="sb-link" href="../CRUD_Tarefas/criar-tarefas.html"><span class="icon">📝</span> Criar Tarefas</a>
+    <a class="sb-link" href="../pagina-tarefas-prof/pagina-tarefas-prof.html"><span class="icon">📋</span> Tarefas <span
+        class="sb-badge">3</span></a>
+    <span class="sb-section">Análises</span>
+    <a class="sb-link" href="../relatorios/relatorios.html"><span class="icon">📊</span> Relatórios</a>
+    <span class="sb-section">Conta</span>
+    <a class="sb-link" href="../configuracoes/configuracoes-prof.html"><span class="icon">⚙️</span> Configurações</a>
+    <div class="sb-bottom"><a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;"
+        onclick="sairDaConta('../../user/login-principal/login-principal.html')"><span class="icon">🚪</span> Sair da
+        conta</a>
+      <div class="sb-user">
+        <div class="sb-av">👨‍🏫</div>
+        <div class="sb-user-info"><strong>Prof. Ricardo</strong><span>4 turmas ativas</span></div>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<main class="main">
-  <div class="topbar">
-    <div>
-      <h1>👥 Gerenciamento de Alunos</h1>
-      <p style="color:var(--muted);font-size:.87rem;margin-top:3px">128 alunos em 4 turmas</p>
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <h1>👥 Gerenciamento de Alunos</h1>
+        <p style="color:var(--muted);font-size:.87rem;margin-top:3px">128 alunos em 4 turmas</p>
+      </div>
+      <div class="top-right">
+        <button class="btn-outline">⬇ Exportar CSV</button>
+        <button class="btn-primary">+ Adicionar Aluno</button>
+      </div>
     </div>
-    <div class="top-right">
-      <button class="btn-outline">⬇ Exportar CSV</button>
-      <button class="btn-primary">+ Adicionar Aluno</button>
-    </div>
-  </div>
 
-  <div class="stats-mini">
-    <div class="sm-card"><div class="sm-icon">👥</div><div><div class="sm-val">128</div><div class="sm-lbl">Total de alunos</div></div></div>
-    <div class="sm-card"><div class="sm-icon">✅</div><div><div class="sm-val">112</div><div class="sm-lbl">Ativos esta semana</div></div></div>
-    <div class="sm-card"><div class="sm-icon">⚠️</div><div><div class="sm-val">11</div><div class="sm-lbl">Precisam de atenção</div></div></div>
-    <div class="sm-card"><div class="sm-icon">🏆</div><div><div class="sm-val">87%</div><div class="sm-lbl">Taxa de conclusão</div></div></div>
-  </div>
-
-  <div class="filter-bar">
-    <div class="search-box">🔍 <input type="text" placeholder="Buscar aluno por nome ou e-mail..."/></div>
-    <select class="filter-select"><option>Todas as turmas</option><option>8º Ano A</option><option>8º Ano B</option><option>9º Ano A</option><option>9º Ano B</option></select>
-    <div class="ftab active" onclick="setTab(this)">Todos (128)</div>
-    <div class="ftab" onclick="setTab(this)">Ativos</div>
-    <div class="ftab" onclick="setTab(this)">⚠️ Atenção</div>
-    <div class="ftab" onclick="setTab(this)">Inativos</div>
-  </div>
-
-  <div class="table-card">
-    <div class="table-head">
-      <div>Aluno</div><div>Turma</div><div>XP</div><div>Nível</div><div>Tarefas</div><div>Status</div><div>Ações</div>
-    </div>
-    <div class="table-body" id="alunosContainer">
-      <div style="padding:2rem;text-align:center;color:var(--muted)">Carregando alunos...</div>
-    </div>
-  </div>
-</main>
-
-<!-- MODAL PERFIL ALUNO -->
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal">
-    <div class="modal-hd">
-      <h3>📋 Perfil do Aluno</h3>
-      <button class="modal-close" onclick="closeModal()">✕</button>
-    </div>
-    <!-- replace the static modal-profile block with: -->
-    <div class="modal-profile">
-      <div class="modal-av">😊</div>
-      <div class="modal-info">
-        <strong id="modalName">—</strong>
-        <span id="modalEmail">—</span>
-        <div style="margin-top:6px;display:flex;gap:6px">
-          <span id="modalLevel" style="background:rgba(255,215,0,.15);color:var(--accent);border-radius:50px;padding:2px 9px;font-size:.7rem;font-weight:700">Nível —</span>
+    <div class="stats-mini">
+      <div class="sm-card">
+        <div class="sm-icon">👥</div>
+        <div>
+          <div class="sm-val">128</div>
+          <div class="sm-lbl">Total de alunos</div>
+        </div>
+      </div>
+      <div class="sm-card">
+        <div class="sm-icon">✅</div>
+        <div>
+          <div class="sm-val">112</div>
+          <div class="sm-lbl">Ativos esta semana</div>
+        </div>
+      </div>
+      <div class="sm-card">
+        <div class="sm-icon">⚠️</div>
+        <div>
+          <div class="sm-val">11</div>
+          <div class="sm-lbl">Precisam de atenção</div>
+        </div>
+      </div>
+      <div class="sm-card">
+        <div class="sm-icon">🏆</div>
+        <div>
+          <div class="sm-val">87%</div>
+          <div class="sm-lbl">Taxa de conclusão</div>
         </div>
       </div>
     </div>
-    <div class="modal-stats">
-      <div class="ms-card"><div class="ms-val" id="modalXP">—</div><div class="ms-lbl">⚡ XP Total</div></div>
-      <div class="ms-card"><div class="ms-val">—</div><div class="ms-lbl">✅ Tarefas feitas</div></div>
-      <div class="ms-card"><div class="ms-val">—</div><div class="ms-lbl">📈 Engajamento</div></div>
+
+    <div class="filter-bar">
+      <div class="search-box">🔍 <input type="text" placeholder="Buscar aluno por nome ou e-mail..." /></div>
+      <select class="filter-select">
+        <option>Todas as turmas</option>
+        <option>8º Ano A</option>
+        <option>8º Ano B</option>
+        <option>9º Ano A</option>
+        <option>9º Ano B</option>
+      </select>
+      <div class="ftab active" onclick="setTab(this)">Todos (128)</div>
+      <div class="ftab" onclick="setTab(this)">Ativos</div>
+      <div class="ftab" onclick="setTab(this)">⚠️ Atenção</div>
+      <div class="ftab" onclick="setTab(this)">Inativos</div>
     </div>
-    <div class="prog-row">
-      <div class="prog-label"><span>Progresso de Nível</span><span style="color:var(--accent)">680 / 1000 XP</span></div>
-      <div class="prog-bg"><div class="prog-f" style="width:68%"></div></div>
+
+    <div class="table-card">
+      <div class="table-head">
+        <div>Aluno</div>
+        <div>Turma</div>
+        <div>XP</div>
+        <div>Nível</div>
+        <div>Tarefas</div>
+        <div>Status</div>
+        <div>Ações</div>
+      </div>
+      <div class="table-body" id="alunosContainer">
+        <div style="padding:2rem;text-align:center;color:var(--muted)">Carregando alunos...</div>
+      </div>
     </div>
-    <div class="prog-row">
-      <div class="prog-label"><span>Tarefas concluídas</span><span style="color:var(--green)">24 / 26</span></div>
-      <div class="prog-bg"><div class="prog-f" style="width:92%;background:linear-gradient(90deg,var(--green),#27ae60)"></div></div>
-    </div>
-    <div class="modal-actions">
-      <button class="btn-sm btn-sm-primary">✉️ Enviar mensagem</button>
-      <button class="btn-sm btn-sm-outline">📊 Ver relatório</button>
-      <button class="btn-sm btn-sm-danger">⚠️ Alertar responsável</button>
+  </main>
+
+  <!-- MODAL PERFIL ALUNO -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-hd">
+        <h3>📋 Perfil do Aluno</h3>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <!-- replace the static modal-profile block with: -->
+      <div class="modal-profile">
+        <div class="modal-av">😊</div>
+        <div class="modal-info">
+          <strong id="modalName">—</strong>
+          <span id="modalEmail">—</span>
+          <div style="margin-top:6px;display:flex;gap:6px">
+            <span id="modalLevel"
+              style="background:rgba(255,215,0,.15);color:var(--accent);border-radius:50px;padding:2px 9px;font-size:.7rem;font-weight:700">Nível
+              —</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-stats">
+        <div class="ms-card">
+          <div class="ms-val" id="modalXP">—</div>
+          <div class="ms-lbl">⚡ XP Total</div>
+        </div>
+        <div class="ms-card">
+          <div class="ms-val">—</div>
+          <div class="ms-lbl">✅ Tarefas feitas</div>
+        </div>
+        <div class="ms-card">
+          <div class="ms-val">—</div>
+          <div class="ms-lbl">📈 Engajamento</div>
+        </div>
+      </div>
+      <div class="prog-row">
+        <div class="prog-label"><span>Progresso de Nível</span><span style="color:var(--accent)">680 / 1000 XP</span>
+        </div>
+        <div class="prog-bg">
+          <div class="prog-f" style="width:68%"></div>
+        </div>
+      </div>
+      <div class="prog-row">
+        <div class="prog-label"><span>Tarefas concluídas</span><span style="color:var(--green)">24 / 26</span></div>
+        <div class="prog-bg">
+          <div class="prog-f" style="width:92%;background:linear-gradient(90deg,var(--green),#27ae60)"></div>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-sm btn-sm-primary">✉️ Enviar mensagem</button>
+        <button class="btn-sm btn-sm-outline">📊 Ver relatório</button>
+        <button class="btn-sm btn-sm-danger">⚠️ Alertar responsável</button>
+      </div>
     </div>
   </div>
-</div>
 
-<script>
-// ── UI helpers ──────────────────────────────────────────────
-function setTab(el) {
-  document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-}
+  <script>
+    // ── UI helpers ──────────────────────────────────────────────
+    function setTab(el) {
+      document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+    }
 
-function openModal(aluno) {
-  if (aluno) {
-    document.getElementById('modalName').textContent   = aluno.nome;
-    document.getElementById('modalEmail').textContent  = aluno.email + ' · ' + (aluno.turma ?? '—');
-    document.getElementById('modalXP').textContent     = aluno.xp ?? '—';
-  }
-  document.getElementById('modalOverlay').classList.add('open');
-}
+    function openModal(aluno) {
+      if (aluno) {
+        document.getElementById('modalName').textContent = aluno.nome;
+        document.getElementById('modalEmail').textContent = aluno.email + ' · ' + (aluno.turma ?? '—');
+        document.getElementById('modalXP').textContent = aluno.xp ?? '—';
+      }
+      document.getElementById('modalOverlay').classList.add('open');
+    }
 
-function closeModal() {
-  document.getElementById('modalOverlay').classList.remove('open');
-}
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('open');
+    }
 
-document.getElementById('modalOverlay').addEventListener('click', function(e) {
-  if (e.target === this) closeModal();
-});
+    document.getElementById('modalOverlay').addEventListener('click', function (e) {
+      if (e.target === this) closeModal();
+    });
 
-function sairDaConta(destino) {
-  if (confirm("Tem certeza que deseja sair da conta?")) {
-    window.location.href = destino;
-  }
-}
+    function sairDaConta(destino) {
+      if (confirm("Tem certeza que deseja sair da conta?")) {
+        window.location.href = destino;
+      }
+    }
 
-// ── Rendering ────────────────────────────────────────────────
-const AV_CLASSES = ['av1','av2','av3','av4','av5','av6','av7','av8'];
+    // ── Rendering ────────────────────────────────────────────────
+    const AV_CLASSES = ['av1', 'av2', 'av3', 'av4', 'av5', 'av6', 'av7', 'av8'];
 
-function xpToLevel(xp) {
-  if (!xp) return 1;
-  if (xp >= 1000) return 6;
-  if (xp >= 700)  return 5;
-  if (xp >= 500)  return 4;
-  if (xp >= 300)  return 3;
-  if (xp >= 150)  return 2;
-  return 1;
-}
+    function xpToLevel(xp) {
+      if (!xp) return 1;
+      if (xp >= 1000) return 6;
+      if (xp >= 700) return 5;
+      if (xp >= 500) return 4;
+      if (xp >= 300) return 3;
+      if (xp >= 150) return 2;
+      return 1;
+    }
 
-function statusChip(ativo) {
-  if (ativo) return '<span class="status-chip sc-ok">✓ Ativo</span>';
-  return '<span class="status-chip sc-bad">✕ Inativo</span>';
-}
+    function statusChip(ativo) {
+      if (ativo) return '<span class="status-chip sc-ok">✓ Ativo</span>';
+      return '<span class="status-chip sc-bad">✕ Inativo</span>';
+    }
 
-function renderRow(aluno, index) {
-  const avClass = AV_CLASSES[index % AV_CLASSES.length];
-  const nivel   = xpToLevel(aluno.xp);
-  const xp      = aluno.xp    ?? '—';
-  const turma   = aluno.turma ?? '—';
+    function renderRow(aluno, index) {
+      const avClass = AV_CLASSES[index % AV_CLASSES.length];
+      const nivel = xpToLevel(aluno.xp);
+      const xp = aluno.xp ?? '—';
+      const turma = aluno.turma ?? '—';
 
-  return `
+      return `
     <div class="tr" onclick='openModal(${JSON.stringify(aluno)})'>
       <div class="td-aluno">
         <div class="ava ${avClass}"></div>
@@ -176,37 +242,38 @@ function renderRow(aluno, index) {
       <div class="td-text">—</div>
       <div>${statusChip(aluno.ativo)}</div>
       <div class="td-actions">
-        <button class="act-btn" onclick="event.stopPropagation();openModal(${JSON.stringify(aluno).replace(/"/g,'&quot;')})">👁</button>
+        <button class="act-btn" onclick="event.stopPropagation();openModal(${JSON.stringify(aluno).replace(/"/g, '&quot;')})">👁</button>
         <button class="act-btn" onclick="event.stopPropagation()">✉️</button>
       </div>
     </div>`;
-}
+    }
 
-function renderAlunos(alunos) {
-  const container = document.getElementById('alunosContainer');
+    function renderAlunos(alunos) {
+      const container = document.getElementById('alunosContainer');
 
-  if (!alunos.length) {
-    container.innerHTML = '<div style="padding:2rem;text-align:center;color:var(--muted)">Nenhum aluno encontrado.</div>';
-    return;
-  }
+      if (!alunos.length) {
+        container.innerHTML = '<div style="padding:2rem;text-align:center;color:var(--muted)">Nenhum aluno encontrado.</div>';
+        return;
+      }
 
-  container.innerHTML = alunos.map((a, i) => renderRow(a, i)).join('');
-}
+      container.innerHTML = alunos.map((a, i) => renderRow(a, i)).join('');
+    }
 
-// ── Load from DB ─────────────────────────────────────────────
-async function loadAlunos() {
-  const result = await window.api.getAlunos();
+    // ── Load from DB ─────────────────────────────────────────────
+    async function loadAlunos() {
+      const result = await window.api.getAlunos();
 
-  if (!result.success) {
-    document.getElementById('alunosContainer').innerHTML =
-      `<div style="padding:2rem;text-align:center;color:red">${result.message}</div>`;
-    return;
-  }
+      if (!result.success) {
+        document.getElementById('alunosContainer').innerHTML =
+          `<div style="padding:2rem;text-align:center;color:red">${result.message}</div>`;
+        return;
+      }
 
-  renderAlunos(result.data);
-}
+      renderAlunos(result.data);
+    }
 
-document.addEventListener('DOMContentLoaded', loadAlunos);
-</script>
+    document.addEventListener('DOMContentLoaded', loadAlunos);
+  </script>
 </body>
+
 </html>

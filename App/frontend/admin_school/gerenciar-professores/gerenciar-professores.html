@@ -1,141 +1,208 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Monetto – Gerenciamento de Professores (Admin)</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="gerenciar-professores.css"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="gerenciar-professores.css" />
   <script src="script.js"></script>
+  <link rel="icon" type="image/x-icon" href="../../Assets/Monetto Logo.ico">
 </head>
+
 <body x-data="dashboard">
 
-<div id="sidebar-container"></div>
+  <div id="sidebar-container"></div>
 
-<nav class="sidebar">
-  <a class="sb-logo" href="#">
-    <svg viewBox="0 0 32 32" fill="none" width="26" height="26"><rect width="32" height="32" rx="8" fill="#1A2A8F"/><path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="10" r="3" fill="#2ECC71"/></svg>
-    onetto <span class="sb-role">Admin</span>
-  </a>
-  <span class="sb-section">Escola</span>
-  <a class="sb-link" href="../dashboard-admin-escolar/dashboard-admin-escolar.html"><span class="icon">🏠</span> Painel Geral</a>
-  <a class="sb-link active" href="../gerenciar-professores/gerenciar-professores.html"><span class="icon">👨‍🏫</span> Professores</a>
-  <a class="sb-link" href="../gerenciar-alunos/gerenciar-alunos.html"><span class="icon">👥</span> Alunos</a>
-  <span class="sb-section">Análises</span>
-  <a class="sb-link" href="../relatorios/relatorios.html"><span class="icon">📊</span> Relatórios</a>
-  <span class="sb-section">Conta</span>
-  <a class="sb-link" href="../configuracoes/configuracoes-prof.html"><span class="icon">⚙️</span> Configurações</a>
-  <a class="sb-link" href="#"><span class="icon">🏫</span> Dados da Escola</a>
-  <a class="sb-link" href="#"><span class="icon">🛡️</span> Permissões</a>
-  <div class="sb-bottom"><a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;" onclick="sairDaConta('../login-principal/login-principal.html')"><span class="icon">🚪</span> Sair da conta</a>
-    <div class="sb-user">
-      <div class="sb-av">🛡️</div>
-      <div class="sb-user-info"><strong>Admin Escola</strong><span style="color:#f1948a">Administrador</span></div>
-    </div>
-  </div>
-</nav>
-
-<main class="main">
-  <div class="topbar">
-    <div>
-      <h1>👨‍🏫 Gerenciamento de Professores</h1>
-      <p style="color:var(--muted);font-size:.87rem;margin-top:3px" x-text="school.name"></p>
-    </div>
-    <div class="top-right">
-      <button class="btn-outline">⬇ Exportar</button>
-      <button class="btn-primary" onclick="openModal()">+ Adicionar Professor</button>
-    </div>
-  </div>
-
-  <div class="stats-row">
-    <div class="sc"><div class="sc-icon">👨‍🏫</div><div class="sc-val">12</div><div class="sc-lbl">Professores ativos</div></div>
-    <div class="sc"><div class="sc-icon">📚</div><div class="sc-val">28</div><div class="sc-lbl">Turmas criadas</div></div>
-    <div class="sc"><div class="sc-icon">👥</div><div class="sc-val">512</div><div class="sc-lbl">Alunos gerenciados</div></div>
-    <div class="sc"><div class="sc-icon">📝</div><div class="sc-val">148</div><div class="sc-lbl">Tarefas publicadas</div></div>
-  </div>
-
-  <div class="filter-bar">
-    <div class="search-box">🔍<input type="text" placeholder="Buscar professor..."/></div>
-    <select class="filter-select"><option>Todas as disciplinas</option><option>Matemática</option><option>Português</option><option>Ciências</option><option>História</option><option>Geografia</option></select>
-    <div class="ftab active" onclick="setTab(this)">Todos (12)</div>
-    <div class="ftab" onclick="setTab(this)">Ativos</div>
-    <div class="ftab" onclick="setTab(this)">Inativos</div>
-    <div class="ftab" onclick="setTab(this)">Admin</div>
-  </div>
-
-  <div class="table-card">
-    <div class="table-head">
-      <div>Professor</div><div>Disciplina</div><div>Turmas</div><div>Alunos</div><div>Permissão</div><div>Status</div><div>Ações</div>
-    </div>
-    <div class="table-body">
-
-      <div class="tr">
-        <div class="td-prof"><div class="pav pa5">👨‍🏫</div><div><div class="pf-name">Prof. André Costa</div><div class="pf-email">andre@escola.edu.br</div></div></div>
-        <div class="td-text">Geografia</div>
-        <div class="td-text">2</div>
-        <div class="td-text">62</div>
-        <div><span class="perm-chip">Professor</span></div>
-        <div><span class="status-chip sc-bad">✕ Inativo</span></div>
-        <div class="td-actions"><button class="act-btn">✏️</button><button class="act-btn">🔑</button><button class="act-btn danger">🗑</button></div>
+  <nav class="sidebar">
+    <a class="sb-logo" href="#">
+      <svg viewBox="0 0 32 32" fill="none" width="26" height="26">
+        <rect width="32" height="32" rx="8" fill="#1A2A8F" />
+        <path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"
+          stroke-linejoin="round" />
+        <circle cx="24" cy="10" r="3" fill="#2ECC71" />
+      </svg>
+      onetto <span class="sb-role">Admin</span>
+    </a>
+    <span class="sb-section">Escola</span>
+    <a class="sb-link" href="../dashboard-admin-escolar/dashboard-admin-escolar.html"><span class="icon">🏠</span>
+      Painel Geral</a>
+    <a class="sb-link active" href="../gerenciar-professores/gerenciar-professores.html"><span class="icon">👨‍🏫</span>
+      Professores</a>
+    <a class="sb-link" href="../gerenciar-alunos/gerenciar-alunos.html"><span class="icon">👥</span> Alunos</a>
+    <span class="sb-section">Análises</span>
+    <a class="sb-link" href="../relatorios/relatorios.html"><span class="icon">📊</span> Relatórios</a>
+    <span class="sb-section">Conta</span>
+    <a class="sb-link" href="../configuracoes/configuracoes-prof.html"><span class="icon">⚙️</span> Configurações</a>
+    <a class="sb-link" href="#"><span class="icon">🏫</span> Dados da Escola</a>
+    <a class="sb-link" href="#"><span class="icon">🛡️</span> Permissões</a>
+    <div class="sb-bottom"><a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;"
+        onclick="sairDaConta('../../user/login-principal/login-principal.html')"><span class="icon">🚪</span> Sair da
+        conta</a>
+      <div class="sb-user">
+        <div class="sb-av">🛡️</div>
+        <div class="sb-user-info"><strong>Admin Escola</strong><span style="color:#f1948a">Administrador</span></div>
       </div>
+    </div>
+  </nav>
 
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <h1>👨‍🏫 Gerenciamento de Professores</h1>
+        <p style="color:var(--muted);font-size:.87rem;margin-top:3px" x-text="school.name"></p>
+      </div>
+      <div class="top-right">
+        <button class="btn-outline">⬇ Exportar</button>
+        <button class="btn-primary" onclick="openModal()">+ Adicionar Professor</button>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="sc">
+        <div class="sc-icon">👨‍🏫</div>
+        <div class="sc-val">12</div>
+        <div class="sc-lbl">Professores ativos</div>
+      </div>
+      <div class="sc">
+        <div class="sc-icon">📚</div>
+        <div class="sc-val">28</div>
+        <div class="sc-lbl">Turmas criadas</div>
+      </div>
+      <div class="sc">
+        <div class="sc-icon">👥</div>
+        <div class="sc-val">512</div>
+        <div class="sc-lbl">Alunos gerenciados</div>
+      </div>
+      <div class="sc">
+        <div class="sc-icon">📝</div>
+        <div class="sc-val">148</div>
+        <div class="sc-lbl">Tarefas publicadas</div>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <div class="search-box">🔍<input type="text" placeholder="Buscar professor..." /></div>
+      <select class="filter-select">
+        <option>Todas as disciplinas</option>
+        <option>Matemática</option>
+        <option>Português</option>
+        <option>Ciências</option>
+        <option>História</option>
+        <option>Geografia</option>
+      </select>
+      <div class="ftab active" onclick="setTab(this)">Todos (12)</div>
+      <div class="ftab" onclick="setTab(this)">Ativos</div>
+      <div class="ftab" onclick="setTab(this)">Inativos</div>
+      <div class="ftab" onclick="setTab(this)">Admin</div>
+    </div>
+
+    <div class="table-card">
+      <div class="table-head">
+        <div>Professor</div>
+        <div>Disciplina</div>
+        <div>Turmas</div>
+        <div>Alunos</div>
+        <div>Permissão</div>
+        <div>Status</div>
+        <div>Ações</div>
+      </div>
+      <div class="table-body">
+
+        <div class="tr">
+          <div class="td-prof">
+            <div class="pav pa5">👨‍🏫</div>
+            <div>
+              <div class="pf-name">Prof. André Costa</div>
+              <div class="pf-email">andre@escola.edu.br</div>
+            </div>
+          </div>
+          <div class="td-text">Geografia</div>
+          <div class="td-text">2</div>
+          <div class="td-text">62</div>
+          <div><span class="perm-chip">Professor</span></div>
+          <div><span class="status-chip sc-bad">✕ Inativo</span></div>
+          <div class="td-actions"><button class="act-btn">✏️</button><button class="act-btn">🔑</button><button
+              class="act-btn danger">🗑</button></div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL ADICIONAR -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-hd">
+        <h3>➕ Adicionar Professor</h3>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="fg-row">
+        <div class="fg"><label>Nome</label><input type="text" placeholder="Ex: Ricardo" /></div>
+        <div class="fg"><label>Sobrenome</label><input type="text" placeholder="Ex: Alves" /></div>
+      </div>
+      <div class="fg"><label>E-mail institucional</label><input type="email" placeholder="professor@escola.edu.br" />
+      </div>
+      <div class="fg-row">
+        <div class="fg"><label>Disciplina</label><select>
+            <option>Matemática</option>
+            <option>Português</option>
+            <option>Ciências</option>
+            <option>História</option>
+            <option>Geografia</option>
+          </select></div>
+        <div class="fg"><label>Permissão</label><select>
+            <option>Professor</option>
+            <option>Admin da Escola</option>
+          </select></div>
+      </div>
+      <div class="fg"><label>Turmas (segure Ctrl para múltiplas)</label><select multiple style="height:90px">
+          <option>8º Ano A</option>
+          <option>8º Ano B</option>
+          <option>9º Ano A</option>
+          <option>9º Ano B</option>
+        </select></div>
+      <div class="modal-footer">
+        <button class="btn-cancel2" onclick="closeModal()">Cancelar</button>
+        <button class="btn-save">Cadastrar Professor</button>
+      </div>
     </div>
   </div>
-</main>
 
-<!-- MODAL ADICIONAR -->
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal">
-    <div class="modal-hd">
-      <h3>➕ Adicionar Professor</h3>
-      <button class="modal-close" onclick="closeModal()">✕</button>
-    </div>
-    <div class="fg-row">
-      <div class="fg"><label>Nome</label><input type="text" placeholder="Ex: Ricardo"/></div>
-      <div class="fg"><label>Sobrenome</label><input type="text" placeholder="Ex: Alves"/></div>
-    </div>
-    <div class="fg"><label>E-mail institucional</label><input type="email" placeholder="professor@escola.edu.br"/></div>
-    <div class="fg-row">
-      <div class="fg"><label>Disciplina</label><select><option>Matemática</option><option>Português</option><option>Ciências</option><option>História</option><option>Geografia</option></select></div>
-      <div class="fg"><label>Permissão</label><select><option>Professor</option><option>Admin da Escola</option></select></div>
-    </div>
-    <div class="fg"><label>Turmas (segure Ctrl para múltiplas)</label><select multiple style="height:90px"><option>8º Ano A</option><option>8º Ano B</option><option>9º Ano A</option><option>9º Ano B</option></select></div>
-    <div class="modal-footer">
-      <button class="btn-cancel2" onclick="closeModal()">Cancelar</button>
-      <button class="btn-save">Cadastrar Professor</button>
-    </div>
-  </div>
-</div>
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('dashboard', () => ({
+        school: { name: 'Carregando…', subtitle: '', chips: [], stats: [] },
+        stats: [],
+        teachers: [],
+        alerts: [],
+        classes: [],
+        xpChart: [],
+        xpMonthValue: '0k',
+        xpMonthDelta: '—',
+        activities: [],
 
-<script>
-document.addEventListener('alpine:init', () => {
-  Alpine.data('dashboard', () => ({
-    school: { name: 'Carregando…', subtitle: '', chips: [], stats: [] },
-    stats: [],
-    teachers: [],
-    alerts: [],
-    classes: [],
-    xpChart: [],
-    xpMonthValue: '0k',
-    xpMonthDelta: '—',
-    activities: [],
+        async init() {
+          const result = await window.api.getDashboardAdminEscolar();
+          if (!result.success) {
+            console.error(result.message);
+            return;
+          }
+          Object.assign(this, result.data);
+        }
+      }));
+    });
+  </script>
 
-    async init() {
-      const result = await window.api.getDashboardAdminEscolar();
-      if (!result.success) {
-        console.error(result.message);
-        return;
-      }
-      Object.assign(this, result.data);
-    }
-  }));
-});
-</script>
+  <script id="logout-script">
+    /* sairDaConta handled by monetto-app.js */
 
-<script id="logout-script">
-/* sairDaConta handled by monetto-app.js */
-}
-</script>
+  </script>
 
-<script src="../shared/monetto-app.js"></script>
+  <script src="../shared/monetto-app.js"></script>
 </body>
+
 </html>

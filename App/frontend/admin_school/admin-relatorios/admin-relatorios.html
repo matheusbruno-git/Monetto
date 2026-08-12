@@ -1,117 +1,224 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Monetto – Administrador – Relatórios</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="admin-relatorios.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monetto – Administrador – Relatórios</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="admin-relatorios.css" />
+  <link rel="icon" type="image/x-icon" href="../../Assets/Monetto Logo.ico">
 </head>
-<body><nav class="sidebar">
-  <a class="sb-logo" href="#">
-    <svg viewBox="0 0 32 32" fill="none" width="26" height="26"><rect width="32" height="32" rx="8" fill="#1A2A8F"/><path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="10" r="3" fill="#2ECC71"/></svg>
-    onetto <span class="sb-role">Admin</span>
-  </a>
-  <span class="sb-section">Escola</span>
-  <a class="sb-link " href="../dashboard-admin-escolar/dashboard-admin-escolar.html"><span class="icon">🏠</span> Painel Escolar</a>
-  <a class="sb-link " href="../admin-professores/admin-professores.html"><span class="icon">👨‍🏫</span> Professores</a>
-  <a class="sb-link " href="../admin-alunos/admin-alunos.html"><span class="icon">👥</span> Alunos</a>
-  <a class="sb-link " href="../admin-tarefas/admin-tarefas.html"><span class="icon">📝</span> Tarefas</a>
-  <span class="sb-section">Análises</span>
-  <a class="sb-link active" href="../admin-relatorios/admin-relatorios.html"><span class="icon">📊</span> Relatórios</a>
-  <a class="sb-link" href="../financeiro/financeiro.html"><span class="icon">💳</span> Financeiro</a>
-  <span class="sb-section">Configurações</span>
-  <a class="sb-link " href="../admin-dados-escola/admin-dados-escola.html"><span class="icon">🏫</span> Dados da Escola</a>
-  <a class="sb-link " href="../admin-permissoes/admin-permissoes.html"><span class="icon">🛡️</span> Permissões</a>
-  <a class="sb-link " href="../admin-configuracoes/admin-configuracoes.html"><span class="icon">⚙️</span> Configurações</a>
-  <div class="sb-bottom">
-    <a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;" onclick="if(confirm('Sair da conta?'))window.location.href='../login-principal/login-principal.html'"><span class="icon">🚪</span> Sair da conta</a>
-    <div class="sb-user">
-      <div class="sb-av">🛡️</div>
-      <div class="sb-user-info"><strong>Admin Escolar</strong><span>Administrador</span></div>
-    </div>
-  </div>
-</nav>
-<main class="main">
-  <div class="topbar">
-    <h1>Relatórios <span>da Escola</span></h1>
-    <div class="top-right">
-      <button class="btn btn-outline">📥 Exportar PDF</button>
-      <button class="btn btn-primary">📊 Gerar Relatório</button>
-    </div>
-  </div>
 
-  <div class="filter-tabs">
-    <div class="ftab active">Abril 2026</div>
-    <div class="ftab">Março</div>
-    <div class="ftab">1º Bimestre</div>
-    <div class="ftab">Ano letivo</div>
-  </div>
-
-  <div class="stats-row">
-    <div class="sc sc-g"><div class="sc-icon">✅</div><div class="sc-val">89%</div><div class="sc-lbl">Taxa de conclusão</div><div class="sc-sub">▲ +4% vs. mês anterior</div></div>
-    <div class="sc sc-y"><div class="sc-icon">⚡</div><div class="sc-val">34.8k</div><div class="sc-lbl">XP distribuído</div><div class="sc-sub">↑ 27% vs. mês anterior</div></div>
-    <div class="sc sc-b"><div class="sc-icon">📋</div><div class="sc-val">148</div><div class="sc-lbl">Tarefas publicadas</div></div>
-    <div class="sc sc-r"><div class="sc-icon">👥</div><div class="sc-val">512</div><div class="sc-lbl">Alunos ativos</div></div>
-  </div>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px">
-    <div class="card">
-      <div class="card-hd"><h3>📈 XP por Semana – Abril</h3></div>
-      <div style="display:flex;align-items:flex-end;gap:10px;height:100px;padding-top:8px">
-        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px"><div style="font-size:.65rem;font-weight:700">7.2k</div><div style="width:100%;border-radius:4px 4px 0 0;height:60px;background:linear-gradient(180deg,#5B9BF8,rgba(91,155,248,.25))"></div><div style="font-size:.62rem;color:var(--muted)">Sem 1</div></div>
-        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px"><div style="font-size:.65rem;font-weight:700">8.1k</div><div style="width:100%;border-radius:4px 4px 0 0;height:72px;background:linear-gradient(180deg,#5B9BF8,rgba(91,155,248,.25))"></div><div style="font-size:.62rem;color:var(--muted)">Sem 2</div></div>
-        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px"><div style="font-size:.65rem;font-weight:700">9.5k</div><div style="width:100%;border-radius:4px 4px 0 0;height:85px;background:linear-gradient(180deg,#5B9BF8,rgba(91,155,248,.25))"></div><div style="font-size:.62rem;color:var(--muted)">Sem 3</div></div>
-        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px"><div style="font-size:.65rem;font-weight:700;color:var(--accent)">10k</div><div style="width:100%;border-radius:4px 4px 0 0;height:100px;background:linear-gradient(180deg,var(--accent),rgba(255,215,0,.25))"></div><div style="font-size:.62rem;color:var(--muted)">Sem 4</div></div>
+<body>
+  <nav class="sidebar">
+    <a class="sb-logo" href="#">
+      <svg viewBox="0 0 32 32" fill="none" width="26" height="26">
+        <rect width="32" height="32" rx="8" fill="#1A2A8F" />
+        <path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"
+          stroke-linejoin="round" />
+        <circle cx="24" cy="10" r="3" fill="#2ECC71" />
+      </svg>
+      onetto <span class="sb-role">Admin</span>
+    </a>
+    <span class="sb-section">Escola</span>
+    <a class="sb-link " href="../dashboard-admin-escolar/dashboard-admin-escolar.html"><span class="icon">🏠</span>
+      Painel Escolar</a>
+    <a class="sb-link " href="../admin-professores/admin-professores.html"><span class="icon">👨‍🏫</span>
+      Professores</a>
+    <a class="sb-link " href="../admin-alunos/admin-alunos.html"><span class="icon">👥</span> Alunos</a>
+    <a class="sb-link " href="../admin-tarefas/admin-tarefas.html"><span class="icon">📝</span> Tarefas</a>
+    <span class="sb-section">Análises</span>
+    <a class="sb-link active" href="../admin-relatorios/admin-relatorios.html"><span class="icon">📊</span>
+      Relatórios</a>
+    <a class="sb-link" href="../financeiro/financeiro.html"><span class="icon">💳</span> Financeiro</a>
+    <span class="sb-section">Configurações</span>
+    <a class="sb-link " href="../admin-dados-escola/admin-dados-escola.html"><span class="icon">🏫</span> Dados da
+      Escola</a>
+    <a class="sb-link " href="../admin-permissoes/admin-permissoes.html"><span class="icon">🛡️</span> Permissões</a>
+    <a class="sb-link " href="../admin-configuracoes/admin-configuracoes.html"><span class="icon">⚙️</span>
+      Configurações</a>
+    <div class="sb-bottom">
+      <a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;"
+        onclick="if(confirm('Sair da conta?'))window.location.href='../../user/login-principal/login-principal.html'"><span
+          class="icon">🚪</span> Sair da conta</a>
+      <div class="sb-user">
+        <div class="sb-av">🛡️</div>
+        <div class="sb-user-info"><strong>Admin Escolar</strong><span>Administrador</span></div>
       </div>
     </div>
-    <div class="card">
-      <div class="card-hd"><h3>📚 Conclusão por Turma</h3></div>
-      <div style="display:flex;flex-direction:column;gap:10px">
-        <div style="display:flex;align-items:center;gap:10px;font-size:.82rem"><span style="width:60px">8ºA</span><div style="flex:1;height:6px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden"><div style="height:100%;width:92%;border-radius:99px;background:linear-gradient(90deg,var(--green),var(--accent))"></div></div><span style="width:32px;text-align:right;color:var(--green);font-weight:700">92%</span></div>
-        <div style="display:flex;align-items:center;gap:10px;font-size:.82rem"><span style="width:60px">9ºB</span><div style="flex:1;height:6px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden"><div style="height:100%;width:91%;border-radius:99px;background:linear-gradient(90deg,var(--green),var(--accent))"></div></div><span style="width:32px;text-align:right;color:var(--green);font-weight:700">91%</span></div>
-        <div style="display:flex;align-items:center;gap:10px;font-size:.82rem"><span style="width:60px">8ºB</span><div style="flex:1;height:6px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden"><div style="height:100%;width:85%;border-radius:99px;background:linear-gradient(90deg,var(--accent),#b8900d)"></div></div><span style="width:32px;text-align:right;color:var(--accent);font-weight:700">85%</span></div>
-        <div style="display:flex;align-items:center;gap:10px;font-size:.82rem"><span style="width:60px">9ºA</span><div style="flex:1;height:6px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden"><div style="height:100%;width:71%;border-radius:99px;background:linear-gradient(90deg,var(--orange),#b7770d)"></div></div><span style="width:32px;text-align:right;color:var(--orange);font-weight:700">71%</span></div>
+  </nav>
+  <main class="main">
+    <div class="topbar">
+      <h1>Relatórios <span>da Escola</span></h1>
+      <div class="top-right">
+        <button class="btn btn-outline">📥 Exportar PDF</button>
+        <button class="btn btn-primary">📊 Gerar Relatório</button>
       </div>
     </div>
-  </div>
 
-  <div class="card">
-    <div class="card-hd"><h3>👨‍🏫 Desempenho por Professor</h3></div>
-    <div class="table-head" style="grid-template-columns:1.5fr 100px 80px 80px 90px">
-      <span>Professor</span><span>Matéria</span><span>Tarefas</span><span>Conclusão</span><span>Engajamento</span>
+    <div class="filter-tabs">
+      <div class="ftab active">Abril 2026</div>
+      <div class="ftab">Março</div>
+      <div class="ftab">1º Bimestre</div>
+      <div class="ftab">Ano letivo</div>
     </div>
-    <div class="data-row" style="grid-template-columns:1.5fr 100px 80px 80px 90px">
-      <div class="person-info"><div class="av av1">R</div><div><div class="person-name">Prof. Ricardo Alves</div></div></div>
-      <div style="font-size:.82rem">Matemática</div>
-      <div style="font-size:.85rem;font-weight:600">42</div>
-      <div><span style="font-weight:700;color:var(--green)">88%</span></div>
-      <div><span style="font-weight:700;color:var(--green)">92%</span></div>
+
+    <div class="stats-row">
+      <div class="sc sc-g">
+        <div class="sc-icon">✅</div>
+        <div class="sc-val">89%</div>
+        <div class="sc-lbl">Taxa de conclusão</div>
+        <div class="sc-sub">▲ +4% vs. mês anterior</div>
+      </div>
+      <div class="sc sc-y">
+        <div class="sc-icon">⚡</div>
+        <div class="sc-val">34.8k</div>
+        <div class="sc-lbl">XP distribuído</div>
+        <div class="sc-sub">↑ 27% vs. mês anterior</div>
+      </div>
+      <div class="sc sc-b">
+        <div class="sc-icon">📋</div>
+        <div class="sc-val">148</div>
+        <div class="sc-lbl">Tarefas publicadas</div>
+      </div>
+      <div class="sc sc-r">
+        <div class="sc-icon">👥</div>
+        <div class="sc-val">512</div>
+        <div class="sc-lbl">Alunos ativos</div>
+      </div>
     </div>
-    <div class="data-row" style="grid-template-columns:1.5fr 100px 80px 80px 90px">
-      <div class="person-info"><div class="av av2">C</div><div><div class="person-name">Profa. Carla Mendes</div></div></div>
-      <div style="font-size:.82rem">Português</div>
-      <div style="font-size:.85rem;font-weight:600">38</div>
-      <div><span style="font-weight:700;color:var(--green)">84%</span></div>
-      <div><span style="font-weight:700;color:var(--green)">87%</span></div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px">
+      <div class="card">
+        <div class="card-hd">
+          <h3>📈 XP por Semana – Abril</h3>
+        </div>
+        <div style="display:flex;align-items:flex-end;gap:10px;height:100px;padding-top:8px">
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
+            <div style="font-size:.65rem;font-weight:700">7.2k</div>
+            <div
+              style="width:100%;border-radius:4px 4px 0 0;height:60px;background:linear-gradient(180deg,#5B9BF8,rgba(91,155,248,.25))">
+            </div>
+            <div style="font-size:.62rem;color:var(--muted)">Sem 1</div>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
+            <div style="font-size:.65rem;font-weight:700">8.1k</div>
+            <div
+              style="width:100%;border-radius:4px 4px 0 0;height:72px;background:linear-gradient(180deg,#5B9BF8,rgba(91,155,248,.25))">
+            </div>
+            <div style="font-size:.62rem;color:var(--muted)">Sem 2</div>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
+            <div style="font-size:.65rem;font-weight:700">9.5k</div>
+            <div
+              style="width:100%;border-radius:4px 4px 0 0;height:85px;background:linear-gradient(180deg,#5B9BF8,rgba(91,155,248,.25))">
+            </div>
+            <div style="font-size:.62rem;color:var(--muted)">Sem 3</div>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
+            <div style="font-size:.65rem;font-weight:700;color:var(--accent)">10k</div>
+            <div
+              style="width:100%;border-radius:4px 4px 0 0;height:100px;background:linear-gradient(180deg,var(--accent),rgba(255,215,0,.25))">
+            </div>
+            <div style="font-size:.62rem;color:var(--muted)">Sem 4</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd">
+          <h3>📚 Conclusão por Turma</h3>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:center;gap:10px;font-size:.82rem"><span style="width:60px">8ºA</span>
+            <div style="flex:1;height:6px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden">
+              <div
+                style="height:100%;width:92%;border-radius:99px;background:linear-gradient(90deg,var(--green),var(--accent))">
+              </div>
+            </div><span style="width:32px;text-align:right;color:var(--green);font-weight:700">92%</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:.82rem"><span style="width:60px">9ºB</span>
+            <div style="flex:1;height:6px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden">
+              <div
+                style="height:100%;width:91%;border-radius:99px;background:linear-gradient(90deg,var(--green),var(--accent))">
+              </div>
+            </div><span style="width:32px;text-align:right;color:var(--green);font-weight:700">91%</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:.82rem"><span style="width:60px">8ºB</span>
+            <div style="flex:1;height:6px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden">
+              <div
+                style="height:100%;width:85%;border-radius:99px;background:linear-gradient(90deg,var(--accent),#b8900d)">
+              </div>
+            </div><span style="width:32px;text-align:right;color:var(--accent);font-weight:700">85%</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:.82rem"><span style="width:60px">9ºA</span>
+            <div style="flex:1;height:6px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden">
+              <div
+                style="height:100%;width:71%;border-radius:99px;background:linear-gradient(90deg,var(--orange),#b7770d)">
+              </div>
+            </div><span style="width:32px;text-align:right;color:var(--orange);font-weight:700">71%</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="data-row" style="grid-template-columns:1.5fr 100px 80px 80px 90px">
-      <div class="person-info"><div class="av av3">M</div><div><div class="person-name">Prof. Marcos Silva</div></div></div>
-      <div style="font-size:.82rem">Ciências</div>
-      <div style="font-size:.85rem;font-weight:600">31</div>
-      <div><span style="font-weight:700;color:var(--green)">90%</span></div>
-      <div><span style="font-weight:700;color:var(--green)">85%</span></div>
+
+    <div class="card">
+      <div class="card-hd">
+        <h3>👨‍🏫 Desempenho por Professor</h3>
+      </div>
+      <div class="table-head" style="grid-template-columns:1.5fr 100px 80px 80px 90px">
+        <span>Professor</span><span>Matéria</span><span>Tarefas</span><span>Conclusão</span><span>Engajamento</span>
+      </div>
+      <div class="data-row" style="grid-template-columns:1.5fr 100px 80px 80px 90px">
+        <div class="person-info">
+          <div class="av av1">R</div>
+          <div>
+            <div class="person-name">Prof. Ricardo Alves</div>
+          </div>
+        </div>
+        <div style="font-size:.82rem">Matemática</div>
+        <div style="font-size:.85rem;font-weight:600">42</div>
+        <div><span style="font-weight:700;color:var(--green)">88%</span></div>
+        <div><span style="font-weight:700;color:var(--green)">92%</span></div>
+      </div>
+      <div class="data-row" style="grid-template-columns:1.5fr 100px 80px 80px 90px">
+        <div class="person-info">
+          <div class="av av2">C</div>
+          <div>
+            <div class="person-name">Profa. Carla Mendes</div>
+          </div>
+        </div>
+        <div style="font-size:.82rem">Português</div>
+        <div style="font-size:.85rem;font-weight:600">38</div>
+        <div><span style="font-weight:700;color:var(--green)">84%</span></div>
+        <div><span style="font-weight:700;color:var(--green)">87%</span></div>
+      </div>
+      <div class="data-row" style="grid-template-columns:1.5fr 100px 80px 80px 90px">
+        <div class="person-info">
+          <div class="av av3">M</div>
+          <div>
+            <div class="person-name">Prof. Marcos Silva</div>
+          </div>
+        </div>
+        <div style="font-size:.82rem">Ciências</div>
+        <div style="font-size:.85rem;font-weight:600">31</div>
+        <div><span style="font-weight:700;color:var(--green)">90%</span></div>
+        <div><span style="font-weight:700;color:var(--green)">85%</span></div>
+      </div>
     </div>
-  </div>
-</main>
+  </main>
 
 
-<script>
-function showToast(msg, tipo) {
-  if (typeof MonettoUI !== 'undefined') {
-    MonettoUI.toast(msg || 'Ação realizada!', tipo || 'success');
-  }
-}
-</script>
-<script src="../shared/monetto-app.js"></script>
+  <script>
+    function showToast(msg, tipo) {
+      if (typeof MonettoUI !== 'undefined') {
+        MonettoUI.toast(msg || 'Ação realizada!', tipo || 'success');
+      }
+    }
+  </script>
+  <script src="../shared/monetto-app.js"></script>
 </body>
+
 </html>
