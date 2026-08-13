@@ -177,6 +177,30 @@ input:focus {
   background: #fff;
 }
 
+.message {
+  margin-top: 20px;
+  padding: 14px;
+  border-radius: 14px;
+  text-align: center;
+  font-weight: 600;
+  display: none;
+  background: #e72c3c;
+  color: #000000;
+}
+
+/* Show success / error states like the main login styles */
+.success {
+  display: block;
+  background: #1f8f5f;
+  color: #000000;
+}
+
+.error {
+  display: block;
+  background: #b33939;
+  color: #000000;
+}
+
 .eye-toggle {
   position: absolute;
   right: 14px;

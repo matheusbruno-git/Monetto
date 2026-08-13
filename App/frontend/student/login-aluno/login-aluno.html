@@ -64,7 +64,7 @@
           <a class="forgot-link" href="#">Esqueci a senha</a>
         </div>
 
-        <button onclick="loginAluno()" class="btn-submit">
+        <button onclick="fazerLogin()" class="btn-submit">
           Entrar e jogar ⚡
         </button>
 
@@ -80,8 +80,9 @@
         <p class="register-link">
           Ainda não tem conta? <a href="../../login/login.html">Cadastrar gratuitamente</a>
         </p>
-
         <a class="back-link" href="../../user/login-principal/login-principal.html">← Voltar para seleção de acesso</a>
+
+        <div id="msg" class="message"></div>
       </div>
     </div>
 
@@ -152,15 +153,61 @@
   </div>
 
   <script>
-    function loginAluno() {
-      var e = document.getElementById("stu-email").value.trim();
-      var p = document.getElementById("stu-pass").value;
-      if (!e || !p) {
-        alert("Preencha e-mail e senha para continuar.");
+    async function fazerLogin() {
+      const email = document.getElementById("stu-email").value.trim();
+      const senha = document.getElementById("stu-pass").value.trim();
+      const msgEl = document.getElementById("msg");
+
+      if (!email || !senha) {
+        if (msgEl) {
+          msgEl.textContent = "Preencha email e senha";
+          msgEl.className = "message error";
+        } else {
+          alert("Preencha email e senha");
+        }
         return;
       }
-      window.location.href = "../dashboard-aluno/dashboard-aluno.html";
+
+      try {
+        const result = await window.api.login({ email, senha });
+
+        if (msgEl) {
+          msgEl.textContent = result.message;
+          msgEl.className = "message " + (result.success ? "success" : "error");
+        }
+
+        if (result.success && result.redirect) {
+          setTimeout(() => {
+            window.location.href = result.redirect;
+          }, 1500);
+        }
+      } catch (err) {
+        console.error(err);
+
+        if (msgEl) {
+          msgEl.textContent = "Erro de comunicação com o servidor.";
+          msgEl.className = "message error";
+        } else {
+          alert('Erro de comunicação com o servidor.');
+        }
+      }
     }
+
+    // Ativa login ao pressionar Enter nos campos de e-mail ou senha
+    (function () {
+      const email = document.getElementById('stu-email');
+      const pass = document.getElementById('stu-pass');
+      if (email) {
+        email.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') fazerLogin();
+        });
+      }
+      if (pass) {
+        pass.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') fazerLogin();
+        });
+      }
+    })();
 
     function togglePass(id, btn) {
       const inp = document.getElementById(id);
@@ -172,21 +219,6 @@
         btn.textContent = "👁️";
       }
     }
-    // Ativa login ao pressionar Enter nos campos de e-mail ou senha
-    (function () {
-      const email = document.getElementById('stu-email');
-      const pass = document.getElementById('stu-pass');
-      if (email) {
-        email.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter') loginAluno();
-        });
-      }
-      if (pass) {
-        pass.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter') loginAluno();
-        });
-      }
-    })();
   </script>
 </body>
 

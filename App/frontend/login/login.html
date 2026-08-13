@@ -215,6 +215,16 @@
 
       document.getElementById("msg").textContent = "";
     }
+    // Ativa login ao pressionar Enter nos campos de e-mail ou senha do formulário principal
+    (function () {
+      const email = document.getElementById('email');
+      const senha = document.getElementById('senha');
+      if (email || senha) {
+        document.body.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') fazerLogin();
+        });
+      }
+    })();
   </script>
   <script src="script.js"></script>
 </body>
