@@ -172,6 +172,21 @@
         btn.textContent = "👁️";
       }
     }
+    // Ativa login ao pressionar Enter nos campos de e-mail ou senha
+    (function () {
+      const email = document.getElementById('stu-email');
+      const pass = document.getElementById('stu-pass');
+      if (email) {
+        email.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') loginAluno();
+        });
+      }
+      if (pass) {
+        pass.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') loginAluno();
+        });
+      }
+    })();
   </script>
 </body>
 
