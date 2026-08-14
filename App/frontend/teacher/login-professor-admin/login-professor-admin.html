@@ -109,6 +109,7 @@
               senha</a>
           </div>
           <button class="btn-submit" onclick="loginProfessor()">Entrar como Professor →</button>
+          <div id="msg" class="message"></div>
           <div class="divider">ou continue com</div>
           <div id="g_id_onload"
             data-client_id="731708419688-3fmc106b98nv1lsb0vallfijb2fnfako.apps.googleusercontent.com"
@@ -156,6 +157,7 @@
           </div>
           <button class="btn-submit" style="background:linear-gradient(135deg,#c0392b,#8B0000);"
             onclick="loginAdmin()">Entrar como Admin 🛡️</button>
+          <div id="msg-admin" class="message"></div>
           <p class="signup-link" style="margin-top:20px;">Problemas de acesso? <a href="#">Contate o suporte</a></p>
 
           <a class="back-link" href="../../user/login-principal/login-principal.html">← Voltar para seleção de
@@ -169,18 +171,62 @@
   </div>
 
   <script>
-    function loginProfessor() {
-      var e = document.getElementById("prof-email").value.trim();
-      var p = document.getElementById("prof-pass").value;
-      if (!e || !p) { alert("Preencha e-mail e senha para continuar."); return; }
-      window.location.href = "../dashboard-professor/dashboard-professor.html";
+    function showMessage(el, text, type) {
+      if (!el) return;
+      el.textContent = text;
+      el.className = 'message ' + (type || 'error');
     }
 
-    function loginAdmin() {
-      var u = document.getElementById("adm-user").value.trim();
-      var p = document.getElementById("adm-pass").value;
-      if (!u || !p) { alert("Preencha usuário e senha para continuar."); return; }
-      window.location.href = "../../admin_general/dashboard-admin-geral/dashboard-admin-geral.html";
+    async function loginProfessor() {
+      const email = document.getElementById("prof-email").value.trim();
+      const senha = document.getElementById("prof-pass").value.trim();
+      const msgEl = document.getElementById("msg");
+
+      if (!email || !senha) {
+        showMessage(msgEl, "Preencha e-mail e senha para continuar.", "error");
+        return;
+      }
+
+      try {
+        const result = await window.api.login({ email, senha });
+
+        showMessage(msgEl, result.message, result.success ? "success" : "error");
+
+        if (result.success && result.redirect) {
+          setTimeout(() => {
+            window.location.href = result.redirect;
+          }, 1500);
+        }
+      } catch (err) {
+        console.error(err);
+        showMessage(msgEl, "Erro de comunicação com o servidor.", "error");
+      }
+    }
+
+    async function loginAdmin() {
+      const email = document.getElementById("adm-user").value.trim();
+      const senha = document.getElementById("adm-pass").value.trim();
+      const msgEl = document.getElementById("msg-admin");
+
+      if (!email || !senha) {
+        showMessage(msgEl, "Preencha usuário e senha para continuar.", "error");
+        return;
+      }
+
+      try {
+        const result = await window.api.login({ email, senha });
+
+        showMessage(msgEl, result.message, result.success ? "success" : "error");
+
+        if (result.success && result.redirect) {
+          setTimeout(() => {
+            window.location.href = result.redirect;
+          }, 1500);
+        }
+      } catch (err) {
+        console.error(err);
+        showMessage(msgEl, "Erro de comunicação com o servidor.", "error");
+      }
     }
 
     function switchTab(id, btn) {
@@ -196,11 +242,39 @@
       else { inp.type = 'password'; btn.textContent = '👁️'; }
     }
 
-    function handleCredentialResponse(response) {
-      // JWT token Google returns
-      const token = response.credential;
+    (function () {
+      const profEmail = document.getElementById('prof-email');
+      const profPass = document.getElementById('prof-pass');
+      const admUser = document.getElementById('adm-user');
+      const admPass = document.getElementById('adm-pass');
 
-      // Decode payload
+      if (profEmail) {
+        profEmail.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') loginProfessor();
+        });
+      }
+
+      if (profPass) {
+        profPass.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') loginProfessor();
+        });
+      }
+
+      if (admUser) {
+        admUser.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') loginAdmin();
+        });
+      }
+
+      if (admPass) {
+        admPass.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') loginAdmin();
+        });
+      }
+    })();
+
+    function handleCredentialResponse(response) {
+      const token = response.credential;
       const payload = JSON.parse(atob(token.split('.')[1]));
 
       console.log("ID:", payload.sub);
