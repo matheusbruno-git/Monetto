@@ -91,11 +91,10 @@
             style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#c0392b,#8b0000);display:flex;align-items:center;justify-content:center;font-size:1.8rem">
             🛡️</div>
           <div>
-            <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:4px">Admin Escolar
+            <div id="perfil-nome" style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:4px">Carregando…
             </div>
-            <div style="font-size:.8rem;color:var(--muted);margin-bottom:8px">admin@escola.edu · E.E. São Paulo –
-              Unidade Centro</div>
-            <span class="badge badge-red">Super Administrador</span>
+            <div id="perfil-email-escola" style="font-size:.8rem;color:var(--muted);margin-bottom:8px">—</div>
+            <span class="badge badge-red">Administrador</span>
           </div>
         </div>
 
@@ -104,16 +103,10 @@
             <h3>✏️ Informações Pessoais</h3>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-            <div class="field-group"><label>Nome</label><input type="text" value="Admin"
+            <div class="field-group"><label>Nome</label><input type="text" id="campo-nome" value=""
                 style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none" />
             </div>
-            <div class="field-group"><label>Sobrenome</label><input type="text" value="Escolar"
-                style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none" />
-            </div>
-            <div class="field-group"><label>E-mail</label><input type="email" value="admin@escola.edu"
-                style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none" />
-            </div>
-            <div class="field-group"><label>Cargo</label><input type="text" value="Diretor Administrativo"
+            <div class="field-group"><label>E-mail</label><input type="email" id="campo-email" value=""
                 style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none" />
             </div>
           </div>
@@ -146,6 +139,30 @@
         MonettoUI.toast(msg || 'Ação realizada!', tipo || 'success');
       }
     }
+
+    // Shows the actual logged-in admin (from the session set at login),
+    // not a hardcoded placeholder. The school name comes from the
+    // school-scoped dashboard query, so it always matches this admin's
+    // own id_escola.
+    async function loadPerfil() {
+      const session = JSON.parse(localStorage.getItem('session') || '{}');
+      const currentUserId = session.id_usuario || session.id;
+      if (!currentUserId) return;
+
+      document.getElementById('perfil-nome').textContent = session.nome || '—';
+      document.getElementById('campo-nome').value = session.nome || '';
+      document.getElementById('campo-email').value = session.email || '';
+
+      let escolaNome = '';
+      if (window.api?.getDashboardAdminEscolar) {
+        const result = await window.api.getDashboardAdminEscolar(currentUserId);
+        if (result.success) escolaNome = result.data.school.name;
+      }
+      document.getElementById('perfil-email-escola').textContent =
+        [session.email, escolaNome].filter(Boolean).join(' · ');
+    }
+
+    document.addEventListener('DOMContentLoaded', loadPerfil);
   </script>
   <script src="../shared/monetto-app.js"></script>
 </body>

@@ -154,7 +154,16 @@
         activities: [],
 
         async init() {
-          const result = await window.api.getDashboardAdminEscolar();
+          // Only ever ask for this logged-in user's own school data — the
+          // backend re-derives id_escola from the user id server-side.
+          const session = JSON.parse(localStorage.getItem('session') || '{}');
+          const currentUserId = session.id_usuario || session.id;
+          if (!currentUserId) {
+            console.error('Sessão inválida — faça login novamente.');
+            return;
+          }
+
+          const result = await window.api.getDashboardAdminEscolar(currentUserId);
           if (!result.success) {
             console.error(result.message);
             return;

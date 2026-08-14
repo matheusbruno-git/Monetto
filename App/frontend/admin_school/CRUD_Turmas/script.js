@@ -35,10 +35,25 @@ async function loadTurmasList() {
 
   listBody.innerHTML = '<div style="color:var(--muted);font-size:.82rem;padding:8px 0">Carregando...</div>';
 
-  try {
-    const result = await window.api.getTurmas();
+  // Only ever show turmas belonging to the logged-in admin's own school —
+  // the backend re-derives id_escola from this user id, it does not trust
+  // any school id sent from the renderer.
+  const session = JSON.parse(localStorage.getItem('session') || '{}');
+  const currentUserId = session.id;
+  if (!currentUserId) {
+    listBody.innerHTML = '<div style="color:red;font-size:.82rem">Sessão inválida — faça login novamente.</div>';
+    return;
+  }
 
-    if (!result.success || !result.data.length) {
+  try {
+    const result = await window.api.getTurmas(currentUserId);
+
+    if (!result.success) {
+      listBody.innerHTML = `<div style="color:red;font-size:.82rem">${result.message}</div>`;
+      return;
+    }
+
+    if (!result.data.length) {
       listBody.innerHTML = '<div style="color:var(--muted);font-size:.82rem;padding:12px 0">Nenhuma turma criada ainda.</div>';
       document.querySelector('.list-hd span').textContent = '0 turmas';
       return;

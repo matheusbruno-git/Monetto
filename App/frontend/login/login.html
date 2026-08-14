@@ -112,6 +112,17 @@
             </div>
           </div>
 
+          <div class="form-group">
+            <label>Escola</label>
+
+            <div class="input-wrap">
+              <span class="input-icon">🏫</span>
+              <select id="id_escola">
+                <option value="">Selecione uma escola</option>
+              </select>
+            </div>
+          </div>
+
           <button class="btn" onclick="fazerCadastro()">
             Criar conta 🚀
           </button>
@@ -155,14 +166,18 @@
         msgEl.textContent = result.message;
         msgEl.className = "message " + (result.success ? "success" : "error");
 
-        if (result.success && result.redirect) {
-          setTimeout(() => {
-            window.location.href = result.redirect;
-          }, 1500);
+        if (result.success) {
+          // ← THIS WAS MISSING
+          localStorage.setItem("session", JSON.stringify(result.user));
+
+          if (result.redirect) {
+            setTimeout(() => {
+              window.location.href = result.redirect;
+            }, 1200);
+          }
         }
       } catch (err) {
         console.error(err);
-
         msgEl.textContent = "Erro de comunicação com o servidor.";
         msgEl.className = "message error";
       }
@@ -174,6 +189,7 @@
         email: document.getElementById("reg_email").value.trim(),
         senha: document.getElementById("reg_senha").value,
         id_perfil: parseInt(document.getElementById("id_perfil").value),
+        id_escola: document.getElementById("id_escola").value || null,
       };
 
       const msgElement = document.getElementById("msg");
@@ -225,6 +241,40 @@
         });
       }
     })();
+
+    // Load schools into select from backend/datatable
+    async function loadSchools() {
+      const sel = document.getElementById('id_escola');
+      if (!sel) return;
+
+      try {
+        let schools = [];
+        if (window.api) {
+          if (typeof window.api.getSchools === 'function') schools = await window.api.getSchools();
+          else if (typeof window.api.getEscolas === 'function') schools = await window.api.getEscolas();
+          else if (typeof window.api.listSchools === 'function') schools = await window.api.listSchools();
+        }
+
+        if (!Array.isArray(schools)) return;
+
+        // Clear existing (except placeholder)
+        sel.innerHTML = '<option value="">Selecione uma escola</option>';
+
+        schools.forEach(s => {
+          const opt = document.createElement('option');
+          // support different possible field names
+          opt.value = s.id ?? s.id_escola ?? s.value ?? '';
+          opt.textContent = s.name ?? s.nome ?? s.escola ?? s.label ?? opt.value;
+          sel.appendChild(opt);
+        });
+      } catch (e) {
+        console.error('Erro carregando escolas', e);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadSchools();
+    });
   </script>
   <script src="script.js"></script>
 </body>
