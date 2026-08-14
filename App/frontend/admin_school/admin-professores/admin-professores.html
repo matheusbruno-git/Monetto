@@ -27,122 +27,30 @@
     <div class="stats-row">
       <div class="sc sc-b">
         <div class="sc-icon">👨‍🏫</div>
-        <div class="sc-val">12</div>
+        <div class="sc-val" id="stat-professores-ativos">—</div>
         <div class="sc-lbl">Professores ativos</div>
       </div>
       <div class="sc sc-g">
         <div class="sc-icon">🏫</div>
-        <div class="sc-val">28</div>
+        <div class="sc-val" id="stat-turmas-gerenciadas">—</div>
         <div class="sc-lbl">Turmas gerenciadas</div>
       </div>
       <div class="sc sc-y">
         <div class="sc-icon">👥</div>
-        <div class="sc-val">512</div>
+        <div class="sc-val" id="stat-alunos-atendidos">—</div>
         <div class="sc-lbl">Alunos atendidos</div>
-      </div>
-      <div class="sc sc-p">
-        <div class="sc-icon">📋</div>
-        <div class="sc-val">148</div>
-        <div class="sc-lbl">Tarefas publicadas (mês)</div>
       </div>
     </div>
 
     <div class="filter-tabs">
-      <div class="ftab active">Todos (12)</div>
-      <div class="ftab">Ativos (10)</div>
-      <div class="ftab">Inativos (2)</div>
-      <div class="ftab">Aguardando aprovação (1)</div>
+      <div class="ftab active" id="filter-todos">Todos</div>
     </div>
 
     <div class="card">
-      <div class="table-head" style="grid-template-columns:2fr 120px 80px 80px 90px 60px">
-        <span>Professor</span><span>Matéria</span><span>Turmas</span><span>Alunos</span><span>Status</span><span>Ações</span>
+      <div class="table-head" style="grid-template-columns:2fr 90px 90px 90px 60px">
+        <span>Professor</span><span>Turmas</span><span>Alunos</span><span>Status</span><span>Ações</span>
       </div>
-      <div class="data-row" style="grid-template-columns:2fr 120px 80px 80px 90px 60px">
-        <div class="person-info">
-          <div class="av av1">R</div>
-          <div>
-            <div class="person-name">Prof. Ricardo Alves</div>
-            <div class="person-sub">r.alves@escola.edu</div>
-          </div>
-        </div>
-        <div><span class="badge badge-blue">Matemática</span></div>
-        <div style="font-size:.85rem;font-weight:600">4</div>
-        <div style="font-size:.85rem;font-weight:600">128</div>
-        <div><span class="badge badge-green">Ativo</span></div>
-        <div class="act-btns">
-          <div class="act-btn">👁</div>
-          <div class="act-btn">✏️</div>
-        </div>
-      </div>
-      <div class="data-row" style="grid-template-columns:2fr 120px 80px 80px 90px 60px">
-        <div class="person-info">
-          <div class="av av2">C</div>
-          <div>
-            <div class="person-name">Profa. Carla Mendes</div>
-            <div class="person-sub">c.mendes@escola.edu</div>
-          </div>
-        </div>
-        <div><span class="badge badge-purple">Português</span></div>
-        <div style="font-size:.85rem;font-weight:600">3</div>
-        <div style="font-size:.85rem;font-weight:600">96</div>
-        <div><span class="badge badge-green">Ativo</span></div>
-        <div class="act-btns">
-          <div class="act-btn">👁</div>
-          <div class="act-btn">✏️</div>
-        </div>
-      </div>
-      <div class="data-row" style="grid-template-columns:2fr 120px 80px 80px 90px 60px">
-        <div class="person-info">
-          <div class="av av3">M</div>
-          <div>
-            <div class="person-name">Prof. Marcos Silva</div>
-            <div class="person-sub">m.silva@escola.edu</div>
-          </div>
-        </div>
-        <div><span class="badge badge-green">Ciências</span></div>
-        <div style="font-size:.85rem;font-weight:600">3</div>
-        <div style="font-size:.85rem;font-weight:600">94</div>
-        <div><span class="badge badge-green">Ativo</span></div>
-        <div class="act-btns">
-          <div class="act-btn">👁</div>
-          <div class="act-btn">✏️</div>
-        </div>
-      </div>
-      <div class="data-row" style="grid-template-columns:2fr 120px 80px 80px 90px 60px">
-        <div class="person-info">
-          <div class="av av4">J</div>
-          <div>
-            <div class="person-name">Profa. Juliana Ramos</div>
-            <div class="person-sub">j.ramos@escola.edu</div>
-          </div>
-        </div>
-        <div><span class="badge badge-yellow">História</span></div>
-        <div style="font-size:.85rem;font-weight:600">2</div>
-        <div style="font-size:.85rem;font-weight:600">64</div>
-        <div><span class="badge badge-yellow">Aguard. aprovação</span></div>
-        <div class="act-btns">
-          <div class="act-btn">✅</div>
-          <div class="act-btn">✏️</div>
-        </div>
-      </div>
-      <div class="data-row" style="grid-template-columns:2fr 120px 80px 80px 90px 60px">
-        <div class="person-info">
-          <div class="av av5">A</div>
-          <div>
-            <div class="person-name">Prof. André Costa</div>
-            <div class="person-sub">a.costa@escola.edu</div>
-          </div>
-        </div>
-        <div><span class="badge badge-red">Geografia</span></div>
-        <div style="font-size:.85rem;font-weight:600">2</div>
-        <div style="font-size:.85rem;font-weight:600">62</div>
-        <div><span class="badge badge-red">Inativo</span></div>
-        <div class="act-btns">
-          <div class="act-btn">👁</div>
-          <div class="act-btn">✏️</div>
-        </div>
-      </div>
+      <div id="professoresContainer"></div>
     </div>
   </main>
 
@@ -189,6 +97,87 @@
         MonettoUI.toast(msg || 'Ação realizada!', tipo || 'success');
       }
     }
+
+    // Reads the logged-in user saved at login time (see main.js's 'login'
+    // handler). We only ever send this user's id to the backend; the
+    // backend re-derives id_escola from it server-side, so this list can
+    // never include another school's teachers.
+    function getCurrentUserId() {
+      try {
+        const session = JSON.parse(localStorage.getItem('session') || '{}');
+        return session.id_usuario || session.id || null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    const AVATAR_COLORS = ['av1', 'av2', 'av3', 'av4', 'av5'];
+
+    function renderProfessores(professores) {
+      const container = document.getElementById('professoresContainer');
+
+      if (!professores.length) {
+        container.innerHTML = '<div style="padding:2rem;text-align:center;color:#888">Nenhum professor cadastrado.</div>';
+        return;
+      }
+
+      container.innerHTML = professores.map((p, i) => {
+        const inicial = (p.nome || '?')[0].toUpperCase();
+        const colorClass = AVATAR_COLORS[i % AVATAR_COLORS.length];
+        const statusLabel = p.ativo ? 'Ativo' : 'Inativo';
+        const badgeClass = p.ativo ? 'badge-green' : 'badge-red';
+
+        return `
+          <div class="data-row" style="grid-template-columns:2fr 90px 90px 90px 60px">
+            <div class="person-info">
+              <div class="av ${colorClass}">${inicial}</div>
+              <div>
+                <div class="person-name">${p.nome}</div>
+                <div class="person-sub">${p.email}</div>
+              </div>
+            </div>
+            <div style="font-size:.85rem;font-weight:600">${p.turmas_count ?? 0}</div>
+            <div style="font-size:.85rem;font-weight:600">${p.alunos_count ?? 0}</div>
+            <div><span class="badge ${badgeClass}">${statusLabel}</span></div>
+            <div class="act-btns">
+              <div class="act-btn">👁</div>
+              <div class="act-btn">✏️</div>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    async function loadProfessores() {
+      const container = document.getElementById('professoresContainer');
+      container.innerHTML = '<div style="padding:2rem;text-align:center;color:#888">Carregando...</div>';
+
+      const currentUserId = getCurrentUserId();
+      if (!currentUserId) {
+        container.innerHTML = '<div style="padding:2rem;text-align:center;color:red">Sessão inválida — faça login novamente.</div>';
+        return;
+      }
+
+      const result = await window.api.getProfessores(currentUserId);
+
+      if (!result.success) {
+        container.innerHTML = `<div style="padding:2rem;text-align:center;color:red">${result.message}</div>`;
+        return;
+      }
+
+      const professores = result.data;
+      const ativos = professores.filter(p => p.ativo).length;
+      const turmasTotal = professores.reduce((sum, p) => sum + (Number(p.turmas_count) || 0), 0);
+      const alunosTotal = professores.reduce((sum, p) => sum + (Number(p.alunos_count) || 0), 0);
+
+      document.getElementById('stat-professores-ativos').textContent = ativos;
+      document.getElementById('stat-turmas-gerenciadas').textContent = turmasTotal;
+      document.getElementById('stat-alunos-atendidos').textContent = alunosTotal;
+      document.getElementById('filter-todos').textContent = `Todos (${professores.length})`;
+
+      renderProfessores(professores);
+    }
+
+    document.addEventListener('DOMContentLoaded', loadProfessores);
   </script>
   <script src="../../shared/monetto-app.js"></script>
 </body>

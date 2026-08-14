@@ -99,20 +99,7 @@
         <h3>🔑 Admins da Escola</h3><button class="btn btn-primary" style="font-size:.78rem;padding:7px 14px">➕
           Adicionar Admin</button>
       </div>
-      <div class="data-row" style="grid-template-columns:2fr 120px 80px 60px">
-        <div class="person-info">
-          <div class="av" style="background:linear-gradient(135deg,#c0392b,#8b0000)">🛡️</div>
-          <div>
-            <div class="person-name">Admin Escolar</div>
-            <div class="person-sub">admin@escola.edu · Admin Principal</div>
-          </div>
-        </div>
-        <div><span class="badge badge-red">Super Admin</span></div>
-        <div style="font-size:.82rem;color:var(--muted)">Desde 2025</div>
-        <div class="act-btns">
-          <div class="act-btn">✏️</div>
-        </div>
-      </div>
+      <div id="adminsContainer"></div>
     </div>
   </main>
 
@@ -123,6 +110,72 @@
         MonettoUI.toast(msg || 'Ação realizada!', tipo || 'success');
       }
     }
+
+    // Reads the logged-in user saved at login time (see main.js's 'login'
+    // handler). We only ever send this user's id to the backend; the
+    // backend re-derives id_escola from it server-side, so this list can
+    // never include another school's admins.
+    function getCurrentUserId() {
+      try {
+        const session = JSON.parse(localStorage.getItem('session') || '{}');
+        return session.id_usuario || session.id || null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function formatYear(dateVal) {
+      if (!dateVal) return '—';
+      const d = new Date(dateVal);
+      return Number.isNaN(d.getTime()) ? '—' : 'Desde ' + d.getFullYear();
+    }
+
+    function renderAdmins(admins) {
+      const container = document.getElementById('adminsContainer');
+      if (!admins.length) {
+        container.innerHTML = '<div style="padding:1.5rem;text-align:center;color:#888">Nenhum admin cadastrado.</div>';
+        return;
+      }
+      container.innerHTML = admins.map(a => {
+        const statusLabel = a.ativo ? 'Admin' : 'Inativo';
+        const badgeClass = a.ativo ? 'badge-red' : 'badge-red';
+        return `
+          <div class="data-row" style="grid-template-columns:2fr 120px 80px 60px">
+            <div class="person-info">
+              <div class="av" style="background:linear-gradient(135deg,#c0392b,#8b0000)">🛡️</div>
+              <div>
+                <div class="person-name">${a.nome}</div>
+                <div class="person-sub">${a.email}</div>
+              </div>
+            </div>
+            <div><span class="badge ${badgeClass}">${statusLabel}</span></div>
+            <div style="font-size:.82rem;color:var(--muted)">${formatYear(a.criado_em)}</div>
+            <div class="act-btns">
+              <div class="act-btn">✏️</div>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    async function loadAdmins() {
+      const container = document.getElementById('adminsContainer');
+      container.innerHTML = '<div style="padding:1.5rem;text-align:center;color:#888">Carregando...</div>';
+
+      const currentUserId = getCurrentUserId();
+      if (!currentUserId || !window.api?.getAdmins) {
+        container.innerHTML = '<div style="padding:1.5rem;text-align:center;color:red">Sessão inválida — faça login novamente.</div>';
+        return;
+      }
+
+      const result = await window.api.getAdmins(currentUserId);
+      if (!result.success) {
+        container.innerHTML = `<div style="padding:1.5rem;text-align:center;color:red">${result.message}</div>`;
+        return;
+      }
+      renderAdmins(result.data);
+    }
+
+    document.addEventListener('DOMContentLoaded', loadAdmins);
   </script>
   <script src="../../shared/monetto-app.js"></script>
 </body>

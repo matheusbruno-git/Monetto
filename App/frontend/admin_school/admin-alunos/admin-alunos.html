@@ -175,11 +175,29 @@
     }).join('');
   }
 
+  // Reads the logged-in user from localStorage('session'), set at login time
+  // (see main.js's 'login' handler). Every DB query is scoped server-side to
+  // this user's id_escola, so an admin can only ever see their own school's data.
+  function getCurrentUserId() {
+    try {
+      const session = JSON.parse(localStorage.getItem('session') || '{}');
+      return session.id_usuario || session.id || null;
+    } catch (e) {
+      return null;
+    }
+  }
+
   async function loadAlunos() {
     const container = document.getElementById('alunosContainer');
     container.innerHTML = '<div style="padding:2rem;text-align:center;color:#888">Carregando...</div>';
 
-    const result = await window.api.getAlunos();
+    const currentUserId = getCurrentUserId();
+    if (!currentUserId) {
+      container.innerHTML = '<div style="padding:2rem;text-align:center;color:red">Sessão inválida — faça login novamente.</div>';
+      return;
+    }
+
+    const result = await window.api.getAlunos(currentUserId);
 
     if (!result.success) {
       container.innerHTML = `<div style="padding:2rem;text-align:center;color:red">${result.message}</div>`;

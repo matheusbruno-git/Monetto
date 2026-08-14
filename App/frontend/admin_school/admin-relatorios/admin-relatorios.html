@@ -33,24 +33,22 @@
     <div class="stats-row">
       <div class="sc sc-g">
         <div class="sc-icon">✅</div>
-        <div class="sc-val">89%</div>
+        <div class="sc-val" id="rel-taxa-conclusao">—</div>
         <div class="sc-lbl">Taxa de conclusão</div>
-        <div class="sc-sub">▲ +4% vs. mês anterior</div>
       </div>
       <div class="sc sc-y">
         <div class="sc-icon">⚡</div>
-        <div class="sc-val">34.8k</div>
+        <div class="sc-val" id="rel-xp">—</div>
         <div class="sc-lbl">XP distribuído</div>
-        <div class="sc-sub">↑ 27% vs. mês anterior</div>
       </div>
       <div class="sc sc-b">
         <div class="sc-icon">📋</div>
-        <div class="sc-val">148</div>
+        <div class="sc-val" id="rel-tarefas">—</div>
         <div class="sc-lbl">Tarefas publicadas</div>
       </div>
       <div class="sc sc-r">
         <div class="sc-icon">👥</div>
-        <div class="sc-val">512</div>
+        <div class="sc-val" id="rel-alunos">—</div>
         <div class="sc-lbl">Alunos ativos</div>
       </div>
     </div>
@@ -58,119 +56,26 @@
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px">
       <div class="card">
         <div class="card-hd">
-          <h3>📈 XP por Semana – Abril</h3>
+          <h3>📈 XP por Semana</h3>
         </div>
-        <div style="display:flex;align-items:flex-end;gap:10px;height:100px;padding-top:8px">
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
-            <div style="font-size:.65rem;font-weight:700">7.2k</div>
-            <div
-              style="width:100%;border-radius:4px 4px 0 0;height:60px;background:linear-gradient(180deg,#5B9BF8,rgba(91,155,248,.25))">
-            </div>
-            <div style="font-size:.62rem;color:var(--muted)">Sem 1</div>
-          </div>
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
-            <div style="font-size:.65rem;font-weight:700">8.1k</div>
-            <div
-              style="width:100%;border-radius:4px 4px 0 0;height:72px;background:linear-gradient(180deg,#5B9BF8,rgba(91,155,248,.25))">
-            </div>
-            <div style="font-size:.62rem;color:var(--muted)">Sem 2</div>
-          </div>
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
-            <div style="font-size:.65rem;font-weight:700">9.5k</div>
-            <div
-              style="width:100%;border-radius:4px 4px 0 0;height:85px;background:linear-gradient(180deg,#5B9BF8,rgba(91,155,248,.25))">
-            </div>
-            <div style="font-size:.62rem;color:var(--muted)">Sem 3</div>
-          </div>
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
-            <div style="font-size:.65rem;font-weight:700;color:var(--accent)">10k</div>
-            <div
-              style="width:100%;border-radius:4px 4px 0 0;height:100px;background:linear-gradient(180deg,var(--accent),rgba(255,215,0,.25))">
-            </div>
-            <div style="font-size:.62rem;color:var(--muted)">Sem 4</div>
-          </div>
-        </div>
+        <div id="rel-xp-chart" style="display:flex;align-items:flex-end;gap:10px;height:100px;padding-top:8px"></div>
       </div>
       <div class="card">
         <div class="card-hd">
           <h3>📚 Conclusão por Turma</h3>
         </div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="display:flex;align-items:center;gap:10px;font-size:.82rem"><span style="width:60px">8ºA</span>
-            <div style="flex:1;height:6px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden">
-              <div
-                style="height:100%;width:92%;border-radius:99px;background:linear-gradient(90deg,var(--green),var(--accent))">
-              </div>
-            </div><span style="width:32px;text-align:right;color:var(--green);font-weight:700">92%</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:.82rem"><span style="width:60px">9ºB</span>
-            <div style="flex:1;height:6px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden">
-              <div
-                style="height:100%;width:91%;border-radius:99px;background:linear-gradient(90deg,var(--green),var(--accent))">
-              </div>
-            </div><span style="width:32px;text-align:right;color:var(--green);font-weight:700">91%</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:.82rem"><span style="width:60px">8ºB</span>
-            <div style="flex:1;height:6px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden">
-              <div
-                style="height:100%;width:85%;border-radius:99px;background:linear-gradient(90deg,var(--accent),#b8900d)">
-              </div>
-            </div><span style="width:32px;text-align:right;color:var(--accent);font-weight:700">85%</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:.82rem"><span style="width:60px">9ºA</span>
-            <div style="flex:1;height:6px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden">
-              <div
-                style="height:100%;width:71%;border-radius:99px;background:linear-gradient(90deg,var(--orange),#b7770d)">
-              </div>
-            </div><span style="width:32px;text-align:right;color:var(--orange);font-weight:700">71%</span>
-          </div>
-        </div>
+        <div id="rel-turmas-conclusao" style="display:flex;flex-direction:column;gap:10px"></div>
       </div>
     </div>
 
     <div class="card">
       <div class="card-hd">
-        <h3>👨‍🏫 Desempenho por Professor</h3>
+        <h3>👨‍🏫 Professores da Escola</h3>
       </div>
-      <div class="table-head" style="grid-template-columns:1.5fr 100px 80px 80px 90px">
-        <span>Professor</span><span>Matéria</span><span>Tarefas</span><span>Conclusão</span><span>Engajamento</span>
+      <div class="table-head" style="grid-template-columns:1.5fr 100px 100px">
+        <span>Professor</span><span>Turmas</span><span>Alunos</span>
       </div>
-      <div class="data-row" style="grid-template-columns:1.5fr 100px 80px 80px 90px">
-        <div class="person-info">
-          <div class="av av1">R</div>
-          <div>
-            <div class="person-name">Prof. Ricardo Alves</div>
-          </div>
-        </div>
-        <div style="font-size:.82rem">Matemática</div>
-        <div style="font-size:.85rem;font-weight:600">42</div>
-        <div><span style="font-weight:700;color:var(--green)">88%</span></div>
-        <div><span style="font-weight:700;color:var(--green)">92%</span></div>
-      </div>
-      <div class="data-row" style="grid-template-columns:1.5fr 100px 80px 80px 90px">
-        <div class="person-info">
-          <div class="av av2">C</div>
-          <div>
-            <div class="person-name">Profa. Carla Mendes</div>
-          </div>
-        </div>
-        <div style="font-size:.82rem">Português</div>
-        <div style="font-size:.85rem;font-weight:600">38</div>
-        <div><span style="font-weight:700;color:var(--green)">84%</span></div>
-        <div><span style="font-weight:700;color:var(--green)">87%</span></div>
-      </div>
-      <div class="data-row" style="grid-template-columns:1.5fr 100px 80px 80px 90px">
-        <div class="person-info">
-          <div class="av av3">M</div>
-          <div>
-            <div class="person-name">Prof. Marcos Silva</div>
-          </div>
-        </div>
-        <div style="font-size:.82rem">Ciências</div>
-        <div style="font-size:.85rem;font-weight:600">31</div>
-        <div><span style="font-weight:700;color:var(--green)">90%</span></div>
-        <div><span style="font-weight:700;color:var(--green)">85%</span></div>
-      </div>
+      <div id="rel-professores"></div>
     </div>
   </main>
 
@@ -181,6 +86,93 @@
         MonettoUI.toast(msg || 'Ação realizada!', tipo || 'success');
       }
     }
+
+    // Reads the logged-in user saved at login time (see main.js's 'login'
+    // handler). We only ever send this user's id to the backend; the
+    // backend re-derives id_escola from it server-side, so every number
+    // and row on this page belongs to this admin's own school.
+    function getCurrentUserId() {
+      try {
+        const session = JSON.parse(localStorage.getItem('session') || '{}');
+        return session.id_usuario || session.id || null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function renderXpChart(xpChart) {
+      const el = document.getElementById('rel-xp-chart');
+      if (!xpChart || !xpChart.length) {
+        el.innerHTML = '<div style="color:var(--muted);font-size:.8rem">Sem dados de XP ainda.</div>';
+        return;
+      }
+      const max = Math.max(...xpChart.map(b => b.height), 1);
+      el.innerHTML = xpChart.map(b => `
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
+          <div style="width:100%;border-radius:4px 4px 0 0;height:${Math.max(4, (b.height / max) * 90)}px;background:linear-gradient(180deg,#5B9BF8,rgba(91,155,248,.25))"></div>
+          <div style="font-size:.62rem;color:var(--muted)">${b.label}</div>
+        </div>`).join('');
+    }
+
+    function renderTurmasConclusao(classes) {
+      const el = document.getElementById('rel-turmas-conclusao');
+      if (!classes || !classes.length) {
+        el.innerHTML = '<div style="color:var(--muted);font-size:.8rem">Nenhuma turma cadastrada.</div>';
+        return;
+      }
+      el.innerHTML = classes.map(c => `
+        <div style="display:flex;align-items:center;gap:10px;font-size:.82rem">
+          <span style="width:60px">${c.name}</span>
+          <div style="flex:1;height:6px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden">
+            <div style="height:100%;width:${c.completion}%;border-radius:99px;background:linear-gradient(90deg,var(--green),var(--accent))"></div>
+          </div>
+          <span style="width:32px;text-align:right;color:var(--green);font-weight:700">${c.completion}%</span>
+        </div>`).join('');
+    }
+
+    function renderProfessores(professores) {
+      const el = document.getElementById('rel-professores');
+      if (!professores.length) {
+        el.innerHTML = '<div style="padding:1.5rem;text-align:center;color:#888">Nenhum professor cadastrado.</div>';
+        return;
+      }
+      el.innerHTML = professores.map((p, i) => `
+        <div class="data-row" style="grid-template-columns:1.5fr 100px 100px">
+          <div class="person-info">
+            <div class="av av${(i % 5) + 1}">${(p.nome || '?')[0].toUpperCase()}</div>
+            <div><div class="person-name">${p.nome}</div></div>
+          </div>
+          <div style="font-size:.85rem;font-weight:600">${p.turmas_count ?? 0}</div>
+          <div style="font-size:.85rem;font-weight:600">${p.alunos_count ?? 0}</div>
+        </div>`).join('');
+    }
+
+    async function loadRelatorios() {
+      const currentUserId = getCurrentUserId();
+      if (!currentUserId) return;
+
+      const [dashResult, profResult] = await Promise.all([
+        window.api.getDashboardAdminEscolar(currentUserId),
+        window.api.getProfessores(currentUserId)
+      ]);
+
+      if (dashResult.success) {
+        const d = dashResult.data;
+        const [statAlunos, statTaxa, statTarefas, statXp] = d.stats || [];
+        if (statTaxa) document.getElementById('rel-taxa-conclusao').textContent = statTaxa.value;
+        if (statXp) document.getElementById('rel-xp').textContent = statXp.value;
+        if (statTarefas) document.getElementById('rel-tarefas').textContent = statTarefas.value;
+        if (statAlunos) document.getElementById('rel-alunos').textContent = statAlunos.value;
+        renderXpChart(d.xpChart);
+        renderTurmasConclusao(d.classes);
+      }
+
+      if (profResult.success) {
+        renderProfessores(profResult.data);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadRelatorios);
   </script>
   <script src="../../shared/monetto-app.js"></script>
 </body>
