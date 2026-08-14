@@ -197,8 +197,9 @@ input:focus {
 
 .error {
   display: block;
-  background: #b33939;
-  color: #000000;
+  background: linear-gradient(170deg, #a51e1e, #5a0a0a);
+  color: #ececec;
+  border: 3px solid #5313135b;
 }
 
 .eye-toggle {
