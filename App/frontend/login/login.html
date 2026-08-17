@@ -242,39 +242,29 @@
       }
     })();
 
-    // Load schools into select from backend/datatable
     async function loadSchools() {
-      const sel = document.getElementById('id_escola');
-      if (!sel) return;
+      const select = document.getElementById("id_escola");
 
       try {
-        let schools = [];
-        if (window.api) {
-          if (typeof window.api.getSchools === 'function') schools = await window.api.getSchools();
-          else if (typeof window.api.getEscolas === 'function') schools = await window.api.getEscolas();
-          else if (typeof window.api.listSchools === 'function') schools = await window.api.listSchools();
-        }
+        const schools = await window.api.getSchools();
 
-        if (!Array.isArray(schools)) return;
+        select.innerHTML = '<option value="">Selecione uma escola</option>';
 
-        // Clear existing (except placeholder)
-        sel.innerHTML = '<option value="">Selecione uma escola</option>';
+        schools.forEach(escola => {
+          const option = document.createElement("option");
 
-        schools.forEach(s => {
-          const opt = document.createElement('option');
-          // support different possible field names
-          opt.value = s.id ?? s.id_escola ?? s.value ?? '';
-          opt.textContent = s.name ?? s.nome ?? s.escola ?? s.label ?? opt.value;
-          sel.appendChild(opt);
+          option.value = escola.id_escola;
+          option.textContent = escola.nome;
+
+          select.appendChild(option);
         });
-      } catch (e) {
-        console.error('Erro carregando escolas', e);
+
+      } catch (error) {
+        console.error("Erro ao carregar escolas:", error);
       }
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      loadSchools();
-    });
+    document.addEventListener("DOMContentLoaded", loadSchools);
   </script>
   <script src="script.js"></script>
 </body>

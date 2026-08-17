@@ -112,7 +112,8 @@
         nome: document.getElementById('nome').value.trim(),
         email: document.getElementById('reg_email').value.trim(),
         senha: document.getElementById('reg_senha').value,
-        id_perfil: parseInt(document.getElementById('id_perfil').value)
+        id_perfil: parseInt(document.getElementById('id_perfil').value),
+        id_escola: document.getElementById('id_escola').value || null,
       };
 
       const msgElement = document.getElementById('msg');

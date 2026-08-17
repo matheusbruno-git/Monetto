@@ -311,6 +311,23 @@ ipcMain.handle('getTurmas', async (event, currentUserId) => {
   }
 });
 
+const db = require("./connection"); // adjust path if necessary
+
+ipcMain.handle("get-schools", async () => {
+  try {
+    const escolas = db.prepare(`
+      SELECT id_escola, nome
+      FROM escolas
+      ORDER BY nome ASC
+    `).all();
+
+    return escolas;
+  } catch (error) {
+    console.error("Erro ao buscar escolas:", error);
+    return [];
+  }
+});
+
 // ============================================================
 // DASHBOARD ADMIN ESCOLAR – dados agregados do banco
 // ============================================================

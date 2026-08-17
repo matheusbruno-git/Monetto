@@ -16,5 +16,6 @@ contextBridge.exposeInMainWorld('api', {
   getCursos:     () => ipcRenderer.invoke('getCursos'),
   getTurmas:     (currentUserId) => ipcRenderer.invoke('getTurmas', currentUserId),
   getNiveis:     () => ipcRenderer.invoke('getNiveis'),
+  getSchools:   () => ipcRenderer.invoke('getSchools'),
   getDashboardAdminEscolar: (currentUserId) => ipcRenderer.invoke('getDashboardAdminEscolar', currentUserId)
 });
