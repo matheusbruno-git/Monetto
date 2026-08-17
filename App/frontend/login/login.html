@@ -248,6 +248,8 @@
       try {
         const schools = await window.api.getSchools();
 
+        console.log(schools);
+
         select.innerHTML = '<option value="">Selecione uma escola</option>';
 
         schools.forEach(escola => {

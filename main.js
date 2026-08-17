@@ -311,9 +311,7 @@ ipcMain.handle('getTurmas', async (event, currentUserId) => {
   }
 });
 
-const db = require("./connection"); // adjust path if necessary
-
-ipcMain.handle("get-schools", async () => {
+ipcMain.handle("getSchools", async () => {
   try {
     const escolas = db.prepare(`
       SELECT id_escola, nome
