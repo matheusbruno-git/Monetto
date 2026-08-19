@@ -29,8 +29,8 @@ async function registerUser(dados) {
 
     const sql = `
       INSERT INTO usuarios 
-      (id_usuario, id_perfil, nome, email, senha_hash, ativo, criado_em)
-      VALUES (?, ?, ?, ?, ?, 1, NOW())
+      (id_usuario, id_perfil, nome, email, senha_hash, id_escola, ativo, criado_em)
+      VALUES (?, ?, ?, ?, ?, ?, 1, NOW())
     `;
 
     await db

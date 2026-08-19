@@ -59,75 +59,56 @@
       <div class="modal-title">👨‍🏫 Novo Professor</div>
       <div class="modal-sub">Preencha os dados para cadastrar um professor</div>
       <div class="form-row">
-        <div class="field-group"><label>Nome</label><input type="text" placeholder="Nome"></div>
-        <div class="field-group"><label>Sobrenome</label><input type="text" placeholder="Sobrenome"></div>
+        <div class="field-group"><label>Nome</label><input type="text" placeholder="Nome" id="nome"></div>
+        <div class="field-group"><label>Sobrenome</label><input type="text" placeholder="Sobrenome" id="sobrenome">
+        </div>
       </div>
-      <div class="field-group"><label>E-mail</label><input type="email" placeholder="email@escola.edu"></div>
+      <div class="field-group"><label>E-mail</label><input type="email" placeholder="email@escola.edu" id="email"></div>
+      <div class="field-group"><label>Telefone</label><input type="text" placeholder="(00) 00000-0000" id="tel"></div>
+      <div class="field-group"><label>Senha Provisoria</label><input type="password" placeholder="Guarde esta senha"
+          id="senha-provisoria"></div>
       <div class="form-row">
-        <div class="field-group"><label>Matéria</label><select>
-            <option>Matemática</option>
-            <option>Português</option>
-            <option>Ciências</option>
-            <option>História</option>
-            <option>Geografia</option>
-          </select></div>
-        <div class="field-group"><label>Status</label><select>
-            <option>Ativo</option>
-            <option>Inativo</option>
-          </select></div>
-      </div>
-      <div class="modal-btns">
-        <button class="btn-modal-cancel"
-          onclick="document.getElementById('addModal').classList.remove('open')">Cancelar</button>
-        <button class="btn-modal-ok">✅ Cadastrar Professor</button>
+        <div class="form-row">
+          <div class="field-group"><label>Data de Nascimento</label><input type="date" id="data-nascimento"></div>
+          <div class="field-group"><label>CPF</label><input type="text" placeholder="000.000.000-00" id="cpf"></div>
+        </div>
+        <br>
+        <div class="modal-btns">
+          <button class="btn-modal-cancel"
+            onclick="document.getElementById('addModal').classList.remove('open')">Cancelar</button>
+          <button class="btn-modal-ok" id="btn">✅ Cadastrar Professor</button>
+        </div>
       </div>
     </div>
-  </div>
 
 
-  <script>
-
-    function salvarNovoItem() {
-      document.getElementById('addModal').classList.remove('open');
-      document.getElementById('addModal').style.display = 'none';
-      MonettoUI.toast('Professor cadastrado com sucesso! ✅', 'success');
-    }
-    function showToast(msg, tipo) {
-      if (typeof MonettoUI !== 'undefined') {
-        MonettoUI.toast(msg || 'Ação realizada!', tipo || 'success');
-      }
-    }
-
-    // Reads the logged-in user saved at login time (see main.js's 'login'
-    // handler). We only ever send this user's id to the backend; the
-    // backend re-derives id_escola from it server-side, so this list can
-    // never include another school's teachers.
-    function getCurrentUserId() {
-      try {
-        const session = JSON.parse(localStorage.getItem('session') || '{}');
-        return session.id_usuario || session.id || null;
-      } catch (e) {
-        return null;
-      }
-    }
-
-    const AVATAR_COLORS = ['av1', 'av2', 'av3', 'av4', 'av5'];
-
-    function renderProfessores(professores) {
-      const container = document.getElementById('professoresContainer');
-
-      if (!professores.length) {
-        container.innerHTML = '<div style="padding:2rem;text-align:center;color:#888">Nenhum professor cadastrado.</div>';
-        return;
+    <script>
+      function getCurrentUserId() {
+        try {
+          const session = JSON.parse(localStorage.getItem('session') || '{}');
+          return session.id_usuario || session.id || null;
+        } catch (e) {
+          return null;
+        }
       }
 
-      container.innerHTML = professores.map((p, i) => {
-        const inicial = (p.nome || '?')[0].toUpperCase();
-        const colorClass = AVATAR_COLORS[i % AVATAR_COLORS.length];
-        const statusLabel = p.ativo ? 'Ativo' : 'Inativo';
-        const badgeClass = p.ativo ? 'badge-green' : 'badge-red';
+      const AVATAR_COLORS = ['av1', 'av2', 'av3', 'av4', 'av5'];
 
-        return `
+      function renderProfessores(professores) {
+        const container = document.getElementById('professoresContainer');
+
+        if (!professores.length) {
+          container.innerHTML = '<div style="padding:2rem;text-align:center;color:#888">Nenhum professor cadastrado.</div>';
+          return;
+        }
+
+        container.innerHTML = professores.map((p, i) => {
+          const inicial = (p.nome || '?')[0].toUpperCase();
+          const colorClass = AVATAR_COLORS[i % AVATAR_COLORS.length];
+          const statusLabel = p.ativo ? 'Ativo' : 'Inativo';
+          const badgeClass = p.ativo ? 'badge-green' : 'badge-red';
+
+          return `
           <div class="data-row" style="grid-template-columns:2fr 90px 90px 90px 60px">
             <div class="person-info">
               <div class="av ${colorClass}">${inicial}</div>
@@ -144,42 +125,43 @@
               <div class="act-btn">✏️</div>
             </div>
           </div>`;
-      }).join('');
-    }
-
-    async function loadProfessores() {
-      const container = document.getElementById('professoresContainer');
-      container.innerHTML = '<div style="padding:2rem;text-align:center;color:#888">Carregando...</div>';
-
-      const currentUserId = getCurrentUserId();
-      if (!currentUserId) {
-        container.innerHTML = '<div style="padding:2rem;text-align:center;color:red">Sessão inválida — faça login novamente.</div>';
-        return;
+        }).join('');
       }
 
-      const result = await window.api.getProfessores(currentUserId);
+      async function loadProfessores() {
+        const container = document.getElementById('professoresContainer');
+        container.innerHTML = '<div style="padding:2rem;text-align:center;color:#888">Carregando...</div>';
 
-      if (!result.success) {
-        container.innerHTML = `<div style="padding:2rem;text-align:center;color:red">${result.message}</div>`;
-        return;
+        const currentUserId = getCurrentUserId();
+        if (!currentUserId) {
+          container.innerHTML = '<div style="padding:2rem;text-align:center;color:red">Sessão inválida — faça login novamente.</div>';
+          return;
+        }
+
+        const result = await window.api.getProfessores(currentUserId);
+
+        if (!result.success) {
+          container.innerHTML = `<div style="padding:2rem;text-align:center;color:red">${result.message}</div>`;
+          return;
+        }
+
+        const professores = result.data;
+        const ativos = professores.filter(p => p.ativo).length;
+        const turmasTotal = professores.reduce((sum, p) => sum + (Number(p.turmas_count) || 0), 0);
+        const alunosTotal = professores.reduce((sum, p) => sum + (Number(p.alunos_count) || 0), 0);
+
+        document.getElementById('stat-professores-ativos').textContent = ativos;
+        document.getElementById('stat-turmas-gerenciadas').textContent = turmasTotal;
+        document.getElementById('stat-alunos-atendidos').textContent = alunosTotal;
+        document.getElementById('filter-todos').textContent = `Todos (${professores.length})`;
+
+        renderProfessores(professores);
       }
 
-      const professores = result.data;
-      const ativos = professores.filter(p => p.ativo).length;
-      const turmasTotal = professores.reduce((sum, p) => sum + (Number(p.turmas_count) || 0), 0);
-      const alunosTotal = professores.reduce((sum, p) => sum + (Number(p.alunos_count) || 0), 0);
-
-      document.getElementById('stat-professores-ativos').textContent = ativos;
-      document.getElementById('stat-turmas-gerenciadas').textContent = turmasTotal;
-      document.getElementById('stat-alunos-atendidos').textContent = alunosTotal;
-      document.getElementById('filter-todos').textContent = `Todos (${professores.length})`;
-
-      renderProfessores(professores);
-    }
-
-    document.addEventListener('DOMContentLoaded', loadProfessores);
-  </script>
-  <script src="../../shared/monetto-app.js"></script>
+      document.addEventListener('DOMContentLoaded', loadProfessores);
+    </script>
+    <script src="../../shared/monetto-app.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

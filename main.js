@@ -1,9 +1,12 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const bcrypt = require('bcryptjs');
+const { v4: uuidv4 } = require('uuid');
 
 const basePath = path.join(__dirname, 'App');
 require(path.join(basePath, './backend/connection.js'));
+
+const db = require(path.join(basePath, 'backend/connection.js'));
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -37,14 +40,61 @@ async function resolveEscolaId(db, currentUserId) {
 }
 
 ipcMain.handle('registerUser', async (event, dados) => {
-  try {
-    const { registerUser } = require(path.join(basePath, 'backend/create_user.js'));
-    return await registerUser(dados);
-  } catch (err) {
-    console.error("RegisterUser Error:", err);
-    return { success: false, message: "Erro ao criar conta." };
+    try {
+      console.log("📝 Tentando cadastrar usuário:", dados.email);
+
+      if (!dados.nome || !dados.email || !dados.senha || !dados.id_perfil) {
+        return { success: false, message: "Todos os campos são obrigatórios." };
+      }
+
+      // Check if email already exists
+      const [existing] = await db
+        .promise()
+        .execute("SELECT id_usuario FROM usuarios WHERE email = ?", [
+          dados.email,
+        ]);
+
+      if (existing.length > 0) {
+        return { success: false, message: "Este email já está cadastrado." };
+      }
+
+      const seed = await bcrypt.genSalt(10);
+      const senha_hash = await bcrypt.hash(dados.senha, seed);
+
+      const id_usuario = uuidv4();
+
+      const sql = `
+        INSERT INTO usuarios 
+        (id_usuario, id_perfil, nome, email, senha_hash, id_escola, ativo, criado_em)
+        VALUES (?, ?, ?, ?, ?, ?, 1, NOW())
+      `;
+
+      await db
+        .promise()
+        .execute(sql, [
+          id_usuario,
+          dados.id_perfil,
+          dados.nome,
+          dados.email,
+          senha_hash,
+          dados.id_escola || null,
+        ]);
+
+      console.log("✅ Usuário criado com sucesso!");
+
+      return {
+        success: true,
+        message: "Conta criada com sucesso! Você já pode fazer login.",
+      };
+    } catch (err) {
+      console.error("❌ ERRO AO CADASTRAR:", err);
+      return {
+        success: false,
+        message: "Erro ao criar conta. Tente novamente.",
+      };
+    }
   }
-});
+);
 
 ipcMain.handle('login', async (event, { email, senha }) => {
   try {

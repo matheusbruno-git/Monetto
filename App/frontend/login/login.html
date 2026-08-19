@@ -161,7 +161,7 @@
       }
 
       try {
-        const result = await window.api.login({ email, senha });
+        const result = await window.api.login({email, senha});
 
         msgEl.textContent = result.message;
         msgEl.className = "message " + (result.success ? "success" : "error");
