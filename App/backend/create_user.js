@@ -22,9 +22,8 @@ async function registerUser(dados) {
       return { success: false, message: "Este email já está cadastrado." };
     }
 
-    // Hash the password
-    const salt = await bcrypt.genSalt(10);
-    const senha_hash = await bcrypt.hash(dados.senha, salt);
+    const seed = await bcrypt.genSalt(10);
+    const senha_hash = await bcrypt.hash(dados.senha, seed);
 
     const id_usuario = uuidv4();
 
@@ -42,6 +41,7 @@ async function registerUser(dados) {
         dados.nome,
         dados.email,
         senha_hash,
+        dados.id_escola || null, // Allow null for id_escola if not provided
       ]);
 
     console.log("✅ Usuário criado com sucesso!");

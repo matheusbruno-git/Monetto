@@ -312,3 +312,40 @@ if (document.readyState === 'loading') {
 } else {
   bootMonettoApp();
 }
+
+async function carregarTeacherEscolar() {
+  // Only run on dashboard page (has hero counters)
+  if (!document.getElementById('school-name') && !document.getElementById('alunos-count')) {
+    return;
+  }
+
+  try {
+    if (!window.api || typeof window.api.getDashboardTeacher !== 'function') {
+      console.warn('API getDashboardTeacher não disponível');
+      const elSchool = document.getElementById('school-name');
+      if (elSchool) elSchool.textContent = 'API indisponível';
+      return;
+    }
+
+    const session = getSession();
+    const currentUserId = session.id_usuario || session.id || null;
+    if (!currentUserId) {
+      console.warn('Sessão sem id_usuario — faça login novamente.');
+      const elSchool = document.getElementById('school-name');
+      if (elSchool) elSchool.textContent = 'Faça login novamente';
+      return;
+    }
+    const result = await window.api.getDashboardAdminEscolar(currentUserId);
+
+    if (!result || !result.success) {
+      console.warn('Erro do backend:', result?.message);
+      const elSchool = document.getElementById('school-name');
+      if (elSchool) elSchool.textContent = result?.message || 'Erro ao carregar';
+      return;
+    }
+
+    renderDashboardAdminEscolar(result.data);
+  } catch (err) {
+    console.error('Erro ao carregar dashboard:', err);
+  }
+}
