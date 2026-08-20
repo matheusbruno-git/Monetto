@@ -119,3 +119,39 @@ document.addEventListener('DOMContentLoaded', () => {
   loadTurmasList();
   document.getElementById('btn').addEventListener('click', criarTurma);
 });
+
+async function loadStudentsPage() {
+  const currentUserId = getCurrentUserId();
+  if (!currentUserId) {
+    setText('school-name', 'Sessão inválida');
+    setText('school-subtitle', 'Faça login novamente para ver os dados da sua escola.');
+    return;
+  }
+
+  const result = await window.api.getDashboardAdminEscolar(currentUserId);
+  if (!result.success) {
+    setText('school-name', 'Erro ao carregar');
+    setText('school-subtitle', result.message || 'Não foi possível carregar os dados da escola.');
+    return;
+  }
+
+  const d = result.data;
+
+  // School hero
+  setText('school-name', d.school.name);
+  setText('school-subtitle', d.school.subtitle || 'Dashboard do Administrador Escolar');
+  const chipsEl = document.getElementById('school-chips');
+  if (chipsEl && d.school.chips) {
+    chipsEl.innerHTML = d.school.chips.map(c => `<span class="shc">${c}</span>`).join('');
+  }
+  const alunos = d.school.stats || null;
+  if (alunos) setText('alunos-count', alunos.value);
+
+  // Stats row: [alunos, taxaConclusao, tarefas, xp, inativos]
+  const statAlunos = d.stats || null;
+  if (statAlunos) setText('alunos-matriculados-count', statAlunos.value);
+
+  renderStudents(d.teachers);
+}
+
+document.addEventListener('DOMContentLoaded', loadDashboard);
