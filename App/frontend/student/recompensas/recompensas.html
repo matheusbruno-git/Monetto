@@ -14,34 +14,7 @@
 
 <body class="rewards-page">
 
-  <nav class="sidebar">
-    <a class="sb-logo" href="#">
-      <svg viewBox="0 0 32 32" fill="none" width="28" height="28">
-        <rect width="32" height="32" rx="8" fill="#1A2A8F" />
-        <path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"
-          stroke-linejoin="round" />
-        <circle cx="24" cy="10" r="3" fill="#2ECC71" />
-      </svg>
-      onetto
-    </a>
-    <span class="sb-section">Principal</span>
-    <a class="sb-link" href="../dashboard-aluno/dashboard-aluno.html"><span class="icon">🏠</span> Dashboard</a>
-    <a class="sb-link" href="../tarefas-aluno/tarefas-aluno.html"><span class="icon">📋</span> Minhas Tarefas</a>
-    <a class="sb-link" href="../modulo-aprendizado/modulo-aprendizado.html"><span class="icon">📚</span> Aprendizado</a>
-    <span class="sb-section">Jogos</span>
-    <a class="sb-link" href="../jogos-quiz/jogos-quiz.html"><span class="icon">🎮</span> Jogos & Quiz</a>
-    <a class="sb-link active" href="../recompensas/recompensas.html"><span class="icon">🏆</span> Recompensas</a>
-    <span class="sb-section">Conta</span>
-    <a class="sb-link" href="../configuracoes/configuracoes.html"><span class="icon">⚙️</span> Configurações</a>
-    <div class="sb-bottom"><a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;"
-        onclick="sairDaConta('../../user/login-principal/login-principal.html')"><span class="icon">🚪</span> Sair da
-        conta</a>
-      <div class="sb-user">
-        <div class="sb-av"></div>
-        <div class="sb-user-info"><strong>Ana Souza</strong><span>⚡ 680 XP · Nível 5</span></div>
-      </div>
-    </div>
-  </nav>
+  <div id="sidebar-container"></div>
 
   <main class="main">
 
@@ -292,6 +265,54 @@
       }
     }
   </script>
+
+  <script>
+    function updateSidebarActiveLink() {
+      const currentPath = normalizePath(window.location.href);
+      const links = document.querySelectorAll('.sidebar .sb-link');
+
+      links.forEach((link) => {
+        const href = link.getAttribute('href');
+        if (
+          !href ||
+          href === '#' ||
+          href.startsWith('javascript:') ||
+          link.classList.contains('sb-logout')
+        ) {
+          link.classList.remove('active');
+          return;
+        }
+        const targetPath = normalizePath(new URL(href, window.location.href).href);
+        link.classList.toggle('active', !!(targetPath && currentPath === targetPath));
+      });
+    }
+
+    // ── Load student sidebar into #sidebar-container ─────────
+    function loadStudentSidebar() {
+      const container = document.getElementById('sidebar-container');
+      if (!container) return Promise.resolve();
+
+      const sidebarUrl = '../../Assets/Components/student-sidebar.html';
+
+      return fetch(sidebarUrl, { cache: 'no-store' })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Failed to load sidebar: ${response.status}`);
+          }
+          return response.text();
+        })
+        .then((html) => {
+          container.innerHTML = html;
+          updateSidebarActiveLink();
+        })
+        .catch((err) => {
+          console.error('Erro ao carregar sidebar:', err);
+        });
+    }
+
+    loadStudentSidebar();
+  </script>
+
 </body>
 
 </html>
