@@ -44,3 +44,17 @@ document.getElementById("btn")?.addEventListener("click", async () => {
     })
     .catch((err) => console.error(err));
 })();
+
+function renderStudents(students) {
+  const el = document.getElementById('students-list');
+  if (!el) return;
+  if (!students || !students.length) {
+    el.innerHTML = '<div class="teach-item"><div class="teach-info"><strong>Nenhum aluno cadastrado</strong></div></div>';
+    return;
+  }
+  el.innerHTML = students.map(s => `
+    <div class="teach-item">
+      <div class="tav ${s.avatarClass || 'ta1'}">${s.emoji || '👨‍ Schüler'}</div>
+      <div class="teach-info"><strong>${s.name}</strong><span>${s.subtitle || ''}</span></div>
+    </div>`).join('');
+}

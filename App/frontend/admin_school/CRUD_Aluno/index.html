@@ -11,14 +11,65 @@
 
 <body>
     <div id="sidebar-container"></div>
-    <input id="nome" placeholder="Nome do aluno">
-    <input id="data" type="date">
-    <input id="cpf" placeholder="CPF">
-    <input id="resp" placeholder="Responsável">
-    <input id="tel" placeholder="Telefone">
-    <input id="email" placeholder="Email do responsável">
-    <input id="serie" placeholder="Série">
-    <button id="btn">Cadastrar Aluno</button>
+    <div class="main">
+        <div class="form-area">
+            <div class="fg">
+                <label>Nome da Turma *</label>
+                <input id="nome" placeholder="Nome do aluno">
+            </div>
+            <div class="fg">
+                <label>Data de Nascimento *</label>
+                <input id="data" type="date">
+            </div>
+            <div class="fg">
+                <label>CPF *</label>
+                <input id="cpf" placeholder="CPF">
+            </div>
+            <div class="fg">
+                <label>Responsável *</label>
+                <input id="resp" placeholder="Responsável">
+            </div>
+            <div class="fg">
+                <label>Telefone *</label>
+                <input id="tel" placeholder="Telefone">
+            </div>
+            <div class="fg">
+                <label>Email do Responsável *</label>
+                <input id="email" placeholder="Email do responsável">
+            </div>
+            <div class="fg">
+                <label>Série *</label>
+                <input id="serie" placeholder="Série">
+            </div>
+            <div id="formMsg" style="display:none;font-size:.84rem;margin-bottom:8px;font-weight:600"></div>
+            <div class="form-footer">
+                <button class="btn-acc" id="btn">Cadastrar Aluno</button>
+            </div>
+        </div>
+        <div class="stats-row">
+            <div class="sc sc-b">
+                <div class="sc-icon">👥</div>
+                <div class="sc-val" id="alunos-matriculados-count">—</div>
+                <div class="sc-lbl">Alunos matriculados</div>
+                <div class="sc-sub" id="alunos-sub">Dados do banco</div>
+            </div>
+            <div class="card">
+                <div class="card-hd">
+                    <h3>👨‍🏫 Alunos Ativos</h3>
+                </div>
+                <div id="students-list">
+                    <div class="teach-item" style="opacity:.6">
+                        <div class="tav ta1">⏳</div>
+                        <div class="teach-info"><strong>Carregando alunos…</strong><span>Aguarde</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
 
     <p id="msg"></p>
 
