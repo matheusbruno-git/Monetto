@@ -45,6 +45,43 @@ document.getElementById("btn")?.addEventListener("click", async () => {
     .catch((err) => console.error(err));
 })();
 
+async function loadDashboard() {
+  const currentUserId = getCurrentUserId();
+  if (!currentUserId) {
+    setText('school-name', 'Sessão inválida');
+    setText('school-subtitle', 'Faça login novamente para ver os dados da sua escola.');
+    return;
+  }
+
+  const result = await window.api.getDashboardAdminEscolar(currentUserId);
+  if (!result.success) {
+    setText('school-name', 'Erro ao carregar');
+    setText('school-subtitle', result.message || 'Não foi possível carregar os dados da escola.');
+    return;
+  }
+
+  const d = result.data;
+
+  // School hero
+  setText('school-name', d.school.name);
+  setText('school-subtitle', d.school.subtitle || 'Dashboard do Administrador Escolar');
+  const chipsEl = document.getElementById('school-chips');
+  if (chipsEl && d.school.chips) {
+    chipsEl.innerHTML = d.school.chips.map(c => `<span class="shc">${c}</span>`).join('');
+  }
+  const alunos = d.school.stats || null;
+  if (alunos) setText('alunos-count', alunos.value);
+
+  // Stats row: [alunos, taxaConclusao, tarefas, xp, inativos]
+  const [statAlunos, statTaxa, statTarefas, statXp] = d.stats || [];
+  if (statAlunos) setText('alunos-matriculados-count', statAlunos.value);
+
+  renderStudents(d.students);
+}
+
+document.addEventListener('DOMContentLoaded', loadDashboard);
+
+
 function renderStudents(students) {
   const el = document.getElementById('students-list');
   if (!el) return;
@@ -58,3 +95,5 @@ function renderStudents(students) {
       <div class="teach-info"><strong>${s.name}</strong><span>${s.subtitle || ''}</span></div>
     </div>`).join('');
 }
+
+loadDashboard();

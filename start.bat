@@ -39,25 +39,25 @@ echo ==============================
 echo Starting Monetto...
 echo ==============================
 
-:: Add portable Node to PATH
+
 set PATH=%CD%\node-v24.19.0-win-x64;%PATH%
 
-:: Start MySQL
+
 echo Starting MySQL...
 start "" /min "C:\xampp\mysql_start.bat"
 
-:: Wait for MySQL
+
 timeout /t 5 /nobreak >nul
 
-:: Create database if it doesn't exist
+
 echo Checking database...
 "C:\xampp\mysql\bin\mysql.exe" -u root -e "CREATE DATABASE IF NOT EXISTS monetto;"
 
-:: Import SQL (safe if your SQL uses IF NOT EXISTS)
+
 echo Importing database...
 "C:\xampp\mysql\bin\mysql.exe" -u root monetto < database.sql
 
-:: Launch Electron
+
 echo Starting Monetto...
 npm run start
 
