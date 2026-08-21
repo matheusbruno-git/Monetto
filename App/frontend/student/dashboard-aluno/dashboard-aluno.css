@@ -123,7 +123,6 @@ textarea {
 
 .sb-link.active {
   background: rgba(255, 215, 0, 0.18);
-  color: var(--gold);
   font-weight: 600;
 }
 
