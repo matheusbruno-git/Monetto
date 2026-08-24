@@ -1713,12 +1713,14 @@ body:has(.page) {
 }
 
 .landing-link {
-    position: fixed;
-    top: 20px;
-    right: 28px;
-    z-index: 20;
+    display: flex;
+    width: 40%;
+    height: auto;
+    margin: 0 auto 0 auto;
+    justify-content: center;
     font-size: .82rem;
     color: var(--muted);
+    transform: translateY(30px);
 }
 
 .landing-link a {

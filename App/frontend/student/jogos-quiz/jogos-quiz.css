@@ -555,7 +555,7 @@ textarea {
 .quiz-options button.qf-wrong {
   border-color: var(--red);
   background: #FEE2E2;
-  color: #991B1B;
+  color: #d12525;
 }
 
 .q-letter {
