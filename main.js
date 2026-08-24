@@ -323,11 +323,9 @@ ipcMain.handle("updateAdmin", async (event, dados) => {
     const UpdateQuery = `UPDATE usuarios
        SET nome = ?, email = ?
        WHERE id_usuario = ?`;
-    const [result] = await db.promise().execute(UpdateQuery, [
-      dados.nome,
-      dados.email,
-      dados.id_usuario,
-    ]);
+    const [result] = await db
+      .promise()
+      .execute(UpdateQuery, [dados.nome, dados.email, dados.id_usuario]);
     return { success: true, message: "Administrador atualizado com sucesso!" };
   } catch (err) {
     console.error("updateAdmin Error:", err);
@@ -340,15 +338,18 @@ ipcMain.handle("updateEscola", async (event, dados) => {
     const db = require(path.join(basePath, "backend/connection.js"));
 
     const UpdateQuery = `UPDATE escolas
-       SET nome = ?, email = ?, telefone = ?, endereco = ?
+       SET nome = ?, email = ?, telefone = ?, endereco = ?, cnpj = ?
        WHERE id_escola = ?`;
-    const [result] = await db.promise().execute(UpdateQuery, [
-      dados.nome,
-      dados.email,
-      dados.telefone,
-      dados.endereco,
-      dados.id_escola,
-    ]);
+    const [result] = await db
+      .promise()
+      .execute(UpdateQuery, [
+        dados.nome,
+        dados.email,
+        dados.telefone,
+        dados.endereco,
+        dados.cnpj,
+        dados.id_escola,
+      ]);
     return { success: true, message: "Escola atualizada com sucesso!" };
   } catch (err) {
     console.error("updateEscola Error:", err);

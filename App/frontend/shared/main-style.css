@@ -37,6 +37,33 @@ body.fade-out {
     opacity: 0;
 }
 
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #c2ab14 #13134c;
+}
+
+
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: #e7e7e7;
+    border-radius: 8px;
+    border: 1px solid #cacaca;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #d55959;
+    border-radius: 8px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background-color: #c04444;
+
+}
+
 .sidebar {
     position: fixed;
     left: 0;

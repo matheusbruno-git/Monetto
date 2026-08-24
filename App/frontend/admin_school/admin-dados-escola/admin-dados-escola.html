@@ -30,19 +30,17 @@
         <div class="field-group"><label>Nome da Escola</label><input type="text" id="campo-nome-escola" value=""
             style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s" />
         </div>
-        <div class="field-group"><label>Código INEP</label><input type="text" value="35123456"
+        <div class="field-group"><label>Endereço</label><input type="text" id="endereco" value="Rua dos Bobos"
             style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none" />
         </div>
-        <div class="field-group"><label>CNPJ</label><input type="text" value="00.000.000/0001-00"
+        <div class="field-group"><label>CNPJ</label><input type="text" id="cnpj" value="00.000.000/0001-00"
             style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none" />
         </div>
-        <div class="field-group"><label>E-mail da Escola</label><input type="email" value="contato@escola.edu.br"
+        <div class="field-group"><label>E-mail da Escola</label><input type="email" id="email-escola"
+            value="contato@escola.edu.br"
             style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none" />
         </div>
-        <div class="field-group"><label>Telefone</label><input type="text" value="(11) 3456-7890"
-            style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none" />
-        </div>
-        <div class="field-group"><label>Cidade / Estado</label><input type="text" id="campo-cidade-estado" value=""
+        <div class="field-group"><label>Telefone</label><input type="text" id="telefone" value="(11) 3456-7890"
             style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none" />
         </div>
       </div>
@@ -132,73 +130,7 @@
   </main>
 
 
-  <script>
-    function showToast(msg, tipo) {
-      if (typeof MonettoUI !== 'undefined') {
-        MonettoUI.toast(msg || 'Ação realizada!', tipo || 'success');
-      }
-    }
-
-    // Only ever ask for this logged-in admin's own school — the backend
-    // re-derives id_escola from the user id server-side, so nothing here
-    // can accidentally show another school's data.
-    async function loadDadosEscola() {
-      const session = JSON.parse(localStorage.getItem('session') || '{}');
-      const currentUserId = session.id_usuario || session.id;
-      if (!currentUserId || !window.api?.getDashboardAdminEscolar) return;
-
-      const result = await window.api.getDashboardAdminEscolar(currentUserId);
-      if (!result.success) return;
-
-      const d = result.data;
-      const nomeEl = document.getElementById('campo-nome-escola');
-      if (nomeEl) nomeEl.value = d.school.name;
-      const cidadeEl = document.getElementById('campo-cidade-estado');
-      if (cidadeEl) cidadeEl.value = d.school.subtitle || '';
-
-      const [statAlunos, , statTarefas] = d.stats || [];
-      const alunosEl = document.getElementById('resumo-alunos');
-      if (alunosEl) alunosEl.textContent = statAlunos ? statAlunos.value : '0';
-      const [, professores, turmas] = d.school.stats || [];
-      const profEl = document.getElementById('resumo-professores');
-      if (profEl) profEl.textContent = professores ? professores.value : '0';
-      const turmasEl = document.getElementById('resumo-turmas');
-      if (turmasEl) turmasEl.textContent = turmas ? turmas.value : '0';
-    }
-
-    async function salvarEscola() {
-      const session = JSON.parse(localStorage.getItem('session') || '{}');
-      const currentUserId = session.id_usuario || session.id;
-      if (!currentUserId) return;
-
-      const nome = document.getElementById('campo-nome').value.trim();
-      const email = document.getElementById('campo-email').value.trim();
-      const telefone = document.getElementById('campo-telefone').value.trim();
-      const cnpj = document.getElementById('campo-cnpj').value.trim();
-
-      try {
-        const result = await window.api.updateEscola({ id_usuario: currentUserId, nome, email, telefone, cnpj });
-        if (result.success) {
-          showToast('Escola atualizada com sucesso!', 'success');
-          // Update the session in localStorage with the new name/email
-          session.nome = nome;
-          session.email = email;
-          localStorage.setItem('session', JSON.stringify(session));
-          loadDadosEscola(); // Refresh displayed school info
-          alert('Escola atualizada com sucesso!');
-        } else {
-          showToast(result.message || 'Falha ao atualizar escola.', 'error');
-          alert(result.message || 'Falha ao atualizar escola.');
-        }
-      } catch (err) {
-        console.error(err);
-        showToast('Erro de comunicação com o servidor.', 'error');
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', loadDadosEscola);
-    document.getElementById('save-btn').addEventListener('click', salvarEscola);
-  </script>
+  <script src="script.js"></script>
   <script src="../../shared/monetto-app.js"></script>
 </body>
 

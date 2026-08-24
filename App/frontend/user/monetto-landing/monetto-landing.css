@@ -91,6 +91,11 @@
     transition: background 0.35s ease, color 0.25s ease;
 }
 
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #c2ab14 #13134c;
+}
+
 .monetto-landing-page * {
     box-sizing: border-box;
 }
