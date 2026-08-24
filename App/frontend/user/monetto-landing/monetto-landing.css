@@ -69,8 +69,8 @@
     --surface: rgba(22, 30, 55, 0.92);
     --surface-soft: rgba(22, 30, 55, 0.75);
     --surface-muted: rgba(16, 24, 48, 0.6);
-    --hero-grad: linear-gradient(135deg, rgba(22, 30, 55, 0.95), rgba(16, 24, 48, 0.9));
-    --feat-grad: linear-gradient(135deg, rgba(22, 30, 55, 0.85), rgba(16, 24, 48, 0.8));
+    --hero-grad: linear-gradient(135deg, rgba(22, 30, 55, 0.95), rgba(40, 56, 106, 0.9));
+    --feat-grad: linear-gradient(135deg, rgba(34, 51, 101, 0.85), rgba(16, 24, 48, 0.8));
     --card-border: rgba(180, 200, 255, 0.1);
     --btn-ghost-bg: rgba(30, 40, 70, 0.8);
     --btn-outline-bg: rgba(30, 40, 70, 0.75);
@@ -577,7 +577,7 @@
 
 .monetto-landing-page .how {
     padding: 86px 18px 10px;
-    background: var(--surface-muted);
+    background: rgba(28, 28, 133, 0.175);
     border-radius: 30px;
     margin-top: 18px;
     transition: background 0.35s ease;
@@ -817,7 +817,7 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 14px;
-    background: linear-gradient(135deg, var(--navy-900), var(--blue-700));
+    background: linear-gradient(135deg, rgba(27, 27, 94, 0.47), rgba(17, 74, 187, 0.481));
     color: var(--white);
     border-radius: 28px;
     padding: 26px 22px;
@@ -829,6 +829,7 @@
     font-size: clamp(1.8rem, 3vw, 2.6rem);
     font-weight: 800;
     letter-spacing: -0.06em;
+    color: white;
 }
 
 .monetto-landing-page .stat-label {
@@ -1128,12 +1129,12 @@
 
 .monetto-landing-page .qf-correct {
     background: rgba(46, 203, 157, 0.12);
-    color: #095d48;
+    color: #35ab92;
 }
 
 .monetto-landing-page .qf-wrong {
     background: rgba(240, 86, 86, 0.08);
-    color: #8a1d1d;
+    color: #c53131;
 }
 
 .monetto-landing-page .quiz-next,
