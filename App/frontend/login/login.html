@@ -27,7 +27,7 @@
     <div class="left">
       <div class="form-box">
         <div class="logo">
-          <div class="logo-icon">M</div>
+          <img src="../Assets/Monetto Logo.png" alt="Monetto Logo" style="height: 50px; border-radius: 15%;" />
           Monetto
         </div>
 
@@ -161,7 +161,7 @@
       }
 
       try {
-        const result = await window.api.login({email, senha});
+        const result = await window.api.login({ email, senha });
 
         msgEl.textContent = result.message;
         msgEl.className = "message " + (result.success ? "success" : "error");

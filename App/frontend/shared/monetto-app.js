@@ -349,3 +349,13 @@ async function carregarTeacherEscolar() {
     console.error('Erro ao carregar dashboard:', err);
   }
 }
+
+document.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    document.body.classList.add('fade-out');
+    setTimeout(() => {
+      window.location.href = this.href;
+    }, 500);
+  });
+});

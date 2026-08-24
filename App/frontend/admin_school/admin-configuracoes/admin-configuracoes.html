@@ -18,7 +18,7 @@
     <div class="topbar">
       <h1>Configurações <span>Admin</span></h1>
       <div class="top-right">
-        <button class="btn btn-primary">💾 Salvar</button>
+        <button class="btn btn-primary" id="save-btn">💾 Salvar</button>
       </div>
     </div>
 
@@ -128,7 +128,36 @@
         [session.email, escolaNome].filter(Boolean).join(' · ');
     }
 
+    async function salvarPerfil() {
+      const session = JSON.parse(localStorage.getItem('session') || '{}');
+      const currentUserId = session.id_usuario || session.id;
+      if (!currentUserId) return;
+
+      const nome = document.getElementById('campo-nome').value.trim();
+      const email = document.getElementById('campo-email').value.trim();
+
+      try {
+        const result = await window.api.updateAdmin({ id_usuario: currentUserId, nome, email });
+        if (result.success) {
+          showToast('Perfil atualizado com sucesso!', 'success');
+          // Update the session in localStorage with the new name/email
+          session.nome = nome;
+          session.email = email;
+          localStorage.setItem('session', JSON.stringify(session));
+          loadPerfil(); // Refresh displayed profile info
+          alert('Perfil atualizado com sucesso!');
+        } else {
+          showToast(result.message || 'Falha ao atualizar perfil.', 'error');
+          alert(result.message || 'Falha ao atualizar perfil.');
+        }
+      } catch (err) {
+        console.error(err);
+        showToast('Erro de comunicação com o servidor.', 'error');
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', loadPerfil);
+    document.getElementById('save-btn').addEventListener('click', salvarPerfil);
   </script>
   <script src="../../shared/monetto-app.js"></script>
 </body>

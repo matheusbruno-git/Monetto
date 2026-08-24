@@ -18,5 +18,12 @@ contextBridge.exposeInMainWorld('api', {
   getNiveis:     () => ipcRenderer.invoke('getNiveis'),
   getSchools:   () => ipcRenderer.invoke('getSchools'),
   getDashboardAdminEscolar: (currentUserId) => ipcRenderer.invoke('getDashboardAdminEscolar', currentUserId),
-  getDashboardProfessor: (currentUserId) => ipcRenderer.invoke('getDashboardProfessor', currentUserId)
+  getDashboardProfessor: (currentUserId) => ipcRenderer.invoke('getDashboardProfessor', currentUserId),
+  updateAluno: (dados) => ipcRenderer.invoke('updateAluno', dados),
+  updateProfessor: (dados) => ipcRenderer.invoke('updateProfessor', dados),
+  updateAdmin: (dados) => ipcRenderer.invoke('updateAdmin', dados),
+  updateTarefa: (dados) => ipcRenderer.invoke('updateTarefa', dados),
+  updateEscola: (dados) => ipcRenderer.invoke('updateEscola', dados),
+  deleteAluno: (alunoId) => ipcRenderer.invoke('deleteAluno', alunoId),
+  deleteProfessor: (professorId) => ipcRenderer.invoke('deleteProfessor', professorId),
 });

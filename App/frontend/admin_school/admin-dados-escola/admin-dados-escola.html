@@ -18,7 +18,7 @@
     <div class="topbar">
       <h1>Dados da <span>Escola</span></h1>
       <div class="top-right">
-        <button class="btn btn-primary">💾 Salvar Alterações</button>
+        <button class="btn btn-primary" id="save-btn">💾 Salvar Alterações</button>
       </div>
     </div>
 
@@ -166,7 +166,38 @@
       if (turmasEl) turmasEl.textContent = turmas ? turmas.value : '0';
     }
 
+    async function salvarEscola() {
+      const session = JSON.parse(localStorage.getItem('session') || '{}');
+      const currentUserId = session.id_usuario || session.id;
+      if (!currentUserId) return;
+
+      const nome = document.getElementById('campo-nome').value.trim();
+      const email = document.getElementById('campo-email').value.trim();
+      const telefone = document.getElementById('campo-telefone').value.trim();
+      const cnpj = document.getElementById('campo-cnpj').value.trim();
+
+      try {
+        const result = await window.api.updateEscola({ id_usuario: currentUserId, nome, email, telefone, cnpj });
+        if (result.success) {
+          showToast('Escola atualizada com sucesso!', 'success');
+          // Update the session in localStorage with the new name/email
+          session.nome = nome;
+          session.email = email;
+          localStorage.setItem('session', JSON.stringify(session));
+          loadDadosEscola(); // Refresh displayed school info
+          alert('Escola atualizada com sucesso!');
+        } else {
+          showToast(result.message || 'Falha ao atualizar escola.', 'error');
+          alert(result.message || 'Falha ao atualizar escola.');
+        }
+      } catch (err) {
+        console.error(err);
+        showToast('Erro de comunicação com o servidor.', 'error');
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', loadDadosEscola);
+    document.getElementById('save-btn').addEventListener('click', salvarEscola);
   </script>
   <script src="../../shared/monetto-app.js"></script>
 </body>
