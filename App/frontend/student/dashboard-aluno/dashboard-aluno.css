@@ -3,9 +3,9 @@
    ========================================================= */
 
 :root {
-  --navy: #1A2A8F;
+  --navy: #e6e6e6;
   --navy-dark: #121E6B;
-  --navy-light: #2A3CB0;
+  --navy-light: #e4e4e4;
   --gold: #FFD700;
   --gold-soft: #FFE566;
   --green: #2ECC71;
@@ -14,7 +14,7 @@
   --orange: #F39C12;
   --purple: #9B59B6;
   --blue: #3498DB;
-  --bg: #F4F6FB;
+  --bg: #2b2b2b;
   --card: #FFFFFF;
   --text: #1A1A2E;
   --muted: #6B7280;
@@ -246,7 +246,7 @@ textarea {
   padding: 8px 16px;
   font-size: 0.88rem;
   font-weight: 600;
-  color: var(--navy);
+  color: var(--navy-dark);
 }
 
 /* ---- STATS ---- */
@@ -301,7 +301,7 @@ textarea {
   font-family: "Syne", sans-serif;
   font-weight: 800;
   font-size: 1.8rem;
-  color: var(--navy);
+  color: #121E6B;
   line-height: 1.1;
 }
 
@@ -332,13 +332,15 @@ textarea {
   padding: 22px;
   box-shadow: var(--shadow);
   border: 1px solid var(--border);
+  height: auto;
+  width: 100%;
 }
 
 .card-title {
   font-family: "Syne", sans-serif;
   font-weight: 700;
   font-size: 1.05rem;
-  color: var(--navy);
+  color: #121E6B;
   margin-bottom: 16px;
   display: flex;
   align-items: center;
@@ -365,22 +367,27 @@ textarea {
 }
 
 .ftab:hover {
-  color: var(--navy);
+  color: #fff;
 }
 
 .ftab.active {
   background: var(--navy);
-  color: #fff;
+  color: #121E6B;
   border-color: var(--navy);
 }
 
 /* ---- TASKS ---- */
 .task-item {
+  width: 100%;
+  height: auto;
   display: flex;
   align-items: flex-start;
+  background: var(--bg);
   gap: 12px;
   padding: 14px 0;
-  border-bottom: 1px solid var(--border);
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border-bottom: 1px solid rgb(77, 77, 77);
 }
 
 .task-item:last-child {
@@ -441,7 +448,7 @@ textarea {
 .task-name {
   font-weight: 600;
   font-size: 0.92rem;
-  color: var(--text);
+  color: white;
 }
 
 .task-name.done-text {
@@ -459,7 +466,7 @@ textarea {
 }
 
 .task-subject {
-  background: #EEF2FF;
+  background: #3f3f3f;
   color: var(--navy);
   padding: 2px 8px;
   border-radius: 6px;
@@ -482,6 +489,8 @@ textarea {
   color: var(--navy);
   white-space: nowrap;
   flex-shrink: 0;
+  margin-right: 30px;
+  margin-top: 15px;
 }
 
 /* ---- MINI CARDS ---- */
@@ -498,7 +507,7 @@ textarea {
   font-family: "Syne", sans-serif;
   font-weight: 700;
   font-size: 0.95rem;
-  color: var(--navy);
+  color: var(--navy-dark);
   margin-bottom: 14px;
 }
 
@@ -525,7 +534,7 @@ textarea {
   display: flex;
   justify-content: space-between;
   font-size: 0.78rem;
-  color: var(--muted);
+  color: var(--navy-dark);
 }
 
 /* Streak */
@@ -548,12 +557,12 @@ textarea {
 
 .sd-done {
   background: var(--green);
-  color: #fff;
+  color: var(--navy-dark);
 }
 
 .sd-today {
   background: var(--gold);
-  color: var(--navy);
+  color: var(--navy-dark);
   box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.35);
 }
 
@@ -581,7 +590,7 @@ textarea {
   gap: 10px;
   padding: 8px 10px;
   border-radius: 10px;
-  background: var(--bg);
+  background: gray;
   transition: background var(--transition);
 }
 
