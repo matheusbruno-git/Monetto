@@ -59,7 +59,6 @@ async function salvarEscola() {
       session.email = email;
       localStorage.setItem("session", JSON.stringify(session));
       loadDadosEscola(); // Refresh displayed school info
-      alert("Escola atualizada com sucesso!");
     } else {
       showToast(result.message || "Falha ao atualizar escola.", "error");
       alert(result.message || "Falha ao atualizar escola.", "error");

@@ -145,7 +145,6 @@
           session.email = email;
           localStorage.setItem('session', JSON.stringify(session));
           loadPerfil(); // Refresh displayed profile info
-          alert('Perfil atualizado com sucesso!');
         } else {
           showToast(result.message || 'Falha ao atualizar perfil.', 'error');
           alert(result.message || 'Falha ao atualizar perfil.');
