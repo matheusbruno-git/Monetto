@@ -3,7 +3,7 @@
     <style>
         .sidebar {
             width: 250px;
-            background: rgb(56, 56, 56);
+            background: var(--navy-dark);
             color: #fff;
             display: flex;
             flex-direction: column;
@@ -55,11 +55,6 @@
             text-decoration: none;
             font-size: 14px;
             transition: all 0.2S;
-        }
-
-        .sb-link:hover {
-            background: linear-gradient(90deg, #323233, #1f2024);
-            box-shadow: 3px 0px 0px #b9b9b9c9;
         }
 
         .sb-link .icon {
@@ -145,7 +140,7 @@
 
     <div class="sb-bottom">
         <a class="sb-link" href="#" style="color: rgba(255, 255, 255, 0.5); margin-bottom: 4px"
-            onclick="sairDaConta('../../user/login-principal/login-principal.html')"><span class="icon">🚪</span> Sair
+            onclick="sairDaConta('../../login/login.html')"><span class="icon">🚪</span> Sair
             da
             conta</a>
         <div class="sb-user">

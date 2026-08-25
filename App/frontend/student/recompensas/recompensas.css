@@ -40,7 +40,7 @@ html {
 
 body {
   font-family: "DM Sans", system-ui, sans-serif;
-  background: var(--bg);
+  background: #0B1340;
   color: var(--text);
   line-height: 1.5;
   min-height: 100vh;
@@ -281,12 +281,12 @@ textarea {
   font-family: "Syne", sans-serif;
   font-weight: 700;
   font-size: 1.1rem;
-  color: var(--navy);
+  color: var(--bg);
 }
 
 .sec-see {
   font-size: 0.85rem;
-  color: var(--navy);
+  color: var(--bg);
   font-weight: 600;
   cursor: pointer;
 }
