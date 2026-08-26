@@ -55,9 +55,27 @@
       </div>
     </div>
 
-  </div>
-  <script src="script.js"></script>
-  <script src="../../shared/monetto-app.js"></script>
+    <div id="modal-container" class="modal-container" style="display:none">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Atribuir Professor</h3>
+          <h4 id="nomeTurma"></h4>
+          <button class="close-btn" onclick="closeModal()">✖</button>
+        </div>
+        <div class="modal-body">
+          <p>Digite o professor para atribuir a esta turma:</p>
+          <select name="" id="professorId">
+            <option value="">Selecione um professor</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-acc" id="atribuirBtn">Atribuir</button>
+        </div>
+      </div>
+
+    </div>
+    <script src="script.js"></script>
+    <script src="../../shared/monetto-app.js"></script>
 </body>
 
 </html>

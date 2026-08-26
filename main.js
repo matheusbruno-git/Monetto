@@ -1088,3 +1088,18 @@ function formatRelative(dateVal) {
     return "—";
   }
 }
+
+ipcMain.handle("atribuirProfessorATurma", async (event, dados) => {
+  try {
+    const db = require(path.join(basePath, "backend/connection.js"));
+    const { id_turma, id_professor } = dados;
+    const result = await db.query(
+      "UPDATE turmas SET id_professor = ? WHERE id_turma = ?",
+      [id_professor, id_turma],
+    );
+    return { success: true, message: "Professor atribuído com sucesso." };
+  } catch (err) {
+    console.error("Error in atribuirProfessorATurma:", err);
+    return { success: false, message: "Erro ao atribuir professor à turma." };
+  }
+});
