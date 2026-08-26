@@ -306,7 +306,7 @@ async function OpenModalAtribuirProfessor(id_turma, nome_turma = "") {
 
   // Abre modal.
 
-  modal.style.display = "block";
+  modal.style.display = "flex";
 
   // Carrega professores.
 

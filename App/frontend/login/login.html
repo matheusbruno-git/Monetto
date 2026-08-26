@@ -167,7 +167,6 @@
         msgEl.className = "message " + (result.success ? "success" : "error");
 
         if (result.success) {
-          // ← THIS WAS MISSING
           localStorage.setItem("session", JSON.stringify(result.user));
 
           if (result.redirect) {
