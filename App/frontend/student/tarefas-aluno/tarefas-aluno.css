@@ -379,9 +379,9 @@ textarea {
 
 .sort-btn:hover {
   color: var(--muted);
-  transform: scaleY(1.2) scaleX(1.03);
+  transform: scaleY(1.1) scaleX(1.03);
   border-color: 1px solid var(--blue);
-  background: var(--card);
+  background: var(--bg);
 }
 
 .group-header {
@@ -698,7 +698,7 @@ span {
   border-top: 3px solid #636262;
   border-left: 2px solid #636262;
   border-right: 2px solid #636262;
-  background: var(--card);
+  background: var(--muted);
   color: var(--bg);
 }
 
