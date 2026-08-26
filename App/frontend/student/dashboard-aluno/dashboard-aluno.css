@@ -259,7 +259,7 @@ textarea {
 }
 
 .stat-card {
-  background: var(--card);
+  background: var(--bg);
   border-radius: var(--radius);
   padding: 20px;
   box-shadow: var(--shadow);
@@ -301,13 +301,13 @@ textarea {
   font-family: "Syne", sans-serif;
   font-weight: 800;
   font-size: 1.8rem;
-  color: #121E6B;
+  color: white;
   line-height: 1.1;
 }
 
 .stat-lbl {
   font-size: 0.85rem;
-  color: var(--muted);
+  color: rgb(185, 184, 184);
   margin-top: 2px;
 }
 
@@ -327,11 +327,11 @@ textarea {
 }
 
 .card {
-  background: var(--card);
+  background: var(--bg);
   border-radius: var(--radius);
   padding: 22px;
   box-shadow: var(--shadow);
-  border: 1px solid var(--border);
+  border: 1px solid var(--bg);
   height: auto;
   width: 100%;
 }
@@ -340,7 +340,7 @@ textarea {
   font-family: "Syne", sans-serif;
   font-weight: 700;
   font-size: 1.05rem;
-  color: #121E6B;
+  color: white;
   margin-bottom: 16px;
   display: flex;
   align-items: center;
@@ -382,7 +382,7 @@ textarea {
   height: auto;
   display: flex;
   align-items: flex-start;
-  background: rgb(60, 60, 60);
+  background: #3f3f3f;
   gap: 12px;
   padding: 14px 0;
   margin-bottom: 10px;
@@ -506,19 +506,21 @@ textarea {
 
 /* ---- MINI CARDS ---- */
 .mini-card {
-  background: var(--card);
+  background: var(--bg);
   border-radius: var(--radius);
   padding: 20px;
   box-shadow: var(--shadow);
-  border: 1px solid var(--border);
   margin-bottom: 16px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .mini-title {
   font-family: "Syne", sans-serif;
   font-weight: 700;
   font-size: 0.95rem;
-  color: var(--navy-dark);
+  color: var(--navy);
   margin-bottom: 14px;
 }
 
@@ -545,7 +547,7 @@ textarea {
   display: flex;
   justify-content: space-between;
   font-size: 0.78rem;
-  color: var(--navy-dark);
+  color: white;
 }
 
 /* Streak */
