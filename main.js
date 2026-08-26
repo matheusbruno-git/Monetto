@@ -1090,16 +1090,49 @@ function formatRelative(dateVal) {
 }
 
 ipcMain.handle("atribuirProfessorATurma", async (event, dados) => {
+  const db = require(path.join(basePath, "backend/connection.js"));
   try {
-    const db = require(path.join(basePath, "backend/connection.js"));
     const { id_turma, id_professor } = dados;
-    const result = await db.query(
-      "UPDATE turmas SET id_professor = ? WHERE id_turma = ?",
-      [id_professor, id_turma],
-    );
-    return { success: true, message: "Professor atribuído com sucesso." };
-  } catch (err) {
-    console.error("Error in atribuirProfessorATurma:", err);
-    return { success: false, message: "Erro ao atribuir professor à turma." };
+
+    console.log("Atribuindo professor:", {
+      id_turma,
+      id_professor,
+    });
+
+    if (!id_turma || !id_professor) {
+      return {
+        success: false,
+        message: "Turma e professor são obrigatórios.",
+      };
+    }
+
+    const sql = `
+      UPDATE turmas
+      SET id_professor = ?
+      WHERE id_turma = ?
+    `;
+
+    const [result] = await connection
+      .promise()
+      .query(sql, [id_professor, id_turma]);
+
+    if (result.affectedRows === 0) {
+      return {
+        success: false,
+        message: "Turma não encontrada.",
+      };
+    }
+
+    return {
+      success: true,
+      message: "Professor atribuído com sucesso.",
+    };
+  } catch (error) {
+    console.error("Error in atribuirProfessorATurma:", error);
+
+    return {
+      success: false,
+      message: "Erro ao atribuir professor: " + error.message,
+    };
   }
 });

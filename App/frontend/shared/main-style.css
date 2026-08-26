@@ -112,6 +112,10 @@ body::-webkit-scrollbar-thumb:hover {
     margin-top: 16px
 }
 
+option {
+    background: #0d1845
+}
+
 .sb-link {
     display: flex;
     align-items: center;
