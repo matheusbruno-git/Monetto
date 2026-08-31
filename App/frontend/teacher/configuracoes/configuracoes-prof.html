@@ -244,20 +244,24 @@
         </div>
 
         <div class="set-card">
-          <div class="set-card-title">🌈 Tema de Cores</div>
+          <div class="set-card-title">Tema de Cores</div>
           <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:8px">
-            <div
+            <div class="theme-opt selected" data-theme="padrao"
               style="height:54px;border-radius:14px;background:linear-gradient(135deg,#0B1340,#1A2A8F);cursor:pointer;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700">
-              ✓ Padrão</div>
-            <div
-              style="height:54px;border-radius:14px;background:linear-gradient(135deg,#1a3d0d,#2d6b1a);cursor:pointer;border:2px solid transparent;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:rgba(255,255,255,.5)">
-              Floresta</div>
-            <div
-              style="height:54px;border-radius:14px;background:linear-gradient(135deg,#3d0d3d,#6b1a6b);cursor:pointer;border:2px solid transparent;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:rgba(255,255,255,.5)">
-              Galáxia</div>
-            <div
-              style="height:54px;border-radius:14px;background:linear-gradient(135deg,#3d1a0d,#7a3310);cursor:pointer;border:2px solid transparent;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:rgba(255,255,255,.5)">
-              Vulcão</div>
+              <span class="theme-check">✓</span><span class="theme-name">Padrão</span>
+            </div>
+            <div class="theme-opt" data-theme="floresta"
+              style="height:54px;border-radius:14px;background:linear-gradient(135deg,#1a3d0d,#2d6b1a);cursor:pointer;border:2px solid transparent;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:rgba(255,255,255,.9)">
+              <span class="theme-check" style="display:none">✓</span><span class="theme-name">Floresta</span>
+            </div>
+            <div class="theme-opt" data-theme="galaxia"
+              style="height:54px;border-radius:14px;background:linear-gradient(135deg,#1A2A8F,#f5f0f5);cursor:pointer;border:2px solid transparent;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:rgba(255,255,255,.9)">
+              <span class="theme-check" style="display:none">✓</span><span class="theme-name">Galáxia</span>
+            </div>
+            <div class="theme-opt" data-theme="vulcao"
+              style="height:54px;border-radius:14px;background:linear-gradient(135deg,#3d1a0d,#7a3310);cursor:pointer;border:2px solid transparent;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:rgba(255,255,255,.9)">
+              <span class="theme-check" style="display:none">✓</span><span class="theme-name">Vulcão</span>
+            </div>
           </div>
           <p style="font-size:.75rem;color:var(--muted)">* Temas adicionais disponíveis na Loja de Prêmios</p>
         </div>

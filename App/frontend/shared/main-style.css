@@ -248,8 +248,15 @@ option {
 }
 
 .btn-primary {
-    background: var(--accent);
-    color: var(--navy)
+    background: var(--white);
+    color: var(--navy);
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-size: .88rem;
+    font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
 }
 
 .btn-primary:hover {
@@ -1671,6 +1678,10 @@ option {
     font-weight: 700;
     font-family: 'DM Sans', sans-serif;
     cursor: pointer
+}
+
+.btn-acc:hover {
+    opacity: .88
 }
 
 .list-area {
