@@ -23,8 +23,8 @@
 
 // Reads the logged-in user saved at login time (see main.js's 'login' handler).
 // We only ever send this user's id to the backend; the backend re-derives
-// id_escola from it server-side, so this admin can never pull another
-// school's data even if localStorage were tampered with.
+// permissions from it server-side, so this teacher can never pull another
+// teacher's data even if localStorage were tampered with.
 function getCurrentUserId() {
   try {
     const session = JSON.parse(localStorage.getItem("session") || "{}");
@@ -39,78 +39,34 @@ function setText(id, value) {
   if (el) el.textContent = value;
 }
 
-function renderTeachers(teachers) {
-  const el = document.getElementById("teachers-list");
-  if (!el) return;
-  if (!teachers || !teachers.length) {
-    el.innerHTML =
-      '<div class="teach-item"><div class="teach-info"><strong>Nenhum professor cadastrado</strong></div></div>';
-    return;
-  }
-  el.innerHTML = teachers
-    .map(
-      (t) => `
-    <div class="teach-item">
-      <div class="tav ${t.avatarClass || "ta1"}">${t.emoji || "👨‍🏫"}</div>
-      <div class="teach-info"><strong>${t.name}</strong><span>${t.subtitle || ""}</span></div>
-    </div>`,
-    )
-    .join("");
-}
-
-function renderAlerts(alerts) {
-  const el = document.getElementById("alerts-list");
-  if (!el) return;
-  if (!alerts || !alerts.length) {
-    el.innerHTML =
-      '<div class="alert-item al-blue"><div class="alert-body"><strong>Nenhum alerta</strong></div></div>';
-    return;
-  }
-  el.innerHTML = alerts
-    .map(
-      (a) => `
-    <div class="alert-item al-${a.level}">
-      <div class="alert-icon">${a.icon}</div>
-      <div class="alert-body"><strong>${a.title}</strong><span>${a.subtitle}</span></div>
-    </div>`,
-    )
-    .join("");
-}
-
-function renderClasses(classes) {
+function renderTurmas(turmas) {
   const el = document.getElementById("turmas-list");
   if (!el) return;
-  if (!classes || !classes.length) {
+  if (!turmas || !turmas.length) {
     el.innerHTML =
-      '<div class="turma-row"><div>Nenhuma turma cadastrada</div><div>—</div><div>—</div><div>—</div></div>';
+      '<div class="turma-item"><div class="turma-info"><strong>Nenhuma turma vinculada</strong><span>Peça ao admin para associar turmas</span></div></div>';
     return;
   }
-  el.innerHTML = classes
-    .map(
-      (c) => `
-    <div class="turma-row">
-      <div style="font-size:.85rem;font-weight:600">${c.name}</div>
-      <div style="color:var(--muted);font-size:.82rem">${c.students}</div>
-      <div>${c.completion}%</div>
-      <div><span class="${c.statusClass}">${c.statusLabel}</span></div>
-    </div>`,
-    )
-    .join("");
-}
-
-function renderXpChart(xpChart) {
-  const el = document.getElementById("xp-chart");
-  if (!el) return;
-  if (!xpChart || !xpChart.length) return;
-  const max = Math.max(...xpChart.map((b) => b.height), 1);
-  el.innerHTML = xpChart
-    .map(
-      (b) => `
-    <div class="bc">
-      <div class="bc-bar blue" style="height:${Math.max(4, (b.height / max) * 90)}px"></div>
-      <div class="bc-lbl">${b.label}</div>
-    </div>`,
-    )
+  const avatarClasses = ["ta-b", "ta-g", "ta-y", "ta-p"];
+  const emojis = ["📘", "📗", "📙", "📒"];
+  el.innerHTML = turmas
+    .map((t, i) => {
+      const av = t.avatarClass || avatarClasses[i % avatarClasses.length];
+      const emoji = t.emoji || emojis[i % emojis.length];
+      const eng = t.engagement != null ? t.engagement : 0;
+      return `
+    <div class="turma-item">
+      <div class="turma-av ${av}">${emoji}</div>
+      <div class="turma-info"><strong>${t.name}</strong><span>${t.subtitle || ""}</span></div>
+      <div class="turma-meta">
+        <div class="eng">${eng}%</div>
+        <div class="cnt">engajamento</div>
+        <div class="prog-bar">
+          <div class="prog-f" style="width:${eng}%"></div>
+        </div>
+      </div>
+    </div>`;
+    })
     .join("");
 }
 
@@ -123,68 +79,172 @@ function renderActivities(activities) {
     return;
   }
   el.innerHTML = activities
-    .map(
-      (a) => `
+    .map((a) => {
+      const dotClass = a.dotClass || a.iconClass || "ad-b";
+      return `
     <div class="act-item">
-      <div class="act-icon ${a.iconClass}">${a.icon}</div>
-      <div class="act-body"><strong>${a.title}</strong><span>${a.subtitle}</span></div>
-      <div class="act-time">${a.time}</div>
-    </div>`,
-    )
+      <div class="act-dot ${dotClass}"></div>
+      <div class="act-body"><strong>${a.title}</strong><span>${a.subtitle || ""}</span></div>
+      <div class="act-time">${a.time || ""}</div>
+    </div>`;
+    })
+    .join("");
+}
+
+function renderCompletionsChart(chart) {
+  const el = document.getElementById("completions-chart");
+  if (!el) return;
+  if (!chart || !chart.length) {
+    el.innerHTML =
+      '<div class="bar-col"><div class="bar-fill" style="height:20px;opacity:.3"></div><div class="bar-label">—</div></div>';
+    return;
+  }
+  const max = Math.max(...chart.map((b) => b.height || b.value || 0), 1);
+  el.innerHTML = chart
+    .map((b) => {
+      const h = b.height != null ? b.height : b.value || 0;
+      const px = Math.max(4, (h / max) * 95);
+      const opacity = h === 0 ? "opacity:.25" : "";
+      return `
+    <div class="bar-col">
+      <div class="bar-fill" style="height:${px}px;${opacity}"></div>
+      <div class="bar-label">${b.label}</div>
+    </div>`;
+    })
+    .join("");
+}
+
+function renderTopAlunos(alunos) {
+  const el = document.getElementById("top-alunos-list");
+  if (!el) return;
+  if (!alunos || !alunos.length) {
+    el.innerHTML =
+      '<div class="top-aluno"><span class="ta-nm">Nenhum dado de ranking ainda</span></div>';
+    return;
+  }
+  const medals = ["🥇", "2", "3", "4", "5"];
+  const avatars = ["tav1", "tav2", "tav3", "tav4", "tav5"];
+  el.innerHTML = alunos
+    .map((a, i) => {
+      const pos = i + 1;
+      const medal = medals[i] || String(pos);
+      const posClass = pos === 1 ? "tp1" : pos === 2 ? "tp2" : "tp3";
+      const style = pos > 3 ? ' style="color:var(--muted)"' : "";
+      const av = a.avatarClass || avatars[i % avatars.length];
+      return `
+    <div class="top-aluno">
+      <div class="ta-pos ${posClass}"${style}>${medal}</div>
+      <div class="ta-av2 ${av}"></div>
+      <span class="ta-nm">${a.name}${a.turma ? " · " + a.turma : ""}</span>
+      <span class="ta-xp">${a.xp != null ? a.xp + " XP" : "—"}</span>
+    </div>`;
+    })
+    .join("");
+}
+
+function renderPending(tasks) {
+  const el = document.getElementById("pending-list");
+  if (!el) return;
+  if (!tasks || !tasks.length) {
+    el.innerHTML =
+      '<div class="pend-item"><div class="pend-body"><strong>Nenhuma tarefa pendente</strong><span>Tudo em dia</span></div></div>';
+    return;
+  }
+  el.innerHTML = tasks
+    .map((t) => {
+      const urgency = t.urgency || "pu-y";
+      const chip = t.chip || "em prazo";
+      return `
+    <div class="pend-item">
+      <div class="pend-urgency ${urgency}"></div>
+      <div class="pend-body"><strong>${t.title}</strong><span>${t.subtitle || ""}</span></div>
+      <span class="pend-chip">${chip}</span>
+    </div>`;
+    })
     .join("");
 }
 
 async function loadDashboard() {
+  console.log("Loading teacher dashboard data...");
   const currentUserId = getCurrentUserId();
   if (!currentUserId) {
-    setText("school-name", "Sessão inválida");
+    setText("teacher-name", "Sessão inválida");
     setText(
-      "school-subtitle",
-      "Faça login novamente para ver os dados da sua escola.",
+      "teacher-subtitle",
+      "Faça login novamente para ver os dados das suas turmas.",
     );
     return;
   }
 
   const result = await window.api.getDashboardTeacher(currentUserId);
   if (!result.success) {
-    setText("school-name", "Erro ao carregar");
+    setText("teacher-name", "Erro ao carregar");
     setText(
-      "school-subtitle",
-      result.message || "Não foi possível carregar os dados da escola.",
+      "teacher-subtitle",
+      result.message || "Não foi possível carregar os dados do professor.",
     );
     return;
   }
 
   const d = result.data;
 
-  // School hero
-  setText("school-name", d.school.name);
-  setText("school-subtitle", d.school.subtitle || "Dashboard do Professor");
-  const chipsEl = document.getElementById("school-chips");
-  if (chipsEl && d.school.chips) {
-    chipsEl.innerHTML = d.school.chips
-      .map((c) => `<span class="shc">${c}</span>`)
-      .join("");
+  // Topbar
+  setText("teacher-name", d.teacher?.name || d.name || "Professor");
+  setText(
+    "teacher-subtitle",
+    d.teacher?.subtitle || d.subtitle || "Dashboard do Professor",
+  );
+
+  // Stats row — expected shape:
+  // d.stats = [{ value, sub }, ...] for [alunos, conclusao, tarefas, avaliacao]
+  // or named keys: d.stats.alunos, etc.
+  const stats = d.stats || {};
+  if (Array.isArray(stats)) {
+    const [sAlunos, sConclusao, sTarefas, sAvaliacao] = stats;
+    if (sAlunos) {
+      setText("stat-alunos", sAlunos.value);
+      if (sAlunos.sub) setText("stat-alunos-sub", sAlunos.sub);
+    }
+    if (sConclusao) {
+      setText("stat-conclusao", sConclusao.value);
+      if (sConclusao.sub) setText("stat-conclusao-sub", sConclusao.sub);
+    }
+    if (sTarefas) {
+      setText("stat-tarefas", sTarefas.value);
+      if (sTarefas.sub) setText("stat-tarefas-sub", sTarefas.sub);
+    }
+    if (sAvaliacao) {
+      setText("stat-avaliacao", sAvaliacao.value);
+      if (sAvaliacao.sub) setText("stat-avaliacao-sub", sAvaliacao.sub);
+    }
+  } else {
+    if (stats.alunos) {
+      setText("stat-alunos", stats.alunos.value ?? stats.alunos);
+      if (stats.alunos.sub) setText("stat-alunos-sub", stats.alunos.sub);
+    }
+    if (stats.conclusao || stats.completion) {
+      const c = stats.conclusao || stats.completion;
+      setText("stat-conclusao", c.value ?? c);
+      if (c.sub) setText("stat-conclusao-sub", c.sub);
+    }
+    if (stats.tarefas) {
+      setText("stat-tarefas", stats.tarefas.value ?? stats.tarefas);
+      if (stats.tarefas.sub) setText("stat-tarefas-sub", stats.tarefas.sub);
+    }
+    if (stats.avaliacao || stats.rating) {
+      const a = stats.avaliacao || stats.rating;
+      setText("stat-avaliacao", a.value ?? a);
+      if (a.sub) setText("stat-avaliacao-sub", a.sub);
+    }
   }
-  const [alunos, professores, turmas] = d.school.stats || [];
-  if (alunos) setText("alunos-count", alunos.value);
-  if (professores) setText("professores-count", professores.value);
-  if (turmas) setText("turmas-count", turmas.value);
 
-  // Stats row: [alunos, taxaConclusao, tarefas, xp, inativos]
-  const [statAlunos, statTaxa, statTarefas, statXp] = d.stats || [];
-  if (statAlunos) setText("alunos-matriculados-count", statAlunos.value);
-  if (statTaxa) setText("completion-rate", statTaxa.value);
-  if (statTarefas) setText("tarefas-count", statTarefas.value);
-  if (statXp) setText("xp-distribuido-count", statXp.value);
+  renderTurmas(d.turmas || d.classes || []);
+  renderActivities(d.activities || []);
+  renderCompletionsChart(d.completionsChart || d.chart || []);
+  renderTopAlunos(d.topAlunos || d.topStudents || []);
+  renderPending(d.pending || d.tarefasPendentes || []);
 
-  renderTeachers(d.teachers);
-  renderAlerts(d.alerts);
-  renderClasses(d.classes);
-  renderXpChart(d.xpChart);
-  setText("xp-month-value", d.xpMonthValue);
-  setText("xp-month-delta", d.xpMonthDelta);
-  renderActivities(d.activities);
+  console.log("Dashboard data loaded:", d);
 }
 
 document.addEventListener("DOMContentLoaded", loadDashboard);

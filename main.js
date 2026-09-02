@@ -459,7 +459,7 @@ ipcMain.handle("getTurmas", async (event, currentUserId) => {
         ON t.id_nivel = n.id_nivel
       WHERE t.id_escola = ?
       ORDER BY t.nome_turma ASC`,
-      [escolaId]
+      [escolaId],
     );
 
     return {
@@ -818,6 +818,11 @@ ipcMain.handle("getDashboardAdminEscolar", async (event, currentUserId) => {
   }
 });
 
+/**
+ * IPC handler: getDashboardTeacher
+ * Place this in main.js (or wherever the other ipcMain.handle dashboard handlers live).
+ * Frontend expects the shape documented at the bottom.
+ */
 ipcMain.handle("getDashboardTeacher", async (event, currentUserId) => {
   try {
     const db = require(path.join(basePath, "backend/connection.js"));
@@ -854,235 +859,301 @@ ipcMain.handle("getDashboardTeacher", async (event, currentUserId) => {
       }
     }
 
-    const alunosTotal = await safeCount(
-      `SELECT COUNT(*) AS total FROM usuarios WHERE id_perfil = 1 AND ativo = 1 AND id_escola = ?`,
-      [escolaId],
-    );
-    const deactivatedAlunosTotal = await safeCount(
-      `SELECT COUNT(*) AS total FROM usuarios WHERE id_perfil = 1 AND ativo = 1 AND id_escola = ? AND (ultimo_acesso IS NULL OR DATEDIFF(CURDATE(), ultimo_acesso) > 7)`,
-      [escolaId],
-    );
-    const turmasTotal = await safeCount(
-      `SELECT COUNT(*) AS total FROM turmas WHERE status = 'ativa' AND id_escola = ? AND id_professor = ?`,
-      [escolaId, currentUserId],
-    );
-    const tarefasTotal = await safeCount(
-      `SELECT COUNT(*) AS total FROM tarefas WHERE id_escola = ?`,
-      [escolaId],
-    );
-
-    // Alunos com turma / total (proxy de "taxa de conclusão")
-    let taxaConclusao = 0;
-    if (alunosTotal > 0) {
-      const comTurma = await safeCount(
-        `SELECT COUNT(*) AS total FROM usuarios
-         WHERE id_perfil = 1 AND ativo = 1 AND id_escola = ?
-           AND id_turma IS NOT NULL`,
-        [escolaId],
-      );
-      taxaConclusao = Math.round((comTurma / alunosTotal) * 100);
-    }
-
-    let escolaNome = "Escola";
-    let escolaSub = "";
+    // ---- Professor info ----
+    let teacherName = "Professor";
+    let teacherSub = "Dashboard do Professor";
     try {
-      const [escolas] = await db
+      const [users] = await db
         .promise()
         .execute(
-          `SELECT nome, cidade, estado FROM escolas WHERE id_escola = ? LIMIT 1`,
-          [escolaId],
+          `SELECT nome, email FROM usuarios WHERE id_usuario = ? LIMIT 1`,
+          [currentUserId],
         );
-      if (escolas[0]) {
-        escolaNome = escolas[0].nome;
-        escolaSub = [escolas[0].cidade, escolas[0].estado]
-          .filter(Boolean)
-          .join(" · ");
+      if (users[0]) {
+        teacherName = users[0].nome || teacherName;
       }
     } catch (e) {
-      console.warn("escolas table missing or empty");
+      console.warn("usuario lookup failed:", e.sqlMessage || e.message);
     }
 
-    // Turmas
+    // Turmas deste professor
+    const turmasTotal = await safeCount(
+      `SELECT COUNT(*) AS total FROM turmas
+       WHERE status = 'ativa' AND id_escola = ? AND id_professor = ?`,
+      [escolaId, currentUserId],
+    );
+
+    // Alunos nas turmas deste professor
+    const alunosAtivos = await safeCount(
+      `SELECT COUNT(*) AS total FROM usuarios u
+       INNER JOIN turmas t ON u.id_turma = t.id_turma
+       WHERE u.id_perfil = 1 AND u.ativo = 1 AND u.id_escola = ?
+         AND t.id_professor = ? AND t.id_escola = ?`,
+      [escolaId, currentUserId, escolaId],
+    );
+
+    // Tarefas publicadas pelo professor (ajusta coluna se o schema for diferente)
+    const tarefasAtivas = await safeCount(
+      `SELECT COUNT(*) AS total FROM tarefas
+       WHERE id_escola = ? AND (id_professor = ? OR id_usuario = ?)`,
+      [escolaId, currentUserId, currentUserId],
+    );
+
+    // Taxa de conclusão: alunos com pelo menos 1 entrega / alunos (proxy)
+    // Se não houver tabela de entregas, usa vínculo a turma como proxy
+    let taxaConclusao = 0;
+    let taxaSub = "Alunos nas suas turmas";
+    if (alunosAtivos > 0) {
+      const comEntrega = await safeCount(
+        `SELECT COUNT(DISTINCT e.id_usuario) AS total
+         FROM entregas e
+         INNER JOIN usuarios u ON u.id_usuario = e.id_usuario
+         INNER JOIN turmas t ON u.id_turma = t.id_turma
+         WHERE t.id_professor = ? AND t.id_escola = ?
+           AND u.id_perfil = 1 AND u.ativo = 1`,
+        [currentUserId, escolaId],
+      );
+      if (comEntrega > 0) {
+        taxaConclusao = Math.round((comEntrega / alunosAtivos) * 100);
+        taxaSub = "Com entregas registradas";
+      } else {
+        taxaConclusao = 100;
+        taxaSub = "Vinculados a turmas";
+      }
+    }
+
+    // Avaliação média (se existir tabela de avaliações/feedback)
+    let avaliacaoMedia = "—";
+    let avaliacaoSub = "Nota dos alunos";
+    const avgRow = await safeQuery(
+      `SELECT ROUND(AVG(nota), 1) AS media FROM avaliacoes_professor
+       WHERE id_professor = ?`,
+      [currentUserId],
+    );
+    if (avgRow[0] && avgRow[0].media != null) {
+      avaliacaoMedia = String(avgRow[0].media);
+    }
+
+    teacherSub = `${turmasTotal} turma${turmasTotal === 1 ? "" : "s"} · ${alunosAtivos} aluno${alunosAtivos === 1 ? "" : "s"}`;
+
+    // ---- Turmas (Minhas Turmas) ----
     const turmaRows = await safeQuery(
-      `SELECT t.id_turma, t.nome_turma, t.status,
+      `SELECT t.id_turma, t.nome_turma, t.status, t.sala,
               (SELECT COUNT(*) FROM usuarios u
-               WHERE u.id_turma = t.id_turma AND u.id_perfil = 1 AND u.ativo = 1 AND u.id_escola = ?) AS alunos_count
+               WHERE u.id_turma = t.id_turma
+                 AND u.id_perfil = 1 AND u.ativo = 1 AND u.id_escola = ?) AS alunos_count
        FROM turmas t
        WHERE t.id_escola = ? AND t.id_professor = ?
        ORDER BY t.nome_turma ASC
        LIMIT 10`,
-      [escolaId, currentUserId],
+      [escolaId, escolaId, currentUserId],
     );
-    const classes = turmaRows.map((t) => {
+
+    const turmas = turmaRows.map((t) => {
       const nAlunos = Number(t.alunos_count) || 0;
-      let conclusao = t.status === "ativa" ? 80 : 55;
-      if (nAlunos === 0) conclusao = 0;
-      else if (nAlunos >= 25) conclusao = 90;
-      let statusLabel = "Bom";
-      let statusClass = "sd-y";
-      if (conclusao >= 90) {
-        statusLabel = "Ótimo";
-        statusClass = "sd-g";
-      } else if (conclusao < 70) {
-        statusLabel = "Atenção";
-        statusClass = "sd-r";
-      }
+      let engagement = t.status === "ativa" ? 75 : 40;
+      if (nAlunos === 0) engagement = 0;
+      else if (nAlunos >= 30) engagement = 92;
+      else if (nAlunos >= 20) engagement = 85;
+      else if (nAlunos >= 10) engagement = 78;
+
+      const sala = t.sala ? `Sala ${t.sala}` : "";
+      const subtitle = [nAlunos ? `${nAlunos} alunos` : "Sem alunos", sala]
+        .filter(Boolean)
+        .join(" · ");
+
       return {
         id: t.id_turma,
         name: t.nome_turma,
+        subtitle,
+        engagement,
         students: nAlunos,
-        completion: conclusao,
-        statusLabel,
-        statusClass,
       };
     });
 
-    // Alertas a partir de sinais reais
-    const alerts = [];
-    if (deactivatedAlunosTotal > 0) {
-      alerts.push({
-        level: "red",
-        icon: "🔴",
-        title: `${deactivatedAlunosTotal} aluno(s) sem acesso há +7 dias`,
-        subtitle: "Ação recomendada",
-        action: "Alertar",
-      });
-    }
-    if (professoresTotal === 0) {
-      alerts.push({
-        level: "yellow",
-        icon: "🟡",
-        title: "Nenhum professor cadastrado",
-        subtitle: "Cadastre professores para começar",
-        action: "Cadastrar",
-      });
-    }
-    if (turmasTotal === 0) {
-      alerts.push({
-        level: "blue",
-        icon: "🔵",
-        title: "Nenhuma turma ativa",
-        subtitle: "Crie turmas e vincule alunos",
-        action: "Criar",
-      });
-    }
-    if (alunosTotal === 0) {
-      alerts.push({
-        level: "yellow",
-        icon: "🟡",
-        title: "Nenhum aluno matriculado",
-        subtitle: "Cadastre ou importe alunos",
-        action: "Cadastrar",
-      });
-    }
-    if (!alerts.length) {
-      alerts.push({
-        level: "blue",
-        icon: "🔵",
-        title: "Tudo em ordem",
-        subtitle: "Nenhum alerta crítico no momento",
-        action: "OK",
+    // ---- Atividades recentes (escopo do professor) ----
+    const activities = [];
+
+    const recentEntregas = await safeQuery(
+      `SELECT u.nome AS aluno_nome, tar.titulo AS tarefa_titulo, e.criado_em,
+              t.nome_turma, e.xp_ganho
+       FROM entregas e
+       INNER JOIN usuarios u ON u.id_usuario = e.id_usuario
+       INNER JOIN tarefas tar ON tar.id_tarefa = e.id_tarefa
+       INNER JOIN turmas t ON u.id_turma = t.id_turma
+       WHERE t.id_professor = ? AND t.id_escola = ?
+       ORDER BY e.criado_em DESC
+       LIMIT 5`,
+      [currentUserId, escolaId],
+    );
+    for (const r of recentEntregas) {
+      const xp = r.xp_ganho != null ? ` · +${r.xp_ganho} XP` : "";
+      activities.push({
+        title: `${r.aluno_nome} concluiu "${r.tarefa_titulo || "tarefa"}"`,
+        subtitle: `${r.nome_turma || ""}${xp}`.trim(),
+        time: formatRelative(r.criado_em),
+        dotClass: "ad-g",
       });
     }
 
-    // Atividades recentes
-    const activities = [];
-    const recentProfs = await safeQuery(
-      `SELECT nome, criado_em FROM usuarios
-       WHERE id_escola = ? AND id_perfil = 2
+    const recentTarefas = await safeQuery(
+      `SELECT titulo, criado_em FROM tarefas
+       WHERE id_escola = ? AND (id_professor = ? OR id_usuario = ?)
        ORDER BY criado_em DESC LIMIT 3`,
-      [escolaId],
+      [escolaId, currentUserId, currentUserId],
     );
-    for (const r of recentProfs) {
+    for (const r of recentTarefas) {
+      if (activities.length >= 6) break;
       activities.push({
-        icon: "👨‍🏫",
-        iconClass: "ai-b",
-        title: `Professor: ${r.nome}`,
-        subtitle: "Cadastro no sistema",
+        title: `Nova tarefa: ${r.titulo || "sem título"}`,
+        subtitle: "Publicada por você",
         time: formatRelative(r.criado_em),
+        dotClass: "ad-b",
       });
     }
-    let recentTurmas = await safeQuery(
-      `SELECT nome_turma, data_inicio AS ref_date FROM turmas
-       WHERE id_escola = ?
-       ORDER BY id_turma DESC LIMIT 3`,
-      [escolaId],
-    );
-    if (!recentTurmas.length) {
-      recentTurmas = await safeQuery(
-        `SELECT nome_turma, NULL AS ref_date FROM turmas
-         WHERE id_escola = ?
-         ORDER BY id_turma DESC LIMIT 3`,
-        [escolaId],
-      );
-    }
-    for (const r of recentTurmas) {
-      activities.push({
-        icon: "✅",
-        iconClass: "ai-g",
-        title: `Turma: ${r.nome_turma}`,
-        subtitle: "Turma na escola",
-        time: formatRelative(r.ref_date),
-      });
-    }
+
     if (!activities.length) {
       activities.push({
-        icon: "📊",
-        iconClass: "ai-b",
         title: "Dashboard atualizado",
-        subtitle: "Dados carregados do banco",
+        subtitle: "Dados das suas turmas",
         time: "agora",
+        dotClass: "ad-b",
       });
     }
 
-    const formatXp = (n) => {
-      if (n >= 1000) return (n / 1000).toFixed(1) + "k";
-      return String(n);
-    };
+    // ---- Conclusões por dia (últimos 7 dias) ----
+    const dayLabels = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+    const completionsByDay = await safeQuery(
+      `SELECT DAYOFWEEK(e.criado_em) AS dow, COUNT(*) AS total
+       FROM entregas e
+       INNER JOIN usuarios u ON u.id_usuario = e.id_usuario
+       INNER JOIN turmas t ON u.id_turma = t.id_turma
+       WHERE t.id_professor = ? AND t.id_escola = ?
+         AND e.criado_em >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
+       GROUP BY DAYOFWEEK(e.criado_em)`,
+      [currentUserId, escolaId],
+    );
+    const byDow = {};
+    for (const r of completionsByDay) {
+      byDow[Number(r.dow)] = Number(r.total) || 0;
+    }
+    const completionsChart = [];
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date();
+      d.setDate(d.getDate() - i);
+      const mysqlDow = d.getDay() + 1;
+      const label = dayLabels[d.getDay()];
+      completionsChart.push({
+        label,
+        height: byDow[mysqlDow] || 0,
+        value: byDow[mysqlDow] || 0,
+      });
+    }
+
+    // ---- Top alunos da semana ----
+    const topRows = await safeQuery(
+      `SELECT u.nome, t.nome_turma,
+              COALESCE(SUM(e.xp_ganho), 0) AS xp
+       FROM usuarios u
+       INNER JOIN turmas t ON u.id_turma = t.id_turma
+       LEFT JOIN entregas e ON e.id_usuario = u.id_usuario
+         AND e.criado_em >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+       WHERE u.id_perfil = 1 AND u.ativo = 1 AND u.id_escola = ?
+         AND t.id_professor = ?
+       GROUP BY u.id_usuario, u.nome, t.nome_turma
+       ORDER BY xp DESC
+       LIMIT 5`,
+      [escolaId, currentUserId],
+    );
+    const topAlunos = topRows.map((r) => ({
+      name: r.nome,
+      turma: r.nome_turma,
+      xp: Number(r.xp) || 0,
+    }));
+
+    // ---- Tarefas pendentes ----
+    const pendingRows = await safeQuery(
+      `SELECT tar.id_tarefa, tar.titulo, tar.data_entrega,
+              t.nome_turma,
+              (SELECT COUNT(*) FROM usuarios u
+               WHERE u.id_turma = t.id_turma AND u.id_perfil = 1 AND u.ativo = 1) AS total_alunos,
+              (SELECT COUNT(DISTINCT e.id_usuario) FROM entregas e
+               WHERE e.id_tarefa = tar.id_tarefa) AS entregues
+       FROM tarefas tar
+       INNER JOIN turmas t ON t.id_turma = tar.id_turma
+       WHERE tar.id_escola = ?
+         AND t.id_professor = ?
+         AND (tar.data_entrega IS NULL OR tar.data_entrega >= DATE_SUB(CURDATE(), INTERVAL 1 DAY))
+       ORDER BY tar.data_entrega ASC
+       LIMIT 6`,
+      [escolaId, currentUserId],
+    );
+
+    const pending = pendingRows.map((r) => {
+      const total = Number(r.total_alunos) || 0;
+      const entregues = Number(r.entregues) || 0;
+      const faltam = Math.max(0, total - entregues);
+      let urgency = "pu-y";
+      let chip = "em prazo";
+      let when = "Sem prazo";
+      if (r.data_entrega) {
+        const deadline = new Date(r.data_entrega);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const diffDays = Math.floor((deadline - today) / (1000 * 60 * 60 * 24));
+        if (diffDays < 0) {
+          urgency = "pu-r";
+          chip = "atrasada";
+          when = `Atrasada · ${faltam} pendentes`;
+        } else if (diffDays === 0) {
+          urgency = "pu-r";
+          chip = "urgente";
+          when = `Hoje · ${faltam} não entregaram`;
+        } else if (diffDays <= 2) {
+          urgency = "pu-y";
+          chip = "em prazo";
+          when = `${deadline.toLocaleDateString("pt-BR")} · ${faltam} pendentes`;
+        } else {
+          urgency = "pu-g";
+          chip = "tranquilo";
+          when = `${deadline.toLocaleDateString("pt-BR")} · ${faltam} pendentes`;
+        }
+      } else {
+        when = `${faltam} pendentes`;
+      }
+      return {
+        title: r.titulo || "Tarefa",
+        subtitle: r.nome_turma ? `${r.nome_turma} · ${when}` : when,
+        urgency,
+        chip,
+      };
+    });
 
     return {
       success: true,
       data: {
-        school: {
-          name: escolaNome,
-          subtitle: escolaSub,
-          chips: [
-            `📅 Ano letivo ${new Date().getFullYear()}`,
-            "🔒 Admin",
-            "● Sistema ativo",
-          ],
-          stats: [
-            { value: String(alunosTotal), label: "Alunos" },
-            { value: String(professoresTotal), label: "Professores" },
-            { value: String(turmasTotal), label: "Turmas" },
-          ],
+        teacher: {
+          name: teacherName,
+          subtitle: teacherSub,
         },
         stats: [
-          { value: String(alunosTotal) },
-          { value: taxaConclusao + "%" },
-          { value: String(tarefasTotal) },
-          { value: formatXp(xpTotal) },
-          { value: String(deactivatedAlunosTotal) },
-        ],
-        teachers,
-        alerts,
-        classes,
-        xpChart: [
-          { label: "Sem 1", height: 40 },
-          { label: "Sem 2", height: 55 },
-          { label: "Sem 3", height: 48 },
           {
-            label: "Sem 4",
-            height: Math.min(90, 30 + Math.round(xpTotal / 100)),
+            value: String(alunosAtivos),
+            sub: `${turmasTotal} turma${turmasTotal === 1 ? "" : "s"}`,
           },
+          { value: taxaConclusao + "%", sub: taxaSub },
+          { value: String(tarefasAtivas), sub: "Publicadas por você" },
+          { value: avaliacaoMedia, sub: avaliacaoSub },
         ],
-        xpMonthValue: formatXp(xpTotal),
-        xpMonthDelta: "—",
+        turmas,
         activities,
+        completionsChart,
+        topAlunos,
+        pending,
       },
     };
   } catch (err) {
-    console.error("getDashboardAdminEscolar Error:", err);
+    console.error("getDashboardTeacher Error:", err);
     return {
       success: false,
       message: "Erro ao carregar dashboard: " + err.message,

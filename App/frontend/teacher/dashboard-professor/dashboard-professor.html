@@ -19,8 +19,8 @@
   <main class="main">
     <div class="topbar">
       <div>
-        <h1>Olá, <span>Prof. Ricardo!</span> 👨‍🏫</h1>
-        <p>Quinta-feira, 17 de abril · Você tem 3 tarefas aguardando revisão</p>
+        <h1>Olá, <span id="teacher-name">Carregando…</span> 👨‍🏫</h1>
+        <p id="teacher-subtitle">Dashboard do Professor</p>
       </div>
       <div class="top-actions">
         <button class="btn-primary" onclick="location.href='../CRUD_Tarefas/criar-tarefas.html'">+ Nova Tarefa</button>
@@ -32,28 +32,27 @@
     <div class="stats-row">
       <div class="stat-card sc-b">
         <div class="stat-icon">👥</div>
-        <div class="stat-val">128</div>
+        <div class="stat-val" id="stat-alunos">—</div>
         <div class="stat-lbl">Alunos ativos</div>
-        <div class="stat-sub">4 turmas</div>
+        <div class="stat-sub" id="stat-alunos-sub">—</div>
       </div>
       <div class="stat-card sc-g">
         <div class="stat-icon">✅</div>
-        <div class="stat-val">87%</div>
+        <div class="stat-val" id="stat-conclusao">—</div>
         <div class="stat-lbl">Taxa de conclusão</div>
-        <div class="stat-sub">▲ +5% esta semana</div>
+        <div class="stat-sub" id="stat-conclusao-sub">—</div>
       </div>
       <div class="stat-card sc-y">
         <div class="stat-icon">📝</div>
-
-        <div class="stat-val">12</div>
+        <div class="stat-val" id="stat-tarefas">—</div>
         <div class="stat-lbl">Tarefas ativas</div>
-        <div class="stat-sub">3 vencendo hoje</div>
+        <div class="stat-sub" id="stat-tarefas-sub">—</div>
       </div>
       <div class="stat-card sc-r">
         <div class="stat-icon">⭐</div>
-        <div class="stat-val">4.8</div>
+        <div class="stat-val" id="stat-avaliacao">—</div>
         <div class="stat-lbl">Avaliação média</div>
-        <div class="stat-sub">Nota dos alunos</div>
+        <div class="stat-sub" id="stat-avaliacao-sub">Nota dos alunos</div>
       </div>
     </div>
 
@@ -62,50 +61,13 @@
 
       <div class="card">
         <div class="card-hd">
-          <h3>📚 Minhas Turmas</h3><a href="../gerenciar-alunos/gerenciar-alunos.html">Ver todas →</a>
+          <h3>📚 Minhas Turmas</h3>
+          <a href="../gerenciar-alunos/gerenciar-alunos.html">Ver todas →</a>
         </div>
-        <div class="turma-item">
-          <div class="turma-av ta-b">📘</div>
-          <div class="turma-info"><strong>8º Ano A – Matemática</strong><span>34 alunos · Sala 12</span></div>
-          <div class="turma-meta">
-            <div class="eng">92%</div>
-            <div class="cnt">engajamento</div>
-            <div class="prog-bar">
-              <div class="prog-f" style="width:92%"></div>
-            </div>
-          </div>
-        </div>
-        <div class="turma-item">
-          <div class="turma-av ta-g">📗</div>
-          <div class="turma-info"><strong>8º Ano B – Matemática</strong><span>31 alunos · Sala 08</span></div>
-          <div class="turma-meta">
-            <div class="eng">85%</div>
-            <div class="cnt">engajamento</div>
-            <div class="prog-bar">
-              <div class="prog-f" style="width:85%"></div>
-            </div>
-          </div>
-        </div>
-        <div class="turma-item">
-          <div class="turma-av ta-y">📙</div>
-          <div class="turma-info"><strong>9º Ano A – Matemática</strong><span>33 alunos · Sala 15</span></div>
-          <div class="turma-meta">
-            <div class="eng">78%</div>
-            <div class="cnt">engajamento</div>
-            <div class="prog-bar">
-              <div class="prog-f" style="width:78%"></div>
-            </div>
-          </div>
-        </div>
-        <div class="turma-item">
-          <div class="turma-av ta-p">📒</div>
-          <div class="turma-info"><strong>9º Ano B – Matemática</strong><span>30 alunos · Sala 03</span></div>
-          <div class="turma-meta">
-            <div class="eng">91%</div>
-            <div class="cnt">engajamento</div>
-            <div class="prog-bar">
-              <div class="prog-f" style="width:91%"></div>
-            </div>
+        <div id="turmas-list">
+          <div class="turma-item" style="opacity:.6">
+            <div class="turma-av ta-b">⏳</div>
+            <div class="turma-info"><strong>Carregando turmas…</strong><span>Aguarde</span></div>
           </div>
         </div>
       </div>
@@ -114,32 +76,12 @@
         <div class="card-hd">
           <h3>⚡ Atividades Recentes</h3>
         </div>
-        <div class="act-item">
-          <div class="act-dot ad-g"></div>
-          <div class="act-body"><strong>Ana Souza concluiu "Frações"</strong><span>8ºA · +50 XP</span></div>
-          <div class="act-time">há 5min</div>
-        </div>
-        <div class="act-item">
-          <div class="act-dot ad-y"></div>
-          <div class="act-body"><strong>3 alunos com tarefa atrasada</strong><span>9ºA · Redação</span></div>
-          <div class="act-time">há 20min</div>
-        </div>
-        <div class="act-item">
-          <div class="act-dot ad-b"></div>
-          <div class="act-body"><strong>Carlos Lima subiu para Nível 6</strong><span>8ºB · 1.000 XP</span></div>
-          <div class="act-time">há 1h</div>
-        </div>
-        <div class="act-item">
-          <div class="act-dot ad-g"></div>
-          <div class="act-body"><strong>Nova tarefa publicada com sucesso</strong><span>Quiz Fotossíntese · 4
-              turmas</span></div>
-          <div class="act-time">há 2h</div>
-        </div>
-        <div class="act-item">
-          <div class="act-dot ad-r"></div>
-          <div class="act-body"><strong>João Pedro com 0 tarefas esta semana</strong><span>9ºB · Atenção
-              necessária</span></div>
-          <div class="act-time">hoje</div>
+        <div id="activities-list">
+          <div class="act-item">
+            <div class="act-dot ad-b"></div>
+            <div class="act-body"><strong>Carregando atividades…</strong><span>Banco de dados</span></div>
+            <div class="act-time">—</div>
+          </div>
         </div>
       </div>
     </div>
@@ -151,89 +93,43 @@
         <div class="card-hd">
           <h3>📈 Conclusões por Dia</h3>
         </div>
-        <div class="chart-wrap">
+        <div class="chart-wrap" id="completions-chart">
           <div class="bar-col">
-            <div class="bar-fill" style="height:55px"></div>
-            <div class="bar-label">Seg</div>
-          </div>
-          <div class="bar-col">
-            <div class="bar-fill" style="height:80px"></div>
-            <div class="bar-label">Ter</div>
-          </div>
-          <div class="bar-col">
-            <div class="bar-fill" style="height:65px"></div>
-            <div class="bar-label">Qua</div>
-          </div>
-          <div class="bar-col">
-            <div class="bar-fill" style="height:95px"></div>
-            <div class="bar-label">Qui</div>
-          </div>
-          <div class="bar-col">
-            <div class="bar-fill" style="height:40px;opacity:.4"></div>
-            <div class="bar-label">Sex</div>
-          </div>
-          <div class="bar-col">
-            <div class="bar-fill" style="height:20px;opacity:.3"></div>
-            <div class="bar-label">Sáb</div>
-          </div>
-          <div class="bar-col">
-            <div class="bar-fill" style="height:10px;opacity:.2"></div>
-            <div class="bar-label">Dom</div>
+            <div class="bar-fill" style="height:20px;opacity:.4"></div>
+            <div class="bar-label">—</div>
           </div>
         </div>
-        <div style="text-align:center;font-size:.75rem;color:var(--muted);margin-top:8px">Tarefas concluídas por dia
+        <div style="text-align:center;font-size:.75rem;color:var(--muted);margin-top:8px">
+          Tarefas concluídas por dia
         </div>
       </div>
 
       <div class="card">
         <div class="card-hd">
-          <h3>🏆 Top Alunos da Semana</h3><a href="../relatorios/relatorios.html">Ver ranking →</a>
+          <h3>🏆 Top Alunos da Semana</h3>
+          <a href="../relatorios/relatorios.html">Ver ranking →</a>
         </div>
-        <div class="top-aluno">
-          <div class="ta-pos tp1">🥇</div>
-          <div class="ta-av2 tav1"></div><span class="ta-nm">Ana Souza · 8ºA</span><span class="ta-xp">680 XP</span>
-        </div>
-        <div class="top-aluno">
-          <div class="ta-pos tp2">2</div>
-          <div class="ta-av2 tav2"></div><span class="ta-nm">Carlos Lima · 8ºB</span><span class="ta-xp">640 XP</span>
-        </div>
-        <div class="top-aluno">
-          <div class="ta-pos tp3">3</div>
-          <div class="ta-av2 tav3"></div><span class="ta-nm">João Pedro · 9ºA</span><span class="ta-xp">590 XP</span>
-        </div>
-        <div class="top-aluno">
-          <div class="ta-pos tp3" style="color:var(--muted)">4</div>
-          <div class="ta-av2 tav4"></div><span class="ta-nm">Maria Clara · 9ºB</span><span class="ta-xp">520 XP</span>
-        </div>
-        <div class="top-aluno">
-          <div class="ta-pos tp3" style="color:var(--muted)">5</div>
-          <div class="ta-av2 tav5"></div><span class="ta-nm">Lucas Torres · 8ºA</span><span class="ta-xp">480 XP</span>
+        <div id="top-alunos-list">
+          <div class="top-aluno" style="opacity:.6">
+            <div class="ta-pos tp3" style="color:var(--muted)">—</div>
+            <div class="ta-av2 tav1"></div>
+            <span class="ta-nm">Carregando…</span>
+            <span class="ta-xp">—</span>
+          </div>
         </div>
       </div>
 
       <div class="card">
         <div class="card-hd">
-          <h3>⏰ Tarefas Pendentes</h3><a href="../pagina-tarefas-prof/pagina-tarefas-prof.html">Ver todas →</a>
+          <h3>⏰ Tarefas Pendentes</h3>
+          <a href="../pagina-tarefas-prof/pagina-tarefas-prof.html">Ver todas →</a>
         </div>
-        <div class="pend-item">
-          <div class="pend-urgency pu-r"></div>
-          <div class="pend-body"><strong>Frações – 8ºA</strong><span>Hoje, 23:59 · 8 não entregaram</span></div><span
-            class="pend-chip">urgente</span>
-        </div>
-        <div class="pend-item">
-          <div class="pend-urgency pu-r"></div>
-          <div class="pend-body"><strong>Redação – 9ºA</strong><span>Hoje, 23:59 · 3 atrasados</span></div><span
-            class="pend-chip">urgente</span>
-        </div>
-        <div class="pend-item">
-          <div class="pend-urgency pu-y"></div>
-          <div class="pend-body"><strong>Quiz Fotossíntese</strong><span>Sex, 19/04 · 22 pendentes</span></div><span
-            class="pend-chip">em prazo</span>
-        </div>
-        <div class="pend-item">
-          <div class="pend-urgency pu-g"></div>
-          <div class="pend-body"><strong>História Medieval</strong><span>Seg, 21/04 · 30 pendentes</span></div><span
-            class="pend-chip">tranquilo</span>
+        <div id="pending-list">
+          <div class="pend-item" style="opacity:.6">
+            <div class="pend-urgency pu-y"></div>
+            <div class="pend-body"><strong>Carregando…</strong><span>Aguarde</span></div>
+            <span class="pend-chip">—</span>
+          </div>
         </div>
       </div>
 
