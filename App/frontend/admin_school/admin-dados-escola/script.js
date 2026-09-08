@@ -31,6 +31,33 @@ async function loadDadosEscola() {
   if (turmasEl) turmasEl.textContent = turmas ? turmas.value : "0";
 }
 
+const successDisplay = document.querySelector(".success-display");
+
+function showSuccess() {
+  successDisplay.classList.add("active");
+
+  setTimeout(() => {
+    hideSuccess();
+  }, 2000);
+}
+
+function hideSuccess() {
+  successDisplay.classList.remove("active");
+  window.load("../dashboard-admin-escolar/dashboard-admin-escolar.html");
+}
+
+successDisplay.addEventListener("click", (event) => {
+  if (event.target === successDisplay) {
+    hideSuccess();
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    hideSuccess();
+  }
+});
+
 async function salvarEscola() {
   const session = JSON.parse(localStorage.getItem("session") || "{}");
   const currentUserId = session.id_usuario || session.id;
@@ -54,11 +81,14 @@ async function salvarEscola() {
     });
     if (result.success) {
       showToast("Escola atualizada com sucesso!", "success");
-      // Update the session in localStorage with the new name/email
+
       session.nome = nome;
       session.email = email;
       localStorage.setItem("session", JSON.stringify(session));
-      loadDadosEscola(); // Refresh displayed school info
+
+      showSuccess();
+
+      loadDadosEscola();
     } else {
       showToast(result.message || "Falha ao atualizar escola.", "error");
       alert(result.message || "Falha ao atualizar escola.", "error");

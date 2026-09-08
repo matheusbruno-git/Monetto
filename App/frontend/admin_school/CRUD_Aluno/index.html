@@ -1,87 +1,261 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Monetto – Alunos</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../../shared/main-style.css">
     <link rel="icon" type="image/x-icon" href="../../Assets/Monetto Logo.ico">
+    <style>
+        /* Page-specific layout improvements */
+        .page-grid {
+            display: grid;
+            grid-template-columns: minmax(320px, 420px) 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        @media (max-width: 980px) {
+            .page-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-area {
+            max-width: none;
+            width: 100%;
+            position: sticky;
+            top: 0;
+        }
+
+        .form-area .form-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+        .form-area .form-sub {
+            margin-bottom: 22px;
+        }
+
+        .stats-summary {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .sc.sc-b {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .students-panel {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 22px;
+        }
+
+        .students-panel .card-hd {
+            margin-bottom: 14px;
+        }
+
+        .students-panel .card-hd h3 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #students-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            max-height: 480px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        #students-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #students-list::-webkit-scrollbar-thumb {
+            background: rgba(255, 215, 0, 0.35);
+            border-radius: 99px;
+        }
+
+        .teach-item {
+            padding: 12px 8px;
+            border-radius: 12px;
+            transition: background 0.15s;
+        }
+
+        .teach-item:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 36px 16px;
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        .empty-state .icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            opacity: 0.7;
+        }
+
+        #formMsg {
+            display: none;
+            font-size: 0.84rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            padding: 10px 14px;
+            border-radius: 10px;
+        }
+
+        #formMsg.ok {
+            display: block;
+            background: rgba(46, 204, 113, 0.12);
+            color: var(--green);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+        }
+
+        #formMsg.err {
+            display: block;
+            background: rgba(231, 76, 60, 0.12);
+            color: var(--red);
+            border: 1px solid rgba(231, 76, 60, 0.3);
+        }
+
+        .form-footer {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .succefull-text {
+            display: none;
+            margin: 0;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--green);
+            background: rgba(46, 204, 113, 0.12);
+            border: 1px solid rgba(46, 204, 113, 0.25);
+        }
+
+        /* Better date input appearance in dark theme */
+        input[type="date"] {
+            color-scheme: dark;
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(0.85);
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
     <div id="sidebar-container"></div>
+
     <div class="main">
-        <div class="form-area">
-            <div class="fg">
-                <label>Nome do Aluno *</label>
-                <input id="nome" placeholder="Nome do aluno">
+        <div class="page-grid">
+
+            <!-- ===================== FORM ===================== -->
+            <div class="form-area">
+                <div class="form-title">👤 Cadastrar Aluno</div>
+                <div class="form-sub">Preencha os dados do aluno e do responsável</div>
+
+                <div class="fg">
+                    <label for="nome">Nome do Aluno *</label>
+                    <input id="nome" placeholder="Nome completo do aluno" autocomplete="name">
+                </div>
+
+                <div class="fg">
+                    <label for="data">Data de Nascimento *</label>
+                    <input id="data" type="date">
+                </div>
+
+                <div class="fg">
+                    <label for="cpf">CPF *</label>
+                    <input id="cpf" placeholder="000.000.000-00" inputmode="numeric" maxlength="14">
+                </div>
+
+                <div class="fg">
+                    <label for="resp">Responsável *</label>
+                    <input id="resp" placeholder="Nome do responsável" autocomplete="name">
+                </div>
+
+                <div class="fg">
+                    <label for="tel">Telefone *</label>
+                    <input id="tel" placeholder="(00) 00000-0000" inputmode="tel" autocomplete="tel">
+                </div>
+
+                <div class="fg">
+                    <label for="email">Email do Responsável *</label>
+                    <input id="email" type="email" placeholder="email@exemplo.com" autocomplete="email">
+                </div>
+
+                <div class="fg">
+                    <label for="serie">Série *</label>
+                    <input id="serie" placeholder="Ex: 5º Ano, 1º Ano EM">
+                </div>
+
+                <div id="formMsg"></div>
+
+                <div class="form-footer">
+                    <button class="btn-acc" id="btn" type="button">Cadastrar Aluno</button>
+                    <h4 class="succefull-text" id="successMsg">Aluno cadastrado com sucesso</h4>
+                </div>
             </div>
-            <div class="fg">
-                <label>Data de Nascimento *</label>
-                <input id="data" type="date">
-            </div>
-            <div class="fg">
-                <label>CPF *</label>
-                <input id="cpf" placeholder="CPF">
-            </div>
-            <div class="fg">
-                <label>Responsável *</label>
-                <input id="resp" placeholder="Responsável">
-            </div>
-            <div class="fg">
-                <label>Telefone *</label>
-                <input id="tel" placeholder="Telefone">
-            </div>
-            <div class="fg">
-                <label>Email do Responsável *</label>
-                <input id="email" placeholder="Email do responsável">
-            </div>
-            <div class="fg">
-                <label>Série *</label>
-                <input id="serie" placeholder="Série">
-            </div>
-            <div id="formMsg" style="display:none;font-size:.84rem;margin-bottom:8px;font-weight:600"></div>
-            <div class="form-footer">
-                <button class="btn-acc" id="btn">Cadastrar Aluno</button>
-                <h4 class="succefull-text" style="display: none;">Aluno cadastrado com Sucesso</h4>
-            </div>
-        </div>
-        <div class="g2" style="margin-top: 32px; display: flex; flex-direction: column; gap: 16px; width: 4000px;">
-            <div class="stats-row">
-                <div class="sc sc-b">
-                    <div class="stats-row">
-                        <div class="sc sc-b">
-                            <div class="sc-icon">👥</div>
-                            <div class="sc-val" id="alunos-matriculados-count">—</div>
-                            <div class="sc-lbl">Alunos matriculados</div>
-                            <div class="sc-sub" id="alunos-count">Dados do banco</div>
-                        </div>
-                        <div class="card">
-                            <div class="card-hd">
-                                <h3>👨‍🏫 Alunos Ativos</h3>
-                            </div>
-                            <div id="students-list">
-                                <div class="teach-item" style="opacity:.6">
-                                    <div class="tav ta1">⏳</div>
-                                    <div class="teach-info"><strong>Carregando alunos…</strong><span>Aguarde</span>
-                                    </div>
-                                </div>
+
+            <!-- ===================== LIST + STATS ===================== -->
+            <div class="right-col">
+                <div class="stats-summary">
+                    <div class="sc sc-b">
+                        <div class="sc-icon">👥</div>
+                        <div class="sc-val" id="alunos-matriculados-count">—</div>
+                        <div class="sc-lbl">Alunos matriculados</div>
+                        <div class="sc-sub" id="alunos-count">Dados do banco</div>
+                    </div>
+                </div>
+
+                <div class="students-panel">
+                    <div class="card-hd">
+                        <h3>👨‍🎓 Alunos Ativos</h3>
+                    </div>
+                    <div id="students-list">
+                        <div class="teach-item" style="opacity:.6">
+                            <div class="tav ta1">⏳</div>
+                            <div class="teach-info">
+                                <strong>Carregando alunos…</strong>
+                                <span>Aguarde</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
+        <p id="msg" hidden></p>
+    </div>
 
-
-
-
-        <p id="msg"></p>
-
-        <script src="../../shared/monetto-app.js"></script>
-        <script src="script.js"></script>
+    <script src="../../shared/monetto-app.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

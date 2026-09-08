@@ -2,174 +2,90 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Monetto – Criar & Gerenciar Turmas</title>
-
   <link
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
-    rel="stylesheet" />
+    rel="stylesheet">
+  <link rel="stylesheet" href="../../shared/main-style.css">
   <link rel="stylesheet" href="style.css">
-
-  <link rel="stylesheet" href="../../shared/main-style.css" />
-
-  <link rel="icon" type="image/x-icon" href="../../Assets/Monetto Logo.ico" />
+  <link rel="icon" type="image/x-icon" href="../../Assets/Monetto Logo.ico">
 </head>
 
 <body>
-
-  <!-- SIDEBAR -->
   <div id="sidebar-container"></div>
 
   <div class="main">
+    <div class="page-grid">
 
-    <!-- =========================
-         FORM AREA
-    ========================== -->
+      <!-- ===================== FORM ===================== -->
+      <div class="form-area">
+        <div class="form-title">📝 Criar Nova Turma</div>
+        <div class="form-sub">Preencha os campos abaixo e publique para suas turmas</div>
 
-    <div class="form-area">
-
-      <div class="form-title">
-        📝 Criar Nova Turma
-      </div>
-
-      <div class="form-sub">
-        Preencha os campos abaixo e publique para suas turmas
-      </div>
-
-      <div id="tab-turma">
-
-        <!-- Nome da turma -->
-        <div class="fg">
-          <label>Nome da Turma *</label>
-
-          <input type="text" id="nomeTurma" placeholder="Ex: 8º Ano A" />
-        </div>
-
-        <!-- Nível -->
-        <div class="fg">
-          <label>Nível Educacional *</label>
-
-          <select id="nivelSelect">
-            <option value="">Carregando...</option>
-          </select>
-        </div>
-
-        <!-- Mensagem -->
-        <div id="formMsg" style="
-            display:none;
-            font-size:.84rem;
-            margin-bottom:8px;
-            font-weight:600
-          "></div>
-
-        <!-- Footer -->
-        <div class="form-footer">
-
-          <button class="btn-acc" id="btn">
-            🚀 Publicar Turma
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- =========================
-         LISTA DE TURMAS
-    ========================== -->
-
-    <div class="list-area" id="turmasList">
-
-      <div class="list-area">
-
-        <div class="list-hd">
-
-          <h3>
-            📋 Turmas Criadas
-          </h3>
-
-          <span>
-            0 turmas
-          </span>
-
-        </div>
-
-        <div id="turmasListBody"></div>
-
-      </div>
-
-    </div>
-
-
-    <!-- =========================
-         MODAL ATRIBUIR PROFESSOR
-    ========================== -->
-
-    <div id="modal-container" class="modal-container" style="display:none">
-
-      <div class="modal">
-
-        <div class="modal-header">
-
-          <h3>
-            Atribuir Professor
-          </h3>
-
-          <h4 id="modalNomeTurma"></h4>
-
-          <button class="close-btn" onclick="closeModal()">
-            ✖
-          </button>
-
-        </div>
-
-
-        <div class="modal-body">
+        <div id="tab-turma">
           <div class="fg">
-            <p>
-              Selecione o professor para atribuir a esta turma:
-            </p>
+            <label for="nomeTurma">Nome da Turma *</label>
+            <input type="text" id="nomeTurma" placeholder="Ex: 8º Ano A" autocomplete="off">
+          </div>
 
-            <select id="professorId" class="select-teacher">
-
-              <option value="">
-                Carregando professores...
-              </option>
-
+          <div class="fg">
+            <label for="nivelSelect">Nível Educacional *</label>
+            <select id="nivelSelect">
+              <option value="">Selecione o nível...</option>
             </select>
           </div>
 
+          <div id="formMsg"></div>
 
+          <div class="form-footer">
+            <button class="btn-acc" id="btn" type="button">🚀 Publicar Turma</button>
+          </div>
         </div>
+      </div>
 
-
-        <div class="modal-footer">
-
-          <button class="btn-acc" id="atribuirBtn">
-            Atribuir
-          </button>
-
+      <!-- ===================== LIST ===================== -->
+      <div class="list-area" id="turmasList">
+        <div class="list-hd">
+          <h3>📋 Turmas Criadas</h3>
+          <span id="turmasCount">0 turmas</span>
         </div>
-
+        <div id="turmasListBody">
+          <!-- Items injected by JS -->
+        </div>
       </div>
 
     </div>
 
+    <!-- ===================== MODAL ===================== -->
+    <div id="modal-container" class="modal-container" style="display:none" aria-hidden="true">
+      <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
+        <div class="modal-header">
+          <h3 id="modalTitle">Atribuir Professor</h3>
+          <h4 id="modalNomeTurma"></h4>
+          <button type="button" class="close-btn" onclick="closeModal()" aria-label="Fechar">✖</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="fg">
+            <label for="professorId">Selecione o professor para esta turma</label>
+            <select id="professorId" class="select-teacher">
+              <option value="">Carregando professores...</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-cancel2" onclick="closeModal()">Cancelar</button>
+          <button type="button" class="btn-acc" id="atribuirBtn">Atribuir</button>
+        </div>
+      </div>
+    </div>
   </div>
 
-
-  <!-- =========================
-       SCRIPTS
-  ========================== -->
-
   <script src="script.js"></script>
-
   <script src="../../shared/monetto-app.js"></script>
-
 </body>
 
 </html>

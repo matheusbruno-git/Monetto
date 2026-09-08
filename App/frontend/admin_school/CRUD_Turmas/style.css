@@ -1,50 +1,214 @@
 /* =========================
-   MODAL OVERLAY
+   PAGE LAYOUT (Turmas)
+========================= */
+
+.page-grid {
+    display: grid;
+    grid-template-columns: minmax(320px, 420px) 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+@media (max-width: 980px) {
+    .page-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.form-area {
+    max-width: none;
+    width: 100%;
+    position: sticky;
+    top: 0;
+}
+
+.form-area .form-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#formMsg {
+    display: none;
+    font-size: 0.84rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+    padding: 10px 14px;
+    border-radius: 10px;
+}
+
+#formMsg.ok {
+    display: block;
+    background: rgba(46, 204, 113, 0.12);
+    color: var(--green);
+    border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+#formMsg.err {
+    display: block;
+    background: rgba(231, 76, 60, 0.12);
+    color: var(--red);
+    border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+/* =========================
+   TURMA LIST ITEMS
+========================= */
+
+#turmasListBody {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.turma-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.turma-card:hover {
+    border-color: rgba(255, 215, 0, 0.25);
+    background: rgba(255, 255, 255, 0.055);
+}
+
+.turma-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.turma-card-info h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 4px;
+    color: var(--white);
+}
+
+.turma-card-meta {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.45;
+}
+
+.turma-card-meta span {
+    display: block;
+}
+
+.turma-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--green);
+    white-space: nowrap;
+}
+
+.turma-status::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+}
+
+.turma-card-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+
+.turma-card-actions .btn-outline-sm,
+.turma-card-actions .btn-danger-sm {
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-outline-sm {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid var(--border);
+    color: var(--white);
+}
+
+.btn-outline-sm:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.btn-danger-sm {
+    background: rgba(231, 76, 60, 0.1);
+    border: 1px solid rgba(231, 76, 60, 0.35);
+    color: var(--red);
+}
+
+.btn-danger-sm:hover {
+    background: rgba(231, 76, 60, 0.18);
+}
+
+.empty-turmas {
+    text-align: center;
+    padding: 40px 16px;
+    color: var(--muted);
+    font-size: 0.88rem;
+}
+
+.empty-turmas .icon {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    opacity: 0.65;
+}
+
+/* =========================
+   MODAL – dark theme (matches app)
 ========================= */
 
 .modal-container {
     position: fixed;
     inset: 0;
-
     width: 100vw;
     height: 100vh;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
-    background: rgba(0, 0, 0, 0.55);
-
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     z-index: 9999;
-
     padding: 20px;
     box-sizing: border-box;
 }
 
-/* =========================
-   MODAL
-========================= */
-
 .modal {
     position: relative;
-
-    width: min(500px, 100%);
+    width: min(460px, 100%);
     max-height: 90vh;
-
-    background: #fff;
-    border-radius: 18px;
-
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-
+    background: #111A5C;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
     overflow: hidden;
-
-    animation: modalAppear 0.2s ease-out;
+    animation: modalAppear 0.22s ease-out;
 }
 
 @keyframes modalAppear {
     from {
         opacity: 0;
-        transform: scale(0.95) translateY(10px);
+        transform: scale(0.96) translateY(12px);
     }
 
     to {
@@ -53,61 +217,80 @@
     }
 }
 
-/* =========================
-   HEADER
-========================= */
-
 .modal-header {
     position: relative;
-
-    padding: 24px;
-
-    border-bottom: 1px solid #eee;
+    padding: 22px 24px 16px;
+    border-bottom: 1px solid var(--border);
 }
 
 .modal-header h3 {
     margin: 0;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--white);
 }
 
 .modal-header h4 {
     margin: 6px 0 0;
+    font-size: 0.85rem;
     font-weight: 500;
+    color: var(--muted);
 }
-
-/* =========================
-   CLOSE BUTTON
-========================= */
 
 .close-btn {
     position: absolute;
-
     top: 16px;
     right: 16px;
-
+    width: 32px;
+    height: 32px;
     border: none;
-    background: transparent;
-
-    font-size: 18px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    color: var(--muted);
+    font-size: 14px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, color 0.15s;
 }
 
-/* =========================
-   BODY
-========================= */
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--white);
+}
 
 .modal-body {
-    padding: 24px;
+    padding: 22px 24px;
 }
 
-/* =========================
-   FOOTER
-========================= */
+.modal-body .fg {
+    margin-bottom: 0;
+}
+
+.modal-body .fg label {
+    margin-bottom: 8px;
+}
+
+.modal-body select {
+    width: 100%;
+}
 
 .modal-footer {
-    padding: 20px 24px;
-
-    border-top: 1px solid #eee;
-
+    padding: 16px 24px 22px;
+    border-top: 1px solid var(--border);
     display: flex;
     justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal-footer .btn-cancel2 {
+    flex: 0 0 auto;
+    min-width: 100px;
+}
+
+.modal-footer .btn-acc {
+    flex: 0 0 auto;
+    min-width: 120px;
 }

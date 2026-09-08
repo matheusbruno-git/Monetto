@@ -122,6 +122,41 @@ option {
     background-color: rgb(49, 184, 130);
 }
 
+.success-display {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.45);
+    border-color: #42be95;
+    border-radius: 12px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    z-index: 9999;
+}
+
+.success-display.active {
+    display: flex;
+}
+
+.success-display h3 {
+    margin: 0;
+    padding: 30px 50px;
+
+    background: rgba(28, 119, 74, 0.514);
+    color: #42be95;
+
+    border-radius: 12px;
+    border-color: #42be95;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+
+    font-size: 24px;
+}
+
 .sb-link {
     display: flex;
     align-items: center;
