@@ -13,9 +13,9 @@
   --orange: #F39C12;
   --purple: #9B59B6;
   --blue: #3498DB;
-  --bg: #F4F6FB;
+  --bg: rgba(255, 255, 255, 0.06);
   --card: #FFFFFF;
-  --text: #1A1A2E;
+  --text: #FFF;
   --muted: #6B7280;
   --border: #E5E7EB;
   --shadow: 0 4px 24px rgba(26, 42, 143, 0.08);
@@ -197,7 +197,7 @@ textarea {
   font-weight: 800;
   font-size: 1.6rem;
   letter-spacing: -0.03em;
-  color: var(--navy);
+  color: var(--text);
 }
 
 .topbar p {
@@ -208,12 +208,13 @@ textarea {
 
 /* LESSON PLAYER */
 .lesson-player {
-  background: var(--card);
+  background: var(--bg);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   border: 1px solid var(--border);
   overflow: hidden;
 }
+
 
 .lp-header {
   display: flex;
@@ -222,6 +223,7 @@ textarea {
   padding: 24px 28px;
   background: linear-gradient(135deg, #EEF2FF 0%, #F0FDF4 100%);
   border-bottom: 1px solid var(--border);
+  color: var(--navy);
 }
 
 .lp-icon {
@@ -267,13 +269,16 @@ textarea {
   margin: 24px 0 12px;
 }
 
-.lesson-body h3:first-child {
+.lesson-body h3 {
   margin-top: 0;
+  color: var(--blue);
 }
 
 .lesson-body p {
   margin-bottom: 14px;
+  color: var(--text);
 }
+
 
 .lesson-body ul {
   margin: 0 0 16px 20px;
@@ -285,6 +290,7 @@ textarea {
 
 .highlight-box {
   background: #EEF2FF;
+  color: var(--navy);
   border-left: 4px solid var(--navy);
   border-radius: 0 12px 12px 0;
   padding: 16px 18px;
@@ -337,13 +343,13 @@ textarea {
 
 .btn-prev {
   background: var(--bg);
-  color: var(--muted);
-  border: 1.5px solid var(--border);
+  color: var(--navy);
+  border: 1.5px solid var(--muted);
 }
 
 .btn-prev:hover {
-  color: var(--navy);
-  border-color: var(--navy);
+  color: var(--navy-dark);
+  border: 1.5px solid var(--navy-dark);
 }
 
 .btn-next {

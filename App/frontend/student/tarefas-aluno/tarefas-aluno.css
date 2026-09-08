@@ -14,7 +14,7 @@
   --orange: #F39C12;
   --purple: #9B59B6;
   --blue: #3498DB;
-  --bg: #2b2b2b;
+  --bg: rgba(255, 255, 255, 0.06);
   --card: #FFFFFF;
   --text: #FFF;
   --muted: #a6a9af;
@@ -207,8 +207,8 @@ textarea {
   width: 42px;
   height: 42px;
   border-radius: 12px;
-  background: var(--card);
-  border: 1px solid var(--border);
+  background: var(--bg);
+  border: 1px solid var(--bg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -237,11 +237,11 @@ textarea {
 }
 
 .sc {
-  background: var(--card);
+  background: var(--bg);
   border-radius: var(--radius);
   padding: 16px 18px;
   box-shadow: var(--shadow);
-  border: 1px solid var(--border);
+  border: 1px solid var(--bg);
   display: flex;
   align-items: center;
   gap: 14px;
@@ -255,13 +255,13 @@ textarea {
   font-family: "Syne", sans-serif;
   font-weight: 800;
   font-size: 1.5rem;
-  color: var(--navy);
+  color: var(--text);
   line-height: 1.1;
 }
 
 .sc-lbl {
   font-size: 0.8rem;
-  color: var(--bg);
+  color: var(--text);
 }
 
 /* FILTER BAR */
@@ -277,8 +277,8 @@ textarea {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: var(--card);
-  border: 1.5px solid var(--border);
+  background: var(--bg);
+  border: 1.5px solid var(--bg);
   border-radius: var(--radius-sm);
   padding: 8px 14px;
   flex: 1;
@@ -296,9 +296,9 @@ textarea {
 
 .filter-sel {
   padding: 9px 14px;
-  border: 1.5px solid var(--border);
+  border: 1.5px solid var(--bg);
   border-radius: var(--radius-sm);
-  background: var(--card);
+  background: var(--bg);
   color: var(--text);
   cursor: pointer;
   outline: none;
@@ -313,22 +313,22 @@ textarea {
   border-radius: 999px;
   font-size: 0.82rem;
   font-weight: 500;
-  background: var(--card);
+  background: var(--bg);
   color: var(--muted);
-  border: 1px solid var(--border);
+  border: 1px solid var(--bg);
   cursor: pointer;
   transition: all var(--transition);
 }
 
 .ftab:hover {
-  color: var(--navy);
-  border-color: var(--navy);
+  color: var(--card);
+  border-color: var(--gold);
 }
 
 .ftab.active {
   background: var(--navy);
   color: #fff;
-  border-color: var(--navy);
+  border-color: var(--accent);
 }
 
 /* CONTENT GRID */
@@ -344,7 +344,7 @@ textarea {
   border-radius: var(--radius);
   padding: 20px;
   box-shadow: var(--shadow);
-  border: 1px solid var(--border);
+  border: 1px solid var(--bg);
 }
 
 .task-list-card h3 {
@@ -368,7 +368,7 @@ textarea {
 .sort-btn {
   display: flex;
   background: var(--bg);
-  border: 1px solid var(--border);
+  border: 1px solid var(--bg);
   border-radius: 8px;
   padding: 6px 12px;
   font-size: 0.8rem;
@@ -378,10 +378,10 @@ textarea {
 }
 
 .sort-btn:hover {
-  color: var(--muted);
-  transform: scaleY(1.2) scaleX(1.03);
+  color: var(--text);
+  transform: scaleY(1.02) scaleX(1.01);
   border-color: 1px solid var(--blue);
-  background: var(--card);
+  background: var(--bg);
 }
 
 .group-header {
@@ -434,11 +434,21 @@ textarea {
 }
 
 .task-item:hover .task-name {
-  color: var(--bg);
+  color: var(--text);
 }
 
 .task-item:hover span {
   color: #0B1340;
+}
+
+.divider {
+  border-top: 1px solid var(--border);
+  margin: 12px auto 0 auto;
+  width: 42vw;
+}
+
+#t2 {
+  margin-top: 1vh;
 }
 
 .priority-bar {
@@ -655,7 +665,7 @@ span {
   border-radius: var(--radius);
   padding: 18px;
   box-shadow: var(--shadow);
-  border: 1px solid var(--border);
+  border: 1px solid var(--bg);
 }
 
 .mini-title {
@@ -698,8 +708,8 @@ span {
   border-top: 3px solid #636262;
   border-left: 2px solid #636262;
   border-right: 2px solid #636262;
-  background: var(--card);
-  color: var(--bg);
+  background: var(--bg);
+  color: var(--text);
 }
 
 .cal-empty {
@@ -784,7 +794,7 @@ span {
   font-size: 0.78rem;
   font-weight: 900;
   border-radius: 10px;
-  color: var(--bg);
+  color: var(--text);
   background: var(--orange);
 }
 
@@ -797,7 +807,7 @@ span {
   font-size: 0.78rem;
   font-weight: 900;
   border-radius: 10px;
-  color: var(--bg);
+  color: var(--text);
   background: var(--green);
 }
 
