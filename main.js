@@ -1050,6 +1050,12 @@ ipcMain.handle("getDashboardTeacher", async (event, currentUserId) => {
       });
     }
 
+    const schoolName = await safeQuery(
+      `SELECT nome FROM escolas WHERE id_escola = ? LIMIT 1`,
+      [escolaId],
+    );
+    const schoolTitle = schoolName[0] ? schoolName[0].nome : "Escola";
+
     // ---- Top alunos da semana ----
     const topRows = await safeQuery(
       `SELECT u.nome, t.nome_turma,
@@ -1146,6 +1152,10 @@ ipcMain.handle("getDashboardTeacher", async (event, currentUserId) => {
           { value: avaliacaoMedia, sub: avaliacaoSub },
         ],
         turmas,
+        school: {
+          name: schoolName[0] ? schoolName[0].nome : "Escola",
+          subtitle: schoolTitle,
+        },
         activities,
         completionsChart,
         topAlunos,
