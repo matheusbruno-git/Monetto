@@ -1,6 +1,23 @@
 USE monetto;
 
 -- ============================================================
+-- 0. PERFIS (ordem correta: aluno → professor → escola → admin)
+-- ============================================================
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- Limpa e recria na ordem desejada
+DELETE FROM perfis;
+
+INSERT INTO perfis (id_perfil, nome, descricao, permissoes, ativo, criado_em) VALUES
+(1, 'aluno',     'Usuário estudante',        '{"acessar_cursos": true, "visualizar_turmas": true, "realizar_atividades": true}', 1, NOW()),
+(2, 'professor', 'Perfil de professor',     '{"acessar_cursos": true, "gerenciar_turmas": true, "lancar_notas": true, "criar_tarefas": true}', 1, NOW()),
+(3, 'escola',    'Administrador da Escola', '{"gerenciar_usuarios": true, "gerenciar_turmas": true, "gerenciar_cursos": true, "ver_relatorios": true, "configurar_escola": true}', 1, NOW()),
+(4, 'admin',     'Administrador do sistema','{"gerenciar_usuarios": true, "gerenciar_escolas": true, "gerenciar_perfis": true, "ver_tudo": true}', 1, NOW());
+
+ALTER TABLE perfis AUTO_INCREMENT = 5;
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- ============================================================
 -- 1. ESCOLAS
 -- ============================================================
 INSERT IGNORE INTO escolas (nome, cnpj, telefone, email, endereco, cidade, estado) VALUES
@@ -51,13 +68,33 @@ INSERT IGNORE INTO cursos (nome, descricao, carga_horaria, nivel, faixa_etaria, 
 -- ============================================================
 SET @hash = '$2b$10$ekKkUQAmecpVf7tj4X8ESu8LJqu4PGZhDkSATTsQJKV25oRQVZvBu';
 
--- Professores + Admins
+-- ============================================================
+-- 5.1 Administradores de Escola (perfil = escola)
+-- ============================================================
 INSERT IGNORE INTO usuarios (id_perfil, id_escola, nome, email, senha_hash, cpf, data_nascimento, telefone, ativo) 
 SELECT p.id_perfil, e.id_escola, v.nome, v.email, @hash, v.cpf, v.data_nascimento, v.telefone, 1
 FROM (
-    SELECT 'admin' as perfil, 'Colégio Horizonte' as escola, 'Ana Paula Mendes' as nome, 'ana.mendes@horizonte.edu.br' as email, '123.456.789-01' as cpf, '1985-03-12' as data_nascimento, '(11) 98765-4321' as telefone UNION ALL
-    SELECT 'admin', 'Escola Futuro Brilhante', 'Carlos Eduardo Silva', 'carlos.silva@futurobrilhante.com.br', '234.567.890-12', '1978-07-22', '(21) 97654-3210' UNION ALL
-    SELECT 'professor', 'Colégio Horizonte', 'Mariana Costa', 'mariana.costa@horizonte.edu.br', '345.678.901-23', '1990-11-05', '(11) 99887-6655' UNION ALL
+    SELECT 'escola' as perfil, 'Colégio Horizonte' as escola, 'Ana Paula Mendes' as nome, 'ana.mendes@horizonte.edu.br' as email, '123.456.789-01' as cpf, '1985-03-12' as data_nascimento, '(11) 98765-4321' as telefone UNION ALL
+    SELECT 'escola', 'Escola Futuro Brilhante', 'Carlos Eduardo Silva', 'carlos.silva@futurobrilhante.com.br', '234.567.890-12', '1978-07-22', '(21) 97654-3210' UNION ALL
+    SELECT 'escola', 'Instituto Educar+', 'Renata Souza', 'renata.souza@educarmais.com.br', '345.111.222-33', '1983-05-14', '(31) 98877-1122' UNION ALL
+    SELECT 'escola', 'Colégio Nova Geração', 'Marcos Vinicius', 'marcos.vinicius@novageracao.edu.br', '456.222.333-44', '1979-11-30', '(41) 97766-2233' UNION ALL
+    SELECT 'escola', 'Academia Super Mente', 'Helena Costa', 'helena.costa@supermente.edu.br', '567.333.444-55', '1986-08-22', '(11) 96655-3344' UNION ALL
+    SELECT 'escola', 'Colégio Liga da Justiça', 'Alfred Pennyworth', 'alfred@ligajustica.edu.br', '678.444.555-66', '1965-04-01', '(21) 95544-4455' UNION ALL
+    SELECT 'escola', 'Instituto Vingadores Educacional', 'Nick Fury', 'nick.fury@vingadoresedu.com.br', '789.555.666-77', '1970-09-15', '(31) 94433-5566' UNION ALL
+    SELECT 'escola', 'Escola Mutante Xavier', 'Jean Grey Admin', 'admin@xavier.edu.br', '890.666.777-88', '1975-02-10', '(11) 93322-6677' UNION ALL
+    SELECT 'escola', 'Colégio Asgardiano', 'Heimdall', 'heimdall@asgard.edu.br', '901.777.888-99', '1980-12-25', '(21) 92211-7788' UNION ALL
+    SELECT 'escola', 'Instituto Wakanda Tech', 'Okoye', 'okoye@wakandatech.edu.br', '012.888.999-00', '1988-07-18', '(31) 91100-8899'
+) v
+JOIN perfis p ON p.nome = v.perfil
+JOIN escolas e ON e.nome = v.escola;
+
+-- ============================================================
+-- 5.2 Professores
+-- ============================================================
+INSERT IGNORE INTO usuarios (id_perfil, id_escola, nome, email, senha_hash, cpf, data_nascimento, telefone, ativo) 
+SELECT p.id_perfil, e.id_escola, v.nome, v.email, @hash, v.cpf, v.data_nascimento, v.telefone, 1
+FROM (
+    SELECT 'professor' as perfil, 'Colégio Horizonte' as escola, 'Mariana Costa' as nome, 'mariana.costa@horizonte.edu.br' as email, '345.678.901-23' as cpf, '1990-11-05' as data_nascimento, '(11) 99887-6655' as telefone UNION ALL
     SELECT 'professor', 'Colégio Horizonte', 'Roberto Almeida', 'roberto.almeida@horizonte.edu.br', '456.789.012-34', '1982-01-30', '(11) 98877-5544' UNION ALL
     SELECT 'professor', 'Escola Futuro Brilhante', 'Fernanda Oliveira', 'fernanda.oliveira@futurobrilhante.com.br', '567.890.123-45', '1988-09-18', '(21) 98765-1122' UNION ALL
     SELECT 'professor', 'Instituto Educar+', 'Lucas Pereira', 'lucas.pereira@educarmais.com.br', '678.901.234-56', '1992-04-25', '(31) 99988-7766' UNION ALL
@@ -75,7 +112,9 @@ FROM (
 JOIN perfis p ON p.nome = v.perfil
 JOIN escolas e ON e.nome = v.escola;
 
--- Alunos
+-- ============================================================
+-- 5.3 Alunos
+-- ============================================================
 INSERT IGNORE INTO usuarios (id_perfil, id_escola, nome, email, senha_hash, cpf, data_nascimento, telefone, ativo) 
 SELECT p.id_perfil, e.id_escola, v.nome, v.email, @hash, v.cpf, v.data_nascimento, v.telefone, 1
 FROM (

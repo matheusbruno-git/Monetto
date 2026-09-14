@@ -259,7 +259,8 @@ textarea {
 }
 
 .stat-card {
-  background: var(--bg);
+  background: rgb(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .1);
   border-radius: var(--radius);
   padding: 20px;
   box-shadow: var(--shadow);
@@ -327,11 +328,11 @@ textarea {
 }
 
 .card {
-  background: var(--bg);
+  background: rgb(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .1);
   border-radius: var(--radius);
   padding: 22px;
   box-shadow: var(--shadow);
-  border: 1px solid var(--bg);
   height: auto;
   width: 100%;
 }
@@ -382,12 +383,37 @@ textarea {
   height: auto;
   display: flex;
   align-items: flex-start;
-  background: #3f3f3f;
   gap: 12px;
   padding: 14px 0;
   margin-bottom: 10px;
   border-radius: 8px;
   border-bottom: 1px solid rgb(77, 77, 77);
+}
+
+.task-item.done {
+  background: rgba(8, 156, 70, 0.479);
+}
+
+.task-item.pendent {
+  background: rgba(221, 160, 29, 0.788);
+}
+
+.task-item.pendent .task-due,
+.task-item.pendent .task-teacher {
+  color: var(--gold-soft);
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
+.task-item.late {
+  background: rgba(167, 23, 23, 0.829);
+}
+
+.task-item.late .task-due,
+.task-item.late .task-teacher {
+  color: rgb(255, 0, 0);
+  font-weight: 600;
+  font-size: 0.82rem;
 }
 
 .task-item:last-child {
@@ -506,7 +532,7 @@ textarea {
 
 /* ---- MINI CARDS ---- */
 .mini-card {
-  background: var(--bg);
+  background: rgb(255, 255, 255, .06);
   border-radius: var(--radius);
   padding: 20px;
   box-shadow: var(--shadow);
