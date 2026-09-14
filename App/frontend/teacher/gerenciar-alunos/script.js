@@ -21,10 +21,6 @@
     });
 })();
 
-// Reads the logged-in user saved at login time (see main.js's 'login' handler).
-// We only ever send this user's id to the backend; the backend re-derives
-// id_escola from it server-side, so this admin can never pull another
-// school's data even if localStorage were tampered with.
 function getCurrentUserId() {
   try {
     const session = JSON.parse(localStorage.getItem("session") || "{}");
@@ -34,159 +30,250 @@ function getCurrentUserId() {
   }
 }
 
-function setText(id, value) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = value;
+function setTab(el) {
+  document.querySelectorAll(".ftab").forEach((t) => t.classList.remove("active"));
+  el.classList.add("active");
 }
 
-function renderTeachers(teachers) {
-  const el = document.getElementById("teachers-list");
-  if (!el) return;
-  if (!teachers || !teachers.length) {
-    el.innerHTML =
-      '<div class="teach-item"><div class="teach-info"><strong>Nenhum professor cadastrado</strong></div></div>';
+function openModal(aluno) {
+  if (aluno) {
+    const nameEl = document.getElementById("modalName");
+    const emailEl = document.getElementById("modalEmail");
+    const xpEl = document.getElementById("modalXP");
+    const levelEl = document.getElementById("modalLevel");
+    if (nameEl) nameEl.textContent = aluno.nome || "—";
+    if (emailEl)
+      emailEl.textContent =
+        (aluno.email || "—") + " · " + (aluno.turma || "—");
+    if (xpEl) xpEl.textContent = aluno.xp != null ? aluno.xp : "—";
+    if (levelEl) levelEl.textContent = "Nível " + xpToLevel(aluno.xp);
+  }
+  document.getElementById("modalOverlay")?.classList.add("open");
+}
+
+function closeModal() {
+  document.getElementById("modalOverlay")?.classList.remove("open");
+}
+
+document.getElementById("modalOverlay")?.addEventListener("click", function (e) {
+  if (e.target === this) closeModal();
+});
+
+function sairDaConta(destino) {
+  if (confirm("Tem certeza que deseja sair da conta?")) {
+    localStorage.removeItem("session");
+    window.location.href = destino;
+  }
+}
+
+const AV_CLASSES = ["av1", "av2", "av3", "av4", "av5", "av6", "av7", "av8"];
+
+function xpToLevel(xp) {
+  if (!xp) return 1;
+  if (xp >= 1000) return 6;
+  if (xp >= 700) return 5;
+  if (xp >= 500) return 4;
+  if (xp >= 300) return 3;
+  if (xp >= 150) return 2;
+  return 1;
+}
+
+function statusChip(ativo) {
+  if (ativo == 1 || ativo === true)
+    return '<span class="status-chip sc-ok">✓ Ativo</span>';
+  return '<span class="status-chip sc-bad">✕ Inativo</span>';
+}
+
+function escapeHtml(str) {
+  return String(str ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function renderRow(aluno, index) {
+  const avClass = AV_CLASSES[index % AV_CLASSES.length];
+  const nivel = xpToLevel(aluno.xp);
+  const xp = aluno.xp != null ? aluno.xp : "—";
+  const turma = aluno.turma || "—";
+  const nome = escapeHtml(aluno.nome);
+  const email = escapeHtml(aluno.email);
+  const payload = encodeURIComponent(JSON.stringify(aluno));
+
+  return `
+    <div class="tr" data-aluno="${payload}" onclick="openModalFromRow(this)">
+      <div class="td-aluno">
+        <div class="ava ${avClass}"></div>
+        <div>
+          <div class="al-name">${nome}</div>
+          <div class="al-email">${email}</div>
+        </div>
+      </div>
+      <div class="td-muted">${escapeHtml(turma)}</div>
+      <div><span class="xp-chip">⚡ ${xp}</span></div>
+      <div><span class="lvl-chip">Nível ${nivel}</span></div>
+      <div class="td-text">—</div>
+      <div>${statusChip(aluno.ativo)}</div>
+      <div class="td-actions">
+        <button class="act-btn" onclick="event.stopPropagation();openModalFromRow(this.closest('.tr'))">👁</button>
+        <button class="act-btn" onclick="event.stopPropagation()">✉️</button>
+      </div>
+    </div>`;
+}
+
+function openModalFromRow(rowEl) {
+  try {
+    const raw = rowEl?.getAttribute("data-aluno");
+    if (!raw) return;
+    openModal(JSON.parse(decodeURIComponent(raw)));
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+window.openModalFromRow = openModalFromRow;
+window.openModal = openModal;
+window.closeModal = closeModal;
+window.setTab = setTab;
+window.sairDaConta = sairDaConta;
+
+let allAlunos = [];
+let currentFilter = "todos";
+
+function renderAlunos(alunos) {
+  const container = document.getElementById("alunosContainer");
+  if (!container) return;
+
+  if (!alunos.length) {
+    container.innerHTML =
+      '<div style="padding:2rem;text-align:center;color:var(--muted)">Nenhum aluno encontrado nas suas turmas.</div>';
     return;
   }
-  el.innerHTML = teachers
-    .map(
-      (t) => `
-    <div class="teach-item">
-      <div class="tav ${t.avatarClass || "ta1"}">${t.emoji || "👨‍🏫"}</div>
-      <div class="teach-info"><strong>${t.name}</strong><span>${t.subtitle || ""}</span></div>
-    </div>`,
-    )
-    .join("");
+
+  container.innerHTML = alunos.map((a, i) => renderRow(a, i)).join("");
 }
 
-function renderAlerts(alerts) {
-  const el = document.getElementById("alerts-list");
-  if (!el) return;
-  if (!alerts || !alerts.length) {
-    el.innerHTML =
-      '<div class="alert-item al-blue"><div class="alert-body"><strong>Nenhum alerta</strong></div></div>';
-    return;
+function applyFilters() {
+  const searchInput = document.querySelector(".search-box input");
+  const q = (searchInput?.value || "").trim().toLowerCase();
+  const turmaSelect = document.querySelector(".filter-select");
+  const turmaVal = turmaSelect?.value || "";
+
+  let list = allAlunos.slice();
+
+  if (turmaVal && turmaVal !== "Todas as turmas") {
+    list = list.filter((a) => a.turma === turmaVal);
   }
-  el.innerHTML = alerts
-    .map(
-      (a) => `
-    <div class="alert-item al-${a.level}">
-      <div class="alert-icon">${a.icon}</div>
-      <div class="alert-body"><strong>${a.title}</strong><span>${a.subtitle}</span></div>
-    </div>`,
-    )
-    .join("");
-}
 
-function renderClasses(classes) {
-  const el = document.getElementById("turmas-list");
-  if (!el) return;
-  if (!classes || !classes.length) {
-    el.innerHTML =
-      '<div class="turma-row"><div>Nenhuma turma cadastrada</div><div>—</div><div>—</div><div>—</div></div>';
-    return;
+  if (currentFilter === "ativos") {
+    list = list.filter((a) => a.ativo == 1 || a.ativo === true);
+  } else if (currentFilter === "inativos" || currentFilter === "atencao") {
+    list = list.filter((a) => !(a.ativo == 1 || a.ativo === true));
   }
-  el.innerHTML = classes
-    .map(
-      (c) => `
-    <div class="turma-row">
-      <div style="font-size:.85rem;font-weight:600">${c.name}</div>
-      <div style="color:var(--muted);font-size:.82rem">${c.students}</div>
-      <div>${c.completion}%</div>
-      <div><span class="${c.statusClass}">${c.statusLabel}</span></div>
-    </div>`,
-    )
-    .join("");
-}
 
-function renderXpChart(xpChart) {
-  const el = document.getElementById("xp-chart");
-  if (!el) return;
-  if (!xpChart || !xpChart.length) return;
-  const max = Math.max(...xpChart.map((b) => b.height), 1);
-  el.innerHTML = xpChart
-    .map(
-      (b) => `
-    <div class="bc">
-      <div class="bc-bar blue" style="height:${Math.max(4, (b.height / max) * 90)}px"></div>
-      <div class="bc-lbl">${b.label}</div>
-    </div>`,
-    )
-    .join("");
-}
-
-function renderActivities(activities) {
-  const el = document.getElementById("activities-list");
-  if (!el) return;
-  if (!activities || !activities.length) {
-    el.innerHTML =
-      '<div class="act-item"><div class="act-body"><strong>Nenhuma atividade recente</strong></div></div>';
-    return;
+  if (q) {
+    list = list.filter(
+      (a) =>
+        (a.nome || "").toLowerCase().includes(q) ||
+        (a.email || "").toLowerCase().includes(q),
+    );
   }
-  el.innerHTML = activities
-    .map(
-      (a) => `
-    <div class="act-item">
-      <div class="act-icon ${a.iconClass}">${a.icon}</div>
-      <div class="act-body"><strong>${a.title}</strong><span>${a.subtitle}</span></div>
-      <div class="act-time">${a.time}</div>
-    </div>`,
-    )
-    .join("");
+
+  renderAlunos(list);
 }
 
-async function loadDashboard() {
+function updateStats(stats, turmas) {
+  const total = stats?.total ?? allAlunos.length;
+  const ativos = stats?.ativos ?? allAlunos.filter((a) => a.ativo).length;
+  const atencao = stats?.atencao ?? Math.max(0, total - ativos);
+  const taxa = stats?.taxaConclusao ?? 0;
+  const turmasCount = stats?.turmasCount ?? turmas?.length ?? 0;
+
+  const subtitle = document.querySelector(".topbar p");
+  if (subtitle) {
+    subtitle.textContent = `${total} aluno${total !== 1 ? "s" : ""} em ${turmasCount} turma${turmasCount !== 1 ? "s" : ""}`;
+  }
+
+  const vals = document.querySelectorAll(".stats-mini .sm-val");
+  if (vals[0]) vals[0].textContent = String(total);
+  if (vals[1]) vals[1].textContent = String(ativos);
+  if (vals[2]) vals[2].textContent = String(atencao);
+  if (vals[3]) vals[3].textContent = taxa + "%";
+
+  const ftabs = document.querySelectorAll(".filter-bar .ftab");
+  if (ftabs[0]) ftabs[0].textContent = `Todos (${total})`;
+
+  const select = document.querySelector(".filter-select");
+  if (select && turmas && turmas.length) {
+    select.innerHTML =
+      '<option value="Todas as turmas">Todas as turmas</option>' +
+      turmas
+        .map((t) => `<option value="${escapeHtml(t.nome)}">${escapeHtml(t.nome)}</option>`)
+        .join("");
+  }
+}
+
+function bindFilters() {
+  document.querySelectorAll(".filter-bar .ftab").forEach((tab, i) => {
+    tab.addEventListener("click", () => {
+      setTab(tab);
+      if (i === 0) currentFilter = "todos";
+      else if (i === 1) currentFilter = "ativos";
+      else if (i === 2) currentFilter = "atencao";
+      else currentFilter = "inativos";
+      applyFilters();
+    });
+  });
+
+  document.querySelector(".search-box input")?.addEventListener("input", applyFilters);
+  document.querySelector(".filter-select")?.addEventListener("change", applyFilters);
+}
+
+async function loadAlunos() {
+  const container = document.getElementById("alunosContainer");
   const currentUserId = getCurrentUserId();
+
   if (!currentUserId) {
-    setText("school-name", "Sessão inválida");
-    setText(
-      "school-subtitle",
-      "Faça login novamente para ver os dados da sua escola.",
-    );
+    if (container) {
+      container.innerHTML =
+        '<div style="padding:2rem;text-align:center;color:red">Sessão inválida. Faça login novamente.</div>';
+    }
     return;
   }
 
-  const result = await window.api.getDashboardTeacher(currentUserId);
-  if (!result.success) {
-    setText("school-name", "Erro ao carregar");
-    setText(
-      "school-subtitle",
-      result.message || "Não foi possível carregar os dados da escola.",
-    );
-    return;
+  try {
+    let result;
+    if (window.api?.getAlunosProfessor) {
+      result = await window.api.getAlunosProfessor(currentUserId);
+    } else {
+      result = await window.api.getAlunos(currentUserId);
+    }
+
+    if (!result.success) {
+      if (container) {
+        container.innerHTML = `<div style="padding:2rem;text-align:center;color:red">${result.message || "Erro ao carregar alunos."}</div>`;
+      }
+      return;
+    }
+
+    allAlunos = (result.data || []).map((a) => ({
+      ...a,
+      xp: a.xp != null ? Number(a.xp) : 0,
+      ativo: a.ativo == 1 || a.ativo === true,
+    }));
+
+    updateStats(result.stats, result.turmas);
+    bindFilters();
+    applyFilters();
+
+    console.log("Alunos do professor carregados:", allAlunos.length);
+  } catch (err) {
+    console.error(err);
+    if (container) {
+      container.innerHTML = `<div style="padding:2rem;text-align:center;color:red">Erro: ${err.message}</div>`;
+    }
   }
-
-  const d = result.data;
-
-  console.log("Dashboard data loaded:", d);
-
-  // School hero
-  setText("school-name", d.school.name);
-  setText("school-subtitle", d.school.subtitle || "Dashboard do Professor");
-  const chipsEl = document.getElementById("school-chips");
-  if (chipsEl && d.school.chips) {
-    chipsEl.innerHTML = d.school.chips
-      .map((c) => `<span class="shc">${c}</span>`)
-      .join("");
-  }
-  const [alunos, professores, turmas] = d.school.stats || [];
-  if (alunos) setText("alunos-count", alunos.value);
-  if (professores) setText("professores-count", professores.value);
-  if (turmas) setText("turmas-count", turmas.value);
-
-  // Stats row: [alunos, taxaConclusao, tarefas, xp, inativos]
-  const [statAlunos, statTaxa, statTarefas, statXp] = d.stats || [];
-  if (statAlunos) setText("alunos-matriculados-count", statAlunos.value);
-  if (statTaxa) setText("completion-rate", statTaxa.value);
-  if (statTarefas) setText("tarefas-count", statTarefas.value);
-  if (statXp) setText("xp-distribuido-count", statXp.value);
-
-  renderTeachers(d.teachers);
-  renderAlerts(d.alerts);
-  renderClasses(d.classes);
-  renderXpChart(d.xpChart);
-  setText("xp-month-value", d.xpMonthValue);
-  setText("xp-month-delta", d.xpMonthDelta);
-  renderActivities(d.activities);
 }
 
-document.addEventListener("DOMContentLoaded", loadDashboard);
+document.addEventListener("DOMContentLoaded", loadAlunos);

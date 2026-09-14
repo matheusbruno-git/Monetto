@@ -10,6 +10,8 @@ contextBridge.exposeInMainWorld("api", {
   login: (dados) => ipcRenderer.invoke("login", dados),
   addAlunoToTurma: (dados) => ipcRenderer.invoke("addAlunoToTurma", dados),
   getAlunos: (currentUserId) => ipcRenderer.invoke("getAlunos", currentUserId),
+  getAlunosProfessor: (currentUserId) =>
+    ipcRenderer.invoke("getAlunosProfessor", currentUserId),
   getProfessores: (currentUserId) =>
     ipcRenderer.invoke("getProfessores", currentUserId),
   getAdmins: (currentUserId) => ipcRenderer.invoke("getAdmins", currentUserId),

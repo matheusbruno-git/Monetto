@@ -20,7 +20,7 @@
     <div class="topbar">
       <div>
         <h1>👥 Gerenciamento de Alunos</h1>
-        <p style="color:var(--muted);font-size:.87rem;margin-top:3px">128 alunos em 4 turmas</p>
+        <p style="color:var(--muted);font-size:.87rem;margin-top:3px">Carregando alunos…</p>
       </div>
       <div class="top-right">
         <button class="btn-outline">⬇ Exportar CSV</button>
@@ -32,28 +32,28 @@
       <div class="sm-card">
         <div class="sm-icon">👥</div>
         <div>
-          <div class="sm-val">128</div>
+          <div class="sm-val">—</div>
           <div class="sm-lbl">Total de alunos</div>
         </div>
       </div>
       <div class="sm-card">
         <div class="sm-icon">✅</div>
         <div>
-          <div class="sm-val">112</div>
+          <div class="sm-val">—</div>
           <div class="sm-lbl">Ativos esta semana</div>
         </div>
       </div>
       <div class="sm-card">
         <div class="sm-icon">⚠️</div>
         <div>
-          <div class="sm-val">11</div>
+          <div class="sm-val">—</div>
           <div class="sm-lbl">Precisam de atenção</div>
         </div>
       </div>
       <div class="sm-card">
         <div class="sm-icon">🏆</div>
         <div>
-          <div class="sm-val">87%</div>
+          <div class="sm-val">—</div>
           <div class="sm-lbl">Taxa de conclusão</div>
         </div>
       </div>
@@ -63,12 +63,8 @@
       <div class="search-box">🔍 <input type="text" placeholder="Buscar aluno por nome ou e-mail..." /></div>
       <select class="filter-select">
         <option>Todas as turmas</option>
-        <option>8º Ano A</option>
-        <option>8º Ano B</option>
-        <option>9º Ano A</option>
-        <option>9º Ano B</option>
       </select>
-      <div class="ftab active" onclick="setTab(this)">Todos (128)</div>
+      <div class="ftab active" onclick="setTab(this)">Todos (0)</div>
       <div class="ftab" onclick="setTab(this)">Ativos</div>
       <div class="ftab" onclick="setTab(this)">⚠️ Atenção</div>
       <div class="ftab" onclick="setTab(this)">Inativos</div>
@@ -97,7 +93,6 @@
         <h3>📋 Perfil do Aluno</h3>
         <button class="modal-close" onclick="closeModal()">✕</button>
       </div>
-      <!-- replace the static modal-profile block with: -->
       <div class="modal-profile">
         <div class="modal-av">😊</div>
         <div class="modal-info">
@@ -125,16 +120,16 @@
         </div>
       </div>
       <div class="prog-row">
-        <div class="prog-label"><span>Progresso de Nível</span><span style="color:var(--accent)">680 / 1000 XP</span>
+        <div class="prog-label"><span>Progresso de Nível</span><span style="color:var(--accent)">—</span>
         </div>
         <div class="prog-bg">
-          <div class="prog-f" style="width:68%"></div>
+          <div class="prog-f" style="width:0%"></div>
         </div>
       </div>
       <div class="prog-row">
-        <div class="prog-label"><span>Tarefas concluídas</span><span style="color:var(--green)">24 / 26</span></div>
+        <div class="prog-label"><span>Tarefas concluídas</span><span style="color:var(--green)">—</span></div>
         <div class="prog-bg">
-          <div class="prog-f" style="width:92%;background:linear-gradient(90deg,var(--green),#27ae60)"></div>
+          <div class="prog-f" style="width:0%;background:linear-gradient(90deg,var(--green),#27ae60)"></div>
         </div>
       </div>
       <div class="modal-actions">
@@ -145,109 +140,7 @@
     </div>
   </div>
 
-  <script>
-    // ── UI helpers ──────────────────────────────────────────────
-    function setTab(el) {
-      document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
-      el.classList.add('active');
-    }
-
-    function openModal(aluno) {
-      if (aluno) {
-        document.getElementById('modalName').textContent = aluno.nome;
-        document.getElementById('modalEmail').textContent = aluno.email + ' · ' + (aluno.turma ?? '—');
-        document.getElementById('modalXP').textContent = aluno.xp ?? '—';
-      }
-      document.getElementById('modalOverlay').classList.add('open');
-    }
-
-    function closeModal() {
-      document.getElementById('modalOverlay').classList.remove('open');
-    }
-
-    document.getElementById('modalOverlay').addEventListener('click', function (e) {
-      if (e.target === this) closeModal();
-    });
-
-    function sairDaConta(destino) {
-      if (confirm("Tem certeza que deseja sair da conta?")) {
-        window.location.href = destino;
-      }
-    }
-
-    // ── Rendering ────────────────────────────────────────────────
-    const AV_CLASSES = ['av1', 'av2', 'av3', 'av4', 'av5', 'av6', 'av7', 'av8'];
-
-    function xpToLevel(xp) {
-      if (!xp) return 1;
-      if (xp >= 1000) return 6;
-      if (xp >= 700) return 5;
-      if (xp >= 500) return 4;
-      if (xp >= 300) return 3;
-      if (xp >= 150) return 2;
-      return 1;
-    }
-
-    function statusChip(ativo) {
-      if (ativo) return '<span class="status-chip sc-ok">✓ Ativo</span>';
-      return '<span class="status-chip sc-bad">✕ Inativo</span>';
-    }
-
-    function renderRow(aluno, index) {
-      const avClass = AV_CLASSES[index % AV_CLASSES.length];
-      const nivel = xpToLevel(aluno.xp);
-      const xp = aluno.xp ?? '—';
-      const turma = aluno.turma ?? '—';
-
-      return `
-    <div class="tr" onclick='openModal(${JSON.stringify(aluno)})'>
-      <div class="td-aluno">
-        <div class="ava ${avClass}"></div>
-        <div>
-          <div class="al-name">${aluno.nome}</div>
-          <div class="al-email">${aluno.email}</div>
-        </div>
-      </div>
-      <div class="td-muted">${turma}</div>
-      <div><span class="xp-chip">⚡ ${xp}</span></div>
-      <div><span class="lvl-chip">Nível ${nivel}</span></div>
-      <div class="td-text">—</div>
-      <div>${statusChip(aluno.ativo)}</div>
-      <div class="td-actions">
-        <button class="act-btn" onclick="event.stopPropagation();openModal(${JSON.stringify(aluno).replace(/"/g, '&quot;')})">👁</button>
-        <button class="act-btn" onclick="event.stopPropagation()">✉️</button>
-      </div>
-    </div>`;
-    }
-
-    function renderAlunos(alunos) {
-      const container = document.getElementById('alunosContainer');
-
-      if (!alunos.length) {
-        container.innerHTML = '<div style="padding:2rem;text-align:center;color:var(--muted)">Nenhum aluno encontrado.</div>';
-        return;
-      }
-
-      container.innerHTML = alunos.map((a, i) => renderRow(a, i)).join('');
-    }
-
-    // ── Load from DB ─────────────────────────────────────────────
-    async function loadAlunos() {
-      const result = await window.api.getAlunos();
-
-      if (!result.success) {
-        document.getElementById('alunosContainer').innerHTML =
-          `<div style="padding:2rem;text-align:center;color:red">${result.message}</div>`;
-        return;
-      }
-
-      renderAlunos(result.data);
-    }
-
-    document.addEventListener('DOMContentLoaded', loadAlunos);
-  </script>
   <script src="script.js"></script>
-
   <script src="../teacher-script/main-teacher-script.js"></script>
 </body>
 

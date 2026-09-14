@@ -29,11 +29,6 @@ app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
 });
 
-// ====================== IPC Handlers ======================
-
-// Resolves the id_escola for a given logged-in user. Every "list" handler
-// below uses this so a school admin can only ever see rows that belong to
-// their own school, regardless of what the renderer asks for.
 async function resolveEscolaId(db, currentUserId) {
   if (!currentUserId) return null;
   const [rows] = await db
@@ -206,17 +201,113 @@ ipcMain.handle("getAlunos", async (event, currentUserId) => {
       };
     }
 
-    const [rows] = await db.promise().execute(
-      `SELECT id_usuario, nome, email, ativo
-       FROM usuarios
-       WHERE id_perfil = 1 AND id_escola = ?
-       ORDER BY nome ASC`,
-      [escolaId],
-    );
-    return { success: true, data: rows };
+    try {
+      const [rows] = await db.promise().execute(
+        `SELECT u.id_usuario, u.nome, u.email, u.ativo,
+                t.nome_turma AS turma,
+                COALESCE(pa.xp_atual, 0) AS xp
+         FROM usuarios u
+         LEFT JOIN turmas t ON t.id_turma = u.id_turma
+         LEFT JOIN progresso_aluno pa ON pa.id_aluno = u.id_usuario
+         WHERE u.id_perfil = 1 AND u.id_escola = ?
+         ORDER BY u.nome ASC`,
+        [escolaId],
+      );
+      return { success: true, data: rows };
+    } catch (richErr) {
+      console.warn("getAlunos rich query failed, falling back:", richErr.message);
+      const [rows] = await db.promise().execute(
+        `SELECT id_usuario, nome, email, ativo
+         FROM usuarios
+         WHERE id_perfil = 1 AND id_escola = ?
+         ORDER BY nome ASC`,
+        [escolaId],
+      );
+      return { success: true, data: rows };
+    }
   } catch (err) {
     console.error("getAlunos Error:", err);
     return { success: false, message: "Erro ao buscar alunos." };
+  }
+});
+
+/**
+ * Students in classes taught by the current teacher (scoped to their turmas).
+ */
+ipcMain.handle("getAlunosProfessor", async (event, currentUserId) => {
+  try {
+    const db = require(path.join(basePath, "backend/connection.js"));
+
+    if (!currentUserId) {
+      return { success: false, message: "ID do usuário não informado." };
+    }
+
+    const escolaId = await resolveEscolaId(db, currentUserId);
+    if (!escolaId) {
+      return {
+        success: false,
+        message: "Usuário não está associado a uma escola.",
+      };
+    }
+
+    let rows;
+    try {
+      const [r] = await db.promise().execute(
+        `SELECT u.id_usuario, u.nome, u.email, u.ativo,
+                t.id_turma, t.nome_turma AS turma,
+                COALESCE(pa.xp_atual, 0) AS xp
+         FROM usuarios u
+         INNER JOIN turmas t ON u.id_turma = t.id_turma
+         LEFT JOIN progresso_aluno pa ON pa.id_aluno = u.id_usuario
+         WHERE u.id_perfil = 1 AND u.id_escola = ?
+           AND t.id_professor = ? AND t.id_escola = ?
+         ORDER BY t.nome_turma ASC, u.nome ASC`,
+        [escolaId, currentUserId, escolaId],
+      );
+      rows = r;
+    } catch (e) {
+      console.warn("getAlunosProfessor join failed:", e.message);
+      const [r] = await db.promise().execute(
+        `SELECT u.id_usuario, u.nome, u.email, u.ativo,
+                t.id_turma, t.nome_turma AS turma
+         FROM usuarios u
+         INNER JOIN turmas t ON u.id_turma = t.id_turma
+         WHERE u.id_perfil = 1 AND u.id_escola = ?
+           AND t.id_professor = ?
+         ORDER BY u.nome ASC`,
+        [escolaId, currentUserId],
+      );
+      rows = r;
+    }
+
+    const total = rows.length;
+    const ativos = rows.filter((a) => a.ativo == 1 || a.ativo === true).length;
+    const comTurma = rows.filter((a) => a.turma).length;
+    const taxa = total > 0 ? Math.round((comTurma / total) * 100) : 0;
+
+    const turmasMap = new Map();
+    for (const a of rows) {
+      if (a.id_turma && a.turma) turmasMap.set(a.id_turma, a.turma);
+    }
+
+    return {
+      success: true,
+      data: rows,
+      stats: {
+        total,
+        ativos,
+        atencao: Math.max(0, total - ativos),
+        taxaConclusao: taxa,
+        turmasCount: turmasMap.size,
+      },
+      turmas: Array.from(turmasMap.entries()).map(([id, nome]) => ({
+        id,
+        nome,
+      })),
+    };
+  } catch (err) {
+    console.error("getAlunosProfessor Error:", err);
+    return { success: false, message: "Erro ao buscar alunos do professor." };
   }
 });
 
@@ -293,23 +384,56 @@ ipcMain.handle("registerTarefa", async (event, dados) => {
   try {
     const db = require(path.join(basePath, "backend/connection.js"));
 
-    const [result] = await db.promise().execute(
-      `INSERT INTO tarefas (id_escola, id_curso, titulo, descricao, data_criacao, data_vencimento, status)
-       VALUES (?, ?, ?, ?, CURDATE(), ?, 'pendente')`,
-      [
-        dados.id_escola,
-        dados.id_curso,
-        dados.titulo,
-        dados.descricao,
-        dados.data_vencimento,
-      ],
-    );
+    let idEscola = dados.id_escola || null;
+    if (!idEscola && dados.id_usuario) {
+      idEscola = await resolveEscolaId(db, dados.id_usuario);
+    }
+    if (!idEscola) {
+      return {
+        success: false,
+        message: "Escola não identificada. Faça login novamente.",
+      };
+    }
 
-    return {
-      success: true,
-      message: "Tarefa criada com sucesso!",
-      id: result.insertId,
-    };
+    const baseParams = [
+      idEscola,
+      dados.id_curso,
+      dados.titulo,
+      dados.descricao || null,
+      dados.data_vencimento,
+    ];
+
+    try {
+      const [result] = await db.promise().execute(
+        `INSERT INTO tarefas (id_escola, id_curso, titulo, descricao, data_criacao, data_vencimento, status, id_professor, id_usuario)
+         VALUES (?, ?, ?, ?, CURDATE(), ?, 'pendente', ?, ?)`,
+        [
+          ...baseParams,
+          dados.id_professor || dados.id_usuario || null,
+          dados.id_usuario || null,
+        ],
+      );
+      return {
+        success: true,
+        message: "Tarefa criada com sucesso!",
+        id: result.insertId,
+      };
+    } catch (colErr) {
+      console.warn(
+        "registerTarefa extended insert failed, using minimal columns:",
+        colErr.message,
+      );
+      const [result] = await db.promise().execute(
+        `INSERT INTO tarefas (id_escola, id_curso, titulo, descricao, data_criacao, data_vencimento, status)
+         VALUES (?, ?, ?, ?, CURDATE(), ?, 'pendente')`,
+        baseParams,
+      );
+      return {
+        success: true,
+        message: "Tarefa criada com sucesso!",
+        id: result.insertId,
+      };
+    }
   } catch (err) {
     console.error("registerTarefa Error:", err);
     return { success: false, message: "Erro ao criar tarefa." };
