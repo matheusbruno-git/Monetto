@@ -16,6 +16,7 @@
   --bg: rgba(255, 255, 255, 0.06);
   --card: #FFFFFF;
   --text: #FFF;
+  --black-text: #000;
   --muted: #6B7280;
   --border: #E5E7EB;
   --shadow: 0 4px 24px rgba(26, 42, 143, 0.08);
@@ -211,7 +212,6 @@ textarea {
   background: var(--bg);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  border: 1px solid var(--border);
   overflow: hidden;
 }
 
@@ -318,6 +318,7 @@ textarea {
   padding: 14px 16px;
   margin: 16px 0;
   font-size: 0.9rem;
+  color: var(--black-text);
 }
 
 .lesson-nav {
@@ -366,8 +367,9 @@ textarea {
 /* MODULE SIDEBAR */
 .module-sidebar {
   width: 300px;
-  background: var(--card);
-  border-left: 1px solid var(--border);
+  background: var(--bg);
+  border-left: 1px solid var(--navy-dark);
+  color: var(--black-text);
   padding: 24px 18px;
   overflow-y: auto;
   flex-shrink: 0;
@@ -377,7 +379,7 @@ textarea {
   font-family: "Syne", sans-serif;
   font-weight: 700;
   font-size: 1rem;
-  color: var(--navy);
+  color: var(--text);
   margin-bottom: 18px;
 }
 
@@ -390,7 +392,7 @@ textarea {
 
 .op-title {
   font-size: 0.8rem;
-  color: var(--muted);
+  color: var(--text);
   margin-bottom: 4px;
 }
 
@@ -398,7 +400,7 @@ textarea {
   font-family: "Syne", sans-serif;
   font-weight: 800;
   font-size: 1.4rem;
-  color: var(--navy);
+  color: var(--text);
 }
 
 .op-bar-bg {
@@ -429,8 +431,9 @@ textarea {
   padding: 10px;
   border-radius: 10px;
   cursor: pointer;
-  transition: background var(--transition);
+  transition: all 0.3s ease;
 }
+
 
 .mod-item:hover {
   background: var(--bg);
@@ -438,6 +441,11 @@ textarea {
 
 .mod-item.active {
   background: #EEF2FF;
+}
+
+.mod-item.active strong,
+.mod-item.active span {
+  color: var(--navy);
 }
 
 .mod-check {
@@ -460,14 +468,14 @@ textarea {
 
 .mc-active {
   background: var(--navy);
-  color: #fff;
+  color: var(--text);
   box-shadow: 0 0 0 3px rgba(26, 42, 143, 0.2);
 }
 
 .mc-locked {
   background: var(--bg);
   border: 1.5px solid var(--border);
-  color: var(--muted);
+  color: var(--text);
 }
 
 .mod-item-body {
@@ -489,13 +497,13 @@ textarea {
 
 .mod-item-body span {
   font-size: 0.75rem;
-  color: var(--muted);
+  color: var(--text);
   margin-top: 2px;
 }
 
 .mod-lock {
   font-size: 0.75rem;
-  color: var(--muted);
+  color: var(--navy-dark);
   opacity: 0.7;
 }
 

@@ -430,15 +430,11 @@ textarea {
 }
 
 .task-item:hover {
-  background: var(--muted);
+  background: var(--navy-dark);
 }
 
 .task-item:hover .task-name {
   color: var(--text);
-}
-
-.task-item:hover span {
-  color: #0B1340;
 }
 
 .divider {

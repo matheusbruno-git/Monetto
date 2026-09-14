@@ -13,9 +13,9 @@
   --orange: #F39C12;
   --purple: #9B59B6;
   --blue: #3498DB;
-  --bg: #F4F6FB;
+  --bg: rgba(255, 255, 255, 0.06);
   --card: #FFFFFF;
-  --text: #1A1A2E;
+  --text: #FFFFFF;
   --muted: #6B7280;
   --border: #E5E7EB;
   --shadow: 0 4px 24px rgba(26, 42, 143, 0.08);
@@ -192,7 +192,7 @@ textarea {
   font-weight: 800;
   font-size: 1.7rem;
   letter-spacing: -0.03em;
-  color: var(--navy);
+  color: var(--text);
 }
 
 .topbar p {
@@ -210,11 +210,11 @@ textarea {
 }
 
 .game-card {
-  background: var(--card);
+  background: var(--bg);
   border-radius: var(--radius);
   padding: 22px;
   box-shadow: var(--shadow);
-  border: 1px solid var(--border);
+  border: 1px solid var(--navy-dark);
   position: relative;
   overflow: hidden;
   cursor: pointer;
@@ -265,7 +265,7 @@ textarea {
   font-family: "Syne", sans-serif;
   font-weight: 700;
   font-size: 1.05rem;
-  color: var(--navy);
+  color: var(--text);
   margin-bottom: 6px;
   position: relative;
 }
@@ -289,7 +289,7 @@ textarea {
   font-family: "Syne", sans-serif;
   font-weight: 700;
   font-size: 0.9rem;
-  color: var(--navy);
+  color: var(--gold);
 }
 
 .play-btn {
@@ -334,18 +334,17 @@ textarea {
 
 /* LEADERBOARD */
 .lb-section {
-  background: var(--card);
+  background: var(--bg);
   border-radius: var(--radius);
   padding: 22px;
   box-shadow: var(--shadow);
-  border: 1px solid var(--border);
 }
 
 .lb-title {
   font-family: "Syne", sans-serif;
   font-weight: 700;
   font-size: 1.05rem;
-  color: var(--navy);
+  color: var(--text);
   margin-bottom: 18px;
 }
 
@@ -379,17 +378,17 @@ textarea {
 }
 
 .lb-card:nth-child(1) .lb-pos {
-  background: #FFD700;
+  background: #ffd9007d;
   color: #1A1A2E;
 }
 
 .lb-card:nth-child(2) .lb-pos {
-  background: #C0C0C0;
+  background: #c0c0c077;
   color: #1A1A2E;
 }
 
 .lb-card:nth-child(3) .lb-pos {
-  background: #CD7F32;
+  background: #cd803281;
 }
 
 .lb-av {
@@ -408,7 +407,7 @@ textarea {
 
 .lb-info span {
   font-size: 0.8rem;
-  color: var(--navy);
+  color: var(--gold);
   font-weight: 600;
 }
 
