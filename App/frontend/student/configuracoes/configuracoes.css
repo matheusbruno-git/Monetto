@@ -13,9 +13,9 @@
   --orange: #F39C12;
   --purple: #9B59B6;
   --blue: #3498DB;
-  --bg: #F4F6FB;
+  --bg: rgba(255, 255, 255, 0.06);
   --card: #FFFFFF;
-  --text: #1A1A2E;
+  --text: #fff;
   --muted: #6B7280;
   --border: #E5E7EB;
   --shadow: 0 4px 24px rgba(26, 42, 143, 0.08);
@@ -179,18 +179,19 @@ textarea {
 
 /* SETTINGS NAV */
 .set-nav {
-  width: 220px;
-  background: var(--card);
-  border-right: 1px solid var(--border);
+  width: auto;
+  background: var(--bg);
+  border-right: 1px solid var(--bg);
   padding: 28px 12px;
   flex-shrink: 0;
+  transform: translateX(-10px);
 }
 
 .set-nav-title {
   font-family: "Syne", sans-serif;
   font-weight: 800;
   font-size: 1.15rem;
-  color: var(--navy);
+  color: var(--text);
   padding: 0 12px;
   margin-bottom: 20px;
   letter-spacing: -0.02em;
@@ -212,12 +213,12 @@ textarea {
 
 .set-nav-item:hover {
   background: var(--bg);
-  color: var(--navy);
+  color: var(--text);
 }
 
 .set-nav-item.active {
-  background: #EEF2FF;
-  color: var(--navy);
+  background: var(--bg);
+  color: var(--text);
   font-weight: 600;
 }
 
@@ -258,11 +259,11 @@ textarea {
   display: flex;
   align-items: center;
   gap: 20px;
-  background: linear-gradient(135deg, #EEF2FF, #F0FDF4);
+  background: var(--bg);
   border-radius: var(--radius);
   padding: 24px;
   margin-bottom: 24px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--bg);
 }
 
 .profile-big-av {
@@ -276,7 +277,7 @@ textarea {
   font-size: 2.4rem;
   position: relative;
   flex-shrink: 0;
-  border: 3px solid var(--gold);
+  border: 3px solid var(--card);
 }
 
 .av-edit {
@@ -340,11 +341,11 @@ textarea {
 
 /* SET CARDS */
 .set-card {
-  background: var(--card);
+  background: var(--bg);
   border-radius: var(--radius);
   padding: 22px;
   box-shadow: var(--shadow);
-  border: 1px solid var(--border);
+  border: 1px solid var(--bg);
   margin-bottom: 18px;
 }
 
@@ -352,7 +353,7 @@ textarea {
   font-family: "Syne", sans-serif;
   font-weight: 700;
   font-size: 1rem;
-  color: var(--navy);
+  color: var(--text);
   margin-bottom: 16px;
 }
 
@@ -442,7 +443,7 @@ textarea {
   border-radius: var(--radius-sm);
   background: #FAFBFF;
   outline: none;
-  color: var(--text);
+  color: black;
   transition: border-color var(--transition), box-shadow var(--transition);
 }
 
@@ -480,9 +481,9 @@ textarea {
 
 .btn-cancel {
   padding: 11px 22px;
-  background: transparent;
-  color: var(--muted);
-  border: 1.5px solid var(--border);
+  background: #b80808;
+  color: var(--text);
+  border: 1px solid var(--bg);
   border-radius: var(--radius-sm);
   font-weight: 600;
   font-size: 0.9rem;
@@ -491,15 +492,16 @@ textarea {
 }
 
 .btn-cancel:hover {
+  transform: translateY(-1px);
   border-color: var(--navy);
-  color: var(--navy);
+  box-shadow: 0 6px 16px rgba(143, 26, 26, 0.3);
 }
 
 .btn-danger {
   padding: 11px 22px;
-  background: #FEE2E2;
-  color: var(--red);
-  border: 1.5px solid #FECACA;
+  background: #b80808;
+  color: var(--text);
+  border: 1.5px solid var(--red);
   border-radius: var(--radius-sm);
   font-weight: 600;
   font-size: 0.9rem;

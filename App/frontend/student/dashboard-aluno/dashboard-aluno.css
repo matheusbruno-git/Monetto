@@ -14,9 +14,9 @@
   --orange: #F39C12;
   --purple: #9B59B6;
   --blue: #3498DB;
-  --bg: #2b2b2b;
+  --bg: rgba(255, 255, 255, 0.06);
   --card: #FFFFFF;
-  --text: #1A1A2E;
+  --text: #fff;
   --muted: #6B7280;
   --border: #E5E7EB;
   --shadow: 0 4px 24px rgba(26, 42, 143, 0.08);
@@ -214,8 +214,8 @@ textarea {
   width: 42px;
   height: 42px;
   border-radius: 12px;
-  background: var(--card);
-  border: 1px solid var(--border);
+  background: var(--bg);
+  border: 1px solid var(--bg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -241,13 +241,13 @@ textarea {
 }
 
 .xp-topbar {
-  background: linear-gradient(135deg, #EEF2FF, #FEF9C3);
-  border: 1px solid #C7D2FE;
+  background: var(--bg);
+  border: 1px solid var(--bg);
   border-radius: 999px;
   padding: 8px 16px;
   font-size: 0.88rem;
   font-weight: 600;
-  color: var(--navy-dark);
+  color: var(--text);
 }
 
 /* ---- STATS ---- */
@@ -400,7 +400,7 @@ textarea {
 
 .task-item.pendent .task-due,
 .task-item.pendent .task-teacher {
-  color: var(--gold-soft);
+  color: #0e0e0e;
   font-weight: 600;
   font-size: 0.82rem;
 }
@@ -410,8 +410,19 @@ textarea {
 }
 
 .task-item.late .task-due,
+.task-item.late .task-teacher:first-child {
+  color: #FFF;
+  border: 1px solid #FFF;
+  border-radius: var(--radius-sm);
+  padding: 2px 6px;
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
+.task-item.late .task-due,
 .task-item.late .task-teacher {
-  color: rgb(255, 0, 0);
+  color: #FFF;
+  padding: 2px 6px;
   font-weight: 600;
   font-size: 0.82rem;
 }
@@ -483,9 +494,9 @@ textarea {
 }
 
 .task-name {
-  font-weight: 600;
+  font-weight: 400;
   font-size: 0.92rem;
-  color: white;
+  color: var(--text);
 }
 
 .task-name.done-text {
@@ -503,12 +514,15 @@ textarea {
 }
 
 .task-subject {
-  background: #3f3f3f;
-  color: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
   padding: 2px 8px;
   border-radius: 6px;
   font-weight: 500;
   font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.50);
 }
 
 .task-due {
@@ -602,7 +616,6 @@ textarea {
 .sd-today {
   background: var(--gold);
   color: var(--navy-dark);
-  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.35);
 }
 
 .sd-empty {
@@ -631,16 +644,16 @@ textarea {
   border-radius: 10px;
   background: var(--navy-dark);
   color: #fff;
-  transition: background var(--transition);
+  transition: all var(--transition);
 }
 
 .rank-row-item:hover {
-  background: #b6bfde;
-  color: var(--navy-dark);
+  background: var(--bg);
+  color: var(--text);
 }
 
 .rank-row-item:hover .rxp {
-  color: var(--navy-dark);
+  color: var(--text);
 }
 
 .rpos {

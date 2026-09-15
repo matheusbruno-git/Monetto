@@ -13,9 +13,9 @@
   --orange: #F39C12;
   --purple: #9B59B6;
   --blue: #3498DB;
-  --bg: #F4F6FB;
+  --bg: rgba(255, 255, 255, 0.06);
   --card: #FFFFFF;
-  --text: #1A1A2E;
+  --text: #fff;
   --muted: #6B7280;
   --border: #E5E7EB;
   --shadow: 0 4px 24px rgba(26, 42, 143, 0.08);
@@ -281,12 +281,12 @@ textarea {
   font-family: "Syne", sans-serif;
   font-weight: 700;
   font-size: 1.1rem;
-  color: var(--bg);
+  color: var(--text);
 }
 
 .sec-see {
   font-size: 0.85rem;
-  color: var(--bg);
+  color: var(--text);
   font-weight: 600;
   cursor: pointer;
 }
@@ -304,12 +304,11 @@ textarea {
 }
 
 .badge-item {
-  background: var(--card);
+  background: var(--bg);
   border-radius: var(--radius);
   padding: 20px 16px;
   text-align: center;
   box-shadow: var(--shadow);
-  border: 1px solid var(--border);
   position: relative;
   transition: transform var(--transition);
 }
@@ -319,8 +318,8 @@ textarea {
 }
 
 .badge-item.locked {
-  opacity: 0.55;
-  filter: grayscale(0.4);
+  opacity: 0.4;
+  filter: grayscale(1);
 }
 
 .badge-icon {
@@ -332,7 +331,7 @@ textarea {
 .badge-name {
   font-weight: 700;
   font-size: 0.9rem;
-  color: var(--navy);
+  color: var(--text);
   margin-bottom: 4px;
 }
 
@@ -371,14 +370,13 @@ textarea {
 }
 
 .shop-card {
-  background: var(--card);
+  background: var(--bg);
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--shadow);
-  border: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  transition: transform var(--transition);
+  transition: all var(--transition);
 }
 
 .shop-card:hover {
@@ -386,7 +384,7 @@ textarea {
 }
 
 .shop-card-top {
-  background: linear-gradient(135deg, #EEF2FF, #FEF9C3);
+  background: var(--bg);
   padding: 24px;
   text-align: center;
 }
@@ -406,7 +404,7 @@ textarea {
 .shop-card p {
   font-size: 0.82rem;
   color: var(--muted);
-  padding: 0 16px 12px;
+  padding: 0px 8px 12px 0px;
   flex: 1;
 }
 
@@ -415,14 +413,14 @@ textarea {
   align-items: center;
   justify-content: space-between;
   padding: 12px 16px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--navy);
 }
 
 .shop-cost {
   font-family: "Syne", sans-serif;
   font-weight: 700;
   font-size: 0.95rem;
-  color: var(--navy);
+  color: var(--text);
 }
 
 .shop-btn {
@@ -454,11 +452,11 @@ textarea {
 
 /* HISTORY */
 .history-list {
-  background: var(--card);
+  background: var(--bg);
   border-radius: var(--radius);
+  border: 1px solid var(--navy-dark);
   padding: 8px 0;
   box-shadow: var(--shadow);
-  border: 1px solid var(--border);
   margin-bottom: 24px;
 }
 
@@ -467,7 +465,7 @@ textarea {
   align-items: center;
   gap: 14px;
   padding: 14px 20px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--navy);
 }
 
 .hist-item:last-child {

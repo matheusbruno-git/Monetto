@@ -24,7 +24,6 @@
       <div class="set-nav-item active" onclick="showTab('perfil',this)"><span class="sni">👤</span> Meu Perfil</div>
       <div class="set-nav-item" onclick="showTab('notif',this)"><span class="sni">🔔</span> Notificações</div>
       <div class="set-nav-item" onclick="showTab('priv',this)"><span class="sni">🔒</span> Privacidade</div>
-      <div class="set-nav-item" onclick="showTab('apar',this)"><span class="sni">🎨</span> Aparência</div>
       <div class="set-nav-item" onclick="showTab('conta',this)"><span class="sni">🛡️</span> Conta</div>
     </div>
 
@@ -233,50 +232,6 @@
 
         <div class="save-row">
           <button class="btn-save" onclick="showToast()">Salvar configurações</button>
-        </div>
-      </div>
-
-      <!-- APARÊNCIA -->
-      <div id="tab-apar" style="display:none">
-        <div class="set-header">
-          <h1>🎨 Aparência</h1>
-          <p>Personalize sua experiência na plataforma</p>
-        </div>
-
-        <div class="set-card">
-          <div class="set-card-title">🌙 Temas ☀️</div>
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:8px">
-            <div
-              style="height:54px;border-radius:14px;background:linear-gradient(135deg,#d8d8d8,#cacaca);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700">
-              Claro</div>
-            <div
-              style="height:54px;border-radius:14px;background:linear-gradient(135deg,#585c56,#2b2b2b);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:rgba(255,255,255,.5)">
-              Escuro</div>
-
-          </div>
-        </div>
-
-        <div class="set-card">
-          <div class="set-card-title">✨ Animações</div>
-          <div class="toggle-row">
-            <div class="toggle-info"><strong>Animações de entrada</strong><span>Efeitos suaves ao carregar as
-                páginas</span></div>
-            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
-          </div>
-          <div class="toggle-row">
-            <div class="toggle-info"><strong>Efeitos de XP</strong><span>Animação ao ganhar pontos de experiência</span>
-            </div>
-            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
-          </div>
-          <div class="toggle-row">
-            <div class="toggle-info"><strong>Confetes nas conquistas</strong><span>Celebre cada medalha com confetes
-                🎉</span></div>
-            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
-          </div>
-        </div>
-
-        <div class="save-row">
-          <button class="btn-save" onclick="showToast()">Salvar aparência</button>
         </div>
       </div>
 

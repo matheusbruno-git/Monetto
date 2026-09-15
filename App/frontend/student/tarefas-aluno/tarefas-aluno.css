@@ -215,6 +215,11 @@ textarea {
   font-size: 1.15rem;
   cursor: pointer;
   position: relative;
+  transition: box-shadow var(--transition);
+}
+
+.notif-btn:hover {
+  box-shadow: var(--shadow);
 }
 
 .notif-dot {
@@ -226,6 +231,16 @@ textarea {
   background: var(--red);
   border-radius: 50%;
   border: 2px solid var(--card);
+}
+
+.xp-topbar {
+  background: var(--bg);
+  border: 1px solid var(--bg);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
 }
 
 /* STATS mini */
@@ -530,23 +545,25 @@ textarea {
 
 .tchip {
   font-size: 0.72rem;
-  font-weight: 500;
   padding: 2px 8px;
   border-radius: 6px;
 }
 
 .tc-subj {
   background: #EEF2FF;
+  font-weight: 900;
   color: var(--navy);
 }
 
 .tc-prof {
   background: #F3F4F6;
-  color: var(--muted);
+  font-weight: 900;
+  color: var(--navy-dark);
 }
 
 .tc-type {
   background: #FEF3C7;
+  font-weight: 900;
   color: #92400E;
 }
 
