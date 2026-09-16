@@ -85,7 +85,7 @@ ipcMain.handle("login", async (event, { email, senha }) => {
       redirect = "../teacher/dashboard-professor/dashboard-professor.html";
     } else if (user.id_perfil === 3) {
       redirect =
-        "../admin_general/dashboard-admin-geral/dashboard-admin-geral.html";
+        "../admin_school/dashboard-admin-escolar/dashboard-admin-escolar.html";
     }
 
     return {
