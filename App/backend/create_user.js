@@ -28,10 +28,10 @@ async function registerUser(dados) {
     const id_usuario = uuidv4();
 
     const sql = `
-      INSERT INTO usuarios 
-      (id_usuario, id_perfil, nome, email, senha_hash, id_escola, ativo, criado_em)
-      VALUES (?, ?, ?, ?, ?, ?, 1, NOW())
-    `;
+          INSERT INTO usuarios 
+          (id_usuario, id_perfil, nome, email, senha_hash, id_escola, ativo, criado_em)
+          VALUES (?, ?, ?, ?, ?, ?, 1, NOW())
+        `;
 
     await db
       .promise()
@@ -41,7 +41,7 @@ async function registerUser(dados) {
         dados.nome,
         dados.email,
         senha_hash,
-        dados.id_escola || null, // Allow null for id_escola if not provided
+        dados.id_escola || null,
       ]);
 
     console.log("✅ Usuário criado com sucesso!");

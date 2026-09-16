@@ -19,10 +19,12 @@
     <a class="sb-link" href="../relatorios/relatorios.html"><span class="icon">📊</span> Relatórios</a>
     <span class="sb-section">Conta</span>
     <a class="sb-link" href="../configuracoes/configuracoes-prof.html"><span class="icon">⚙️</span> Configurações</a>
-    <div class="sb-bottom"><a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;"
-            onclick="sairDaConta('../../user/login-principal/login-principal.html')"><span class="icon">🚪</span> Sair
-            da
-            conta</a>
+    <div class="sb-bottom">
+        <a class="sb-link sb-logout" href="../../login/login.html"
+            onclick="if (typeof sairDaConta === 'function') { sairDaConta('../../login/login.html'); return false; }">
+            <span class="icon">🚪</span>
+            Sair da conta
+        </a>
         <div class="sb-user">
             <div class="sb-av">👨‍🏫</div>
             <div class="sb-user-info"><strong>Prof. Ricardo</strong><span>4 turmas ativas</span></div>

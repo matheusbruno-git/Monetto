@@ -10,162 +10,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../../shared/main-style.css">
     <link rel="icon" type="image/x-icon" href="../../Assets/Monetto Logo.ico">
-    <style>
-        /* Page-specific layout improvements */
-        .page-grid {
-            display: grid;
-            grid-template-columns: minmax(320px, 420px) 1fr;
-            gap: 24px;
-            align-items: start;
-        }
-
-        @media (max-width: 980px) {
-            .page-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .form-area {
-            max-width: none;
-            width: 100%;
-            position: sticky;
-            top: 0;
-        }
-
-        .form-area .form-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 6px;
-        }
-
-        .form-area .form-sub {
-            margin-bottom: 22px;
-        }
-
-        .stats-summary {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 14px;
-            margin-bottom: 18px;
-        }
-
-        .sc.sc-b {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .students-panel {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 22px;
-        }
-
-        .students-panel .card-hd {
-            margin-bottom: 14px;
-        }
-
-        .students-panel .card-hd h3 {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        #students-list {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            max-height: 480px;
-            overflow-y: auto;
-            padding-right: 4px;
-        }
-
-        #students-list::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        #students-list::-webkit-scrollbar-thumb {
-            background: rgba(255, 215, 0, 0.35);
-            border-radius: 99px;
-        }
-
-        .teach-item {
-            padding: 12px 8px;
-            border-radius: 12px;
-            transition: background 0.15s;
-        }
-
-        .teach-item:hover {
-            background: rgba(255, 255, 255, 0.04);
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 36px 16px;
-            color: var(--muted);
-            font-size: 0.88rem;
-        }
-
-        .empty-state .icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            opacity: 0.7;
-        }
-
-        #formMsg {
-            display: none;
-            font-size: 0.84rem;
-            margin-bottom: 10px;
-            font-weight: 600;
-            padding: 10px 14px;
-            border-radius: 10px;
-        }
-
-        #formMsg.ok {
-            display: block;
-            background: rgba(46, 204, 113, 0.12);
-            color: var(--green);
-            border: 1px solid rgba(46, 204, 113, 0.3);
-        }
-
-        #formMsg.err {
-            display: block;
-            background: rgba(231, 76, 60, 0.12);
-            color: var(--red);
-            border: 1px solid rgba(231, 76, 60, 0.3);
-        }
-
-        .form-footer {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-
-        .succefull-text {
-            display: none;
-            margin: 0;
-            padding: 10px 16px;
-            border-radius: 10px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--green);
-            background: rgba(46, 204, 113, 0.12);
-            border: 1px solid rgba(46, 204, 113, 0.25);
-        }
-
-        /* Better date input appearance in dark theme */
-        input[type="date"] {
-            color-scheme: dark;
-        }
-
-        input[type="date"]::-webkit-calendar-picker-indicator {
-            filter: invert(0.85);
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -182,6 +27,16 @@
                 <div class="fg">
                     <label for="nome">Nome do Aluno *</label>
                     <input id="nome" placeholder="Nome completo do aluno" autocomplete="name">
+                </div>
+
+                <div class="fg">
+                    <label for="email">Email *</label>
+                    <input id="email" type="email" placeholder="email@exemplo.com" autocomplete="email">
+                </div>
+
+                <div class="fg">
+                    <label for="senha">Senha Provisoria*</label>
+                    <input id="senha" type="password" placeholder="Senha do aluno" autocomplete="new-password">
                 </div>
 
                 <div class="fg">

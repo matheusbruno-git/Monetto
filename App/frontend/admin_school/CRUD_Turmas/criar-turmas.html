@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 
+
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,6 +37,23 @@
             <select id="nivelSelect">
               <option value="">Selecione o nível...</option>
             </select>
+          </div>
+
+          <div class="fg">
+            <label for="alunosSelect">Alunos da Turma</label>
+            <select id="alunosSelect" multiple size="8" aria-label="Selecionar alunos da turma">
+              <option value="Ana Souza">Ana Souza</option>
+              <option value="Bruno Costa">Bruno Costa</option>
+              <option value="Carla Mendes">Carla Mendes</option>
+              <option value="Daniel Lima">Daniel Lima</option>
+              <option value="Eduarda Rocha">Eduarda Rocha</option>
+              <option value="Felipe Nunes">Felipe Nunes</option>
+              <option value="Gabriela Reis">Gabriela Reis</option>
+              <option value="Henrique Silva">Henrique Silva</option>
+              <option value="Isabela Moraes">Isabela Moraes</option>
+              <option value="João Pereira">João Pereira</option>
+            </select>
+            <small>Segure Ctrl/Cmd para selecionar vários alunos.</small>
           </div>
 
           <div id="formMsg"></div>
@@ -82,10 +101,170 @@
         </div>
       </div>
     </div>
+    <div id="studentModal" class="modal-container" style="display:none" aria-hidden="true">
+      <div class="modal" role="dialog" aria-labelledby="studentModalTitle" aria-modal="true">
+        <div class="modal-header">
+          <h3 id="studentModalTitle">Atribuir Alunos</h3>
+          <h4 id="studentModalTurmaNome"></h4>
+          <button type="button" class="close-btn" onclick="closeStudentModal()" aria-label="Fechar">✖</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="fg">
+            <label for="studentAssignments">Selecione os alunos desta turma</label>
+            <select id="studentAssignments" class="select-teacher" multiple size="10">
+              <option value="Ana Souza">Ana Souza</option>
+              <option value="Bruno Costa">Bruno Costa</option>
+              <option value="Carla Mendes">Carla Mendes</option>
+              <option value="Daniel Lima">Daniel Lima</option>
+              <option value="Eduarda Rocha">Eduarda Rocha</option>
+              <option value="Felipe Nunes">Felipe Nunes</option>
+              <option value="Gabriela Reis">Gabriela Reis</option>
+              <option value="Henrique Silva">Henrique Silva</option>
+              <option value="Isabela Moraes">Isabela Moraes</option>
+              <option value="João Pereira">João Pereira</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-cancel2" onclick="closeStudentModal()">Cancelar</button>
+          <button type="button" class="btn-acc" id="saveStudentsBtn">Salvar Alunos</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>
   <script src="../../shared/monetto-app.js"></script>
+  <script>
+    const turmas = [];
+    let turmaSelecionada = null;
+
+    function showMsg(text, isError = false) {
+      const el = document.getElementById('formMsg');
+      el.textContent = text;
+      el.style.color = isError ? '#d33' : '#1b8a5a';
+      el.style.marginTop = '8px';
+      el.style.display = 'block';
+    }
+
+    function getSelectedStudents(selectEl) {
+      const selected = Array.from(selectEl.selectedOptions || []).map(opt => opt.value);
+      return selected.filter(Boolean);
+    }
+
+    function renderTurmas() {
+      const listBody = document.getElementById('turmasListBody');
+      const countEl = document.getElementById('turmasCount');
+      listBody.innerHTML = '';
+
+      if (!turmas.length) {
+        listBody.innerHTML = '<div class="empty-state">Nenhuma turma criada ainda.</div>';
+        countEl.textContent = '0 turmas';
+        return;
+      }
+
+      countEl.textContent = `${turmas.length} turma${turmas.length > 1 ? 's' : ''}`;
+
+      turmas.forEach((turma) => {
+        const card = document.createElement('div');
+        card.className = 'turma-card';
+
+        const alunos = turma.alunos && turma.alunos.length ? turma.alunos.join(', ') : 'Nenhum aluno atribuído';
+
+        card.innerHTML = `
+          <div class="turma-head">
+            <div>
+              <h4>${turma.nome}</h4>
+              <span>${turma.nivel}</span>
+            </div>
+            <button type="button" class="btn-cancel2" data-action="atribuir-alunos" data-id="${turma.id}">Atribuir alunos</button>
+          </div>
+          <div class="turma-meta">
+            <strong>Alunos:</strong>
+            <p>${alunos}</p>
+          </div>
+        `;
+
+        listBody.appendChild(card);
+      });
+
+      document.querySelectorAll('[data-action="atribuir-alunos"]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const turmaId = Number(btn.dataset.id);
+          openStudentModal(turmaId);
+        });
+      });
+    }
+
+    function openStudentModal(turmaId) {
+      turmaSelecionada = turmas.find(t => t.id === turmaId);
+      if (!turmaSelecionada) return;
+
+      const modal = document.getElementById('studentModal');
+      const title = document.getElementById('studentModalTurmaNome');
+      const select = document.getElementById('studentAssignments');
+
+      title.textContent = turmaSelecionada.nome;
+      Array.from(select.options).forEach((option) => {
+        option.selected = turmaSelecionada.alunos.includes(option.value);
+      });
+
+      modal.style.display = 'flex';
+      modal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeStudentModal() {
+      const modal = document.getElementById('studentModal');
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+      turmaSelecionada = null;
+    }
+
+    document.getElementById('btn').addEventListener('click', () => {
+      const nome = document.getElementById('nomeTurma').value.trim();
+      const nivel = document.getElementById('nivelSelect').value;
+      const alunos = getSelectedStudents(document.getElementById('alunosSelect'));
+
+      if (!nome || !nivel) {
+        showMsg('Preencha o nome da turma e o nível educacional.', true);
+        return;
+      }
+
+      turmas.push({
+        id: Date.now(),
+        nome,
+        nivel,
+        alunos
+      });
+
+      document.getElementById('nomeTurma').value = '';
+      document.getElementById('nivelSelect').value = '';
+      document.getElementById('alunosSelect').selectedIndex = -1;
+      showMsg('Turma criada com sucesso!');
+      renderTurmas();
+    });
+
+    document.getElementById('saveStudentsBtn').addEventListener('click', () => {
+      if (!turmaSelecionada) return;
+
+      const select = document.getElementById('studentAssignments');
+      turmaSelecionada.alunos = getSelectedStudents(select);
+      renderTurmas();
+      closeStudentModal();
+    });
+
+    const nivelSelect = document.getElementById('nivelSelect');
+    ['Educação Infantil', 'Ensino Fundamental I', 'Ensino Fundamental II', 'Ensino Médio', 'Ensino Técnico'].forEach((nivel) => {
+      const option = document.createElement('option');
+      option.value = nivel;
+      option.textContent = nivel;
+      nivelSelect.appendChild(option);
+    });
+
+    renderTurmas();
+  </script>
 </body>
 
 </html>
