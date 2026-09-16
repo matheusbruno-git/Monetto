@@ -1,0 +1,342 @@
+{
+  "schema_version": "2.0",
+  "projeto": {
+    "nome": "Monetto",
+    "descricao": "Plataforma educacional gamificada de educação financeira para estudantes, com simulação de vida financeira, tomada de decisões, consequências, recompensas, progressão e acompanhamento escolar.",
+    "publico_alvo": "Estudantes de 12 a 18 anos, principalmente Ensino Fundamental - Anos Finais e Ensino Médio.",
+    "uso_escolar": [
+      "trilhas de aprendizagem",
+      "simulações financeiras",
+      "atividades gamificadas",
+      "acompanhamento de progresso",
+      "relatórios para professores e escola"
+    ]
+  },
+  "criterio_bncc": {
+    "regra": "Separar rigorosamente o texto oficial da habilidade BNCC das aplicações específicas criadas pelo Monetto.",
+    "observacao": "Nem todo conteúdo financeiro do produto aparece nominalmente na BNCC. Itens como Pix, INSS, taxas bancárias, cartão de crédito, multas e tipos de investimento são contextos pedagógicos que podem mobilizar habilidades da BNCC, mas não devem ser apresentados como se fossem texto oficial da Base.",
+    "classificacoes_relacao": {
+      "direta": "A habilidade cita educação financeira, Matemática Financeira, orçamento, juros, impostos/contas ou consumo de forma explícita.",
+      "direta por aplicação": "O objeto matemático ou linguístico se aplica diretamente às finanças, embora a habilidade não nomeie educação financeira.",
+      "indireta/interdisciplinar": "A habilidade contribui para contexto econômico, social, trabalho, renda ou direitos do consumidor."
+    }
+  },
+  "conteudos_monetto_planejados": [
+    "renda e salário",
+    "descontos no salário em simulações didáticas",
+    "INSS e impostos como contextos de aprendizagem",
+    "débito, crédito, parcelamento e Pix",
+    "contas de água, energia, gás e internet",
+    "orçamento e controle de gastos",
+    "planejamento e estabilidade financeira",
+    "porcentagens",
+    "juros simples e compostos",
+    "taxas e multas",
+    "consumo consciente",
+    "publicidade e decisão de compra",
+    "direitos do consumidor",
+    "investimentos e metas financeiras",
+    "trabalho, emprego, renda e desigualdade"
+  ],
+  "total_habilidades": 17,
+  "habilidades_nucleo_sugeridas": [
+    "EF06MA13",
+    "EF07MA02",
+    "EF08MA04",
+    "EF09MA05",
+    "EF69LP04",
+    "EF67LP16",
+    "EM13MAT203",
+    "EM13MAT303",
+    "EM13MAT304",
+    "EM13MAT404",
+    "EM13CHS401",
+    "EM13CHS402"
+  ],
+  "arquivos_originais_revisados": [
+    "EF05GE05.json",
+    "EF07GE08.json",
+    "EF07MA02.json",
+    "EF09MA05.json",
+    "EF67LP16.json",
+    "EF69LP04.json",
+    "EM13CHS401.json",
+    "EM13CHS402.json",
+    "EM13MAT302.json",
+    "EM13MAT305.json"
+  ],
+  "novas_habilidades_adicionadas_por_relevancia": [
+    "EF05MA06.json",
+    "EF06MA13.json",
+    "EF08MA04.json",
+    "EM13MAT203.json",
+    "EM13MAT303.json",
+    "EM13MAT304.json",
+    "EM13MAT404.json"
+  ],
+  "habilidades": [
+    {
+      "codigo": "EF05GE05",
+      "arquivo": "EF05GE05.json",
+      "etapa": "Ensino Fundamental - Anos Iniciais",
+      "ano_serie": "5º ano",
+      "area": "Ciências Humanas",
+      "tipo_relacao": "indireta/interdisciplinar",
+      "nivel_no_produto": "pré-requisito / contextualização",
+      "resumo": [
+        "trabalho",
+        "fontes de renda",
+        "setores da economia",
+        "tecnologia e trabalho"
+      ]
+    },
+    {
+      "codigo": "EF05MA06",
+      "arquivo": "EF05MA06.json",
+      "etapa": "Ensino Fundamental - Anos Iniciais",
+      "ano_serie": "5º ano",
+      "area": "Matemática",
+      "tipo_relacao": "direta",
+      "nivel_no_produto": "pré-requisito / revisão",
+      "resumo": [
+        "porcentagem básica",
+        "sistema monetário",
+        "desconto simples",
+        "parte do orçamento"
+      ]
+    },
+    {
+      "codigo": "EF06MA13",
+      "arquivo": "EF06MA13.json",
+      "etapa": "Ensino Fundamental - Anos Finais",
+      "ano_serie": "6º ano",
+      "area": "Matemática",
+      "tipo_relacao": "direta",
+      "nivel_no_produto": "núcleo",
+      "resumo": [
+        "porcentagem",
+        "descontos",
+        "acréscimos",
+        "orçamento"
+      ]
+    },
+    {
+      "codigo": "EF07GE08",
+      "arquivo": "EF07GE08.json",
+      "etapa": "Ensino Fundamental - Anos Finais",
+      "ano_serie": "7º ano",
+      "area": "Ciências Humanas",
+      "tipo_relacao": "indireta/interdisciplinar",
+      "nivel_no_produto": "contextualização",
+      "resumo": [
+        "economia brasileira",
+        "industrialização",
+        "tecnologia",
+        "mercado de trabalho"
+      ]
+    },
+    {
+      "codigo": "EF07MA02",
+      "arquivo": "EF07MA02.json",
+      "etapa": "Ensino Fundamental - Anos Finais",
+      "ano_serie": "7º ano",
+      "area": "Matemática",
+      "tipo_relacao": "direta",
+      "nivel_no_produto": "núcleo",
+      "resumo": [
+        "porcentagem",
+        "acréscimos",
+        "decréscimos",
+        "descontos"
+      ]
+    },
+    {
+      "codigo": "EF08MA04",
+      "arquivo": "EF08MA04.json",
+      "etapa": "Ensino Fundamental - Anos Finais",
+      "ano_serie": "8º ano",
+      "area": "Matemática",
+      "tipo_relacao": "direta por aplicação",
+      "nivel_no_produto": "núcleo",
+      "resumo": [
+        "porcentagem",
+        "comparação de preços",
+        "descontos",
+        "taxas"
+      ]
+    },
+    {
+      "codigo": "EF09MA05",
+      "arquivo": "EF09MA05.json",
+      "etapa": "Ensino Fundamental - Anos Finais",
+      "ano_serie": "9º ano",
+      "area": "Matemática",
+      "tipo_relacao": "direta",
+      "nivel_no_produto": "núcleo",
+      "resumo": [
+        "percentuais sucessivos",
+        "taxas percentuais",
+        "reajustes sucessivos",
+        "descontos sucessivos"
+      ]
+    },
+    {
+      "codigo": "EF67LP16",
+      "arquivo": "EF67LP16.json",
+      "etapa": "Ensino Fundamental - Anos Finais",
+      "ano_serie": "6º e 7º ano",
+      "area": "Linguagens",
+      "tipo_relacao": "indireta/interdisciplinar",
+      "nivel_no_produto": "núcleo complementar",
+      "resumo": [
+        "direitos do consumidor",
+        "SAC",
+        "ouvidoria",
+        "cobrança indevida"
+      ]
+    },
+    {
+      "codigo": "EF69LP04",
+      "arquivo": "EF69LP04.json",
+      "etapa": "Ensino Fundamental - Anos Finais",
+      "ano_serie": "6º ao 9º ano",
+      "area": "Linguagens",
+      "tipo_relacao": "direta/interdisciplinar",
+      "nivel_no_produto": "núcleo",
+      "resumo": [
+        "publicidade",
+        "persuasão",
+        "consumo consciente",
+        "necessidades e desejos"
+      ]
+    },
+    {
+      "codigo": "EM13CHS401",
+      "arquivo": "EM13CHS401.json",
+      "etapa": "Ensino Médio",
+      "ano_serie": "1ª a 3ª série",
+      "area": "Ciências Humanas e Sociais Aplicadas",
+      "tipo_relacao": "indireta/interdisciplinar",
+      "nivel_no_produto": "contextualização",
+      "resumo": [
+        "mundo do trabalho",
+        "fontes de renda",
+        "formas de contratação em abordagem conceitual",
+        "tecnologia e trabalho"
+      ]
+    },
+    {
+      "codigo": "EM13CHS402",
+      "arquivo": "EM13CHS402.json",
+      "etapa": "Ensino Médio",
+      "ano_serie": "1ª a 3ª série",
+      "area": "Ciências Humanas e Sociais Aplicadas",
+      "tipo_relacao": "direta/interdisciplinar",
+      "nivel_no_produto": "núcleo complementar",
+      "resumo": [
+        "emprego",
+        "renda",
+        "indicadores socioeconômicos",
+        "desigualdade"
+      ]
+    },
+    {
+      "codigo": "EM13MAT203",
+      "arquivo": "EM13MAT203.json",
+      "etapa": "Ensino Médio",
+      "ano_serie": "1ª a 3ª série",
+      "area": "Matemática e suas Tecnologias",
+      "tipo_relacao": "direta",
+      "nivel_no_produto": "núcleo prioritário",
+      "resumo": [
+        "orçamento pessoal e familiar",
+        "receitas e despesas",
+        "controle de gastos",
+        "planejamento financeiro"
+      ]
+    },
+    {
+      "codigo": "EM13MAT302",
+      "arquivo": "EM13MAT302.json",
+      "etapa": "Ensino Médio",
+      "ano_serie": "1ª a 3ª série",
+      "area": "Matemática e suas Tecnologias",
+      "tipo_relacao": "indireta por aplicação",
+      "nivel_no_produto": "aprofundamento",
+      "resumo": [
+        "modelagem de custos",
+        "salário líquido em modelos simplificados",
+        "custos fixos e variáveis",
+        "projeções"
+      ]
+    },
+    {
+      "codigo": "EM13MAT303",
+      "arquivo": "EM13MAT303.json",
+      "etapa": "Ensino Médio",
+      "ano_serie": "1ª a 3ª série",
+      "area": "Matemática e suas Tecnologias",
+      "tipo_relacao": "direta",
+      "nivel_no_produto": "núcleo prioritário",
+      "resumo": [
+        "juros simples",
+        "juros compostos",
+        "crédito",
+        "parcelamento"
+      ]
+    },
+    {
+      "codigo": "EM13MAT304",
+      "arquivo": "EM13MAT304.json",
+      "etapa": "Ensino Médio",
+      "ano_serie": "1ª a 3ª série",
+      "area": "Matemática e suas Tecnologias",
+      "tipo_relacao": "direta",
+      "nivel_no_produto": "aprofundamento",
+      "resumo": [
+        "juros compostos",
+        "crescimento de dívidas",
+        "crescimento de investimentos",
+        "tempo"
+      ]
+    },
+    {
+      "codigo": "EM13MAT305",
+      "arquivo": "EM13MAT305.json",
+      "etapa": "Ensino Médio",
+      "ano_serie": "1ª a 3ª série",
+      "area": "Matemática e suas Tecnologias",
+      "tipo_relacao": "direta",
+      "nivel_no_produto": "aprofundamento avançado",
+      "resumo": [
+        "tempo para atingir meta financeira",
+        "tempo para quitar ou multiplicar capital",
+        "matemática financeira",
+        "logaritmos"
+      ]
+    },
+    {
+      "codigo": "EM13MAT404",
+      "arquivo": "EM13MAT404.json",
+      "etapa": "Ensino Médio",
+      "ano_serie": "1ª a 3ª série",
+      "area": "Matemática e suas Tecnologias",
+      "tipo_relacao": "direta",
+      "nivel_no_produto": "núcleo prioritário",
+      "resumo": [
+        "Imposto de Renda",
+        "conta de água",
+        "conta de energia",
+        "conta de gás"
+      ]
+    }
+  ],
+  "fonte_principal": {
+    "documento": "Base Nacional Comum Curricular (BNCC)",
+    "orgao": "Ministério da Educação (MEC)",
+    "ano": "2018",
+    "tipo": "fonte oficial",
+    "url": "https://basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
+    "observacao": "O texto da habilidade BNCC foi mantido separado das aplicações pedagógicas específicas do Monetto."
+  }
+}

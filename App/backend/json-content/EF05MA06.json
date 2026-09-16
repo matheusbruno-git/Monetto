@@ -1,0 +1,56 @@
+{
+  "schema_version": "2.0",
+  "codigo": "EF05MA06",
+  "status": "vigente",
+  "etapa": "Ensino Fundamental - Anos Iniciais",
+  "ano_serie": "5º ano",
+  "area_conhecimento": "Matemática",
+  "componente_curricular": "Matemática",
+  "unidade_tematica": "Números",
+  "objeto_conhecimento": [
+    "Cálculo de porcentagens e representação fracionária"
+  ],
+  "habilidade_bncc": "Associar as representações 10%, 25%, 50%, 75% e 100% respectivamente à décima parte, quarta parte, metade, três quartos e um inteiro, para calcular porcentagens, utilizando estratégias pessoais, cálculo mental e calculadora, em contextos de educação financeira, entre outros.",
+  "alinhamento_monetto": {
+    "tipo_relacao": "direta",
+    "nivel_no_produto": "pré-requisito / revisão",
+    "justificativa": "A habilidade cita explicitamente contextos de educação financeira e serve como base matemática para estudantes que precisem revisar porcentagens antes de avançar.",
+    "conteudos_financeiros_relacionados": [
+      "porcentagem básica",
+      "sistema monetário",
+      "desconto simples",
+      "parte do orçamento",
+      "consumo consciente"
+    ],
+    "objetivos_de_aprendizagem": [
+      "Relacionar porcentagens simples a partes de uma quantia.",
+      "Calcular descontos e parcelas simples em situações de compra.",
+      "Interpretar quanto uma despesa representa de um orçamento disponível."
+    ],
+    "aplicacoes_no_monetto": [
+      {
+        "modulo": "Fundamentos financeiros",
+        "situacao": "Desafios com 10%, 25%, 50%, 75% e 100% de valores em M$ e reais.",
+        "justificativa_educacional": "A habilidade cita explicitamente contextos de educação financeira e serve como base matemática para estudantes que precisem revisar porcentagens antes de avançar."
+      }
+    ],
+    "evidencias_de_aprendizagem": [
+      "Resolve corretamente cálculos percentuais básicos.",
+      "Explica a relação entre percentual, fração e valor monetário."
+    ]
+  },
+  "tags": [
+    "BNCC",
+    "educação financeira",
+    "porcentagem",
+    "revisão"
+  ],
+  "fonte_bncc": {
+    "documento": "Base Nacional Comum Curricular (BNCC)",
+    "orgao": "Ministério da Educação (MEC)",
+    "ano": "2018",
+    "tipo": "fonte oficial",
+    "url": "https://basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
+    "observacao": "O texto da habilidade BNCC foi mantido separado das aplicações pedagógicas específicas do Monetto."
+  }
+}
