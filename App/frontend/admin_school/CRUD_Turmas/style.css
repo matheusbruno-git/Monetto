@@ -37,20 +37,6 @@
     border-radius: 10px;
 }
 
-#formMsg.ok {
-    display: block;
-    background: rgba(46, 204, 113, 0.12);
-    color: var(--green);
-    border: 1px solid rgba(46, 204, 113, 0.3);
-}
-
-#formMsg.err {
-    display: block;
-    background: rgba(231, 76, 60, 0.12);
-    color: var(--red);
-    border: 1px solid rgba(231, 76, 60, 0.3);
-}
-
 /* =========================
    TURMA LIST ITEMS
 ========================= */
@@ -293,4 +279,15 @@
 .modal-footer .btn-acc {
     flex: 0 0 auto;
     min-width: 120px;
+}
+
+
+.fg input,
+.fg #nivelSelect {
+    transition: all .15s ease-in-out;
+}
+
+.fg input:hover,
+.fg #nivelSelect:hover {
+    background: var(--input-hover);
 }

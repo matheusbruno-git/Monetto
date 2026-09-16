@@ -22,6 +22,10 @@ function showMsg(el, text, success) {
 
   el.style.color = success ? "var(--green)" : "var(--red)";
 
+  el.style.background = success
+    ? "rgba(46, 204, 113, 0.12)"
+    : "rgba(231, 76, 60, 0.12)";
+
   el.style.display = "block";
 
   setTimeout(() => (el.style.display = "none"), 3500);

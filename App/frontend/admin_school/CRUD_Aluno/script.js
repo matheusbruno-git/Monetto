@@ -12,27 +12,92 @@ function setText(id, text) {
   if (el) el.textContent = text;
 }
 document.getElementById("btn")?.addEventListener("click", async () => {
-  // id_escola comes from the logged-in admin's own session, never a hardcoded
-  // value, so a new student is always enrolled into the admin's own school.
+  const btn = document.getElementById("btn");
+  const formMsg = document.getElementById("formMsg");
+  const successMsg = document.getElementById("successMsg");
+
   const session = JSON.parse(localStorage.getItem("session") || "{}");
   const dados = {
     id_escola: session.id_escola,
-    nome: document.getElementById("nome").value,
+    nome: document.getElementById("nome").value?.trim(),
     data_nascimento: document.getElementById("data").value,
-    cpf: document.getElementById("cpf").value,
-    responsavel: document.getElementById("resp").value,
-    telefone_responsavel: document.getElementById("tel").value,
-    email_responsavel: document.getElementById("email").value,
-    serie: document.getElementById("serie").value,
+    cpf: document.getElementById("cpf").value?.trim(),
+    responsavel: document.getElementById("resp").value?.trim(),
+    telefone_responsavel: document.getElementById("tel").value?.trim(),
+    email_responsavel: document.getElementById("email").value?.trim(),
+    serie: document.getElementById("serie").value?.trim(),
   };
 
+  function showFormMsg(text, type) {
+    if (!formMsg) return;
+    formMsg.textContent = text;
+    formMsg.className = "";
+    if (type === "ok") formMsg.classList.add("ok");
+    if (type === "err") formMsg.classList.add("err");
+    formMsg.style.display = "block";
+  }
+
+  function hideFormMsg() {
+    if (!formMsg) return;
+    formMsg.style.display = "none";
+    formMsg.className = "";
+    formMsg.textContent = "";
+  }
+
   if (!dados.id_escola) {
-    console.error("Sessão inválida — faça login novamente.");
+    showFormMsg("Sessão inválida — faça login novamente.", "err");
     return;
   }
 
-  const result = await window.api.registerAluno(dados);
-  console.log(result);
+  // Basic validation for required fields
+  if (
+    !dados.nome ||
+    !dados.data_nascimento ||
+    !dados.cpf ||
+    !dados.responsavel
+  ) {
+    showFormMsg(
+      "Preencha todos os campos obrigatórios (nome, data, CPF, responsável).",
+      "err",
+    );
+    return;
+  }
+
+  btn.disabled = true;
+  showFormMsg("Enviando...", null);
+
+  try {
+    const result = await window.api.registerAluno(dados);
+    console.log(result);
+
+    if (result && result.success) {
+      showFormMsg(result.message || "Aluno cadastrado com sucesso.", "ok");
+      if (successMsg) successMsg.style.display = "block";
+
+      // Clear form fields
+      ["nome", "data", "cpf", "resp", "tel", "email", "serie"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.value = "";
+      });
+
+      // Reload dashboard/list so the new aluno appears
+      if (typeof loadDashboard === "function") loadDashboard();
+
+      // hide success text after a short delay
+      setTimeout(() => {
+        if (successMsg) successMsg.style.display = "none";
+        hideFormMsg();
+      }, 2500);
+    } else {
+      const msg = (result && result.message) || "Erro ao cadastrar aluno.";
+      showFormMsg(msg, "err");
+      btn.disabled = false;
+    }
+  } catch (err) {
+    console.error(err);
+    showFormMsg("Erro de comunicação com o servidor.", "err");
+    btn.disabled = false;
+  }
 });
 
 // Fallback sidebar loader (monetto-app.js preferred when present)
