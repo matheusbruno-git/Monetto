@@ -215,7 +215,10 @@ ipcMain.handle("getAlunos", async (event, currentUserId) => {
       );
       return { success: true, data: rows };
     } catch (richErr) {
-      console.warn("getAlunos rich query failed, falling back:", richErr.message);
+      console.warn(
+        "getAlunos rich query failed, falling back:",
+        richErr.message,
+      );
       const [rows] = await db.promise().execute(
         `SELECT id_usuario, nome, email, ativo
          FROM usuarios

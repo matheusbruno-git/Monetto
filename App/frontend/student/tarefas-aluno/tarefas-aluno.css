@@ -693,7 +693,7 @@ span {
 .prog-labels {
   display: flex;
   justify-content: space-between;
-  width: 120px;
+  width: 10vw;
   font-size: 0.8rem;
   margin: 8px auto 6px 0;
   padding: 5px 8px;

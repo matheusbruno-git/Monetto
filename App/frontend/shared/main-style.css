@@ -479,10 +479,10 @@ option {
     display: grid;
     gap: 12px;
     align-items: center;
-    padding: 13px 0;
+    padding: 13px 10px;
     border-bottom: 1px solid var(--border);
+    cursor: pointer;
     transition: all .2s;
-    cursor: pointer
 }
 
 .data-row:last-child {
@@ -750,15 +750,21 @@ option {
     color: var(--muted);
     font-size: .88rem;
     font-family: 'DM Sans', sans-serif;
-    cursor: pointer
+    cursor: pointer;
+    transition: all 0.2s ease-out
+}
+
+.btn-modal-cancel:hover {
+    background: var(--red);
+    color: var(--white);
 }
 
 .btn-modal-ok {
-    transition: 0.2s ease-out;
+    transition: all 0.2s ease-out;
     flex: 2;
     background: var(--accent);
     color: var(--navy);
-    border: none;
+    border: 1px solid var(--border);
     border-radius: 12px;
     padding: 12px;
     font-size: .88rem;
