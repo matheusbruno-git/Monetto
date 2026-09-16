@@ -77,17 +77,15 @@ ipcMain.handle("login", async (event, { email, senha }) => {
       )
       .catch((e) => console.warn("Failed to update ultimo_acesso:", e.message));
 
+    // determine redirect based on profile
+    let redirect = null;
     if (user.id_perfil === 1) {
-      redirect = "../../student/dashboard-aluno/dashboard-aluno.html";
-    }
-
-    if (user.id_perfil === 2) {
-      redirect = "../../teacher/dashboard-professor/dashboard-professor.html";
-    }
-
-    if (user.id_perfil === 3) {
+      redirect = "../student/dashboard-aluno/dashboard-aluno.html";
+    } else if (user.id_perfil === 2) {
+      redirect = "../teacher/dashboard-professor/dashboard-professor.html";
+    } else if (user.id_perfil === 3) {
       redirect =
-        "../../admin_general/dashboard-admin-geral/dashboard-admin-geral.html";
+        "../admin_general/dashboard-admin-geral/dashboard-admin-geral.html";
     }
 
     return {
@@ -147,46 +145,13 @@ ipcMain.handle("addAlunoToTurma", async (event, dados) => {
 
 ipcMain.handle("getAlunos", async (event, currentUserId) => {
   try {
-    const db = require(path.join(basePath, "backend/connection.js"));
-
-    const escolaId = await resolveEscolaId(db, currentUserId);
-    if (!escolaId) {
-      return {
-        success: false,
-        message: "Usuário não está associado a uma escola.",
-      };
-    }
-
-    try {
-      const [rows] = await db.promise().execute(
-        `SELECT u.id_usuario, u.nome, u.email, u.ativo,
-                t.nome_turma AS turma,
-                COALESCE(pa.xp_atual, 0) AS xp
-         FROM usuarios u
-         LEFT JOIN turmas t ON t.id_turma = u.id_turma
-         LEFT JOIN progresso_aluno pa ON pa.id_aluno = u.id_usuario
-         WHERE u.id_perfil = 1 AND u.id_escola = ?
-         ORDER BY u.nome ASC`,
-        [escolaId],
-      );
-      return { success: true, data: rows };
-    } catch (richErr) {
-      console.warn(
-        "getAlunos rich query failed, falling back:",
-        richErr.message,
-      );
-      const [rows] = await db.promise().execute(
-        `SELECT id_usuario, nome, email, ativo
-         FROM usuarios
-         WHERE id_perfil = 1 AND id_escola = ?
-         ORDER BY nome ASC`,
-        [escolaId],
-      );
-      return { success: true, data: rows };
-    }
+    const { getAluno } = require(
+      path.join(basePath, "backend/get_aluno.js"),
+    );
+    return await getAluno(currentUserId);
   } catch (err) {
-    console.error("getAlunos Error:", err);
-    return { success: false, message: "Erro ao buscar alunos." };
+    console.error("addAlunoToTurma Error:", err);
+    return { success: false, message: "Erro ao adicionar aluno à turma." };
   }
 });
 
@@ -397,11 +362,6 @@ ipcMain.handle("getDashboardAdminEscolar", async (event, currentUserId) => {
   }
 });
 
-/**
- * IPC handler: getDashboardTeacher
- * Place this in main.js (or wherever the other ipcMain.handle dashboard handlers live).
- * Frontend expects the shape documented at the bottom.
- */
 ipcMain.handle("getDashboardTeacher", async (event, currentUserId) => {
   try {
     const { getDashboardTeacher } = require(
