@@ -1,0 +1,64 @@
+{
+  "schema_version": "2.0",
+  "codigo": "EM13CHS401",
+  "status": "vigente",
+  "etapa": "Ensino Médio",
+  "ano_serie": "1ª a 3ª série",
+  "area_conhecimento": "Ciências Humanas e Sociais Aplicadas",
+  "componentes_relacionados": [
+    "Geografia",
+    "História",
+    "Sociologia",
+    "Filosofia"
+  ],
+  "competencia_especifica": "Competência Específica 4",
+  "objeto_conhecimento_relacionado": [
+    "Mundo do trabalho",
+    "Transformações técnicas, tecnológicas e informacionais",
+    "Novas formas de trabalho"
+  ],
+  "habilidade_bncc": "Identificar e analisar as relações entre sujeitos, grupos, classes sociais e sociedades com culturas distintas diante das transformações técnicas, tecnológicas e informacionais e das novas formas de trabalho ao longo do tempo, em diferentes espaços (urbanos e rurais) e contextos.",
+  "alinhamento_monetto": {
+    "tipo_relacao": "indireta/interdisciplinar",
+    "nivel_no_produto": "contextualização",
+    "justificativa": "A habilidade oferece base social e histórica para discutir renda e trabalho no Monetto sem reduzir o tema a cálculos.",
+    "conteudos_financeiros_relacionados": [
+      "mundo do trabalho",
+      "fontes de renda",
+      "formas de contratação em abordagem conceitual",
+      "tecnologia e trabalho",
+      "planejamento de vida"
+    ],
+    "objetivos_de_aprendizagem": [
+      "Analisar mudanças nas formas de trabalho.",
+      "Relacionar transformações tecnológicas a oportunidades e desafios de geração de renda.",
+      "Evitar tratar escolhas financeiras como fenômenos isolados do contexto social."
+    ],
+    "aplicacoes_no_monetto": [
+      {
+        "modulo": "Trabalho, renda e projeto de vida",
+        "situacao": "Cenários de profissões e formas contemporâneas de trabalho com diferentes características de renda e estabilidade.",
+        "justificativa_educacional": "A habilidade oferece base social e histórica para discutir renda e trabalho no Monetto sem reduzir o tema a cálculos."
+      }
+    ],
+    "evidencias_de_aprendizagem": [
+      "Compara formas de trabalho em contextos distintos.",
+      "Explica impactos da tecnologia sobre trabalho e renda."
+    ]
+  },
+  "tags": [
+    "BNCC",
+    "Ciências Humanas",
+    "trabalho",
+    "renda",
+    "tecnologia"
+  ],
+  "fonte_bncc": {
+    "documento": "Base Nacional Comum Curricular (BNCC)",
+    "orgao": "Ministério da Educação (MEC)",
+    "ano": "2018",
+    "tipo": "fonte oficial",
+    "url": "https://basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
+    "observacao": "O texto da habilidade BNCC foi mantido separado das aplicações pedagógicas específicas do Monetto."
+  }
+}

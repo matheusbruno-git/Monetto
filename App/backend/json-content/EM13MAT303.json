@@ -1,0 +1,63 @@
+{
+  "schema_version": "2.0",
+  "codigo": "EM13MAT303",
+  "status": "vigente",
+  "etapa": "Ensino Médio",
+  "ano_serie": "1ª a 3ª série",
+  "area_conhecimento": "Matemática e suas Tecnologias",
+  "componente_curricular": "Matemática",
+  "competencia_especifica": "Competência Específica 3",
+  "objeto_conhecimento_relacionado": [
+    "Juros simples e compostos",
+    "Crescimento linear e exponencial"
+  ],
+  "habilidade_bncc": "Interpretar e comparar situações que envolvam juros simples com as que envolvem juros compostos, por meio de representações gráficas ou análise de planilhas, destacando o crescimento linear ou exponencial de cada caso.",
+  "alinhamento_monetto": {
+    "tipo_relacao": "direta",
+    "nivel_no_produto": "núcleo prioritário",
+    "justificativa": "Esta habilidade corresponde exatamente a uma das funções centrais do Monetto: mostrar consequências de decisões financeiras ao longo do tempo.",
+    "conteudos_financeiros_relacionados": [
+      "juros simples",
+      "juros compostos",
+      "crédito",
+      "parcelamento",
+      "empréstimos",
+      "investimentos",
+      "crescimento linear",
+      "crescimento exponencial"
+    ],
+    "objetivos_de_aprendizagem": [
+      "Diferenciar juros simples e compostos.",
+      "Comparar custo total de dívidas e rendimento de aplicações.",
+      "Reconhecer o efeito do tempo sobre juros compostos."
+    ],
+    "aplicacoes_no_monetto": [
+      {
+        "modulo": "Crédito, dívida e investimento",
+        "situacao": "Comparar compra parcelada, atraso, empréstimo e investimento em diferentes prazos, exibindo tabela ou gráfico de evolução.",
+        "justificativa_educacional": "Esta habilidade corresponde exatamente a uma das funções centrais do Monetto: mostrar consequências de decisões financeiras ao longo do tempo."
+      }
+    ],
+    "evidencias_de_aprendizagem": [
+      "Distingue crescimento linear de exponencial.",
+      "Escolhe entre cenários com justificativa matemática.",
+      "Calcula ou interpreta montante e custo total."
+    ]
+  },
+  "tags": [
+    "BNCC",
+    "Matemática",
+    "juros simples",
+    "juros compostos",
+    "crédito",
+    "investimento"
+  ],
+  "fonte_bncc": {
+    "documento": "Base Nacional Comum Curricular (BNCC)",
+    "orgao": "Ministério da Educação (MEC)",
+    "ano": "2018",
+    "tipo": "fonte oficial",
+    "url": "https://basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
+    "observacao": "O texto da habilidade BNCC foi mantido separado das aplicações pedagógicas específicas do Monetto."
+  }
+}

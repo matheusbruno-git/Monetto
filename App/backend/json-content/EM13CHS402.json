@@ -1,0 +1,66 @@
+{
+  "schema_version": "2.0",
+  "codigo": "EM13CHS402",
+  "status": "vigente",
+  "etapa": "Ensino Médio",
+  "ano_serie": "1ª a 3ª série",
+  "area_conhecimento": "Ciências Humanas e Sociais Aplicadas",
+  "componentes_relacionados": [
+    "Geografia",
+    "História",
+    "Sociologia",
+    "Filosofia"
+  ],
+  "competencia_especifica": "Competência Específica 4",
+  "objeto_conhecimento_relacionado": [
+    "Emprego",
+    "Trabalho",
+    "Renda",
+    "Estratificação",
+    "Desigualdade socioeconômica"
+  ],
+  "habilidade_bncc": "Analisar e comparar indicadores de emprego, trabalho e renda em diferentes espaços, escalas e tempos, associando-os a processos de estratificação e desigualdade socioeconômica.",
+  "alinhamento_monetto": {
+    "tipo_relacao": "direta/interdisciplinar",
+    "nivel_no_produto": "núcleo complementar",
+    "justificativa": "A habilidade é diretamente relacionada a trabalho e renda e amplia a educação financeira para a dimensão social e cidadã.",
+    "conteudos_financeiros_relacionados": [
+      "emprego",
+      "renda",
+      "indicadores socioeconômicos",
+      "desigualdade",
+      "contexto regional"
+    ],
+    "objetivos_de_aprendizagem": [
+      "Ler e comparar indicadores de renda e emprego.",
+      "Relacionar diferenças de renda a contextos sociais e territoriais.",
+      "Interpretar criticamente dados econômicos antes de tirar conclusões."
+    ],
+    "aplicacoes_no_monetto": [
+      {
+        "modulo": "Renda e realidade socioeconômica",
+        "situacao": "Painéis com dados fictícios ou públicos de renda e emprego para comparação entre regiões e períodos.",
+        "justificativa_educacional": "A habilidade é diretamente relacionada a trabalho e renda e amplia a educação financeira para a dimensão social e cidadã."
+      }
+    ],
+    "evidencias_de_aprendizagem": [
+      "Interpreta indicador e unidade de medida.",
+      "Compara contextos sem confundir média com realidade individual."
+    ]
+  },
+  "tags": [
+    "BNCC",
+    "Ciências Humanas",
+    "renda",
+    "emprego",
+    "desigualdade"
+  ],
+  "fonte_bncc": {
+    "documento": "Base Nacional Comum Curricular (BNCC)",
+    "orgao": "Ministério da Educação (MEC)",
+    "ano": "2018",
+    "tipo": "fonte oficial",
+    "url": "https://basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
+    "observacao": "O texto da habilidade BNCC foi mantido separado das aplicações pedagógicas específicas do Monetto."
+  }
+}

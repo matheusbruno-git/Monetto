@@ -1,0 +1,56 @@
+{
+  "schema_version": "2.0",
+  "codigo": "EF06MA13",
+  "status": "vigente",
+  "etapa": "Ensino Fundamental - Anos Finais",
+  "ano_serie": "6º ano",
+  "area_conhecimento": "Matemática",
+  "componente_curricular": "Matemática",
+  "unidade_tematica": "Números",
+  "objeto_conhecimento": [
+    "Cálculo de porcentagens por meio de estratégias diversas, sem fazer uso da “regra de três”"
+  ],
+  "habilidade_bncc": "Resolver e elaborar problemas que envolvam porcentagens, com base na ideia de proporcionalidade, sem fazer uso da “regra de três”, utilizando estratégias pessoais, cálculo mental e calculadora, em contextos de educação financeira, entre outros.",
+  "alinhamento_monetto": {
+    "tipo_relacao": "direta",
+    "nivel_no_produto": "núcleo",
+    "justificativa": "A habilidade menciona explicitamente educação financeira e é adequada à faixa inicial do público-alvo do Monetto.",
+    "conteudos_financeiros_relacionados": [
+      "porcentagem",
+      "descontos",
+      "acréscimos",
+      "orçamento",
+      "consumo"
+    ],
+    "objetivos_de_aprendizagem": [
+      "Resolver situações financeiras simples com porcentagens.",
+      "Comparar preços, descontos e acréscimos sem depender mecanicamente de regra de três.",
+      "Tomar decisões de compra com base em cálculos percentuais."
+    ],
+    "aplicacoes_no_monetto": [
+      {
+        "modulo": "Compras e consumo",
+        "situacao": "Comparar preço original, desconto, preço final e impacto da compra no saldo do aluno.",
+        "justificativa_educacional": "A habilidade menciona explicitamente educação financeira e é adequada à faixa inicial do público-alvo do Monetto."
+      }
+    ],
+    "evidencias_de_aprendizagem": [
+      "Calcula porcentagens em situações de compra.",
+      "Justifica qual oferta é mais econômica a partir do cálculo."
+    ]
+  },
+  "tags": [
+    "BNCC",
+    "Matemática",
+    "porcentagem",
+    "consumo"
+  ],
+  "fonte_bncc": {
+    "documento": "Base Nacional Comum Curricular (BNCC)",
+    "orgao": "Ministério da Educação (MEC)",
+    "ano": "2018",
+    "tipo": "fonte oficial",
+    "url": "https://basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
+    "observacao": "O texto da habilidade BNCC foi mantido separado das aplicações pedagógicas específicas do Monetto."
+  }
+}

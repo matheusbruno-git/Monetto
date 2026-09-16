@@ -1,0 +1,55 @@
+{
+  "schema_version": "2.0",
+  "codigo": "EF05GE05",
+  "status": "vigente",
+  "etapa": "Ensino Fundamental - Anos Iniciais",
+  "ano_serie": "5º ano",
+  "area_conhecimento": "Ciências Humanas",
+  "componente_curricular": "Geografia",
+  "unidade_tematica": "Mundo do trabalho",
+  "objeto_conhecimento": [
+    "Trabalho e inovação tecnológica"
+  ],
+  "habilidade_bncc": "Identificar e comparar as mudanças dos tipos de trabalho e desenvolvimento tecnológico na agropecuária, na indústria, no comércio e nos serviços.",
+  "alinhamento_monetto": {
+    "tipo_relacao": "indireta/interdisciplinar",
+    "nivel_no_produto": "pré-requisito / contextualização",
+    "justificativa": "A habilidade não é de educação financeira em sentido estrito, mas sustenta a contextualização de trabalho e geração de renda usada nas simulações do Monetto.",
+    "conteudos_financeiros_relacionados": [
+      "trabalho",
+      "fontes de renda",
+      "setores da economia",
+      "tecnologia e trabalho"
+    ],
+    "objetivos_de_aprendizagem": [
+      "Reconhecer que a renda pode estar ligada a diferentes tipos de trabalho.",
+      "Comparar como tecnologia e mudanças econômicas alteram profissões e formas de geração de renda."
+    ],
+    "aplicacoes_no_monetto": [
+      {
+        "modulo": "Trabalho e renda",
+        "situacao": "Apresentar personagens com profissões de diferentes setores e fontes de renda distintas.",
+        "justificativa_educacional": "A habilidade não é de educação financeira em sentido estrito, mas sustenta a contextualização de trabalho e geração de renda usada nas simulações do Monetto."
+      }
+    ],
+    "evidencias_de_aprendizagem": [
+      "Identifica diferentes setores de trabalho.",
+      "Relaciona ocupação, atividade econômica e geração de renda sem confundir salário com única forma possível de renda."
+    ]
+  },
+  "observacoes_tcc": "Como o público principal do Monetto é de 12 a 18 anos, esta habilidade deve aparecer como conhecimento de base, não como eixo principal da trilha.",
+  "tags": [
+    "BNCC",
+    "Geografia",
+    "trabalho",
+    "renda"
+  ],
+  "fonte_bncc": {
+    "documento": "Base Nacional Comum Curricular (BNCC)",
+    "orgao": "Ministério da Educação (MEC)",
+    "ano": "2018",
+    "tipo": "fonte oficial",
+    "url": "https://basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
+    "observacao": "O texto da habilidade BNCC foi mantido separado das aplicações pedagógicas específicas do Monetto."
+  }
+}

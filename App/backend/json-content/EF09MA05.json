@@ -1,0 +1,58 @@
+{
+  "schema_version": "2.0",
+  "codigo": "EF09MA05",
+  "status": "vigente",
+  "etapa": "Ensino Fundamental - Anos Finais",
+  "ano_serie": "9º ano",
+  "area_conhecimento": "Matemática",
+  "componente_curricular": "Matemática",
+  "unidade_tematica": "Números",
+  "objeto_conhecimento": [
+    "Porcentagens: problemas que envolvem cálculo de percentuais sucessivos"
+  ],
+  "habilidade_bncc": "Resolver e elaborar problemas que envolvam porcentagens, com a ideia de aplicação de percentuais sucessivos e a determinação das taxas percentuais, preferencialmente com o uso de tecnologias digitais, no contexto da educação financeira.",
+  "alinhamento_monetto": {
+    "tipo_relacao": "direta",
+    "nivel_no_produto": "núcleo",
+    "justificativa": "A própria habilidade situa o trabalho com percentuais sucessivos no contexto da educação financeira.",
+    "conteudos_financeiros_relacionados": [
+      "percentuais sucessivos",
+      "taxas percentuais",
+      "reajustes sucessivos",
+      "descontos sucessivos",
+      "inflação em simulações",
+      "consumo"
+    ],
+    "objetivos_de_aprendizagem": [
+      "Calcular percentuais sucessivos sem somar percentuais de forma indevida.",
+      "Determinar taxas percentuais a partir de valores inicial e final.",
+      "Analisar mudanças sucessivas de preços ou despesas."
+    ],
+    "aplicacoes_no_monetto": [
+      {
+        "modulo": "Variação de preços e orçamento",
+        "situacao": "Simular reajustes, descontos em etapas e alterações sucessivas no custo de vida do personagem.",
+        "justificativa_educacional": "A própria habilidade situa o trabalho com percentuais sucessivos no contexto da educação financeira."
+      }
+    ],
+    "evidencias_de_aprendizagem": [
+      "Calcula corretamente percentuais sucessivos.",
+      "Interpreta taxa e impacto acumulado no saldo."
+    ]
+  },
+  "observacoes_tcc": "O arquivo original dizia que a habilidade oficial incluía juros simples e compostos. A BNCC não traz esses termos na EF09MA05; eles aparecem com clareza no Ensino Médio, especialmente na EM13MAT303.",
+  "tags": [
+    "BNCC",
+    "Matemática",
+    "percentuais sucessivos",
+    "educação financeira"
+  ],
+  "fonte_bncc": {
+    "documento": "Base Nacional Comum Curricular (BNCC)",
+    "orgao": "Ministério da Educação (MEC)",
+    "ano": "2018",
+    "tipo": "fonte oficial",
+    "url": "https://basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf",
+    "observacao": "O texto da habilidade BNCC foi mantido separado das aplicações pedagógicas específicas do Monetto."
+  }
+}
