@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 
 async function registerTurma(dados) {
   try {
-    const db = require(path.join(basePath, "backend/connection.js"));
+    const db = require("./connection.js");
     const [result] = await db.promise().execute(
       `INSERT INTO turmas (id_escola, id_professor, id_nivel, nome_turma, ano_letivo, status)
          VALUES (?, ?, ?, ?, YEAR(CURDATE()), 'ativa')`,

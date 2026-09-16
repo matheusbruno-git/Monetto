@@ -1,6 +1,6 @@
 async function getNiveis() {
   try {
-    const db = require(path.join(basePath, "backend/connection.js"));
+    const db = require("./connection.js");
     const [rows] = await db
       .promise()
       .execute(

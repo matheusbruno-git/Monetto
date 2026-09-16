@@ -1,6 +1,6 @@
 async function getAlunos(currentUserId) {
   try {
-    const db = require(path.join(basePath, "backend/connection.js"));
+    const db = require("./connection.js");
 
     const escolaId = await resolveEscolaId(db, currentUserId);
     if (!escolaId) {

@@ -1,6 +1,6 @@
 async function updateEscola(dados) {
   try {
-    const db = require(path.join(basePath, "backend/connection.js"));
+    const db = require("./connection.js");
 
     const UpdateQuery = `UPDATE escolas
        SET nome = ?, email = ?, telefone = ?, endereco = ?, cnpj = ?
