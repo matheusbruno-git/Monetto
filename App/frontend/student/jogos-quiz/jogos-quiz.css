@@ -439,7 +439,7 @@ textarea {
 }
 
 .quiz-modal {
-  background: var(--card);
+  background: var(--navy-dark);
   border-radius: 20px;
   width: 100%;
   max-width: 560px;
@@ -461,7 +461,7 @@ textarea {
   font-family: "Syne", sans-serif;
   font-weight: 700;
   font-size: 1.1rem;
-  color: var(--navy);
+  color: var(--text);
 }
 
 .quiz-close {
@@ -472,7 +472,7 @@ textarea {
   background: var(--bg);
   font-size: 1.2rem;
   cursor: pointer;
-  color: var(--muted);
+  color: var(--text);
   transition: background var(--transition);
 }
 
@@ -489,7 +489,7 @@ textarea {
   display: flex;
   justify-content: space-between;
   font-size: 0.8rem;
-  color: var(--muted);
+  color: var(--text);
   margin-bottom: 6px;
 }
 
@@ -509,7 +509,7 @@ textarea {
 
 .quiz-q-num {
   font-size: 0.8rem;
-  color: var(--muted);
+  color: var(--text);
   padding: 16px 24px 0;
 }
 
@@ -534,7 +534,7 @@ textarea {
   padding: 14px 16px;
   border: 1.5px solid var(--border);
   border-radius: 12px;
-  background: var(--card);
+  background: var(--bg);
   cursor: pointer;
   font-size: 0.92rem;
   font-weight: 500;
@@ -546,12 +546,12 @@ textarea {
 }
 
 .quiz-options button:hover {
-  border-color: var(--navy);
+  border-color: var(--bg);
   background: #F8F9FF;
 }
 
 .quiz-options button.selected {
-  border-color: var(--navy);
+  border-color: var(--bg);
   background: #EEF2FF;
 }
 
