@@ -689,6 +689,19 @@ span {
   margin-bottom: 14px;
 }
 
+/* Progress Labels */
+.prog-labels {
+  display: flex;
+  justify-content: space-between;
+  width: 120px;
+  font-size: 0.8rem;
+  margin: 8px auto 6px 0;
+  padding: 5px 8px;
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--muted);
+}
+
 /* Calendar */
 .cal-grid {
   display: grid;
@@ -838,6 +851,67 @@ span {
   text-overflow: ellipsis;
 }
 
+/* Streak */
+.streak-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+  margin: 14px 0 12px;
+}
+
+.sd {
+  aspect-ratio: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.sd span {
+  color: inherit;
+  font-size: 0.55rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.sd-done {
+  border-color: rgba(46, 204, 113, 0.45);
+  background: rgba(46, 204, 113, 0.14);
+  color: var(--green);
+}
+
+.sd-today {
+  border-color: var(--gold);
+  background: rgba(255, 215, 0, 0.16);
+  color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.08);
+}
+
+.sd-empty {
+  border-style: dashed;
+  color: rgba(166, 169, 175, 0.55);
+  background: transparent;
+}
+
+.streak-sub {
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.streak-sub strong {
+  color: var(--gold);
+  font-weight: 700;
+}
+
 /* Toast */
 .toast {
   position: fixed;
@@ -902,5 +976,9 @@ span {
 
   .stats-row {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .streak-days {
+    gap: 6px;
   }
 }
