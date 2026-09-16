@@ -1,6 +1,6 @@
 async function getDashboardAdminEscolar(currentUserId) {
   try {
-    const db = require(path.join(basePath, "backend/connection.js"));
+    const db = require(path.join(basePath, "connection.js"));
 
     if (!currentUserId) {
       return { success: false, message: "ID do usuário não informado." };
