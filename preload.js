@@ -39,6 +39,9 @@ contextBridge.exposeInMainWorld("api", {
   deleteAluno: (alunoId) => ipcRenderer.invoke("deleteAluno", alunoId),
   deleteProfessor: (professorId) =>
     ipcRenderer.invoke("deleteProfessor", professorId),
+  deleteTurma: (turmaId) => ipcRenderer.invoke("deleteTurma", turmaId),
+  deleteTarefa: (tarefaId) => ipcRenderer.invoke("deleteTarefa", tarefaId),
+  deleteEscola: (escolaId) => ipcRenderer.invoke("deleteEscola", escolaId),
   atribuirProfessorATurma: (dados) =>
     ipcRenderer.invoke("atribuirProfessorATurma", dados),
 });
