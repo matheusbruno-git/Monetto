@@ -76,7 +76,6 @@ ipcMain.handle("login", async (event, { email, senha }) => {
       )
       .catch((e) => console.warn("Failed to update ultimo_acesso:", e.message));
 
-
     let redirect = null;
     if (user.id_perfil === 1) {
       redirect = "../student/dashboard-aluno/dashboard-aluno.html";
@@ -144,9 +143,7 @@ ipcMain.handle("addAlunoToTurma", async (event, dados) => {
 
 ipcMain.handle("getAlunos", async (event, currentUserId) => {
   try {
-    const { getAluno } = require(
-      path.join(basePath, "backend/get_aluno.js"),
-    );
+    const { getAluno } = require(path.join(basePath, "backend/get_aluno.js"));
     return await getAluno(currentUserId);
   } catch (err) {
     console.error("addAlunoToTurma Error:", err);
@@ -250,6 +247,18 @@ ipcMain.handle("getAdmins", async (event, currentUserId) => {
   } catch (err) {
     console.error("getAdmins Error:", err);
     return { success: false, message: "Erro ao buscar administradores." };
+  }
+});
+
+ipcMain.handle("deleteTurma", async (event, dados) => {
+  try {
+    const { deleteTurma } = require(
+      path.join(basePath, "backend/delete_turma.js"),
+    );
+    return await deleteTurma(dados);
+  } catch (err) {
+    console.error("deleteTurma Error:", err);
+    return { success: false, message: "Erro ao excluir turma." };
   }
 });
 

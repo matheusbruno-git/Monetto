@@ -42,11 +42,11 @@
           <div class="profile-big-av">😊<div class="av-edit">✏️</div>
           </div>
           <div class="profile-info">
-            <strong>Prof. Ricardo Alves</strong>
-            <span>ricardo.alves@escola.edu.br</span>
+            <strong id="profile-display-name">Professor</strong>
+            <span id="profile-display-email">—</span>
             <div class="profile-badges">
               <span class="pb pb-gold">👨‍🏫 Professor</span>
-              <span class="pb pb-green">📚 4 turmas</span>
+              <span class="pb pb-green" id="profile-class-badge">📚 0 turmas</span>
               <span class="pb">🏫 Admin</span>
             </div>
           </div>
@@ -69,31 +69,29 @@
           <div class="form-row">
             <div class="field-group">
               <label>Nome</label>
-              <input type="text" value="Ricardo" />
+              <input type="text" id="profile-first-name" value="" />
             </div>
             <div class="field-group">
               <label>Sobrenome</label>
-              <input type="text" value="Alves" />
+              <input type="text" id="profile-last-name" value="" />
             </div>
           </div>
           <div class="form-row single">
             <div class="field-group">
               <label>E-mail</label>
-              <input type="email" value="ricardo.alves@escola.edu.br" />
+              <input type="email" id="profile-email" value="" readonly />
             </div>
           </div>
           <div class="form-row">
             <div class="field-group">
               <label>Turma</label>
               <select>
-                <option>8º Ano A</option>
-                <option>8º Ano B</option>
-                <option>9º Ano A</option>
+                <option id="profile-class-option">Sem turma</option>
               </select>
             </div>
             <div class="field-group">
               <label>Escola</label>
-              <input type="text" value="E.E. São Paulo Centro" />
+              <input type="text" id="profile-school" value="" readonly />
             </div>
           </div>
           <div class="form-row single">
@@ -302,18 +300,18 @@
           <div style="font-size:.85rem;display:flex;flex-direction:column;gap:12px">
             <div
               style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--border)">
-              <span style="color:var(--muted)">E-mail</span><span>ricardo.alves@escola.edu.br</span>
+              <span style="color:var(--muted)">E-mail</span><span id="profile-display-email">—</span>
             </div>
             <div
               style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--border)">
-              <span style="color:var(--muted)">Membro desde</span><span>Fevereiro 2024</span>
+              <span style="color:var(--muted)">Membro desde</span><span id="account-member-since">—</span>
             </div>
             <div
               style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--border)">
-              <span style="color:var(--muted)">Tipo de conta</span><span>Professor</span>
+              <span style="color:var(--muted)">Tipo de conta</span><span id="account-type">Professor</span>
             </div>
             <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">Escola
-                vinculada</span><span>Escola Estadual São Paulo</span></div>
+                vinculada</span><span id="account-school">—</span></div>
           </div>
         </div>
 
@@ -359,6 +357,72 @@
     });
   </script>
 
+  <script>
+
+    function settingsSessionId() {
+      try {
+        const session = JSON.parse(localStorage.getItem("session") || "{}");
+        return session.id_usuario || session.id || null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function settingsEscape(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+
+    function formatMemberSince(value) {
+      if (!value) return "—";
+      const d = new Date(value);
+      if (Number.isNaN(d.getTime())) return "—";
+      return d.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
+    }
+
+    async function carregarPerfilProfessor() {
+      const id = settingsSessionId();
+      if (!id || !window.api || typeof window.api.getTeacherProfile !== "function") {
+        return;
+      }
+
+      try {
+        const result = await window.api.getTeacherProfile(id);
+        if (!result?.success) {
+          console.error(result?.message || "Erro ao carregar perfil.");
+          return;
+        }
+
+        const p = result.data || {};
+        const fullName = p.nome || "Professor";
+        const parts = fullName.trim().split(/\s+/);
+        const first = parts.shift() || "";
+        const last = parts.join(" ");
+
+        document.getElementById("profile-display-name").textContent = fullName;
+        document.getElementById("profile-display-email").textContent = p.email || "—";
+        document.getElementById("profile-first-name").value = first;
+        document.getElementById("profile-last-name").value = last;
+        document.getElementById("profile-email").value = p.email || "";
+        document.getElementById("profile-school").value = p.escola || "—";
+        document.getElementById("profile-class-badge").textContent = `📚 ${Number(p.turmasCount) || 0} turmas`;
+
+        const classOption = document.getElementById("profile-class-option");
+        if (classOption) classOption.textContent = p.turma || "Sem turma";
+
+        document.getElementById("account-email").textContent = p.email || "—";
+        document.getElementById("account-member-since").textContent = formatMemberSince(p.criado_em);
+        document.getElementById("account-type").textContent =
+          p.id_perfil === 2 ? "Professor" : "Conta";
+        document.getElementById("account-school").textContent = p.escola || "—";
+      } catch (err) {
+        console.error("Erro ao carregar perfil:", err);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", carregarPerfilProfessor);
+  </script>
   <script id="logout-script">
     function sairDaConta(destino) {
       if (confirm("Tem certeza que deseja sair da conta?")) {

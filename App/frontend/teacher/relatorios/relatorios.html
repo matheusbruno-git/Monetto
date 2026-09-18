@@ -88,48 +88,7 @@
         <div class="card-hd">
           <h3>📈 Conclusões de Tarefas por Dia</h3><span style="font-size:.75rem;color:var(--muted)">Abril 2026</span>
         </div>
-        <div class="bar-chart">
-          <div class="bc">
-            <div class="bc-bar blue" style="height:45px"></div>
-            <div class="bc-lbl">Seg 07</div>
-          </div>
-          <div class="bc">
-            <div class="bc-bar blue" style="height:62px"></div>
-            <div class="bc-lbl">Ter 08</div>
-          </div>
-          <div class="bc">
-            <div class="bc-bar blue" style="height:50px"></div>
-            <div class="bc-lbl">Qua 09</div>
-          </div>
-          <div class="bc">
-            <div class="bc-bar blue" style="height:80px"></div>
-            <div class="bc-lbl">Qui 10</div>
-          </div>
-          <div class="bc">
-            <div class="bc-bar blue" style="height:55px"></div>
-            <div class="bc-lbl">Sex 11</div>
-          </div>
-          <div class="bc">
-            <div class="bc-bar blue" style="height:20px;opacity:.5"></div>
-            <div class="bc-lbl">Sáb 12</div>
-          </div>
-          <div class="bc">
-            <div class="bc-bar gold" style="height:48px"></div>
-            <div class="bc-lbl">Seg 14</div>
-          </div>
-          <div class="bc">
-            <div class="bc-bar gold" style="height:72px"></div>
-            <div class="bc-lbl">Ter 15</div>
-          </div>
-          <div class="bc">
-            <div class="bc-bar gold" style="height:58px"></div>
-            <div class="bc-lbl">Qua 16</div>
-          </div>
-          <div class="bc">
-            <div class="bc-bar gold" style="height:95px"></div>
-            <div class="bc-lbl">Qui 17</div>
-          </div>
-        </div>
+        <div class="bar-chart" id="report-chart"></div>
         <div style="display:flex;gap:16px;margin-top:10px">
           <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--muted)">
             <div style="width:10px;height:10px;border-radius:3px;background:#5B9BF8"></div>Semana passada
@@ -145,27 +104,8 @@
           <h3>🎯 Conclusão por Turma</h3>
         </div>
         <div class="pie-section">
-          <div class="pie"
-            style="background:conic-gradient(var(--green) 0% 33%,#5B9BF8 33% 57%,var(--accent) 57% 78%,var(--purple) 78% 100%)">
-          </div>
-          <div class="pie-leg">
-            <div class="pl-row">
-              <div class="pl-dot" style="background:var(--green)"></div><span class="pl-label">8º A</span><span
-                class="pl-pct" style="color:var(--green)">92%</span><span class="pl-count">34</span>
-            </div>
-            <div class="pl-row">
-              <div class="pl-dot" style="background:#5B9BF8"></div><span class="pl-label">9º B</span><span
-                class="pl-pct" style="color:#5B9BF8">91%</span><span class="pl-count">30</span>
-            </div>
-            <div class="pl-row">
-              <div class="pl-dot" style="background:var(--accent)"></div><span class="pl-label">8º B</span><span
-                class="pl-pct" style="color:var(--accent)">85%</span><span class="pl-count">31</span>
-            </div>
-            <div class="pl-row">
-              <div class="pl-dot" style="background:var(--purple)"></div><span class="pl-label">9º A</span><span
-                class="pl-pct" style="color:var(--orange)">71%</span><span class="pl-count">33</span>
-            </div>
-          </div>
+          <div class="pie" id="report-pie"></div>
+          <div class="pie-leg" id="report-class-legend"></div>
         </div>
       </div>
     </div>
@@ -188,198 +128,35 @@
             <div>Progresso</div>
             <div>Status</div>
           </div>
-          <div class="al-row">
-            <div class="al-user">
-              <div class="al-av av1"></div>
-              <div class="al-name">Ana Souza</div>
-            </div>
-            <div><span class="xp-chip">⚡680</span></div>
-            <div><span class="lvl-chip">Nv. 5</span></div>
-            <div style="font-size:.82rem">24/26</div>
-            <div>
-              <div class="prog-mini">
-                <div class="prog-mini-f" style="width:92%"></div>
-              </div>
-            </div>
-            <div><span class="status-chip sc-ok">Ótimo</span></div>
-          </div>
-          <div class="al-row">
-            <div class="al-user">
-              <div class="al-av av2"></div>
-              <div class="al-name">Carlos Lima</div>
-            </div>
-            <div><span class="xp-chip">⚡640</span></div>
-            <div><span class="lvl-chip">Nv. 5</span></div>
-            <div style="font-size:.82rem">22/26</div>
-            <div>
-              <div class="prog-mini">
-                <div class="prog-mini-f" style="width:85%"></div>
-              </div>
-            </div>
-            <div><span class="status-chip sc-ok">Ótimo</span></div>
-          </div>
-          <div class="al-row">
-            <div class="al-user">
-              <div class="al-av av3"></div>
-              <div class="al-name">João Pedro</div>
-            </div>
-            <div><span class="xp-chip">⚡590</span></div>
-            <div><span class="lvl-chip">Nv. 4</span></div>
-            <div style="font-size:.82rem">20/26</div>
-            <div>
-              <div class="prog-mini">
-                <div class="prog-mini-f" style="width:77%"></div>
-              </div>
-            </div>
-            <div><span class="status-chip sc-ok">Bom</span></div>
-          </div>
-          <div class="al-row">
-            <div class="al-user">
-              <div class="al-av av4"></div>
-              <div class="al-name">Maria Clara</div>
-            </div>
-            <div><span class="xp-chip">⚡520</span></div>
-            <div><span class="lvl-chip">Nv. 4</span></div>
-            <div style="font-size:.82rem">18/26</div>
-            <div>
-              <div class="prog-mini">
-                <div class="prog-mini-f" style="width:69%;background:var(--accent)"></div>
-              </div>
-            </div>
-            <div><span class="status-chip sc-warn">Atenção</span></div>
-          </div>
-          <div class="al-row">
-            <div class="al-user">
-              <div class="al-av av5"></div>
-              <div class="al-name">Lucas Torres</div>
-            </div>
-            <div><span class="xp-chip">⚡480</span></div>
-            <div><span class="lvl-chip">Nv. 4</span></div>
-            <div style="font-size:.82rem">16/26</div>
-            <div>
-              <div class="prog-mini">
-                <div class="prog-mini-f" style="width:62%;background:var(--accent)"></div>
-              </div>
-            </div>
-            <div><span class="status-chip sc-warn">Atenção</span></div>
-          </div>
-          <div class="al-row">
-            <div class="al-user">
-              <div class="al-av av6"></div>
-              <div class="al-name">Fernanda Costa</div>
-            </div>
-            <div><span class="xp-chip">⚡420</span></div>
-            <div><span class="lvl-chip">Nv. 3</span></div>
-            <div style="font-size:.82rem">14/26</div>
-            <div>
-              <div class="prog-mini">
-                <div class="prog-mini-f" style="width:54%;background:var(--accent)"></div>
-              </div>
-            </div>
-            <div><span class="status-chip sc-warn">Atenção</span></div>
-          </div>
-          <div class="al-row">
-            <div class="al-user">
-              <div class="al-av av7"></div>
-              <div class="al-name">Rafael Mendes</div>
-            </div>
-            <div><span class="xp-chip">⚡200</span></div>
-            <div><span class="lvl-chip">Nv. 2</span></div>
-            <div style="font-size:.82rem">7/26</div>
-            <div>
-              <div class="prog-mini">
-                <div class="prog-mini-f" style="width:27%;background:var(--red)"></div>
-              </div>
-            </div>
-            <div><span class="status-chip sc-bad">Em risco</span></div>
-          </div>
-          <div class="al-row">
-            <div class="al-user">
-              <div class="al-av av8"></div>
-              <div class="al-name">Isabela Rocha</div>
-            </div>
-            <div><span class="xp-chip">⚡360</span></div>
-            <div><span class="lvl-chip">Nv. 3</span></div>
-            <div style="font-size:.82rem">12/26</div>
-            <div>
-              <div class="prog-mini">
-                <div class="prog-mini-f" style="width:46%;background:var(--orange)"></div>
-              </div>
-            </div>
-            <div><span class="status-chip sc-warn">Atenção</span></div>
-          </div>
+          <div id="report-students"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COL -->
+    <div style="display:flex;flex-direction:column;gap:18px">
+
+      <!-- ANÁLISE POR TAREFA -->
+      <div class="card">
+        <div class="card-hd">
+          <h3>📋 Taxa de Entrega por Tarefa</h3>
+        </div>
+        <div id="report-tasks">
+          <div style="color:var(--muted);font-size:.8rem">Carregando...</div>
         </div>
       </div>
 
-      <!-- RIGHT COL -->
-      <div style="display:flex;flex-direction:column;gap:18px">
-
-        <!-- ANÁLISE POR TAREFA -->
-        <div class="card">
-          <div class="card-hd">
-            <h3>📋 Taxa de Entrega por Tarefa</h3>
-          </div>
-          <div class="task-ana-item">
-            <div class="ta-subj" style="background:var(--green)"></div>
-            <div class="ta-info"><strong>Frações – 8ºA</strong><span>Matemática · Vence hoje</span></div>
-            <div class="ta-prog">
-              <div class="ta-bar">
-                <div class="ta-bar-f tf-g" style="width:76%"></div>
-              </div><span class="ta-pct" style="color:var(--green)">76%</span>
-            </div>
-          </div>
-          <div class="task-ana-item">
-            <div class="ta-subj" style="background:var(--accent)"></div>
-            <div class="ta-info"><strong>Redação – 9ºA</strong><span>Português · Vence hoje</span></div>
-            <div class="ta-prog">
-              <div class="ta-bar">
-                <div class="ta-bar-f tf-y" style="width:42%"></div>
-              </div><span class="ta-pct" style="color:var(--accent)">42%</span>
-            </div>
-          </div>
-          <div class="task-ana-item">
-            <div class="ta-subj" style="background:(#5B9BF8)"></div>
-            <div class="ta-info"><strong>Quiz Fotossíntese</strong><span>Ciências · Sex 19/04</span></div>
-            <div class="ta-prog">
-              <div class="ta-bar">
-                <div class="ta-bar-f" style="width:30%;background:#5B9BF8"></div>
-              </div><span class="ta-pct" style="color:#5B9BF8">30%</span>
-            </div>
-          </div>
-          <div class="task-ana-item">
-            <div class="ta-subj" style="background:var(--green)"></div>
-            <div class="ta-info"><strong>Mapa Mental – 9ºB</strong><span>História · Expirada</span></div>
-            <div class="ta-prog">
-              <div class="ta-bar">
-                <div class="ta-bar-f tf-g" style="width:90%"></div>
-              </div><span class="ta-pct" style="color:var(--green)">90%</span>
-            </div>
-          </div>
+      <!-- ALERTAS -->
+      <div class="card">
+        <div class="card-hd">
+          <h3>⚠️ Alertas de Desempenho</h3>
         </div>
-
-        <!-- ALERTAS -->
-        <div class="card">
-          <div class="card-hd">
-            <h3>⚠️ Alertas de Desempenho</h3>
-          </div>
-          <div class="at-item at-red">
-            <div class="at-icon">🔴</div>
-            <div class="at-body"><strong>Rafael Mendes – 7/26 tarefas</strong><span>Inativo há 8 dias · 9ºA</span></div>
-            <button class="at-btn">Alertar</button>
-          </div>
-          <div class="at-item at-yellow">
-            <div class="at-icon">🟡</div>
-            <div class="at-body"><strong>3 alunos com queda de engajamento</strong><span>9ºA – Taxa caiu de 85% →
-                71%</span></div><button class="at-btn">Ver</button>
-          </div>
-          <div class="at-item at-green">
-            <div class="at-icon">🟢</div>
-            <div class="at-body"><strong>8ºA atingiu 92% de engajamento!</strong><span>Melhor resultado da semana</span>
-            </div><button class="at-btn">Parabéns</button>
-          </div>
+        <div id="report-alerts">
+          <div style="color:var(--muted);font-size:.8rem">Carregando...</div>
         </div>
-
       </div>
+
+    </div>
     </div>
 
     <!-- DESTAQUES -->
@@ -387,40 +164,184 @@
       <div class="card-hd">
         <h3>🏆 Destaques da Semana</h3>
       </div>
-      <div class="destaque-grid">
-        <div class="dest-card">
-          <div class="dest-pos">🥇</div>
-          <div class="dest-av av1"></div>
-          <div class="dest-name">Ana Souza</div>
-          <div class="dest-xp">⚡ 680 XP</div>
-          <div class="dest-info">8ºA · 24 tarefas feitas</div>
-        </div>
-        <div class="dest-card">
-          <div class="dest-pos">🥈</div>
-          <div class="dest-av av2"></div>
-          <div class="dest-name">Carlos Lima</div>
-          <div class="dest-xp">⚡ 640 XP</div>
-          <div class="dest-info">8ºB · 22 tarefas feitas</div>
-        </div>
-        <div class="dest-card">
-          <div class="dest-pos">🥉</div>
-          <div class="dest-av av3"></div>
-          <div class="dest-name">João Pedro</div>
-          <div class="dest-xp">⚡ 590 XP</div>
-          <div class="dest-info">9ºA · 20 tarefas feitas</div>
-        </div>
-      </div>
+      <div class="destaque-grid" id="report-highlights"></div>
+    </div>
     </div>
 
   </main>
 
   <script>
     function setPeriod(btn) {
-      document.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
       btn.classList.add('active');
     }
   </script>
 
+  <script>
+
+    function reportEscape(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+
+    function reportSessionId() {
+      try {
+        const session = JSON.parse(localStorage.getItem("session") || "{}");
+        return session.id_usuario || session.id || null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function reportDate(value) {
+      if (!value) return "Sem prazo";
+      const d = new Date(value);
+      return Number.isNaN(d.getTime()) ? "Sem prazo" : d.toLocaleDateString("pt-BR");
+    }
+
+    function renderTeacherReports(d) {
+      const s = d.stats || {};
+      document.getElementById("report-alunos").textContent = s.students ?? 0;
+      document.getElementById("report-conclusao").textContent = `${s.completionRate ?? 0}%`;
+      document.getElementById("report-xp").textContent =
+        (Number(s.xpWeek) >= 1000 ? (Number(s.xpWeek) / 1000).toFixed(1) + "k" : Number(s.xpWeek || 0));
+      document.getElementById("report-tarefas").textContent = s.activeTasks ?? 0;
+      document.getElementById("report-risco").textContent = s.riskCount ?? 0;
+
+      const today = new Date();
+      const dueToday = (d.tasks || []).filter(t => {
+        if (!t.deadline) return false;
+        const x = new Date(t.deadline);
+        return x.toDateString() === today.toDateString();
+      }).length;
+      document.getElementById("report-tarefas-sub").textContent =
+        `${dueToday} vencendo hoje`;
+
+      // Gráfico
+      const chart = document.getElementById("report-chart");
+      const points = d.completionsChart || [];
+      const max = Math.max(1, ...points.map(p => Number(p.value) || 0));
+      chart.innerHTML = points.map(p => `
+        <div class="bc">
+          <div class="bc-bar gold" style="height:${Math.max(4, Math.round(((Number(p.value) || 0) / max) * 95))}px"
+               title="${Number(p.value) || 0} conclusão(ões)"></div>
+          <div class="bc-lbl">${reportEscape(p.label)}</div>
+        </div>
+      `).join("");
+
+      // Turmas
+      const classes = d.classes || [];
+      const legend = document.getElementById("report-class-legend");
+      const pie = document.getElementById("report-pie");
+      const palette = ["var(--green)", "#5B9BF8", "var(--accent)", "var(--purple)", "var(--orange)"];
+      let cursor = 0;
+      const stops = [];
+      const totalWeight = Math.max(1, classes.reduce((sum, c) => sum + (Number(c.students) || 1), 0));
+      classes.forEach((c, i) => {
+        const width = ((Number(c.students) || 1) / totalWeight) * 100;
+        stops.push(`${palette[i % palette.length]} ${cursor}% ${cursor + width}%`);
+        cursor += width;
+      });
+      pie.style.background = classes.length
+        ? `conic-gradient(${stops.join(",")})`
+        : "conic-gradient(var(--border) 0 100%)";
+
+      legend.innerHTML = classes.length ? classes.map((c, i) => `
+        <div class="pl-row">
+          <div class="pl-dot" style="background:${palette[i % palette.length]}"></div>
+          <span class="pl-label">${reportEscape(c.name)}</span>
+          <span class="pl-pct" style="color:${palette[i % palette.length]}">${Number(c.completion) || 0}%</span>
+          <span class="pl-count">${Number(c.students) || 0}</span>
+        </div>
+      `).join("") : `<div style="color:var(--muted);font-size:.8rem">Nenhuma turma encontrada.</div>`;
+
+      // Alunos
+      const students = (d.students || []).slice(0, 12);
+      document.getElementById("report-students").innerHTML = students.length ? students.map(st => {
+        const status = st.progresso >= 80 ? ["Ótimo", "sc-ok"] :
+          st.progresso >= 50 ? ["Atenção", "sc-warn"] : ["Em risco", "sc-bad"];
+        return `
+          <div class="al-row">
+            <div class="al-user">
+              <div class="al-av ${reportEscape(st.avatarClass)}"></div>
+              <div>
+                <div class="al-name">${reportEscape(st.name)}</div>
+                <div style="font-size:.68rem;color:var(--muted)">${reportEscape(st.turma)}</div>
+              </div>
+            </div>
+            <div><span class="xp-chip">⚡${Number(st.xp) || 0}</span></div>
+            <div><span class="lvl-chip">Nv. ${Number(st.nivel) || 0}</span></div>
+            <div style="font-size:.82rem">${Number(st.tarefasFeitas) || 0}/${Number(st.tarefasTotal) || 0}</div>
+            <div><div class="prog-mini"><div class="prog-mini-f" style="width:${Math.max(0, Math.min(100, Number(st.progresso) || 0))}%"></div></div></div>
+            <div><span class="status-chip ${status[1]}">${status[0]}</span></div>
+          </div>`;
+      }).join("") : `<div style="padding:18px;color:var(--muted);font-size:.82rem">Nenhum aluno encontrado.</div>`;
+
+      // Tarefas
+      const taskEl = document.getElementById("report-tasks");
+      taskEl.innerHTML = (d.tasks || []).length ? d.tasks.map((t, i) => `
+        <div class="task-ana-item">
+          <div class="ta-subj" style="background:${palette[i % palette.length]}"></div>
+          <div class="ta-info">
+            <strong>${reportEscape(t.title)}</strong>
+            <span>${reportEscape(t.disciplina)} · ${reportEscape(t.turma)} · ${reportDate(t.deadline)}</span>
+          </div>
+          <div class="ta-prog">
+            <div class="ta-bar"><div class="ta-bar-f" style="width:${Number(t.rate) || 0}%;background:${palette[i % palette.length]}"></div></div>
+            <span class="ta-pct" style="color:${palette[i % palette.length]}">${Number(t.rate) || 0}%</span>
+          </div>
+        </div>
+      `).join("") : `<div style="padding:12px 0;color:var(--muted);font-size:.8rem">Nenhuma tarefa encontrada.</div>`;
+
+      // Alertas
+      const risks = d.risks || [];
+      document.getElementById("report-alerts").innerHTML = risks.length ? risks.slice(0, 3).map((r, i) => `
+        <div class="at-item ${r.progresso < 50 ? "at-red" : "at-yellow"}">
+          <div class="at-icon">${r.progresso < 50 ? "🔴" : "🟡"}</div>
+          <div class="at-body">
+            <strong>${reportEscape(r.name)} – ${Number(r.progresso) || 0}% de progresso</strong>
+            <span>${reportEscape(r.turma)} · ${Number(r.tarefasFeitas) || 0}/${Number(r.tarefasTotal) || 0} tarefas</span>
+          </div>
+        </div>
+      `).join("") : `<div class="at-item at-green"><div class="at-icon">🟢</div><div class="at-body"><strong>Nenhum aluno abaixo de 50%</strong><span>Baseado nos dados atuais</span></div></div>`;
+
+      // Destaques
+      document.getElementById("report-highlights").innerHTML = (d.highlights || []).map((h, i) => `
+        <div class="dest-card">
+          <div class="dest-pos">${["🥇", "🥈", "🥉"][i] || "🏅"}</div>
+          <div class="dest-av ${reportEscape(h.avatarClass)}"></div>
+          <div class="dest-name">${reportEscape(h.name)}</div>
+          <div class="dest-xp">⚡ ${Number(h.xp) || 0} XP</div>
+          <div class="dest-info">${reportEscape(h.turma)} · ${Number(h.tarefasFeitas) || 0} tarefas feitas</div>
+        </div>
+      `).join("") || `<div style="padding:18px;color:var(--muted)">Nenhum destaque disponível.</div>`;
+    }
+
+    async function carregarRelatoriosProfessor() {
+      const id = reportSessionId();
+      if (!id) {
+        document.querySelector(".main").insertAdjacentHTML("afterbegin",
+          '<div style="padding:12px;color:var(--red)">Sessão inválida. Faça login novamente.</div>');
+        return;
+      }
+
+      try {
+        if (!window.api || typeof window.api.getTeacherReports !== "function") {
+          throw new Error("API de relatórios não disponível.");
+        }
+        const result = await window.api.getTeacherReports(id);
+        if (!result || !result.success) throw new Error(result?.message || "Erro ao carregar relatórios.");
+        renderTeacherReports(result.data);
+      } catch (err) {
+        console.error("Erro nos relatórios:", err);
+        document.querySelector(".main").insertAdjacentHTML("afterbegin",
+          `<div style="padding:12px;color:var(--red)">Erro ao carregar dados reais: ${reportEscape(err.message)}</div>`);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", carregarRelatoriosProfessor);
+  </script>
   <script id="logout-script">
     function sairDaConta(destino) {
       if (confirm("Tem certeza que deseja sair da conta?")) {
