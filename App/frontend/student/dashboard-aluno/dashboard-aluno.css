@@ -37,6 +37,7 @@
 html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
+  width: 100%;
 }
 
 body {
@@ -49,6 +50,9 @@ body {
 
 body.student-dashboard-page {
   display: flex;
+  width: 100vw;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 a {
@@ -76,7 +80,7 @@ textarea {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 100;
+  z-index: 200;
   overflow-y: auto;
 }
 
@@ -177,8 +181,12 @@ textarea {
 /* ---- MAIN ---- */
 .main {
   background: #0B1340;
-  margin-left: var(--sidebar-w);
-  flex: 1;
+  position: fixed;
+  inset: 0 0 0 var(--sidebar-w);
+  width: auto;
+  max-width: none;
+  overflow-y: auto;
+  z-index: 1;
   padding: 28px 32px 48px;
   min-width: 0;
 }
@@ -757,6 +765,9 @@ textarea {
 }
 
 @media (max-width: 768px) {
+  :root {
+    --sidebar-w: 72px;
+  }
   .sidebar {
     width: 72px;
     padding: 16px 8px;
@@ -785,7 +796,6 @@ textarea {
   }
 
   .main {
-    margin-left: 72px;
     padding: 20px 16px;
   }
 

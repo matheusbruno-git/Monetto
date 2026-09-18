@@ -1,12 +1,57 @@
+
+
+const db = require("./connection.js");
+
+async function resolveEscolaId(currentUserId) {
+  if (!currentUserId) return null;
+
+  const [rows] = await db.promise().execute(
+    `SELECT id_escola
+     FROM usuarios
+     WHERE id_usuario = ?
+       AND ativo = 1
+     LIMIT 1`,
+    [currentUserId]
+  );
+
+  return rows[0]?.id_escola || null;
+}
+
+function formatRelative(dateVal) {
+  if (!dateVal) return "—";
+
+  try {
+    const d = new Date(dateVal);
+
+    if (Number.isNaN(d.getTime())) return "—";
+
+    const diffMs = Date.now() - d.getTime();
+    const mins = Math.floor(diffMs / 60000);
+
+    if (mins < 1) return "agora";
+    if (mins < 60) return `há ${mins}min`;
+
+    const hours = Math.floor(mins / 60);
+    if (hours < 24) return `há ${hours}h`;
+
+    const days = Math.floor(hours / 24);
+    if (days === 1) return "ontem";
+    if (days < 30) return `há ${days}d`;
+
+    return d.toLocaleDateString("pt-BR");
+  } catch (_) {
+    return "—";
+  }
+}
+
 async function getDashboardAdminEscolar(currentUserId) {
   try {
-    const db = require(path.join(basePath, "connection.js"));
 
     if (!currentUserId) {
       return { success: false, message: "ID do usuário não informado." };
     }
 
-    const escolaId = await resolveEscolaId(db, currentUserId);
+    const escolaId = await resolveEscolaId(currentUserId);
     if (!escolaId) {
       return {
         success: false,

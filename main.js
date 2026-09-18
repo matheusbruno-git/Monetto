@@ -69,7 +69,6 @@ ipcMain.handle("login", async (event, { email, senha }) => {
     if (!senhaCorreta)
       return { success: false, message: "Email ou senha incorretos." };
 
-    // Track last-login time (used by the "inactive students" dashboard stat)
     db.promise()
       .execute(
         "UPDATE usuarios SET ultimo_acesso = NOW() WHERE id_usuario = ?",
@@ -77,7 +76,7 @@ ipcMain.handle("login", async (event, { email, senha }) => {
       )
       .catch((e) => console.warn("Failed to update ultimo_acesso:", e.message));
 
-    // determine redirect based on profile
+
     let redirect = null;
     if (user.id_perfil === 1) {
       redirect = "../student/dashboard-aluno/dashboard-aluno.html";
@@ -374,6 +373,42 @@ ipcMain.handle("getDashboardTeacher", async (event, currentUserId) => {
       success: false,
       message: "Erro ao buscar dashboard do professor.",
     };
+  }
+});
+
+ipcMain.handle("getStudentDashboard", async (event, studentId) => {
+  try {
+    const { getStudentDashboard } = require(
+      path.join(basePath, "backend/get_student_dashboard.js"),
+    );
+    return await getStudentDashboard(studentId);
+  } catch (err) {
+    console.error("getStudentDashboard Error:", err);
+    return { success: false, message: "Erro ao buscar dados do aluno." };
+  }
+});
+
+ipcMain.handle("completeStudentTask", async (event, studentId, taskId) => {
+  try {
+    const { completeStudentTask } = require(
+      path.join(basePath, "backend/get_student_dashboard.js"),
+    );
+    return await completeStudentTask(studentId, taskId);
+  } catch (err) {
+    console.error("completeStudentTask Error:", err);
+    return { success: false, message: "Erro ao concluir tarefa." };
+  }
+});
+
+ipcMain.handle("awardStudentXp", async (event, studentId, amount, source) => {
+  try {
+    const { awardStudentXp } = require(
+      path.join(basePath, "backend/get_student_dashboard.js"),
+    );
+    return await awardStudentXp(studentId, amount, source);
+  } catch (err) {
+    console.error("awardStudentXp Error:", err);
+    return { success: false, message: "Erro ao registrar XP." };
   }
 });
 

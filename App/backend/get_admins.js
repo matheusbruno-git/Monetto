@@ -1,3 +1,5 @@
+const { resolveEscolaId } = require("./resolve_escola_id.js");
+
 async function getAdmins(currentUserId) {
   try {
     const db = require("./connection.js");

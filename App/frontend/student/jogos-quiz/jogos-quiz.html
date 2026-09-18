@@ -176,6 +176,7 @@
     </div>
   </div>
 
+  <script src="../student-data.js"></script>
   <script>
     const questions = [
       {
@@ -282,7 +283,7 @@
       renderQuestion();
     }
 
-    function showScore() {
+    async function showScore() {
       document.getElementById('quizScreen').style.display = 'none';
       const ss = document.getElementById('scoreScreen');
       ss.style.display = 'block';
@@ -290,6 +291,11 @@
       const xp = score * 20;
       document.getElementById('scorePct').textContent = pct + '%';
       document.getElementById('scoreXP').textContent = xp + ' XP';
+      const session = JSON.parse(localStorage.getItem('session') || '{}');
+      if (xp && session.id && window.api?.awardStudentXp) {
+        const result = await window.api.awardStudentXp(session.id, xp, 'quiz_financas');
+        if (!result.success) console.error(result.message);
+      }
       document.getElementById('scoreSubtitle').textContent = `Você acertou ${score} de ${questions.length} perguntas`;
       const trophy = document.getElementById('scoreTrophy');
       const title = document.getElementById('scoreTitle');

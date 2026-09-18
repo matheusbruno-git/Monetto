@@ -31,6 +31,11 @@ function showMsg(el, text, success) {
   setTimeout(() => (el.style.display = "none"), 3500);
 }
 
+function setText(id, value) {
+  const element = document.getElementById(id);
+  if (element) element.textContent = value ?? "—";
+}
+
 // ============================================================
 // POPULATE NÍVEIS DROPDOWN
 // ============================================================
