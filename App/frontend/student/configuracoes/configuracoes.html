@@ -1,289 +1,246 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Monetto – Configurações</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="configuracoes.css" />
-  <link rel="icon" type="image/x-icon" href="../../Assets/Monetto Logo.ico">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Monetto – Configurações</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&amp;family=DM+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="configuracoes.css" rel="stylesheet"/>
+<link href="../../Assets/Monetto Logo.ico" rel="icon" type="image/x-icon"/>
 </head>
-
 <body class="settings-page">
-
-  <div id="sidebar-container"></div>
-
-  <div class="main">
-
-    <!-- SETTINGS NAV -->
-    <div class="set-nav">
-      <div class="set-nav-title">Configurações</div>
-      <div class="set-nav-item active" onclick="showTab('perfil',this)"><span class="sni">👤</span> Meu Perfil</div>
-      <div class="set-nav-item" onclick="showTab('notif',this)"><span class="sni">🔔</span> Notificações</div>
-      <div class="set-nav-item" onclick="showTab('priv',this)"><span class="sni">🔒</span> Privacidade</div>
-      <div class="set-nav-item" onclick="showTab('conta',this)"><span class="sni">🛡️</span> Conta</div>
-    </div>
-
-    <!-- SETTINGS CONTENT -->
-    <div class="set-content">
-
-      <!-- PERFIL -->
-      <div id="tab-perfil">
-        <div class="set-header">
-          <h1>👤 Meu Perfil</h1>
-          <p>Atualize suas informações pessoais e foto</p>
-        </div>
-
-        <div class="profile-hero">
-          <div class="profile-big-av">😊<div class="av-edit">✏️</div>
-          </div>
-          <div class="profile-info">
-            <strong>Ana Souza</strong>
-            <span>ana.souza@escola.edu.br</span>
-            <div class="profile-badges">
-              <span class="pb pb-gold">⭐ Nível 5</span>
-              <span class="pb pb-green">🔥 7 dias</span>
-              <span class="pb">🎓 Turma 8ºA</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="set-card">
-          <div class="set-card-title">📸 Escolher Avatar</div>
-          <div class="avatar-grid">
-            <div class="av-opt av1 selected">😊</div>
-            <div onclick="turnIcon()" class="av-opt av2">😎</div>
-            <div class="av-opt av3">🤓</div>
-            <div class="av-opt av4">😄</div>
-            <div class="av-opt av5">🥳</div>
-            <div class="av-opt av6">🤩</div>
-          </div>
-        </div>
-
-        <div class="set-card">
-          <div class="set-card-title">✏️ Informações Pessoais</div>
-          <div class="form-row">
-            <div class="field-group">
-              <label>Nome</label>
-              <input type="text" id="nome_usuario" value="null" />
-            </div>
-            <div class="field-group">
-              <label>Sobrenome</label>
-              <input type="text" value="null" />
-            </div>
-          </div>
-          <div class="form-row single">
-            <div class="field-group">
-              <label>E-mail</label>
-              <input type="email" value="null" />
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="field-group">
-              <label>Turma</label>
-              <select>
-                <option>8º Ano A</option>
-                <option>8º Ano B</option>
-                <option>9º Ano A</option>
-              </select>
-            </div>
-            <div class="field-group">
-              <label>Escola</label>
-              <input type="text" value="Escola Estadual São Paulo" />
-            </div>
-          </div>
-          <div class="form-row single">
-            <div class="field-group">
-              <label>Bio (opcional)</label>
-              <input type="text" placeholder="Conte um pouco sobre você..."
-                value="Amo matemática e aprender sobre finanças! 📚" />
-            </div>
-          </div>
-        </div>
-
-        <div class="set-card">
-          <div class="set-card-title">🔑 Alterar Senha</div>
-          <div class="form-row single">
-            <div class="field-group">
-              <label>Senha atual</label>
-              <input type="password" placeholder="••••••••" />
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="field-group">
-              <label>Nova senha</label>
-              <input type="password" placeholder="••••••••" />
-            </div>
-            <div class="field-group">
-              <label>Confirmar nova senha</label>
-              <input type="password" placeholder="••••••••" />
-            </div>
-          </div>
-        </div>
-
-        <div class="save-row">
-          <button class="btn-save" onclick="showToast()">Salvar alterações</button>
-          <button class="btn-cancel">Cancelar</button>
-        </div>
-      </div>
-
-      <!-- NOTIFICAÇÕES -->
-      <div id="tab-notif" style="display:none">
-        <div class="set-header">
-          <h1>🔔 Notificações</h1>
-          <p>Controle o que você quer ser notificado</p>
-        </div>
-
-        <div class="set-card">
-          <div class="set-card-title">🔔 Alertas de Tarefas</div>
-          <div class="toggle-row">
-            <div class="toggle-info"><strong>Nova tarefa do professor</strong><span>Avise quando o professor adicionar
+<div id="sidebar-container"></div>
+<div class="main">
+<!-- SETTINGS NAV -->
+<div class="set-nav">
+<div class="set-nav-title">Configurações</div>
+<div class="set-nav-item active" onclick="showTab('perfil',this)"><span class="sni">👤</span> Meu Perfil</div>
+<div class="set-nav-item" onclick="showTab('notif',this)"><span class="sni">🔔</span> Notificações</div>
+<div class="set-nav-item" onclick="showTab('priv',this)"><span class="sni">🔒</span> Privacidade</div>
+<div class="set-nav-item" onclick="showTab('conta',this)"><span class="sni">🛡️</span> Conta</div>
+</div>
+<!-- SETTINGS CONTENT -->
+<div class="set-content">
+<!-- PERFIL -->
+<div id="tab-perfil">
+<div class="set-header">
+<h1>👤 Meu Perfil</h1>
+<p>Atualize suas informações pessoais e foto</p>
+</div>
+<div class="profile-hero">
+<div class="profile-big-av">😊<div class="av-edit">✏️</div>
+</div>
+<div class="profile-info"><strong>Carregando perfil...</strong></div>
+</div>
+<div class="set-card">
+<div class="set-card-title">📸 Escolher Avatar</div>
+<div class="avatar-grid">
+<div class="av-opt av1 selected">😊</div>
+<div class="av-opt av2" onclick="turnIcon()">😎</div>
+<div class="av-opt av3">🤓</div>
+<div class="av-opt av4">😄</div>
+<div class="av-opt av5">🥳</div>
+<div class="av-opt av6">🤩</div>
+</div>
+</div>
+<div class="set-card">
+<div class="set-card-title">✏️ Informações Pessoais</div>
+<div class="form-row">
+<div class="field-group">
+<label>Nome</label>
+<input id="nome_usuario" type="text" value=""/>
+</div>
+<div class="field-group">
+<label>Sobrenome</label>
+<input disabled="" id="sobrenome_usuario" type="text" value=""/>
+</div>
+</div>
+<div class="form-row single">
+<div class="field-group">
+<label>E-mail</label>
+<input id="email_usuario" type="email" value=""/>
+</div>
+</div>
+<div class="form-row">
+<div class="field-group">
+<label>Turma</label>
+<input disabled="" id="turma_usuario" type="text" value=""/>
+</div>
+<div class="field-group">
+<label>Escola</label>
+<input disabled="" id="escola_usuario" type="text" value=""/>
+</div>
+</div>
+<div class="form-row single">
+<div class="field-group">
+<label>Bio (opcional)</label>
+<input disabled="" placeholder="Conte um pouco sobre você..." type="text" value=""/>
+</div>
+</div>
+</div>
+<div class="set-card">
+<div class="set-card-title">🔑 Alterar Senha</div>
+<div class="form-row single">
+<div class="field-group">
+<label>Senha atual</label>
+<input id="senha_atual" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<div class="form-row">
+<div class="field-group">
+<label>Nova senha</label>
+<input id="nova_senha" placeholder="••••••••" type="password"/>
+</div>
+<div class="field-group">
+<label>Confirmar nova senha</label>
+<input id="confirmar_senha" placeholder="••••••••" type="password"/>
+</div>
+</div>
+</div>
+<div class="save-row">
+<button class="btn-save" id="salvar_perfil">Salvar alterações</button>
+<button class="btn-cancel">Cancelar</button>
+</div>
+</div>
+<!-- NOTIFICAÇÕES -->
+<div id="tab-notif" style="display:none">
+<div class="set-header">
+<h1>🔔 Notificações</h1>
+<p>Controle o que você quer ser notificado</p>
+</div>
+<div class="set-card">
+<div class="set-card-title">🔔 Alertas de Tarefas</div>
+<div class="toggle-row">
+<div class="toggle-info"><strong>Nova tarefa do professor</strong><span>Avise quando o professor adicionar
                 uma nova tarefa</span></div>
-            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
-          </div>
-          <div class="toggle-row">
-            <div class="toggle-info"><strong>Tarefa próxima do prazo</strong><span>Lembrete 24h antes do prazo</span>
-            </div>
-            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
-          </div>
-          <div class="toggle-row">
-            <div class="toggle-info"><strong>Tarefa atrasada</strong><span>Aviso quando uma tarefa passar do
+<div class="toggle on" onclick="this.classList.toggle('on')"></div>
+</div>
+<div class="toggle-row">
+<div class="toggle-info"><strong>Tarefa próxima do prazo</strong><span>Lembrete 24h antes do prazo</span>
+</div>
+<div class="toggle on" onclick="this.classList.toggle('on')"></div>
+</div>
+<div class="toggle-row">
+<div class="toggle-info"><strong>Tarefa atrasada</strong><span>Aviso quando uma tarefa passar do
                 prazo</span></div>
-            <div class="toggle" onclick="this.classList.toggle('on')"></div>
-          </div>
-        </div>
-
-        <div class="set-card">
-          <div class="set-card-title">🎮 Jogos e Conquistas</div>
-          <div class="toggle-row">
-            <div class="toggle-info"><strong>Nova medalha desbloqueada</strong><span>Comemore cada conquista sua!</span>
-            </div>
-            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
-          </div>
-          <div class="toggle-row">
-            <div class="toggle-info"><strong>Subir de nível</strong><span>Notificação ao atingir um novo nível</span>
-            </div>
-            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
-          </div>
-          <div class="toggle-row">
-            <div class="toggle-info"><strong>Ranking atualizado</strong><span>Saiba quando sua posição no ranking
+<div class="toggle" onclick="this.classList.toggle('on')"></div>
+</div>
+</div>
+<div class="set-card">
+<div class="set-card-title">🎮 Jogos e Conquistas</div>
+<div class="toggle-row">
+<div class="toggle-info"><strong>Nova medalha desbloqueada</strong><span>Comemore cada conquista sua!</span>
+</div>
+<div class="toggle on" onclick="this.classList.toggle('on')"></div>
+</div>
+<div class="toggle-row">
+<div class="toggle-info"><strong>Subir de nível</strong><span>Notificação ao atingir um novo nível</span>
+</div>
+<div class="toggle on" onclick="this.classList.toggle('on')"></div>
+</div>
+<div class="toggle-row">
+<div class="toggle-info"><strong>Ranking atualizado</strong><span>Saiba quando sua posição no ranking
                 mudar</span></div>
-            <div class="toggle" onclick="this.classList.toggle('on')"></div>
-          </div>
-          <div class="toggle-row">
-            <div class="toggle-info"><strong>Novo jogo disponível</strong><span>Avisamos quando um jogo novo for
+<div class="toggle" onclick="this.classList.toggle('on')"></div>
+</div>
+<div class="toggle-row">
+<div class="toggle-info"><strong>Novo jogo disponível</strong><span>Avisamos quando um jogo novo for
                 lançado</span></div>
-            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
-          </div>
-        </div>
-
-        <div class="set-card">
-          <div class="set-card-title">📧 E-mail e Resumo</div>
-          <div class="toggle-row">
-            <div class="toggle-info"><strong>Resumo semanal por e-mail</strong><span>Receba um resumo do seu desempenho
+<div class="toggle on" onclick="this.classList.toggle('on')"></div>
+</div>
+</div>
+<div class="set-card">
+<div class="set-card-title">📧 E-mail e Resumo</div>
+<div class="toggle-row">
+<div class="toggle-info"><strong>Resumo semanal por e-mail</strong><span>Receba um resumo do seu desempenho
                 toda segunda-feira</span></div>
-            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
-          </div>
-          <div class="toggle-row">
-            <div class="toggle-info"><strong>Lembrete de sequência</strong><span>Não perca sua sequência de acesso
+<div class="toggle on" onclick="this.classList.toggle('on')"></div>
+</div>
+<div class="toggle-row">
+<div class="toggle-info"><strong>Lembrete de sequência</strong><span>Não perca sua sequência de acesso
                 diário</span></div>
-            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
-          </div>
-        </div>
-
-        <div class="save-row">
-          <button class="btn-save" onclick="showToast()">Salvar preferências</button>
-        </div>
-      </div>
-
-      <!-- PRIVACIDADE -->
-      <div id="tab-priv" style="display:none">
-        <div class="set-header">
-          <h1>🔒 Privacidade</h1>
-          <p>Controle quem pode ver suas informações</p>
-        </div>
-
-        <div class="set-card">
-          <div class="set-card-title">👁️ Visibilidade do Perfil</div>
-          <div class="toggle-row">
-            <div class="toggle-info"><strong>Mostrar no ranking da turma</strong><span>Seu nome aparece no ranking dos
+<div class="toggle on" onclick="this.classList.toggle('on')"></div>
+</div>
+</div>
+<div class="save-row">
+<button class="btn-save" onclick="showToast()">Salvar preferências</button>
+</div>
+</div>
+<!-- PRIVACIDADE -->
+<div id="tab-priv" style="display:none">
+<div class="set-header">
+<h1>🔒 Privacidade</h1>
+<p>Controle quem pode ver suas informações</p>
+</div>
+<div class="set-card">
+<div class="set-card-title">👁️ Visibilidade do Perfil</div>
+<div class="toggle-row">
+<div class="toggle-info"><strong>Mostrar no ranking da turma</strong><span>Seu nome aparece no ranking dos
                 colegas</span></div>
-            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
-          </div>
-          <div class="toggle-row">
-            <div class="toggle-info"><strong>Mostrar XP e nível</strong><span>Colegas podem ver seu nível atual</span>
-            </div>
-            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
-          </div>
-          <div class="toggle-row">
-            <div class="toggle-info"><strong>Mostrar medalhas</strong><span>Suas conquistas ficam visíveis para a
+<div class="toggle on" onclick="this.classList.toggle('on')"></div>
+</div>
+<div class="toggle-row">
+<div class="toggle-info"><strong>Mostrar XP e nível</strong><span>Colegas podem ver seu nível atual</span>
+</div>
+<div class="toggle on" onclick="this.classList.toggle('on')"></div>
+</div>
+<div class="toggle-row">
+<div class="toggle-info"><strong>Mostrar medalhas</strong><span>Suas conquistas ficam visíveis para a
                 turma</span></div>
-            <div class="toggle" onclick="this.classList.toggle('on')"></div>
-          </div>
-          <div class="toggle-row">
-            <div class="toggle-info"><strong>Mostrar sequência de acesso</strong><span>Outros alunos podem ver sua
+<div class="toggle" onclick="this.classList.toggle('on')"></div>
+</div>
+<div class="toggle-row">
+<div class="toggle-info"><strong>Mostrar sequência de acesso</strong><span>Outros alunos podem ver sua
                 sequência de dias</span></div>
-            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
-          </div>
-        </div>
-
-        <div class="save-row">
-          <button class="btn-save" onclick="showToast()">Salvar configurações</button>
-        </div>
-      </div>
-
-      <!-- CONTA -->
-      <div id="tab-conta" style="display:none">
-        <div class="set-header">
-          <h1>🛡️ Conta</h1>
-          <p>Gerencie os dados e a segurança da sua conta</p>
-        </div>
-
-        <div class="set-card">
-          <div class="set-card-title">📊 Dados da Conta</div>
-          <div style="font-size:.85rem;display:flex;flex-direction:column;gap:12px">
-            <div
-              style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--border)">
-              <span style="color:var(--muted)">E-mail</span><span>ana.souza@escola.edu.br</span>
-            </div>
-            <div
-              style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--border)">
-              <span style="color:var(--muted)">Membro desde</span><span>Março 2025</span>
-            </div>
-            <div
-              style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--border)">
-              <span style="color:var(--muted)">Tipo de conta</span><span>Aluno</span>
-            </div>
-            <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">Escola
-                vinculada</span><span>Escola Estadual São Paulo</span></div>
-          </div>
-        </div>
-
-        <div class="set-card">
-          <div class="set-card-title" style="color:var(--red)">⚠️ Zona de Perigo</div>
-          <p style="font-size:.85rem;color:var(--muted);margin-bottom:16px;line-height:1.6">Essas ações são
+<div class="toggle on" onclick="this.classList.toggle('on')"></div>
+</div>
+</div>
+<div class="save-row">
+<button class="btn-save" onclick="showToast()">Salvar configurações</button>
+</div>
+</div>
+<!-- CONTA -->
+<div id="tab-conta" style="display:none">
+<div class="set-header">
+<h1>🛡️ Conta</h1>
+<p>Gerencie os dados e a segurança da sua conta</p>
+</div>
+<div class="set-card">
+<div class="set-card-title">📊 Dados da Conta</div>
+<div style="font-size:.85rem;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--border)">
+<span style="color:var(--muted)">E-mail</span><span>ana.souza@escola.edu.br</span>
+</div>
+<div style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--border)">
+<span style="color:var(--muted)">Membro desde</span><span>Março 2025</span>
+</div>
+<div style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--border)">
+<span style="color:var(--muted)">Tipo de conta</span><span>Aluno</span>
+</div>
+<div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">Escola
+                vinculada</span><span id="conta_escola">Carregando...</span></div>
+</div>
+</div>
+<div class="set-card">
+<div class="set-card-title" style="color:var(--red)">⚠️ Zona de Perigo</div>
+<p style="font-size:.85rem;color:var(--muted);margin-bottom:16px;line-height:1.6">Essas ações são
             irreversíveis. Certifique-se antes de continuar.</p>
-          <div style="display:flex;gap:12px;flex-wrap:wrap">
-            <button class="btn-danger">📤 Exportar meus dados</button>
-            <button class="btn-danger" onclick="sairDaConta('../../login/login.html')">🚪 Sair
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<button class="btn-danger">📤 Exportar meus dados</button>
+<button class="btn-danger" onclick="sairDaConta('../../login/login.html')">🚪 Sair
               da
               conta</button>
-            <button class="btn-danger" style="border-color:rgba(231,76,60,.6)">🗑️ Excluir conta</button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- TOAST -->
-  <div class="toast" style="display:none;" id="toast">✅ Alterações salvas com sucesso!</div>
-
-  <script src="../student-data.js"></script>
-  <script>
+<button class="btn-danger" style="border-color:rgba(231,76,60,.6)">🗑️ Excluir conta</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- TOAST -->
+<div class="toast" id="toast" style="display:none;">✅ Alterações salvas com sucesso!</div>
+<script src="../student-data.js"></script>
+<script>
 
     function turnIcon() {
       const bigIcon = document.getElementById('profile-big-av');
@@ -308,6 +265,39 @@
       setTimeout(() => t.classList.remove('show'), 2800);
     }
 
+
+    async function salvarPerfilAluno() {
+      const session = JSON.parse(localStorage.getItem('session') || '{}');
+      const id = session.id_usuario || session.id;
+      if (!id) return alert('Sessão do aluno não encontrada.');
+      const nome = document.getElementById('nome_usuario').value.trim();
+      const email = document.getElementById('email_usuario').value.trim();
+      const senhaAtual = document.getElementById('senha_atual').value;
+      const novaSenha = document.getElementById('nova_senha').value;
+      const confirmar = document.getElementById('confirmar_senha').value;
+
+      const perfil = await window.api.updateAluno({ id_usuario: id, nome, email });
+      if (!perfil.success) return alert(perfil.message || 'Erro ao atualizar perfil.');
+
+      if (senhaAtual || novaSenha || confirmar) {
+        if (!senhaAtual || !novaSenha || !confirmar) return alert('Preencha os três campos de senha.');
+        if (novaSenha !== confirmar) return alert('A confirmação da nova senha não confere.');
+        const senha = await window.api.changeAlunoPassword({ id_usuario: id, senhaAtual, novaSenha });
+        if (!senha.success) return alert(senha.message || 'Erro ao alterar senha.');
+        document.getElementById('senha_atual').value = '';
+        document.getElementById('nova_senha').value = '';
+        document.getElementById('confirmar_senha').value = '';
+      }
+
+      session.nome = nome;
+      session.email = email;
+      localStorage.setItem('session', JSON.stringify(session));
+      showToast();
+      if (window.reloadStudentData) await window.reloadStudentData();
+    }
+
+    document.getElementById('salvar_perfil')?.addEventListener('click', salvarPerfilAluno);
+
     const nomeUsuario = document.getElementById('nome_usuario');
 
     console.log(nomeUsuario)
@@ -319,16 +309,14 @@
       });
     });
   </script>
-
-  <script id="logout-script">
+<script id="logout-script">
     function sairDaConta(destino) {
       if (confirm("Tem certeza que deseja sair da conta?")) {
         window.location.href = destino;
       }
     }
   </script>
-
-  <script>
+<script>
     function updateSidebarActiveLink() {
       const currentPath = normalizePath(window.location.href);
       const links = document.querySelectorAll('.sidebar .sb-link');
@@ -374,7 +362,5 @@
 
     loadStudentSidebar();
   </script>
-
 </body>
-
 </html>

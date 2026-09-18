@@ -1,183 +1,136 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Monetto – Jogos & Quiz de Finanças</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="jogos-quiz.css" />
-  <link rel="icon" type="image/x-icon" href="../../Assets/Monetto Logo.ico">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Monetto – Jogos &amp; Quiz de Finanças</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&amp;family=DM+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="jogos-quiz.css" rel="stylesheet"/>
+<link href="../../Assets/Monetto Logo.ico" rel="icon" type="image/x-icon"/>
 </head>
-
 <body class="games-page">
-
-  <div id="sidebar-container"></div>
-
-  <main class="main">
-    <div class="topbar">
-      <div>
-        <h1>🎮 Jogos & Quiz de Finanças</h1>
-        <p style="color:var(--muted);font-size:.88rem;margin-top:2px">Aprenda finanças jogando e ganhando XP!</p>
-      </div>
-      <div class="xp-topbar">
-        ⚡ <strong>680 XP</strong> &nbsp;· Nível 5
-      </div>
-    </div>
-
-    <!-- GAME CARDS -->
-    <div class="games-grid">
-
-      <div class="game-card gc-1" onclick="openQuiz()">
-        <div class="bg-emoji">💰</div>
-        <span class="game-tag gt-quiz">Quiz</span>
-        <h3>Quiz: Orçamento Pessoal</h3>
-        <p>Teste seus conhecimentos sobre como planejar seu dinheiro do dia a dia.</p>
-        <div class="game-meta">
-          <span class="game-xp">+100 XP</span>
-          <button class="play-btn" onclick="openQuiz()">▶ Jogar</button>
-        </div>
-      </div>
-
-      <div class="game-card gc-2">
-        <div class="bg-emoji">🏪</div>
-        <span class="game-tag gt-game">Jogo</span>
-        <h3>Mercado Virtual</h3>
-        <p>Compre e venda produtos num mercado simulado. Aprenda lucro e prejuízo na prática.</p>
-        <div class="game-meta">
-          <span class="game-xp">+150 XP</span>
-          <button class="play-btn">▶ Jogar</button>
-        </div>
-      </div>
-
-      <div class="game-card gc-3">
-        <div class="bg-emoji">📈</div>
-        <span class="game-tag gt-sim">Simulação</span>
-        <h3>Bolsa de Valores Jr.</h3>
-        <p>Invista R$ 1.000 virtuais em ações e veja seu dinheiro crescer ou cair.</p>
-        <div class="game-meta">
-          <span class="game-xp">+200 XP</span>
-          <button class="play-btn">▶ Jogar</button>
-        </div>
-      </div>
-
-      <div class="game-card gc-4">
-        <div class="bg-emoji">🏦</div>
-        <span class="game-tag gt-quiz">Quiz</span>
-        <h3>Quiz: Poupança & Juros</h3>
-        <p>Juros simples, juros compostos e o poder de poupar cedo. Você sabe tudo?</p>
-        <div class="game-meta">
-          <span class="game-xp">+80 XP</span>
-          <button class="play-btn">▶ Jogar</button>
-        </div>
-      </div>
-
-      <div class="game-card gc-5">
-        <div class="bg-emoji">🛒</div>
-        <span class="game-tag gt-game">Jogo</span>
-        <h3>Desafio do Consumidor</h3>
-        <p>Tome decisões de compra inteligentes. Necessidade ou desejo? Você decide!</p>
-        <div class="game-meta">
-          <span class="game-xp">+120 XP</span>
-          <button class="play-btn">▶ Jogar</button>
-        </div>
-      </div>
-
-      <div class="game-card gc-6">
-        <div class="bg-emoji">💳</div>
-        <span class="game-tag gt-quiz">Quiz</span>
-        <h3>Quiz: Crédito & Dívida</h3>
-        <p>Entenda como o crédito funciona, evite dívidas e use o cartão com sabedoria.</p>
-        <div class="game-meta">
-          <span class="game-xp">+90 XP</span>
-          <button class="play-btn">▶ Jogar</button>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- LEADERBOARD -->
-    <div class="lb-section">
-      <div class="lb-title">🏆 Top Jogadores da Semana</div>
-      <div class="lb-grid">
-        <div class="lb-card">
-          <div class="lb-pos">🥇</div>
-          <div class="lb-av la1"></div>
-          <div class="lb-info"><strong>Ana Souza</strong><span>1.240 XP nos jogos</span></div>
-        </div>
-        <div class="lb-card">
-          <div class="lb-pos">🥈</div>
-          <div class="lb-av la2"></div>
-          <div class="lb-info"><strong>Carlos Lima</strong><span>980 XP nos jogos</span></div>
-        </div>
-        <div class="lb-card">
-          <div class="lb-pos">🥉</div>
-          <div class="lb-av la3"></div>
-          <div class="lb-info"><strong>João Pedro</strong><span>860 XP nos jogos</span></div>
-        </div>
-        <div class="lb-card">
-          <div class="lb-pos" style="color:var(--muted)">4</div>
-          <div class="lb-av la4"></div>
-          <div class="lb-info"><strong>Maria Clara</strong><span>720 XP nos jogos</span></div>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <!-- QUIZ MODAL -->
-  <div class="quiz-overlay" id="quizOverlay">
-    <div class="quiz-modal">
-
-      <!-- QUIZ SCREEN -->
-      <div id="quizScreen">
-        <div class="quiz-header">
-          <div class="quiz-title">💰 Quiz: Orçamento Pessoal</div>
-          <button class="quiz-close" onclick="closeQuiz()">✕</button>
-        </div>
-
-        <div class="quiz-progress-wrap">
-          <div class="quiz-prog-labels">
-            <span id="qLabel">Pergunta 1 de 5</span>
-            <span id="qXP">0 XP</span>
-          </div>
-          <div class="quiz-prog-bar">
-            <div class="quiz-prog-fill" id="qProgress" style="width:20%"></div>
-          </div>
-        </div>
-
-        <div class="quiz-q-num" id="qNum">Pergunta 1 / 5</div>
-        <div class="quiz-question" id="qText"></div>
-
-        <div class="quiz-options" id="qOptions"></div>
-
-        <div class="quiz-feedback qf-correct" id="qFeedbackCorrect">✅ <span id="qFeedbackText"></span></div>
-        <div class="quiz-feedback qf-wrong" id="qFeedbackWrong">❌ <span id="qFeedbackWrongText"></span></div>
-
-        <button class="quiz-next" id="qNext" onclick="nextQuestion()">Próxima pergunta →</button>
-      </div>
-
-      <!-- SCORE SCREEN -->
-      <div class="score-screen" id="scoreScreen">
-        <div class="score-trophy" id="scoreTrophy">🏆</div>
-        <h2 id="scoreTitle">Quiz Concluído!</h2>
-        <p id="scoreSubtitle" style="color:var(--muted);font-size:.9rem"></p>
-        <div class="score-pct" id="scorePct">0%</div>
-        <div class="score-xp-earned">
+<div id="sidebar-container"></div>
+<main class="main">
+<div class="topbar">
+<div>
+<h1>🎮 Jogos &amp; Quiz de Finanças</h1>
+<p style="color:var(--muted);font-size:.88rem;margin-top:2px">Aprenda finanças jogando e ganhando XP!</p>
+</div>
+<div class="xp-topbar">⚡ Carregando...</div>
+</div>
+<!-- GAME CARDS -->
+<div class="games-grid">
+<div class="game-card gc-1" onclick="openQuiz()">
+<div class="bg-emoji">💰</div>
+<span class="game-tag gt-quiz">Quiz</span>
+<h3>Quiz: Orçamento Pessoal</h3>
+<p>Teste seus conhecimentos sobre como planejar seu dinheiro do dia a dia.</p>
+<div class="game-meta">
+<span class="game-xp">+100 XP</span>
+<button class="play-btn" onclick="openQuiz()">▶ Jogar</button>
+</div>
+</div>
+<div class="game-card gc-2">
+<div class="bg-emoji">🏪</div>
+<span class="game-tag gt-game">Jogo</span>
+<h3>Mercado Virtual</h3>
+<p>Compre e venda produtos num mercado simulado. Aprenda lucro e prejuízo na prática.</p>
+<div class="game-meta">
+<span class="game-xp">+150 XP</span>
+<button class="play-btn">▶ Jogar</button>
+</div>
+</div>
+<div class="game-card gc-3">
+<div class="bg-emoji">📈</div>
+<span class="game-tag gt-sim">Simulação</span>
+<h3>Bolsa de Valores Jr.</h3>
+<p>Invista R$ 1.000 virtuais em ações e veja seu dinheiro crescer ou cair.</p>
+<div class="game-meta">
+<span class="game-xp">+200 XP</span>
+<button class="play-btn">▶ Jogar</button>
+</div>
+</div>
+<div class="game-card gc-4">
+<div class="bg-emoji">🏦</div>
+<span class="game-tag gt-quiz">Quiz</span>
+<h3>Quiz: Poupança &amp; Juros</h3>
+<p>Juros simples, juros compostos e o poder de poupar cedo. Você sabe tudo?</p>
+<div class="game-meta">
+<span class="game-xp">+80 XP</span>
+<button class="play-btn">▶ Jogar</button>
+</div>
+</div>
+<div class="game-card gc-5">
+<div class="bg-emoji">🛒</div>
+<span class="game-tag gt-game">Jogo</span>
+<h3>Desafio do Consumidor</h3>
+<p>Tome decisões de compra inteligentes. Necessidade ou desejo? Você decide!</p>
+<div class="game-meta">
+<span class="game-xp">+120 XP</span>
+<button class="play-btn">▶ Jogar</button>
+</div>
+</div>
+<div class="game-card gc-6">
+<div class="bg-emoji">💳</div>
+<span class="game-tag gt-quiz">Quiz</span>
+<h3>Quiz: Crédito &amp; Dívida</h3>
+<p>Entenda como o crédito funciona, evite dívidas e use o cartão com sabedoria.</p>
+<div class="game-meta">
+<span class="game-xp">+90 XP</span>
+<button class="play-btn">▶ Jogar</button>
+</div>
+</div>
+</div>
+<!-- LEADERBOARD -->
+<div class="lb-section">
+<div class="lb-title">🏆 Top Jogadores da Semana</div>
+<div class="lb-grid"><p>Carregando ranking...</p></div>
+</div>
+</main>
+<!-- QUIZ MODAL -->
+<div class="quiz-overlay" id="quizOverlay">
+<div class="quiz-modal">
+<!-- QUIZ SCREEN -->
+<div id="quizScreen">
+<div class="quiz-header">
+<div class="quiz-title">💰 Quiz: Orçamento Pessoal</div>
+<button class="quiz-close" onclick="closeQuiz()">✕</button>
+</div>
+<div class="quiz-progress-wrap">
+<div class="quiz-prog-labels">
+<span id="qLabel">Pergunta 1 de 5</span>
+<span id="qXP">0 XP</span>
+</div>
+<div class="quiz-prog-bar">
+<div class="quiz-prog-fill" id="qProgress" style="width:20%"></div>
+</div>
+</div>
+<div class="quiz-q-num" id="qNum">Pergunta 1 / 5</div>
+<div class="quiz-question" id="qText"></div>
+<div class="quiz-options" id="qOptions"></div>
+<div class="quiz-feedback qf-correct" id="qFeedbackCorrect">✅ <span id="qFeedbackText"></span></div>
+<div class="quiz-feedback qf-wrong" id="qFeedbackWrong">❌ <span id="qFeedbackWrongText"></span></div>
+<button class="quiz-next" id="qNext" onclick="nextQuestion()">Próxima pergunta →</button>
+</div>
+<!-- SCORE SCREEN -->
+<div class="score-screen" id="scoreScreen">
+<div class="score-trophy" id="scoreTrophy">🏆</div>
+<h2 id="scoreTitle">Quiz Concluído!</h2>
+<p id="scoreSubtitle" style="color:var(--muted);font-size:.9rem"></p>
+<div class="score-pct" id="scorePct">0%</div>
+<div class="score-xp-earned">
           Você ganhou <strong id="scoreXP">0 XP</strong> ⚡
         </div>
-        <div class="score-actions">
-          <button class="btn-retry" onclick="restartQuiz()">🔄 Tentar novamente</button>
-          <button class="btn-finish" onclick="closeQuiz()">✓ Concluir</button>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <script src="../student-data.js"></script>
-  <script>
+<div class="score-actions">
+<button class="btn-retry" onclick="restartQuiz()">🔄 Tentar novamente</button>
+<button class="btn-finish" onclick="closeQuiz()">✓ Concluir</button>
+</div>
+</div>
+</div>
+</div>
+<script src="../student-data.js"></script>
+<script>
     const questions = [
       {
         q: "João recebe R$ 1.200 por mês. Ele gasta R$ 800 com despesas fixas. Qual é a porcentagem que sobra para poupar?",
@@ -292,8 +245,9 @@
       document.getElementById('scorePct').textContent = pct + '%';
       document.getElementById('scoreXP').textContent = xp + ' XP';
       const session = JSON.parse(localStorage.getItem('session') || '{}');
-      if (xp && session.id && window.api?.awardStudentXp) {
-        const result = await window.api.awardStudentXp(session.id, xp, 'quiz_financas');
+      const studentId = session.id_usuario || session.id;
+      if (xp && studentId && window.api?.awardStudentXp) {
+        const result = await window.api.awardStudentXp(studentId, xp, 'quiz_financas');
         if (!result.success) console.error(result.message);
       }
       document.getElementById('scoreSubtitle').textContent = `Você acertou ${score} de ${questions.length} perguntas`;
@@ -314,16 +268,14 @@
     // init
     renderQuestion();
   </script>
-
-  <script id="logout-script">
+<script id="logout-script">
     function sairDaConta(destino) {
       if (confirm("Tem certeza que deseja sair da conta?")) {
         window.location.href = destino;
       }
     }
   </script>
-
-  <script>
+<script>
     function updateSidebarActiveLink() {
       const currentPath = normalizePath(window.location.href);
       const links = document.querySelectorAll('.sidebar .sb-link');
@@ -369,7 +321,5 @@
 
     loadStudentSidebar();
   </script>
-
 </body>
-
 </html>
