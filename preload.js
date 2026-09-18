@@ -23,6 +23,14 @@ contextBridge.exposeInMainWorld("api", {
   getSchools: () => ipcRenderer.invoke("getSchools"),
   getDashboardAdminEscolar: (currentUserId) =>
     ipcRenderer.invoke("getDashboardAdminEscolar", currentUserId),
+  getAdminReports: (currentUserId) =>
+    ipcRenderer.invoke("getAdminReports", currentUserId),
+  getAdminProfile: (currentUserId) =>
+    ipcRenderer.invoke("getAdminProfile", currentUserId),
+  getProfessorProfile: (currentUserId) =>
+    ipcRenderer.invoke("getProfessorProfile", currentUserId),
+  getDashboardAdmin: (currentUserId) =>
+    ipcRenderer.invoke("getDashboardAdmin", currentUserId),
   getDashboardTeacher: (currentUserId) =>
     ipcRenderer.invoke("getDashboardTeacher", currentUserId),
   getStudentDashboard: (studentId) =>
@@ -44,4 +52,10 @@ contextBridge.exposeInMainWorld("api", {
   deleteEscola: (escolaId) => ipcRenderer.invoke("deleteEscola", escolaId),
   atribuirProfessorATurma: (dados) =>
     ipcRenderer.invoke("atribuirProfessorATurma", dados),
+  changeAdminPassword: (dados) =>
+    ipcRenderer.invoke("changeAdminPassword", dados),
+  changeProfessorPassword: (dados) =>
+    ipcRenderer.invoke("changeProfessorPassword", dados),
+  changeAlunoPassword: (dados) =>
+    ipcRenderer.invoke("changeAlunoPassword", dados),
 });
