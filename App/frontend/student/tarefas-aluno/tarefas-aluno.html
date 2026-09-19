@@ -1,304 +1,361 @@
 <!DOCTYPE html>
 
 <html lang="pt-BR">
+
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Monetto – Minhas Tarefas</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&amp;family=DM+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="tarefas-aluno.css" rel="stylesheet"/>
-<link href="../../Assets/Monetto Logo.ico" rel="icon" type="image/x-icon"/>
+
+  <meta charset="utf-8" />
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+  <title>Monetto – Minhas Tarefas</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+
+  <link href="tarefas-aluno.css" rel="stylesheet" />
+
+  <link href="../../Assets/Monetto Logo.ico" rel="icon" type="image/x-icon" />
+
 </head>
+
+
 <body class="tasks-page">
-<div id="sidebar-container"></div>
-<main class="main">
-<!-- TOPBAR -->
-<div class="topbar">
-<div>
-<h1>📋 Minhas Tarefas</h1>
-<p>Quinta-feira, 17 de abril · 3 tarefas pendentes hoje</p>
-</div>
-<div class="top-actions">
-<div class="notif-btn">🔔<div class="notif-dot"></div>
-</div>
-<div class="xp-topbar">⚡ Carregando...</div>
-</div>
-<!-- FILTER BAR -->
-<div class="filter-bar">
-<div class="search-wrap">🔍 <input placeholder="Buscar tarefa ou professor..." type="text"/></div>
-<select class="filter-sel">
-<option>Todas as matérias</option>
-<option>Matemática</option>
-<option>Português</option>
-<option>Ciências</option>
-<option>História</option>
-</select>
-<div class="ftab active" onclick="setTab(this,'todas')">Todas (8)</div>
-<div class="ftab" onclick="setTab(this,'pendentes')">⏳ Pendentes (3)</div>
-<div class="ftab" onclick="setTab(this,'hoje')">🔴 Vence hoje (2)</div>
-<div class="ftab" onclick="setTab(this,'concluidas')">✅ Concluídas (5)</div>
-</div>
-<!-- STATS -->
-<div class="stats-row">
-<div class="sc">
-<div class="sc-icon">📋</div>
-<div>
-<div class="sc-val">—</div>
-<div class="sc-lbl">Total de tarefas</div>
-</div>
-</div>
-<div class="sc">
-<div class="sc-icon">⏳</div>
-<div>
-<div class="sc-val" style="color:var(--muted)">—</div>
-<div class="sc-lbl">Pendentes</div>
-</div>
-</div>
-<div class="sc">
-<div class="sc-icon">✅</div>
-<div>
-<div class="sc-val" style="color:var(--green)">—</div>
-<div class="sc-lbl">Concluídas</div>
-</div>
-</div>
-<div class="sc">
-<div class="sc-icon">⚡</div>
-<div>
-<div class="sc-val" style="color:var(--gold )">—</div>
-<div class="sc-lbl">XP ganho</div>
-</div>
-</div>
-</div>
-<!-- CONTENT -->
-<div class="content-grid">
-<!-- TASK LIST -->
-<div class="task-list-card"><p>Carregando tarefas...</p></div><!-- /task-list-card -->
-<!-- RIGHT COL -->
-<div class="right-col">
-<!-- PROGRESS POR MATÉRIA -->
-<div class="mini-card">
-<div class="mc-title">📊 Progresso por Matéria</div>
-<div class="prog-row">
-<div class="prog-labels"><span>Matemática</span>
-<span style="background:var(--bg);border-radius:4px;padding:0 4px">
-                  2/3</span>
-</div>
-<div class="prog-bg">
-<div class="prog-f pf-green" style="width:66%"></div>
-</div>
-</div>
-<div class="prog-row">
-<div class="prog-labels"><span>Português</span>
-<span style="background:var(--bg);border-radius:4px;padding:0 4px"> 1/2</span>
-</div>
-<div class="prog-bg">
-<div class="prog-f pf-gold" style="width:50%"></div>
-</div>
-</div>
-<div class="prog-row">
-<div class="prog-labels"><span>Ciências</span>
-<span style="background:var(--bg);border-radius:4px;padding:0 4px"> 1/2</span>
-</div>
-<div class="prog-bg">
-<div class="prog-f pf-blue" style="width:50%"></div>
-</div>
-</div>
-<div class="prog-row">
-<div class="prog-labels"><span>História</span>
-<span style="background:var(--bg);border-radius:4px;padding:0 4px"> 1/1</span>
-</div>
-<div class="prog-bg">
-<div class="prog-f pf-green" style="width:100%"></div>
-</div>
-</div>
-<div style="text-align:center;margin-top:12px;font-size:.78rem;color:var(--card)">Total: <strong style="color:var(--gold)">5/8 tarefas</strong> concluídas</div>
-</div>
-<!-- CALENDÁRIO -->
-<div class="mini-card">
-<div class="mc-title">📅 Abril 2026</div>
-<div class="cal-grid">
-<div class="cal-day-hd">D</div>
-<div class="cal-day-hd">S</div>
-<div class="cal-day-hd">T</div>
-<div class="cal-day-hd">Q</div>
-<div class="cal-day-hd">Q</div>
-<div class="cal-day-hd">S</div>
-<div class="cal-day-hd">S</div>
-<!-- row 1 -->
-<div class="cal-day cal-empty"></div>
-<div class="cal-day"></div>
-<div class="cal-day">1</div>
-<div class="cal-day">2</div>
-<div class="cal-day">3</div>
-<div class="cal-day">4</div>
-<div class="cal-day">5</div>
-<!-- row 2 -->
-<div class="cal-day">6</div>
-<div class="cal-day">7</div>
-<div class="cal-day cal-has-task">8</div>
-<div class="cal-day">9</div>
-<div class="cal-day cal-has-task">10</div>
-<div class="cal-day cal-has-task">11</div>
-<div class="cal-day">12</div>
-<!-- row 3 -->
-<div class="cal-day">13</div>
-<div class="cal-day cal-has-task">14</div>
-<div class="cal-day cal-has-task">15</div>
-<div class="cal-day">16</div>
-<div class="cal-day cal-today">17</div>
-<div class="cal-day cal-has-due">18</div>
-<div class="cal-day">19</div>
-<!-- row 4 -->
-<div class="cal-day">20</div>
-<div class="cal-day cal-has-due">21</div>
-<div class="cal-day">22</div>
-<div class="cal-day">23</div>
-<div class="cal-day">24</div>
-<div class="cal-day">25</div>
-<div class="cal-day">26</div>
-<!-- row 5 -->
-<div class="cal-day">27</div>
-<div class="cal-day">28</div>
-<div class="cal-day">29</div>
-<div class="cal-day">30</div>
-</div>
-<div class="cal-legend">
-<div class="cl-item">
-<div class="cl-dot" style="background:var(--green)"></div>Entregue
-              </div>
-<div class="cl-item">
-<div class="cl-dot" style="background:var(--red)"></div>Prazo
-              </div>
-<div class="cl-item">
-<div class="cl-dot" style="background:var(--gold)"></div>Hoje
-              </div>
-</div>
-</div>
-<!-- PRÓXIMOS PRAZOS -->
-<div class="mini-card">
-<div class="mc-title">⏰ Próximos Prazos</div>
-<div class="upcoming-item">
-<div class="up-dot" style="background:var(--red)"></div>
-<div class="up-body"><strong>Frações – Matemática</strong><span>Prof. Ricardo</span></div>
-<span class="up-date up-urgent">Hoje</span>
-</div>
-<div class="upcoming-item">
-<div class="up-dot" style="background:var(--red)"></div>
-<div class="up-body"><strong>Redação – Português</strong><span>Prof. Carla</span></div>
-<span class="up-date up-urgent">Hoje</span>
-</div>
-<div class="upcoming-item">
-<div class="up-dot" style="background:var(--orange)"></div>
-<div class="up-body"><strong>Quiz Fotossíntese</strong><span>Prof. Marcos</span></div>
-<span class="up-date up-soon">Sex 19/04</span>
-</div>
-<div class="upcoming-item">
-<div class="up-dot" style="background:var(--green)"></div>
-<div class="up-body"><strong>Módulo 2 – Finanças</strong><span>Plataforma</span></div>
-<span class="up-date up-ok">Seg 21/04</span>
-</div>
-</div>
-<!-- STREAK -->
-<div class="mini-card">
-<div class="mc-title">🔥 Sequência de Acesso</div>
-<div class="streak-days">
-<div class="sd sd-done"><span style="font-size:.55rem">Seg</span>✓</div>
-<div class="sd sd-done"><span style="font-size:.55rem">Ter</span>✓</div>
-<div class="sd sd-done"><span style="font-size:.55rem">Qua</span>✓</div>
-<div class="sd sd-today"><span style="font-size:.55rem">Qui</span>●</div>
-<div class="sd sd-empty"><span style="font-size:.55rem">Sex</span></div>
-<div class="sd sd-empty"><span style="font-size:.55rem">Sáb</span></div>
-<div class="sd sd-empty"><span style="font-size:.55rem">Dom</span></div>
-</div>
-<div class="streak-sub">Sequência de <strong>7 dias</strong> 🔥 Continue assim!</div>
-</div>
-</div>
-</div><!-- /content-grid -->
-</div></main>
-<!-- TOAST -->
-<div class="toast" id="toast">✅ Tarefa marcada como concluída! <strong>+50 XP</strong></div>
-<script src="../student-data.js"></script>
-<script>
-    function setTab(el, type) {
-      document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
-      el.classList.add('active');
-    }
-    function toggleDetail(id, btn) {
-      const el = document.getElementById(id);
-      el.classList.toggle('open');
-      btn.textContent = el.classList.contains('open') ? 'ver menos ▴' : 'ver mais ▾';
-    }
-    function toggleCheck(circle, taskId) {
-      const item = document.getElementById(taskId);
-      const wasDone = circle.classList.contains('checked');
-      circle.classList.toggle('checked');
-      item.classList.toggle('done-item');
-      const name = item.querySelector('.task-name');
-      name.classList.toggle('done-txt');
-      if (!wasDone) {
-        showToast();
-        const badge = item.querySelector('.xp-badge');
-        if (badge) { badge.classList.add('earned'); badge.textContent = '✓ ' + badge.textContent.replace('✓ ', ''); }
-      }
-    }
-    function showToast() {
-      const t = document.getElementById('toast');
-      t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 3000);
-    }
-  </script>
-<script id="logout-script">
-    function sairDaConta(destino) {
-      if (confirm("Tem certeza que deseja sair da conta?")) {
-        window.location.href = destino;
-      }
-    }
-  </script>
-<script>
-    function updateSidebarActiveLink() {
-      const currentPath = normalizePath(window.location.href);
-      const links = document.querySelectorAll('.sidebar .sb-link');
 
-      links.forEach((link) => {
-        const href = link.getAttribute('href');
-        if (
-          !href ||
-          href === '#' ||
-          href.startsWith('javascript:') ||
-          link.classList.contains('sb-logout')
-        ) {
-          link.classList.remove('active');
-          return;
-        }
-        const targetPath = normalizePath(new URL(href, window.location.href).href);
-        link.classList.toggle('active', !!(targetPath && currentPath === targetPath));
-      });
-    }
 
-    // ── Load student sidebar into #sidebar-container ─────────
-    function loadStudentSidebar() {
-      const container = document.getElementById('sidebar-container');
-      if (!container) return Promise.resolve();
 
-      const sidebarUrl = '../../Assets/Components/student-sidebar.html';
 
-      return fetch(sidebarUrl, { cache: 'no-store' })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`Failed to load sidebar: ${response.status}`);
-          }
-          return response.text();
-        })
-        .then((html) => {
-          container.innerHTML = html;
-          updateSidebarActiveLink();
-        })
-        .catch((err) => {
-          console.error('Erro ao carregar sidebar:', err);
-        });
-    }
+  <div id="sidebar-container"></div>
 
-    loadStudentSidebar();
-  </script>
+
+
+
+  <main class="main">
+
+
+
+
+    <div class="topbar">
+
+      <div>
+
+        <h1>
+          📋 Minhas Tarefas
+        </h1>
+
+        <p>
+          Carregando suas tarefas...
+        </p>
+
+      </div>
+
+
+      <div class="top-actions">
+
+        <div class="notif-btn">
+
+          🔔
+
+          <div class="notif-dot"></div>
+
+        </div>
+
+
+        <div class="xp-topbar">
+          ⚡ Carregando...
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+
+    <div class="filter-bar">
+
+      <div class="search-wrap">
+
+        🔍
+
+        <input placeholder="Buscar tarefa ou professor..." type="text" />
+
+      </div>
+
+
+      <select class="filter-sel">
+
+        <option value="">
+          Todas as matérias
+        </option>
+
+      </select>
+
+
+      <div class="ftab active" data-filter="todas">
+        Todas
+      </div>
+
+
+      <div class="ftab" data-filter="pendentes">
+        ⏳ Pendentes
+      </div>
+
+
+      <div class="ftab" data-filter="hoje">
+        🔴 Vence hoje
+      </div>
+
+
+      <div class="ftab" data-filter="concluidas">
+        ✅ Concluídas
+      </div>
+
+    </div>
+
+
+
+
+    <div class="stats-row">
+
+
+      <div class="sc">
+
+        <div class="sc-icon">
+          📋
+        </div>
+
+        <div>
+
+          <div class="sc-val">
+            —
+          </div>
+
+          <div class="sc-lbl">
+            Total de tarefas
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="sc">
+
+        <div class="sc-icon">
+          ⏳
+        </div>
+
+        <div>
+
+          <div class="sc-val" style="color:var(--muted)">
+            —
+          </div>
+
+          <div class="sc-lbl">
+            Pendentes
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="sc">
+
+        <div class="sc-icon">
+          ✅
+        </div>
+
+        <div>
+
+          <div class="sc-val" style="color:var(--green)">
+            —
+          </div>
+
+          <div class="sc-lbl">
+            Concluídas
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="sc">
+
+        <div class="sc-icon">
+          ⚡
+        </div>
+
+        <div>
+
+          <div class="sc-val" style="color:var(--gold)">
+            —
+          </div>
+
+          <div class="sc-lbl">
+            XP Total
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+
+    <div class="content-grid">
+
+
+
+
+      <div class="task-list-card">
+
+        <p>
+          Carregando tarefas...
+        </p>
+
+      </div>
+
+
+
+
+      <div class="right-col">
+
+
+
+
+        <div class="mini-card">
+
+          <div class="mc-title">
+            📊 Progresso por Matéria
+          </div>
+
+          <p>
+            Carregando progresso...
+          </p>
+
+        </div>
+
+
+
+
+        <div class="mini-card">
+
+          <div class="mc-title">
+            📅 Calendário
+          </div>
+
+          <p>
+            Carregando prazos...
+          </p>
+
+        </div>
+
+
+
+
+        <div class="mini-card">
+
+          <div class="mc-title">
+            ⏰ Próximos Prazos
+          </div>
+
+          <p>
+            Carregando próximos prazos...
+          </p>
+
+        </div>
+
+
+
+
+        <div class="mini-card">
+
+          <div class="mc-title">
+            🔥 Sequência de Acesso
+          </div>
+
+          <div class="streak-days">
+
+            <div class="sd sd-empty">
+              <span style="font-size:.55rem">
+                Seg
+              </span>
+            </div>
+
+            <div class="sd sd-empty">
+              <span style="font-size:.55rem">
+                Ter
+              </span>
+            </div>
+
+            <div class="sd sd-empty">
+              <span style="font-size:.55rem">
+                Qua
+              </span>
+            </div>
+
+            <div class="sd sd-empty">
+              <span style="font-size:.55rem">
+                Qui
+              </span>
+            </div>
+
+            <div class="sd sd-empty">
+              <span style="font-size:.55rem">
+                Sex
+              </span>
+            </div>
+
+            <div class="sd sd-empty">
+              <span style="font-size:.55rem">
+                Sáb
+              </span>
+            </div>
+
+            <div class="sd sd-empty">
+              <span style="font-size:.55rem">
+                Dom
+              </span>
+            </div>
+
+          </div>
+
+
+          <div class="streak-sub">
+            Carregando sequência...
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+  </main>
+
+
+
+
+  <div class="toast" id="toast">
+    ✅ Tarefa marcada como concluída!
+  </div>
+
+
+
+
+  <script src="../student-script.js"></script>
+
+  <script src="../student-data.js"></script>
+
+
 </body>
+
 </html>

@@ -1,4 +1,3 @@
-// backend/create_turma.js
 const db = require("./connection.js");
 const { v4: uuidv4 } = require("uuid");
 

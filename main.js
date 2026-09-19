@@ -373,8 +373,6 @@ ipcMain.handle("getAdminReports", async (event, currentUserId) => {
       [escolaId, escolaId],
     );
 
-    // Newer schema: tasks can be linked to a class and teacher.
-    // Older schema is supported below.
     let tasks = await safeQuery(
       `SELECT tar.id_tarefa, tar.titulo, tar.id_turma, tar.id_curso,
               tar.data_criacao, tar.data_entrega, tar.status,
@@ -639,9 +637,6 @@ ipcMain.handle("getAdminReports", async (event, currentUserId) => {
   }
 });
 
-// ============================================================
-// PERFIL DO ADMINISTRADOR ESCOLAR – dados reais do banco
-// ============================================================
 ipcMain.handle("getAdminProfile", async (event, currentUserId) => {
   try {
     const { getAdminProfile } = require(
@@ -792,24 +787,167 @@ ipcMain.handle("getStudentDashboard", async (event, studentId) => {
 ipcMain.handle("completeStudentTask", async (event, studentId, taskId) => {
   try {
     const { completeStudentTask } = require(
-      path.join(basePath, "backend/completeStudentTask.js"),
+      path.join(basePath, "backend/get_student_dashboard.js"),
     );
+
     return await completeStudentTask(studentId, taskId);
   } catch (err) {
     console.error("completeStudentTask Error:", err);
-    return { success: false, message: "Erro ao concluir tarefa." };
+
+    return {
+      success: false,
+      message: "Erro ao concluir tarefa.",
+    };
   }
 });
 
 ipcMain.handle("awardStudentXp", async (event, studentId, amount, source) => {
   try {
     const { awardStudentXp } = require(
-      path.join(basePath, "backend/awardStudentXp.js"),
+      path.join(basePath, "backend/get_student_dashboard.js"),
     );
+
     return await awardStudentXp(studentId, amount, source);
   } catch (err) {
     console.error("awardStudentXp Error:", err);
-    return { success: false, message: "Erro ao registrar XP." };
+
+    return {
+      success: false,
+      message: "Erro ao registrar XP.",
+    };
+  }
+});
+
+ipcMain.handle("updateAluno", async (event, dados) => {
+  try {
+    if (!dados?.id_usuario || !dados?.nome || !dados?.email) {
+      return {
+        success: false,
+        message: "Nome e e-mail são obrigatórios.",
+      };
+    }
+
+    const [duplicado] = await db.promise().execute(
+      `
+      SELECT id_usuario
+      FROM usuarios
+      WHERE email = ?
+        AND id_usuario <> ?
+      LIMIT 1
+      `,
+      [String(dados.email).trim(), dados.id_usuario],
+    );
+
+    if (duplicado.length > 0) {
+      return {
+        success: false,
+        message: "Este e-mail já está em uso.",
+      };
+    }
+
+    const [result] = await db.promise().execute(
+      `
+      UPDATE usuarios
+      SET nome = ?,
+          email = ?
+      WHERE id_usuario = ?
+        AND id_perfil = 1
+        AND ativo = 1
+      `,
+      [String(dados.nome).trim(), String(dados.email).trim(), dados.id_usuario],
+    );
+
+    if (!result.affectedRows) {
+      return {
+        success: false,
+        message: "Aluno não encontrado.",
+      };
+    }
+
+    return {
+      success: true,
+      message: "Perfil atualizado com sucesso!",
+    };
+  } catch (err) {
+    console.error("updateAluno Error:", err);
+
+    return {
+      success: false,
+      message: "Erro ao atualizar perfil: " + err.message,
+    };
+  }
+});
+
+ipcMain.handle("changeAlunoPassword", async (event, dados) => {
+  try {
+    if (!dados?.id_usuario || !dados?.senhaAtual || !dados?.novaSenha) {
+      return {
+        success: false,
+        message: "Preencha todos os campos de senha.",
+      };
+    }
+
+    if (String(dados.novaSenha).length < 6) {
+      return {
+        success: false,
+        message: "A nova senha deve ter pelo menos 6 caracteres.",
+      };
+    }
+
+    const [rows] = await db.promise().execute(
+      `
+      SELECT senha_hash
+      FROM usuarios
+      WHERE id_usuario = ?
+        AND id_perfil = 1
+        AND ativo = 1
+      LIMIT 1
+      `,
+      [dados.id_usuario],
+    );
+
+    if (!rows.length) {
+      return {
+        success: false,
+        message: "Aluno não encontrado.",
+      };
+    }
+
+    const senhaCorreta = await bcrypt.compare(
+      String(dados.senhaAtual),
+      rows[0].senha_hash,
+    );
+
+    if (!senhaCorreta) {
+      return {
+        success: false,
+        message: "A senha atual está incorreta.",
+      };
+    }
+
+    const hash = await bcrypt.hash(String(dados.novaSenha), 10);
+
+    await db.promise().execute(
+      `
+      UPDATE usuarios
+      SET senha_hash = ?
+      WHERE id_usuario = ?
+        AND id_perfil = 1
+      `,
+      [hash, dados.id_usuario],
+    );
+
+    return {
+      success: true,
+      message: "Senha alterada com sucesso!",
+    };
+  } catch (err) {
+    console.error("changeAlunoPassword Error:", err);
+
+    return {
+      success: false,
+      message: "Erro ao alterar senha: " + err.message,
+    };
   }
 });
 

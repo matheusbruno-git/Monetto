@@ -1,366 +1,1229 @@
 <!DOCTYPE html>
 
 <html lang="pt-BR">
+
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Monetto – Configurações</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&amp;family=DM+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="configuracoes.css" rel="stylesheet"/>
-<link href="../../Assets/Monetto Logo.ico" rel="icon" type="image/x-icon"/>
+
+  <meta charset="utf-8" />
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+  <title>Monetto – Configurações</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+
+  <link href="configuracoes.css" rel="stylesheet" />
+
+  <link href="../../Assets/Monetto Logo.ico" rel="icon" type="image/x-icon" />
+
 </head>
+
+
 <body class="settings-page">
-<div id="sidebar-container"></div>
-<div class="main">
-<!-- SETTINGS NAV -->
-<div class="set-nav">
-<div class="set-nav-title">Configurações</div>
-<div class="set-nav-item active" onclick="showTab('perfil',this)"><span class="sni">👤</span> Meu Perfil</div>
-<div class="set-nav-item" onclick="showTab('notif',this)"><span class="sni">🔔</span> Notificações</div>
-<div class="set-nav-item" onclick="showTab('priv',this)"><span class="sni">🔒</span> Privacidade</div>
-<div class="set-nav-item" onclick="showTab('conta',this)"><span class="sni">🛡️</span> Conta</div>
-</div>
-<!-- SETTINGS CONTENT -->
-<div class="set-content">
-<!-- PERFIL -->
-<div id="tab-perfil">
-<div class="set-header">
-<h1>👤 Meu Perfil</h1>
-<p>Atualize suas informações pessoais e foto</p>
-</div>
-<div class="profile-hero">
-<div class="profile-big-av">😊<div class="av-edit">✏️</div>
-</div>
-<div class="profile-info"><strong>Carregando perfil...</strong></div>
-</div>
-<div class="set-card">
-<div class="set-card-title">📸 Escolher Avatar</div>
-<div class="avatar-grid">
-<div class="av-opt av1 selected">😊</div>
-<div class="av-opt av2" onclick="turnIcon()">😎</div>
-<div class="av-opt av3">🤓</div>
-<div class="av-opt av4">😄</div>
-<div class="av-opt av5">🥳</div>
-<div class="av-opt av6">🤩</div>
-</div>
-</div>
-<div class="set-card">
-<div class="set-card-title">✏️ Informações Pessoais</div>
-<div class="form-row">
-<div class="field-group">
-<label>Nome</label>
-<input id="nome_usuario" type="text" value=""/>
-</div>
-<div class="field-group">
-<label>Sobrenome</label>
-<input disabled="" id="sobrenome_usuario" type="text" value=""/>
-</div>
-</div>
-<div class="form-row single">
-<div class="field-group">
-<label>E-mail</label>
-<input id="email_usuario" type="email" value=""/>
-</div>
-</div>
-<div class="form-row">
-<div class="field-group">
-<label>Turma</label>
-<input disabled="" id="turma_usuario" type="text" value=""/>
-</div>
-<div class="field-group">
-<label>Escola</label>
-<input disabled="" id="escola_usuario" type="text" value=""/>
-</div>
-</div>
-<div class="form-row single">
-<div class="field-group">
-<label>Bio (opcional)</label>
-<input disabled="" placeholder="Conte um pouco sobre você..." type="text" value=""/>
-</div>
-</div>
-</div>
-<div class="set-card">
-<div class="set-card-title">🔑 Alterar Senha</div>
-<div class="form-row single">
-<div class="field-group">
-<label>Senha atual</label>
-<input id="senha_atual" placeholder="••••••••" type="password"/>
-</div>
-</div>
-<div class="form-row">
-<div class="field-group">
-<label>Nova senha</label>
-<input id="nova_senha" placeholder="••••••••" type="password"/>
-</div>
-<div class="field-group">
-<label>Confirmar nova senha</label>
-<input id="confirmar_senha" placeholder="••••••••" type="password"/>
-</div>
-</div>
-</div>
-<div class="save-row">
-<button class="btn-save" id="salvar_perfil">Salvar alterações</button>
-<button class="btn-cancel">Cancelar</button>
-</div>
-</div>
-<!-- NOTIFICAÇÕES -->
-<div id="tab-notif" style="display:none">
-<div class="set-header">
-<h1>🔔 Notificações</h1>
-<p>Controle o que você quer ser notificado</p>
-</div>
-<div class="set-card">
-<div class="set-card-title">🔔 Alertas de Tarefas</div>
-<div class="toggle-row">
-<div class="toggle-info"><strong>Nova tarefa do professor</strong><span>Avise quando o professor adicionar
-                uma nova tarefa</span></div>
-<div class="toggle on" onclick="this.classList.toggle('on')"></div>
-</div>
-<div class="toggle-row">
-<div class="toggle-info"><strong>Tarefa próxima do prazo</strong><span>Lembrete 24h antes do prazo</span>
-</div>
-<div class="toggle on" onclick="this.classList.toggle('on')"></div>
-</div>
-<div class="toggle-row">
-<div class="toggle-info"><strong>Tarefa atrasada</strong><span>Aviso quando uma tarefa passar do
-                prazo</span></div>
-<div class="toggle" onclick="this.classList.toggle('on')"></div>
-</div>
-</div>
-<div class="set-card">
-<div class="set-card-title">🎮 Jogos e Conquistas</div>
-<div class="toggle-row">
-<div class="toggle-info"><strong>Nova medalha desbloqueada</strong><span>Comemore cada conquista sua!</span>
-</div>
-<div class="toggle on" onclick="this.classList.toggle('on')"></div>
-</div>
-<div class="toggle-row">
-<div class="toggle-info"><strong>Subir de nível</strong><span>Notificação ao atingir um novo nível</span>
-</div>
-<div class="toggle on" onclick="this.classList.toggle('on')"></div>
-</div>
-<div class="toggle-row">
-<div class="toggle-info"><strong>Ranking atualizado</strong><span>Saiba quando sua posição no ranking
-                mudar</span></div>
-<div class="toggle" onclick="this.classList.toggle('on')"></div>
-</div>
-<div class="toggle-row">
-<div class="toggle-info"><strong>Novo jogo disponível</strong><span>Avisamos quando um jogo novo for
-                lançado</span></div>
-<div class="toggle on" onclick="this.classList.toggle('on')"></div>
-</div>
-</div>
-<div class="set-card">
-<div class="set-card-title">📧 E-mail e Resumo</div>
-<div class="toggle-row">
-<div class="toggle-info"><strong>Resumo semanal por e-mail</strong><span>Receba um resumo do seu desempenho
-                toda segunda-feira</span></div>
-<div class="toggle on" onclick="this.classList.toggle('on')"></div>
-</div>
-<div class="toggle-row">
-<div class="toggle-info"><strong>Lembrete de sequência</strong><span>Não perca sua sequência de acesso
-                diário</span></div>
-<div class="toggle on" onclick="this.classList.toggle('on')"></div>
-</div>
-</div>
-<div class="save-row">
-<button class="btn-save" onclick="showToast()">Salvar preferências</button>
-</div>
-</div>
-<!-- PRIVACIDADE -->
-<div id="tab-priv" style="display:none">
-<div class="set-header">
-<h1>🔒 Privacidade</h1>
-<p>Controle quem pode ver suas informações</p>
-</div>
-<div class="set-card">
-<div class="set-card-title">👁️ Visibilidade do Perfil</div>
-<div class="toggle-row">
-<div class="toggle-info"><strong>Mostrar no ranking da turma</strong><span>Seu nome aparece no ranking dos
-                colegas</span></div>
-<div class="toggle on" onclick="this.classList.toggle('on')"></div>
-</div>
-<div class="toggle-row">
-<div class="toggle-info"><strong>Mostrar XP e nível</strong><span>Colegas podem ver seu nível atual</span>
-</div>
-<div class="toggle on" onclick="this.classList.toggle('on')"></div>
-</div>
-<div class="toggle-row">
-<div class="toggle-info"><strong>Mostrar medalhas</strong><span>Suas conquistas ficam visíveis para a
-                turma</span></div>
-<div class="toggle" onclick="this.classList.toggle('on')"></div>
-</div>
-<div class="toggle-row">
-<div class="toggle-info"><strong>Mostrar sequência de acesso</strong><span>Outros alunos podem ver sua
-                sequência de dias</span></div>
-<div class="toggle on" onclick="this.classList.toggle('on')"></div>
-</div>
-</div>
-<div class="save-row">
-<button class="btn-save" onclick="showToast()">Salvar configurações</button>
-</div>
-</div>
-<!-- CONTA -->
-<div id="tab-conta" style="display:none">
-<div class="set-header">
-<h1>🛡️ Conta</h1>
-<p>Gerencie os dados e a segurança da sua conta</p>
-</div>
-<div class="set-card">
-<div class="set-card-title">📊 Dados da Conta</div>
-<div style="font-size:.85rem;display:flex;flex-direction:column;gap:12px">
-<div style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--border)">
-<span style="color:var(--muted)">E-mail</span><span>ana.souza@escola.edu.br</span>
-</div>
-<div style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--border)">
-<span style="color:var(--muted)">Membro desde</span><span>Março 2025</span>
-</div>
-<div style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--border)">
-<span style="color:var(--muted)">Tipo de conta</span><span>Aluno</span>
-</div>
-<div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">Escola
-                vinculada</span><span id="conta_escola">Carregando...</span></div>
-</div>
-</div>
-<div class="set-card">
-<div class="set-card-title" style="color:var(--red)">⚠️ Zona de Perigo</div>
-<p style="font-size:.85rem;color:var(--muted);margin-bottom:16px;line-height:1.6">Essas ações são
-            irreversíveis. Certifique-se antes de continuar.</p>
-<div style="display:flex;gap:12px;flex-wrap:wrap">
-<button class="btn-danger">📤 Exportar meus dados</button>
-<button class="btn-danger" onclick="sairDaConta('../../login/login.html')">🚪 Sair
-              da
-              conta</button>
-<button class="btn-danger" style="border-color:rgba(231,76,60,.6)">🗑️ Excluir conta</button>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- TOAST -->
-<div class="toast" id="toast" style="display:none;">✅ Alterações salvas com sucesso!</div>
-<script src="../student-data.js"></script>
-<script>
 
-    function turnIcon() {
-      const bigIcon = document.getElementById('profile-big-av');
 
-      const icon2 = document.getElementsByClassName('av-opt av2 selected')[0];
 
-      icon2.addEventListener('click', function () {
-        bigIcon.innerHTML = icon2;
+
+  <div id="sidebar-container"></div>
+
+
+  <div class="main">
+
+
+
+
+    <div class="set-nav">
+
+      <div class="set-nav-title">
+        Configurações
+      </div>
+
+
+      <div class="set-nav-item active" onclick="showTab('perfil', this)">
+        <span class="sni">👤</span>
+        Meu Perfil
+      </div>
+
+
+      <div class="set-nav-item" onclick="showTab('notif', this)">
+        <span class="sni">🔔</span>
+        Notificações
+      </div>
+
+
+      <div class="set-nav-item" onclick="showTab('priv', this)">
+        <span class="sni">🔒</span>
+        Privacidade
+      </div>
+
+
+      <div class="set-nav-item" onclick="showTab('conta', this)">
+        <span class="sni">🛡️</span>
+        Conta
+      </div>
+
+    </div>
+
+
+
+
+    <div class="set-content">
+
+
+
+
+      <div id="tab-perfil">
+
+
+        <div class="set-header">
+
+          <h1>
+            👤 Meu Perfil
+          </h1>
+
+          <p>
+            Atualize suas informações pessoais
+          </p>
+
+        </div>
+
+
+
+
+        <div class="profile-hero">
+
+          <div class="profile-big-av" id="profile_big_av">
+            😊
+
+            <div class="av-edit">
+              ✏️
+            </div>
+
+          </div>
+
+
+          <div class="profile-info">
+
+            <strong>
+              Carregando perfil...
+            </strong>
+
+          </div>
+
+        </div>
+
+
+
+
+        <div class="set-card">
+
+          <div class="set-card-title">
+            📸 Escolher Avatar
+          </div>
+
+
+          <div class="avatar-grid">
+
+            <div class="av-opt av1 selected" data-avatar="😊">
+              😊
+            </div>
+
+            <div class="av-opt av2" data-avatar="😎">
+              😎
+            </div>
+
+            <div class="av-opt av3" data-avatar="🤓">
+              🤓
+            </div>
+
+            <div class="av-opt av4" data-avatar="😄">
+              😄
+            </div>
+
+            <div class="av-opt av5" data-avatar="🥳">
+              🥳
+            </div>
+
+            <div class="av-opt av6" data-avatar="🤩">
+              🤩
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+
+        <div class="set-card">
+
+          <div class="set-card-title">
+            ✏️ Informações Pessoais
+          </div>
+
+
+          <div class="form-row">
+
+            <div class="field-group">
+
+              <label for="nome_usuario">
+                Nome
+              </label>
+
+              <input id="nome_usuario" type="text" value="" />
+
+            </div>
+
+
+            <div class="field-group">
+
+              <label>
+                Turma
+              </label>
+
+              <input disabled id="turma_usuario" type="text" value="" />
+
+            </div>
+
+          </div>
+
+
+          <div class="form-row">
+
+            <div class="field-group">
+
+              <label for="email_usuario">
+                E-mail
+              </label>
+
+              <input id="email_usuario" type="email" value="" />
+
+            </div>
+
+
+            <div class="field-group">
+
+              <label>
+                Escola
+              </label>
+
+              <input disabled id="escola_usuario" type="text" value="" />
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+
+        <div class="set-card">
+
+          <div class="set-card-title">
+            🔑 Alterar Senha
+          </div>
+
+
+          <p style="
+              font-size:.8rem;
+              color:var(--muted);
+              margin-bottom:14px;
+            ">
+            Só preencha os campos abaixo caso queira alterar sua senha.
+          </p>
+
+
+          <div class="form-row single">
+
+            <div class="field-group">
+
+              <label for="senha_atual">
+                Senha atual
+              </label>
+
+              <input id="senha_atual" placeholder="••••••••" type="password" autocomplete="current-password" />
+
+            </div>
+
+          </div>
+
+
+          <div class="form-row">
+
+            <div class="field-group">
+
+              <label for="nova_senha">
+                Nova senha
+              </label>
+
+              <input id="nova_senha" placeholder="••••••••" type="password" autocomplete="new-password" />
+
+            </div>
+
+
+            <div class="field-group">
+
+              <label for="confirmar_senha">
+                Confirmar nova senha
+              </label>
+
+              <input id="confirmar_senha" placeholder="••••••••" type="password" autocomplete="new-password" />
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="save-row">
+
+          <button class="btn-save" id="salvar_perfil" type="button">
+            Salvar alterações
+          </button>
+
+
+          <button class="btn-cancel" id="cancelar_perfil" type="button">
+            Cancelar
+          </button>
+
+        </div>
+
+
+      </div>
+
+
+
+
+      <div id="tab-notif" style="display:none">
+
+
+        <div class="set-header">
+
+          <h1>
+            🔔 Notificações
+          </h1>
+
+          <p>
+            Controle o que você quer ser notificado
+          </p>
+
+        </div>
+
+
+        <div class="set-card">
+
+          <div class="set-card-title">
+            🔔 Alertas de Tarefas
+          </div>
+
+
+          <div class="toggle-row">
+
+            <div class="toggle-info">
+
+              <strong>
+                Nova tarefa do professor
+              </strong>
+
+              <span>
+                Avise quando o professor adicionar uma nova tarefa
+              </span>
+
+            </div>
+
+            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+
+          </div>
+
+
+          <div class="toggle-row">
+
+            <div class="toggle-info">
+
+              <strong>
+                Tarefa próxima do prazo
+              </strong>
+
+              <span>
+                Lembrete antes do prazo
+              </span>
+
+            </div>
+
+            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+
+          </div>
+
+
+          <div class="toggle-row">
+
+            <div class="toggle-info">
+
+              <strong>
+                Tarefa atrasada
+              </strong>
+
+              <span>
+                Aviso quando uma tarefa passar do prazo
+              </span>
+
+            </div>
+
+            <div class="toggle" onclick="this.classList.toggle('on')"></div>
+
+          </div>
+
+        </div>
+
+
+        <div class="set-card">
+
+          <div class="set-card-title">
+            🎮 Jogos e Conquistas
+          </div>
+
+
+          <div class="toggle-row">
+
+            <div class="toggle-info">
+
+              <strong>
+                Nova medalha desbloqueada
+              </strong>
+
+              <span>
+                Aviso quando uma nova conquista for registrada
+              </span>
+
+            </div>
+
+            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+
+          </div>
+
+
+          <div class="toggle-row">
+
+            <div class="toggle-info">
+
+              <strong>
+                Ranking atualizado
+              </strong>
+
+              <span>
+                Acompanhe sua posição na turma
+              </span>
+
+            </div>
+
+            <div class="toggle" onclick="this.classList.toggle('on')"></div>
+
+          </div>
+
+        </div>
+
+
+        <div class="save-row">
+
+          <button class="btn-save" type="button" onclick="showVisualOnlyToast()">
+            Salvar preferências
+          </button>
+
+        </div>
+
+
+      </div>
+
+
+
+
+      <div id="tab-priv" style="display:none">
+
+
+        <div class="set-header">
+
+          <h1>
+            🔒 Privacidade
+          </h1>
+
+          <p>
+            Preferências de exibição do perfil
+          </p>
+
+        </div>
+
+
+        <div class="set-card">
+
+          <div class="set-card-title">
+            👁️ Visibilidade do Perfil
+          </div>
+
+
+          <div class="toggle-row">
+
+            <div class="toggle-info">
+
+              <strong>
+                Mostrar no ranking da turma
+              </strong>
+
+              <span>
+                Seu nome aparece no ranking dos colegas
+              </span>
+
+            </div>
+
+            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+
+          </div>
+
+
+          <div class="toggle-row">
+
+            <div class="toggle-info">
+
+              <strong>
+                Mostrar XP e nível
+              </strong>
+
+              <span>
+                Colegas podem visualizar sua pontuação
+              </span>
+
+            </div>
+
+            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+
+          </div>
+
+
+          <div class="toggle-row">
+
+            <div class="toggle-info">
+
+              <strong>
+                Mostrar medalhas
+              </strong>
+
+              <span>
+                Suas conquistas ficam visíveis
+              </span>
+
+            </div>
+
+            <div class="toggle" onclick="this.classList.toggle('on')"></div>
+
+          </div>
+
+        </div>
+
+
+        <div class="save-row">
+
+          <button class="btn-save" type="button" onclick="showVisualOnlyToast()">
+            Salvar configurações
+          </button>
+
+        </div>
+
+
+      </div>
+
+
+
+
+      <div id="tab-conta" style="display:none">
+
+
+        <div class="set-header">
+
+          <h1>
+            🛡️ Conta
+          </h1>
+
+          <p>
+            Dados da sua conta Monetto
+          </p>
+
+        </div>
+
+
+        <div class="set-card">
+
+          <div class="set-card-title">
+            📊 Dados da Conta
+          </div>
+
+
+          <div style="
+              font-size:.85rem;
+              display:flex;
+              flex-direction:column;
+              gap:12px;
+            ">
+
+
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                padding-bottom:12px;
+                border-bottom:1px solid var(--border);
+              ">
+
+              <span style="color:var(--muted)">
+                E-mail
+              </span>
+
+              <span id="conta_email">
+                Carregando...
+              </span>
+
+            </div>
+
+
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                padding-bottom:12px;
+                border-bottom:1px solid var(--border);
+              ">
+
+              <span style="color:var(--muted)">
+                Tipo de conta
+              </span>
+
+              <span>
+                Aluno
+              </span>
+
+            </div>
+
+
+            <div style="
+                display:flex;
+                justify-content:space-between;
+              ">
+
+              <span style="color:var(--muted)">
+                Escola vinculada
+              </span>
+
+              <span id="conta_escola">
+                Carregando...
+              </span>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+
+        <div class="set-card">
+
+          <div class="set-card-title" style="color:var(--red)">
+            🔐 Segurança
+          </div>
+
+
+          <p style="
+              font-size:.85rem;
+              color:var(--muted);
+              margin-bottom:16px;
+              line-height:1.6;
+            ">
+            Para encerrar sua sessão neste computador,
+            utilize a opção abaixo.
+          </p>
+
+
+          <div style="
+              display:flex;
+              gap:12px;
+              flex-wrap:wrap;
+            ">
+
+            <button class="btn-danger" type="button" onclick="sairDaConta('../../login/login.html')">
+              🚪 Sair da conta
+            </button>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+
+  <div class="toast" id="toast" style="display:none;">
+    ✅ Alterações salvas com sucesso!
+  </div>
+
+
+
+
+  <script src="../student-script.js"></script>
+
+  <script src="../student-data.js"></script>
+
+
+
+  <script>
+
+
+
+    function showTab(id, element) {
+
+      document
+        .querySelectorAll(
+          '[id^="tab-"]',
+        )
+        .forEach((tab) => {
+          tab.style.display =
+            "none";
+        });
+
+
+      document
+        .querySelectorAll(
+          ".set-nav-item",
+        )
+        .forEach((item) => {
+          item.classList.remove(
+            "active",
+          );
+        });
+
+
+      const target =
+        document.getElementById(
+          "tab-" + id,
+        );
+
+
+      if (target) {
+        target.style.display =
+          "block";
+      }
+
+
+      if (element) {
+        element.classList.add(
+          "active",
+        );
+      }
+
+
+      atualizarDadosConta();
+    }
+
+
+
+
+    function showToast(
+      message =
+        "✅ Alterações salvas com sucesso!",
+    ) {
+
+      const toast =
+        document.getElementById(
+          "toast",
+        );
+
+
+      if (!toast) {
+        return;
+      }
+
+
+      toast.textContent =
+        message;
+
+
+      toast.style.display =
+        "block";
+
+
+      toast.classList.add(
+        "show",
+      );
+
+
+      setTimeout(() => {
+
+        toast.classList.remove(
+          "show",
+        );
+
+
+        toast.style.display =
+          "none";
+
+      }, 2800);
+    }
+
+
+
+
+    function showVisualOnlyToast() {
+
+      showToast(
+        "ℹ️ Preferência alterada nesta tela. Persistência ainda não integrada.",
+      );
+    }
+
+
+
+
+    document
+      .querySelectorAll(
+        ".av-opt",
+      )
+      .forEach((avatar) => {
+
+        avatar.addEventListener(
+          "click",
+          function () {
+
+            document
+              .querySelectorAll(
+                ".av-opt",
+              )
+              .forEach((item) => {
+                item.classList.remove(
+                  "selected",
+                );
+              });
+
+
+            this.classList.add(
+              "selected",
+            );
+
+
+            const bigAvatar =
+              document.getElementById(
+                "profile_big_av",
+              );
+
+
+            if (bigAvatar) {
+
+              const emoji =
+                this.dataset.avatar ||
+                this.textContent.trim();
+
+
+              bigAvatar.childNodes[0].textContent =
+                emoji;
+            }
+
+          },
+        );
+
       });
+
+
+
+
+    function atualizarDadosConta() {
+
+      const data =
+        window.studentData;
+
+
+      if (!data?.student) {
+        return;
+      }
+
+
+      const email =
+        document.getElementById(
+          "conta_email",
+        );
+
+
+      const escola =
+        document.getElementById(
+          "conta_escola",
+        );
+
+
+      if (email) {
+        email.textContent =
+          data.student.email ||
+          "Não informado";
+      }
+
+
+      if (escola) {
+        escola.textContent =
+          data.student.escola ||
+          "Não vinculada";
+      }
+
     }
 
-    function showTab(id, el) {
-      document.querySelectorAll('[id^="tab-"]').forEach(t => t.style.display = 'none');
-      document.querySelectorAll('.set-nav-item').forEach(i => i.classList.remove('active'));
-      document.getElementById('tab-' + id).style.display = 'block';
-      el.classList.add('active');
-    }
 
-    function showToast() {
-      const t = document.getElementById('toast');
-      t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 2800);
-    }
 
 
     async function salvarPerfilAluno() {
-      const session = JSON.parse(localStorage.getItem('session') || '{}');
-      const id = session.id_usuario || session.id;
-      if (!id) return alert('Sessão do aluno não encontrada.');
-      const nome = document.getElementById('nome_usuario').value.trim();
-      const email = document.getElementById('email_usuario').value.trim();
-      const senhaAtual = document.getElementById('senha_atual').value;
-      const novaSenha = document.getElementById('nova_senha').value;
-      const confirmar = document.getElementById('confirmar_senha').value;
 
-      const perfil = await window.api.updateAluno({ id_usuario: id, nome, email });
-      if (!perfil.success) return alert(perfil.message || 'Erro ao atualizar perfil.');
+      let session = {};
 
-      if (senhaAtual || novaSenha || confirmar) {
-        if (!senhaAtual || !novaSenha || !confirmar) return alert('Preencha os três campos de senha.');
-        if (novaSenha !== confirmar) return alert('A confirmação da nova senha não confere.');
-        const senha = await window.api.changeAlunoPassword({ id_usuario: id, senhaAtual, novaSenha });
-        if (!senha.success) return alert(senha.message || 'Erro ao alterar senha.');
-        document.getElementById('senha_atual').value = '';
-        document.getElementById('nova_senha').value = '';
-        document.getElementById('confirmar_senha').value = '';
+
+      try {
+
+        session =
+          JSON.parse(
+            localStorage.getItem(
+              "session",
+            ) || "{}",
+          );
+
+      } catch (error) {
+
+        console.error(
+          "Erro ao ler sessão:",
+          error,
+        );
       }
 
-      session.nome = nome;
-      session.email = email;
-      localStorage.setItem('session', JSON.stringify(session));
-      showToast();
-      if (window.reloadStudentData) await window.reloadStudentData();
-    }
 
-    document.getElementById('salvar_perfil')?.addEventListener('click', salvarPerfilAluno);
+      const id =
+        session.id_usuario ||
+        session.id;
 
-    const nomeUsuario = document.getElementById('nome_usuario');
 
-    console.log(nomeUsuario)
+      if (!id) {
 
-    document.querySelectorAll('.av-opt').forEach(av => {
-      av.addEventListener('click', function () {
-        document.querySelectorAll('.av-opt').forEach(a => a.classList.remove('selected'));
-        this.classList.add('selected');
-      });
-    });
-  </script>
-<script id="logout-script">
-    function sairDaConta(destino) {
-      if (confirm("Tem certeza que deseja sair da conta?")) {
-        window.location.href = destino;
+        alert(
+          "Sessão do aluno não encontrada.",
+        );
+
+        return;
       }
-    }
-  </script>
-<script>
-    function updateSidebarActiveLink() {
-      const currentPath = normalizePath(window.location.href);
-      const links = document.querySelectorAll('.sidebar .sb-link');
 
-      links.forEach((link) => {
-        const href = link.getAttribute('href');
-        if (
-          !href ||
-          href === '#' ||
-          href.startsWith('javascript:') ||
-          link.classList.contains('sb-logout')
-        ) {
-          link.classList.remove('active');
+
+      const nome =
+        document
+          .getElementById(
+            "nome_usuario",
+          )
+          ?.value
+          .trim();
+
+
+      const email =
+        document
+          .getElementById(
+            "email_usuario",
+          )
+          ?.value
+          .trim();
+
+
+      const senhaAtual =
+        document.getElementById(
+          "senha_atual",
+        )?.value || "";
+
+
+      const novaSenha =
+        document.getElementById(
+          "nova_senha",
+        )?.value || "";
+
+
+      const confirmar =
+        document.getElementById(
+          "confirmar_senha",
+        )?.value || "";
+
+
+      if (!nome || !email) {
+
+        alert(
+          "Nome e e-mail são obrigatórios.",
+        );
+
+        return;
+      }
+
+
+      if (
+        !window.api?.updateAluno
+      ) {
+
+        alert(
+          "A função de atualização do aluno não está disponível.",
+        );
+
+        return;
+      }
+
+
+      try {
+
+
+
+        const perfil =
+          await window.api
+            .updateAluno({
+              id_usuario: id,
+              nome,
+              email,
+            });
+
+
+        if (!perfil?.success) {
+
+          alert(
+            perfil?.message ||
+            "Erro ao atualizar perfil.",
+          );
+
           return;
         }
-        const targetPath = normalizePath(new URL(href, window.location.href).href);
-        link.classList.toggle('active', !!(targetPath && currentPath === targetPath));
-      });
-    }
 
-    // ── Load student sidebar into #sidebar-container ─────────
-    function loadStudentSidebar() {
-      const container = document.getElementById('sidebar-container');
-      if (!container) return Promise.resolve();
 
-      const sidebarUrl = '../../Assets/Components/student-sidebar.html';
 
-      return fetch(sidebarUrl, { cache: 'no-store' })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`Failed to load sidebar: ${response.status}`);
+
+        if (
+          senhaAtual ||
+          novaSenha ||
+          confirmar
+        ) {
+
+          if (
+            !senhaAtual ||
+            !novaSenha ||
+            !confirmar
+          ) {
+
+            alert(
+              "Para alterar a senha, preencha os três campos.",
+            );
+
+            return;
           }
-          return response.text();
-        })
-        .then((html) => {
-          container.innerHTML = html;
-          updateSidebarActiveLink();
-        })
-        .catch((err) => {
-          console.error('Erro ao carregar sidebar:', err);
-        });
+
+
+          if (
+            novaSenha !==
+            confirmar
+          ) {
+
+            alert(
+              "A confirmação da nova senha não confere.",
+            );
+
+            return;
+          }
+
+
+          if (
+            novaSenha.length < 6
+          ) {
+
+            alert(
+              "A nova senha deve ter pelo menos 6 caracteres.",
+            );
+
+            return;
+          }
+
+
+          if (
+            !window.api
+              ?.changeAlunoPassword
+          ) {
+
+            alert(
+              "A função de alteração de senha não está disponível.",
+            );
+
+            return;
+          }
+
+
+          const senha =
+            await window.api
+              .changeAlunoPassword({
+                id_usuario: id,
+                senhaAtual,
+                novaSenha,
+              });
+
+
+          if (!senha?.success) {
+
+            alert(
+              senha?.message ||
+              "Erro ao alterar senha.",
+            );
+
+            return;
+          }
+
+
+          document.getElementById(
+            "senha_atual",
+          ).value = "";
+
+
+          document.getElementById(
+            "nova_senha",
+          ).value = "";
+
+
+          document.getElementById(
+            "confirmar_senha",
+          ).value = "";
+        }
+
+
+
+
+        session.nome = nome;
+
+        session.email = email;
+
+
+        localStorage.setItem(
+          "session",
+          JSON.stringify(
+            session,
+          ),
+        );
+
+
+        showToast();
+
+
+        if (
+          window.reloadStudentData
+        ) {
+
+          await window
+            .reloadStudentData();
+        }
+
+
+        atualizarDadosConta();
+
+      } catch (error) {
+
+        console.error(
+          "Erro ao salvar perfil:",
+          error,
+        );
+
+
+        alert(
+          "Não foi possível salvar as alterações.",
+        );
+      }
     }
 
-    loadStudentSidebar();
+
+
+    async function cancelarAlteracoes() {
+
+      document.getElementById(
+        "senha_atual",
+      ).value = "";
+
+
+      document.getElementById(
+        "nova_senha",
+      ).value = "";
+
+
+      document.getElementById(
+        "confirmar_senha",
+      ).value = "";
+
+
+      if (
+        window.reloadStudentData
+      ) {
+
+        await window
+          .reloadStudentData();
+      }
+
+
+      atualizarDadosConta();
+    }
+
+
+
+
+    document
+      .getElementById(
+        "salvar_perfil",
+      )
+      ?.addEventListener(
+        "click",
+        salvarPerfilAluno,
+      );
+
+
+    document
+      .getElementById(
+        "cancelar_perfil",
+      )
+      ?.addEventListener(
+        "click",
+        cancelarAlteracoes,
+      );
+
+
+
+
+    const accountWatcher =
+      setInterval(() => {
+
+        if (
+          window.studentData
+            ?.student
+        ) {
+
+          atualizarDadosConta();
+
+          clearInterval(
+            accountWatcher,
+          );
+        }
+
+      }, 100);
+
+
+    setTimeout(() => {
+
+      clearInterval(
+        accountWatcher,
+      );
+
+    }, 5000);
+
   </script>
+
+
 </body>
+
 </html>

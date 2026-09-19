@@ -1,9 +1,7 @@
-// backend/add_aluno_to_turma.js
 const db = require("./connection");
 
 async function addAlunoToTurma(dados) {
   try {
-    // Verifica se o aluno pertence à escola
     const [usuario] = await db.promise().execute(
       `
             SELECT id_usuario
@@ -21,7 +19,6 @@ async function addAlunoToTurma(dados) {
       };
     }
 
-    // Atualiza a turma
     await db.promise().execute(
       `
             UPDATE usuarios

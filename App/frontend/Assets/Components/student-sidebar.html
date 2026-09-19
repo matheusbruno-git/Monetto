@@ -3,40 +3,93 @@
     <a class="sb-logo" href="../dashboard-aluno/dashboard-aluno.html">
         <svg viewBox="0 0 32 32" fill="none" width="28" height="28">
             <rect width="32" height="32" rx="8" fill="#1A2A8F" />
+
             <path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"
                 stroke-linejoin="round" />
+
             <circle cx="24" cy="10" r="3" fill="#2ECC71" />
         </svg>
+
         <span>Monetto</span>
     </a>
 
-    <span class="sb-section">Principal</span>
-    <a class="sb-link" href="../dashboard-aluno/dashboard-aluno.html"><span
-            class="icon">🏠</span><span>Dashboard</span></a>
-    <a class="sb-link" href="../tarefas-aluno/tarefas-aluno.html"><span class="icon">📋</span><span>Minhas
-            Tarefas</span></a>
-    <a class="sb-link" href="../modulo-aprendizado/modulo-aprendizado.html"><span
-            class="icon">📚</span><span>Aprendizado</span></a>
 
-    <span class="sb-section">Jogos</span>
-    <a class="sb-link" href="../jogos-quiz/jogos-quiz.html"><span class="icon">🎮</span><span>Jogos & Quiz</span></a>
-    <a class="sb-link" href="../recompensas/recompensas.html"><span class="icon">🏆</span><span>Recompensas</span></a>
+    <span class="sb-section">
+        Principal
+    </span>
 
-    <span class="sb-section">Conta</span>
-    <a class="sb-link" href="../configuracoes/configuracoes.html"><span
-            class="icon">⚙️</span><span>Configurações</span></a>
+    <a class="sb-link" href="../dashboard-aluno/dashboard-aluno.html">
+        <span class="icon">🏠</span>
+        <span>Dashboard</span>
+    </a>
+
+    <a class="sb-link" href="../tarefas-aluno/tarefas-aluno.html">
+        <span class="icon">📋</span>
+        <span>Minhas Tarefas</span>
+    </a>
+
+    <a class="sb-link" href="../modulo-aprendizado/modulo-aprendizado.html">
+        <span class="icon">📚</span>
+        <span>Aprendizado</span>
+    </a>
+
+
+    <span class="sb-section">
+        Jogos
+    </span>
+
+    <a class="sb-link" href="../jogos-quiz/jogos-quiz.html">
+        <span class="icon">🎮</span>
+        <span>Jogos & Quiz</span>
+    </a>
+
+    <a class="sb-link" href="../recompensas/recompensas.html">
+        <span class="icon">🏆</span>
+        <span>Recompensas</span>
+    </a>
+
+
+    <span class="sb-section">
+        Conta
+    </span>
+
+    <a class="sb-link" href="../configuracoes/configuracoes.html">
+        <span class="icon">⚙️</span>
+        <span>Configurações</span>
+    </a>
+
 
     <div class="sb-bottom">
-        <a class="sb-link sb-logout" href="../../login/login.html"
-            onclick="if (typeof sairDaConta === 'function') { sairDaConta('../../login/login.html'); return false; }">
-            <span class="icon">🚪</span><span>Sair da conta</span>
+
+        <a class="sb-link sb-logout" href="../../login/login.html" onclick="
+        if (typeof sairDaConta === 'function') {
+          sairDaConta('../../login/login.html');
+          return false;
+        }
+      ">
+            <span class="icon">🚪</span>
+            <span>Sair da conta</span>
         </a>
+
+
         <div class="sb-user">
+
             <div class="sb-av"></div>
+
             <div class="sb-user-info">
-                <strong>Ana Souza</strong>
-                <span>⚡ 680 XP · Nível 5</span>
+
+                <strong>
+                    Aluno
+                </strong>
+
+                <span class="sb-student-progress">
+                    Carregando progresso...
+                </span>
+
             </div>
+
         </div>
+
     </div>
+
 </nav>
