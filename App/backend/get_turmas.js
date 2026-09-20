@@ -38,6 +38,7 @@ async function getTurmas(currentUserId) {
       success: true,
       data: rows,
     };
+  
   } catch (err) {
     console.error("getTurmas Error:", err);
 

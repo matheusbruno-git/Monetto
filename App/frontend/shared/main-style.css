@@ -456,6 +456,12 @@ option {
     color: var(--muted)
 }
 
+.ftab:hover,
+.ftab.active:hover {
+    background: var(--navy);
+    color: var(--white)
+}
+
 .ftab.active {
     background: var(--accent);
     color: var(--navy);
@@ -1041,8 +1047,24 @@ option {
     color: var(--muted)
 }
 
+.alert-action {
+    background: var(--red);
+    color: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 2px 7px;
+    font-size: .65rem;
+    font-weight: 800;
+    transition: all .2s;
+}
 
-
+.alert-action:hover {
+    background: var(--navy);
+    color: var(--red);
+    border-color: var(--red);
+    transform: scale(0.95);
+    cursor: pointer;
+}
 
 .turma-row {
     display: grid;

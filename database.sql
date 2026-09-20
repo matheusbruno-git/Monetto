@@ -16,6 +16,10 @@ CREATE TABLE IF NOT EXISTS escolas (
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+INSERT IGNORE INTO escolas (nome, cnpj, telefone, email, endereco, cidade, estado)
+VALUES
+    ('Colégio Horizonte', '12.345.678/0001-90', '(11) 3456-7890', 'contato@horizonte.edu.br', 'Rua das Flores, 120', 'São Paulo', 'SP');
+
 -- ============================================================
 -- PERFIS
 -- ============================================================
@@ -30,10 +34,16 @@ CREATE TABLE IF NOT EXISTS perfis (
 
 
 
-INSERT IGNORE INTO perfis (nome, descricao, permissoes, ativo) VALUES
-    ('admin', 'Administrador do sistema', '{"gerenciar_usuarios": true, "gerenciar_escolas": true, "gerenciar_cursos": true, "gerenciar_turmas": true}', 1),
-    ('aluno', 'Usuário estudante', '{"acessar_cursos": true, "visualizar_turmas": true}', 1),
-    ('professor', 'Perfil de professor', '{"acessar_cursos": true, "gerenciar_turmas": true}', 1);
+INSERT INTO perfis (id_perfil, nome, descricao, permissoes, ativo)
+VALUES
+    (1, 'aluno', 'Usuário estudante', '{"acessar_cursos": true, "visualizar_turmas": true}', 1),
+    (2, 'professor', 'Perfil de professor', '{"acessar_cursos": true, "gerenciar_turmas": true}', 1),
+    (3, 'escola', 'Administrador da Escola', '{"gerenciar_usuarios": true, "gerenciar_turmas": true, "gerenciar_cursos": true, "ver_relatorios": true, "configurar_escola": true}', 1),
+    (4, 'admin', 'Administrador do sistema', '{"gerenciar_usuarios": true, "gerenciar_escolas": true, "gerenciar_cursos": true, "gerenciar_turmas": true}', 1)
+ON DUPLICATE KEY UPDATE
+    descricao = VALUES(descricao),
+    permissoes = VALUES(permissoes),
+    ativo = VALUES(ativo);
 
 -- ============================================================
 -- NIVEIS EDUCACIONAIS
@@ -81,6 +91,13 @@ CREATE TABLE IF NOT EXISTS usuarios (
     FOREIGN KEY (id_perfil) REFERENCES perfis(id_perfil),
     FOREIGN KEY (id_escola) REFERENCES escolas(id_escola)
 );
+
+-- Usuário de exemplo da escola para que o painel de configurações tenha algo para carregar.
+INSERT IGNORE INTO usuarios (id_perfil, id_escola, nome, email, senha_hash, cpf, data_nascimento, telefone, ativo)
+SELECT p.id_perfil, e.id_escola, 'Ana Paula Mendes', 'ana.mendes@horizonte.edu.br', '$2b$10$ekKkUQAmecpVf7tj4X8ESu8LJqu4PGZhDkSATTsQJKV25oRQVZvBu', '123.456.789-01', '1985-03-12', '(11) 98765-4321', 1
+FROM perfis p
+JOIN escolas e ON e.nome = 'Colégio Horizonte'
+WHERE p.nome = 'escola';
 
 -- ============================================================
 -- TURMAS

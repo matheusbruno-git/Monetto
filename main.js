@@ -250,6 +250,18 @@ ipcMain.handle("getAdmins", async (event, currentUserId) => {
   }
 });
 
+ipcMain.handle("updateAdmin", async (event, dados) => {
+  try {
+    const { updateAdmin } = require(
+      path.join(basePath, "backend/update_admin.js"),
+    );
+    return await updateAdmin(dados);
+  } catch (err) {
+    console.error("updateAdmin Error:", err);
+    return { success: false, message: "Erro ao atualizar perfil." };
+  }
+});
+
 ipcMain.handle("changeAdminPassword", async (event, dados) => {
   try {
     if (!dados?.id_usuario || !dados?.senhaAtual || !dados?.novaSenha) {
@@ -452,8 +464,8 @@ ipcMain.handle("getAdminReports", async (event, currentUserId) => {
         tarefasFeitas: assigned.length
           ? completed.length
           : deliveries.filter(
-              (e) => String(e.id_usuario) === String(s.id_usuario),
-            ).length,
+            (e) => String(e.id_usuario) === String(s.id_usuario),
+          ).length,
         tarefasTotal: assigned.length,
         progresso: Math.max(0, Math.min(100, progress)),
         ativo: s.ativo == 1 || s.ativo === true,
@@ -474,9 +486,9 @@ ipcMain.handle("getAdminReports", async (event, currentUserId) => {
       );
       const avg = classStudents.length
         ? Math.round(
-            classStudents.reduce((sum, s) => sum + s.progresso, 0) /
-              classStudents.length,
-          )
+          classStudents.reduce((sum, s) => sum + s.progresso, 0) /
+          classStudents.length,
+        )
         : 0;
 
       return {
@@ -529,11 +541,11 @@ ipcMain.handle("getAdminReports", async (event, currentUserId) => {
       ? Math.round((completedPairs.length / assignedPairs.length) * 100)
       : activeStudents.length
         ? Math.round(
-            activeStudents.reduce(
-              (sum, s) => sum + (Number(s.percentual_conclusao) || 0),
-              0,
-            ) / activeStudents.length,
-          )
+          activeStudents.reduce(
+            (sum, s) => sum + (Number(s.percentual_conclusao) || 0),
+            0,
+          ) / activeStudents.length,
+        )
         : 0;
 
     const totalXp =
@@ -643,14 +655,28 @@ ipcMain.handle("getAdminReports", async (event, currentUserId) => {
 // PERFIL DO ADMINISTRADOR ESCOLAR – dados reais do banco
 // ============================================================
 ipcMain.handle("getAdminProfile", async (event, currentUserId) => {
+
+  console.log("🔥 MAIN: getAdminProfile recebido");
+  console.log("🔥 MAIN ID:", currentUserId);
+
   try {
+
     const { getAdminProfile } = require(
-      path.join(basePath, "backend/get_adminProfile.js"),
+      path.join(basePath, "backend/get_adminProfile.js")
     );
+
+    console.log("🔥 MAIN: chamando backend");
+
     return await getAdminProfile(currentUserId);
+
   } catch (err) {
-    console.error("getAdminProfile Error:", err);
-    return { success: false, message: "Erro ao carregar perfil." };
+
+    console.error("🔥 MAIN ERRO:", err);
+
+    return {
+      success: false,
+      message: "Erro ao carregar perfil: " + err.message
+    };
   }
 });
 
@@ -752,7 +778,9 @@ ipcMain.handle("getDashboardAdminEscolar", async (event, currentUserId) => {
     const { getDashboardAdminEscolar } = require(
       path.join(basePath, "backend/get_dashboardAdminEscolar.js"),
     );
+
     return await getDashboardAdminEscolar(currentUserId);
+
   } catch (err) {
     console.error("getDashboardAdminEscolar Error:", err);
     return {

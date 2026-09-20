@@ -25,8 +25,12 @@ contextBridge.exposeInMainWorld("api", {
     ipcRenderer.invoke("getDashboardAdminEscolar", currentUserId),
   getAdminReports: (currentUserId) =>
     ipcRenderer.invoke("getAdminReports", currentUserId),
-  getAdminProfile: (currentUserId) =>
-    ipcRenderer.invoke("getAdminProfile", currentUserId),
+  getAdminProfile: (currentUserId) => {
+    console.log("🔥 PRELOAD: getAdminProfile chamado");
+    console.log("🔥 PRELOAD ID:", currentUserId);
+
+    return ipcRenderer.invoke("getAdminProfile", currentUserId);
+  },
   getProfessorProfile: (currentUserId) =>
     ipcRenderer.invoke("getProfessorProfile", currentUserId),
   getDashboardAdmin: (currentUserId) =>

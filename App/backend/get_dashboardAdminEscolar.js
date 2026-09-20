@@ -119,17 +119,19 @@ async function getDashboardAdminEscolar(currentUserId) {
       taxaConclusao = Math.round((comTurma / alunosTotal) * 100);
     }
 
-    let escolaNome = "Escola";
+    let escolaNome = "";
     let escolaSub = "";
+    let escolaEmail = "";
     try {
-      const [escolas] = await db
+      const escolas = await db
         .promise()
         .execute(
-          `SELECT nome, cidade, estado FROM escolas WHERE id_escola = ? LIMIT 1`,
-          [escolaId],
+          `SELECT nome, cidade, estado, email FROM escolas`,
+          [escolaId]
         );
       if (escolas[0]) {
         escolaNome = escolas[0].nome;
+        escolaEmail = escolas[0].email;
         escolaSub = [escolas[0].cidade, escolas[0].estado]
           .filter(Boolean)
           .join(" · ");
@@ -321,6 +323,7 @@ async function getDashboardAdminEscolar(currentUserId) {
         school: {
           name: escolaNome,
           subtitle: escolaSub,
+          email: escolaEmail,
           chips: [
             `📅 Ano letivo ${new Date().getFullYear()}`,
             "🔒 Admin",
