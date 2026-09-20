@@ -63,6 +63,441 @@ async function ensureStudentProgress(studentId) {
   );
 }
 
+async function grantRewardByName(studentId, rewardName) {
+  if (
+    !studentId ||
+    !rewardName ||
+    !(await tableExists("recompensas")) ||
+    !(await tableExists("recompensas_aluno"))
+  ) {
+    return {
+      granted: false,
+      reward: null,
+      xpAwarded: 0,
+    };
+  }
+
+  try {
+    const [[reward]] = await db.promise().execute(
+      `
+        SELECT
+          id_recompensa,
+          nome,
+          descricao,
+          tipo,
+          valor_bonus
+
+        FROM recompensas
+
+        WHERE
+          nome = ?
+          AND (
+            ativo = 1
+            OR ativo IS NULL
+          )
+
+        LIMIT 1
+      `,
+      [rewardName],
+    );
+
+    if (!reward) {
+      return {
+        granted: false,
+        reward: null,
+        xpAwarded: 0,
+      };
+    }
+
+    const [insertResult] = await db.promise().execute(
+      `
+        INSERT IGNORE INTO recompensas_aluno
+        (
+          id_aluno,
+          id_recompensa,
+          visto
+        )
+
+        VALUES
+        (
+          ?,
+          ?,
+          0
+        )
+      `,
+      [
+        studentId,
+        reward.id_recompensa,
+      ],
+    );
+
+    if (!insertResult.affectedRows) {
+      return {
+        granted: false,
+        reward,
+        xpAwarded: 0,
+      };
+    }
+
+    const bonus =
+      Math.max(
+        0,
+        Number(
+          reward.valor_bonus,
+        ) || 0,
+      );
+
+    if (bonus > 0) {
+      const xpResult =
+        await awardStudentXp(
+          studentId,
+          bonus,
+          `recompensa:${reward.nome}`,
+        );
+
+      if (!xpResult?.success) {
+        await db.promise().execute(
+          `
+            DELETE FROM recompensas_aluno
+
+            WHERE
+              id_aluno = ?
+              AND id_recompensa = ?
+          `,
+          [
+            studentId,
+            reward.id_recompensa,
+          ],
+        );
+
+        return {
+          granted: false,
+          reward,
+          xpAwarded: 0,
+        };
+      }
+
+      return {
+        granted: true,
+        reward,
+        xpAwarded: bonus,
+        xp_atual: xpResult.xp_atual,
+        nivel_atual: xpResult.nivel_atual,
+      };
+    }
+
+    return {
+      granted: true,
+      reward,
+      xpAwarded: 0,
+    };
+  } catch (error) {
+    console.warn(
+      `Não foi possível conceder a recompensa "${rewardName}":`,
+      error.message,
+    );
+
+    return {
+      granted: false,
+      reward: null,
+      xpAwarded: 0,
+    };
+  }
+}
+
+async function getPerfectGradeRewardNames(studentId) {
+  const rewardNames =
+    new Set();
+
+  if (
+    !(await tableExists("notas")) ||
+    !(await tableExists("avaliacoes"))
+  ) {
+    return rewardNames;
+  }
+
+  try {
+    const [rows] = await db.promise().execute(
+      `
+        SELECT
+          n.nota,
+          a.nota_maxima,
+          a.titulo,
+          a.descricao
+
+        FROM notas n
+
+        INNER JOIN avaliacoes a
+          ON a.id_avaliacao =
+             n.id_avaliacao
+
+        WHERE
+          n.id_aluno = ?
+          AND n.nota IS NOT NULL
+      `,
+      [studentId],
+    );
+
+    rows.forEach((row) => {
+      const note =
+        Number(row.nota);
+
+      const maximum =
+        Number(
+          row.nota_maxima,
+        );
+
+      if (
+        !Number.isFinite(note) ||
+        !Number.isFinite(maximum) ||
+        note < maximum
+      ) {
+        return;
+      }
+
+      const text =
+        `${row.titulo || ""} ${row.descricao || ""}`
+          .normalize("NFD")
+          .replace(
+            /[\u0300-\u036f]/g,
+            "",
+          )
+          .toLowerCase();
+
+      if (
+        text.includes(
+          "orcamento",
+        )
+      ) {
+        rewardNames.add(
+          "Orçamento Perfeito",
+        );
+      }
+
+      if (
+        text.includes(
+          "juros",
+        )
+      ) {
+        rewardNames.add(
+          "Mestre dos Juros",
+        );
+      }
+
+      if (
+        text.includes(
+          "vibranium",
+        )
+      ) {
+        rewardNames.add(
+          "Rei de Wakanda",
+        );
+      }
+    });
+  } catch (error) {
+    console.warn(
+      "Não foi possível avaliar recompensas por nota:",
+      error.message,
+    );
+  }
+
+  return rewardNames;
+}
+
+async function evaluateAutomaticRewards({
+  student,
+  tasks,
+  deliveries,
+  ranking,
+}) {
+  if (
+    !student?.id_usuario ||
+    !(await tableExists("recompensas")) ||
+    !(await tableExists("recompensas_aluno"))
+  ) {
+    return {
+      granted: [],
+      xpAwarded: 0,
+      xp_atual:
+        Number(student?.xp_atual) || 0,
+      nivel_atual:
+        Number(student?.nivel_atual) || 1,
+    };
+  }
+
+  const rewardNames =
+    new Set();
+
+  rewardNames.add(
+    "Primeiro Login",
+  );
+
+  const streak =
+    Number(
+      student.sequencia_dias,
+    ) || 0;
+
+  if (streak >= 7) {
+    rewardNames.add(
+      "Sequência de 7 dias",
+    );
+  }
+
+  if (streak >= 14) {
+    rewardNames.add(
+      "Sequência de 14 dias",
+    );
+  }
+
+  if (
+    Array.isArray(deliveries) &&
+    deliveries.length >= 1
+  ) {
+    rewardNames.add(
+      "Primeiro Salto",
+    );
+  }
+
+  const totalTasks =
+    Array.isArray(tasks)
+      ? tasks.length
+      : 0;
+
+  const completedTasks =
+    Array.isArray(tasks)
+      ? tasks.filter(
+        (task) =>
+          Boolean(task.concluida),
+      ).length
+      : 0;
+
+  if (
+    totalTasks > 0 &&
+    completedTasks === totalTasks
+  ) {
+    rewardNames.add(
+      "Bat-Sinal de Economia",
+    );
+  }
+
+  if (
+    student.id_turma &&
+    Array.isArray(ranking) &&
+    ranking.length
+  ) {
+    const position =
+      ranking.findIndex(
+        (entry) =>
+          String(
+            entry.id_usuario,
+          ) ===
+          String(
+            student.id_usuario,
+          ),
+      );
+
+    if (
+      position >= 0 &&
+      position < 3
+    ) {
+      rewardNames.add(
+        "Top 3 da Turma",
+      );
+    }
+
+    if (position === 0) {
+      rewardNames.add(
+        "Líder da Turma",
+      );
+    }
+  }
+
+  const gradeRewards =
+    await getPerfectGradeRewardNames(
+      student.id_usuario,
+    );
+
+  gradeRewards.forEach(
+    (name) => {
+      rewardNames.add(name);
+    },
+  );
+
+  const granted = [];
+
+  let totalXpAwarded = 0;
+
+  let latestXp =
+    Number(
+      student.xp_atual,
+    ) || 0;
+
+  let latestLevel =
+    Number(
+      student.nivel_atual,
+    ) || 1;
+
+  for (
+    const rewardName
+    of rewardNames
+  ) {
+    const result =
+      await grantRewardByName(
+        student.id_usuario,
+        rewardName,
+      );
+
+    if (!result.granted) {
+      continue;
+    }
+
+    granted.push(
+      rewardName,
+    );
+
+    totalXpAwarded +=
+      Number(
+        result.xpAwarded,
+      ) || 0;
+
+    if (
+      Number.isFinite(
+        Number(
+          result.xp_atual,
+        ),
+      )
+    ) {
+      latestXp =
+        Number(
+          result.xp_atual,
+        );
+    }
+
+    if (
+      Number.isFinite(
+        Number(
+          result.nivel_atual,
+        ),
+      )
+    ) {
+      latestLevel =
+        Number(
+          result.nivel_atual,
+        );
+    }
+  }
+
+  return {
+    granted,
+    xpAwarded:
+      totalXpAwarded,
+    xp_atual:
+      latestXp,
+    nivel_atual:
+      latestLevel,
+  };
+}
+
 async function getStudentDashboard(studentId) {
   if (!studentId) {
     return {
@@ -105,7 +540,6 @@ async function getStudentDashboard(studentId) {
     const [[student]] = await db.promise().execute(
       `
         SELECT
-
           u.id_usuario,
           u.nome,
           u.email,
@@ -154,7 +588,7 @@ async function getStudentDashboard(studentId) {
           AND u.ativo = 1
 
         LIMIT 1
-        `,
+      `,
       [studentId],
     );
 
@@ -176,13 +610,9 @@ async function getStudentDashboard(studentId) {
     }
 
     const hasTurma = taskColumns.has("id_turma");
-
     const hasProfessor = taskColumns.has("id_professor");
-
     const hasCurso = taskColumns.has("id_curso");
-
     const hasDescricao = taskColumns.has("descricao");
-
     const hasStatus = taskColumns.has("status");
 
     let xpColumn = null;
@@ -228,18 +658,15 @@ async function getStudentDashboard(studentId) {
     }
 
     const where = [];
-
     const params = [];
 
     if (taskColumns.has("id_escola")) {
       where.push("tar.id_escola = ?");
-
       params.push(student.id_escola);
     }
 
     if (hasTurma && student.id_turma != null) {
       where.push("(tar.id_turma = ? OR tar.id_turma IS NULL)");
-
       params.push(student.id_turma);
     }
 
@@ -258,7 +685,9 @@ async function getStudentDashboard(studentId) {
       );
     }
 
-    const whereSql = where.length ? `WHERE ${where.join(" AND ")}` : "";
+    const whereSql = where.length
+      ? `WHERE ${where.join(" AND ")}`
+      : "";
 
     const descriptionSelect = hasDescricao
       ? "tar.descricao"
@@ -268,7 +697,9 @@ async function getStudentDashboard(studentId) {
       ? `tar.${dueColumn} AS data_vencimento`
       : "NULL AS data_vencimento";
 
-    const courseSelect = hasCurso ? "c.nome AS curso" : "NULL AS curso";
+    const courseSelect = hasCurso
+      ? "c.nome AS curso"
+      : "NULL AS curso";
 
     const professorSelect = hasProfessor
       ? "prof.nome AS professor"
@@ -334,27 +765,19 @@ async function getStudentDashboard(studentId) {
     const [tasks] = await db.promise().execute(
       `
         SELECT
-
           tar.id_tarefa,
           tar.titulo,
 
           ${descriptionSelect},
-
           ${dueSelect},
-
           ${courseSelect},
-
           ${professorSelect},
-
           ${xpSelect},
-
           ${deliveryDateSelect},
-
           ${deliveryXpSelect},
 
           CASE
-            WHEN ent.id_tarefa
-                 IS NULL
+            WHEN ent.id_tarefa IS NULL
             THEN 0
             ELSE 1
           END AS concluida
@@ -366,7 +789,7 @@ async function getStudentDashboard(studentId) {
         ${whereSql}
 
         ${orderSql}
-        `,
+      `,
       [studentId, ...params],
     );
 
@@ -376,11 +799,9 @@ async function getStudentDashboard(studentId) {
       const [rankingRows] = await db.promise().execute(
         `
           SELECT
-
             u.id_usuario,
             u.nome,
-
-            ${xpAtualSelect.replaceAll("p.", "p.")} AS xp
+            ${xpAtualSelect} AS xp
 
           FROM usuarios u
 
@@ -398,7 +819,7 @@ async function getStudentDashboard(studentId) {
             u.nome ASC
 
           LIMIT 20
-          `,
+        `,
         [student.id_turma],
       );
 
@@ -437,14 +858,77 @@ async function getStudentDashboard(studentId) {
           = ?
 
         ${deliveryOrder}
-        `,
+      `,
       [studentId],
     );
+
+    const normalizedTasks = tasks.map((task) => ({
+      ...task,
+
+      concluida: Boolean(task.concluida),
+
+      data_vencimento: dateOnly(task.data_vencimento),
+
+      xp_recompensa: Number(task.xp_recompensa) || 0,
+
+      xp_ganho: Number(task.xp_ganho) || 0,
+    }));
+
+    const completed = normalizedTasks.filter(
+      (task) => task.concluida,
+    ).length;
+
+    const totalTasks = normalizedTasks.length;
+
+    const pendingTasks = totalTasks - completed;
+
+    const completionRate = totalTasks
+      ? Math.round((completed / totalTasks) * 100)
+      : Number(student.percentual_conclusao) || 0;
+
+    const automaticRewards =
+      await evaluateAutomaticRewards({
+        student,
+        tasks: normalizedTasks,
+        deliveries,
+        ranking,
+      });
+
+    if (
+      automaticRewards.xpAwarded > 0
+    ) {
+      student.xp_atual =
+        automaticRewards.xp_atual;
+
+      student.nivel_atual =
+        automaticRewards.nivel_atual;
+
+      student.xp_proximo_nivel =
+        Math.max(
+          100,
+          Number(
+            automaticRewards.nivel_atual,
+          ) * 100,
+        );
+
+      if (
+        progressColumns.has(
+          "pontos_totais",
+        )
+      ) {
+        student.pontos_totais =
+          (
+            Number(
+              student.pontos_totais,
+            ) || 0
+          ) +
+          automaticRewards.xpAwarded;
+      }
+    }
 
     let rewards = [];
 
     const hasRewards = await tableExists("recompensas");
-
     const hasStudentRewards = await tableExists("recompensas_aluno");
 
     if (hasRewards && hasStudentRewards) {
@@ -452,7 +936,6 @@ async function getStudentDashboard(studentId) {
         const [rewardRows] = await db.promise().execute(
           `
             SELECT
-
               r.id_recompensa,
               r.nome,
               r.descricao,
@@ -478,39 +961,20 @@ async function getStudentDashboard(studentId) {
 
             ORDER BY
               ra.conquistado_em DESC
-            `,
+          `,
           [studentId],
         );
 
         rewards = rewardRows;
       } catch (rewardError) {
-        console.warn("Recompensas ainda não compatíveis:", rewardError.message);
+        console.warn(
+          "Recompensas ainda não compatíveis:",
+          rewardError.message,
+        );
 
         rewards = [];
       }
     }
-
-    const normalizedTasks = tasks.map((task) => ({
-      ...task,
-
-      concluida: Boolean(task.concluida),
-
-      data_vencimento: dateOnly(task.data_vencimento),
-
-      xp_recompensa: Number(task.xp_recompensa) || 0,
-
-      xp_ganho: Number(task.xp_ganho) || 0,
-    }));
-
-    const completed = normalizedTasks.filter((task) => task.concluida).length;
-
-    const totalTasks = normalizedTasks.length;
-
-    const pendingTasks = totalTasks - completed;
-
-    const completionRate = totalTasks
-      ? Math.round((completed / totalTasks) * 100)
-      : Number(student.percentual_conclusao) || 0;
 
     return {
       success: true,
@@ -519,17 +983,23 @@ async function getStudentDashboard(studentId) {
         student: {
           ...student,
 
-          xp_atual: Number(student.xp_atual) || 0,
+          xp_atual:
+            Number(student.xp_atual) || 0,
 
-          xp_proximo_nivel: Number(student.xp_proximo_nivel) || 100,
+          xp_proximo_nivel:
+            Number(student.xp_proximo_nivel) || 100,
 
-          nivel_atual: Number(student.nivel_atual) || 1,
+          nivel_atual:
+            Number(student.nivel_atual) || 1,
 
-          pontos_totais: Number(student.pontos_totais) || 0,
+          pontos_totais:
+            Number(student.pontos_totais) || 0,
 
-          sequencia_dias: Number(student.sequencia_dias) || 0,
+          sequencia_dias:
+            Number(student.sequencia_dias) || 0,
 
-          percentual_conclusao: completionRate,
+          percentual_conclusao:
+            completionRate,
         },
 
         tasks: normalizedTasks,
@@ -552,12 +1022,17 @@ async function getStudentDashboard(studentId) {
       },
     };
   } catch (error) {
-    console.error("getStudentDashboard Error:", error);
+    console.error(
+      "getStudentDashboard Error:",
+      error,
+    );
 
     return {
       success: false,
 
-      message: "Não foi possível carregar os dados do aluno: " + error.message,
+      message:
+        "Não foi possível carregar os dados do aluno: " +
+        error.message,
     };
   }
 }
@@ -578,7 +1053,6 @@ async function completeStudentTask(studentId, taskId) {
     const [[student]] = await db.promise().execute(
       `
         SELECT
-
           id_usuario,
           id_escola,
           id_turma
@@ -591,7 +1065,7 @@ async function completeStudentTask(studentId, taskId) {
           AND ativo = 1
 
         LIMIT 1
-        `,
+      `,
       [studentId],
     );
 
@@ -608,13 +1082,11 @@ async function completeStudentTask(studentId, taskId) {
 
     if (taskColumns.has("id_escola")) {
       taskWhere.push("id_escola = ?");
-
       taskParams.push(student.id_escola);
     }
 
     if (hasTurma && student.id_turma != null) {
       taskWhere.push("(id_turma = ? OR id_turma IS NULL)");
-
       taskParams.push(student.id_turma);
     }
 
@@ -628,21 +1100,23 @@ async function completeStudentTask(studentId, taskId) {
           ${taskWhere.join(" AND ")}
 
         LIMIT 1
-        `,
+      `,
       taskParams,
     );
 
     if (!task) {
       return {
         success: false,
-        message: "Tarefa não disponível para este aluno.",
+        message:
+          "Tarefa não disponível para este aluno.",
       };
     }
 
     if (!(await tableExists("entregas"))) {
       return {
         success: false,
-        message: "A tabela de entregas não foi encontrada.",
+        message:
+          "A tabela de entregas não foi encontrada.",
       };
     }
 
@@ -657,7 +1131,8 @@ async function completeStudentTask(studentId, taskId) {
     if (!studentColumn) {
       return {
         success: false,
-        message: "A tabela de entregas não possui identificação do aluno.",
+        message:
+          "A tabela de entregas não possui identificação do aluno.",
       };
     }
 
@@ -672,77 +1147,93 @@ async function completeStudentTask(studentId, taskId) {
           AND ${studentColumn} = ?
 
         LIMIT 1
-        `,
+      `,
       [taskId, studentId],
     );
 
-    if (!existing.length) {
-      const insertColumns = ["id_tarefa", studentColumn];
-
-      const values = [taskId, studentId];
-
-      const placeholders = ["?", "?"];
-
-      if (columns.has("status")) {
-        insertColumns.push("status");
-
-        values.push("concluida");
-
-        placeholders.push("?");
-      }
-
+    if (existing.length) {
       await db.promise().execute(
         `
+          DELETE FROM entregas
+
+          WHERE
+            id_tarefa = ?
+            AND ${studentColumn} = ?
+        `,
+        [taskId, studentId],
+      );
+
+      return {
+        success: true,
+        completed: false,
+        message:
+          "Tarefa reaberta com sucesso!",
+      };
+    }
+
+    const insertColumns = [
+      "id_tarefa",
+      studentColumn,
+    ];
+
+    const values = [
+      taskId,
+      studentId,
+    ];
+
+    const placeholders = [
+      "?",
+      "?",
+    ];
+
+    if (columns.has("status")) {
+      insertColumns.push("status");
+      values.push("concluida");
+      placeholders.push("?");
+    }
+
+    await db.promise().execute(
+      `
         INSERT INTO entregas
           (${insertColumns.join(", ")})
 
         VALUES
           (${placeholders.join(", ")})
-        `,
-        values,
-      );
-    } else if (columns.has("status")) {
-      let update = "status = 'concluida'";
-
-      if (columns.has("criado_em")) {
-        update += ", criado_em = CURRENT_TIMESTAMP";
-      } else if (columns.has("concluida_em")) {
-        update += ", concluida_em = CURRENT_TIMESTAMP";
-      }
-
-      await db.promise().execute(
-        `
-        UPDATE entregas
-
-        SET
-          ${update}
-
-        WHERE
-          id_tarefa = ?
-          AND ${studentColumn} = ?
-        `,
-        [taskId, studentId],
-      );
-    }
+      `,
+      values,
+    );
 
     return {
       success: true,
-
-      message: "Tarefa concluída com sucesso!",
+      completed: true,
+      message:
+        "Tarefa concluída com sucesso!",
     };
   } catch (error) {
-    console.error("completeStudentTask Error:", error);
+    console.error(
+      "completeStudentTask Error:",
+      error,
+    );
 
     return {
       success: false,
 
-      message: "Não foi possível concluir a tarefa: " + error.message,
+      message:
+        "Não foi possível alterar a tarefa: " +
+        error.message,
     };
   }
 }
 
-async function awardStudentXp(studentId, amount, source) {
-  const xp = Math.max(0, Math.min(Number(amount) || 0, 500));
+async function awardStudentXp(
+  studentId,
+  amount,
+  source,
+) {
+  const xp = Math.max(
+    0,
+    Math.min(Number(amount) || 0, 500),
+  );
 
   if (!studentId || !xp) {
     return {
@@ -764,7 +1255,7 @@ async function awardStudentXp(studentId, amount, source) {
           AND ativo = 1
 
         LIMIT 1
-        `,
+      `,
       [studentId],
     );
 
@@ -777,7 +1268,9 @@ async function awardStudentXp(studentId, amount, source) {
 
     await ensureStudentProgress(studentId);
 
-    const columns = await getColumns("progresso_aluno");
+    const columns = await getColumns(
+      "progresso_aluno",
+    );
 
     const [progressRows] = await db.promise().execute(
       `
@@ -788,28 +1281,36 @@ async function awardStudentXp(studentId, amount, source) {
         WHERE id_aluno = ?
 
         LIMIT 1
-        `,
+      `,
       [studentId],
     );
 
-    const progress = progressRows[0] || {};
+    const progress =
+      progressRows[0] || {};
 
     const currentXp =
-      Number(progress.xp_atual ?? progress.pontos_totais ?? 0) || 0;
+      Number(
+        progress.xp_atual ??
+        progress.pontos_totais ??
+        0,
+      ) || 0;
 
-    const newXp = currentXp + xp;
+    const newXp =
+      currentXp + xp;
 
-    const newLevel = Math.max(1, Math.floor(newXp / 100) + 1);
+    const newLevel = Math.max(
+      1,
+      Math.floor(newXp / 100) + 1,
+    );
 
-    const nextLevelXp = newLevel * 100;
+    const nextLevelXp =
+      newLevel * 100;
 
     const updates = [];
-
     const values = [];
 
     if (columns.has("xp_atual")) {
       updates.push("xp_atual = ?");
-
       values.push(newXp);
     }
 
@@ -829,24 +1330,28 @@ async function awardStudentXp(studentId, amount, source) {
 
     if (columns.has("nivel_atual")) {
       updates.push("nivel_atual = ?");
-
       values.push(newLevel);
     }
 
     if (columns.has("xp_proximo_nivel")) {
-      updates.push("xp_proximo_nivel = ?");
+      updates.push(
+        "xp_proximo_nivel = ?",
+      );
 
       values.push(nextLevelXp);
     }
 
     if (columns.has("atualizado_em")) {
-      updates.push("atualizado_em = CURRENT_TIMESTAMP");
+      updates.push(
+        "atualizado_em = CURRENT_TIMESTAMP",
+      );
     }
 
     if (!updates.length) {
       return {
         success: false,
-        message: "A tabela de progresso não possui campos de XP compatíveis.",
+        message:
+          "A tabela de progresso não possui campos de XP compatíveis.",
       };
     }
 
@@ -864,7 +1369,9 @@ async function awardStudentXp(studentId, amount, source) {
       values,
     );
 
-    if (await tableExists("logs_atividade")) {
+    if (
+      await tableExists("logs_atividade")
+    ) {
       try {
         await db.promise().execute(
           `
@@ -887,17 +1394,25 @@ async function awardStudentXp(studentId, amount, source) {
             )
           )
           `,
-          [studentId, source || "xp", xp],
+          [
+            studentId,
+            source || "xp",
+            xp,
+          ],
         );
       } catch (logError) {
-        console.warn("Não foi possível registrar log de XP:", logError.message);
+        console.warn(
+          "Não foi possível registrar log de XP:",
+          logError.message,
+        );
       }
     }
 
     return {
       success: true,
 
-      message: `${xp} XP adicionados com sucesso!`,
+      message:
+        `${xp} XP adicionados com sucesso!`,
 
       amount: xp,
 
@@ -906,20 +1421,23 @@ async function awardStudentXp(studentId, amount, source) {
       nivel_atual: newLevel,
     };
   } catch (error) {
-    console.error("awardStudentXp Error:", error);
+    console.error(
+      "awardStudentXp Error:",
+      error,
+    );
 
     return {
       success: false,
 
-      message: "Não foi possível registrar os XP: " + error.message,
+      message:
+        "Não foi possível registrar os XP: " +
+        error.message,
     };
   }
 }
 
 module.exports = {
   getStudentDashboard,
-
   completeStudentTask,
-
   awardStudentXp,
 };

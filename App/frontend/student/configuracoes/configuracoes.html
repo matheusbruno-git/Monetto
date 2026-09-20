@@ -8,7 +8,9 @@
 
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-  <title>Monetto – Configurações</title>
+  <title>
+    Monetto – Configurações
+  </title>
 
   <link
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
@@ -24,14 +26,10 @@
 <body class="settings-page">
 
 
-
-
   <div id="sidebar-container"></div>
 
 
   <div class="main">
-
-
 
 
     <div class="set-nav">
@@ -42,36 +40,44 @@
 
 
       <div class="set-nav-item active" onclick="showTab('perfil', this)">
-        <span class="sni">👤</span>
+        <span class="sni">
+          👤
+        </span>
+
         Meu Perfil
       </div>
 
 
       <div class="set-nav-item" onclick="showTab('notif', this)">
-        <span class="sni">🔔</span>
+        <span class="sni">
+          🔔
+        </span>
+
         Notificações
       </div>
 
 
       <div class="set-nav-item" onclick="showTab('priv', this)">
-        <span class="sni">🔒</span>
+        <span class="sni">
+          🔒
+        </span>
+
         Privacidade
       </div>
 
 
       <div class="set-nav-item" onclick="showTab('conta', this)">
-        <span class="sni">🛡️</span>
+        <span class="sni">
+          🛡️
+        </span>
+
         Conta
       </div>
 
     </div>
 
 
-
-
     <div class="set-content">
-
-
 
 
       <div id="tab-perfil">
@@ -90,17 +96,14 @@
         </div>
 
 
-
-
         <div class="profile-hero">
 
-          <div class="profile-big-av" id="profile_big_av">
+          <div class="profile-big-av" id="profile-big-av">
             😊
 
             <div class="av-edit">
               ✏️
             </div>
-
           </div>
 
 
@@ -113,8 +116,6 @@
           </div>
 
         </div>
-
-
 
 
         <div class="set-card">
@@ -155,8 +156,6 @@
         </div>
 
 
-
-
         <div class="set-card">
 
           <div class="set-card-title">
@@ -168,7 +167,7 @@
 
             <div class="field-group">
 
-              <label for="nome_usuario">
+              <label>
                 Nome
               </label>
 
@@ -194,7 +193,7 @@
 
             <div class="field-group">
 
-              <label for="email_usuario">
+              <label>
                 E-mail
               </label>
 
@@ -215,9 +214,22 @@
 
           </div>
 
+
+          <div class="form-row single">
+
+            <div class="field-group">
+
+              <label>
+                Bio
+              </label>
+
+              <input id="bio_usuario" maxlength="120" placeholder="Conte um pouco sobre você..." type="text" value="" />
+
+            </div>
+
+          </div>
+
         </div>
-
-
 
 
         <div class="set-card">
@@ -228,9 +240,9 @@
 
 
           <p style="
-              font-size:.8rem;
+              font-size:.85rem;
               color:var(--muted);
-              margin-bottom:14px;
+              margin-bottom:16px;
             ">
             Só preencha os campos abaixo caso queira alterar sua senha.
           </p>
@@ -240,11 +252,11 @@
 
             <div class="field-group">
 
-              <label for="senha_atual">
+              <label>
                 Senha atual
               </label>
 
-              <input id="senha_atual" placeholder="••••••••" type="password" autocomplete="current-password" />
+              <input id="senha_atual" placeholder="••••••••" type="password" />
 
             </div>
 
@@ -255,22 +267,22 @@
 
             <div class="field-group">
 
-              <label for="nova_senha">
+              <label>
                 Nova senha
               </label>
 
-              <input id="nova_senha" placeholder="••••••••" type="password" autocomplete="new-password" />
+              <input id="nova_senha" placeholder="••••••••" type="password" />
 
             </div>
 
 
             <div class="field-group">
 
-              <label for="confirmar_senha">
+              <label>
                 Confirmar nova senha
               </label>
 
-              <input id="confirmar_senha" placeholder="••••••••" type="password" autocomplete="new-password" />
+              <input id="confirmar_senha" placeholder="••••••••" type="password" />
 
             </div>
 
@@ -292,10 +304,7 @@
 
         </div>
 
-
       </div>
-
-
 
 
       <div id="tab-notif" style="display:none">
@@ -335,7 +344,7 @@
 
             </div>
 
-            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+            <div class="toggle on" data-setting="nova_tarefa"></div>
 
           </div>
 
@@ -354,7 +363,7 @@
 
             </div>
 
-            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+            <div class="toggle on" data-setting="prazo_tarefa"></div>
 
           </div>
 
@@ -373,7 +382,7 @@
 
             </div>
 
-            <div class="toggle" onclick="this.classList.toggle('on')"></div>
+            <div class="toggle" data-setting="tarefa_atrasada"></div>
 
           </div>
 
@@ -401,7 +410,26 @@
 
             </div>
 
-            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+            <div class="toggle on" data-setting="nova_medalha"></div>
+
+          </div>
+
+
+          <div class="toggle-row">
+
+            <div class="toggle-info">
+
+              <strong>
+                Subir de nível
+              </strong>
+
+              <span>
+                Notificação ao atingir um novo nível
+              </span>
+
+            </div>
+
+            <div class="toggle on" data-setting="novo_nivel"></div>
 
           </div>
 
@@ -420,7 +448,73 @@
 
             </div>
 
-            <div class="toggle" onclick="this.classList.toggle('on')"></div>
+            <div class="toggle" data-setting="ranking"></div>
+
+          </div>
+
+
+          <div class="toggle-row">
+
+            <div class="toggle-info">
+
+              <strong>
+                Novo jogo disponível
+              </strong>
+
+              <span>
+                Aviso quando uma nova atividade for disponibilizada
+              </span>
+
+            </div>
+
+            <div class="toggle on" data-setting="novo_jogo"></div>
+
+          </div>
+
+        </div>
+
+
+        <div class="set-card">
+
+          <div class="set-card-title">
+            📧 E-mail e Resumo
+          </div>
+
+
+          <div class="toggle-row">
+
+            <div class="toggle-info">
+
+              <strong>
+                Resumo semanal
+              </strong>
+
+              <span>
+                Manter um resumo semanal das atividades
+              </span>
+
+            </div>
+
+            <div class="toggle on" data-setting="resumo_semanal"></div>
+
+          </div>
+
+
+          <div class="toggle-row">
+
+            <div class="toggle-info">
+
+              <strong>
+                Lembrete de sequência
+              </strong>
+
+              <span>
+                Não perca sua sequência de acesso
+              </span>
+
+            </div>
+
+            <div class="toggle on" data-setting="lembrete_sequencia"></div>
 
           </div>
 
@@ -429,16 +523,13 @@
 
         <div class="save-row">
 
-          <button class="btn-save" type="button" onclick="showVisualOnlyToast()">
+          <button class="btn-save" id="salvar_notificacoes" type="button">
             Salvar preferências
           </button>
 
         </div>
 
-
       </div>
-
-
 
 
       <div id="tab-priv" style="display:none">
@@ -478,7 +569,7 @@
 
             </div>
 
-            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+            <div class="toggle on" data-privacy="ranking"></div>
 
           </div>
 
@@ -497,7 +588,7 @@
 
             </div>
 
-            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+            <div class="toggle on" data-privacy="xp"></div>
 
           </div>
 
@@ -516,7 +607,26 @@
 
             </div>
 
-            <div class="toggle" onclick="this.classList.toggle('on')"></div>
+            <div class="toggle" data-privacy="medalhas"></div>
+
+          </div>
+
+
+          <div class="toggle-row">
+
+            <div class="toggle-info">
+
+              <strong>
+                Mostrar sequência de acesso
+              </strong>
+
+              <span>
+                Outros alunos podem ver sua sequência de dias
+              </span>
+
+            </div>
+
+            <div class="toggle on" data-privacy="sequencia"></div>
 
           </div>
 
@@ -525,16 +635,13 @@
 
         <div class="save-row">
 
-          <button class="btn-save" type="button" onclick="showVisualOnlyToast()">
+          <button class="btn-save" id="salvar_privacidade" type="button">
             Salvar configurações
           </button>
 
         </div>
 
-
       </div>
-
-
 
 
       <div id="tab-conta" style="display:none">
@@ -575,7 +682,9 @@
                 border-bottom:1px solid var(--border);
               ">
 
-              <span style="color:var(--muted)">
+              <span style="
+                  color:var(--muted);
+                ">
                 E-mail
               </span>
 
@@ -593,11 +702,13 @@
                 border-bottom:1px solid var(--border);
               ">
 
-              <span style="color:var(--muted)">
+              <span style="
+                  color:var(--muted);
+                ">
                 Tipo de conta
               </span>
 
-              <span>
+              <span id="conta_tipo">
                 Aluno
               </span>
 
@@ -609,7 +720,9 @@
                 justify-content:space-between;
               ">
 
-              <span style="color:var(--muted)">
+              <span style="
+                  color:var(--muted);
+                ">
                 Escola vinculada
               </span>
 
@@ -619,7 +732,6 @@
 
             </div>
 
-
           </div>
 
         </div>
@@ -627,7 +739,9 @@
 
         <div class="set-card">
 
-          <div class="set-card-title" style="color:var(--red)">
+          <div class="set-card-title" style="
+              color:var(--red);
+            ">
             🔐 Segurança
           </div>
 
@@ -638,8 +752,8 @@
               margin-bottom:16px;
               line-height:1.6;
             ">
-            Para encerrar sua sessão neste computador,
-            utilize a opção abaixo.
+            Você pode exportar uma cópia das suas informações
+            ou encerrar a sessão deste computador.
           </p>
 
 
@@ -649,14 +763,28 @@
               flex-wrap:wrap;
             ">
 
-            <button class="btn-danger" type="button" onclick="sairDaConta('../../login/login.html')">
+
+            <button class="btn-danger" id="exportar_dados" type="button">
+              📤 Exportar meus dados
+            </button>
+
+
+            <button class="btn-danger" id="sair_conta" type="button">
               🚪 Sair da conta
+            </button>
+
+
+            <button class="btn-danger" id="excluir_conta" type="button" disabled
+              title="Função não disponível nesta versão" style="
+                opacity:.45;
+                cursor:not-allowed;
+              ">
+              🗑️ Excluir conta
             </button>
 
           </div>
 
         </div>
-
 
       </div>
 
@@ -666,13 +794,9 @@
   </div>
 
 
-
-
-  <div class="toast" id="toast" style="display:none;">
+  <div class="toast" id="toast" style="display:none">
     ✅ Alterações salvas com sucesso!
   </div>
-
-
 
 
   <script src="../student-script.js"></script>
@@ -680,37 +804,79 @@
   <script src="../student-data.js"></script>
 
 
-
   <script>
 
+    const configSession =
+      JSON.parse(
+        localStorage.getItem(
+          "session"
+        ) || "{}"
+      );
 
 
-    function showTab(id, element) {
+    const configStudentId =
+      configSession.id_usuario ||
+      configSession.id ||
+      null;
+
+
+    const avatarKey =
+      `monetto_avatar_${configStudentId}`;
+
+
+    const bioKey =
+      `monetto_bio_${configStudentId}`;
+
+
+    const notificationKey =
+      `monetto_notifications_${configStudentId}`;
+
+
+    const privacyKey =
+      `monetto_privacy_${configStudentId}`;
+
+
+    let originalProfile = {
+      nome: "",
+      email: "",
+      bio: "",
+      avatar: "😊"
+    };
+
+
+    function showTab(
+      id,
+      element
+    ) {
 
       document
         .querySelectorAll(
-          '[id^="tab-"]',
+          '[id^="tab-"]'
         )
-        .forEach((tab) => {
-          tab.style.display =
-            "none";
-        });
+        .forEach(
+          (tab) => {
+            tab.style.display =
+              "none";
+          }
+        );
 
 
       document
         .querySelectorAll(
-          ".set-nav-item",
+          ".set-nav-item"
         )
-        .forEach((item) => {
-          item.classList.remove(
-            "active",
-          );
-        });
+        .forEach(
+          (item) => {
+            item.classList.remove(
+              "active"
+            );
+          }
+        );
 
 
       const target =
         document.getElementById(
-          "tab-" + id,
+          `tab-${id}`
         );
 
 
@@ -722,25 +888,27 @@
 
       if (element) {
         element.classList.add(
-          "active",
+          "active"
         );
       }
 
 
-      atualizarDadosConta();
+      if (
+        id ===
+        "conta"
+      ) {
+        updateAccountData();
+      }
     }
 
 
-
-
     function showToast(
-      message =
-        "✅ Alterações salvas com sucesso!",
+      message
     ) {
 
       const toast =
         document.getElementById(
-          "toast",
+          "toast"
         );
 
 
@@ -750,7 +918,8 @@
 
 
       toast.textContent =
-        message;
+        message ||
+        "✅ Alterações salvas com sucesso!";
 
 
       toast.style.display =
@@ -758,160 +927,188 @@
 
 
       toast.classList.add(
-        "show",
+        "show"
       );
 
 
-      setTimeout(() => {
-
-        toast.classList.remove(
-          "show",
-        );
-
-
-        toast.style.display =
-          "none";
-
-      }, 2800);
-    }
-
-
-
-
-    function showVisualOnlyToast() {
-
-      showToast(
-        "ℹ️ Preferência alterada nesta tela. Persistência ainda não integrada.",
+      clearTimeout(
+        window.monettoToastTimer
       );
-    }
 
 
+      window.monettoToastTimer =
+        setTimeout(
+          () => {
 
-
-    document
-      .querySelectorAll(
-        ".av-opt",
-      )
-      .forEach((avatar) => {
-
-        avatar.addEventListener(
-          "click",
-          function () {
-
-            document
-              .querySelectorAll(
-                ".av-opt",
-              )
-              .forEach((item) => {
-                item.classList.remove(
-                  "selected",
-                );
-              });
-
-
-            this.classList.add(
-              "selected",
+            toast.classList.remove(
+              "show"
             );
 
 
-            const bigAvatar =
-              document.getElementById(
-                "profile_big_av",
-              );
-
-
-            if (bigAvatar) {
-
-              const emoji =
-                this.dataset.avatar ||
-                this.textContent.trim();
-
-
-              bigAvatar.childNodes[0].textContent =
-                emoji;
-            }
+            setTimeout(
+              () => {
+                toast.style.display =
+                  "none";
+              },
+              300
+            );
 
           },
+          2500
+        );
+    }
+
+
+    function getCurrentStudent() {
+
+      return (
+        window.studentData
+          ?.student ||
+        {}
+      );
+    }
+
+
+    function getSelectedAvatar() {
+
+      return (
+        document.querySelector(
+          ".av-opt.selected"
+        )?.dataset.avatar ||
+        "😊"
+      );
+    }
+
+
+    function applyAvatar(
+      avatar
+    ) {
+
+      const finalAvatar =
+        avatar ||
+        "😊";
+
+
+      const bigAvatar =
+        document.getElementById(
+          "profile-big-av"
         );
 
-      });
 
+      if (bigAvatar) {
 
+        bigAvatar.innerHTML = `
+          ${finalAvatar}
 
-
-    function atualizarDadosConta() {
-
-      const data =
-        window.studentData;
-
-
-      if (!data?.student) {
-        return;
+          <div class="av-edit">
+            ✏️
+          </div>
+        `;
       }
+
+
+      document
+        .querySelectorAll(
+          ".av-opt"
+        )
+        .forEach(
+          (item) => {
+
+            item.classList.toggle(
+              "selected",
+              item.dataset.avatar ===
+              finalAvatar
+            );
+          }
+        );
+    }
+
+
+    function loadAvatar() {
+
+      const avatar =
+        localStorage.getItem(
+          avatarKey
+        ) ||
+        "😊";
+
+
+      applyAvatar(
+        avatar
+      );
+
+
+      return avatar;
+    }
+
+
+    function loadBio() {
+
+      const bio =
+        localStorage.getItem(
+          bioKey
+        ) ||
+        "";
+
+
+      const input =
+        document.getElementById(
+          "bio_usuario"
+        );
+
+
+      if (input) {
+        input.value =
+          bio;
+      }
+
+
+      return bio;
+    }
+
+
+    function captureOriginalProfile() {
+
+      const nome =
+        document.getElementById(
+          "nome_usuario"
+        )?.value ||
+        "";
 
 
       const email =
         document.getElementById(
-          "conta_email",
-        );
+          "email_usuario"
+        )?.value ||
+        "";
 
 
-      const escola =
+      const bio =
         document.getElementById(
-          "conta_escola",
-        );
+          "bio_usuario"
+        )?.value ||
+        "";
 
 
-      if (email) {
-        email.textContent =
-          data.student.email ||
-          "Não informado";
-      }
-
-
-      if (escola) {
-        escola.textContent =
-          data.student.escola ||
-          "Não vinculada";
-      }
-
+      originalProfile = {
+        nome,
+        email,
+        bio,
+        avatar:
+          localStorage.getItem(
+            avatarKey
+          ) ||
+          "😊"
+      };
     }
-
-
 
 
     async function salvarPerfilAluno() {
 
-      let session = {};
-
-
-      try {
-
-        session =
-          JSON.parse(
-            localStorage.getItem(
-              "session",
-            ) || "{}",
-          );
-
-      } catch (error) {
-
-        console.error(
-          "Erro ao ler sessão:",
-          error,
-        );
-      }
-
-
-      const id =
-        session.id_usuario ||
-        session.id;
-
-
-      if (!id) {
+      if (!configStudentId) {
 
         alert(
-          "Sessão do aluno não encontrada.",
+          "Sessão do aluno não encontrada."
         );
 
         return;
@@ -921,43 +1118,62 @@
       const nome =
         document
           .getElementById(
-            "nome_usuario",
+            "nome_usuario"
           )
-          ?.value
+          .value
           .trim();
 
 
       const email =
         document
           .getElementById(
-            "email_usuario",
+            "email_usuario"
           )
-          ?.value
+          .value
+          .trim();
+
+
+      const bio =
+        document
+          .getElementById(
+            "bio_usuario"
+          )
+          .value
           .trim();
 
 
       const senhaAtual =
         document.getElementById(
-          "senha_atual",
-        )?.value || "";
+          "senha_atual"
+        ).value;
 
 
       const novaSenha =
         document.getElementById(
-          "nova_senha",
-        )?.value || "";
+          "nova_senha"
+        ).value;
 
 
       const confirmar =
         document.getElementById(
-          "confirmar_senha",
-        )?.value || "";
+          "confirmar_senha"
+        ).value;
 
 
-      if (!nome || !email) {
+      if (!nome) {
 
         alert(
-          "Nome e e-mail são obrigatórios.",
+          "Informe seu nome."
+        );
+
+        return;
+      }
+
+
+      if (!email) {
+
+        alert(
+          "Informe seu e-mail."
         );
 
         return;
@@ -965,11 +1181,12 @@
 
 
       if (
-        !window.api?.updateAluno
+        !window.api
+          ?.updateAluno
       ) {
 
         alert(
-          "A função de atualização do aluno não está disponível.",
+          "A função de atualização do aluno não está disponível."
         );
 
         return;
@@ -978,28 +1195,29 @@
 
       try {
 
-
-
         const perfil =
           await window.api
             .updateAluno({
-              id_usuario: id,
+              id_usuario:
+                configStudentId,
+
               nome,
-              email,
+
+              email
             });
 
 
-        if (!perfil?.success) {
+        if (
+          !perfil?.success
+        ) {
 
           alert(
             perfil?.message ||
-            "Erro ao atualizar perfil.",
+            "Erro ao atualizar perfil."
           );
 
           return;
         }
-
-
 
 
         if (
@@ -1015,7 +1233,7 @@
           ) {
 
             alert(
-              "Para alterar a senha, preencha os três campos.",
+              "Preencha os três campos de senha."
             );
 
             return;
@@ -1028,7 +1246,7 @@
           ) {
 
             alert(
-              "A confirmação da nova senha não confere.",
+              "A confirmação da nova senha não confere."
             );
 
             return;
@@ -1036,11 +1254,12 @@
 
 
           if (
-            novaSenha.length < 6
+            novaSenha.length <
+            4
           ) {
 
             alert(
-              "A nova senha deve ter pelo menos 6 caracteres.",
+              "A nova senha deve possuir pelo menos 4 caracteres."
             );
 
             return;
@@ -1053,7 +1272,7 @@
           ) {
 
             alert(
-              "A função de alteração de senha não está disponível.",
+              "A função de alteração de senha não está disponível."
             );
 
             return;
@@ -1063,55 +1282,88 @@
           const senha =
             await window.api
               .changeAlunoPassword({
-                id_usuario: id,
+                id_usuario:
+                  configStudentId,
+
                 senhaAtual,
-                novaSenha,
+
+                novaSenha
               });
 
 
-          if (!senha?.success) {
+          if (
+            !senha?.success
+          ) {
 
             alert(
               senha?.message ||
-              "Erro ao alterar senha.",
+              "Erro ao alterar senha."
             );
 
             return;
           }
-
-
-          document.getElementById(
-            "senha_atual",
-          ).value = "";
-
-
-          document.getElementById(
-            "nova_senha",
-          ).value = "";
-
-
-          document.getElementById(
-            "confirmar_senha",
-          ).value = "";
         }
 
 
+        const avatar =
+          getSelectedAvatar();
 
 
-        session.nome = nome;
+        localStorage.setItem(
+          avatarKey,
+          avatar
+        );
 
-        session.email = email;
+        document.dispatchEvent(
+          new CustomEvent(
+            "student:avatar-updated",
+          ),
+        );
+
+
+        localStorage.setItem(
+          bioKey,
+          bio
+        );
+
+
+        configSession.nome =
+          nome;
+
+
+        configSession.email =
+          email;
 
 
         localStorage.setItem(
           "session",
           JSON.stringify(
-            session,
-          ),
+            configSession
+          )
         );
 
 
-        showToast();
+        document.getElementById(
+          "senha_atual"
+        ).value = "";
+
+
+        document.getElementById(
+          "nova_senha"
+        ).value = "";
+
+
+        document.getElementById(
+          "confirmar_senha"
+        ).value = "";
+
+
+        captureOriginalProfile();
+
+
+        showToast(
+          "✅ Perfil atualizado com sucesso!"
+        );
 
 
         if (
@@ -1123,103 +1375,655 @@
         }
 
 
-        atualizarDadosConta();
+        updateAccountData();
 
-      } catch (error) {
+      } catch (
+      error
+      ) {
 
         console.error(
           "Erro ao salvar perfil:",
-          error,
+          error
         );
 
 
         alert(
-          "Não foi possível salvar as alterações.",
+          "Não foi possível salvar as alterações."
         );
       }
     }
 
 
+    function cancelarPerfil() {
 
-    async function cancelarAlteracoes() {
-
-      document.getElementById(
-        "senha_atual",
-      ).value = "";
-
-
-      document.getElementById(
-        "nova_senha",
-      ).value = "";
+      const nome =
+        document.getElementById(
+          "nome_usuario"
+        );
 
 
-      document.getElementById(
-        "confirmar_senha",
-      ).value = "";
+      const email =
+        document.getElementById(
+          "email_usuario"
+        );
 
 
-      if (
-        window.reloadStudentData
-      ) {
+      const bio =
+        document.getElementById(
+          "bio_usuario"
+        );
 
-        await window
-          .reloadStudentData();
+
+      if (nome) {
+        nome.value =
+          originalProfile.nome;
       }
 
 
-      atualizarDadosConta();
+      if (email) {
+        email.value =
+          originalProfile.email;
+      }
+
+
+      if (bio) {
+        bio.value =
+          originalProfile.bio;
+      }
+
+
+      applyAvatar(
+        originalProfile.avatar
+      );
+
+
+      document.getElementById(
+        "senha_atual"
+      ).value = "";
+
+
+      document.getElementById(
+        "nova_senha"
+      ).value = "";
+
+
+      document.getElementById(
+        "confirmar_senha"
+      ).value = "";
+
+
+      showToast(
+        "↩️ Alterações canceladas."
+      );
     }
 
 
+    function toggleElement(
+      element
+    ) {
 
-
-    document
-      .getElementById(
-        "salvar_perfil",
-      )
-      ?.addEventListener(
-        "click",
-        salvarPerfilAluno,
+      element.classList.toggle(
+        "on"
       );
+    }
 
 
-    document
-      .getElementById(
-        "cancelar_perfil",
-      )
-      ?.addEventListener(
-        "click",
-        cancelarAlteracoes,
+    function saveToggleGroup(
+      selector,
+      storageKey
+    ) {
+
+      const values =
+        {};
+
+
+      document
+        .querySelectorAll(
+          selector
+        )
+        .forEach(
+          (toggle) => {
+
+            const name =
+              toggle.dataset.setting ||
+              toggle.dataset.privacy;
+
+
+            if (!name) {
+              return;
+            }
+
+
+            values[name] =
+              toggle.classList.contains(
+                "on"
+              );
+          }
+        );
+
+
+      localStorage.setItem(
+        storageKey,
+        JSON.stringify(
+          values
+        )
       );
+    }
 
 
+    function loadToggleGroup(
+      selector,
+      storageKey
+    ) {
+
+      const saved =
+        localStorage.getItem(
+          storageKey
+        );
 
 
-    const accountWatcher =
-      setInterval(() => {
+      if (!saved) {
+        return;
+      }
 
-        if (
-          window.studentData
-            ?.student
-        ) {
 
-          atualizarDadosConta();
+      try {
 
-          clearInterval(
-            accountWatcher,
+        const values =
+          JSON.parse(
+            saved
           );
-        }
-
-      }, 100);
 
 
-    setTimeout(() => {
+        document
+          .querySelectorAll(
+            selector
+          )
+          .forEach(
+            (toggle) => {
 
-      clearInterval(
-        accountWatcher,
+              const name =
+                toggle.dataset.setting ||
+                toggle.dataset.privacy;
+
+
+              if (
+                typeof values[
+                name
+                ] !==
+                "boolean"
+              ) {
+                return;
+              }
+
+
+              toggle.classList.toggle(
+                "on",
+                values[name]
+              );
+            }
+          );
+
+      } catch (
+      error
+      ) {
+
+        console.error(
+          "Erro ao carregar preferências:",
+          error
+        );
+      }
+    }
+
+
+    function salvarNotificacoes() {
+
+      saveToggleGroup(
+        "#tab-notif .toggle",
+        notificationKey
       );
 
-    }, 5000);
+
+      showToast(
+        "✅ Preferências de notificações salvas!"
+      );
+    }
+
+
+    function salvarPrivacidade() {
+
+      saveToggleGroup(
+        "#tab-priv .toggle",
+        privacyKey
+      );
+
+
+      showToast(
+        "✅ Configurações de privacidade salvas!"
+      );
+    }
+
+
+    function updateAccountData() {
+
+      const student =
+        getCurrentStudent();
+
+
+      const sessionNow =
+        JSON.parse(
+          localStorage.getItem(
+            "session"
+          ) || "{}"
+        );
+
+
+      const email =
+        student.email ||
+        sessionNow.email ||
+        "Não informado";
+
+
+      const school =
+        student.escola ||
+        "Não vinculada";
+
+
+      const emailElement =
+        document.getElementById(
+          "conta_email"
+        );
+
+
+      const schoolElement =
+        document.getElementById(
+          "conta_escola"
+        );
+
+
+      const typeElement =
+        document.getElementById(
+          "conta_tipo"
+        );
+
+
+      if (emailElement) {
+
+        emailElement.textContent =
+          email;
+      }
+
+
+      if (schoolElement) {
+
+        schoolElement.textContent =
+          school;
+      }
+
+
+      if (typeElement) {
+
+        typeElement.textContent =
+          "Aluno";
+      }
+    }
+
+
+    function safeJson(
+      key
+    ) {
+
+      try {
+
+        return JSON.parse(
+          localStorage.getItem(
+            key
+          ) ||
+          "{}"
+        );
+
+      } catch (_) {
+
+        return {};
+      }
+    }
+
+
+    function exportarDados() {
+
+      const student =
+        getCurrentStudent();
+
+
+      const data = {
+
+        nome:
+          student.nome ||
+          configSession.nome ||
+          "",
+
+
+        email:
+          student.email ||
+          configSession.email ||
+          "",
+
+
+        escola:
+          student.escola ||
+          null,
+
+
+        turma:
+          student.turma ||
+          null,
+
+
+        nivel:
+          Number(
+            student.nivel_atual
+          ) ||
+          1,
+
+
+        xp:
+          Number(
+            student.xp_atual
+          ) ||
+          0,
+
+
+        sequencia:
+          Number(
+            student.sequencia_dias
+          ) ||
+          0,
+
+
+        avatar:
+          localStorage.getItem(
+            avatarKey
+          ) ||
+          "😊",
+
+
+        bio:
+          localStorage.getItem(
+            bioKey
+          ) ||
+          "",
+
+
+        notificacoes:
+          safeJson(
+            notificationKey
+          ),
+
+
+        privacidade:
+          safeJson(
+            privacyKey
+          )
+
+      };
+
+
+      const blob =
+        new Blob(
+          [
+            JSON.stringify(
+              data,
+              null,
+              2
+            )
+          ],
+          {
+            type:
+              "application/json"
+          }
+        );
+
+
+      const url =
+        URL.createObjectURL(
+          blob
+        );
+
+
+      const link =
+        document.createElement(
+          "a"
+        );
+
+
+      link.href =
+        url;
+
+
+      link.download =
+        "monetto-meus-dados.json";
+
+
+      document.body.appendChild(
+        link
+      );
+
+
+      link.click();
+
+
+      link.remove();
+
+
+      URL.revokeObjectURL(
+        url
+      );
+
+
+      showToast(
+        "✅ Dados exportados."
+      );
+    }
+
+
+    function logoutConfig() {
+
+      const confirmar =
+        confirm(
+          "Tem certeza que deseja sair da conta?"
+        );
+
+
+      if (!confirmar) {
+        return;
+      }
+
+
+      localStorage.removeItem(
+        "session"
+      );
+
+
+      sessionStorage.clear();
+
+
+      window.location.href =
+        "../../login/login.html";
+    }
+
+
+    function initializeSettings() {
+
+      loadAvatar();
+
+      loadBio();
+
+
+      loadToggleGroup(
+        "#tab-notif .toggle",
+        notificationKey
+      );
+
+
+      loadToggleGroup(
+        "#tab-priv .toggle",
+        privacyKey
+      );
+
+
+      document
+        .querySelectorAll(
+          ".av-opt"
+        )
+        .forEach(
+          (avatar) => {
+
+            avatar.addEventListener(
+              "click",
+              () => {
+
+                document
+                  .querySelectorAll(
+                    ".av-opt"
+                  )
+                  .forEach(
+                    (item) => {
+
+                      item.classList.remove(
+                        "selected"
+                      );
+                    }
+                  );
+
+
+                avatar.classList.add(
+                  "selected"
+                );
+
+
+                applyAvatar(
+                  avatar.dataset.avatar
+                );
+              }
+            );
+          }
+        );
+
+
+      document
+        .querySelectorAll(
+          "#tab-notif .toggle, #tab-priv .toggle"
+        )
+        .forEach(
+          (toggle) => {
+
+            toggle.addEventListener(
+              "click",
+              () => {
+
+                toggleElement(
+                  toggle
+                );
+              }
+            );
+          }
+        );
+
+
+      document
+        .getElementById(
+          "salvar_perfil"
+        )
+        ?.addEventListener(
+          "click",
+          salvarPerfilAluno
+        );
+
+
+      document
+        .getElementById(
+          "cancelar_perfil"
+        )
+        ?.addEventListener(
+          "click",
+          cancelarPerfil
+        );
+
+
+      document
+        .getElementById(
+          "salvar_notificacoes"
+        )
+        ?.addEventListener(
+          "click",
+          salvarNotificacoes
+        );
+
+
+      document
+        .getElementById(
+          "salvar_privacidade"
+        )
+        ?.addEventListener(
+          "click",
+          salvarPrivacidade
+        );
+
+
+      document
+        .getElementById(
+          "exportar_dados"
+        )
+        ?.addEventListener(
+          "click",
+          exportarDados
+        );
+
+
+      document
+        .getElementById(
+          "sair_conta"
+        )
+        ?.addEventListener(
+          "click",
+          logoutConfig
+        );
+
+
+      setTimeout(
+        () => {
+
+          loadBio();
+
+          loadAvatar();
+
+          updateAccountData();
+
+          captureOriginalProfile();
+
+        },
+        700
+      );
+    }
+
+
+    if (
+      document.readyState ===
+      "loading"
+    ) {
+
+      document.addEventListener(
+        "DOMContentLoaded",
+        initializeSettings,
+        {
+          once: true
+        }
+      );
+
+    } else {
+
+      initializeSettings();
+    }
 
   </script>
 

@@ -60,7 +60,6 @@ textarea {
   font-size: inherit;
 }
 
-
 .sidebar {
   width: var(--sidebar-w);
   min-height: 100vh;
@@ -238,7 +237,6 @@ textarea {
   color: var(--text);
 }
 
-
 .stats-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -274,7 +272,6 @@ textarea {
   color: var(--text);
 }
 
-
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -306,16 +303,26 @@ textarea {
 
 .filter-sel {
   padding: 9px 14px;
-  border: 1.5px solid var(--bg);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-sm);
-  background: var(--bg);
-  color: var(--text);
+  background: #1A2454;
+  color: #FFFFFF;
   cursor: pointer;
   outline: none;
+  color-scheme: dark;
+}
+
+.filter-sel:hover {
+  border-color: rgba(255, 215, 0, 0.55);
 }
 
 .filter-sel:focus {
-  border-color: var(--navy);
+  border-color: var(--gold);
+}
+
+.filter-sel option {
+  background: #1A2454;
+  color: #FFFFFF;
 }
 
 .ftab {
@@ -340,7 +347,6 @@ textarea {
   color: #fff;
   border-color: var(--accent);
 }
-
 
 .content-grid {
   display: grid;
@@ -424,7 +430,6 @@ textarea {
   border-radius: 999px;
   font-weight: 600;
 }
-
 
 .task-item {
   display: flex;
@@ -595,7 +600,6 @@ textarea {
   color: var(--green-dark);
 }
 
-
 .task-expand {
   display: none;
   padding: 12px 12px 12px 50px;
@@ -661,7 +665,6 @@ span {
   background: var(--muted);
 }
 
-
 .right-col {
   display: flex;
   flex-direction: column;
@@ -684,7 +687,6 @@ span {
   margin-bottom: 14px;
 }
 
-
 .prog-labels {
   display: flex;
   justify-content: space-between;
@@ -696,7 +698,6 @@ span {
   background: var(--bg);
   color: var(--muted);
 }
-
 
 .cal-grid {
   display: grid;
@@ -773,7 +774,6 @@ span {
   border-radius: 50%;
 }
 
-
 .upcoming-item {
   display: flex;
   gap: 12px;
@@ -846,7 +846,6 @@ span {
   text-overflow: ellipsis;
 }
 
-
 .streak-days {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
@@ -906,7 +905,6 @@ span {
   color: var(--gold);
   font-weight: 700;
 }
-
 
 .toast {
   position: fixed;

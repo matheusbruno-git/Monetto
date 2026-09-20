@@ -20,22 +20,63 @@
 
   <link href="../../Assets/Monetto Logo.ico" rel="icon" type="image/x-icon" />
 
+
+
+  <style>
+    .quiz-question {
+      color: #152b8e !important;
+      font-weight: 700 !important;
+      font-size: 1.05rem !important;
+      line-height: 1.5 !important;
+      min-height: 60px;
+    }
+
+    .q-opt {
+      color: #152b8e !important;
+      font-weight: 500 !important;
+    }
+
+    .q-opt .q-letter {
+      color: #152b8e !important;
+      font-weight: 800 !important;
+    }
+
+    .q-opt.correct {
+      color: #087443 !important;
+    }
+
+    .q-opt.wrong {
+      color: #b4232d !important;
+    }
+
+    .qf-correct,
+    .qf-correct span {
+      color: #087443 !important;
+    }
+
+    .qf-wrong,
+    .qf-wrong span {
+      color: #b4232d !important;
+    }
+
+    .score-award-note {
+      margin-top: 10px;
+      color: #687189;
+      font-size: .82rem;
+      line-height: 1.4;
+    }
+  </style>
+
 </head>
 
 
 <body class="games-page">
 
 
-
-
   <div id="sidebar-container"></div>
 
 
-
-
   <main class="main">
-
-
 
 
     <div class="topbar">
@@ -65,12 +106,12 @@
 
 
 
-
     <div class="games-grid">
 
 
 
-      <div class="game-card gc-1" onclick="openQuiz()">
+
+      <div class="game-card gc-1" onclick="openActivity('budget')">
 
         <div class="bg-emoji">
           💰
@@ -85,7 +126,8 @@
         </h3>
 
         <p>
-          Teste seus conhecimentos sobre como planejar seu dinheiro do dia a dia.
+          Teste seus conhecimentos sobre como
+          planejar seu dinheiro do dia a dia.
         </p>
 
         <div class="game-meta">
@@ -94,7 +136,10 @@
             Até +100 XP
           </span>
 
-          <button class="play-btn" type="button" onclick="event.stopPropagation(); openQuiz();">
+          <button class="play-btn" type="button" onclick="
+              event.stopPropagation();
+              openActivity('budget');
+            ">
             ▶ Jogar
           </button>
 
@@ -105,7 +150,8 @@
 
 
 
-      <div class="game-card gc-2">
+
+      <div class="game-card gc-2" onclick="openActivity('market')">
 
         <div class="bg-emoji">
           🏪
@@ -120,17 +166,21 @@
         </h3>
 
         <p>
-          Compre e venda produtos num mercado simulado.
-          Aprenda lucro e prejuízo na prática.
+          Compre e venda produtos num mercado
+          simulado. Aprenda lucro e prejuízo
+          na prática.
         </p>
 
         <div class="game-meta">
 
           <span class="game-xp">
-            +150 XP
+            Até +150 XP
           </span>
 
-          <button class="play-btn" type="button">
+          <button class="play-btn" type="button" onclick="
+              event.stopPropagation();
+              openActivity('market');
+            ">
             ▶ Jogar
           </button>
 
@@ -141,7 +191,8 @@
 
 
 
-      <div class="game-card gc-3">
+
+      <div class="game-card gc-3" onclick="openActivity('stocks')">
 
         <div class="bg-emoji">
           📈
@@ -156,16 +207,20 @@
         </h3>
 
         <p>
-          Invista R$ 1.000 virtuais em ações e veja seu dinheiro crescer ou cair.
+          Invista R$ 1.000 virtuais e aprenda
+          sobre risco, retorno e diversificação.
         </p>
 
         <div class="game-meta">
 
           <span class="game-xp">
-            +200 XP
+            Até +200 XP
           </span>
 
-          <button class="play-btn" type="button">
+          <button class="play-btn" type="button" onclick="
+              event.stopPropagation();
+              openActivity('stocks');
+            ">
             ▶ Jogar
           </button>
 
@@ -176,7 +231,8 @@
 
 
 
-      <div class="game-card gc-4">
+
+      <div class="game-card gc-4" onclick="openActivity('saving')">
 
         <div class="bg-emoji">
           🏦
@@ -191,17 +247,20 @@
         </h3>
 
         <p>
-          Juros simples, juros compostos e o poder de poupar cedo.
-          Você sabe tudo?
+          Juros simples, juros compostos e o
+          poder de poupar cedo.
         </p>
 
         <div class="game-meta">
 
           <span class="game-xp">
-            +80 XP
+            Até +80 XP
           </span>
 
-          <button class="play-btn" type="button">
+          <button class="play-btn" type="button" onclick="
+              event.stopPropagation();
+              openActivity('saving');
+            ">
             ▶ Jogar
           </button>
 
@@ -212,7 +271,8 @@
 
 
 
-      <div class="game-card gc-5">
+
+      <div class="game-card gc-5" onclick="openActivity('consumer')">
 
         <div class="bg-emoji">
           🛒
@@ -234,10 +294,13 @@
         <div class="game-meta">
 
           <span class="game-xp">
-            +120 XP
+            Até +120 XP
           </span>
 
-          <button class="play-btn" type="button">
+          <button class="play-btn" type="button" onclick="
+              event.stopPropagation();
+              openActivity('consumer');
+            ">
             ▶ Jogar
           </button>
 
@@ -248,7 +311,7 @@
 
 
 
-      <div class="game-card gc-6">
+      <div class="game-card gc-6" onclick="openActivity('credit')">
 
         <div class="bg-emoji">
           💳
@@ -263,17 +326,20 @@
         </h3>
 
         <p>
-          Entenda como o crédito funciona,
-          evite dívidas e use o cartão com sabedoria.
+          Entenda crédito, juros, parcelamento
+          e uso responsável do cartão.
         </p>
 
         <div class="game-meta">
 
           <span class="game-xp">
-            +90 XP
+            Até +90 XP
           </span>
 
-          <button class="play-btn" type="button">
+          <button class="play-btn" type="button" onclick="
+              event.stopPropagation();
+              openActivity('credit');
+            ">
             ▶ Jogar
           </button>
 
@@ -283,6 +349,7 @@
 
 
     </div>
+
 
 
 
@@ -309,6 +376,7 @@
 
 
 
+
   <div class="quiz-overlay" id="quizOverlay">
 
     <div class="quiz-modal">
@@ -320,15 +388,16 @@
 
         <div class="quiz-header">
 
-          <div class="quiz-title">
+          <div class="quiz-title" id="activityTitle">
             💰 Quiz: Orçamento Pessoal
           </div>
 
-          <button class="quiz-close" type="button" onclick="closeQuiz()">
+          <button class="quiz-close" type="button" onclick="closeActivity()">
             ✕
           </button>
 
         </div>
+
 
 
         <div class="quiz-progress-wrap">
@@ -355,15 +424,19 @@
         </div>
 
 
+
         <div class="quiz-q-num" id="qNum">
           Pergunta 1 / 5
         </div>
 
 
+
         <div class="quiz-question" id="qText"></div>
 
 
+
         <div class="quiz-options" id="qOptions"></div>
+
 
 
         <div class="quiz-feedback qf-correct" id="qFeedbackCorrect">
@@ -372,10 +445,12 @@
         </div>
 
 
+
         <div class="quiz-feedback qf-wrong" id="qFeedbackWrong">
           ❌
           <span id="qFeedbackWrongText"></span>
         </div>
+
 
 
         <button class="quiz-next" id="qNext" type="button" onclick="nextQuestion()">
@@ -394,9 +469,11 @@
           🏆
         </div>
 
+
         <h2 id="scoreTitle">
-          Quiz Concluído!
+          Atividade concluída!
         </h2>
+
 
         <p id="scoreSubtitle" style="
             color:var(--muted);
@@ -411,7 +488,7 @@
 
         <div class="score-xp-earned">
 
-          Você ganhou
+          Você conquistou
 
           <strong id="scoreXP">
             0 XP
@@ -422,18 +499,20 @@
         </div>
 
 
+        <div class="score-award-note" id="scoreAwardNote"></div>
+
+
         <div class="score-actions">
 
-          <button class="btn-retry" type="button" onclick="restartQuiz()">
+          <button class="btn-retry" type="button" onclick="restartActivity()">
             🔄 Tentar novamente
           </button>
 
-          <button class="btn-finish" type="button" onclick="closeQuiz()">
+          <button class="btn-finish" type="button" onclick="closeActivity()">
             ✓ Concluir
           </button>
 
         </div>
-
 
       </div>
 
@@ -445,168 +524,935 @@
 
 
 
+
   <script src="../student-script.js"></script>
 
   <script src="../student-data.js"></script>
 
 
 
-
   <script>
 
-    const questions = [
-      {
-        q:
-          "João recebe R$ 1.200 por mês. Ele gasta R$ 800 com despesas fixas. Qual é a porcentagem que sobra para poupar?",
 
-        opts: [
-          "20%",
-          "30%",
-          "33%",
-          "40%",
+
+    const activities = {
+
+
+
+      budget: {
+
+        title:
+          "💰 Quiz: Orçamento Pessoal",
+
+        maxXp: 100,
+
+        source:
+          "quiz_orcamento",
+
+        questions: [
+
+          {
+            q:
+              "Uma estudante recebe R$ 600 por mês e possui R$ 420 de despesas necessárias. Quanto sobra para poupança, lazer ou outros objetivos?",
+
+            opts: [
+              "R$ 120",
+              "R$ 150",
+              "R$ 180",
+              "R$ 220",
+            ],
+
+            correct: 2,
+
+            explain:
+              "R$ 600 − R$ 420 = R$ 180 disponíveis.",
+
+            wrongExplain:
+              "É necessário subtrair as despesas da renda: R$ 600 − R$ 420 = R$ 180.",
+          },
+
+
+          {
+            q:
+              "Qual atitude representa melhor a criação de um orçamento pessoal?",
+
+            opts: [
+              "Registrar receitas e despesas para planejar o uso do dinheiro",
+              "Gastar primeiro e verificar o saldo depois",
+              "Utilizar todo o limite do cartão",
+              "Registrar somente as compras mais caras",
+            ],
+
+            correct: 0,
+
+            explain:
+              "O orçamento organiza entradas e saídas para apoiar o planejamento financeiro.",
+
+            wrongExplain:
+              "Um orçamento precisa considerar receitas e despesas para permitir planejamento.",
+          },
+
+
+          {
+            q:
+              "Na regra 50-30-20, qual percentual é reservado para poupança ou objetivos financeiros?",
+
+            opts: [
+              "10%",
+              "20%",
+              "30%",
+              "50%",
+            ],
+
+            correct: 1,
+
+            explain:
+              "A regra usa 20% como referência para poupança ou objetivos.",
+
+            wrongExplain:
+              "A divisão de referência é 50% necessidades, 30% desejos e 20% poupança.",
+          },
+
+
+          {
+            q:
+              "Uma pessoa pretende guardar R$ 80 por mês durante 5 meses. Sem considerar rendimento, quanto terá acumulado?",
+
+            opts: [
+              "R$ 320",
+              "R$ 360",
+              "R$ 400",
+              "R$ 480",
+            ],
+
+            correct: 2,
+
+            explain:
+              "R$ 80 × 5 = R$ 400.",
+
+            wrongExplain:
+              "Multiplicando R$ 80 pelos 5 meses, o total é R$ 400.",
+          },
+
+
+          {
+            q:
+              "Qual é a principal finalidade de uma reserva de emergência?",
+
+            opts: [
+              "Aumentar o limite do cartão",
+              "Financiar apenas gastos de lazer",
+              "Cobrir despesas inesperadas sem depender imediatamente de crédito",
+              "Substituir completamente um orçamento",
+            ],
+
+            correct: 2,
+
+            explain:
+              "A reserva ajuda a enfrentar imprevistos sem depender imediatamente de dívida.",
+
+            wrongExplain:
+              "A reserva de emergência é destinada principalmente a situações inesperadas.",
+          },
+
         ],
 
-        correct: 2,
-
-        explain:
-          "R$ 400 sobra de R$ 1.200, o que representa 400/1200 × 100 = 33,3%.",
-
-        wrongExplain:
-          "A resposta correta é 33%. R$ 400 de R$ 1.200 = 33,3%.",
       },
 
-      {
-        q:
-          "O que é uma despesa FIXA?",
 
-        opts: [
-          "Gasto que varia todo mês",
-          "Gasto com lazer e diversão",
-          "Gasto com valor igual todo mês como aluguel",
-          "Gasto inesperado e emergencial",
+
+
+
+      market: {
+
+        title:
+          "🏪 Mercado Virtual",
+
+        maxXp: 150,
+
+        source:
+          "jogo_mercado_virtual",
+
+        questions: [
+
+          {
+            q:
+              "Uma loja comprou um produto por R$ 45 e vendeu por R$ 60. Qual foi o lucro?",
+
+            opts: [
+              "R$ 10",
+              "R$ 15",
+              "R$ 20",
+              "R$ 25",
+            ],
+
+            correct: 1,
+
+            explain:
+              "Lucro = preço de venda − custo. R$ 60 − R$ 45 = R$ 15.",
+
+            wrongExplain:
+              "O lucro é a diferença entre R$ 60 de venda e R$ 45 de custo: R$ 15.",
+          },
+
+
+          {
+            q:
+              "Um produto foi comprado por R$ 90 e vendido por R$ 75. Qual foi o resultado da operação?",
+
+            opts: [
+              "Lucro de R$ 15",
+              "Prejuízo de R$ 15",
+              "Lucro de R$ 25",
+              "Não houve lucro nem prejuízo",
+            ],
+
+            correct: 1,
+
+            explain:
+              "R$ 75 − R$ 90 = −R$ 15. Houve prejuízo de R$ 15.",
+
+            wrongExplain:
+              "Como o preço de venda ficou abaixo do custo, houve prejuízo de R$ 15.",
+          },
+
+
+          {
+            q:
+              "Antes de comprar mercadorias para revenda, qual atitude ajuda a tomar uma decisão mais segura?",
+
+            opts: [
+              "Comprar todo o estoque disponível",
+              "Analisar custo, procura e dinheiro disponível",
+              "Escolher sempre o produto mais caro",
+              "Ignorar o saldo disponível",
+            ],
+
+            correct: 1,
+
+            explain:
+              "Analisar custo, demanda e recursos disponíveis reduz o risco da decisão.",
+
+            wrongExplain:
+              "Uma boa decisão comercial precisa considerar custo, possibilidade de venda e caixa disponível.",
+          },
+
+
+          {
+            q:
+              "Um produto custa R$ 80. Para obter lucro de R$ 20, por quanto ele deve ser vendido?",
+
+            opts: [
+              "R$ 90",
+              "R$ 95",
+              "R$ 100",
+              "R$ 110",
+            ],
+
+            correct: 2,
+
+            explain:
+              "R$ 80 de custo + R$ 20 de lucro = R$ 100.",
+
+            wrongExplain:
+              "O preço precisa cobrir R$ 80 de custo e acrescentar R$ 20 de lucro.",
+          },
+
+
+          {
+            q:
+              "Por que registrar custos e vendas é importante em um negócio?",
+
+            opts: [
+              "Para descobrir se houve lucro ou prejuízo",
+              "Para aumentar automaticamente os preços",
+              "Para garantir que todos os produtos sejam vendidos",
+              "Para evitar qualquer despesa",
+            ],
+
+            correct: 0,
+
+            explain:
+              "Os registros permitem comparar receitas e custos e medir o resultado.",
+
+            wrongExplain:
+              "Registrar movimentações ajuda a calcular resultados, mas não garante vendas nem elimina despesas.",
+          },
+
         ],
 
-        correct: 2,
-
-        explain:
-          "Despesas fixas têm valor constante todo mês, como aluguel, escola e plano de saúde.",
-
-        wrongExplain:
-          "Despesa fixa é aquela com valor constante todo mês, como aluguel.",
       },
 
-      {
-        q:
-          "Qual é a regra do orçamento 50-30-20?",
 
-        opts: [
-          "50% lazer, 30% poupança, 20% necessidades",
-          "50% necessidades, 30% desejos, 20% poupança",
-          "50% poupança, 30% necessidades, 20% desejos",
-          "50% desejos, 30% investimento, 20% gastos",
+
+
+
+      stocks: {
+
+        title:
+          "📈 Bolsa de Valores Jr.",
+
+        maxXp: 200,
+
+        source:
+          "simulacao_bolsa",
+
+        questions: [
+
+          {
+            q:
+              "Qual atitude ajuda a reduzir o risco de colocar todo o dinheiro em apenas um investimento?",
+
+            opts: [
+              "Diversificar os investimentos",
+              "Comprar por impulso",
+              "Investir dinheiro emprestado",
+              "Ignorar os riscos",
+            ],
+
+            correct: 0,
+
+            explain:
+              "Diversificação distribui os recursos entre diferentes opções.",
+
+            wrongExplain:
+              "Concentrar recursos ou ignorar riscos não reduz a exposição a perdas.",
+          },
+
+
+          {
+            q:
+              "Uma ação foi comprada por R$ 25 e passou a valer R$ 30. Qual foi a valorização por ação?",
+
+            opts: [
+              "R$ 3",
+              "R$ 5",
+              "R$ 7",
+              "R$ 10",
+            ],
+
+            correct: 1,
+
+            explain:
+              "R$ 30 − R$ 25 = R$ 5.",
+
+            wrongExplain:
+              "A valorização corresponde à diferença entre R$ 30 e R$ 25.",
+          },
+
+
+          {
+            q:
+              "O que significa dizer que um investimento possui risco?",
+
+            opts: [
+              "Que o lucro é garantido",
+              "Que existe possibilidade de variação e perda",
+              "Que sempre terá rendimento alto",
+              "Que o valor nunca pode diminuir",
+            ],
+
+            correct: 1,
+
+            explain:
+              "Risco envolve incerteza sobre os resultados e possibilidade de perda.",
+
+            wrongExplain:
+              "Investimentos com risco não possuem retorno garantido.",
+          },
+
+
+          {
+            q:
+              "Qual atitude é mais adequada antes de escolher um investimento?",
+
+            opts: [
+              "Conhecer objetivos, prazo e riscos",
+              "Escolher apenas pela propaganda",
+              "Investir sem entender o produto",
+              "Utilizar todo o dinheiro disponível",
+            ],
+
+            correct: 0,
+
+            explain:
+              "Objetivos, prazo e risco ajudam a avaliar se uma opção faz sentido.",
+
+            wrongExplain:
+              "Uma decisão de investimento exige análise e planejamento.",
+          },
+
+
+          {
+            q:
+              "Um investimento passou de R$ 1.000 para R$ 1.100. Qual foi a valorização percentual?",
+
+            opts: [
+              "5%",
+              "10%",
+              "15%",
+              "20%",
+            ],
+
+            correct: 1,
+
+            explain:
+              "O ganho foi R$ 100. R$ 100 ÷ R$ 1.000 × 100 = 10%.",
+
+            wrongExplain:
+              "O aumento de R$ 100 corresponde a 10% do valor inicial de R$ 1.000.",
+          },
+
         ],
 
-        correct: 1,
-
-        explain:
-          "A regra 50-30-20 diz: 50% para necessidades, 30% para desejos e 20% para poupança/investimentos.",
-
-        wrongExplain:
-          "A regra é: 50% necessidades, 30% desejos, 20% poupança.",
       },
 
-      {
-        q:
-          "Maria quer comprar um celular de R$ 1.500. Ela poupa R$ 150 por mês. Em quanto tempo ela terá o dinheiro?",
 
-        opts: [
-          "8 meses",
-          "10 meses",
-          "12 meses",
-          "15 meses",
+
+
+
+      saving: {
+
+        title:
+          "🏦 Quiz: Poupança & Juros",
+
+        maxXp: 80,
+
+        source:
+          "quiz_poupanca_juros",
+
+        questions: [
+
+          {
+            q:
+              "Qual alternativa descreve melhor o hábito de poupar?",
+
+            opts: [
+              "Separar parte da renda para objetivos futuros",
+              "Gastar toda a renda disponível",
+              "Utilizar sempre crédito",
+              "Comprar apenas de forma parcelada",
+            ],
+
+            correct: 0,
+
+            explain:
+              "Poupar significa reservar recursos para necessidades ou objetivos futuros.",
+
+            wrongExplain:
+              "Poupar exige reservar recursos, e não aumentar gastos ou dívidas.",
+          },
+
+
+          {
+            q:
+              "Nos juros simples, a taxa de juros é calculada sobre qual valor-base durante os períodos?",
+
+            opts: [
+              "O capital inicial",
+              "O saldo acumulado a cada período",
+              "A renda mensal da pessoa",
+              "O limite disponível no cartão",
+            ],
+
+            correct: 0,
+
+            explain:
+              "Nos juros simples, o capital inicial permanece como base para os cálculos.",
+
+            wrongExplain:
+              "O modelo de juros simples utiliza o capital inicial como base.",
+          },
+
+
+          {
+            q:
+              "O que caracteriza os juros compostos?",
+
+            opts: [
+              "Os juros acumulados passam a participar dos cálculos dos períodos seguintes",
+              "A taxa de juros sempre é zero",
+              "O valor nunca muda com o tempo",
+              "Os juros são calculados apenas uma vez",
+            ],
+
+            correct: 0,
+
+            explain:
+              "Nos juros compostos ocorre a acumulação de juros ao longo do tempo.",
+
+            wrongExplain:
+              "Nos juros compostos, os juros acumulados influenciam os períodos seguintes.",
+          },
+
+
+          {
+            q:
+              "Uma pessoa guarda R$ 60 por mês durante 4 meses. Sem rendimento, qual é o total acumulado?",
+
+            opts: [
+              "R$ 180",
+              "R$ 200",
+              "R$ 240",
+              "R$ 260",
+            ],
+
+            correct: 2,
+
+            explain:
+              "R$ 60 × 4 = R$ 240.",
+
+            wrongExplain:
+              "O total corresponde a R$ 60 multiplicados pelos 4 meses.",
+          },
+
+
+          {
+            q:
+              "Qual prática favorece a construção de uma poupança ao longo do tempo?",
+
+            opts: [
+              "Guardar regularmente parte da renda",
+              "Esperar sempre sobrar muito dinheiro",
+              "Usar a reserva para compras por impulso",
+              "Contrair dívida para criar uma reserva",
+            ],
+
+            correct: 0,
+
+            explain:
+              "A regularidade ajuda a transformar a poupança em hábito.",
+
+            wrongExplain:
+              "Uma poupança sustentável depende de planejamento e regularidade.",
+          },
+
         ],
 
-        correct: 1,
-
-        explain:
-          "R$ 1.500 ÷ R$ 150 = 10 meses. Planejamento é tudo!",
-
-        wrongExplain:
-          "R$ 1.500 ÷ R$ 150 = 10 meses. Maria precisaria de 10 meses poupando.",
       },
 
-      {
-        q:
-          "O que é fundo de emergência?",
 
-        opts: [
-          "Dinheiro para gastar nas férias",
-          "Investimento em ações",
-          "Reserva para cobrir gastos imprevistos por 3 a 6 meses",
-          "Empréstimo bancário de emergência",
+
+
+      consumer: {
+
+        title:
+          "🛒 Desafio do Consumidor",
+
+        maxXp: 120,
+
+        source:
+          "jogo_consumidor",
+
+        questions: [
+
+          {
+            q:
+              "Você possui um celular funcionando, mas quer trocar apenas porque surgiu um modelo novo. Essa compra é principalmente:",
+
+            opts: [
+              "Uma necessidade básica",
+              "Um desejo",
+              "Uma emergência financeira",
+              "Uma obrigação",
+            ],
+
+            correct: 1,
+
+            explain:
+              "Como o aparelho atual ainda funciona, a troca é principalmente um desejo.",
+
+            wrongExplain:
+              "Nesse cenário não existe necessidade imediata de substituir o aparelho.",
+          },
+
+
+          {
+            q:
+              "Qual atitude representa melhor um consumo consciente?",
+
+            opts: [
+              "Comparar preços e verificar se a compra cabe no orçamento",
+              "Comprar porque a promoção termina hoje",
+              "Utilizar todo o limite disponível",
+              "Ignorar o preço total de uma compra parcelada",
+            ],
+
+            correct: 0,
+
+            explain:
+              "Comparar preços e avaliar o orçamento reduz decisões impulsivas.",
+
+            wrongExplain:
+              "Consumo consciente envolve análise da necessidade, preço e capacidade de pagamento.",
+          },
+
+
+          {
+            q:
+              "Um produto custa R$ 180 à vista ou 6 parcelas de R$ 35. Qual opção possui menor custo total?",
+
+            opts: [
+              "À vista por R$ 180",
+              "Parcelado por R$ 190",
+              "Parcelado por R$ 200",
+              "Parcelado por R$ 210",
+            ],
+
+            correct: 0,
+
+            explain:
+              "6 × R$ 35 = R$ 210. O preço à vista de R$ 180 é menor.",
+
+            wrongExplain:
+              "O parcelamento totaliza R$ 210, portanto o pagamento à vista custa menos.",
+          },
+
+
+          {
+            q:
+              "Qual situação representa melhor uma compra por impulso?",
+
+            opts: [
+              "Comprar sem planejamento apenas porque viu uma promoção",
+              "Pesquisar preços antes da compra",
+              "Guardar dinheiro antes de comprar",
+              "Verificar se realmente precisa do produto",
+            ],
+
+            correct: 0,
+
+            explain:
+              "Comprar apenas por causa do estímulo de uma promoção pode ser uma decisão impulsiva.",
+
+            wrongExplain:
+              "Pesquisar, planejar e verificar necessidade são comportamentos mais conscientes.",
+          },
+
+
+          {
+            q:
+              "Uma pessoa tem dinheiro limitado e precisa escolher entre alimentação e um gasto de lazer. Qual deve ser priorizado?",
+
+            opts: [
+              "Alimentação",
+              "Lazer",
+              "Os dois sempre possuem a mesma prioridade",
+              "Nenhum deles",
+            ],
+
+            correct: 0,
+
+            explain:
+              "Alimentação é uma necessidade básica e deve ser considerada antes de um gasto de lazer.",
+
+            wrongExplain:
+              "Quando os recursos são limitados, necessidades essenciais têm prioridade sobre desejos.",
+          },
+
         ],
 
-        correct: 2,
-
-        explain:
-          "Fundo de emergência é uma reserva equivalente a 3–6 meses de despesas para cobrir imprevistos como desemprego ou doença.",
-
-        wrongExplain:
-          "Fundo de emergência é uma reserva para cobrir imprevistos equivalente a 3–6 meses de despesas.",
       },
-    ];
 
 
-    let current = 0;
-
-    let score = 0;
-
-    let answered = false;
 
 
-    function openQuiz() {
 
-      current = 0;
+      credit: {
 
-      score = 0;
+        title:
+          "💳 Quiz: Crédito & Dívida",
 
-      answered = false;
+        maxXp: 90,
+
+        source:
+          "quiz_credito_divida",
+
+        questions: [
+
+          {
+            q:
+              "O que significa utilizar crédito em uma compra?",
+
+            opts: [
+              "Utilizar recursos agora com compromisso de pagamento futuro",
+              "Receber dinheiro sem precisar devolver",
+              "Obter automaticamente um desconto",
+              "Utilizar somente dinheiro já poupado",
+            ],
+
+            correct: 0,
+
+            explain:
+              "Crédito permite utilizar recursos agora assumindo obrigação de pagamento futuro.",
+
+            wrongExplain:
+              "Crédito cria um compromisso de pagamento futuro.",
+          },
+
+
+          {
+            q:
+              "Por que é importante verificar a taxa de juros antes de contratar crédito?",
+
+            opts: [
+              "Porque ela influencia o custo total da dívida",
+              "Porque elimina todas as parcelas",
+              "Porque garante um desconto",
+              "Porque não altera o valor pago",
+            ],
+
+            correct: 0,
+
+            explain:
+              "A taxa de juros interfere no valor total que será pago.",
+
+            wrongExplain:
+              "Os juros fazem parte do custo do crédito e precisam ser considerados.",
+          },
+
+
+          {
+            q:
+              "Uma compra de R$ 600 será paga em 6 parcelas iguais sem juros. Qual será o valor de cada parcela?",
+
+            opts: [
+              "R$ 80",
+              "R$ 90",
+              "R$ 100",
+              "R$ 120",
+            ],
+
+            correct: 2,
+
+            explain:
+              "R$ 600 ÷ 6 = R$ 100 por parcela.",
+
+            wrongExplain:
+              "Sem juros, basta dividir os R$ 600 igualmente entre as 6 parcelas.",
+          },
+
+
+          {
+            q:
+              "Qual atitude ajuda a evitar endividamento excessivo com cartão de crédito?",
+
+            opts: [
+              "Acompanhar a fatura e gastar dentro do orçamento",
+              "Tratar o limite como renda extra",
+              "Pagar sempre apenas o valor mínimo",
+              "Ignorar parcelas anteriores",
+            ],
+
+            correct: 0,
+
+            explain:
+              "Acompanhar a fatura e respeitar o orçamento ajuda a manter as obrigações sob controle.",
+
+            wrongExplain:
+              "O limite não é renda e deve ser utilizado dentro da capacidade de pagamento.",
+          },
+
+
+          {
+            q:
+              "Se uma dívida acumula juros ao longo do tempo, qual consequência pode ocorrer?",
+
+            opts: [
+              "O custo total pode ficar maior que o valor inicialmente utilizado",
+              "A dívida desaparece automaticamente",
+              "Os juros reduzem o valor da dívida",
+              "O prazo deixa de influenciar o custo",
+            ],
+
+            correct: 0,
+
+            explain:
+              "A incidência de juros pode elevar o custo total acima do valor original.",
+
+            wrongExplain:
+              "Tempo e juros podem aumentar o valor total devido.",
+          },
+
+        ],
+
+      },
+
+    };
+
+
+
+
+    let currentActivityId =
+      "budget";
+
+    let currentActivity =
+      activities[
+      currentActivityId
+      ];
+
+    let current =
+      0;
+
+    let score =
+      0;
+
+    let answered =
+      false;
+
+    let scoreSaved =
+      false;
+
+
+
+
+
+    function getCurrentStudentId() {
+
+      try {
+
+        const session =
+          JSON.parse(
+            localStorage.getItem(
+              "session",
+            ) || "{}",
+          );
+
+        return (
+          session.id_usuario ||
+          session.id ||
+          null
+        );
+
+      } catch (error) {
+
+        console.error(
+          "Erro ao ler sessão:",
+          error,
+        );
+
+        return null;
+      }
+    }
+
+
+
+
+    function getXpPerCorrect() {
+
+      return (
+        currentActivity.maxXp /
+        currentActivity.questions.length
+      );
+    }
+
+
+
+
+    function openActivity(
+      activityId,
+    ) {
+
+      if (
+        !activities[
+        activityId
+        ]
+      ) {
+
+        console.error(
+          "Atividade não encontrada:",
+          activityId,
+        );
+
+        return;
+      }
+
+
+      currentActivityId =
+        activityId;
+
+
+      currentActivity =
+        activities[
+        activityId
+        ];
+
+
+      current =
+        0;
+
+      score =
+        0;
+
+      answered =
+        false;
+
+      scoreSaved =
+        false;
+
+
+      document.getElementById(
+        "activityTitle",
+      ).textContent =
+        currentActivity.title;
 
 
       document.getElementById(
         "quizScreen",
-      ).style.display = "block";
+      ).style.display =
+        "block";
 
 
       document.getElementById(
         "scoreScreen",
-      ).style.display = "none";
+      ).style.display =
+        "none";
+
+
+      document.getElementById(
+        "scoreAwardNote",
+      ).textContent =
+        "";
 
 
       document.getElementById(
         "quizOverlay",
-      ).classList.add("open");
+      ).classList.add(
+        "open",
+      );
 
 
       renderQuestion();
     }
 
 
-    function closeQuiz() {
+
+
+
+    function closeActivity() {
 
       document.getElementById(
         "quizOverlay",
-      ).classList.remove("open");
+      ).classList.remove(
+        "open",
+      );
     }
+
+
+
 
 
     function renderQuestion() {
 
-      answered = false;
+      answered =
+        false;
 
 
-      const q =
-        questions[current];
+      const question =
+        currentActivity
+          .questions[
+        current
+        ];
 
 
       const letters = [
@@ -619,59 +1465,76 @@
 
       document.getElementById(
         "qText",
-      ).textContent = q.q;
+      ).textContent =
+        question.q;
 
 
       document.getElementById(
         "qNum",
       ).textContent =
-        `Pergunta ${current + 1} / ${questions.length}`;
+        `Pergunta ${current + 1} / ${currentActivity.questions.length}`;
 
 
       document.getElementById(
         "qLabel",
       ).textContent =
-        `Pergunta ${current + 1} de ${questions.length}`;
+        `Pergunta ${current + 1} de ${currentActivity.questions.length}`;
 
 
       document.getElementById(
         "qXP",
       ).textContent =
-        `${score * 20} XP`;
+        `${Math.round(
+          score *
+          getXpPerCorrect(),
+        )} XP`;
 
 
       document.getElementById(
         "qProgress",
       ).style.width =
-        `${((current + 1) / questions.length) * 100}%`;
+        `${(
+          (current + 1) /
+          currentActivity
+            .questions.length
+        ) *
+        100
+        }%`;
 
 
       document.getElementById(
         "qFeedbackCorrect",
-      ).style.display = "none";
+      ).style.display =
+        "none";
 
 
       document.getElementById(
         "qFeedbackWrong",
-      ).style.display = "none";
+      ).style.display =
+        "none";
 
 
       document.getElementById(
         "qNext",
-      ).style.display = "none";
+      ).style.display =
+        "none";
 
 
-      const optsEl =
+      const options =
         document.getElementById(
           "qOptions",
         );
 
 
-      optsEl.innerHTML = "";
+      options.innerHTML =
+        "";
 
 
-      q.opts.forEach(
-        (opt, index) => {
+      question.opts.forEach(
+        (
+          option,
+          index,
+        ) => {
 
           const button =
             document.createElement(
@@ -691,24 +1554,33 @@
             <span class="q-letter">
               ${letters[index]}
             </span>
-            ${opt}
+
+            <span>
+              ${option}
+            </span>
           `;
 
 
-          button.onclick =
-            () =>
+          button.addEventListener(
+            "click",
+            () => {
+
               answer(
                 index,
                 button,
               );
+            },
+          );
 
 
-          optsEl.appendChild(
+          options.appendChild(
             button,
           );
         },
       );
     }
+
+
 
 
     function answer(
@@ -721,29 +1593,36 @@
       }
 
 
-      answered = true;
+      answered =
+        true;
 
 
-      const q =
-        questions[current];
+      const question =
+        currentActivity
+          .questions[
+        current
+        ];
 
 
       const allOptions =
         document.querySelectorAll(
-          ".q-opt",
+          "#qOptions .q-opt",
         );
 
 
       allOptions.forEach(
-        (item) =>
+        (item) => {
+
           item.classList.add(
             "disabled",
-          ),
+          );
+        },
       );
 
 
       if (
-        index === q.correct
+        index ===
+        question.correct
       ) {
 
         button.classList.add(
@@ -754,19 +1633,15 @@
         score++;
 
 
-        const feedback =
-          document.getElementById(
-            "qFeedbackCorrect",
-          );
-
-
         document.getElementById(
           "qFeedbackText",
         ).textContent =
-          q.explain;
+          question.explain;
 
 
-        feedback.style.display =
+        document.getElementById(
+          "qFeedbackCorrect",
+        ).style.display =
           "block";
 
       } else {
@@ -776,44 +1651,64 @@
         );
 
 
-        allOptions[
-          q.correct
-        ].classList.add(
-          "correct",
-        );
+        if (
+          allOptions[
+          question.correct
+          ]
+        ) {
 
-
-        const feedback =
-          document.getElementById(
-            "qFeedbackWrong",
+          allOptions[
+            question.correct
+          ].classList.add(
+            "correct",
           );
+        }
 
 
         document.getElementById(
           "qFeedbackWrongText",
         ).textContent =
-          q.wrongExplain;
+          question.wrongExplain;
 
 
-        feedback.style.display =
+        document.getElementById(
+          "qFeedbackWrong",
+        ).style.display =
           "block";
       }
 
 
       document.getElementById(
-        "qNext",
-      ).style.display =
+        "qXP",
+      ).textContent =
+        `${Math.round(
+          score *
+          getXpPerCorrect(),
+        )} XP`;
+
+
+      const nextButton =
+        document.getElementById(
+          "qNext",
+        );
+
+
+      nextButton.style.display =
         "block";
 
 
-      document.getElementById(
-        "qNext",
-      ).textContent =
+      nextButton.textContent =
         current <
-          questions.length - 1
+          currentActivity
+            .questions.length -
+          1
+
           ? "Próxima pergunta →"
+
           : "Ver resultado →";
     }
+
+
 
 
     function nextQuestion() {
@@ -823,7 +1718,8 @@
 
       if (
         current >=
-        questions.length
+        currentActivity
+          .questions.length
       ) {
 
         showScore();
@@ -834,6 +1730,9 @@
 
       renderQuestion();
     }
+
+
+
 
 
     async function showScore() {
@@ -852,14 +1751,20 @@
 
       const percentage =
         Math.round(
-          (score /
-            questions.length) *
+          (
+            score /
+            currentActivity
+              .questions.length
+          ) *
           100,
         );
 
 
       const xp =
-        score * 20;
+        Math.round(
+          score *
+          getXpPerCorrect(),
+        );
 
 
       document.getElementById(
@@ -874,85 +1779,10 @@
         `${xp} XP`;
 
 
-
-
-      let session = {};
-
-      try {
-
-        session =
-          JSON.parse(
-            localStorage.getItem(
-              "session",
-            ) || "{}",
-          );
-
-      } catch (error) {
-
-        console.error(
-          "Erro ao ler sessão:",
-          error,
-        );
-      }
-
-
-      const studentId =
-        session.id_usuario ||
-        session.id;
-
-
-
-
-      if (
-        xp > 0 &&
-        studentId &&
-        window.api
-          ?.awardStudentXp
-      ) {
-
-        try {
-
-          const result =
-            await window.api
-              .awardStudentXp(
-                studentId,
-                xp,
-                "quiz_financas",
-              );
-
-
-          if (
-            !result?.success
-          ) {
-
-            console.error(
-              result?.message ||
-              "Não foi possível registrar XP.",
-            );
-
-          } else if (
-            window
-              .reloadStudentData
-          ) {
-
-            await window
-              .reloadStudentData();
-          }
-
-        } catch (error) {
-
-          console.error(
-            "Erro ao registrar XP do quiz:",
-            error,
-          );
-        }
-      }
-
-
       document.getElementById(
         "scoreSubtitle",
       ).textContent =
-        `Você acertou ${score} de ${questions.length} perguntas`;
+        `Você acertou ${score} de ${currentActivity.questions.length} perguntas`;
 
 
       const trophy =
@@ -995,16 +1825,185 @@
         title.textContent =
           "Continue estudando!";
       }
+
+
+      await registerXp(
+        xp,
+      );
     }
 
 
-    function restartQuiz() {
 
-      current = 0;
 
-      score = 0;
 
-      answered = false;
+    async function registerXp(
+      xp,
+    ) {
+
+      if (scoreSaved) {
+        return;
+      }
+
+
+      scoreSaved =
+        true;
+
+
+      const studentId =
+        getCurrentStudentId();
+
+
+      const note =
+        document.getElementById(
+          "scoreAwardNote",
+        );
+
+
+      if (!studentId) {
+
+        note.textContent =
+          "Não foi possível identificar o aluno.";
+
+        return;
+      }
+
+
+      const storageKey =
+        `monetto_best_${studentId}_${currentActivityId}`;
+
+
+      const previousBest =
+        Number(
+          localStorage.getItem(
+            storageKey,
+          ) || 0,
+        );
+
+
+      const xpToAward =
+        Math.max(
+          0,
+          xp -
+          previousBest,
+        );
+
+
+      if (
+        xp > previousBest
+      ) {
+
+        localStorage.setItem(
+          storageKey,
+          String(xp),
+        );
+      }
+
+
+      if (
+        xpToAward <= 0
+      ) {
+
+        note.textContent =
+          `Seu melhor resultado nesta atividade já vale ${previousBest} XP. Nenhum XP adicional foi registrado.`;
+
+        return;
+      }
+
+
+      if (
+        !window.api
+          ?.awardStudentXp
+      ) {
+
+        note.textContent =
+          "Atividade concluída, mas a função de registrar XP não está disponível.";
+
+        return;
+      }
+
+
+      try {
+
+        const result =
+          await window.api
+            .awardStudentXp(
+              studentId,
+              xpToAward,
+              currentActivity
+                .source,
+            );
+
+
+        if (
+          !result?.success
+        ) {
+
+          console.error(
+            result?.message ||
+            "Erro ao registrar XP.",
+          );
+
+
+          note.textContent =
+            "Atividade concluída, mas não foi possível registrar o XP.";
+
+          return;
+        }
+
+
+        if (
+          xpToAward ===
+          xp
+        ) {
+
+          note.textContent =
+            `${xpToAward} XP foram adicionados ao seu progresso.`;
+
+        } else {
+
+          note.textContent =
+            `Você melhorou seu resultado e ganhou mais ${xpToAward} XP.`;
+        }
+
+
+        if (
+          window
+            .reloadStudentData
+        ) {
+
+          await window
+            .reloadStudentData();
+        }
+
+      } catch (error) {
+
+        console.error(
+          "Erro ao registrar XP:",
+          error,
+        );
+
+
+        note.textContent =
+          "Não foi possível atualizar o XP neste momento.";
+      }
+    }
+
+
+
+
+    function restartActivity() {
+
+      current =
+        0;
+
+      score =
+        0;
+
+      answered =
+        false;
+
+      scoreSaved =
+        false;
 
 
       document.getElementById(
@@ -1019,8 +2018,55 @@
         "none";
 
 
+      document.getElementById(
+        "scoreAwardNote",
+      ).textContent =
+        "";
+
+
       renderQuestion();
     }
+
+
+
+
+
+    document.addEventListener(
+      "keydown",
+      (
+        event,
+      ) => {
+
+        if (
+          event.key ===
+          "Escape"
+        ) {
+
+          closeActivity();
+        }
+      },
+    );
+
+
+
+
+    document.getElementById(
+      "quizOverlay",
+    ).addEventListener(
+      "click",
+      (
+        event,
+      ) => {
+
+        if (
+          event.target.id ===
+          "quizOverlay"
+        ) {
+
+          closeActivity();
+        }
+      },
+    );
 
   </script>
 
