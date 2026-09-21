@@ -3923,3 +3923,201 @@ body:has(.page) {
     transform: translateY(0);
     opacity: 1
 }
+
+/* ======================================================
+   PÁGINA CRIAR / GERENCIAR TAREFAS
+   ====================================================== */
+
+.tarefas-page .main {
+    display: grid;
+    grid-template-columns: minmax(560px, 650px) minmax(420px, 1fr);
+    align-items: start;
+    gap: 24px;
+    padding: 32px 36px;
+}
+
+/* formulário */
+
+.tarefas-page .form-area {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 26px;
+}
+
+/* lista de tarefas */
+
+.tarefas-page .list-area {
+    width: 100%;
+    margin: 0;
+    min-width: 0;
+}
+
+
+/* ======================================================
+   TABS TAREFA / QUIZ / JOGO
+   ====================================================== */
+
+.tarefas-page .tab-row {
+    margin-bottom: 22px;
+}
+
+.tarefas-page .tab-row .form-footer {
+    margin-top: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+
+/* ======================================================
+   CAMPOS
+   ====================================================== */
+
+.tarefas-page .fg input,
+.tarefas-page .fg select,
+.tarefas-page .fg textarea {
+    width: 100%;
+}
+
+.tarefas-page .fg textarea {
+    background: rgba(255, 255, 255, .07);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 11px 14px;
+    color: var(--white);
+    font-size: .88rem;
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+    resize: vertical;
+    min-height: 90px;
+    transition: border-color .2s;
+}
+
+.tarefas-page .fg textarea:focus {
+    border-color: var(--accent);
+}
+
+.tarefas-page .fg textarea::placeholder {
+    color: var(--muted);
+}
+
+
+/* ======================================================
+   TIPOS DE TAREFA
+   ====================================================== */
+
+.tarefas-page .tipo-tarefa-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.tarefas-page .tipo-tarefa-grid .tipo-btn {
+    width: 100%;
+    min-height: 105px;
+    justify-content: center;
+}
+
+
+/* ======================================================
+   DIFICULDADE
+   ====================================================== */
+
+.tarefas-page .dif-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.tarefas-page .dif-row .btn-acc {
+    width: 100%;
+}
+
+
+/* ======================================================
+   XP
+   ====================================================== */
+
+.tarefas-page .xp-row {
+    width: 100%;
+}
+
+.tarefas-page .xp-row input[type="range"] {
+    width: 100%;
+    min-width: 0;
+}
+
+
+/* ======================================================
+   TURMAS
+   ====================================================== */
+
+.tarefas-page .turmas-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.tarefas-page .turma-chk {
+    width: 100%;
+}
+
+
+/* ======================================================
+   BOTÕES INFERIORES
+   ====================================================== */
+
+.tarefas-page #tab-tarefa>.form-footer,
+.tarefas-page #tab-quiz>.form-footer,
+.tarefas-page #tab-jogo>.form-footer {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.tarefas-page #tab-tarefa>.form-footer .btn-draft,
+.tarefas-page #tab-tarefa>.form-footer .btn-acc {
+    min-height: 44px;
+}
+
+
+/* ======================================================
+   RESPONSIVIDADE
+   ====================================================== */
+
+@media (max-width: 1250px) {
+
+    .tarefas-page .main {
+        grid-template-columns: 1fr;
+    }
+
+    .tarefas-page .form-area,
+    .tarefas-page .list-area {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .tarefas-page .main {
+        padding: 20px 16px;
+    }
+
+    .tarefas-page .fg-row {
+        grid-template-columns: 1fr;
+    }
+
+    .tarefas-page .tipo-tarefa-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tarefas-page .dif-row {
+        grid-template-columns: 1fr;
+    }
+
+    .tarefas-page .turmas-grid {
+        grid-template-columns: 1fr;
+    }
+}

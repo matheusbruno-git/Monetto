@@ -4,195 +4,761 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Monetto – Criar & Gerenciar Tarefas</title>
+
   <link
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
+
   <link rel="stylesheet" href="../../shared/main-style.css" />
+
   <link rel="icon" type="image/x-icon" href="../../Assets/Monetto Logo.ico">
 </head>
 
-<body>
+<body class="tarefas-page">
 
   <div id="sidebar-container"></div>
 
   <div class="main">
 
-    <!-- FORM AREA -->
-    <div class="form-area">
-      <div class="form-title">📝 Criar Nova Tarefa</div>
-      <div class="form-sub">Preencha os campos abaixo e publique para suas turmas</div>
+    <!-- =========================================================
+         FORM AREA
+    ========================================================== -->
 
+    <div class="form-area">
+
+      <div class="form-title">
+        📝 Criar Nova Tarefa
+      </div>
+
+      <div class="form-sub">
+        Preencha os campos abaixo e publique para suas turmas
+      </div>
+
+      <!-- TABS -->
       <div class="tab-row">
         <div class="form-footer">
-          <button class="btn-acc" onclick="switchTab('tarefa',this)">📋 Tarefa</button>
-          <button class="btn-acc" onclick="switchTab('quiz',this)">🧠 Quiz</button>
-          <button class="btn-acc" onclick="switchTab('jogo',this)">🎮 Jogo Financeiro</button>
+
+          <button type="button" class="btn-acc" onclick="switchTab('tarefa', this)">
+            📋 Tarefa
+          </button>
+
+          <button type="button" class="btn-acc" onclick="switchTab('quiz', this)">
+            🧠 Quiz
+          </button>
+
+          <button type="button" class="btn-acc" onclick="switchTab('jogo', this)">
+            🎮 Jogo Financeiro
+          </button>
+
         </div>
       </div>
 
-      <!-- TAREFA -->
+
+      <!-- =======================================================
+           TAREFA
+      ======================================================== -->
+
       <div id="tab-tarefa">
-        <div class="fg"><label>Título da Tarefa *</label><input type="text"
-            placeholder="Ex: Exercícios de Frações – Capítulo 5" /></div>
-        <div class="fg"><label>Descrição / Instruções</label><input type="textarea"
-            placeholder="Descreva o que o aluno deve fazer, quais materiais usar, formato de entrega..."></input>
-        </div>
-        <div class="fg-row">
-          <div class="fg"><label>Disciplina *</label><select data-cursos></select></div>
-          <div class="fg"><label>Prazo de entrega *</label><input type="datetime-local" /></div>
+
+        <!-- TÍTULO -->
+        <div class="fg">
+          <label>
+            Título da Tarefa *
+          </label>
+
+          <input type="text" id="tituloTarefa" placeholder="Ex: Exercícios de Frações – Capítulo 5" />
         </div>
 
-        <div class="fg"><label>Tipo de Tarefa</label>
-          <div class="stats-row" style="margin-top:6px;margin-bottom:6px">
-            <div class="fg">
-              <div class="tipo-btn selected" onclick="selTipo(this)">
-                <div class="tipo-icon">📄</div>Texto / Redação
+
+        <!-- DESCRIÇÃO -->
+        <div class="fg">
+
+          <label>
+            Descrição / Instruções
+          </label>
+
+          <textarea id="descricaoTarefa"
+            placeholder="Descreva o que o aluno deve fazer, quais materiais usar, formato de entrega..."></textarea>
+
+        </div>
+
+
+        <!-- DISCIPLINA / PRAZO -->
+        <div class="fg-row">
+
+          <div class="fg">
+
+            <label>
+              Disciplina *
+            </label>
+
+            <select id="disciplinaTarefa" data-cursos></select>
+
+          </div>
+
+
+          <div class="fg">
+
+            <label>
+              Prazo de entrega *
+            </label>
+
+            <input type="datetime-local" id="prazoTarefa" />
+
+          </div>
+
+        </div>
+
+
+        <!-- TIPO -->
+        <div class="fg">
+
+          <label>
+            Tipo de Tarefa
+          </label>
+
+          <div class="tipo-tarefa-grid">
+
+            <div class="tipo-btn selected" data-tipo="Texto / Redação" onclick="selTipo(this)">
+              <div class="tipo-icon">
+                📄
               </div>
+
+              Texto / Redação
             </div>
-            <div class="tipo-btn" onclick="selTipo(this)">
-              <div class="tipo-icon">🔢</div>Exercício
+
+
+            <div class="tipo-btn" data-tipo="Exercício" onclick="selTipo(this)">
+              <div class="tipo-icon">
+                🔢
+              </div>
+
+              Exercício
             </div>
-            <div class="tipo-btn" onclick="selTipo(this)">
-              <div class="tipo-icon">📎</div>Envio de arquivo
+
+
+            <div class="tipo-btn" data-tipo="Envio de arquivo" onclick="selTipo(this)">
+              <div class="tipo-icon">
+                📎
+              </div>
+
+              Envio de arquivo
             </div>
-            <div class="tipo-btn" onclick="selTipo(this)">
-              <div class="tipo-icon">🧠</div>Quiz
+
+
+            <div class="tipo-btn" data-tipo="Quiz" onclick="selTipo(this)">
+              <div class="tipo-icon">
+                🧠
+              </div>
+
+              Quiz
             </div>
-            <div class="tipo-btn" onclick="selTipo(this)">
-              <div class="tipo-icon">📖</div>Leitura
+
+
+            <div class="tipo-btn" data-tipo="Leitura" onclick="selTipo(this)">
+              <div class="tipo-icon">
+                📖
+              </div>
+
+              Leitura
             </div>
-            <div class="tipo-btn" onclick="selTipo(this)">
-              <div class="tipo-icon">🎥</div>Vídeo
+
+
+            <div class="tipo-btn" data-tipo="Vídeo" onclick="selTipo(this)">
+              <div class="tipo-icon">
+                🎥
+              </div>
+
+              Vídeo
             </div>
+
           </div>
+
         </div>
 
-        <div class="fg"><label>Dificuldade</label>
+
+        <!-- DIFICULDADE -->
+        <div class="fg">
+
+          <label>
+            Dificuldade
+          </label>
+
           <div class="dif-row">
-            <button class="btn-acc" onclick="selDif(this,'sel-g')">🟢 Fácil</button>
-            <button class="btn-acc" onclick="selDif(this,'sel-y')">🟡 Médio</button>
-            <button class="btn-acc" onclick="selDif(this,'sel-r')">🔴 Difícil</button>
+
+            <button type="button" class="btn-acc" data-dificuldade="Fácil" onclick="selDif(this, 'sel-g')">
+              🟢 Fácil
+            </button>
+
+
+            <button type="button" class="btn-acc" data-dificuldade="Médio" onclick="selDif(this, 'sel-y')">
+              🟡 Médio
+            </button>
+
+
+            <button type="button" class="btn-acc" data-dificuldade="Difícil" onclick="selDif(this, 'sel-r')">
+              🔴 Difícil
+            </button>
+
           </div>
+
         </div>
 
-        <div class="fg"><label>XP para o aluno ao concluir</label>
+
+        <!-- XP -->
+        <div class="fg">
+
+          <label>
+            XP para o aluno ao concluir
+          </label>
+
           <div class="xp-row">
-            <input type="range" min="10" max="200" value="50"
-              oninput="document.getElementById('xpval').textContent=this.value+' XP'" />
-            <div class="xp-val" id="xpval">50 XP</div>
+
+            <input type="range" id="xpTarefa" min="10" max="200" value="50"
+              oninput="document.getElementById('xpval').textContent = this.value + ' XP'" />
+
+            <div class="xp-val" id="xpval">
+              50 XP
+            </div>
+
           </div>
+
         </div>
 
-        <div class="fg"><label>Turmas destinatárias *</label>
+
+        <!-- TURMAS -->
+        <div class="fg">
+
+          <label>
+            Turmas destinatárias *
+          </label>
+
           <div class="turmas-grid">
-            <div class="turma-chk selected" onclick="this.classList.toggle('selected')"><input type="checkbox"
-                checked /><span class="turma-chk-label">📘 8º Ano A</span></div>
-            <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox" /><span
-                class="turma-chk-label">📗 8º Ano B</span></div>
-            <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox" /><span
-                class="turma-chk-label">📙 9º Ano A</span></div>
-            <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox" /><span
-                class="turma-chk-label">📒 9º Ano B</span></div>
+
+
+            <!-- 8º A -->
+            <div class="turma-chk selected" onclick="toggleTurma(this)">
+
+              <input type="checkbox" value="8º Ano A" checked onclick="event.stopPropagation()"
+                onchange="syncTurmaCheckbox(this)" />
+
+              <span class="turma-chk-label">
+                📘 8º Ano A
+              </span>
+
+            </div>
+
+
+            <!-- 8º B -->
+            <div class="turma-chk" onclick="toggleTurma(this)">
+
+              <input type="checkbox" value="8º Ano B" onclick="event.stopPropagation()"
+                onchange="syncTurmaCheckbox(this)" />
+
+              <span class="turma-chk-label">
+                📗 8º Ano B
+              </span>
+
+            </div>
+
+
+            <!-- 9º A -->
+            <div class="turma-chk" onclick="toggleTurma(this)">
+
+              <input type="checkbox" value="9º Ano A" onclick="event.stopPropagation()"
+                onchange="syncTurmaCheckbox(this)" />
+
+              <span class="turma-chk-label">
+                📙 9º Ano A
+              </span>
+
+            </div>
+
+
+            <!-- 9º B -->
+            <div class="turma-chk" onclick="toggleTurma(this)">
+
+              <input type="checkbox" value="9º Ano B" onclick="event.stopPropagation()"
+                onchange="syncTurmaCheckbox(this)" />
+
+              <span class="turma-chk-label">
+                📒 9º Ano B
+              </span>
+
+            </div>
+
           </div>
+
         </div>
-        <div id="formMsg" style="display:none;font-size:.84rem;margin-bottom:8px;font-weight:600"></div>
+
+
+        <!-- MENSAGEM -->
+        <div id="formMsg" style="
+            display: none;
+            font-size: .84rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+          "></div>
+
+
+        <!-- FOOTER -->
         <div class="form-footer">
-          <button class="btn-draft">💾 Rascunho</button>
-          <button class="btn-acc" id="btn">🚀 Publicar Tarefa</button>
+
+          <button type="button" class="btn-draft" id="btnRascunhoTarefa">
+            💾 Rascunho
+          </button>
+
+
+          <button type="button" class="btn-acc" id="btn">
+            🚀 Publicar Tarefa
+          </button>
+
         </div>
+
       </div>
 
-      <!-- QUIZ -->
-      <div id="tab-quiz" style="display:none">
-        <div class="fg"><label>Título do Quiz *</label><input type="text"
-            placeholder="Ex: Quiz – Fotossíntese e Respiração Celular" /></div>
-        <div class="fg-row">
-          <div class="fg"><label>Disciplina</label><select>
-              <option>Ciências</option>
-              <option>Matemática</option>
-              <option>Português</option>
-              <option>História</option>
-            </select></div>
-          <div class="fg"><label>Tempo limite (min)</label><input type="number" placeholder="15" value="20" /></div>
+
+      <!-- =======================================================
+           QUIZ
+      ======================================================== -->
+
+      <div id="tab-quiz" style="display: none;">
+
+        <!-- TÍTULO -->
+        <div class="fg">
+
+          <label>
+            Título do Quiz *
+          </label>
+
+          <input type="text" id="tituloQuiz" placeholder="Ex: Quiz – Fotossíntese e Respiração Celular" />
+
         </div>
-        <div
-          style="background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.2);border-radius:14px;padding:18px;margin-bottom:18px">
-          <div style="font-size:.82rem;font-weight:700;margin-bottom:12px;color:var(--accent)">Pergunta 1</div>
-          <div class="fg"><label>Enunciado</label><input type="text" placeholder="Digite a pergunta aqui..." /></div>
-          <div class="fg"><label>Alternativa A</label><input type="text" placeholder="Opção A" /></div>
-          <div class="fg"><label>Alternativa B</label><input type="text" placeholder="Opção B" /></div>
+
+
+        <!-- DISCIPLINA / TEMPO -->
+        <div class="fg-row">
+
+          <div class="fg">
+
+            <label>
+              Disciplina
+            </label>
+
+            <select id="disciplinaQuiz">
+
+              <option value="Ciências">
+                Ciências
+              </option>
+
+              <option value="Matemática">
+                Matemática
+              </option>
+
+              <option value="Português">
+                Português
+              </option>
+
+              <option value="História">
+                História
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="fg">
+
+            <label>
+              Tempo limite (min)
+            </label>
+
+            <input type="number" id="tempoQuiz" placeholder="15" value="20" min="1" />
+
+          </div>
+
+        </div>
+
+
+        <!-- PERGUNTA -->
+        <div id="quizPerguntas" style="
+            background: rgba(255,215,0,.06);
+            border: 1px solid rgba(255,215,0,.2);
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 18px;
+          ">
+
+          <div style="
+              font-size: .82rem;
+              font-weight: 700;
+              margin-bottom: 12px;
+              color: var(--accent);
+            ">
+            Pergunta 1
+          </div>
+
+
+          <div class="fg">
+
+            <label>
+              Enunciado
+            </label>
+
+            <input type="text" placeholder="Digite a pergunta aqui..." />
+
+          </div>
+
+
+          <div class="fg">
+
+            <label>
+              Alternativa A
+            </label>
+
+            <input type="text" placeholder="Opção A" />
+
+          </div>
+
+
+          <div class="fg">
+
+            <label>
+              Alternativa B
+            </label>
+
+            <input type="text" placeholder="Opção B" />
+
+          </div>
+
+
           <div class="fg-row">
-            <div class="fg"><label>Alternativa C</label><input type="text" placeholder="Opção C" /></div>
-            <div class="fg"><label>Alternativa D</label><input type="text" placeholder="Opção D" /></div>
+
+            <div class="fg">
+
+              <label>
+                Alternativa C
+              </label>
+
+              <input type="text" placeholder="Opção C" />
+
+            </div>
+
+
+            <div class="fg">
+
+              <label>
+                Alternativa D
+              </label>
+
+              <input type="text" placeholder="Opção D" />
+
+            </div>
+
           </div>
-          <div class="fg"><label>Resposta correta</label><select>
-              <option>A</option>
-              <option>B</option>
-              <option>C</option>
-              <option>D</option>
-            </select></div>
+
+
+          <div class="fg">
+
+            <label>
+              Resposta correta
+            </label>
+
+            <select>
+
+              <option value="A">
+                A
+              </option>
+
+              <option value="B">
+                B
+              </option>
+
+              <option value="C">
+                C
+              </option>
+
+              <option value="D">
+                D
+              </option>
+
+            </select>
+
+          </div>
+
         </div>
-        <button
-          style="width:100%;padding:11px;background:rgba(255,255,255,.07);border:1.5px dashed var(--border);border-radius:12px;color:var(--muted);cursor:pointer;font-size:.88rem">+
-          Adicionar Pergunta</button>
-        <div class="form-footer" style="margin-top:20px">
-          <button class="btn-acc">💾 Rascunho</button>
-          <button class="btn-acc">🚀 Publicar Quiz</button>
+
+
+        <!-- ADICIONAR PERGUNTA -->
+        <button type="button" id="btnAdicionarPergunta" style="
+            width: 100%;
+            padding: 11px;
+            background: rgba(255,255,255,.07);
+            border: 1.5px dashed var(--border);
+            border-radius: 12px;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: .88rem;
+          ">
+          + Adicionar Pergunta
+        </button>
+
+
+        <!-- FOOTER -->
+        <div class="form-footer" style="margin-top: 20px;">
+
+          <button type="button" class="btn-draft">
+            💾 Rascunho
+          </button>
+
+          <button type="button" class="btn-acc">
+            🚀 Publicar Quiz
+          </button>
+
         </div>
+
       </div>
 
-      <!-- JOGO -->
-      <div id="tab-jogo" style="display:none">
-        <div class="fg"><label>Selecione o Jogo Financeiro</label>
+
+      <!-- =======================================================
+           JOGO FINANCEIRO
+      ======================================================== -->
+
+      <div id="tab-jogo" style="display: none;">
+
+        <!-- JOGO -->
+        <div class="fg">
+
+          <label>
+            Selecione o Jogo Financeiro
+          </label>
+
           <div class="tipo-grid">
-            <div class="tipo-btn selected" onclick="selTipo(this)">
-              <div class="tipo-icon">💰</div>Orçamento
+
+            <div class="tipo-btn selected" data-jogo="Orçamento" onclick="selTipo(this)">
+
+              <div class="tipo-icon">
+                💰
+              </div>
+
+              Orçamento
+
             </div>
-            <div class="tipo-btn" onclick="selTipo(this)">
-              <div class="tipo-icon">📈</div>Bolsa Jr.
+
+
+            <div class="tipo-btn" data-jogo="Bolsa Jr." onclick="selTipo(this)">
+
+              <div class="tipo-icon">
+                📈
+              </div>
+
+              Bolsa Jr.
+
             </div>
-            <div class="tipo-btn" onclick="selTipo(this)">
-              <div class="tipo-icon">🏪</div>Mercado Virtual
+
+
+            <div class="tipo-btn" data-jogo="Mercado Virtual" onclick="selTipo(this)">
+
+              <div class="tipo-icon">
+                🏪
+              </div>
+
+              Mercado Virtual
+
             </div>
+
           </div>
+
         </div>
-        <div class="fg"><label>Instruções adicionais ao aluno</label><textarea
-            placeholder="Explique o objetivo da atividade para os alunos..."></textarea></div>
+
+
+        <!-- INSTRUÇÕES -->
+        <div class="fg">
+
+          <label>
+            Instruções adicionais ao aluno
+          </label>
+
+          <textarea id="instrucoesJogo" placeholder="Explique o objetivo da atividade para os alunos..."></textarea>
+
+        </div>
+
+
+        <!-- PRAZO / XP -->
         <div class="fg-row">
-          <div class="fg"><label>Prazo</label><input type="datetime-local" /></div>
-          <div class="fg"><label>XP ao concluir</label><input type="number" placeholder="100" value="100" /></div>
-        </div>
-        <div class="fg"><label>Turmas</label>
-          <div class="turmas-grid">
-            <div class="turma-chk selected" onclick="this.classList.toggle('selected')"><input type="checkbox"
-                checked /><span class="turma-chk-label">📘 8º Ano A</span></div>
-            <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox" /><span
-                class="turma-chk-label">📗 8º Ano B</span></div>
-            <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox" /><span
-                class="turma-chk-label">📙 9º Ano A</span></div>
-            <div class="turma-chk" onclick="this.classList.toggle('selected')"><input type="checkbox" /><span
-                class="turma-chk-label">📒 9º Ano B</span></div>
+
+          <div class="fg">
+
+            <label>
+              Prazo
+            </label>
+
+            <input type="datetime-local" id="prazoJogo" />
+
           </div>
+
+
+          <div class="fg">
+
+            <label>
+              XP ao concluir
+            </label>
+
+            <input type="number" id="xpJogo" placeholder="100" value="100" min="0" />
+
+          </div>
+
         </div>
-        <div class="form-footer" style="margin-top:20px">
-          <button class="btn-draft">💾 Rascunho</button>
-          <button class="btn-acc">🚀 Atribuir Jogo</button>
+
+
+        <!-- TURMAS -->
+        <div class="fg">
+
+          <label>
+            Turmas
+          </label>
+
+          <div class="turmas-grid">
+
+
+            <div class="turma-chk selected" onclick="toggleTurma(this)">
+
+              <input type="checkbox" value="8º Ano A" checked onclick="event.stopPropagation()"
+                onchange="syncTurmaCheckbox(this)" />
+
+              <span class="turma-chk-label">
+                📘 8º Ano A
+              </span>
+
+            </div>
+
+
+            <div class="turma-chk" onclick="toggleTurma(this)">
+
+              <input type="checkbox" value="8º Ano B" onclick="event.stopPropagation()"
+                onchange="syncTurmaCheckbox(this)" />
+
+              <span class="turma-chk-label">
+                📗 8º Ano B
+              </span>
+
+            </div>
+
+
+            <div class="turma-chk" onclick="toggleTurma(this)">
+
+              <input type="checkbox" value="9º Ano A" onclick="event.stopPropagation()"
+                onchange="syncTurmaCheckbox(this)" />
+
+              <span class="turma-chk-label">
+                📙 9º Ano A
+              </span>
+
+            </div>
+
+
+            <div class="turma-chk" onclick="toggleTurma(this)">
+
+              <input type="checkbox" value="9º Ano B" onclick="event.stopPropagation()"
+                onchange="syncTurmaCheckbox(this)" />
+
+              <span class="turma-chk-label">
+                📒 9º Ano B
+              </span>
+
+            </div>
+
+          </div>
+
         </div>
+
+
+        <!-- FOOTER -->
+        <div class="form-footer" style="margin-top: 20px;">
+
+          <button type="button" class="btn-draft">
+            💾 Rascunho
+          </button>
+
+          <button type="button" class="btn-acc">
+            🚀 Atribuir Jogo
+          </button>
+
+        </div>
+
       </div>
+
     </div>
 
-    <!-- LIST AREA -->
+
+    <!-- =========================================================
+         LIST AREA
+    ========================================================== -->
+
     <div class="list-area" id="tarefasList">
+
       <div class="list-hd">
-        <h3>📋 Tarefas Criadas</h3><span>12 tarefas</span>
+
+        <h3>
+          📋 Tarefas Criadas
+        </h3>
+
+        <span id="tarefasCount">
+          12 tarefas
+        </span>
+
       </div>
 
     </div>
 
   </div>
+
+
+  <!-- ===========================================================
+       SCRIPTS
+  ============================================================ -->
+
   <script src="script.js"></script>
+
   <script src="../teacher-script/main-teacher-script.js"></script>
+
+
+  <script>
+    /*
+      Mantém a div da turma sincronizada com o checkbox.
+      Se seu script.js já tiver essas funções,
+      você pode remover este pequeno bloco.
+    */
+
+    function toggleTurma(element) {
+      const checkbox = element.querySelector('input[type="checkbox"]');
+
+      if (!checkbox) return;
+
+      checkbox.checked = !checkbox.checked;
+
+      element.classList.toggle(
+        'selected',
+        checkbox.checked
+      );
+    }
+
+
+    function syncTurmaCheckbox(checkbox) {
+      const element = checkbox.closest('.turma-chk');
+
+      if (!element) return;
+
+      element.classList.toggle(
+        'selected',
+        checkbox.checked
+      );
+    }
+  </script>
+
 </body>
 
 </html>
