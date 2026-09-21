@@ -4,7 +4,7 @@ async function getAlunos(currentUserId) {
   try {
     const db = require("./connection.js");
 
-    const escolaId = await resolveEscolaId(db, currentUserId);
+    const escolaId = await resolveEscolaId(currentUserId);
     if (!escolaId) {
       return {
         success: false,

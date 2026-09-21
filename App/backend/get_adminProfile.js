@@ -1,3 +1,6 @@
+const { resolveEscolaId } = require("./resolve_escola_id.js");
+const db = require("./connection.js");
+
 async function getAdminProfile(currentUserId) {
 
   console.log("🔥 BACKEND: ENTROU NO getAdminProfile");
@@ -105,3 +108,5 @@ async function getAdminProfile(currentUserId) {
     };
   }
 }
+
+module.exports = { getAdminProfile };

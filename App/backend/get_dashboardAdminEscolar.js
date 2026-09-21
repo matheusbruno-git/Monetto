@@ -1,19 +1,6 @@
 const db = require("./connection.js");
 
-async function resolveEscolaId(currentUserId) {
-  if (!currentUserId) return null;
-
-  const [rows] = await db.promise().execute(
-    `SELECT id_escola
-     FROM usuarios
-     WHERE id_usuario = ?
-       AND ativo = 1
-     LIMIT 1`,
-    [currentUserId],
-  );
-
-  return rows[0]?.id_escola || null;
-}
+const { resolveEscolaId } = require("./resolve_escola_id.js");
 
 function formatRelative(dateVal) {
   if (!dateVal) return "—";

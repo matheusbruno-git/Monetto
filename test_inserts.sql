@@ -507,5 +507,68 @@ FROM (
 ) v
 JOIN usuarios u ON u.email = v.email;
 
+-- ============================================================
+-- ADMINISTRADORES DO SISTEMA (perfil = 4)
+-- ============================================================
+
+
+INSERT IGNORE INTO usuarios
+(
+    id_perfil,
+    id_escola,
+    nome,
+    email,
+    senha_hash,
+    cpf,
+    data_nascimento,
+    telefone,
+    ativo
+)
+VALUES
+(
+    4,
+    NULL,
+    'Administrador Geral',
+    'admin@monetto.com',
+    @hash,
+    '123.123.123-01',
+    '1980-01-15',
+    '(11) 90000-0001',
+    1
+),
+(
+    4,
+    NULL,
+    'Bruno Administrador',
+    'bruno.admin@monetto.com',
+    @hash,
+    '234.234.234-02',
+    '1985-05-20',
+    '(11) 90000-0002',
+    1
+),
+(
+    4,
+    NULL,
+    'Administrador Financeiro',
+    'financeiro@monetto.com',
+    @hash,
+    '345.345.345-03',
+    '1982-09-10',
+    '(11) 90000-0003',
+    1
+),
+(
+    4,
+    NULL,
+    'Administrador de Sistema',
+    'sistema@monetto.com',
+    @hash,
+    '456.456.456-04',
+    '1978-12-05',
+    '(11) 90000-0004',
+    1
+);
+
 -- Fim
 SELECT 'Seed completo executado com sucesso! Todos os usuários têm senha 1234.' AS status;

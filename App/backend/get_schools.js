@@ -1,3 +1,5 @@
+const { resolveEscolaId } = require("./resolve_escola_id.js");
+
 async function getSchools() {
   const db = require("./connection.js");
   try {

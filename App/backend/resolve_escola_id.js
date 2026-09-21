@@ -1,3 +1,6 @@
+const path = require("path");
+const db = require(path.join(__dirname, "connection.js"));
+
 async function resolveEscolaId(currentUserId) {
 
   console.log("🔥 RESOLVE ESCOLA ID");

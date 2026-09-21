@@ -1,5 +1,7 @@
 const db = require("./connection.js");
 
+const { resolveEscolaId } = require("./resolve_escola_id.js");
+
 async function tableExists(tableName) {
   try {
     const [rows] = await db.promise().execute(

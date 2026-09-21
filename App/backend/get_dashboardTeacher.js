@@ -8,7 +8,7 @@ async function getDashboardTeacher(currentUserId) {
       return { success: false, message: "ID do usuário não informado." };
     }
 
-    const escolaId = await resolveEscolaId(db, currentUserId);
+    const escolaId = await resolveEscolaId(currentUserId);
     if (!escolaId) {
       return {
         success: false,
