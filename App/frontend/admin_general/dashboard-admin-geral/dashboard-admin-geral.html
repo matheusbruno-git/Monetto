@@ -8,7 +8,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="dashboard-admin-geral.css" />
+  <link rel="stylesheet" href="../../shared/main-style.css" />
   <link rel="icon" type="image/x-icon" href="../../Assets/Monetto Logo.ico">
 </head>
 
@@ -49,70 +49,69 @@
 
   <main class="main">
     <div class="topbar">
-      <h1>Gerenciar <span>Professores</span></h1>
+      <h1>Painel <span>Geral</span></h1>
       <div class="top-right">
-        <div class="search-bar"><span>🔍</span><input type="text" placeholder="Buscar professor..."></div>
-        <button class="btn btn-primary" onclick="document.getElementById('addModal').classList.add('open')">➕ Novo
-          Professor</button>
+        <div class="search-bar"><span>🔄</span><input id="dashboard-status" type="text" value="Carregando dados..." readonly></div>
+        <button class="btn btn-primary" onclick="carregarDashboardAdminGeral()">↻ Atualizar</button>
       </div>
     </div>
 
-    <main class="main">
+    <div class="main">
 
       <!-- TOP BANNER -->
       <div class="top-banner">
         <div class="tb-left">
           <h2>🌐 Monetto – Painel Geral da Plataforma</h2>
-          <p>ML Solutions · Visão completa de todas as escolas · Abril 2026</p>
+          <p>ML Solutions · Visão completa de todas as escolas · <span id="dashboard-period">carregando…</span></p>
         </div>
         <div class="tb-stats">
           <div class="tbs">
-            <div class="tbs-val">20</div>
-            <div class="tbs-lbl">Escolas ativas</div>
+            <div class="tbs-val" id="banner-escolas">—</div>
+            <div class="tbs-lbl">Escolas cadastradas</div>
           </div>
           <div class="tbs">
-            <div class="tbs-val">3.2k</div>
-            <div class="tbs-lbl">Alunos totais</div>
+            <div class="tbs-val" id="banner-alunos">—</div>
+            <div class="tbs-lbl">Alunos ativos</div>
           </div>
           <div class="tbs">
-            <div class="tbs-val">98%</div>
-            <div class="tbs-lbl">Uptime</div>
+            <div class="tbs-val" id="banner-professores">—</div>
+            <div class="tbs-lbl">Professores ativos</div>
           </div>
         </div>
-        <button class="btn-purple">📊 Gerar Relatório Global</button>
+        <button class="btn-purple" onclick="carregarDashboardAdminGeral()">↻ Atualizar dados</button>
       </div>
 
       <!-- STATS -->
       <div class="stats-row">
         <div class="sc sc-p">
           <div class="sc-icon">🏫</div>
-          <div class="sc-val">20</div>
-          <div class="sc-lbl">Escolas ativas</div>
-          <div class="sc-trend up">▲ +3 este mês</div>
+          <div class="sc-val" id="stat-escolas">—</div>
+          <div class="sc-lbl">Escolas cadastradas</div>
+          <div class="sc-trend">Dados do banco</div>
         </div>
         <div class="sc sc-b">
           <div class="sc-icon">👥</div>
-          <div class="sc-val">3.2k</div>
-          <div class="sc-lbl">Alunos totais</div>
-          <div class="sc-trend up">▲ +340 este mês</div>
+          <div class="sc-val" id="stat-alunos">—</div>
+          <div class="sc-lbl">Alunos ativos</div>
+          <div class="sc-trend up" id="stat-alunos-trend">—</div>
         </div>
         <div class="sc sc-g">
           <div class="sc-icon">👨‍🏫</div>
-          <div class="sc-val">87</div>
-          <div class="sc-lbl">Professores</div>
-          <div class="sc-trend up">▲ +12 este mês</div>
+          <div class="sc-val" id="stat-professores">—</div>
+          <div class="sc-lbl">Professores ativos</div>
+          <div class="sc-trend up" id="stat-professores-trend">—</div>
         </div>
         <div class="sc sc-y">
           <div class="sc-icon">⚡</div>
-          <div class="sc-val">218k</div>
-          <div class="sc-lbl">XP distribuído</div>
-          <div class="sc-trend up">▲ +27% este mês</div>
+          <div class="sc-val" id="stat-xp">—</div>
+          <div class="sc-lbl">XP atual dos alunos</div>
+          <div class="sc-trend">Soma de progresso_aluno</div>
         </div>
         <div class="sc sc-r">
           <div class="sc-icon">💳</div>
-          <div class="sc-val">R$48k</div>
-          <div class="sc-lbl">MRR</div>
-          <div class="sc-trend up">▲ +18% MoM</div>
+          <div class="sc-val" id="stat-mrr">—</div>
+          <div class="sc-lbl">Receita recebida no mês</div>
+          <div class="sc-trend up" id="stat-mrr-trend">—</div>
         </div>
       </div>
 
@@ -127,79 +126,46 @@
             <div>#</div>
             <div>Escola</div>
             <div>Alunos</div>
-            <div>Engaj.</div>
-            <div>Plano</div>
+            <div>Conclusão</div>
+            <div>Local</div>
           </div>
-          <div class="ts-row">
-            <div class="ts-pos">1</div>
-            <div style="font-size:.85rem;font-weight:600">E.E. São Paulo Centro</div>
-            <div style="color:var(--muted)">512</div>
-            <div class="ts-eng">92%</div>
-            <div><span class="ts-plan">Premium</span></div>
-          </div>
-          <div class="ts-row">
-            <div class="ts-pos">2</div>
-            <div style="font-size:.85rem;font-weight:600">Colégio Novo Mundo</div>
-            <div style="color:var(--muted)">380</div>
-            <div class="ts-eng">89%</div>
-            <div><span class="ts-plan">Premium</span></div>
-          </div>
-          <div class="ts-row">
-            <div class="ts-pos">3</div>
-            <div style="font-size:.85rem;font-weight:600">E.M. Jardim América</div>
-            <div style="color:var(--muted)">290</div>
-            <div class="ts-eng">85%</div>
-            <div><span class="ts-plan" style="background:rgba(255,215,0,.12);color:var(--accent)">Basic</span></div>
-          </div>
-          <div class="ts-row">
-            <div class="ts-pos">4</div>
-            <div style="font-size:.85rem;font-weight:600">CETEC – Campinas</div>
-            <div style="color:var(--muted)">450</div>
-            <div class="ts-eng">83%</div>
-            <div><span class="ts-plan">Premium</span></div>
-          </div>
-          <div class="ts-row">
-            <div class="ts-pos">5</div>
-            <div style="font-size:.85rem;font-weight:600">E.E. Prof. Benedito</div>
-            <div style="color:var(--muted)">210</div>
-            <div style="color:var(--orange);font-weight:700;font-size:.8rem">71%</div>
-            <div><span class="ts-plan" style="background:rgba(255,255,255,.08);color:var(--muted)">Free</span></div>
+          <div id="schools-list">
+            <div class="ts-row"><div>—</div><div>Carregando escolas…</div><div>—</div><div>—</div><div>—</div></div>
           </div>
         </div>
 
         <div class="card">
           <div class="card-hd">
-            <h3>💳 Planos Ativos</h3><a>Gerenciar →</a>
+            <h3>💳 Pagamentos da Plataforma</h3>
           </div>
-          <div class="plano-grid">
+          <div class="plano-grid" id="payment-summary">
             <div class="plano-card">
-              <div class="plano-icon">🆓</div>
-              <div class="plano-name">Free</div>
-              <div class="plano-cnt">5</div>
-              <div class="plano-lbl">escolas</div>
+              <div class="plano-icon">✅</div>
+              <div class="plano-name">Pagos</div>
+              <div class="plano-cnt" id="payments-paid-count">—</div>
+              <div class="plano-lbl">registros</div>
             </div>
-            <div class="plano-card" style="border-color:rgba(255,215,0,.3);background:rgba(255,215,0,.04)">
-              <div class="plano-icon">⭐</div>
-              <div class="plano-name">Basic</div>
-              <div class="plano-cnt" style="color:var(--accent)">8</div>
-              <div class="plano-lbl">escolas</div>
+            <div class="plano-card">
+              <div class="plano-icon">⏳</div>
+              <div class="plano-name">Pendentes</div>
+              <div class="plano-cnt" id="payments-pending-count">—</div>
+              <div class="plano-lbl">registros</div>
             </div>
-            <div class="plano-card" style="border-color:rgba(155,89,182,.4);background:rgba(155,89,182,.06)">
-              <div class="plano-icon">💎</div>
-              <div class="plano-name">Premium</div>
-              <div class="plano-cnt" style="color:#c39bd3">7</div>
-              <div class="plano-lbl">escolas</div>
+            <div class="plano-card">
+              <div class="plano-icon">💰</div>
+              <div class="plano-name">Recebido</div>
+              <div class="plano-cnt" id="payments-paid-value">—</div>
+              <div class="plano-lbl">valor total</div>
             </div>
           </div>
           <div style="margin-top:16px">
-            <div style="display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:5px"><span
-                style="color:var(--muted)">MRR Total</span><span
-                style="color:var(--accent);font-weight:800;font-family:'Syne',sans-serif">R$ 48.200</span></div>
-            <div style="display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:5px"><span
-                style="color:var(--muted)">ARR Projetado</span><span style="color:var(--green);font-weight:700">R$
-                578.400</span></div>
-            <div style="display:flex;justify-content:space-between;font-size:.78rem"><span
-                style="color:var(--muted)">Churn Rate</span><span style="color:var(--green);font-weight:700">2.1%</span>
+            <div style="display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:5px">
+              <span style="color:var(--muted)">Receita do mês</span>
+              <span id="payments-mrr" style="color:var(--accent);font-weight:800;font-family:'Syne',sans-serif">—</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:.78rem">
+              <span style="color:var(--muted)">Receita mês anterior</span>
+              <span id="payments-previous-mrr" style="color:var(--green);font-weight:700">—</span>
             </div>
           </div>
         </div>
@@ -212,31 +178,16 @@
           <div class="card-hd">
             <h3>📈 Crescimento de Alunos</h3>
           </div>
-          <div class="bar-chart">
-            <div class="bc">
-              <div class="bc-bar bc-purple" style="height:38px"></div>
-              <div class="bc-lbl">Jan</div>
-            </div>
-            <div class="bc">
-              <div class="bc-bar bc-purple" style="height:44px"></div>
-              <div class="bc-lbl">Fev</div>
-            </div>
-            <div class="bc">
-              <div class="bc-bar bc-purple" style="height:52px"></div>
-              <div class="bc-lbl">Mar</div>
-            </div>
-            <div class="bc">
-              <div class="bc-bar bc-gold" style="height:78px"></div>
-              <div class="bc-lbl">Abr</div>
-            </div>
+          <div class="bar-chart" id="student-growth-chart">
+            <div class="bc"><div class="bc-bar bc-purple" style="height:20px"></div><div class="bc-lbl">—</div></div>
           </div>
           <div style="display:flex;justify-content:space-around;margin-top:14px">
             <div style="text-align:center">
-              <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--accent)">3.2k</div>
+              <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--accent)" id="growth-active-students">—</div>
               <div style="font-size:.68rem;color:var(--muted)">alunos ativos</div>
             </div>
             <div style="text-align:center">
-              <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--green)">+340</div>
+              <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--green)" id="growth-new-students">—</div>
               <div style="font-size:.68rem;color:var(--muted)">novos este mês</div>
             </div>
           </div>
@@ -244,96 +195,27 @@
 
         <div class="card">
           <div class="card-hd">
-            <h3>🎮 Jogos Mais Jogados</h3>
+            <h3>📚 Cursos mais utilizados</h3>
           </div>
-          <div style="display:flex;flex-direction:column;gap:10px">
-            <div style="display:flex;align-items:center;gap:10px;font-size:.82rem">
-              <span style="font-size:1.1rem">💰</span>
-              <div style="flex:1">
-                <div style="margin-bottom:3px">Quiz Orçamento Pessoal</div>
-                <div style="height:4px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden">
-                  <div
-                    style="height:100%;width:88%;background:linear-gradient(90deg,var(--accent),#f0a500);border-radius:99px">
-                  </div>
-                </div>
-              </div>
-              <span style="color:var(--accent);font-weight:700;font-size:.75rem">2.8k</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:10px;font-size:.82rem">
-              <span style="font-size:1.1rem">🏪</span>
-              <div style="flex:1">
-                <div style="margin-bottom:3px">Mercado Virtual</div>
-                <div style="height:4px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden">
-                  <div
-                    style="height:100%;width:72%;background:linear-gradient(90deg,var(--green),#27ae60);border-radius:99px">
-                  </div>
-                </div>
-              </div>
-              <span style="color:var(--green);font-weight:700;font-size:.75rem">2.3k</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:10px;font-size:.82rem">
-              <span style="font-size:1.1rem">📈</span>
-              <div style="flex:1">
-                <div style="margin-bottom:3px">Bolsa de Valores Jr.</div>
-                <div style="height:4px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden">
-                  <div
-                    style="height:100%;width:55%;background:linear-gradient(90deg,#5B9BF8,#3a7bd5);border-radius:99px">
-                  </div>
-                </div>
-              </div>
-              <span style="color:#5B9BF8;font-weight:700;font-size:.75rem">1.7k</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:10px;font-size:.82rem">
-              <span style="font-size:1.1rem">🏦</span>
-              <div style="flex:1">
-                <div style="margin-bottom:3px">Quiz Poupança & Juros</div>
-                <div style="height:4px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden">
-                  <div
-                    style="height:100%;width:42%;background:linear-gradient(90deg,var(--purple),#60338a);border-radius:99px">
-                  </div>
-                </div>
-              </div>
-              <span style="color:#c39bd3;font-weight:700;font-size:.75rem">1.3k</span>
-            </div>
+          <div id="course-usage-list" style="display:flex;flex-direction:column;gap:10px">
+            <div style="font-size:.82rem;color:var(--muted)">Carregando dados…</div>
           </div>
         </div>
 
         <div class="card">
           <div class="card-hd">
-            <h3>⚡ Atividades em Tempo Real</h3>
+            <h3>⚡ Atividades recentes</h3>
           </div>
-          <div class="tl-item">
-            <div class="tl-dot" style="background:var(--green)"></div>
-            <div class="tl-body"><strong>Nova escola cadastrada</strong><span>Colégio Bom Jesus · Sorocaba</span></div>
-            <div class="tl-time">há 8min</div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot" style="background:var(--accent)"></div>
-            <div class="tl-body"><strong>Pico de acesso detectado</strong><span>14h30 · 1.240 alunos online</span></div>
-            <div class="tl-time">há 20min</div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot" style="background:#5B9BF8"></div>
-            <div class="tl-body"><strong>Upgrade de plano</strong><span>E.M. Jardim América · Free → Basic</span></div>
-            <div class="tl-time">há 1h</div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot" style="background:var(--purple)"></div>
-            <div class="tl-body"><strong>218.400 XP distribuídos</strong><span>Recorde mensal da plataforma 🎉</span>
-            </div>
-            <div class="tl-time">hoje</div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot" style="background:var(--red)"></div>
-            <div class="tl-body"><strong>Escola inativa há 14 dias</strong><span>E.E. Prof. Benedito · Verificar</span>
-            </div>
-            <div class="tl-time">hoje</div>
+          <div id="activities-list">
+            <div class="tl-item"><div class="tl-body"><strong>Carregando atividades…</strong><span>Consultando banco de dados</span></div></div>
           </div>
         </div>
 
       </div>
-    </main>
+    </div>
+  </main>
 
+    <script src="./script.js"></script>
     <script id="logout-script">
       function sairDaConta(destino) {
         if (confirm("Tem certeza que deseja sair da conta?")) {

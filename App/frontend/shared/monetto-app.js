@@ -94,6 +94,11 @@ function renderDashboardAdminEscolar(d) {
   // Hero
   const elSchool = document.getElementById('school-name');
   if (elSchool) elSchool.textContent = d.school?.name || 'Escola';
+  if (elSchool) elSchool.value = d.school?.name || 'Escola';
+
+  const elEmail = document.getElementById('school-email');
+  if (elEmail) elEmail.textContent = d.school?.email || 'Email';
+  if (elEmail) elEmail.value = d.school?.email || 'Email';
 
   const elSub = document.getElementById('school-subtitle');
   if (elSub) {
@@ -351,7 +356,7 @@ async function carregarTeacherEscolar() {
 }
 
 document.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', function(e) {
+  link.addEventListener('click', function (e) {
     e.preventDefault();
     document.body.classList.add('fade-out');
     setTimeout(() => {

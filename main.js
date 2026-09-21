@@ -84,6 +84,8 @@ ipcMain.handle("login", async (event, { email, senha }) => {
     } else if (user.id_perfil === 3) {
       redirect =
         "../admin_school/dashboard-admin-escolar/dashboard-admin-escolar.html";
+    } else if (user.id_perfil === 4) {
+      redirect = "../admin_general/dashboard-admin-geral/dashboard-admin-geral.html";
     }
 
     return {
@@ -153,75 +155,10 @@ ipcMain.handle("getAlunos", async (event, currentUserId) => {
 
 ipcMain.handle("getAlunosProfessor", async (event, currentUserId) => {
   try {
-    const db = require(path.join(basePath, "backend/connection.js"));
-
-    if (!currentUserId) {
-      return { success: false, message: "ID do usuário não informado." };
-    }
-
-    const escolaId = await resolveEscolaId(db, currentUserId);
-    if (!escolaId) {
-      return {
-        success: false,
-        message: "Usuário não está associado a uma escola.",
-      };
-    }
-
-    let rows;
-    try {
-      const [r] = await db.promise().execute(
-        `SELECT u.id_usuario, u.nome, u.email, u.ativo,
-                t.id_turma, t.nome_turma AS turma,
-                COALESCE(pa.xp_atual, 0) AS xp
-         FROM usuarios u
-         INNER JOIN turmas t ON u.id_turma = t.id_turma
-         LEFT JOIN progresso_aluno pa ON pa.id_aluno = u.id_usuario
-         WHERE u.id_perfil = 1 AND u.id_escola = ?
-           AND t.id_professor = ? AND t.id_escola = ?
-         ORDER BY t.nome_turma ASC, u.nome ASC`,
-        [escolaId, currentUserId, escolaId],
-      );
-      rows = r;
-    } catch (e) {
-      console.warn("getAlunosProfessor join failed:", e.message);
-      const [r] = await db.promise().execute(
-        `SELECT u.id_usuario, u.nome, u.email, u.ativo,
-                t.id_turma, t.nome_turma AS turma
-         FROM usuarios u
-         INNER JOIN turmas t ON u.id_turma = t.id_turma
-         WHERE u.id_perfil = 1 AND u.id_escola = ?
-           AND t.id_professor = ?
-         ORDER BY u.nome ASC`,
-        [escolaId, currentUserId],
-      );
-      rows = r;
-    }
-
-    const total = rows.length;
-    const ativos = rows.filter((a) => a.ativo == 1 || a.ativo === true).length;
-    const comTurma = rows.filter((a) => a.turma).length;
-    const taxa = total > 0 ? Math.round((comTurma / total) * 100) : 0;
-
-    const turmasMap = new Map();
-    for (const a of rows) {
-      if (a.id_turma && a.turma) turmasMap.set(a.id_turma, a.turma);
-    }
-
-    return {
-      success: true,
-      data: rows,
-      stats: {
-        total,
-        ativos,
-        atencao: Math.max(0, total - ativos),
-        taxaConclusao: taxa,
-        turmasCount: turmasMap.size,
-      },
-      turmas: Array.from(turmasMap.entries()).map(([id, nome]) => ({
-        id,
-        nome,
-      })),
-    };
+    const { getAlunosProfessor } = require(
+      path.join(basePath, "backend/get_alunosProfessor.js"),
+    );
+    return await getAlunosProfessor(currentUserId);
   } catch (err) {
     console.error("getAlunosProfessor Error:", err);
     return { success: false, message: "Erro ao buscar alunos do professor." };
@@ -250,6 +187,30 @@ ipcMain.handle("getAdmins", async (event, currentUserId) => {
   }
 });
 
+ipcMain.handle("updateAdmin", async (event, dados) => {
+  try {
+    const { updateAdmin } = require(
+      path.join(basePath, "backend/update_admin.js"),
+    );
+    return await updateAdmin(dados);
+  } catch (err) {
+    console.error("updateAdmin Error:", err);
+    return { success: false, message: "Erro ao atualizar perfil." };
+  }
+});
+
+ipcMain.handle("changeAdminPassword", async (event, dados) => {
+  try {
+    const { changeAdminPassword } = require(
+      path.join(basePath, "backend/change_adminPassword.js"),
+    );
+    return await changeAdminPassword(dados);
+  } catch (err) {
+    console.error("changeAdminPassword Error:", err);
+    return { success: false, message: "Erro ao alterar senha." };
+  }
+});
+
 ipcMain.handle("deleteTurma", async (event, dados) => {
   try {
     const { deleteTurma } = require(
@@ -259,6 +220,44 @@ ipcMain.handle("deleteTurma", async (event, dados) => {
   } catch (err) {
     console.error("deleteTurma Error:", err);
     return { success: false, message: "Erro ao excluir turma." };
+  }
+});
+
+ipcMain.handle("getAdminReports", async (event, currentUserId) => {
+  try {
+    const { getAdminReports } = require(
+      path.join(basePath, "backend/get_adminReports.js"),
+    );
+    return await getAdminReports(currentUserId);
+  } catch (err) {
+    console.error("getAdminReports Error:", err);
+    return { success: false, message: "Erro ao buscar relatórios." };
+  }
+});
+
+ipcMain.handle("getAdminProfile", async (event, currentUserId) => {
+
+  console.log("🔥 MAIN: getAdminProfile recebido");
+  console.log("🔥 MAIN ID:", currentUserId);
+
+  try {
+
+    const { getAdminProfile } = require(
+      path.join(basePath, "backend/get_adminProfile.js")
+    );
+
+    console.log("🔥 MAIN: chamando backend");
+
+    return await getAdminProfile(currentUserId);
+
+  } catch (err) {
+
+    console.error("🔥 MAIN ERRO:", err);
+
+    return {
+      success: false,
+      message: "Erro ao carregar perfil: " + err.message
+    };
   }
 });
 
@@ -360,7 +359,9 @@ ipcMain.handle("getDashboardAdminEscolar", async (event, currentUserId) => {
     const { getDashboardAdminEscolar } = require(
       path.join(basePath, "backend/get_dashboardAdminEscolar.js"),
     );
+
     return await getDashboardAdminEscolar(currentUserId);
+
   } catch (err) {
     console.error("getDashboardAdminEscolar Error:", err);
     return {
@@ -402,10 +403,15 @@ ipcMain.handle("completeStudentTask", async (event, studentId, taskId) => {
     const { completeStudentTask } = require(
       path.join(basePath, "backend/get_student_dashboard.js"),
     );
+
     return await completeStudentTask(studentId, taskId);
   } catch (err) {
     console.error("completeStudentTask Error:", err);
-    return { success: false, message: "Erro ao concluir tarefa." };
+
+    return {
+      success: false,
+      message: "Erro ao concluir tarefa.",
+    };
   }
 });
 
@@ -414,10 +420,49 @@ ipcMain.handle("awardStudentXp", async (event, studentId, amount, source) => {
     const { awardStudentXp } = require(
       path.join(basePath, "backend/get_student_dashboard.js"),
     );
+
     return await awardStudentXp(studentId, amount, source);
   } catch (err) {
     console.error("awardStudentXp Error:", err);
-    return { success: false, message: "Erro ao registrar XP." };
+
+    return {
+      success: false,
+      message: "Erro ao registrar XP.",
+    };
+  }
+});
+
+ipcMain.handle("updateAluno", async (event, dados) => {
+  try {
+    const { updateAluno } = require(
+      path.join(basePath, "backend/update_aluno.js"),
+    );
+
+    return await updateAluno(dados);
+  } catch (err) {
+    console.error("updateAluno Error:", err);
+
+    return {
+      success: false,
+      message: "Erro ao atualizar perfil.",
+    };
+  }
+});
+
+ipcMain.handle("changeAlunoPassword", async (event, dados) => {
+  try {
+    const { changeAlunoPassword } = require(
+      path.join(basePath, "backend/change_alunoPassword.js"),
+    );
+
+    return await changeAlunoPassword(dados);
+  } catch (err) {
+    console.error("changeAlunoPassword Error:", err);
+
+    return {
+      success: false,
+      message: "Erro ao alterar senha: " + err.message,
+    };
   }
 });
 
@@ -453,5 +498,17 @@ ipcMain.handle("atribuirProfessorATurma", async (event, dados) => {
       success: false,
       message: "Erro ao atribuir professor à turma.",
     };
+  }
+});
+
+ipcMain.handle("getDashboardAdminGeral", async (event, currentUserId) => {
+  try {
+    const { getDashboardAdminGeral } = require(
+      path.join(basePath, "backend/get_dashboardAdminGeral.js"),
+    );
+    return await getDashboardAdminGeral(currentUserId);
+  } catch (err) {
+    console.error("getDashboardAdminGeral Error:", err);
+    return { success: false, message: "Erro ao buscar dashboard do administrador geral." };
   }
 });

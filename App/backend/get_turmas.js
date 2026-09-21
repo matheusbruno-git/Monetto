@@ -4,7 +4,7 @@ async function getTurmas(currentUserId) {
   try {
     const db = require("./connection.js");
 
-    const escolaId = await resolveEscolaId(db, currentUserId);
+    const escolaId = await resolveEscolaId(currentUserId);
 
     if (!escolaId) {
       return {
@@ -38,6 +38,7 @@ async function getTurmas(currentUserId) {
       success: true,
       data: rows,
     };
+  
   } catch (err) {
     console.error("getTurmas Error:", err);
 

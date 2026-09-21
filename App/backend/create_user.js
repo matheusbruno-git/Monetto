@@ -1,4 +1,3 @@
-// backend/create_user.js
 const db = require("./connection.js");
 const bcrypt = require("bcryptjs");
 const { v4: uuidv4 } = require("uuid");
@@ -11,7 +10,6 @@ async function registerUser(dados) {
       return { success: false, message: "Todos os campos são obrigatórios." };
     }
 
-    // Check if email already exists
     const [existing] = await db
       .promise()
       .execute("SELECT id_usuario FROM usuarios WHERE email = ?", [

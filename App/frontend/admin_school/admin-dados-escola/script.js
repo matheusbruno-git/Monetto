@@ -8,27 +8,51 @@ function showToast(msg, tipo) {
 // re-derives id_escola from the user id server-side, so nothing here
 // can accidentally show another school's data.
 async function loadDadosEscola() {
+
+  console.log("A função está sendo chamada!");
+
   const session = JSON.parse(localStorage.getItem("session") || "{}");
   const currentUserId = session.id_usuario || session.id;
-  if (!currentUserId || !window.api?.getDashboardAdminEscolar) return;
 
-  const result = await window.api.getDashboardAdminEscolar(currentUserId);
-  if (!result.success) return;
+  if (!currentUserId) {
+    console.log("ID do usuário não encontrado");
+    return;
+  }
 
-  const d = result.data;
-  const nomeEl = document.getElementById("campo-nome-escola");
-  if (nomeEl) nomeEl.value = d.school.name;
-  const cidadeEl = document.getElementById("campo-cidade-estado");
-  if (cidadeEl) cidadeEl.value = d.school.subtitle || "";
+  try {
 
-  const [statAlunos, , statTarefas] = d.stats || [];
-  const alunosEl = document.getElementById("resumo-alunos");
-  if (alunosEl) alunosEl.textContent = statAlunos ? statAlunos.value : "0";
-  const [, professores, turmas] = d.school.stats || [];
-  const profEl = document.getElementById("resumo-professores");
-  if (profEl) profEl.textContent = professores ? professores.value : "0";
-  const turmasEl = document.getElementById("resumo-turmas");
-  if (turmasEl) turmasEl.textContent = turmas ? turmas.value : "0";
+    const result = await window.api.getAdminProfile(currentUserId);
+
+    console.log("RESULTADO COMPLETO:", result);
+
+    if (!result.success) {
+      console.error("ERRO DO BACKEND:", result.message);
+      return;
+    }
+
+    console.log("NOME ESCOLA:", result.data.escola.nome);
+    console.log("EMAIL ESCOLA:", result.data.escola.email);
+
+    document.getElementById("campo-nome-escola").value =
+      result.data.escola.nome;
+
+    document.getElementById("email-escola").value =
+      result.data.escola.email;
+
+    document.getElementById("telefone").value =
+      result.data.escola.telefone;
+
+    document.getElementById("endereco").value =
+      result.data.escola.endereco;
+
+    document.getElementById("cnpj").value =
+      result.data.escola.cnpj;
+
+  } catch (err) {
+
+    console.error("Erro ao carregar escola:", err);
+
+  }
 }
 
 const successDisplay = document.querySelector(".success-display");
@@ -99,5 +123,8 @@ async function salvarEscola() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", loadDadosEscola);
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM CARREGADO");
+  loadDadosEscola();
+});
 document.getElementById("save-btn").addEventListener("click", salvarEscola);

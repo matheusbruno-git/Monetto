@@ -1,21 +1,6 @@
-
-
 const db = require("./connection.js");
 
-async function resolveEscolaId(currentUserId) {
-  if (!currentUserId) return null;
-
-  const [rows] = await db.promise().execute(
-    `SELECT id_escola
-     FROM usuarios
-     WHERE id_usuario = ?
-       AND ativo = 1
-     LIMIT 1`,
-    [currentUserId]
-  );
-
-  return rows[0]?.id_escola || null;
-}
+const { resolveEscolaId } = require("./resolve_escola_id.js");
 
 function formatRelative(dateVal) {
   if (!dateVal) return "—";
@@ -46,7 +31,6 @@ function formatRelative(dateVal) {
 
 async function getDashboardAdminEscolar(currentUserId) {
   try {
-
     if (!currentUserId) {
       return { success: false, message: "ID do usuário não informado." };
     }
@@ -107,7 +91,6 @@ async function getDashboardAdminEscolar(currentUserId) {
       [escolaId],
     );
 
-    // Alunos com turma / total (proxy de "taxa de conclusão")
     let taxaConclusao = 0;
     if (alunosTotal > 0) {
       const comTurma = await safeCount(
@@ -119,17 +102,19 @@ async function getDashboardAdminEscolar(currentUserId) {
       taxaConclusao = Math.round((comTurma / alunosTotal) * 100);
     }
 
-    let escolaNome = "Escola";
+    let escolaNome = "";
     let escolaSub = "";
+    let escolaEmail = "";
     try {
-      const [escolas] = await db
+      const escolas = await db
         .promise()
         .execute(
-          `SELECT nome, cidade, estado FROM escolas WHERE id_escola = ? LIMIT 1`,
-          [escolaId],
+          `SELECT nome, cidade, estado, email FROM escolas`,
+          [escolaId]
         );
       if (escolas[0]) {
         escolaNome = escolas[0].nome;
+        escolaEmail = escolas[0].email;
         escolaSub = [escolas[0].cidade, escolas[0].estado]
           .filter(Boolean)
           .join(" · ");
@@ -138,7 +123,6 @@ async function getDashboardAdminEscolar(currentUserId) {
       console.warn("escolas table missing or empty");
     }
 
-    // Professores
     const profRows = await safeQuery(
       `SELECT u.id_usuario, u.nome, u.email,
               (SELECT COUNT(*) FROM turmas t WHERE t.id_professor = u.id_usuario AND t.status = 'ativa') AS turmas_count
@@ -177,7 +161,6 @@ async function getDashboardAdminEscolar(currentUserId) {
       emoji: i % 2 === 0 ? "👨‍🏫" : "👩‍🏫",
     }));
 
-    // Turmas
     const turmaRows = await safeQuery(
       `SELECT t.id_turma, t.nome_turma, t.status,
               (SELECT COUNT(*) FROM usuarios u
@@ -212,7 +195,6 @@ async function getDashboardAdminEscolar(currentUserId) {
       };
     });
 
-    // Alertas a partir de sinais reais
     const alerts = [];
     if (deactivatedAlunosTotal > 0) {
       alerts.push({
@@ -260,7 +242,6 @@ async function getDashboardAdminEscolar(currentUserId) {
       });
     }
 
-    // Atividades recentes
     const activities = [];
     const recentProfs = await safeQuery(
       `SELECT nome, criado_em FROM usuarios
@@ -321,6 +302,7 @@ async function getDashboardAdminEscolar(currentUserId) {
         school: {
           name: escolaNome,
           subtitle: escolaSub,
+          email: escolaEmail,
           chips: [
             `📅 Ano letivo ${new Date().getFullYear()}`,
             "🔒 Admin",

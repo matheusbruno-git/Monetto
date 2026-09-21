@@ -1,7 +1,3 @@
-/* =========================================================
-   Monetto – Dashboard do Aluno
-   ========================================================= */
-
 :root {
   --navy: #e6e6e6;
   --navy-dark: #121E6B;
@@ -68,11 +64,11 @@ textarea {
   font-size: inherit;
 }
 
-/* ---- SIDEBAR ---- */
+
 .sidebar {
   width: var(--sidebar-w);
   min-height: 100vh;
-  background: linear-gradient(180deg, var(--navy-dark) 0%, var(--navy) 100%);
+  background: #0c1a77;
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -178,7 +174,7 @@ textarea {
   color: rgba(255, 255, 255, 0.55);
 }
 
-/* ---- MAIN ---- */
+
 .main {
   background: #0B1340;
   position: fixed;
@@ -258,7 +254,7 @@ textarea {
   color: var(--text);
 }
 
-/* ---- STATS ---- */
+
 .stats-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -327,7 +323,7 @@ textarea {
   font-weight: 500;
 }
 
-/* ---- SECTION LAYOUT ---- */
+
 .section-row {
   display: grid;
   grid-template-columns: 1.6fr 1fr;
@@ -385,7 +381,7 @@ textarea {
   border-color: var(--navy);
 }
 
-/* ---- TASKS ---- */
+
 .task-item {
   width: 100%;
   height: auto;
@@ -552,7 +548,7 @@ textarea {
   margin-top: 15px;
 }
 
-/* ---- MINI CARDS ---- */
+
 .mini-card {
   background: rgb(255, 255, 255, .06);
   border-radius: var(--radius);
@@ -598,7 +594,7 @@ textarea {
   color: white;
 }
 
-/* Streak */
+
 .streak-row {
   display: flex;
   gap: 6px;
@@ -637,7 +633,7 @@ textarea {
   color: var(--muted);
 }
 
-/* Ranking */
+
 .rank-list {
   display: flex;
   flex-direction: column;
@@ -753,7 +749,7 @@ textarea {
   margin-left: 4px;
 }
 
-/* Responsive */
+
 @media (max-width: 1100px) {
   .stats-row {
     grid-template-columns: repeat(2, 1fr);
@@ -768,6 +764,7 @@ textarea {
   :root {
     --sidebar-w: 72px;
   }
+
   .sidebar {
     width: 72px;
     padding: 16px 8px;
@@ -806,4 +803,56 @@ textarea {
   .topbar h1 {
     font-size: 1.35rem;
   }
+}
+
+
+
+
+.streak-days {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0;
+  flex-wrap: nowrap;
+}
+
+.sd {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.7rem;
+  font-weight: 700;
+
+  transition: 0.2s ease;
+}
+
+.sd-done {
+  background: var(--green);
+  color: var(--navy-dark);
+  border: 1px solid var(--green);
+}
+
+.sd-empty {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.55);
+  border: 1px dashed rgba(255, 255, 255, 0.3);
+}
+
+.sd-today {
+  background: var(--gold);
+  color: var(--navy-dark);
+  border: 2px solid var(--gold-soft);
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.12);
+}
+
+.streak-sub {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.75);
 }

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Monetto – Configurações (Professor/Admin)</title>
+  <title>Monetto – Configurações do Administrador</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
@@ -35,19 +35,19 @@
       <div id="tab-perfil">
         <div class="set-header">
           <h1>👤 Meu Perfil</h1>
-          <p>Atualize suas informações pessoais e foto</p>
+          <p>Atualize suas informações pessoais e preferências</p>
         </div>
 
         <div class="profile-hero">
           <div class="profile-big-av">😊<div class="av-edit">✏️</div>
           </div>
           <div class="profile-info">
-            <strong id="profile-display-name">Professor</strong>
+            <strong id="profile-display-name">Carregando…</strong>
             <span id="profile-display-email">—</span>
             <div class="profile-badges">
-              <span class="pb pb-gold">👨‍🏫 Professor</span>
-              <span class="pb pb-green" id="profile-class-badge">📚 0 turmas</span>
-              <span class="pb">🏫 Admin</span>
+              <span class="pb pb-gold">🛡️ Administrador</span>
+              <span class="pb pb-green" id="profile-stats-badge">🏫 — alunos</span>
+              <span class="pb" id="profile-school-badge">🏫 —</span>
             </div>
           </div>
         </div>
@@ -69,36 +69,33 @@
           <div class="form-row">
             <div class="field-group">
               <label>Nome</label>
-              <input type="text" id="profile-first-name" value="" />
+              <input type="text" id="admin-nome" />
             </div>
             <div class="field-group">
               <label>Sobrenome</label>
-              <input type="text" id="profile-last-name" value="" />
+              <input type="text" id="admin-sobrenome" />
             </div>
           </div>
           <div class="form-row single">
             <div class="field-group">
               <label>E-mail</label>
-              <input type="email" id="profile-email" value="" readonly />
+              <input type="email" id="admin-email" />
             </div>
           </div>
           <div class="form-row">
             <div class="field-group">
-              <label>Turma</label>
-              <select>
-                <option id="profile-class-option">Sem turma</option>
-              </select>
+              <label>Escola</label>
+              <input type="text" id="admin-escola" readonly />
             </div>
             <div class="field-group">
-              <label>Escola</label>
-              <input type="text" id="profile-school" value="" readonly />
+              <label>Cidade / Estado</label>
+              <input type="text" id="admin-localizacao" readonly />
             </div>
           </div>
           <div class="form-row single">
             <div class="field-group">
-              <label>Bio (opcional)</label>
-              <input type="text" placeholder="Conte um pouco sobre você..."
-                value="Professor de Matemática há 8 anos. 📐" />
+              <label>Telefone da escola</label>
+              <input type="text" id="admin-escola-telefone" readonly />
             </div>
           </div>
         </div>
@@ -108,23 +105,23 @@
           <div class="form-row single">
             <div class="field-group">
               <label>Senha atual</label>
-              <input type="password" placeholder="••••••••" />
+              <input type="password" placeholder="Digite sua senha atual" id="senha-atual" />
             </div>
           </div>
           <div class="form-row">
             <div class="field-group">
               <label>Nova senha</label>
-              <input type="password" placeholder="••••••••" />
+              <input type="password" placeholder="Digite a nova senha" id="nova-senha" />
             </div>
             <div class="field-group">
               <label>Confirmar nova senha</label>
-              <input type="password" placeholder="••••••••" />
+              <input type="password" placeholder="Confirme a nova senha" id="confirma-senha" />
             </div>
           </div>
         </div>
 
         <div class="save-row">
-          <button class="btn-save" onclick="showToast()">Salvar alterações</button>
+          <button class="btn-save" id="save-profile">Salvar alterações</button>
           <button class="btn-cancel">Cancelar</button>
         </div>
       </div>
@@ -230,7 +227,7 @@
         </div>
 
         <div class="save-row">
-          <button class="btn-save" onclick="showToast()">Salvar configurações</button>
+          <button class="btn-save" data-save-prefs="true">Salvar configurações</button>
         </div>
       </div>
 
@@ -284,7 +281,7 @@
         </div>
 
         <div class="save-row">
-          <button class="btn-save" onclick="showToast()">Salvar aparência</button>
+          <button class="btn-save" data-save-prefs="true">Salvar aparência</button>
         </div>
       </div>
 
@@ -300,15 +297,15 @@
           <div style="font-size:.85rem;display:flex;flex-direction:column;gap:12px">
             <div
               style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--border)">
-              <span style="color:var(--muted)">E-mail</span><span id="profile-display-email">—</span>
+              <span style="color:var(--muted)">E-mail</span><span id="account-email">—</span>
             </div>
             <div
               style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--border)">
-              <span style="color:var(--muted)">Membro desde</span><span id="account-member-since">—</span>
+              <span style="color:var(--muted)">Membro desde</span><span id="account-created">—</span>
             </div>
             <div
               style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--border)">
-              <span style="color:var(--muted)">Tipo de conta</span><span id="account-type">Professor</span>
+              <span style="color:var(--muted)">Tipo de conta</span><span id="account-type">Administrador</span>
             </div>
             <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">Escola
                 vinculada</span><span id="account-school">—</span></div>
@@ -336,99 +333,217 @@
   <div class="toast" id="toast">✅ Alterações salvas com sucesso!</div>
 
   <script>
+    const SETTINGS_KEY = "monetto_admin_preferences";
+
+    function getAdminSession() {
+      try {
+        return JSON.parse(localStorage.getItem("session") || "{}");
+      } catch (_) { return {}; }
+    }
+
+    function adminId() {
+      const s = getAdminSession();
+      return s.id_usuario || s.id || null;
+    }
+
+    function setValue(id, value) {
+      const el = document.getElementById(id);
+      if (el) el.value = value ?? "";
+    }
+
+    function setText(id, value) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = value ?? "—";
+    }
+
     function showTab(id, el) {
       document.querySelectorAll('[id^="tab-"]').forEach(t => t.style.display = 'none');
       document.querySelectorAll('.set-nav-item').forEach(i => i.classList.remove('active'));
-      document.getElementById('tab-' + id).style.display = 'block';
-      el.classList.add('active');
+      const tab = document.getElementById('tab-' + id);
+      if (tab) tab.style.display = 'block';
+      if (el) el.classList.add('active');
     }
 
-    function showToast() {
-      const t = document.getElementById('toast');
-      t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 2800);
+    function toast(message, type = "success") {
+      const t = document.getElementById("toast");
+      if (!t) return;
+      t.textContent = (type === "error" ? "❌ " : "✅ ") + message;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 2800);
     }
 
-    document.querySelectorAll('.av-opt').forEach(av => {
-      av.addEventListener('click', function () {
-        document.querySelectorAll('.av-opt').forEach(a => a.classList.remove('selected'));
-        this.classList.add('selected');
+    function loadPreferences() {
+      let p = {};
+      try { p = JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}"); } catch (_) { }
+      document.querySelectorAll(".toggle").forEach((el, i) => {
+        const key = "toggle_" + i;
+        if (typeof p[key] === "boolean") el.classList.toggle("on", p[key]);
+        el.dataset.prefKey = key;
       });
-    });
-  </script>
 
-  <script>
+      if (p.theme) {
+        document.querySelectorAll(".theme-opt").forEach(el => {
+          const selected = el.dataset.theme === p.theme;
+          el.classList.toggle("selected", selected);
+          const check = el.querySelector(".theme-check");
+          if (check) check.style.display = selected ? "" : "none";
+        });
+      }
 
-    function settingsSessionId() {
-      try {
-        const session = JSON.parse(localStorage.getItem("session") || "{}");
-        return session.id_usuario || session.id || null;
-      } catch (_) {
-        return null;
+      document.querySelectorAll(".toggle").forEach(el => {
+        el.onclick = () => el.classList.toggle("on");
+      });
+      document.querySelectorAll(".theme-opt").forEach(el => {
+        el.onclick = () => {
+          document.querySelectorAll(".theme-opt").forEach(x => {
+            x.classList.remove("selected");
+            const c = x.querySelector(".theme-check");
+            if (c) c.style.display = "none";
+          });
+          el.classList.add("selected");
+          const c = el.querySelector(".theme-check");
+          if (c) c.style.display = "";
+        };
+      });
+
+      document.querySelectorAll(".av-opt").forEach(el => {
+        el.onclick = () => {
+          document.querySelectorAll(".av-opt").forEach(x => x.classList.remove("selected"));
+          el.classList.add("selected");
+          localStorage.setItem("monetto_admin_avatar", el.textContent.trim());
+          document.querySelector(".profile-big-av").childNodes[0].textContent = el.textContent.trim();
+        };
+      });
+
+      const avatar = localStorage.getItem("monetto_admin_avatar");
+      if (avatar) {
+        const selected = [...document.querySelectorAll(".av-opt")].find(x => x.textContent.trim() === avatar);
+        if (selected) selected.click();
       }
     }
 
-    function settingsEscape(value) {
-      return String(value ?? "")
-        .replace(/&/g, "&amp;").replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    function savePreferences() {
+      const p = {};
+      document.querySelectorAll(".toggle").forEach(el => {
+        p[el.dataset.prefKey] = el.classList.contains("on");
+      });
+      const selected = document.querySelector(".theme-opt.selected");
+      if (selected) p.theme = selected.dataset.theme;
+      localStorage.setItem(SETTINGS_KEY, JSON.stringify(p));
+      toast("Preferências salvas com sucesso!");
     }
 
-    function formatMemberSince(value) {
-      if (!value) return "—";
-      const d = new Date(value);
-      if (Number.isNaN(d.getTime())) return "—";
-      return d.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
-    }
-
-    async function carregarPerfilProfessor() {
-      const id = settingsSessionId();
-      if (!id || !window.api || typeof window.api.getTeacherProfile !== "function") {
+    async function loadAdminProfile() {
+      const id = adminId();
+      if (!id) {
+        toast("Sessão inválida. Faça login novamente.", "error");
         return;
       }
 
       try {
-        const result = await window.api.getTeacherProfile(id);
-        if (!result?.success) {
-          console.error(result?.message || "Erro ao carregar perfil.");
-          return;
-        }
+        if (!window.api?.getAdminProfile) throw new Error("API de perfil não disponível.");
+        const result = await window.api.getAdminProfile(id);
+        if (!result?.success) throw new Error(result?.message || "Não foi possível carregar o perfil.");
 
-        const p = result.data || {};
-        const fullName = p.nome || "Professor";
-        const parts = fullName.trim().split(/\s+/);
-        const first = parts.shift() || "";
-        const last = parts.join(" ");
+        const d = result.data;
+        const parts = String(d.nome || "").trim().split(/\s+/);
+        setValue("admin-nome", parts.shift() || "");
+        setValue("admin-sobrenome", parts.join(" "));
+        setValue("admin-email", d.email);
+        setText("profile-display-name", d.nome);
+        setText("profile-display-email", d.email);
 
-        document.getElementById("profile-display-name").textContent = fullName;
-        document.getElementById("profile-display-email").textContent = p.email || "—";
-        document.getElementById("profile-first-name").value = first;
-        document.getElementById("profile-last-name").value = last;
-        document.getElementById("profile-email").value = p.email || "";
-        document.getElementById("profile-school").value = p.escola || "—";
-        document.getElementById("profile-class-badge").textContent = `📚 ${Number(p.turmasCount) || 0} turmas`;
+        setText("profile-stats-badge", `🏫 ${Number(d.stats?.alunos) || 0} alunos`);
+        setText("profile-school-badge", `🏫 ${d.escola?.nome || "—"}`);
 
-        const classOption = document.getElementById("profile-class-option");
-        if (classOption) classOption.textContent = p.turma || "Sem turma";
+        setValue("admin-escola", d.escola?.nome);
+        setValue("admin-localizacao", [d.escola?.cidade, d.escola?.estado].filter(Boolean).join(" · "));
+        setValue("admin-escola-telefone", d.escola?.telefone);
 
-        document.getElementById("account-email").textContent = p.email || "—";
-        document.getElementById("account-member-since").textContent = formatMemberSince(p.criado_em);
-        document.getElementById("account-type").textContent =
-          p.id_perfil === 2 ? "Professor" : "Conta";
-        document.getElementById("account-school").textContent = p.escola || "—";
+        setText("account-email", d.email);
+        setText("account-created", d.criado_em ? new Date(d.criado_em).toLocaleDateString("pt-BR") : "—");
+        setText("account-type", "Administrador");
+        setText("account-school", d.escola?.nome || "—");
       } catch (err) {
-        console.error("Erro ao carregar perfil:", err);
+        console.error(err);
+        toast(err.message, "error");
       }
     }
 
-    document.addEventListener("DOMContentLoaded", carregarPerfilProfessor);
-  </script>
-  <script id="logout-script">
-    function sairDaConta(destino) {
-      if (confirm("Tem certeza que deseja sair da conta?")) {
-        window.location.href = destino;
+    async function saveProfile() {
+      const id = adminId();
+      const nome = [document.getElementById("admin-nome")?.value.trim(),
+      document.getElementById("admin-sobrenome")?.value.trim()]
+        .filter(Boolean).join(" ");
+      const email = document.getElementById("admin-email")?.value.trim();
+
+      if (!id || !nome || !email) {
+        toast("Nome e e-mail são obrigatórios.", "error");
+        return;
+      }
+
+      const button = document.getElementById("save-profile");
+      button.disabled = true;
+      try {
+        const result = await window.api.updateAdmin({ id_usuario: id, nome, email });
+        if (!result?.success) throw new Error(result?.message || "Erro ao salvar perfil.");
+
+        const s = getAdminSession();
+        s.nome = nome;
+        s.email = email;
+        s.id_usuario = s.id_usuario || id;
+        localStorage.setItem("session", JSON.stringify(s));
+
+        setText("profile-display-name", nome);
+        setText("profile-display-email", email);
+        setText("account-email", email);
+        toast(result.message || "Perfil atualizado!");
+      } catch (err) {
+        console.error(err);
+        toast(err.message, "error");
+      } finally {
+        button.disabled = false;
       }
     }
+
+    async function changePassword() {
+      const id = adminId();
+      const atual = document.getElementById("senha-atual")?.value;
+      const nova = document.getElementById("nova-senha")?.value;
+      const confirmacao = document.getElementById("confirma-senha")?.value;
+
+      if (!nova || nova !== confirmacao) {
+        toast("A confirmação da nova senha não confere.", "error");
+        return;
+      }
+
+      try {
+        const result = await window.api.changeAdminPassword({
+          id_usuario: id, senhaAtual: atual, novaSenha: nova
+        });
+        if (!result?.success) throw new Error(result?.message || "Erro ao alterar senha.");
+
+        document.getElementById("senha-atual").value = "";
+        document.getElementById("nova-senha").value = "";
+        document.getElementById("confirma-senha").value = "";
+        toast(result.message || "Senha alterada!");
+      } catch (err) {
+        console.error(err);
+        toast(err.message, "error");
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      loadPreferences();
+      loadAdminProfile();
+      document.getElementById("save-profile")?.addEventListener("click", saveProfile);
+
+      document.getElementById("save-password")?.addEventListener("click", changePassword);
+
+      document.querySelectorAll("[data-save-prefs]").forEach(btn => {
+        btn.addEventListener("click", savePreferences);
+      });
+    });
   </script>
   <script src="../teacher-script/main-teacher-script.js"></script>
 </body>
