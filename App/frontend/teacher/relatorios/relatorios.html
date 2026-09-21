@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Monetto – Relatórios do Professor</title>
+  <title>Monetto – Relatórios da Escola</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
@@ -21,29 +21,23 @@
     <div class="topbar">
       <div>
         <h1>📊 Relatórios & Analytics</h1>
-        <p style="color:var(--muted);font-size:.87rem;margin-top:3px">Análise completa do desempenho das suas turmas</p>
+        <p style="color:var(--muted);font-size:.87rem;margin-top:3px">Análise real do desempenho de toda a escola</p>
       </div>
       <div class="top-right">
-        <button class="btn-export">⬇ PDF</button>
-        <button class="btn-export">📊 Excel</button>
-        <button class="btn-export">📧 Enviar</button>
+        <button class="btn-export" onclick="window.print()">🖨 Imprimir / PDF</button>
       </div>
     </div>
 
     <!-- PERIOD / FILTER -->
     <div class="period-row">
       <div class="period-tabs">
-        <button class="ftab active" onclick="setPeriod(this)">Esta semana</button>
-        <button class="ftab" onclick="setPeriod(this)">Este mês</button>
-        <button class="ftab" onclick="setPeriod(this)">Bimestre</button>
-        <button class="ftab" onclick="setPeriod(this)">Ano letivo</button>
+        <button class="ftab active" data-period="week">Esta semana</button>
+        <button class="ftab" data-period="month">Este mês</button>
+        <button class="ftab" data-period="term">Bimestre</button>
+        <button class="ftab" data-period="year">Ano letivo</button>
       </div>
-      <select class="filter-select">
-        <option>Todas as turmas</option>
-        <option>8º Ano A</option>
-        <option>8º Ano B</option>
-        <option>9º Ano A</option>
-        <option>9º Ano B</option>
+      <select class="filter-select" id="report-class-filter">
+        <option value="">Todas as turmas</option>
       </select>
     </div>
 
@@ -51,133 +45,65 @@
     <div class="kpi-row">
       <div class="kpi">
         <div class="kpi-icon">👥</div>
-        <div class="kpi-val">128</div>
+        <div class="kpi-val" id="report-students">—</div>
         <div class="kpi-lbl">Alunos ativos</div>
-        <div class="kpi-delta delta-up">▲ 98% de presença</div>
+        <div class="kpi-delta delta-neu" id="report-students-sub">Banco de dados</div>
       </div>
       <div class="kpi">
         <div class="kpi-icon">✅</div>
-        <div class="kpi-val">87%</div>
+        <div class="kpi-val" id="report-completion">—</div>
         <div class="kpi-lbl">Taxa de conclusão</div>
-        <div class="kpi-delta delta-up">▲ +5% vs. semana anterior</div>
+        <div class="kpi-delta delta-neu">Calculada pelas entregas</div>
       </div>
       <div class="kpi">
         <div class="kpi-icon">⚡</div>
-        <div class="kpi-val">8.4k</div>
+        <div class="kpi-val" id="report-xp">—</div>
         <div class="kpi-lbl">XP distribuído</div>
-        <div class="kpi-delta delta-up">▲ +27% vs. semana anterior</div>
+        <div class="kpi-delta delta-neu">Entregas registradas</div>
       </div>
       <div class="kpi">
         <div class="kpi-icon">📝</div>
-        <div class="kpi-val">12</div>
+        <div class="kpi-val" id="report-tasks-count">—</div>
         <div class="kpi-lbl">Tarefas ativas</div>
-        <div class="kpi-delta delta-neu">3 vencendo hoje</div>
+        <div class="kpi-delta delta-neu" id="report-due-today">—</div>
       </div>
       <div class="kpi">
         <div class="kpi-icon">⚠️</div>
-        <div class="kpi-val">11</div>
+        <div class="kpi-val" id="report-risk">—</div>
         <div class="kpi-lbl">Alunos em risco</div>
-        <div class="kpi-delta delta-dn">▼ Atenção necessária</div>
+        <div class="kpi-delta delta-dn">Progresso abaixo de 50%</div>
       </div>
     </div>
 
     <!-- ROW 1 -->
     <div class="g3">
-
       <div class="card" style="grid-column:span 2">
         <div class="card-hd">
-          <h3>📈 Conclusões de Tarefas por Dia</h3><span style="font-size:.75rem;color:var(--muted)">Abril 2026</span>
+          <h3>📈 Entregas por Dia</h3>
+          <span id="report-period-label" style="font-size:.75rem;color:var(--muted)">Últimos 7 dias</span>
         </div>
-        <div class="bar-chart">
-          <div class="bc">
-            <div class="bc-bar blue" style="height:45px"></div>
-            <div class="bc-lbl">Seg 07</div>
-          </div>
-          <div class="bc">
-            <div class="bc-bar blue" style="height:62px"></div>
-            <div class="bc-lbl">Ter 08</div>
-          </div>
-          <div class="bc">
-            <div class="bc-bar blue" style="height:50px"></div>
-            <div class="bc-lbl">Qua 09</div>
-          </div>
-          <div class="bc">
-            <div class="bc-bar blue" style="height:80px"></div>
-            <div class="bc-lbl">Qui 10</div>
-          </div>
-          <div class="bc">
-            <div class="bc-bar blue" style="height:55px"></div>
-            <div class="bc-lbl">Sex 11</div>
-          </div>
-          <div class="bc">
-            <div class="bc-bar blue" style="height:20px;opacity:.5"></div>
-            <div class="bc-lbl">Sáb 12</div>
-          </div>
-          <div class="bc">
-            <div class="bc-bar gold" style="height:48px"></div>
-            <div class="bc-lbl">Seg 14</div>
-          </div>
-          <div class="bc">
-            <div class="bc-bar gold" style="height:72px"></div>
-            <div class="bc-lbl">Ter 15</div>
-          </div>
-          <div class="bc">
-            <div class="bc-bar gold" style="height:58px"></div>
-            <div class="bc-lbl">Qua 16</div>
-          </div>
-          <div class="bc">
-            <div class="bc-bar gold" style="height:95px"></div>
-            <div class="bc-lbl">Qui 17</div>
-          </div>
-        </div>
-        <div style="display:flex;gap:16px;margin-top:10px">
-          <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--muted)">
-            <div style="width:10px;height:10px;border-radius:3px;background:#5B9BF8"></div>Semana passada
-          </div>
-          <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--muted)">
-            <div style="width:10px;height:10px;border-radius:3px;background:var(--accent)"></div>Esta semana
-          </div>
+        <div class="bar-chart" id="report-chart"></div>
+        <div style="display:flex;gap:16px;margin-top:10px;font-size:.72rem;color:var(--muted)">
+          Dados calculados a partir das entregas registradas no banco.
         </div>
       </div>
 
       <div class="card">
         <div class="card-hd">
-          <h3>🎯 Conclusão por Turma</h3>
+          <h3>🎯 Progresso por Turma</h3>
         </div>
         <div class="pie-section">
-          <div class="pie"
-            style="background:conic-gradient(var(--green) 0% 33%,#5B9BF8 33% 57%,var(--accent) 57% 78%,var(--purple) 78% 100%)">
-          </div>
-          <div class="pie-leg">
-            <div class="pl-row">
-              <div class="pl-dot" style="background:var(--green)"></div><span class="pl-label">8º A</span><span
-                class="pl-pct" style="color:var(--green)">92%</span><span class="pl-count">34</span>
-            </div>
-            <div class="pl-row">
-              <div class="pl-dot" style="background:#5B9BF8"></div><span class="pl-label">9º B</span><span
-                class="pl-pct" style="color:#5B9BF8">91%</span><span class="pl-count">30</span>
-            </div>
-            <div class="pl-row">
-              <div class="pl-dot" style="background:var(--accent)"></div><span class="pl-label">8º B</span><span
-                class="pl-pct" style="color:var(--accent)">85%</span><span class="pl-count">31</span>
-            </div>
-            <div class="pl-row">
-              <div class="pl-dot" style="background:var(--purple)"></div><span class="pl-label">9º A</span><span
-                class="pl-pct" style="color:var(--orange)">71%</span><span class="pl-count">33</span>
-            </div>
-          </div>
+          <div class="pie" id="report-pie"></div>
+          <div class="pie-leg" id="report-class-legend"></div>
         </div>
       </div>
     </div>
 
     <!-- ROW 2 -->
     <div class="g-wide">
-
-      <!-- ALUNOS TABLE -->
       <div class="card">
         <div class="card-hd">
-          <h3>👥 Desempenho Individual dos Alunos</h3><a href="../gerenciar-alunos/gerenciar-alunos.html">Ver todos
-            →</a>
+          <h3>👥 Desempenho Individual dos Alunos</h3>
         </div>
         <div class="al-table">
           <div class="al-head">
@@ -188,247 +114,276 @@
             <div>Progresso</div>
             <div>Status</div>
           </div>
-          <div class="al-row">
-            <div class="al-user">
-              <div class="al-av av1"></div>
-              <div class="al-name">Ana Souza</div>
-            </div>
-            <div><span class="xp-chip">⚡680</span></div>
-            <div><span class="lvl-chip">Nv. 5</span></div>
-            <div style="font-size:.82rem">24/26</div>
-            <div>
-              <div class="prog-mini">
-                <div class="prog-mini-f" style="width:92%"></div>
-              </div>
-            </div>
-            <div><span class="status-chip sc-ok">Ótimo</span></div>
-          </div>
-          <div class="al-row">
-            <div class="al-user">
-              <div class="al-av av2"></div>
-              <div class="al-name">Carlos Lima</div>
-            </div>
-            <div><span class="xp-chip">⚡640</span></div>
-            <div><span class="lvl-chip">Nv. 5</span></div>
-            <div style="font-size:.82rem">22/26</div>
-            <div>
-              <div class="prog-mini">
-                <div class="prog-mini-f" style="width:85%"></div>
-              </div>
-            </div>
-            <div><span class="status-chip sc-ok">Ótimo</span></div>
-          </div>
-          <div class="al-row">
-            <div class="al-user">
-              <div class="al-av av3"></div>
-              <div class="al-name">João Pedro</div>
-            </div>
-            <div><span class="xp-chip">⚡590</span></div>
-            <div><span class="lvl-chip">Nv. 4</span></div>
-            <div style="font-size:.82rem">20/26</div>
-            <div>
-              <div class="prog-mini">
-                <div class="prog-mini-f" style="width:77%"></div>
-              </div>
-            </div>
-            <div><span class="status-chip sc-ok">Bom</span></div>
-          </div>
-          <div class="al-row">
-            <div class="al-user">
-              <div class="al-av av4"></div>
-              <div class="al-name">Maria Clara</div>
-            </div>
-            <div><span class="xp-chip">⚡520</span></div>
-            <div><span class="lvl-chip">Nv. 4</span></div>
-            <div style="font-size:.82rem">18/26</div>
-            <div>
-              <div class="prog-mini">
-                <div class="prog-mini-f" style="width:69%;background:var(--accent)"></div>
-              </div>
-            </div>
-            <div><span class="status-chip sc-warn">Atenção</span></div>
-          </div>
-          <div class="al-row">
-            <div class="al-user">
-              <div class="al-av av5"></div>
-              <div class="al-name">Lucas Torres</div>
-            </div>
-            <div><span class="xp-chip">⚡480</span></div>
-            <div><span class="lvl-chip">Nv. 4</span></div>
-            <div style="font-size:.82rem">16/26</div>
-            <div>
-              <div class="prog-mini">
-                <div class="prog-mini-f" style="width:62%;background:var(--accent)"></div>
-              </div>
-            </div>
-            <div><span class="status-chip sc-warn">Atenção</span></div>
-          </div>
-          <div class="al-row">
-            <div class="al-user">
-              <div class="al-av av6"></div>
-              <div class="al-name">Fernanda Costa</div>
-            </div>
-            <div><span class="xp-chip">⚡420</span></div>
-            <div><span class="lvl-chip">Nv. 3</span></div>
-            <div style="font-size:.82rem">14/26</div>
-            <div>
-              <div class="prog-mini">
-                <div class="prog-mini-f" style="width:54%;background:var(--accent)"></div>
-              </div>
-            </div>
-            <div><span class="status-chip sc-warn">Atenção</span></div>
-          </div>
-          <div class="al-row">
-            <div class="al-user">
-              <div class="al-av av7"></div>
-              <div class="al-name">Rafael Mendes</div>
-            </div>
-            <div><span class="xp-chip">⚡200</span></div>
-            <div><span class="lvl-chip">Nv. 2</span></div>
-            <div style="font-size:.82rem">7/26</div>
-            <div>
-              <div class="prog-mini">
-                <div class="prog-mini-f" style="width:27%;background:var(--red)"></div>
-              </div>
-            </div>
-            <div><span class="status-chip sc-bad">Em risco</span></div>
-          </div>
-          <div class="al-row">
-            <div class="al-user">
-              <div class="al-av av8"></div>
-              <div class="al-name">Isabela Rocha</div>
-            </div>
-            <div><span class="xp-chip">⚡360</span></div>
-            <div><span class="lvl-chip">Nv. 3</span></div>
-            <div style="font-size:.82rem">12/26</div>
-            <div>
-              <div class="prog-mini">
-                <div class="prog-mini-f" style="width:46%;background:var(--orange)"></div>
-              </div>
-            </div>
-            <div><span class="status-chip sc-warn">Atenção</span></div>
-          </div>
+          <div id="report-students"></div>
         </div>
       </div>
 
-      <!-- RIGHT COL -->
       <div style="display:flex;flex-direction:column;gap:18px">
-
-        <!-- ANÁLISE POR TAREFA -->
         <div class="card">
           <div class="card-hd">
             <h3>📋 Taxa de Entrega por Tarefa</h3>
           </div>
-          <div class="task-ana-item">
-            <div class="ta-subj" style="background:var(--green)"></div>
-            <div class="ta-info"><strong>Frações – 8ºA</strong><span>Matemática · Vence hoje</span></div>
-            <div class="ta-prog">
-              <div class="ta-bar">
-                <div class="ta-bar-f tf-g" style="width:76%"></div>
-              </div><span class="ta-pct" style="color:var(--green)">76%</span>
-            </div>
-          </div>
-          <div class="task-ana-item">
-            <div class="ta-subj" style="background:var(--accent)"></div>
-            <div class="ta-info"><strong>Redação – 9ºA</strong><span>Português · Vence hoje</span></div>
-            <div class="ta-prog">
-              <div class="ta-bar">
-                <div class="ta-bar-f tf-y" style="width:42%"></div>
-              </div><span class="ta-pct" style="color:var(--accent)">42%</span>
-            </div>
-          </div>
-          <div class="task-ana-item">
-            <div class="ta-subj" style="background:(#5B9BF8)"></div>
-            <div class="ta-info"><strong>Quiz Fotossíntese</strong><span>Ciências · Sex 19/04</span></div>
-            <div class="ta-prog">
-              <div class="ta-bar">
-                <div class="ta-bar-f" style="width:30%;background:#5B9BF8"></div>
-              </div><span class="ta-pct" style="color:#5B9BF8">30%</span>
-            </div>
-          </div>
-          <div class="task-ana-item">
-            <div class="ta-subj" style="background:var(--green)"></div>
-            <div class="ta-info"><strong>Mapa Mental – 9ºB</strong><span>História · Expirada</span></div>
-            <div class="ta-prog">
-              <div class="ta-bar">
-                <div class="ta-bar-f tf-g" style="width:90%"></div>
-              </div><span class="ta-pct" style="color:var(--green)">90%</span>
-            </div>
+          <div id="report-tasks">
+            <div style="color:var(--muted);font-size:.8rem">Carregando...</div>
           </div>
         </div>
-
-        <!-- ALERTAS -->
         <div class="card">
           <div class="card-hd">
             <h3>⚠️ Alertas de Desempenho</h3>
           </div>
-          <div class="at-item at-red">
-            <div class="at-icon">🔴</div>
-            <div class="at-body"><strong>Rafael Mendes – 7/26 tarefas</strong><span>Inativo há 8 dias · 9ºA</span></div>
-            <button class="at-btn">Alertar</button>
-          </div>
-          <div class="at-item at-yellow">
-            <div class="at-icon">🟡</div>
-            <div class="at-body"><strong>3 alunos com queda de engajamento</strong><span>9ºA – Taxa caiu de 85% →
-                71%</span></div><button class="at-btn">Ver</button>
-          </div>
-          <div class="at-item at-green">
-            <div class="at-icon">🟢</div>
-            <div class="at-body"><strong>8ºA atingiu 92% de engajamento!</strong><span>Melhor resultado da semana</span>
-            </div><button class="at-btn">Parabéns</button>
+          <div id="report-alerts">
+            <div style="color:var(--muted);font-size:.8rem">Carregando...</div>
           </div>
         </div>
-
       </div>
     </div>
 
     <!-- DESTAQUES -->
     <div class="card" style="margin-bottom:20px">
       <div class="card-hd">
-        <h3>🏆 Destaques da Semana</h3>
+        <h3>🏆 Destaques</h3>
       </div>
-      <div class="destaque-grid">
-        <div class="dest-card">
-          <div class="dest-pos">🥇</div>
-          <div class="dest-av av1"></div>
-          <div class="dest-name">Ana Souza</div>
-          <div class="dest-xp">⚡ 680 XP</div>
-          <div class="dest-info">8ºA · 24 tarefas feitas</div>
-        </div>
-        <div class="dest-card">
-          <div class="dest-pos">🥈</div>
-          <div class="dest-av av2"></div>
-          <div class="dest-name">Carlos Lima</div>
-          <div class="dest-xp">⚡ 640 XP</div>
-          <div class="dest-info">8ºB · 22 tarefas feitas</div>
-        </div>
-        <div class="dest-card">
-          <div class="dest-pos">🥉</div>
-          <div class="dest-av av3"></div>
-          <div class="dest-name">João Pedro</div>
-          <div class="dest-xp">⚡ 590 XP</div>
-          <div class="dest-info">9ºA · 20 tarefas feitas</div>
-        </div>
-      </div>
+      <div class="destaque-grid" id="report-highlights"></div>
     </div>
-
   </main>
 
   <script>
-    function setPeriod(btn) {
-      document.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
-      btn.classList.add('active');
-    }
-  </script>
+    const reportState = { data: null, period: "week", classId: "" };
 
-  <script id="logout-script">
-    function sairDaConta(destino) {
-      if (confirm("Tem certeza que deseja sair da conta?")) {
-        window.location.href = destino;
+    function esc(v) {
+      return String(v ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+
+    function sessionId() {
+      try {
+        const s = JSON.parse(localStorage.getItem("session") || "{}");
+        return s.id_usuario || s.id || null;
+      } catch (_) { return null; }
+    }
+
+    function formatDate(v) {
+      if (!v) return "Sem prazo";
+      const d = new Date(v);
+      return Number.isNaN(d.getTime()) ? "Sem prazo" : d.toLocaleDateString("pt-BR");
+    }
+
+    function periodStart(period) {
+      const d = new Date();
+      d.setHours(0, 0, 0, 0);
+      if (period === "month") d.setDate(1);
+      else if (period === "term") d.setMonth(d.getMonth() - 2);
+      else if (period === "year") d.setMonth(0, 1);
+      else d.setDate(d.getDate() - 6);
+      return d;
+    }
+
+    function filterData() {
+      const d = reportState.data;
+      if (!d) return { students: [], classes: [], tasks: [], deliveries: [] };
+
+      let students = [...(d.students || [])];
+      let classes = [...(d.classes || [])];
+      let tasks = [...(d.tasks || [])];
+
+      if (reportState.classId) {
+        students = students.filter(s => {
+          const raw = (d.students || []).find(x => String(x.id_usuario ?? x.id) === String(s.id));
+          return raw && String(raw.id_turma) === String(reportState.classId);
+        });
+        classes = classes.filter(c => String(c.id) === String(reportState.classId));
+        tasks = tasks.filter(t => String(t.id_turma || "") === String(reportState.classId));
+      }
+
+      const start = periodStart(reportState.period);
+      const deliveries = (d.deliveries || []).filter(e => {
+        const x = new Date(e.criado_em);
+        return !Number.isNaN(x.getTime()) && x >= start;
+      });
+
+      return { students, classes, tasks, deliveries };
+    }
+
+    function renderReports() {
+      const d = reportState.data;
+      if (!d) return;
+      const f = filterData();
+
+      const active = f.students.filter(s => s.ativo);
+      const assigned = [];
+      for (const s of active) {
+        for (const t of f.tasks) {
+          if (t.id_turma && s.id_turma && String(t.id_turma) === String(s.id_turma)) {
+            assigned.push([t.id_tarefa, s.id]);
+          }
+        }
+      }
+      const completed = assigned.filter(([tid, sid]) =>
+        (d.deliveryKeys || []).includes(`${String(tid)}:${String(sid)}`)
+      );
+      const completion = assigned.length ? Math.round(completed.length / assigned.length * 100)
+        : (active.length ? Math.round(active.reduce((a, s) => a + Number(s.progresso || 0), 0) / active.length) : 0);
+
+      const xp = f.deliveries.reduce((sum, e) => sum + (Number(e.xp_ganho) || 0), 0);
+      const activeTasks = f.tasks.filter(t => {
+        const status = String(t.status || "").toLowerCase();
+        if (["concluida", "concluído", "concluido", "cancelada", "cancelado"].includes(status)) return false;
+        if (!t.deadline) return true;
+        const x = new Date(t.deadline);
+        return Number.isNaN(x.getTime()) || x >= new Date();
+      });
+
+      const risk = active.filter(s => Number(s.progresso || 0) < 50).length;
+      const dueToday = f.tasks.filter(t => {
+        if (!t.deadline) return false;
+        const x = new Date(t.deadline), today = new Date();
+        return !Number.isNaN(x.getTime()) && x.toDateString() === today.toDateString();
+      }).length;
+
+      document.getElementById("report-students").textContent = active.length;
+      document.getElementById("report-students-sub").textContent = `${f.students.length} cadastrados`;
+      document.getElementById("report-completion").textContent = `${completion}%`;
+      document.getElementById("report-xp").textContent = xp >= 1000 ? `${(xp / 1000).toFixed(1)}k` : xp;
+      document.getElementById("report-tasks-count").textContent = activeTasks.length;
+      document.getElementById("report-due-today").textContent = `${dueToday} vencendo hoje`;
+      document.getElementById("report-risk").textContent = risk;
+      document.getElementById("report-period-label").textContent =
+        reportState.period === "week" ? "Últimos 7 dias" :
+          reportState.period === "month" ? "Este mês" :
+            reportState.period === "term" ? "Últimos 2 meses" : "Ano letivo";
+
+      // Daily delivery chart
+      const chart = document.getElementById("report-chart");
+      const days = reportState.period === "week" ? 7 : 10;
+      const points = [];
+      for (let i = days - 1; i >= 0; i--) {
+        const day = new Date();
+        day.setHours(0, 0, 0, 0);
+        day.setDate(day.getDate() - i);
+        const next = new Date(day); next.setDate(next.getDate() + 1);
+        const value = f.deliveries.filter(e => {
+          const x = new Date(e.criado_em);
+          return x >= day && x < next;
+        }).length;
+        points.push({ label: day.toLocaleDateString("pt-BR", { weekday: "short" }).replace(".", ""), value });
+      }
+      const max = Math.max(1, ...points.map(p => p.value));
+      chart.innerHTML = points.map(p => `
+        <div class="bc">
+          <div class="bc-bar blue" style="height:${Math.max(4, Math.round(p.value / max * 95))}px" title="${p.value} entrega(s)"></div>
+          <div class="bc-lbl">${esc(p.label)}</div>
+        </div>`).join("");
+
+      // Classes
+      const classList = f.classes;
+      const legend = document.getElementById("report-class-legend");
+      const pie = document.getElementById("report-pie");
+      const palette = ["var(--green)", "#5B9BF8", "var(--accent)", "var(--purple)", "var(--orange)"];
+      let cursor = 0, stops = [];
+      const totalStudents = Math.max(1, classList.reduce((sum, c) => sum + (Number(c.students) || 0), 0));
+      classList.forEach((c, i) => {
+        const width = (Number(c.students) || 0) / totalStudents * 100;
+        stops.push(`${palette[i % palette.length]} ${cursor}% ${cursor + width}%`);
+        cursor += width;
+      });
+      pie.style.background = classList.length ? `conic-gradient(${stops.join(",")})` : "conic-gradient(var(--border) 0 100%)";
+      legend.innerHTML = classList.length ? classList.map((c, i) => `
+        <div class="pl-row">
+          <div class="pl-dot" style="background:${palette[i % palette.length]}"></div>
+          <span class="pl-label">${esc(c.name)}</span>
+          <span class="pl-pct" style="color:${palette[i % palette.length]}">${Number(c.completion) || 0}%</span>
+          <span class="pl-count">${Number(c.students) || 0}</span>
+        </div>`).join("") :
+        `<div style="color:var(--muted);font-size:.8rem">Nenhuma turma encontrada.</div>`;
+
+      // Students
+      const studentsEl = document.getElementById("report-students");
+      studentsEl.innerHTML = f.students.length ? f.students.map(s => {
+        const pct = Math.max(0, Math.min(100, Number(s.progresso) || 0));
+        const status = pct >= 80 ? ["Ótimo", "sc-ok"] : pct >= 50 ? ["Atenção", "sc-warn"] : ["Em risco", "sc-bad"];
+        return `<div class="al-row">
+          <div class="al-user"><div class="al-av ${esc(s.avatarClass)}"></div><div class="al-name">${esc(s.name)}</div></div>
+          <div><span class="xp-chip">⚡${Number(s.xp) || 0}</span></div>
+          <div><span class="lvl-chip">Nv. ${Number(s.nivel) || 0}</span></div>
+          <div style="font-size:.82rem">${Number(s.tarefasFeitas) || 0}/${Number(s.tarefasTotal) || 0}</div>
+          <div><div class="prog-mini"><div class="prog-mini-f" style="width:${pct}%"></div></div></div>
+          <div><span class="status-chip ${status[1]}">${status[0]}</span></div>
+        </div>`;
+      }).join("") : `<div style="padding:18px;color:var(--muted)">Nenhum aluno encontrado.</div>`;
+
+      // Tasks
+      const tasksEl = document.getElementById("report-tasks");
+      tasksEl.innerHTML = f.tasks.slice(0, 8).map(t => `
+        <div class="task-ana-item">
+          <div class="ta-subj" style="background:var(--accent)"></div>
+          <div class="ta-info"><strong>${esc(t.title)}</strong><span>${esc(t.disciplina)} · ${esc(t.turma)} · ${formatDate(t.deadline)}</span></div>
+          <div class="ta-prog"><div class="ta-bar"><div class="ta-bar-f" style="width:${Number(t.rate) || 0}%"></div></div><span class="ta-pct">${Number(t.rate) || 0}%</span></div>
+        </div>`).join("") || `<div style="padding:12px;color:var(--muted)">Nenhuma tarefa encontrada.</div>`;
+
+      // Risks
+      const alerts = active.filter(s => Number(s.progresso || 0) < 50).sort((a, b) => a.progresso - b.progresso).slice(0, 5);
+      document.getElementById("report-alerts").innerHTML = alerts.length ? alerts.map(s => `
+        <div class="at-item at-red">
+          <div class="at-icon">🔴</div>
+          <div class="at-body"><strong>${esc(s.name)} – ${Number(s.progresso) || 0}%</strong><span>${esc(s.turma)} · ${s.ultimoAcesso ? "último acesso " + formatDate(s.ultimoAcesso) : "sem acesso registrado"}</span></div>
+        </div>`).join("") :
+        `<div style="padding:12px;color:var(--muted)">Nenhum aluno abaixo de 50%.</div>`;
+
+      // Highlights
+      document.getElementById("report-highlights").innerHTML = [...active].sort((a, b) => b.xp - a.xp).slice(0, 3).map((s, i) => `
+        <div class="dest-card">
+          <div class="dest-pos">${["🥇", "🥈", "🥉"][i] || "🏅"}</div>
+          <div class="dest-av ${esc(s.avatarClass)}"></div>
+          <div class="dest-name">${esc(s.name)}</div>
+          <div class="dest-xp">⚡ ${Number(s.xp) || 0} XP</div>
+          <div class="dest-info">${esc(s.turma)} · ${Number(s.tarefasFeitas) || 0} tarefas feitas</div>
+        </div>`).join("") ||
+        `<div style="padding:18px;color:var(--muted)">Nenhum destaque disponível.</div>`;
+    }
+
+    function populateClassFilter() {
+      const select = document.getElementById("report-class-filter");
+      select.innerHTML = `<option value="">Todas as turmas</option>` +
+        (reportState.data?.classes || []).map(c => `<option value="${esc(c.id)}">${esc(c.name)}</option>`).join("");
+      select.value = reportState.classId;
+    }
+
+    async function loadReports() {
+      const id = sessionId();
+      if (!id) {
+        document.querySelector(".main").insertAdjacentHTML("afterbegin",
+          '<div style="padding:12px;color:var(--red)">Sessão inválida. Faça login novamente.</div>');
+        return;
+      }
+      try {
+        const result = await window.api.getAdminReports(id);
+        if (!result?.success) throw new Error(result?.message || "Erro ao carregar relatórios.");
+        reportState.data = result.data;
+        populateClassFilter();
+        renderReports();
+      } catch (err) {
+        console.error("Erro nos relatórios:", err);
+        document.querySelector(".main").insertAdjacentHTML("afterbegin",
+          `<div style="padding:12px;color:var(--red)">Erro ao carregar dados reais: ${esc(err.message)}</div>`);
       }
     }
-  </script>
 
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll(".ftab").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".ftab").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          reportState.period = btn.dataset.period;
+          renderReports();
+        });
+      });
+      document.getElementById("report-class-filter").addEventListener("change", e => {
+        reportState.classId = e.target.value;
+        renderReports();
+      });
+      loadReports();
+    });
+  </script>
   <script src="../teacher-script/main-teacher-script.js"></script>
 </body>
 

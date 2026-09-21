@@ -1,5 +1,5 @@
 async function atribuirProfessorATurma(dados) {
-  const connection = require(path.join(basePath, "backend/connection.js"));
+  const connection = require(path.join(basePath, "connection.js"));
 
   try {
     const { id_turma, id_professor } = dados;

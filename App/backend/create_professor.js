@@ -1,4 +1,3 @@
-// backend/create_professor.js
 const db = require("./connection.js");
 const bcrypt = require("bcryptjs");
 
@@ -13,7 +12,6 @@ async function registerProfessor(dados) {
       return { success: false, message: "Campos obrigatórios faltando." };
     }
 
-    // Check if email already exists
     const [existing] = await db
       .promise()
       .execute("SELECT id_usuario FROM usuarios WHERE email = ?", [
@@ -26,7 +24,6 @@ async function registerProfessor(dados) {
 
     const senha_hash = await bcrypt.hash(dados.senha_provisoria, 10);
 
-    // 1. Get the correct id_perfil for "professor" (now = 2, but we look it up by name)
     const [perfil] = await db
       .promise()
       .execute("SELECT id_perfil FROM perfis WHERE nome = 'professor' LIMIT 1");
@@ -35,9 +32,8 @@ async function registerProfessor(dados) {
       return { success: false, message: "Perfil 'professor' não encontrado." };
     }
 
-    const id_perfil = perfil[0].id_perfil; // will be 2 with the new order
+    const id_perfil = perfil[0].id_perfil;
 
-    // 2. Insert WITHOUT id_usuario (let AUTO_INCREMENT generate it)
     const sql = `
       INSERT INTO usuarios 
         (id_perfil, id_escola, nome, email, senha_hash, cpf, data_nascimento, telefone, ativo, criado_em)

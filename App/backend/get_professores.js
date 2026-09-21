@@ -1,8 +1,10 @@
+const { resolveEscolaId } = require("./resolve_escola_id.js");
+
 async function getProfessores(currentUserId) {
   try {
-    const db = require(path.join(basePath, "backend/connection.js"));
+    const db = require("./connection.js");
 
-    const escolaId = await resolveEscolaId(db, currentUserId);
+    const escolaId = await resolveEscolaId(currentUserId);
     if (!escolaId) {
       return {
         success: false,

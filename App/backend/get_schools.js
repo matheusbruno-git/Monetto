@@ -1,5 +1,7 @@
+const { resolveEscolaId } = require("./resolve_escola_id.js");
+
 async function getSchools() {
-  const db = require(path.join(basePath, "backend/connection.js"));
+  const db = require("./connection.js");
   try {
     const [escolas] = await db.promise().execute(`
       SELECT id_escola, nome

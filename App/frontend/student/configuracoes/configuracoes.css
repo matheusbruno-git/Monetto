@@ -1,7 +1,3 @@
-/* =========================================================
-   Monetto – Configurações
-   ========================================================= */
-
 :root {
   --navy: #1A2A8F;
   --navy-dark: #121E6B;
@@ -60,7 +56,7 @@ textarea {
   font-size: inherit;
 }
 
-/* SIDEBAR */
+
 .sidebar {
   width: var(--sidebar-w);
   min-height: 100vh;
@@ -168,7 +164,7 @@ textarea {
   color: rgba(255, 255, 255, 0.55);
 }
 
-/* MAIN = settings layout */
+
 .main {
   margin-left: var(--sidebar-w);
   flex: 1;
@@ -177,7 +173,7 @@ textarea {
   min-width: 0;
 }
 
-/* SETTINGS NAV */
+
 .set-nav {
   width: auto;
   background: var(--bg);
@@ -228,7 +224,7 @@ textarea {
   text-align: center;
 }
 
-/* SETTINGS CONTENT */
+
 .set-content {
   flex: 1;
   padding: 28px 32px 48px;
@@ -254,7 +250,7 @@ textarea {
   margin-top: 4px;
 }
 
-/* PROFILE HERO */
+
 .profile-hero {
   display: flex;
   align-items: center;
@@ -296,6 +292,40 @@ textarea {
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
+
+
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.profile-info>strong {
+  display: block;
+  font-family: "Syne", sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.profile-info>span {
+  display: block;
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.profile-info .profile-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
 
 .profile-info h2 {
   font-family: "Syne", sans-serif;
@@ -339,7 +369,7 @@ textarea {
   color: #065F46;
 }
 
-/* SET CARDS */
+
 .set-card {
   background: var(--bg);
   border-radius: var(--radius);
@@ -357,7 +387,7 @@ textarea {
   margin-bottom: 16px;
 }
 
-/* Avatar grid */
+
 .avatar-grid {
   display: flex;
   flex-wrap: wrap;
@@ -412,7 +442,7 @@ textarea {
   background: linear-gradient(135deg, #a18cd1, #fbc2eb);
 }
 
-/* Forms */
+
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -515,7 +545,7 @@ textarea {
   border-color: var(--red);
 }
 
-/* Toggles */
+
 .toggle-row {
   display: flex;
   align-items: center;
@@ -575,14 +605,14 @@ textarea {
   transform: translateX(20px);
 }
 
-/* Theme options */
+
 .theme-options {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
 }
 
-/* Tab panels */
+
 .tab-panel {
   display: none;
 }

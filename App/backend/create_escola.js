@@ -1,4 +1,3 @@
-// backend/create_escola.js
 const db = require("./connection.js");
 
 async function registerEscola(dados) {

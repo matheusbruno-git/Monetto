@@ -1,12 +1,14 @@
+const { resolveEscolaId } = require("./resolve_escola_id.js");
+
 async function getDashboardTeacher(currentUserId) {
   try {
-    const db = require(path.join(basePath, "backend/connection.js"));
+    const db = require("./connection.js");
 
     if (!currentUserId) {
       return { success: false, message: "ID do usuário não informado." };
     }
 
-    const escolaId = await resolveEscolaId(db, currentUserId);
+    const escolaId = await resolveEscolaId(currentUserId);
     if (!escolaId) {
       return {
         success: false,
@@ -34,7 +36,6 @@ async function getDashboardTeacher(currentUserId) {
       }
     }
 
-    // ---- Professor info ----
     let teacherName = "Professor";
     let teacherSub = "Dashboard do Professor";
     try {
@@ -51,14 +52,12 @@ async function getDashboardTeacher(currentUserId) {
       console.warn("usuario lookup failed:", e.sqlMessage || e.message);
     }
 
-    // Turmas deste professor
     const turmasTotal = await safeCount(
       `SELECT COUNT(*) AS total FROM turmas
        WHERE status = 'ativa' AND id_escola = ? AND id_professor = ?`,
       [escolaId, currentUserId],
     );
 
-    // Alunos nas turmas deste professor
     const alunosAtivos = await safeCount(
       `SELECT COUNT(*) AS total FROM usuarios u
        INNER JOIN turmas t ON u.id_turma = t.id_turma
@@ -67,15 +66,12 @@ async function getDashboardTeacher(currentUserId) {
       [escolaId, currentUserId, escolaId],
     );
 
-    // Tarefas publicadas pelo professor (ajusta coluna se o schema for diferente)
     const tarefasAtivas = await safeCount(
       `SELECT COUNT(*) AS total FROM tarefas
        WHERE id_escola = ? AND (id_professor = ? OR id_usuario = ?)`,
       [escolaId, currentUserId, currentUserId],
     );
 
-    // Taxa de conclusão: alunos com pelo menos 1 entrega / alunos (proxy)
-    // Se não houver tabela de entregas, usa vínculo a turma como proxy
     let taxaConclusao = 0;
     let taxaSub = "Alunos nas suas turmas";
     if (alunosAtivos > 0) {
@@ -97,7 +93,6 @@ async function getDashboardTeacher(currentUserId) {
       }
     }
 
-    // Avaliação média (se existir tabela de avaliações/feedback)
     let avaliacaoMedia = "—";
     let avaliacaoSub = "Nota dos alunos";
     const avgRow = await safeQuery(
@@ -111,7 +106,6 @@ async function getDashboardTeacher(currentUserId) {
 
     teacherSub = `${turmasTotal} turma${turmasTotal === 1 ? "" : "s"} · ${alunosAtivos} aluno${alunosAtivos === 1 ? "" : "s"}`;
 
-    // ---- Turmas (Minhas Turmas) ----
     const turmaRows = await safeQuery(
       `SELECT t.id_turma, t.nome_turma, t.status, t.sala,
               (SELECT COUNT(*) FROM usuarios u
@@ -146,7 +140,6 @@ async function getDashboardTeacher(currentUserId) {
       };
     });
 
-    // ---- Atividades recentes (escopo do professor) ----
     const activities = [];
 
     const recentEntregas = await safeQuery(
@@ -196,7 +189,6 @@ async function getDashboardTeacher(currentUserId) {
       });
     }
 
-    // ---- Conclusões por dia (últimos 7 dias) ----
     const dayLabels = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
     const completionsByDay = await safeQuery(
       `SELECT DAYOFWEEK(e.criado_em) AS dow, COUNT(*) AS total
@@ -231,7 +223,6 @@ async function getDashboardTeacher(currentUserId) {
     );
     const schoolTitle = schoolName[0] ? schoolName[0].nome : "Escola";
 
-    // ---- Top alunos da semana ----
     const topRows = await safeQuery(
       `SELECT u.nome, t.nome_turma,
               COALESCE(SUM(e.xp_ganho), 0) AS xp
@@ -252,7 +243,6 @@ async function getDashboardTeacher(currentUserId) {
       xp: Number(r.xp) || 0,
     }));
 
-    // ---- Tarefas pendentes ----
     const pendingRows = await safeQuery(
       `SELECT tar.id_tarefa, tar.titulo, tar.data_entrega,
               t.nome_turma,
