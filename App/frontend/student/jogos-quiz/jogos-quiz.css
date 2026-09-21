@@ -543,7 +543,7 @@ textarea {
 
 .quiz-options button:hover {
   border-color: var(--bg);
-  background: #F8F9FF;
+  background: var(--bg);
 }
 
 .quiz-options button.selected {
@@ -567,7 +567,7 @@ textarea {
   width: 28px;
   height: 28px;
   border-radius: 8px;
-  background: var(--bg);
+  background: var(--text);
   display: flex;
   align-items: center;
   justify-content: center;
