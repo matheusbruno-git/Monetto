@@ -225,13 +225,26 @@ ipcMain.handle("deleteTurma", async (event, dados) => {
 
 ipcMain.handle("getAdminReports", async (event, currentUserId) => {
   try {
+    console.log("🔥 MAIN: getAdminReports");
+    console.log("🔥 MAIN ID:", currentUserId);
+
     const { getAdminReports } = require(
-      path.join(basePath, "backend/get_adminReports.js"),
+      path.join(basePath, "backend/get_adminReports.js")
     );
-    return await getAdminReports(currentUserId);
+
+    const db = require(
+      path.join(basePath, "backend/connection.js")
+    );
+
+    return await getAdminReports(db, currentUserId);
+
   } catch (err) {
-    console.error("getAdminReports Error:", err);
-    return { success: false, message: "Erro ao buscar relatórios." };
+    console.error("❌ getAdminReports Error:", err);
+
+    return {
+      success: false,
+      message: "Erro ao buscar relatórios: " + err.message
+    };
   }
 });
 
