@@ -3,7 +3,7 @@ const { resolveEscolaId } = require("./resolve_escola_id.js");
 async function getAlunosProfessor(currentUserId) {
 
     try {
-        const db = require(path.join(basePath, "backend/connection.js"));
+        const db = require("./connection.js");
 
         if (!currentUserId) {
             return { success: false, message: "ID do usuário não informado." };

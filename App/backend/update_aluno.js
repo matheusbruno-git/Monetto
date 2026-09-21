@@ -1,3 +1,5 @@
+const db = require("./connection.js");
+
 async function updateAluno(dados) {
 
     try {

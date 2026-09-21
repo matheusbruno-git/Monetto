@@ -14,44 +14,14 @@
 
 <body>
 
-  <nav class="sidebar">
-    <a class="sb-logo" href="#">
-      <svg viewBox="0 0 32 32" fill="none" width="26" height="26">
-        <rect width="32" height="32" rx="8" fill="#1A2A8F" />
-        <path d="M8 22V10l6 8 6-8v12" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"
-          stroke-linejoin="round" />
-        <circle cx="24" cy="10" r="3" fill="#2ECC71" />
-      </svg>
-      onetto <span class="sb-role">Admin</span>
-    </a>
-    <span class="sb-section">Escola</span>
-    <a class="sb-link active" href="../dashboard-admin-geral/dashboard-admin-geral.html"><span class="icon">🏠</span>
-      Painel Escolar</a>
-    <a class="sb-link " href="../financeiro/financeiro.html"><span class="icon">💵</span> Financeiro</a>
-    <span class="sb-section">Análises</span>
-    <a class="sb-link " href="../admin-relatorios/admin-relatorios.html"><span class="icon">📊</span> Relatórios</a>
-    <span class="sb-section">Configurações</span>
-    <a class="sb-link " href="../admin-dados-escola/admin-dados-escola.html"><span class="icon">🏫</span> Dados da
-      Escola</a>
-    <a class="sb-link " href="../admin-permissoes/admin-permissoes.html"><span class="icon">🛡️</span> Permissões</a>
-    <a class="sb-link " href="../admin-configuracoes/admin-configuracoes.html"><span class="icon">⚙️</span>
-      Configurações</a>
-    <div class="sb-bottom">
-      <a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;"
-        onclick="if(confirm('Sair da conta?'))window.location.href='../../user/monetto-landing/monetto-landing.html'"><span
-          class="icon">🚪</span> Sair da conta</a>
-      <div class="sb-user">
-        <div class="sb-av">🛡️</div>
-        <div class="sb-user-info"><strong>Admin Escolar</strong><span>Administrador</span></div>
-      </div>
-    </div>
-  </nav>
+  <div id="sidebar-container"></div>
 
   <main class="main">
     <div class="topbar">
       <h1>Painel <span>Geral</span></h1>
       <div class="top-right">
-        <div class="search-bar"><span>🔄</span><input id="dashboard-status" type="text" value="Carregando dados..." readonly></div>
+        <div class="search-bar"><span>🔄</span><input id="dashboard-status" type="text" value="Carregando dados..."
+            readonly></div>
         <button class="btn btn-primary" onclick="carregarDashboardAdminGeral()">↻ Atualizar</button>
       </div>
     </div>
@@ -130,7 +100,13 @@
             <div>Local</div>
           </div>
           <div id="schools-list">
-            <div class="ts-row"><div>—</div><div>Carregando escolas…</div><div>—</div><div>—</div><div>—</div></div>
+            <div class="ts-row">
+              <div>—</div>
+              <div>Carregando escolas…</div>
+              <div>—</div>
+              <div>—</div>
+              <div>—</div>
+            </div>
           </div>
         </div>
 
@@ -179,15 +155,20 @@
             <h3>📈 Crescimento de Alunos</h3>
           </div>
           <div class="bar-chart" id="student-growth-chart">
-            <div class="bc"><div class="bc-bar bc-purple" style="height:20px"></div><div class="bc-lbl">—</div></div>
+            <div class="bc">
+              <div class="bc-bar bc-purple" style="height:20px"></div>
+              <div class="bc-lbl">—</div>
+            </div>
           </div>
           <div style="display:flex;justify-content:space-around;margin-top:14px">
             <div style="text-align:center">
-              <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--accent)" id="growth-active-students">—</div>
+              <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--accent)"
+                id="growth-active-students">—</div>
               <div style="font-size:.68rem;color:var(--muted)">alunos ativos</div>
             </div>
             <div style="text-align:center">
-              <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--green)" id="growth-new-students">—</div>
+              <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--green)"
+                id="growth-new-students">—</div>
               <div style="font-size:.68rem;color:var(--muted)">novos este mês</div>
             </div>
           </div>
@@ -207,7 +188,9 @@
             <h3>⚡ Atividades recentes</h3>
           </div>
           <div id="activities-list">
-            <div class="tl-item"><div class="tl-body"><strong>Carregando atividades…</strong><span>Consultando banco de dados</span></div></div>
+            <div class="tl-item">
+              <div class="tl-body"><strong>Carregando atividades…</strong><span>Consultando banco de dados</span></div>
+            </div>
           </div>
         </div>
 
@@ -215,14 +198,15 @@
     </div>
   </main>
 
-    <script src="./script.js"></script>
-    <script id="logout-script">
-      function sairDaConta(destino) {
-        if (confirm("Tem certeza que deseja sair da conta?")) {
-          window.location.href = destino;
-        }
+  <script src="./script.js"></script>
+  <script src="../main_script.js"></script>
+  <script id="logout-script">
+    function sairDaConta(destino) {
+      if (confirm("Tem certeza que deseja sair da conta?")) {
+        window.location.href = destino;
       }
-    </script>
+    }
+  </script>
 </body>
 
 </html>

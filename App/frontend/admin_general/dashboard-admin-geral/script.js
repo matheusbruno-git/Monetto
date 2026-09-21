@@ -94,16 +94,16 @@
 
     el.innerHTML = rows.length
       ? rows
-          .map(
-            (item, index) => `
+        .map(
+          (item, index) => `
               <div class="bc">
                 <div class="bc-bar ${index === rows.length - 1 ? "bc-gold" : "bc-purple"}"
                      style="height:${Math.max(8, ((Number(item.total) || 0) / max) * 90)}px"
                      title="${number(item.total)} alunos"></div>
                 <div class="bc-lbl">${escapeHtml(item.label)}</div>
               </div>`,
-          )
-          .join("")
+        )
+        .join("")
       : '<div style="font-size:.78rem;color:var(--muted)">Sem dados de crescimento.</div>';
   }
 
