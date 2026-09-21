@@ -12,7 +12,7 @@
   <link rel="icon" type="image/x-icon" href="../../Assets/Monetto Logo.ico">
 </head>
 
-<body>
+<body class="dashboard-page">
 
   <div id="sidebar-container"></div>
 
@@ -26,175 +26,172 @@
       </div>
     </div>
 
-    <div class="main">
-
-      <!-- TOP BANNER -->
-      <div class="top-banner">
-        <div class="tb-left">
-          <h2>🌐 Monetto – Painel Geral da Plataforma</h2>
-          <p>ML Solutions · Visão completa de todas as escolas · <span id="dashboard-period">carregando…</span></p>
-        </div>
-        <div class="tb-stats">
-          <div class="tbs">
-            <div class="tbs-val" id="banner-escolas">—</div>
-            <div class="tbs-lbl">Escolas cadastradas</div>
-          </div>
-          <div class="tbs">
-            <div class="tbs-val" id="banner-alunos">—</div>
-            <div class="tbs-lbl">Alunos ativos</div>
-          </div>
-          <div class="tbs">
-            <div class="tbs-val" id="banner-professores">—</div>
-            <div class="tbs-lbl">Professores ativos</div>
-          </div>
-        </div>
-        <button class="btn-purple" onclick="carregarDashboardAdminGeral()">↻ Atualizar dados</button>
+    <!-- TOP BANNER -->
+    <div class="top-banner">
+      <div class="tb-left">
+        <h2>🌐 Monetto – Painel Geral da Plataforma</h2>
+        <p>ML Solutions · Visão completa de todas as escolas · <span id="dashboard-period">carregando…</span></p>
       </div>
-
-      <!-- STATS -->
-      <div class="stats-row">
-        <div class="sc sc-p">
-          <div class="sc-icon">🏫</div>
-          <div class="sc-val" id="stat-escolas">—</div>
-          <div class="sc-lbl">Escolas cadastradas</div>
-          <div class="sc-trend">Dados do banco</div>
+      <div class="tb-stats">
+        <div class="tbs">
+          <div class="tbs-val" id="banner-escolas">—</div>
+          <div class="tbs-lbl">Escolas cadastradas</div>
         </div>
-        <div class="sc sc-b">
-          <div class="sc-icon">👥</div>
-          <div class="sc-val" id="stat-alunos">—</div>
-          <div class="sc-lbl">Alunos ativos</div>
-          <div class="sc-trend up" id="stat-alunos-trend">—</div>
+        <div class="tbs">
+          <div class="tbs-val" id="banner-alunos">—</div>
+          <div class="tbs-lbl">Alunos ativos</div>
         </div>
-        <div class="sc sc-g">
-          <div class="sc-icon">👨‍🏫</div>
-          <div class="sc-val" id="stat-professores">—</div>
-          <div class="sc-lbl">Professores ativos</div>
-          <div class="sc-trend up" id="stat-professores-trend">—</div>
-        </div>
-        <div class="sc sc-y">
-          <div class="sc-icon">⚡</div>
-          <div class="sc-val" id="stat-xp">—</div>
-          <div class="sc-lbl">XP atual dos alunos</div>
-          <div class="sc-trend">Soma de progresso_aluno</div>
-        </div>
-        <div class="sc sc-r">
-          <div class="sc-icon">💳</div>
-          <div class="sc-val" id="stat-mrr">—</div>
-          <div class="sc-lbl">Receita recebida no mês</div>
-          <div class="sc-trend up" id="stat-mrr-trend">—</div>
+        <div class="tbs">
+          <div class="tbs-val" id="banner-professores">—</div>
+          <div class="tbs-lbl">Professores ativos</div>
         </div>
       </div>
+      <button class="btn-purple" onclick="carregarDashboardAdminGeral()">↻ Atualizar dados</button>
+    </div>
 
-      <!-- ROW 1 -->
-      <div class="g2">
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="sc sc-p">
+        <div class="sc-icon">🏫</div>
+        <div class="sc-val" id="stat-escolas">—</div>
+        <div class="sc-lbl">Escolas cadastradas</div>
+        <div class="sc-trend">Dados do banco</div>
+      </div>
+      <div class="sc sc-b">
+        <div class="sc-icon">👥</div>
+        <div class="sc-val" id="stat-alunos">—</div>
+        <div class="sc-lbl">Alunos ativos</div>
+        <div class="sc-trend up" id="stat-alunos-trend">—</div>
+      </div>
+      <div class="sc sc-g">
+        <div class="sc-icon">👨‍🏫</div>
+        <div class="sc-val" id="stat-professores">—</div>
+        <div class="sc-lbl">Professores ativos</div>
+        <div class="sc-trend up" id="stat-professores-trend">—</div>
+      </div>
+      <div class="sc sc-y">
+        <div class="sc-icon">⚡</div>
+        <div class="sc-val" id="stat-xp">—</div>
+        <div class="sc-lbl">XP atual dos alunos</div>
+        <div class="sc-trend">Soma de progresso_aluno</div>
+      </div>
+      <div class="sc sc-r">
+        <div class="sc-icon">💳</div>
+        <div class="sc-val" id="stat-mrr">—</div>
+        <div class="sc-lbl">Receita recebida no mês</div>
+        <div class="sc-trend up" id="stat-mrr-trend">—</div>
+      </div>
+    </div>
 
-        <div class="card">
-          <div class="card-hd">
-            <h3>🏫 Top Escolas por Engajamento</h3><a>Ver todas →</a>
-          </div>
-          <div class="ts-row th">
-            <div>#</div>
-            <div>Escola</div>
-            <div>Alunos</div>
-            <div>Conclusão</div>
-            <div>Local</div>
-          </div>
-          <div id="schools-list">
-            <div class="ts-row">
-              <div>—</div>
-              <div>Carregando escolas…</div>
-              <div>—</div>
-              <div>—</div>
-              <div>—</div>
-            </div>
-          </div>
+    <!-- ROW 1 -->
+    <div class="g2">
+
+      <div class="card">
+        <div class="card-hd">
+          <h3>🏫 Top Escolas por Engajamento</h3><a>Ver todas →</a>
         </div>
-
-        <div class="card">
-          <div class="card-hd">
-            <h3>💳 Pagamentos da Plataforma</h3>
-          </div>
-          <div class="plano-grid" id="payment-summary">
-            <div class="plano-card">
-              <div class="plano-icon">✅</div>
-              <div class="plano-name">Pagos</div>
-              <div class="plano-cnt" id="payments-paid-count">—</div>
-              <div class="plano-lbl">registros</div>
-            </div>
-            <div class="plano-card">
-              <div class="plano-icon">⏳</div>
-              <div class="plano-name">Pendentes</div>
-              <div class="plano-cnt" id="payments-pending-count">—</div>
-              <div class="plano-lbl">registros</div>
-            </div>
-            <div class="plano-card">
-              <div class="plano-icon">💰</div>
-              <div class="plano-name">Recebido</div>
-              <div class="plano-cnt" id="payments-paid-value">—</div>
-              <div class="plano-lbl">valor total</div>
-            </div>
-          </div>
-          <div style="margin-top:16px">
-            <div style="display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:5px">
-              <span style="color:var(--muted)">Receita do mês</span>
-              <span id="payments-mrr" style="color:var(--accent);font-weight:800;font-family:'Syne',sans-serif">—</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;font-size:.78rem">
-              <span style="color:var(--muted)">Receita mês anterior</span>
-              <span id="payments-previous-mrr" style="color:var(--green);font-weight:700">—</span>
-            </div>
+        <div class="ts-row th">
+          <div>#</div>
+          <div>Escola</div>
+          <div>Alunos</div>
+          <div>Conclusão</div>
+          <div>Local</div>
+        </div>
+        <div id="schools-list">
+          <div class="ts-row">
+            <div>—</div>
+            <div>Carregando escolas…</div>
+            <div>—</div>
+            <div>—</div>
+            <div>—</div>
           </div>
         </div>
       </div>
 
-      <!-- ROW 2 -->
-      <div class="g3">
-
-        <div class="card">
-          <div class="card-hd">
-            <h3>📈 Crescimento de Alunos</h3>
+      <div class="card">
+        <div class="card-hd">
+          <h3>💳 Pagamentos da Plataforma</h3>
+        </div>
+        <div class="plano-grid" id="payment-summary">
+          <div class="plano-card">
+            <div class="plano-icon">✅</div>
+            <div class="plano-name">Pagos</div>
+            <div class="plano-cnt" id="payments-paid-count">—</div>
+            <div class="plano-lbl">registros</div>
           </div>
-          <div class="bar-chart" id="student-growth-chart">
-            <div class="bc">
-              <div class="bc-bar bc-purple" style="height:20px"></div>
-              <div class="bc-lbl">—</div>
-            </div>
+          <div class="plano-card">
+            <div class="plano-icon">⏳</div>
+            <div class="plano-name">Pendentes</div>
+            <div class="plano-cnt" id="payments-pending-count">—</div>
+            <div class="plano-lbl">registros</div>
           </div>
-          <div style="display:flex;justify-content:space-around;margin-top:14px">
-            <div style="text-align:center">
-              <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--accent)"
-                id="growth-active-students">—</div>
-              <div style="font-size:.68rem;color:var(--muted)">alunos ativos</div>
-            </div>
-            <div style="text-align:center">
-              <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--green)"
-                id="growth-new-students">—</div>
-              <div style="font-size:.68rem;color:var(--muted)">novos este mês</div>
-            </div>
+          <div class="plano-card">
+            <div class="plano-icon">💰</div>
+            <div class="plano-name">Recebido</div>
+            <div class="plano-cnt" id="payments-paid-value">—</div>
+            <div class="plano-lbl">valor total</div>
           </div>
         </div>
-
-        <div class="card">
-          <div class="card-hd">
-            <h3>📚 Cursos mais utilizados</h3>
+        <div style="margin-top:16px">
+          <div style="display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:5px">
+            <span style="color:var(--muted)">Receita do mês</span>
+            <span id="payments-mrr" style="color:var(--accent);font-weight:800;font-family:'Syne',sans-serif">—</span>
           </div>
-          <div id="course-usage-list" style="display:flex;flex-direction:column;gap:10px">
-            <div style="font-size:.82rem;color:var(--muted)">Carregando dados…</div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-hd">
-            <h3>⚡ Atividades recentes</h3>
-          </div>
-          <div id="activities-list">
-            <div class="tl-item">
-              <div class="tl-body"><strong>Carregando atividades…</strong><span>Consultando banco de dados</span></div>
-            </div>
+          <div style="display:flex;justify-content:space-between;font-size:.78rem">
+            <span style="color:var(--muted)">Receita mês anterior</span>
+            <span id="payments-previous-mrr" style="color:var(--green);font-weight:700">—</span>
           </div>
         </div>
-
       </div>
+    </div>
+
+    <!-- ROW 2 -->
+    <div class="g3">
+
+      <div class="card">
+        <div class="card-hd">
+          <h3>📈 Crescimento de Alunos</h3>
+        </div>
+        <div class="bar-chart" id="student-growth-chart">
+          <div class="bc">
+            <div class="bc-bar bc-purple" style="height:20px"></div>
+            <div class="bc-lbl">—</div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-around;margin-top:14px">
+          <div style="text-align:center">
+            <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--accent)"
+              id="growth-active-students">—</div>
+            <div style="font-size:.68rem;color:var(--muted)">alunos ativos</div>
+          </div>
+          <div style="text-align:center">
+            <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--green)"
+              id="growth-new-students">—</div>
+            <div style="font-size:.68rem;color:var(--muted)">novos este mês</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-hd">
+          <h3>📚 Cursos mais utilizados</h3>
+        </div>
+        <div id="course-usage-list" style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-size:.82rem;color:var(--muted)">Carregando dados…</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-hd">
+          <h3>⚡ Atividades recentes</h3>
+        </div>
+        <div id="activities-list">
+          <div class="tl-item">
+            <div class="tl-body"><strong>Carregando atividades…</strong><span>Consultando banco de dados</span></div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </main>
 
