@@ -45,7 +45,7 @@
     <div class="kpi-row">
       <div class="kpi">
         <div class="kpi-icon">👥</div>
-        <div class="kpi-val" id="report-students">—</div>
+        <div class="kpi-val" id="report-students-count">—</div>
         <div class="kpi-lbl">Alunos ativos</div>
         <div class="kpi-delta delta-neu" id="report-students-sub">Banco de dados</div>
       </div>
@@ -157,9 +157,37 @@
 
     function sessionId() {
       try {
-        const s = JSON.parse(localStorage.getItem("session") || "{}");
-        return s.id_usuario || s.id || null;
-      } catch (_) { return null; }
+        const raw = localStorage.getItem("session");
+
+        console.log("📦 SESSION RAW:", raw);
+
+        if (!raw) {
+          console.error("❌ localStorage['session'] não existe.");
+          return null;
+        }
+
+        const s = JSON.parse(raw);
+
+        console.log("📦 SESSION OBJETO:", s);
+
+        const id =
+          s.id_usuario ??
+          s.id ??
+          s.usuario?.id_usuario ??
+          s.usuario?.id ??
+          s.user?.id_usuario ??
+          s.user?.id ??
+          s.usuarioId ??
+          s.userId ??
+          null;
+
+        console.log("👤 ID RESOLVIDO:", id);
+
+        return id;
+      } catch (err) {
+        console.error("❌ Erro ao ler sessão:", err);
+        return null;
+      }
     }
 
     function formatDate(v) {
@@ -240,7 +268,7 @@
         return !Number.isNaN(x.getTime()) && x.toDateString() === today.toDateString();
       }).length;
 
-      document.getElementById("report-students").textContent = active.length;
+      document.getElementById("report-students-count").textContent = active.length;
       document.getElementById("report-students-sub").textContent = `${f.students.length} cadastrados`;
       document.getElementById("report-completion").textContent = `${completion}%`;
       document.getElementById("report-xp").textContent = xp >= 1000 ? `${(xp / 1000).toFixed(1)}k` : xp;
@@ -350,21 +378,66 @@
 
     async function loadReports() {
       const id = sessionId();
+
+      console.log("📊 CARREGANDO RELATÓRIOS");
+      console.log("👤 currentUserId:", id);
+
       if (!id) {
-        document.querySelector(".main").insertAdjacentHTML("afterbegin",
-          '<div style="padding:12px;color:var(--red)">Sessão inválida. Faça login novamente.</div>');
+        console.error("❌ Não foi possível obter o ID do usuário.");
+
+        document.querySelector(".main").insertAdjacentHTML(
+          "afterbegin",
+          `<div style="
+        padding:12px;
+        margin-bottom:15px;
+        color:var(--red);
+        background:rgba(255,0,0,.08);
+        border:1px solid rgba(255,0,0,.2);
+        border-radius:8px;
+      ">
+        Sessão inválida. ID do usuário não encontrado.
+      </div>`
+        );
+
         return;
       }
+
       try {
+        console.log("📡 Chamando getAdminReports com ID:", id);
+
         const result = await window.api.getAdminReports(id);
-        if (!result?.success) throw new Error(result?.message || "Erro ao carregar relatórios.");
+
+        console.log("📥 RESPOSTA DOS RELATÓRIOS:", result);
+
+        if (!result?.success) {
+          throw new Error(
+            result?.message || "Erro ao carregar relatórios."
+          );
+        }
+
         reportState.data = result.data;
+
+        console.log("✅ Dados dos relatórios carregados:", reportState.data);
+
         populateClassFilter();
         renderReports();
+
       } catch (err) {
-        console.error("Erro nos relatórios:", err);
-        document.querySelector(".main").insertAdjacentHTML("afterbegin",
-          `<div style="padding:12px;color:var(--red)">Erro ao carregar dados reais: ${esc(err.message)}</div>`);
+        console.error("❌ Erro nos relatórios:", err);
+
+        document.querySelector(".main").insertAdjacentHTML(
+          "afterbegin",
+          `<div style="
+        padding:12px;
+        margin-bottom:15px;
+        color:var(--red);
+        background:rgba(255,0,0,.08);
+        border:1px solid rgba(255,0,0,.2);
+        border-radius:8px;
+      ">
+        Erro ao carregar dados reais: ${esc(err.message)}
+      </div>`
+        );
       }
     }
 
