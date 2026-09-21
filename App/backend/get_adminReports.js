@@ -244,12 +244,15 @@ async function getAdminReports(db, currentUserId) {
             ).length;
             return {
                 id: t.id_tarefa,
+                id_turma: t.id_turma, // ← ADD THIS
                 title: t.titulo || "Tarefa",
                 turma: t.turma || "Toda a escola",
                 disciplina: t.disciplina || "—",
                 deadline: t.data_entrega,
                 status: t.status,
-                rate: target.length ? Math.round((delivered / target.length) * 100) : 0,
+                rate: target.length
+                    ? Math.round((delivered / target.length) * 100)
+                    : 0,
                 delivered,
                 total: target.length,
             };
