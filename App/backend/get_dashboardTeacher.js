@@ -59,11 +59,18 @@ async function getDashboardTeacher(currentUserId) {
     );
 
     const alunosAtivos = await safeCount(
-      `SELECT COUNT(*) AS total FROM usuarios u
-       INNER JOIN turmas t ON u.id_turma = t.id_turma
-       WHERE u.id_perfil = 1 AND u.ativo = 1 AND u.id_escola = ?
-         AND t.id_professor = ? AND t.id_escola = ?`,
-      [escolaId, currentUserId, escolaId],
+      `SELECT u.id_usuario, u.nome, u.email, u.ativo, u.ultimo_acesso, u.id_turma,
+              t.nome_turma AS turma,
+              COALESCE(pa.xp_atual, 0) AS xp_atual,
+              COALESCE(pa.pontos_totais, 0) AS pontos_totais,
+              COALESCE(pa.nivel_atual, 0) AS nivel_atual,
+              COALESCE(pa.percentual_conclusao, 0) AS percentual_conclusao
+       FROM usuarios u
+       LEFT JOIN turmas t ON t.id_turma = u.id_turma
+       LEFT JOIN progresso_aluno pa ON pa.id_aluno = u.id_usuario
+       WHERE u.id_perfil = 1 AND u.id_escola = ?
+       ORDER BY u.nome ASC`,
+      [escolaId],
     );
 
     const tarefasAtivas = await safeCount(
