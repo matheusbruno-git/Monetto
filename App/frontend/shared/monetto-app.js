@@ -174,24 +174,274 @@ function renderDashboardAdminEscolar(d) {
     }
   }
 
-  // Alerts
+  // ── Alerts ─────────────────────────────────────────────────────
   const alertsEl = document.getElementById('alerts-list');
+
   if (alertsEl) {
     const list = Array.isArray(d.alerts) ? d.alerts : [];
+
     alertsEl.innerHTML = list
       .map((a) => {
-        const level = a.level === 'red' ? 'al-red' : a.level === 'yellow' ? 'al-yellow' : 'al-blue';
+        const level =
+          a.level === 'red'
+            ? 'al-red'
+            : a.level === 'yellow'
+              ? 'al-yellow'
+              : 'al-blue';
+
+        const hasAction =
+          a.action &&
+          a.action !== 'OK';
+
         return `
         <div class="alert-item ${level}">
-          <div class="alert-icon">${a.icon || '🔵'}</div>
+          <div class="alert-icon">
+            ${a.icon || '🔵'}
+          </div>
+
           <div class="alert-body">
-            <strong>${escapeHtml(a.title)}</strong>
+            <strong>${escapeHtml(a.title || '')}</strong>
             <span>${escapeHtml(a.subtitle || '')}</span>
           </div>
-          <button class="alert-action">${escapeHtml(a.action || 'Ver')}</button>
-        </div>`;
+
+          ${hasAction
+            ? `
+                <button
+                  class="alert-action"
+                  type="button"
+                  data-alert-id="${escapeHtml(a.id || '')}">
+                  ${escapeHtml(a.action)}
+                </button>
+              `
+            : ''
+          }
+        </div>
+      `;
       })
       .join('');
+
+    alertsEl
+      .querySelectorAll('.alert-action')
+      .forEach((button) => {
+        button.addEventListener('click', async () => {
+
+          const alertId = button.dataset.alertId;
+
+          const alert = list.find(
+            (item) => String(item.id) === String(alertId)
+          );
+
+          if (!alert) {
+            console.error('Alerta não encontrado:', alertId);
+            showToast('Alerta não encontrado.', 'error');
+            return;
+          }
+
+          // ─────────────────────────────────────────────
+          // ALERTA: ALUNOS SEM ACESSO
+          // ─────────────────────────────────────────────
+          if (alert.type === 'inactive-students') {
+
+            const recipients = Array.isArray(alert.recipients)
+              ? alert.recipients.filter(
+                (student) =>
+                  student &&
+                  student.email &&
+                  String(student.email).trim() !== ''
+              )
+              : [];
+
+            if (!recipients.length) {
+              showToast(
+                'Nenhum aluno possui email cadastrado.',
+                'error'
+              );
+
+              return;
+            }
+
+            if (
+              !window.api ||
+              typeof window.api.sendEmail !== 'function'
+            ) {
+              console.error(
+                'window.api.sendEmail não está disponível.'
+              );
+
+              showToast(
+                'Serviço de email indisponível.',
+                'error'
+              );
+
+              return;
+            }
+
+            const originalText = button.textContent;
+            const session = getSession();
+            const currentUserEmail =
+              session.email ||
+              session.user_email ||
+              session.email_usuario ||
+              session.emailAddress ||
+              '';
+
+            if (!currentUserEmail) {
+              showToast(
+                'Não foi possível identificar o email do usuário atual.',
+                'error'
+              );
+              return;
+            }
+
+            try {
+
+              button.disabled = true;
+              button.textContent = 'Enviando...';
+
+              let enviados = 0;
+              let erros = 0;
+
+              for (const student of recipients) {
+
+                try {
+
+                  const result = await window.api.sendEmail({
+                    from: currentUserEmail,
+                    to: student.email,
+
+                    subject: 'Monetto - Lembrete de acesso',
+
+                    message: `
+Olá, ${student.name}!
+
+Notamos que você está há mais de 7 dias sem acessar o Monetto.
+
+Acesse a plataforma para continuar acompanhando suas atividades e tarefas escolares.
+
+Equipe Monetto
+                  `.trim(),
+
+                    html: `
+                    <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+                      <h2>Olá, ${escapeHtml(student.name)}!</h2>
+
+                      <p>
+                        Notamos que você está há mais de
+                        <strong>7 dias</strong> sem acessar o Monetto.
+                      </p>
+
+                      <p>
+                        Acesse a plataforma para continuar acompanhando
+                        suas atividades e tarefas escolares.
+                      </p>
+
+                      <p>
+                        <strong>Equipe Monetto</strong>
+                      </p>
+                    </div>
+                  `.trim(),
+
+                    recipient: student.email,
+                    email: student.email,
+
+                    alert: {
+                      id: alert.id,
+                      type: alert.type,
+                      title: alert.title
+                    }
+                  });
+
+                  if (result && result.success === false) {
+                    throw new Error(
+                      result.message || 'Falha no envio.'
+                    );
+                  }
+
+                  enviados++;
+
+                } catch (error) {
+
+                  erros++;
+
+                  console.error(
+                    `Erro ao enviar para ${student.email}:`,
+                    error
+                  );
+                }
+              }
+
+              // ─────────────────────────────────────────
+              // RESULTADO
+              // ─────────────────────────────────────────
+
+              if (enviados > 0 && erros === 0) {
+
+                showToast(
+                  `${enviados} email(s) enviado(s) com sucesso!`,
+                  'success'
+                );
+
+              } else if (enviados > 0 && erros > 0) {
+
+                showToast(
+                  `${enviados} enviado(s), ${erros} falharam.`,
+                  'warning'
+                );
+
+              } else {
+
+                showToast(
+                  'Não foi possível enviar os emails.',
+                  'error'
+                );
+              }
+
+            } catch (error) {
+
+              console.error(
+                'Erro ao enviar alertas:',
+                error
+              );
+
+              showToast(
+                error.message || 'Erro ao enviar emails.',
+                'error'
+              );
+
+            } finally {
+
+              button.disabled = false;
+              button.textContent = originalText;
+            }
+
+            return;
+          }
+
+          // ─────────────────────────────────────────────
+          // OUTROS ALERTAS
+          // ─────────────────────────────────────────────
+
+          if (alert.action === 'Cadastrar') {
+
+            showToast(
+              'Use o menu lateral para cadastrar.',
+              'info'
+            );
+
+            return;
+          }
+
+          if (alert.action === 'Criar') {
+
+            showToast(
+              'Use o menu lateral para criar a turma.',
+              'info'
+            );
+
+            return;
+          }
+        });
+      });
   }
 
   // Classes / turmas

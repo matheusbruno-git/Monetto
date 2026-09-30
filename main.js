@@ -367,6 +367,18 @@ ipcMain.handle("getSchools", async () => {
   }
 });
 
+ipcMain.handle("sendEmail", async (event, dados) => {
+  try {
+    const { sendEmail } = require(
+      path.join(basePath, "backend/send_email.js"),
+    );
+    return await sendEmail(dados);
+  } catch (err) {
+    console.error("sendEmail Error:", err);
+    return { success: false, message: "Erro ao enviar email." };
+  }
+});
+
 ipcMain.handle("getDashboardAdminEscolar", async (event, currentUserId) => {
   try {
     const { getDashboardAdminEscolar } = require(

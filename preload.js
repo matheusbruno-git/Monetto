@@ -63,4 +63,5 @@ contextBridge.exposeInMainWorld("api", {
     ipcRenderer.invoke("changeProfessorPassword", dados),
   changeAlunoPassword: (dados) =>
     ipcRenderer.invoke("changeAlunoPassword", dados),
+  sendEmail: (dados) => ipcRenderer.invoke("sendEmail", dados),
 });

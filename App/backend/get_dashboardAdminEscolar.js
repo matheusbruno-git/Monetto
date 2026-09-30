@@ -105,22 +105,25 @@ async function getDashboardAdminEscolar(currentUserId) {
     let escolaNome = "";
     let escolaSub = "";
     let escolaEmail = "";
+
     try {
-      const escolas = await db
-        .promise()
-        .execute(
-          `SELECT nome, cidade, estado, email FROM escolas`,
-          [escolaId]
-        );
-      if (escolas[0]) {
-        escolaNome = escolas[0].nome;
-        escolaEmail = escolas[0].email;
+      const [escolas] = await db.promise().execute(
+        `SELECT nome, cidade, estado, email
+     FROM escolas
+     WHERE id_escola = ?
+     LIMIT 1`,
+        [escolaId]
+      );
+
+      if (escolas.length > 0) {
+        escolaNome = escolas[0].nome || "";
+        escolaEmail = escolas[0].email || "";
         escolaSub = [escolas[0].cidade, escolas[0].estado]
           .filter(Boolean)
           .join(" · ");
       }
     } catch (e) {
-      console.warn("escolas table missing or empty");
+      console.warn("Erro ao carregar escola:", e.sqlMessage || e.message);
     }
 
     const profRows = await safeQuery(
@@ -194,15 +197,34 @@ async function getDashboardAdminEscolar(currentUserId) {
         statusClass,
       };
     });
-
+    const inactiveStudents = await safeQuery(
+      `SELECT id_usuario, nome, email, ultimo_acesso
+   FROM usuarios
+   WHERE id_perfil = 1
+     AND ativo = 1
+     AND id_escola = ?
+     AND (ultimo_acesso IS NULL OR DATEDIFF(CURDATE(), ultimo_acesso) > 7)
+     AND email IS NOT NULL
+     AND email <> ''
+   ORDER BY nome ASC`,
+      [escolaId],
+    );
     const alerts = [];
     if (deactivatedAlunosTotal > 0) {
       alerts.push({
+        id: "inactive-students",
+        type: "inactive-students",
         level: "red",
         icon: "🔴",
         title: `${deactivatedAlunosTotal} aluno(s) sem acesso há +7 dias`,
-        subtitle: "Ação recomendada",
+        subtitle: "Enviar lembrete para os alunos",
         action: "Alertar",
+
+        recipients: inactiveStudents.map((student) => ({
+          id: student.id_usuario,
+          name: student.nome,
+          email: student.email,
+        })),
       });
     }
     if (professoresTotal === 0) {
