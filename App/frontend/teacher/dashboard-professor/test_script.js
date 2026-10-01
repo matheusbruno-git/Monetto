@@ -1,0 +1,309 @@
+
+const reportState = { data: null, period: "week", classId: "" };
+
+function esc(v) {
+  return String(v ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+function sessionId() {
+  try {
+    const raw = localStorage.getItem("session");
+
+    console.log("📦 SESSION RAW:", raw);
+
+    if (!raw) {
+      console.error("❌ localStorage['session'] não existe.");
+      return null;
+    }
+
+    const s = JSON.parse(raw);
+
+    console.log("📦 SESSION OBJETO:", s);
+
+    const id =
+      s.id_usuario ??
+      s.id ??
+      s.usuario?.id_usuario ??
+      s.usuario?.id ??
+      s.user?.id_usuario ??
+      s.user?.id ??
+      s.usuarioId ??
+      s.userId ??
+      null;
+
+    console.log("👤 ID RESOLVIDO:", id);
+
+    return id;
+  } catch (err) {
+    console.error("❌ Erro ao ler sessão:", err);
+    return null;
+  }
+}
+
+function formatDate(v) {
+  if (!v) return "Sem prazo";
+  const d = new Date(v);
+  return Number.isNaN(d.getTime()) ? "Sem prazo" : d.toLocaleDateString("pt-BR");
+}
+
+function periodStart(period) {
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
+  if (period === "month") d.setDate(1);
+  else if (period === "term") d.setMonth(d.getMonth() - 2);
+  else if (period === "year") d.setMonth(0, 1);
+  else d.setDate(d.getDate() - 6);
+  return d;
+}
+
+function filterData() {
+  const d = reportState.data;
+  if (!d) return { students: [], classes: [], tasks: [], deliveries: [] };
+
+  let students = [...(d.students || [])];
+  let classes = [...(d.classes || [])];
+  let tasks = [...(d.tasks || [])];
+
+  if (reportState.classId) {
+    students = students.filter(s => {
+      const raw = (d.students || []).find(x => String(x.id_usuario ?? x.id) === String(s.id));
+      return raw && String(raw.id_turma) === String(reportState.classId);
+    });
+    classes = classes.filter(c => String(c.id) === String(reportState.classId));
+    tasks = tasks.filter(t => String(t.id_turma || "") === String(reportState.classId));
+  }
+
+  const start = periodStart(reportState.period);
+  const deliveries = (d.deliveries || []).filter(e => {
+    const x = new Date(e.criado_em);
+    return !Number.isNaN(x.getTime()) && x >= start;
+  });
+
+  return { students, classes, tasks, deliveries };
+}
+
+function renderReports() {
+  const d = reportState.data;
+  if (!d) return;
+  const f = filterData();
+
+  const active = f.students.filter(s => s.ativo);
+  const assigned = [];
+  for (const s of active) {
+    for (const t of f.tasks) {
+      if (t.id_turma && s.id_turma && String(t.id_turma) === String(s.id_turma)) {
+        assigned.push([t.id_tarefa, s.id]);
+      }
+    }
+  }
+  const completed = assigned.filter(([tid, sid]) =>
+    (d.deliveryKeys || []).includes(`${String(tid)}:${String(sid)}`)
+  );
+  const completion = assigned.length ? Math.round(completed.length / assigned.length * 100)
+    : (active.length ? Math.round(active.reduce((a, s) => a + Number(s.progresso || 0), 0) / active.length) : 0);
+
+  const xp = f.deliveries.reduce((sum, e) => sum + (Number(e.xp_ganho) || 0), 0);
+  const activeTasks = f.tasks.filter(t => {
+    const status = String(t.status || "").toLowerCase();
+    if (["concluida", "concluído", "concluido", "cancelada", "cancelado"].includes(status)) return false;
+    if (!t.deadline) return true;
+    const x = new Date(t.deadline);
+    return Number.isNaN(x.getTime()) || x >= new Date();
+  });
+
+  const risk = active.filter(s => Number(s.progresso || 0) < 50).length;
+  const dueToday = f.tasks.filter(t => {
+    if (!t.deadline) return false;
+    const x = new Date(t.deadline), today = new Date();
+    return !Number.isNaN(x.getTime()) && x.toDateString() === today.toDateString();
+  }).length;
+
+  document.getElementById("report-students-count").textContent = active.length;
+  document.getElementById("report-students-sub").textContent = `${f.students.length} cadastrados`;
+  document.getElementById("report-completion").textContent = `${completion}%`;
+  document.getElementById("report-xp").textContent = xp >= 1000 ? `${(xp / 1000).toFixed(1)}k` : xp;
+  document.getElementById("report-tasks-count").textContent = activeTasks.length;
+  document.getElementById("report-due-today").textContent = `${dueToday} vencendo hoje`;
+  document.getElementById("report-risk").textContent = risk;
+  document.getElementById("report-period-label").textContent =
+    reportState.period === "week" ? "Últimos 7 dias" :
+      reportState.period === "month" ? "Este mês" :
+        reportState.period === "term" ? "Últimos 2 meses" : "Ano letivo";
+
+  // Daily delivery chart
+  const chart = document.getElementById("report-chart");
+  const days = reportState.period === "week" ? 7 : 10;
+  const points = [];
+  for (let i = days - 1; i >= 0; i--) {
+    const day = new Date();
+    day.setHours(0, 0, 0, 0);
+    day.setDate(day.getDate() - i);
+    const next = new Date(day); next.setDate(next.getDate() + 1);
+    const value = f.deliveries.filter(e => {
+      const x = new Date(e.criado_em);
+      return x >= day && x < next;
+    }).length;
+    points.push({ label: day.toLocaleDateString("pt-BR", { weekday: "short" }).replace(".", ""), value });
+  }
+  const max = Math.max(1, ...points.map(p => p.value));
+  chart.innerHTML = points.map(p => `
+        <div class="bc">
+          <div class="bc-bar blue" style="height:${Math.max(4, Math.round(p.value / max * 95))}px" title="${p.value} entrega(s)"></div>
+          <div class="bc-lbl">${esc(p.label)}</div>
+        </div>`).join("");
+
+  // Classes
+  const classList = f.classes;
+  const legend = document.getElementById("report-class-legend");
+  const pie = document.getElementById("report-pie");
+  const palette = ["var(--green)", "#5B9BF8", "var(--accent)", "var(--purple)", "var(--orange)"];
+  let cursor = 0, stops = [];
+  const totalStudents = Math.max(1, classList.reduce((sum, c) => sum + (Number(c.students) || 0), 0));
+  classList.forEach((c, i) => {
+    const width = (Number(c.students) || 0) / totalStudents * 100;
+    stops.push(`${palette[i % palette.length]} ${cursor}% ${cursor + width}%`);
+    cursor += width;
+  });
+  pie.style.background = classList.length ? `conic-gradient(${stops.join(",")})` : "conic-gradient(var(--border) 0 100%)";
+  legend.innerHTML = classList.length ? classList.map((c, i) => `
+        <div class="pl-row">
+          <div class="pl-dot" style="background:${palette[i % palette.length]}"></div>
+          <span class="pl-label">${esc(c.name)}</span>
+          <span class="pl-pct" style="color:${palette[i % palette.length]}">${Number(c.completion) || 0}%</span>
+          <span class="pl-count">${Number(c.students) || 0}</span>
+        </div>`).join("") :
+    `<div style="color:var(--muted);font-size:.8rem">Nenhuma turma encontrada.</div>`;
+
+  // Students
+  const studentsEl = document.getElementById("report-students");
+  studentsEl.innerHTML = f.students.length ? f.students.map(s => {
+    const pct = Math.max(0, Math.min(100, Number(s.progresso) || 0));
+    const status = pct >= 80 ? ["Ótimo", "sc-ok"] : pct >= 50 ? ["Atenção", "sc-warn"] : ["Em risco", "sc-bad"];
+    return `<div class="al-row">
+          <div class="al-user"><div class="al-av ${esc(s.avatarClass)}"></div><div class="al-name">${esc(s.name)}</div></div>
+          <div><span class="xp-chip">⚡${Number(s.xp) || 0}</span></div>
+          <div><span class="lvl-chip">Nv. ${Number(s.nivel) || 0}</span></div>
+          <div style="font-size:.82rem">${Number(s.tarefasFeitas) || 0}/${Number(s.tarefasTotal) || 0}</div>
+          <div><div class="prog-mini"><div class="prog-mini-f" style="width:${pct}%"></div></div></div>
+          <div><span class="status-chip ${status[1]}">${status[0]}</span></div>
+        </div>`;
+  }).join("") : `<div style="padding:18px;color:var(--muted)">Nenhum aluno encontrado.</div>`;
+
+  // Tasks
+  const tasksEl = document.getElementById("report-tasks");
+  tasksEl.innerHTML = f.tasks.slice(0, 8).map(t => `
+        <div class="task-ana-item">
+          <div class="ta-subj" style="background:var(--accent)"></div>
+          <div class="ta-info"><strong>${esc(t.title)}</strong><span>${esc(t.disciplina)} · ${esc(t.turma)} · ${formatDate(t.deadline)}</span></div>
+          <div class="ta-prog"><div class="ta-bar"><div class="ta-bar-f" style="width:${Number(t.rate) || 0}%"></div></div><span class="ta-pct">${Number(t.rate) || 0}%</span></div>
+        </div>`).join("") || `<div style="padding:12px;color:var(--muted)">Nenhuma tarefa encontrada.</div>`;
+
+  // Risks
+  const alerts = active.filter(s => Number(s.progresso || 0) < 50).sort((a, b) => a.progresso - b.progresso).slice(0, 5);
+  document.getElementById("report-alerts").innerHTML = alerts.length ? alerts.map(s => `
+        <div class="at-item at-red">
+          <div class="at-icon">🔴</div>
+          <div class="at-body"><strong>${esc(s.name)} – ${Number(s.progresso) || 0}%</strong><span>${esc(s.turma)} · ${s.ultimoAcesso ? "último acesso " + formatDate(s.ultimoAcesso) : "sem acesso registrado"}</span></div>
+        </div>`).join("") :
+    `<div style="padding:12px;color:var(--muted)">Nenhum aluno abaixo de 50%.</div>`;
+
+  // Highlights
+  document.getElementById("report-highlights").innerHTML = [...active].sort((a, b) => b.xp - a.xp).slice(0, 3).map((s, i) => `
+        <div class="dest-card">
+          <div class="dest-pos">${["🥇", "🥈", "🥉"][i] || "🏅"}</div>
+          <div class="dest-av ${esc(s.avatarClass)}"></div>
+          <div class="dest-name">${esc(s.name)}</div>
+          <div class="dest-xp">⚡ ${Number(s.xp) || 0} XP</div>
+          <div class="dest-info">${esc(s.turma)} · ${Number(s.tarefasFeitas) || 0} tarefas feitas</div>
+        </div>`).join("") ||
+    `<div style="padding:18px;color:var(--muted)">Nenhum destaque disponível.</div>`;
+}
+
+function populateClassFilter() {
+  const select = document.getElementById("report-class-filter");
+  select.innerHTML = `<option value="">Todas as turmas</option>` +
+    (reportState.data?.classes || []).map(c => `<option value="${esc(c.id)}">${esc(c.name)}</option>`).join("");
+  select.value = reportState.classId;
+}
+
+async function loadReports() {
+  const id = sessionId();
+
+  console.log("📊 CARREGANDO RELATÓRIOS");
+  console.log("👤 currentUserId:", id);
+
+  if (!id) {
+    console.error("❌ Não foi possível obter o ID do usuário.");
+
+    document.querySelector(".main").insertAdjacentHTML(
+      "afterbegin",
+      `<div style="
+        padding:12px;
+        margin-bottom:15px;
+        color:var(--red);
+        background:rgba(255,0,0,.08);
+        border:1px solid rgba(255,0,0,.2);
+        border-radius:8px;
+      ">
+        Sessão inválida. ID do usuário não encontrado.
+      </div>`
+    );
+
+    return;
+  }
+
+  try {
+    console.log("📡 Chamando getAdminReports com ID:", id);
+
+    const result = await window.api.getAdminReports(id);
+
+    console.log("📥 RESPOSTA DOS RELATÓRIOS:", result);
+
+    if (!result?.success) {
+      throw new Error(
+        result?.message || "Erro ao carregar relatórios."
+      );
+    }
+
+    reportState.data = result.data;
+
+    console.log("✅ Dados dos relatórios carregados:", reportState.data);
+
+    populateClassFilter();
+    renderReports();
+
+  } catch (err) {
+    console.error("❌ Erro nos relatórios:", err);
+
+    document.querySelector(".main").insertAdjacentHTML(
+      "afterbegin",
+      `<div style="
+        padding:12px;
+        margin-bottom:15px;
+        color:var(--red);
+        background:rgba(255,0,0,.08);
+        border:1px solid rgba(255,0,0,.2);
+        border-radius:8px;
+      ">
+        Erro ao carregar dados reais: ${esc(err.message)}
+      </div>`
+    );
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".ftab").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".ftab").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      reportState.period = btn.dataset.period;
+      renderReports();
+    });
+  });
+  document.getElementById("report-class-filter").addEventListener("change", e => {
+    reportState.classId = e.target.value;
+    renderReports();
+  });
+  loadReports();
+});
