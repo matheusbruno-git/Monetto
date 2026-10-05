@@ -4,3 +4,4 @@ node-v24.21.0-win-x64/
 .env
 
 node install nodemailler
+npm install exceljs

@@ -1,818 +1,320 @@
 // ============================================================
-// LOGOUT
+// CRIAR / GERENCIAR TURMAS + ATRIBUIR ALUNOS
 // ============================================================
 
-function sairDaConta(destino) {
-  if (confirm("Tem certeza que deseja sair da conta?")) {
-    window.location.href = destino;
+let turmas = [];
+let alunos = [];
+let turmaSelecionadaId = null;
+let alunosSelecionados = new Set();
+
+function getSession() {
+  try {
+    return JSON.parse(localStorage.getItem("session") || "{}");
+  } catch {
+    return {};
   }
 }
 
-// ============================================================
-// MENSAGENS
-// ============================================================
+function currentUserId() {
+  const session = getSession();
+  return session.id_usuario || session.id || null;
+}
 
-function showMsg(el, text, success) {
-  if (!el) {
-    alert(text);
-    return;
-  }
-
-  el.textContent = text;
-
-  el.style.color = success ? "var(--green)" : "var(--red)";
-
-  el.style.background = success
-    ? "rgba(46, 204, 113, 0.12)"
-    : "rgba(231, 76, 60, 0.12)";
-
+function showMsg(text, success = false) {
+  const el = document.getElementById("formMsg");
+  if (!el) return;
+  el.textContent = text || "";
+  el.className = success ? "ok" : "err";
   el.style.display = "block";
-
-  setTimeout(() => (el.style.display = "none"), 3500);
+  clearTimeout(showMsg.timer);
+  showMsg.timer = setTimeout(() => {
+    el.style.display = "none";
+  }, 3500);
 }
-
-function setText(id, value) {
-  const element = document.getElementById(id);
-  if (element) element.textContent = value ?? "—";
-}
-
-// ============================================================
-// POPULATE NÍVEIS DROPDOWN
-// ============================================================
 
 async function loadNiveis() {
+  const sel = document.getElementById("nivelSelect");
+  if (!sel || !window.api?.getNiveis) return;
+
   try {
-    if (!window.api?.getNiveis) {
-      console.error("window.api.getNiveis não existe.");
-      return;
-    }
-
     const result = await window.api.getNiveis();
-
-    if (!result.success) {
-      console.error("Erro ao carregar níveis:", result.message);
-
-      return;
-    }
-
-    const sel = document.getElementById("nivelSelect");
-
-    if (!sel) return;
-
-    // IMPORTANTE:
-    // Não existe mais espaço antes do ID.
+    if (!result.success) throw new Error(result.message || "Erro ao carregar níveis.");
 
     sel.innerHTML =
       '<option value="">Selecione o nível...</option>' +
-      result.data
-        .map((n) => `<option value="${n.id_nivel}">${n.nome}</option>`)
+      (result.data || [])
+        .map(n => `<option value="${n.id_nivel}">${escapeHtml(n.nome)}</option>`)
         .join("");
   } catch (err) {
     console.error("loadNiveis:", err);
+    showMsg("Não foi possível carregar os níveis.", false);
   }
 }
 
-// ============================================================
-// LOAD TURMAS LIST
-// ============================================================
+async function loadAlunos() {
+  const id = currentUserId();
+  if (!id || !window.api?.getAlunos) return;
+
+  try {
+    const result = await window.api.getAlunos(id);
+    if (!result.success) throw new Error(result.message || "Erro ao carregar alunos.");
+    alunos = Array.isArray(result.data) ? result.data : [];
+  } catch (err) {
+    console.error("loadAlunos:", err);
+    alunos = [];
+  }
+}
 
 async function loadTurmasList() {
-  const listBody = document.getElementById("turmasListBody");
+  const body = document.getElementById("turmasListBody");
+  const count = document.getElementById("turmasCount");
+  if (!body) return;
 
-  if (!listBody) return;
+  body.innerHTML = '<div class="empty-state">Carregando...</div>';
 
-  listBody.innerHTML =
-    '<div style="color:var(--muted);font-size:.82rem;padding:8px 0">Carregando...</div>';
-
-  // ----------------------------------------------------------
-  // SESSION
-  // ----------------------------------------------------------
-
-  const session = JSON.parse(localStorage.getItem("session") || "{}");
-
-  const currentUserId = session.id;
-
-  if (!currentUserId) {
-    listBody.innerHTML =
-      '<div style="color:red;font-size:.82rem">Sessão inválida — faça login novamente.</div>';
-
+  const id = currentUserId();
+  if (!id) {
+    body.innerHTML = '<div class="empty-state">Sessão inválida — faça login novamente.</div>';
     return;
   }
 
   try {
-    const result = await window.api.getTurmas(currentUserId);
+    const result = await window.api.getTurmas(id);
+    if (!result.success) throw new Error(result.message || "Erro ao carregar turmas.");
 
-    if (!result.success) {
-      listBody.innerHTML = `<div style="color:red;font-size:.82rem">${result.message}</div>`;
+    turmas = Array.isArray(result.data) ? result.data : [];
+    if (count) count.textContent = `${turmas.length} turma${turmas.length === 1 ? "" : "s"}`;
 
+    if (!turmas.length) {
+      body.innerHTML = '<div class="empty-state">Nenhuma turma criada ainda.</div>';
       return;
     }
 
-    // --------------------------------------------------------
-    // NENHUMA TURMA
-    // --------------------------------------------------------
+    body.innerHTML = turmas.map(t => {
+      const roster = alunos.filter(a => Number(a.id_turma) === Number(t.id_turma));
+      const rosterHtml = roster.length
+        ? roster.map(a => `<span class="student-chip">${escapeHtml(a.nome)}</span>`).join("")
+        : '<span style="color:var(--muted)">Nenhum aluno atribuído</span>';
 
-    if (!result.data.length) {
-      listBody.innerHTML =
-        '<div style="color:var(--muted);font-size:.82rem;padding:12px 0">Nenhuma turma criada ainda.</div>';
-
-      const counter = document.querySelector(".list-hd span");
-
-      if (counter) {
-        counter.textContent = "0 turmas";
-      }
-
-      return;
-    }
-
-    // --------------------------------------------------------
-    // COUNTER
-    // --------------------------------------------------------
-
-    const counter = document.querySelector(".list-hd span");
-
-    if (counter) {
-      counter.textContent = result.data.length + " turmas";
-    }
-
-    // --------------------------------------------------------
-    // RENDER TURMAS
-    // --------------------------------------------------------
-
-    listBody.innerHTML = result.data
-      .map((t) => {
-        const badge =
-          t.status === "ativa"
-            ? '<span style="color:var(--green);font-size:.72rem;font-weight:700">● Ativa</span>'
-            : '<span style="color:var(--muted);font-size:.72rem">● Inativa</span>';
-
-        // Escape simples para o nome da turma
-        // antes de colocar no onclick.
-
-        const nomeTurma = String(t.nome_turma || "")
-          .replace(/\\/g, "\\\\")
-          .replace(/'/g, "\\'")
-          .replace(/"/g, "&quot;");
-
-        return `
-
-            <div
-              style="
-                padding:12px 0;
-                border-bottom:1px solid var(--border);
-                display:flex;
-                justify-content:space-between;
-                align-items:center
-              "
-            >
-
-              <div>
-
-                <div
-                  style="
-                    font-weight:600;
-                    font-size:.88rem
-                  "
-                >
-                  ${t.nome_turma}
-                </div>
-
-
-                <div
-                  style="
-                    font-size:.75rem;
-                    color:var(--muted)
-                  "
-                >
-                  ${t.nivel ?? "—"} · ${t.ano_letivo}
-                </div>
-
-
-                <div
-                  style="
-                    font-size:.75rem;
-                    color:var(--muted)
-                  "
-                >
-                  Criada em: ${t.criado_em}
-                </div>
-
-
-                <div
-                  style="
-                    font-size:.75rem;
-                    color:var(--muted)
-                  "
-                >
-                  Professor:
-                  ${t.professor_nome || "—"}
-                </div>
-
-
-                <div
-                  style="
-                    font-size:.75rem;
-                    color:var(--muted);
-                    margin-top:6px
-                  "
-                >
-
-                  <button
-                    onclick="OpenModalAtribuirProfessor(${t.id_turma}, '${nomeTurma}')"
-                    class="btn btn-primary"
-                  >
-                    Atribuir Professor
-                  </button>
-
-
-                  <button
-                    onclick="deleteTurma(${t.id_turma})"
-                    class="btn btn-danger"
-                  >
-                    Excluir
-                  </button>
-
-                </div>
-
-              </div>
-
-
-              ${badge}
-
+      return `
+        <div class="turma-card">
+          <div class="turma-head">
+            <div>
+              <h4>${escapeHtml(t.nome_turma || "Turma")}</h4>
+              <span style="color:var(--muted);font-size:.78rem">
+                ${escapeHtml(t.nivel || "—")} · ${escapeHtml(String(t.ano_letivo || ""))}
+              </span>
             </div>
-
-          `;
-      })
-      .join("");
-  } catch (err) {
-    listBody.innerHTML = `<div style="color:red;font-size:.82rem">Erro: ${err.message}</div>`;
-
-    console.error("loadTurmasList:", err);
-  }
-}
-
-// ============================================================
-// DELETE TURMA
-// ============================================================
-
-async function deleteTurma(id_turma) {
-  if (!confirm("Tem certeza que deseja excluir esta turma?")) {
-    return;
-  }
-
-  try {
-    const result = await window.api.deleteTurma(id_turma);
-
-    if (result.success) {
-      await loadTurmasList();
-    } else {
-      alert(result.message || "Erro ao excluir turma.");
-    }
-  } catch (error) {
-    console.error("deleteTurma:", error);
-
-    alert("Erro ao excluir turma.");
-  }
-}
-
-// ============================================================
-// TURMA SELECIONADA
-// ============================================================
-
-let turmaSelecionadaId = null;
-
-// ============================================================
-// ABRIR MODAL ATRIBUIR PROFESSOR
-// ============================================================
-
-async function OpenModalAtribuirProfessor(id_turma, nome_turma = "") {
-  const modal = document.getElementById("modal-container");
-
-  const professorSelect = document.getElementById("professorId");
-
-  const nomeTurmaModal = document.getElementById("modalNomeTurma");
-
-  if (!modal || !professorSelect) {
-    console.error("Modal ou select de professor não encontrado.");
-
-    return;
-  }
-
-  // Guarda a turma que está sendo editada.
-
-  turmaSelecionadaId = id_turma;
-
-  // Nome da turma no modal.
-
-  if (nomeTurmaModal) {
-    nomeTurmaModal.textContent = nome_turma;
-  }
-
-  // Mostra loading.
-
-  professorSelect.innerHTML =
-    '<option value="">Carregando professores...</option>';
-
-  // Abre modal.
-
-  modal.style.display = "flex";
-
-  // Carrega professores.
-
-  await renderProfessores();
-}
-
-// ============================================================
-// CARREGAR PROFESSORES NO SELECT
-// ============================================================
-
-async function renderProfessores() {
-  const professorSelect = document.getElementById("professorId");
-
-  if (!professorSelect) {
-    return;
-  }
-
-  try {
-    // --------------------------------------------------------
-    // SESSION
-    // --------------------------------------------------------
-
-    const session = JSON.parse(localStorage.getItem("session") || "{}");
-
-    const currentUserId = session.id;
-
-    if (!currentUserId) {
-      professorSelect.innerHTML = '<option value="">Sessão inválida</option>';
-
-      return;
-    }
-
-    // --------------------------------------------------------
-    // GET DASHBOARD
-    // --------------------------------------------------------
-
-    const result = await window.api.getDashboardAdminEscolar(currentUserId);
-
-    if (!result.success) {
-      professorSelect.innerHTML =
-        '<option value="">Erro ao carregar professores</option>';
-
-      console.error(result.message);
-
-      return;
-    }
-
-    // --------------------------------------------------------
-    // TEACHERS
-    // --------------------------------------------------------
-
-    const teachers = result.data?.teachers || [];
-
-    console.log("Professores encontrados:", teachers);
-
-    // --------------------------------------------------------
-    // NENHUM PROFESSOR
-    // --------------------------------------------------------
-
-    if (!teachers.length) {
-      professorSelect.innerHTML =
-        '<option value="">Nenhum professor cadastrado</option>';
-
-      return;
-    }
-
-    // --------------------------------------------------------
-    // SELECT OPTIONS
-    // --------------------------------------------------------
-
-    professorSelect.innerHTML =
-      '<option value="">Selecione um professor...</option>' +
-      teachers
-        .map((teacher) => {
-          /*
-           * O backend pode retornar o ID com nomes
-           * diferentes. Tentamos os possíveis campos.
-           */
-
-          const id = teacher.id_usuario ?? teacher.id_professor ?? teacher.id;
-
-          const name =
-            teacher.nome ?? teacher.name ?? teacher.nome_usuario ?? "Professor";
-
-          if (id === undefined || id === null) {
-            console.warn("Professor sem ID:", teacher);
-
-            return "";
-          }
-
-          return `
-            <option value="${id}">
-              ${name}
-            </option>
-          `;
-        })
-        .join("");
-  } catch (error) {
-    console.error("Erro ao carregar professores:", error);
-
-    professorSelect.innerHTML =
-      '<option value="">Erro ao carregar professores</option>';
-  }
-}
-
-// ============================================================
-// ATRIBUIR PROFESSOR
-// ============================================================
-
-async function AtribuirProfessor() {
-  const professorSelect = document.getElementById("professorId");
-
-  if (!professorSelect) {
-    return;
-  }
-
-  // IMPORTANTE:
-  // Aqui precisamos pegar o VALUE do select,
-  // e não o elemento inteiro.
-
-  const id_professor = professorSelect.value;
-
-  // ----------------------------------------------------------
-  // VALIDAR TURMA
-  // ----------------------------------------------------------
-
-  if (!turmaSelecionadaId) {
-    alert("Nenhuma turma selecionada.");
-
-    return;
-  }
-
-  // ----------------------------------------------------------
-  // VALIDAR PROFESSOR
-  // ----------------------------------------------------------
-
-  if (!id_professor) {
-    alert("Selecione um professor.");
-
-    return;
-  }
-
-  try {
-    // --------------------------------------------------------
-    // BOTÃO
-    // --------------------------------------------------------
-
-    const button = document.getElementById("atribuirBtn");
-
-    if (button) {
-      button.disabled = true;
-
-      button.textContent = "⏳ Atribuindo...";
-    }
-
-    // --------------------------------------------------------
-    // API
-    // --------------------------------------------------------
-
-    const result = await window.api.atribuirProfessorATurma({
-      id_turma: turmaSelecionadaId,
-
-      id_professor: parseInt(id_professor),
+            <span style="color:${t.status === "ativa" ? "var(--green)" : "var(--muted)"};font-size:.72rem;font-weight:700">
+              ● ${escapeHtml(t.status || "ativa")}
+            </span>
+          </div>
+
+          <div class="turma-meta">
+            <strong>Professor:</strong> ${escapeHtml(t.professor_nome || "—")}
+            <div style="margin-top:10px"><strong>Alunos (${roster.length}):</strong></div>
+            <div style="margin-top:5px">${rosterHtml}</div>
+          </div>
+
+          <div class="turma-actions">
+            <button type="button" class="btn-acc" data-assign="${t.id_turma}">
+              👥 Atribuir alunos
+            </button>
+            <button type="button" class="btn-cancel2" data-delete="${t.id_turma}">
+              Excluir
+            </button>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    body.querySelectorAll("[data-assign]").forEach(btn => {
+      btn.addEventListener("click", () => openStudentModal(Number(btn.dataset.assign)));
     });
 
-    // --------------------------------------------------------
-    // SUCCESS
-    // --------------------------------------------------------
-
-    if (result.success) {
-      closeModal();
-
-      await loadTurmasList();
-    } else {
-      alert(result.message || "Erro ao atribuir professor à turma.");
-    }
-  } catch (error) {
-    console.error("Erro ao atribuir professor:", error);
-
-    alert("Erro ao atribuir professor à turma.");
-  } finally {
-    const button = document.getElementById("atribuirBtn");
-
-    if (button) {
-      button.disabled = false;
-
-      button.textContent = "Atribuir";
-    }
+    body.querySelectorAll("[data-delete]").forEach(btn => {
+      btn.addEventListener("click", () => deleteTurma(Number(btn.dataset.delete)));
+    });
+  } catch (err) {
+    console.error("loadTurmasList:", err);
+    body.innerHTML = `<div class="empty-state" style="color:var(--red)">Erro: ${escapeHtml(err.message)}</div>`;
   }
 }
-
-// ============================================================
-// FECHAR MODAL
-// ============================================================
-
-function closeModal() {
-  const modal = document.getElementById("modal-container");
-
-  if (modal) {
-    modal.style.display = "none";
-  }
-
-  // Limpa turma selecionada.
-
-  turmaSelecionadaId = null;
-
-  // Limpa select.
-
-  const professorSelect = document.getElementById("professorId");
-
-  if (professorSelect) {
-    professorSelect.innerHTML =
-      '<option value="">Selecione um professor...</option>';
-  }
-
-  // Limpa nome.
-
-  const nomeTurmaModal = document.getElementById("modalNomeTurma");
-
-  if (nomeTurmaModal) {
-    nomeTurmaModal.textContent = "";
-  }
-}
-
-// ============================================================
-// CURRENT USER ID
-// ============================================================
-
-async function getCurrentUserId() {
-  const session = JSON.parse(localStorage.getItem("session") || "{}");
-
-  return session.id || null;
-}
-
-// ============================================================
-// CRIAR TURMA
-// ============================================================
 
 async function criarTurma() {
   const btn = document.getElementById("btn");
-
-  const msgEl = document.getElementById("formMsg");
-
   const nome_turma = document.getElementById("nomeTurma")?.value.trim();
-
   const id_nivel = document.getElementById("nivelSelect")?.value;
+  const session = getSession();
 
-  // ----------------------------------------------------------
-  // SESSION
-  // ----------------------------------------------------------
+  if (!nome_turma) return showMsg("O nome da turma é obrigatório.", false);
+  if (!id_nivel) return showMsg("Selecione o nível educacional.", false);
+  if (!session.id_escola || !currentUserId()) return showMsg("Sessão inválida — faça login novamente.", false);
 
-  const session = JSON.parse(localStorage.getItem("session") || "{}");
-
-  const id_escola = session.id_escola;
-
-  const id_professor = session.id;
-
-  // ----------------------------------------------------------
-  // VALIDATIONS
-  // ----------------------------------------------------------
-
-  if (!nome_turma) {
-    showMsg(msgEl, "O nome da turma é obrigatório.", false);
-
-    return;
-  }
-
-  if (!id_nivel) {
-    showMsg(msgEl, "Selecione o nível educacional.", false);
-
-    return;
-  }
-
-  if (!id_escola) {
-    showMsg(msgEl, "Sessão inválida — faça login novamente.", false);
-
-    return;
-  }
-
-  if (!id_professor) {
-    showMsg(msgEl, "Sessão inválida — faça login novamente.", false);
-
-    return;
-  }
-
-  // ----------------------------------------------------------
-  // BUTTON
-  // ----------------------------------------------------------
-
-  if (btn) {
-    btn.disabled = true;
-
-    btn.textContent = "⏳ Criando...";
-  }
+  btn.disabled = true;
+  btn.textContent = "⏳ Criando...";
 
   try {
     const result = await window.api.registerTurma({
-      id_escola: id_escola,
-
-      id_professor: id_professor,
-
-      id_nivel: parseInt(id_nivel),
-
-      nome_turma: nome_turma,
+      id_escola: Number(session.id_escola),
+      id_professor: null,
+      id_nivel: Number(id_nivel),
+      nome_turma,
+      ano_letivo: new Date().getFullYear()
     });
 
-    // --------------------------------------------------------
-    // RESET BUTTON
-    // --------------------------------------------------------
+    if (!result.success) throw new Error(result.message || "Erro ao criar turma.");
 
-    if (btn) {
-      btn.disabled = false;
+    document.getElementById("nomeTurma").value = "";
+    document.getElementById("nivelSelect").value = "";
+    showMsg("Turma criada com sucesso.", true);
 
-      btn.textContent = "🚀 Publicar Turma";
-    }
-
-    // --------------------------------------------------------
-    // MESSAGE
-    // --------------------------------------------------------
-
-    showMsg(msgEl, result.message, result.success);
-
-    // --------------------------------------------------------
-    // SUCCESS
-    // --------------------------------------------------------
-
-    if (result.success) {
-      document.getElementById("nomeTurma").value = "";
-
-      document.getElementById("nivelSelect").value = "";
-
-      await loadTurmasList();
-    }
-  } catch (error) {
-    console.error("Erro ao criar turma:", error);
-
-    if (btn) {
-      btn.disabled = false;
-
-      btn.textContent = "🚀 Publicar Turma";
-    }
-
-    showMsg(msgEl, "Erro ao criar turma: " + error.message, false);
+    await loadAlunos();
+    await loadTurmasList();
+  } catch (err) {
+    console.error("criarTurma:", err);
+    showMsg(err.message || "Erro ao criar turma.", false);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "🚀 Criar Turma";
   }
 }
 
-// ============================================================
-// LOAD STUDENTS / DASHBOARD
-// ============================================================
+async function openStudentModal(turmaId) {
+  const turma = turmas.find(t => Number(t.id_turma) === Number(turmaId));
+  if (!turma) return;
 
-async function loadStudentsPage() {
-  const currentUserId = await getCurrentUserId();
+  turmaSelecionadaId = turmaId;
 
-  if (!currentUserId) {
-    setText("school-name", "Sessão inválida");
+  const modal = document.getElementById("studentModal");
+  const title = document.getElementById("studentModalTurmaNome");
+  const search = document.getElementById("studentSearch");
 
-    setText(
-      "school-subtitle",
-      "Faça login novamente para ver os dados da sua escola.",
-    );
+  title.textContent = turma.nome_turma || "";
+  search.value = "";
 
+  alunosSelecionados = new Set(
+    alunos
+      .filter(a => Number(a.id_turma) === Number(turmaId))
+      .map(a => String(a.id_usuario))
+  );
+
+  renderStudentOptions();
+
+  modal.style.display = "flex";
+  modal.setAttribute("aria-hidden", "false");
+}
+
+function renderStudentOptions() {
+  const container = document.getElementById("studentAssignments");
+  const term = (document.getElementById("studentSearch")?.value || "").trim().toLowerCase();
+
+  const filtered = alunos.filter(a => {
+    const name = String(a.nome || "").toLowerCase();
+    const email = String(a.email || "").toLowerCase();
+    return !term || name.includes(term) || email.includes(term);
+  });
+
+  if (!filtered.length) {
+    container.innerHTML = '<div class="empty-state">Nenhum aluno encontrado.</div>';
     return;
   }
+
+  container.innerHTML = filtered.map(a => {
+    const id = String(a.id_usuario);
+    const checked = alunosSelecionados.has(id);
+    const turmaAtual = Number(a.id_turma || 0);
+    const outraTurma = turmaAtual && turmaAtual !== Number(turmaSelecionadaId);
+    const outraTurmaNome = outraTurma
+      ? (turmas.find(t => Number(t.id_turma) === turmaAtual)?.nome_turma || "outra turma")
+      : "";
+
+    return `
+      <label class="student-option">
+        <input type="checkbox" data-student-id="${escapeHtml(id)}" ${checked ? "checked" : ""}>
+        <span>
+          <strong>${escapeHtml(a.nome || "Aluno")}</strong>
+          <small>${escapeHtml(a.email || "")}${outraTurma ? ` · Atualmente em: ${escapeHtml(outraTurmaNome)}` : ""}</small>
+        </span>
+      </label>
+    `;
+  }).join("");
+
+  container.querySelectorAll("[data-student-id]").forEach(cb => {
+    cb.addEventListener("change", () => {
+      const id = String(cb.dataset.studentId);
+      if (cb.checked) alunosSelecionados.add(id);
+      else alunosSelecionados.delete(id);
+    });
+  });
+}
+
+async function saveStudents() {
+  if (!turmaSelecionadaId) return;
+
+  const btn = document.getElementById("saveStudentsBtn");
+  btn.disabled = true;
+  btn.textContent = "⏳ Salvando...";
 
   try {
-    const result = await window.api.getDashboardAdminEscolar(currentUserId);
+    const result = await window.api.saveAlunosTurma({
+      id_turma: Number(turmaSelecionadaId),
+      id_alunos: Array.from(alunosSelecionados).map(Number)
+    });
 
-    if (!result.success) {
-      setText("school-name", "Erro ao carregar");
+    if (!result.success) throw new Error(result.message || "Erro ao salvar alunos.");
 
-      setText(
-        "school-subtitle",
-        result.message || "Não foi possível carregar os dados da escola.",
-      );
-
-      return;
-    }
-
-    const d = result.data;
-
-    // --------------------------------------------------------
-    // SCHOOL HERO
-    // --------------------------------------------------------
-
-    setText("school-name", d.school.name);
-
-    setText(
-      "school-subtitle",
-      d.school.subtitle || "Dashboard do Administrador Escolar",
-    );
-
-    const chipsEl = document.getElementById("school-chips");
-
-    if (chipsEl && d.school.chips) {
-      chipsEl.innerHTML = d.school.chips
-        .map((c) => `<span class="shc">${c}</span>`)
-        .join("");
-    }
-
-    // --------------------------------------------------------
-    // TEACHERS COUNT
-    // --------------------------------------------------------
-
-    const teachers = d.school.stats || null;
-
-    if (teachers) {
-      setText("teachers-count", teachers.value);
-    }
-
-    // --------------------------------------------------------
-    // DASHBOARD TEACHERS
-    // --------------------------------------------------------
-
-    renderTeachers(d.teachers);
-  } catch (error) {
-    console.error("loadStudentsPage:", error);
+    closeStudentModal();
+    await loadAlunos();
+    await loadTurmasList();
+  } catch (err) {
+    console.error("saveStudents:", err);
+    alert(err.message || "Erro ao salvar alunos.");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Salvar Alunos";
   }
 }
 
-// ============================================================
-// RENDER DASHBOARD TEACHERS
-// ============================================================
+async function deleteTurma(id_turma) {
+  if (!confirm("Tem certeza que deseja excluir esta turma?")) return;
 
-function renderTeachers(teachers) {
-  const el = document.getElementById("teachers-list");
-
-  if (!el) {
-    return;
+  try {
+    const result = await window.api.deleteTurma(id_turma);
+    if (!result.success) throw new Error(result.message || "Erro ao excluir turma.");
+    await loadAlunos();
+    await loadTurmasList();
+  } catch (err) {
+    console.error("deleteTurma:", err);
+    alert(err.message || "Erro ao excluir turma.");
   }
-
-  if (!teachers || !teachers.length) {
-    el.innerHTML =
-      '<div class="teach-item"><div class="teach-info"><strong>Nenhum professor cadastrado</strong></div></div>';
-
-    return;
-  }
-
-  el.innerHTML = teachers
-    .map(
-      (t) => `
-
-          <div class="teach-item">
-
-            <div
-              class="tav ${t.avatarClass || "ta1"}"
-            >
-              ${t.emoji || "👨‍🏫"}
-            </div>
-
-            <div class="teach-info">
-
-              <strong>
-                ${t.name}
-              </strong>
-
-              <span>
-                ${t.subtitle || ""}
-              </span>
-
-            </div>
-
-          </div>
-
-        `,
-    )
-    .join("");
-
-  console.log("Teachers data loaded:", teachers);
 }
 
-// ============================================================
-// DOM READY
-// ============================================================
+function closeStudentModal() {
+  const modal = document.getElementById("studentModal");
+  modal.style.display = "none";
+  modal.setAttribute("aria-hidden", "true");
+  turmaSelecionadaId = null;
+  alunosSelecionados = new Set();
+}
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Load levels
-  loadNiveis();
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
 
-  // Load classes
-  loadTurmasList();
+document.addEventListener("DOMContentLoaded", async () => {
+  document.getElementById("btn")?.addEventListener("click", criarTurma);
+  document.getElementById("saveStudentsBtn")?.addEventListener("click", saveStudents);
+  document.getElementById("closeStudentModal")?.addEventListener("click", closeStudentModal);
+  document.getElementById("cancelStudentModal")?.addEventListener("click", closeStudentModal);
+  document.getElementById("studentSearch")?.addEventListener("input", renderStudentOptions);
 
-  // Load dashboard
-  loadStudentsPage();
-
-  // Create class button
-
-  const criarBtn = document.getElementById("btn");
-
-  if (criarBtn) {
-    criarBtn.addEventListener("click", criarTurma);
-  }
-
-  // Assign teacher button
-
-  const atribuirBtn = document.getElementById("atribuirBtn");
-
-  if (atribuirBtn) {
-    atribuirBtn.addEventListener("click", AtribuirProfessor);
-  }
+  await loadNiveis();
+  await loadAlunos();
+  await loadTurmasList();
 });

@@ -1,270 +1,105 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
-
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Monetto – Criar & Gerenciar Turmas</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../shared/main-style.css">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/x-icon" href="../../Assets/Monetto Logo.ico">
+  <style>
+    .page-grid { display:grid; grid-template-columns:minmax(320px,420px) 1fr; gap:24px; align-items:start; }
+    @media (max-width:980px){ .page-grid{grid-template-columns:1fr;} }
+    .form-area{position:sticky;top:0;}
+    .list-area{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:22px;}
+    .turma-card{padding:16px 0;border-bottom:1px solid var(--border);}
+    .turma-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;}
+    .turma-head h4{margin:0 0 4px;}
+    .turma-meta{margin-top:12px;color:var(--muted);font-size:.82rem;}
+    .turma-meta p{margin:6px 0 0;color:var(--text);}
+    .turma-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+    .student-chip{display:inline-block;margin:3px 4px 3px 0;padding:4px 8px;border-radius:99px;background:rgba(255,255,255,.06);font-size:.75rem;}
+    .empty-state{padding:30px 0;color:var(--muted);text-align:center;}
+    .modal-container{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px;}
+    .modal{width:min(620px,100%);max-height:90vh;overflow:auto;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:22px;}
+    .modal-header{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+    .modal-header h3{margin:0;flex:1;}
+    .modal-header h4{margin:0;color:var(--muted);font-size:.85rem;}
+    .close-btn{background:none;border:0;color:var(--muted);cursor:pointer;font-size:18px;}
+    .modal-footer{display:flex;justify-content:flex-end;gap:10px;margin-top:18px;}
+    .student-select{width:100%;min-height:320px;}
+    .student-option{display:flex;align-items:center;gap:10px;padding:9px 4px;border-bottom:1px solid rgba(255,255,255,.05);}
+    .student-option small{display:block;color:var(--muted);}
+    #formMsg{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;font-size:.82rem;}
+    #formMsg.ok{display:block;color:var(--green);background:rgba(46,204,113,.12);}
+    #formMsg.err{display:block;color:var(--red);background:rgba(231,76,60,.12);}
+  </style>
 </head>
-
 <body>
   <div id="sidebar-container"></div>
 
   <div class="main">
     <div class="page-grid">
-
-      <!-- ===================== FORM ===================== -->
       <div class="form-area">
         <div class="form-title">📝 Criar Nova Turma</div>
-        <div class="form-sub">Preencha os campos abaixo e publique para suas turmas</div>
+        <div class="form-sub">Crie a turma primeiro. Depois use “Atribuir alunos” para definir a lista.</div>
 
-        <div id="tab-turma">
-          <div class="fg">
-            <label for="nomeTurma">Nome da Turma *</label>
-            <input type="text" id="nomeTurma" placeholder="Ex: 8º Ano A" autocomplete="off">
-          </div>
+        <div class="fg">
+          <label for="nomeTurma">Nome da Turma *</label>
+          <input type="text" id="nomeTurma" placeholder="Ex: 8º Ano A" autocomplete="off">
+        </div>
 
-          <div class="fg">
-            <label for="nivelSelect">Nível Educacional *</label>
-            <select id="nivelSelect">
-              <option value="">Selecione o nível...</option>
-            </select>
-          </div>
+        <div class="fg">
+          <label for="nivelSelect">Nível Educacional *</label>
+          <select id="nivelSelect">
+            <option value="">Selecione o nível...</option>
+          </select>
+        </div>
 
-          <div class="fg">
-            <label for="alunosSelect">Alunos da Turma</label>
-            <select id="alunosSelect" multiple size="8" aria-label="Selecionar alunos da turma">
-              <option value="Ana Souza">Ana Souza</option>
-              <option value="Bruno Costa">Bruno Costa</option>
-              <option value="Carla Mendes">Carla Mendes</option>
-              <option value="Daniel Lima">Daniel Lima</option>
-              <option value="Eduarda Rocha">Eduarda Rocha</option>
-              <option value="Felipe Nunes">Felipe Nunes</option>
-              <option value="Gabriela Reis">Gabriela Reis</option>
-              <option value="Henrique Silva">Henrique Silva</option>
-              <option value="Isabela Moraes">Isabela Moraes</option>
-              <option value="João Pereira">João Pereira</option>
-            </select>
-            <small>Segure Ctrl/Cmd para selecionar vários alunos.</small>
-          </div>
+        <div id="formMsg"></div>
 
-          <div id="formMsg"></div>
-
-          <div class="form-footer">
-            <button class="btn-acc" id="btn" type="button">🚀 Publicar Turma</button>
-          </div>
+        <div class="form-footer">
+          <button class="btn-acc" id="btn" type="button">🚀 Criar Turma</button>
         </div>
       </div>
 
-      <!-- ===================== LIST ===================== -->
-      <div class="list-area" id="turmasList">
+      <div class="list-area">
         <div class="list-hd">
           <h3>📋 Turmas Criadas</h3>
           <span id="turmasCount">0 turmas</span>
         </div>
         <div id="turmasListBody">
-          <!-- Items injected by JS -->
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ===================== MODAL ===================== -->
-    <div id="modal-container" class="modal-container" style="display:none" aria-hidden="true">
-      <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
-        <div class="modal-header">
-          <h3 id="modalTitle">Atribuir Professor</h3>
-          <h4 id="modalNomeTurma"></h4>
-          <button type="button" class="close-btn" onclick="closeModal()" aria-label="Fechar">✖</button>
-        </div>
-
-        <div class="modal-body">
-          <div class="fg">
-            <label for="professorId">Selecione o professor para esta turma</label>
-            <select id="professorId" class="select-teacher">
-              <option value="">Carregando professores...</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn-cancel2" onclick="closeModal()">Cancelar</button>
-          <button type="button" class="btn-acc" id="atribuirBtn">Atribuir</button>
-        </div>
-      </div>
-    </div>
-    <div id="studentModal" class="modal-container" style="display:none" aria-hidden="true">
-      <div class="modal" role="dialog" aria-labelledby="studentModalTitle" aria-modal="true">
-        <div class="modal-header">
-          <h3 id="studentModalTitle">Atribuir Alunos</h3>
-          <h4 id="studentModalTurmaNome"></h4>
-          <button type="button" class="close-btn" onclick="closeStudentModal()" aria-label="Fechar">✖</button>
-        </div>
-
-        <div class="modal-body">
-          <div class="fg">
-            <label for="studentAssignments">Selecione os alunos desta turma</label>
-            <select id="studentAssignments" class="select-teacher" multiple size="10">
-              <option value="Ana Souza">Ana Souza</option>
-              <option value="Bruno Costa">Bruno Costa</option>
-              <option value="Carla Mendes">Carla Mendes</option>
-              <option value="Daniel Lima">Daniel Lima</option>
-              <option value="Eduarda Rocha">Eduarda Rocha</option>
-              <option value="Felipe Nunes">Felipe Nunes</option>
-              <option value="Gabriela Reis">Gabriela Reis</option>
-              <option value="Henrique Silva">Henrique Silva</option>
-              <option value="Isabela Moraes">Isabela Moraes</option>
-              <option value="João Pereira">João Pereira</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn-cancel2" onclick="closeStudentModal()">Cancelar</button>
-          <button type="button" class="btn-acc" id="saveStudentsBtn">Salvar Alunos</button>
+          <div class="empty-state">Carregando...</div>
         </div>
       </div>
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <!-- Student assignment modal -->
+  <div id="studentModal" class="modal-container" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="studentModalTitle">
+      <div class="modal-header">
+        <h3 id="studentModalTitle">Atribuir alunos</h3>
+        <h4 id="studentModalTurmaNome"></h4>
+        <button type="button" class="close-btn" id="closeStudentModal" aria-label="Fechar">✖</button>
+      </div>
+
+      <div class="fg">
+        <label for="studentSearch">Pesquisar aluno</label>
+        <input id="studentSearch" type="search" placeholder="Digite o nome do aluno...">
+      </div>
+
+      <div id="studentAssignments" class="student-select"></div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel2" id="cancelStudentModal">Cancelar</button>
+        <button type="button" class="btn-acc" id="saveStudentsBtn">Salvar Alunos</button>
+      </div>
+    </div>
+  </div>
+
   <script src="../../shared/monetto-app.js"></script>
-  <script>
-    const turmas = [];
-    let turmaSelecionada = null;
-
-    function showMsg(text, isError = false) {
-      const el = document.getElementById('formMsg');
-      el.textContent = text;
-      el.style.color = isError ? '#d33' : '#1b8a5a';
-      el.style.marginTop = '8px';
-      el.style.display = 'block';
-    }
-
-    function getSelectedStudents(selectEl) {
-      const selected = Array.from(selectEl.selectedOptions || []).map(opt => opt.value);
-      return selected.filter(Boolean);
-    }
-
-    function renderTurmas() {
-      const listBody = document.getElementById('turmasListBody');
-      const countEl = document.getElementById('turmasCount');
-      listBody.innerHTML = '';
-
-      if (!turmas.length) {
-        listBody.innerHTML = '<div class="empty-state">Nenhuma turma criada ainda.</div>';
-        countEl.textContent = '0 turmas';
-        return;
-      }
-
-      countEl.textContent = `${turmas.length} turma${turmas.length > 1 ? 's' : ''}`;
-
-      turmas.forEach((turma) => {
-        const card = document.createElement('div');
-        card.className = 'turma-card';
-
-        const alunos = turma.alunos && turma.alunos.length ? turma.alunos.join(', ') : 'Nenhum aluno atribuído';
-
-        card.innerHTML = `
-          <div class="turma-head">
-            <div>
-              <h4>${turma.nome}</h4>
-              <span>${turma.nivel}</span>
-            </div>
-            <button type="button" class="btn-cancel2" data-action="atribuir-alunos" data-id="${turma.id}">Atribuir alunos</button>
-          </div>
-          <div class="turma-meta">
-            <strong>Alunos:</strong>
-            <p>${alunos}</p>
-          </div>
-        `;
-
-        listBody.appendChild(card);
-      });
-
-      document.querySelectorAll('[data-action="atribuir-alunos"]').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const turmaId = Number(btn.dataset.id);
-          openStudentModal(turmaId);
-        });
-      });
-    }
-
-    function openStudentModal(turmaId) {
-      turmaSelecionada = turmas.find(t => t.id === turmaId);
-      if (!turmaSelecionada) return;
-
-      const modal = document.getElementById('studentModal');
-      const title = document.getElementById('studentModalTurmaNome');
-      const select = document.getElementById('studentAssignments');
-
-      title.textContent = turmaSelecionada.nome;
-      Array.from(select.options).forEach((option) => {
-        option.selected = turmaSelecionada.alunos.includes(option.value);
-      });
-
-      modal.style.display = 'flex';
-      modal.setAttribute('aria-hidden', 'false');
-    }
-
-    function closeStudentModal() {
-      const modal = document.getElementById('studentModal');
-      modal.style.display = 'none';
-      modal.setAttribute('aria-hidden', 'true');
-      turmaSelecionada = null;
-    }
-
-    document.getElementById('btn').addEventListener('click', () => {
-      const nome = document.getElementById('nomeTurma').value.trim();
-      const nivel = document.getElementById('nivelSelect').value;
-      const alunos = getSelectedStudents(document.getElementById('alunosSelect'));
-
-      if (!nome || !nivel) {
-        showMsg('Preencha o nome da turma e o nível educacional.', true);
-        return;
-      }
-
-      turmas.push({
-        id: Date.now(),
-        nome,
-        nivel,
-        alunos
-      });
-
-      document.getElementById('nomeTurma').value = '';
-      document.getElementById('nivelSelect').value = '';
-      document.getElementById('alunosSelect').selectedIndex = -1;
-      showMsg('Turma criada com sucesso!');
-      renderTurmas();
-    });
-
-    document.getElementById('saveStudentsBtn').addEventListener('click', () => {
-      if (!turmaSelecionada) return;
-
-      const select = document.getElementById('studentAssignments');
-      turmaSelecionada.alunos = getSelectedStudents(select);
-      renderTurmas();
-      closeStudentModal();
-    });
-
-    const nivelSelect = document.getElementById('nivelSelect');
-    ['Educação Infantil', 'Ensino Fundamental I', 'Ensino Fundamental II', 'Ensino Médio', 'Ensino Técnico'].forEach((nivel) => {
-      const option = document.createElement('option');
-      option.value = nivel;
-      option.textContent = nivel;
-      nivelSelect.appendChild(option);
-    });
-
-    renderTurmas();
-  </script>
+  <script src="script.js"></script>
 </body>
-
 </html>

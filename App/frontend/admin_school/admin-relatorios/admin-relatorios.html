@@ -18,7 +18,7 @@
     <div class="topbar">
       <h1>Relatórios <span>da Escola</span></h1>
       <div class="top-right">
-        <button class="btn btn-primary">📊 Gerar Relatório</button>
+        <button class="btn btn-primary" id="btn-gerar-relatorio">📊 Gerar Relatório</button>
       </div>
     </div>
 
@@ -85,6 +85,273 @@
         MonettoUI.toast(msg || 'Ação realizada!', tipo || 'success');
       }
     }
+
+    document
+      .getElementById('btn-gerar-relatorio')
+      .addEventListener('click', async () => {
+
+        const currentUserId =
+          getCurrentUserId();
+
+        if (!currentUserId) {
+
+          showToast(
+            'Usuário não encontrado. Faça login novamente.',
+            'error'
+          );
+
+          return;
+        }
+
+        const button =
+          document.getElementById(
+            'btn-gerar-relatorio'
+          );
+
+        const originalText =
+          button.innerHTML;
+
+        try {
+
+          button.disabled = true;
+          button.innerHTML = '⏳ Gerando...';
+
+          // -------------------------------------------------------
+          // Get dashboard + teachers
+          // -------------------------------------------------------
+
+          const [
+            dashResult,
+            profResult
+          ] = await Promise.all([
+
+            window.api.getDashboardAdminEscolar(
+              currentUserId
+            ),
+
+            window.api.getProfessores(
+              currentUserId
+            )
+
+          ]);
+
+          if (
+            !dashResult ||
+            !dashResult.success
+          ) {
+
+            throw new Error(
+              dashResult?.message ||
+              'Não foi possível carregar os dados do relatório.'
+            );
+          }
+
+          const d =
+            dashResult.data || {};
+
+          const professores =
+            profResult?.success &&
+              Array.isArray(profResult.data)
+              ? profResult.data
+              : [];
+
+          // -------------------------------------------------------
+          // Statistics
+          // -------------------------------------------------------
+
+          const stats =
+            Array.isArray(d.stats)
+              ? d.stats
+              : [];
+
+          const statAlunos =
+            stats[0]?.value ?? 0;
+
+          const statTaxa =
+            stats[1]?.value ?? 0;
+
+          const statTarefas =
+            stats[2]?.value ?? 0;
+
+          const statXp =
+            stats[3]?.value ?? 0;
+
+          // -------------------------------------------------------
+          // SHEET 1 — RESUMO
+          // -------------------------------------------------------
+
+          const resumo = [
+
+            {
+              indicador: 'Alunos ativos',
+              valor: statAlunos
+            },
+
+            {
+              indicador: 'Taxa de conclusão',
+              valor: statTaxa
+            },
+
+            {
+              indicador: 'Tarefas publicadas',
+              valor: statTarefas
+            },
+
+            {
+              indicador: 'XP distribuído',
+              valor: statXp
+            }
+
+          ];
+
+          // -------------------------------------------------------
+          // SHEET 2 — TURMAS
+          // -------------------------------------------------------
+
+          const turmas =
+            Array.isArray(d.classes)
+              ? d.classes.map(turma => ({
+
+                turma:
+                  turma.name ||
+                  'Sem nome',
+
+                alunos:
+                  turma.students ?? 0,
+
+                conclusao:
+                  turma.completion ?? 0,
+
+                status:
+                  turma.statusLabel ||
+                  ''
+
+              }))
+              : [];
+
+          // -------------------------------------------------------
+          // SHEET 3 — PROFESSORES
+          // -------------------------------------------------------
+
+          const professoresExcel =
+            professores.map(professor => ({
+
+              professor:
+                professor.nome ||
+                'Sem nome',
+
+              turmas:
+                professor.turmas_count ??
+                0,
+
+              alunos:
+                professor.alunos_count ??
+                0
+
+            }));
+
+          // -------------------------------------------------------
+          // SHEET 4 — XP POR SEMANA
+          // -------------------------------------------------------
+
+          const xpPorSemana =
+            Array.isArray(d.xpChart)
+              ? d.xpChart.map(semana => ({
+
+                semana:
+                  semana.label ||
+                  '',
+
+                xp:
+                  semana.height ??
+                  0
+
+              }))
+              : [];
+
+          // -------------------------------------------------------
+          // Export
+          // -------------------------------------------------------
+
+          if (
+            !window.api ||
+            typeof window.api.exportToExcel !== 'function'
+          ) {
+
+            throw new Error(
+              'API de exportação do Excel indisponível.'
+            );
+          }
+
+          const result =
+            await window.api.exportToExcel({
+
+              nomeArquivo:
+                'relatorio_monetto.xlsx',
+
+              sheets: [
+
+                {
+                  nome: 'Resumo',
+                  dados: resumo
+                },
+
+                {
+                  nome: 'Turmas',
+                  dados: turmas
+                },
+
+                {
+                  nome: 'Professores',
+                  dados: professoresExcel
+                },
+
+                {
+                  nome: 'XP por Semana',
+                  dados: xpPorSemana
+                }
+
+              ]
+
+            });
+
+          if (
+            !result ||
+            result.success === false
+          ) {
+
+            throw new Error(
+              result?.message ||
+              'Falha ao gerar o arquivo Excel.'
+            );
+          }
+
+          showToast(
+            'Relatório Excel gerado com sucesso!',
+            'success'
+          );
+
+        } catch (error) {
+
+          console.error(
+            'Erro ao gerar relatório:',
+            error
+          );
+
+          showToast(
+            error.message ||
+            'Erro ao gerar relatório.',
+            'error'
+          );
+
+        } finally {
+
+          button.disabled = false;
+          button.innerHTML = originalText;
+
+        }
+      });
+
 
     // Reads the logged-in user saved at login time (see main.js's 'login'
     // handler). We only ever send this user's id to the backend; the

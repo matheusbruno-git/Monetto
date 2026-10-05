@@ -153,6 +153,21 @@ ipcMain.handle("getAlunos", async (event, currentUserId) => {
   }
 });
 
+ipcMain.handle("saveAlunosTurma", async (event, dados) => {
+  try {
+    const { saveAlunosTurma } = require(
+      path.join(basePath, "backend/save_alunos_turma.js"),
+    );
+    return await saveAlunosTurma(dados);
+  } catch (err) {
+    console.error("saveAlunosTurma Error:", err);
+    return {
+      success: false,
+      message: "Erro ao salvar alunos da turma: " + err.message,
+    };
+  }
+});
+
 ipcMain.handle("getAlunosProfessor", async (event, currentUserId) => {
   try {
     const { getAlunosProfessor } = require(
@@ -332,16 +347,16 @@ ipcMain.handle("getNiveis", async () => {
 
 ipcMain.handle("registerTurma", async (event, dados) => {
   try {
-    const db = require(path.join(basePath, "backend/connection.js"));
-    const [rows] = await db
-      .promise()
-      .execute(
-        "SELECT id_turma, nome_turma FROM turmas ORDER BY nome_turma ASC",
-      );
-    return { success: true, data: rows };
+    const { registerTurma } = require(
+      path.join(basePath, "backend/create_turma.js"),
+    );
+    return await registerTurma(dados);
   } catch (err) {
-    console.error("getTurmas Error:", err);
-    return { success: false, message: "Erro ao buscar turmas." };
+    console.error("registerTurma Error:", err);
+    return {
+      success: false,
+      message: "Erro ao criar turma: " + err.message,
+    };
   }
 });
 
@@ -378,6 +393,52 @@ ipcMain.handle("sendEmail", async (event, dados) => {
     return { success: false, message: "Erro ao enviar email." };
   }
 });
+
+
+ipcMain.handle("exportToExcel", async (event, dados) => {
+  try {
+    const { exportToExcel } = require(
+      path.join(basePath, "backend/export_excel.js"));
+    if (!dados || typeof dados !== "object") {
+      throw new Error(
+        "Dados de exportação inválidos."
+      );
+    }
+
+    const arquivo = await exportToExcel({
+      nomeArquivo:
+        dados.nomeArquivo ||
+        "monetto_export.xlsx",
+
+      sheets:
+        Array.isArray(dados.sheets)
+          ? dados.sheets
+          : []
+    });
+
+    return {
+      success: true,
+      message:
+        "Relatório Excel criado com sucesso!",
+      arquivo
+    };
+
+  } catch (error) {
+
+    console.error(
+      "Erro no IPC exportToExcel:",
+      error
+    );
+
+    return {
+      success: false,
+      message:
+        error.message ||
+        "Erro ao gerar o arquivo Excel."
+    };
+  }
+});
+
 
 ipcMain.handle("getDashboardAdminEscolar", async (event, currentUserId) => {
   try {

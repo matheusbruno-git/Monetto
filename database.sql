@@ -164,7 +164,7 @@ WHERE p.nome = 'escola';
 CREATE TABLE IF NOT EXISTS turmas (
     id_turma INT AUTO_INCREMENT PRIMARY KEY,
     id_escola INT NOT NULL,
-    id_professor INT NOT NULL,
+    id_professor INT NULL,
     id_nivel INT NOT NULL,
     nome_turma VARCHAR(100) NOT NULL,
     ano_letivo INT NOT NULL,

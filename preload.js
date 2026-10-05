@@ -64,4 +64,6 @@ contextBridge.exposeInMainWorld("api", {
   changeAlunoPassword: (dados) =>
     ipcRenderer.invoke("changeAlunoPassword", dados),
   sendEmail: (dados) => ipcRenderer.invoke("sendEmail", dados),
+  exportToExcel: (dados) =>
+    ipcRenderer.invoke('exportToExcel', dados),
 });

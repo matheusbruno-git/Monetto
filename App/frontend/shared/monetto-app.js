@@ -20,6 +20,65 @@ function getSession() {
   }
 }
 
+// ── Export data to Excel ──────────────────────────────────────
+async function exportToExcel(dados, opcoes = {}) {
+  try {
+    if (!Array.isArray(dados)) {
+      throw new Error('Os dados para exportação precisam ser um array.');
+    }
+
+    if (!dados.length) {
+      showToast('Não existem dados para exportar.', 'warning');
+      return false;
+    }
+
+    if (
+      !window.api ||
+      typeof window.api.exportToExcel !== 'function'
+    ) {
+      console.error('window.api.exportToExcel não está disponível.');
+
+      showToast(
+        'Serviço de exportação para Excel indisponível.',
+        'error'
+      );
+
+      return false;
+    }
+
+    const resultado = await window.api.exportToExcel({
+      dados,
+      nomeArquivo: opcoes.nomeArquivo || 'monetto_export.xlsx',
+      nomePlanilha: opcoes.nomePlanilha || 'Monetto'
+    });
+
+    if (!resultado || resultado.success === false) {
+      throw new Error(
+        resultado?.message || 'Não foi possível exportar os dados.'
+      );
+    }
+
+    showToast(
+      resultado.message || 'Arquivo Excel criado com sucesso!',
+      'success'
+    );
+
+    return true;
+
+  } catch (error) {
+    console.error('Erro ao exportar para Excel:', error);
+
+    showToast(
+      error.message || 'Erro ao exportar os dados para Excel.',
+      'error'
+    );
+
+    return false;
+  }
+}
+
+
+
 // ── Path helpers for active sidebar link ──────────────────────
 function normalizePath(url) {
   try {
@@ -614,3 +673,4 @@ document.querySelectorAll('a').forEach(link => {
     }, 500);
   });
 });
+
