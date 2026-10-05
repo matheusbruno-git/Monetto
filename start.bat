@@ -94,4 +94,32 @@ echo Importing database...
 echo Starting Monetto...
 npm run start
 
+:: Install optional npm packages if they don't exist
+if not exist "%CD%\node_modules\nodemailer" (
+	echo Installing nodemailer...
+	npm install nodemailer
+) else (
+	echo nodemailer already installed.
+)
+
+if not exist "%CD%\node_modules\exceljs" (
+	echo Installing exceljs...
+	npm install exceljs
+) else (
+	echo exceljs already installed.
+)
+
+if not exist "%CD%\node_modules\@google\genai" (
+	echo Installing @google/genai and dotenv...
+	npm install @google/genai dotenv
+) else (
+	echo @google/genai already installed. Checking dotenv...
+	if not exist "%CD%\node_modules\dotenv" (
+		echo Installing dotenv...
+		npm install dotenv
+	) else (
+		echo dotenv already installed.
+	)
+)
+
 pause
