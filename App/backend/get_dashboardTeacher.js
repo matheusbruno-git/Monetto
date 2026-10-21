@@ -1,5 +1,20 @@
 const { resolveEscolaId } = require("./resolve_escola_id.js");
 
+function formatRelative(dateVal) {
+  if (!dateVal) return "—";
+  const d = new Date(dateVal);
+  if (Number.isNaN(d.getTime())) return "—";
+  const mins = Math.floor((Date.now() - d.getTime()) / 60000);
+  if (mins < 1) return "agora";
+  if (mins < 60) return "há " + mins + "min";
+  const hours = Math.floor(mins / 60);
+  if (hours < 24) return "há " + hours + "h";
+  const days = Math.floor(hours / 24);
+  if (days === 1) return "ontem";
+  if (days < 30) return "há " + days + "d";
+  return d.toLocaleDateString("pt-BR");
+}
+
 async function getDashboardTeacher(currentUserId) {
   try {
     const db = require("./connection.js");
@@ -36,6 +51,43 @@ async function getDashboardTeacher(currentUserId) {
       }
     }
 
+    async function getColumns(table) {
+      try {
+        const [rows] = await db.promise().query(`SHOW COLUMNS FROM \`${table}\``);
+        return new Set(rows.map((r) => r.Field));
+      } catch (e) {
+        console.warn("getColumns failed for " + table + ":", e.message);
+        return new Set();
+      }
+    }
+
+    const tarCols = await getColumns("tarefas");
+    const entCols = await getColumns("entregas");
+
+    // Real schema (see create_tarefa.js / get_tarefas.js): data_criacao, data_vencimento.
+    const tarCreated = tarCols.has("data_criacao")
+      ? "data_criacao"
+      : tarCols.has("criado_em")
+        ? "criado_em"
+        : null;
+    const tarDue = tarCols.has("data_vencimento")
+      ? "data_vencimento"
+      : tarCols.has("data_entrega")
+        ? "data_entrega"
+        : null;
+    const ownerParts = [];
+    const ownerParams = [];
+    if (tarCols.has("id_professor")) {
+      ownerParts.push("id_professor = ?");
+      ownerParams.push(currentUserId);
+    }
+    if (tarCols.has("id_usuario")) {
+      ownerParts.push("id_usuario = ?");
+      ownerParams.push(currentUserId);
+    }
+    const ownerSql = ownerParts.length ? `(${ownerParts.join(" OR ")})` : "1 = 0";
+    const xpEntrega = entCols.has("xp_ganho") ? "COALESCE(e.xp_ganho, 0)" : "0";
+
     let teacherName = "Professor";
     let teacherSub = "Dashboard do Professor";
     try {
@@ -59,24 +111,18 @@ async function getDashboardTeacher(currentUserId) {
     );
 
     const alunosAtivos = await safeCount(
-      `SELECT u.id_usuario, u.nome, u.email, u.ativo, u.ultimo_acesso, u.id_turma,
-              t.nome_turma AS turma,
-              COALESCE(pa.xp_atual, 0) AS xp_atual,
-              COALESCE(pa.pontos_totais, 0) AS pontos_totais,
-              COALESCE(pa.nivel_atual, 0) AS nivel_atual,
-              COALESCE(pa.percentual_conclusao, 0) AS percentual_conclusao
+      `SELECT COUNT(*) AS total
        FROM usuarios u
-       LEFT JOIN turmas t ON t.id_turma = u.id_turma
-       LEFT JOIN progresso_aluno pa ON pa.id_aluno = u.id_usuario
-       WHERE u.id_perfil = 1 AND u.id_escola = ?
-       ORDER BY u.nome ASC`,
-      [escolaId],
+       INNER JOIN turmas t ON t.id_turma = u.id_turma
+       WHERE u.id_perfil = 1 AND u.ativo = 1 AND u.id_escola = ?
+         AND t.id_escola = ? AND t.id_professor = ?`,
+      [escolaId, escolaId, currentUserId],
     );
 
     const tarefasAtivas = await safeCount(
       `SELECT COUNT(*) AS total FROM tarefas
-       WHERE id_escola = ? AND (id_professor = ? OR id_usuario = ?)`,
-      [escolaId, currentUserId, currentUserId],
+       WHERE id_escola = ? AND ${ownerSql}`,
+      [escolaId, ...ownerParams],
     );
 
     let taxaConclusao = 0;
@@ -113,8 +159,10 @@ async function getDashboardTeacher(currentUserId) {
 
     teacherSub = `${turmasTotal} turma${turmasTotal === 1 ? "" : "s"} · ${alunosAtivos} aluno${alunosAtivos === 1 ? "" : "s"}`;
 
+    const turmaCols = await getColumns("turmas");
+    const salaSelect = turmaCols.has("sala") ? "t.sala" : "NULL";
     const turmaRows = await safeQuery(
-      `SELECT t.id_turma, t.nome_turma, t.status, t.sala,
+      `SELECT t.id_turma, t.nome_turma, t.status, ${salaSelect} AS sala,
               (SELECT COUNT(*) FROM usuarios u
                WHERE u.id_turma = t.id_turma
                  AND u.id_perfil = 1 AND u.ativo = 1 AND u.id_escola = ?) AS alunos_count
@@ -151,7 +199,7 @@ async function getDashboardTeacher(currentUserId) {
 
     const recentEntregas = await safeQuery(
       `SELECT u.nome AS aluno_nome, tar.titulo AS tarefa_titulo, e.criado_em,
-              t.nome_turma, e.xp_ganho
+              t.nome_turma, ${xpEntrega} AS xp_ganho
        FROM entregas e
        INNER JOIN usuarios u ON u.id_usuario = e.id_usuario
        INNER JOIN tarefas tar ON tar.id_tarefa = e.id_tarefa
@@ -172,10 +220,10 @@ async function getDashboardTeacher(currentUserId) {
     }
 
     const recentTarefas = await safeQuery(
-      `SELECT titulo, criado_em FROM tarefas
-       WHERE id_escola = ? AND (id_professor = ? OR id_usuario = ?)
-       ORDER BY criado_em DESC LIMIT 3`,
-      [escolaId, currentUserId, currentUserId],
+      `SELECT titulo, ${tarCreated ? tarCreated : "NULL"} AS criado_em FROM tarefas
+       WHERE id_escola = ? AND ${ownerSql}
+       ORDER BY ${tarCreated ? tarCreated + " DESC," : ""} id_tarefa DESC LIMIT 3`,
+      [escolaId, ...ownerParams],
     );
     for (const r of recentTarefas) {
       if (activities.length >= 6) break;
@@ -232,7 +280,7 @@ async function getDashboardTeacher(currentUserId) {
 
     const topRows = await safeQuery(
       `SELECT u.nome, t.nome_turma,
-              COALESCE(SUM(e.xp_ganho), 0) AS xp
+              COALESCE(SUM(${xpEntrega}), 0) AS xp
        FROM usuarios u
        INNER JOIN turmas t ON u.id_turma = t.id_turma
        LEFT JOIN entregas e ON e.id_usuario = u.id_usuario
@@ -250,21 +298,25 @@ async function getDashboardTeacher(currentUserId) {
       xp: Number(r.xp) || 0,
     }));
 
+    const dueSelect = tarDue ? `tar.${tarDue}` : "NULL";
+    const pendingScope = tarCols.has("id_turma")
+      ? { join: "INNER JOIN turmas t ON t.id_turma = tar.id_turma", where: "t.id_professor = ?", params: [currentUserId] }
+      : { join: "LEFT JOIN turmas t ON 1 = 0", where: ownerSql.replace(/\b(id_professor|id_usuario)\b/g, "tar.$1"), params: ownerParams };
     const pendingRows = await safeQuery(
-      `SELECT tar.id_tarefa, tar.titulo, tar.data_entrega,
+      `SELECT tar.id_tarefa, tar.titulo, ${dueSelect} AS data_entrega,
               t.nome_turma,
               (SELECT COUNT(*) FROM usuarios u
                WHERE u.id_turma = t.id_turma AND u.id_perfil = 1 AND u.ativo = 1) AS total_alunos,
               (SELECT COUNT(DISTINCT e.id_usuario) FROM entregas e
                WHERE e.id_tarefa = tar.id_tarefa) AS entregues
        FROM tarefas tar
-       INNER JOIN turmas t ON t.id_turma = tar.id_turma
+       ${pendingScope.join}
        WHERE tar.id_escola = ?
-         AND t.id_professor = ?
-         AND (tar.data_entrega IS NULL OR tar.data_entrega >= DATE_SUB(CURDATE(), INTERVAL 1 DAY))
-       ORDER BY tar.data_entrega ASC
+         AND ${pendingScope.where}
+         ${tarDue ? `AND (${dueSelect} IS NULL OR ${dueSelect} >= DATE_SUB(CURDATE(), INTERVAL 1 DAY))` : ""}
+       ORDER BY ${tarDue ? dueSelect + " ASC," : ""} tar.id_tarefa DESC
        LIMIT 6`,
-      [escolaId, currentUserId],
+      [escolaId, ...pendingScope.params],
     );
 
     const pending = pendingRows.map((r) => {

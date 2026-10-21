@@ -133,8 +133,8 @@ option {
     background: rgba(0, 0, 0, 0.45);
     border-color: #42be95;
     border-radius: 12px;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 
     z-index: 9999;
 }
@@ -655,8 +655,8 @@ option {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, .6);
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
     z-index: 100;
     display: flex;
     align-items: center;
@@ -5149,4 +5149,470 @@ body:has(.page) {
     .finance-page .ftab {
         flex: 1;
     }
+}
+
+/* =========================================================
+   MONETTO PROFESSIONAL UI OVERRIDES
+   Clean institutional visual system for a school finance TCC.
+   No gradients, glassmorphism, low-contrast surfaces, or motion gimmicks.
+   ========================================================= */
+:root {
+    --navy: #14213d !important;
+    --navy-dark: #0f1a31 !important;
+    --navy-light: #23395d !important;
+    --blue: #2457c5 !important;
+    --blue-700: #1e46a0 !important;
+    --blue-600: #2457c5 !important;
+    --sky-blue: #4c78dd !important;
+    --sky-500: #4c78dd !important;
+    --accent: #e9b949 !important;
+    --gold: #e9b949 !important;
+    --gold-400: #e9b949 !important;
+    --gold-300: #f2cf77 !important;
+    --green: #2f7d5b !important;
+    --green-dark: #27674b !important;
+    --mint-500: #2f7d5b !important;
+    --red: #b63e45 !important;
+    --orange: #b96f2d !important;
+    --purple: #6a5d7b !important;
+    --white: #ffffff !important;
+    --text: #172033 !important;
+    --ink-900: #172033 !important;
+    --ink-700: #344054 !important;
+    --ink-500: #667085 !important;
+    --ink-300: #98a2b3 !important;
+    --muted: #667085 !important;
+    --bg: #f5f7fa !important;
+    --bg-soft: #f5f7fa !important;
+    --page-bg: #f5f7fa !important;
+    --card: #ffffff !important;
+    --panel: #ffffff !important;
+    --panel-strong: #ffffff !important;
+    --surface: #ffffff !important;
+    --surface-soft: #f8fafc !important;
+    --surface-muted: #eef2f6 !important;
+    --border: #d8dee8 !important;
+    --line: #d8dee8 !important;
+    --card-border: #d8dee8 !important;
+    --shadow: 0 1px 2px rgba(16, 24, 40, .06), 0 4px 12px rgba(16, 24, 40, .05) !important;
+    --shadow-soft: 0 1px 2px rgba(16, 24, 40, .06), 0 8px 24px rgba(16, 24, 40, .06) !important;
+    --shadow-card: 0 1px 2px rgba(16, 24, 40, .06), 0 4px 12px rgba(16, 24, 40, .05) !important;
+    --radius: 10px !important;
+    --radius-sm: 8px !important;
+    --transition: 0s !important;
+    --hero-grad: #ffffff !important;
+    --feat-grad: #ffffff !important;
+    --btn-ghost-bg: #ffffff !important;
+    --btn-outline-bg: #ffffff !important;
+    --footer-bg: #ffffff !important;
+    --quiz-modal-bg: #ffffff !important;
+    --q-opt-bg: #f8fafc !important;
+}
+
+html,
+body,
+button,
+input,
+select,
+textarea {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+}
+
+html {
+    background: #f5f7fa !important;
+}
+
+body {
+    background: #f5f7fa !important;
+    color: #172033 !important;
+    opacity: 1 !important;
+}
+
+body::before,
+body::after,
+.monetto-landing-page::before,
+.monetto-landing-page::after {
+    background-image: none !important;
+    filter: none !important;
+}
+
+/* motion / reveal cleanup */
+*,
+*::before,
+*::after {
+    animation: none !important;
+    scroll-behavior: auto !important;
+}
+
+.reveal,
+.fade-in,
+.fade-up,
+[data-aos],
+.visible,
+.in-view {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+/* no glass surfaces */
+.form-box,
+.card,
+.stat-card,
+.dashboard-card,
+.panel,
+.students-panel,
+.turma-card,
+.task-card,
+.reward-card,
+.module-card,
+.lesson-card,
+.quiz-card,
+.set-card,
+.feature-card,
+.how-card,
+.pricing-card,
+.hero-card,
+.hero-panel,
+.hero-preview,
+.landing-card,
+.modal,
+.modal-content,
+.content-card,
+.setting-card,
+.settings-card {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-image: none !important;
+    box-shadow: var(--shadow) !important;
+    border-color: #d8dee8 !important;
+    border-radius: 10px !important;
+}
+
+/* app shell */
+.sidebar {
+    background: #14213d !important;
+    background-image: none !important;
+    color: #ffffff !important;
+    border-right: 1px solid #253552 !important;
+    box-shadow: none !important;
+}
+
+.sb-logo,
+.sidebar .logo,
+.sb-user-info strong {
+    color: #ffffff !important;
+}
+
+.sb-section,
+.sb-user-info span {
+    color: #aeb9cc !important;
+}
+
+.sb-link {
+    color: #d7deea !important;
+    border-left: 0 !important;
+    border-radius: 6px !important;
+    transition: none !important;
+}
+
+.sb-link:hover {
+    background: #1d2d4c !important;
+    color: #ffffff !important;
+}
+
+.sb-link.active {
+    background: #243859 !important;
+    color: #ffffff !important;
+    border-left: 0 !important;
+    font-weight: 600 !important;
+}
+
+.sb-link.active::before {
+    display: none !important;
+}
+
+.sb-av {
+    background: #e9b949 !important;
+    border: 0 !important;
+}
+
+.main,
+main,
+.page-content,
+.dashboard-main,
+.content-area {
+    background: #f5f7fa !important;
+    color: #172033 !important;
+}
+
+/* typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.logo,
+.sb-logo,
+.form-title,
+.hero-title,
+.section-title {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    color: #172033 !important;
+    letter-spacing: -0.02em !important;
+    text-shadow: none !important;
+    background: none !important;
+    -webkit-background-clip: border-box !important;
+    -webkit-text-fill-color: currentColor !important;
+}
+
+.sidebar h1,
+.sidebar h2,
+.sidebar h3,
+.sidebar h4,
+.sidebar .sb-logo {
+    color: #fff !important;
+}
+
+.hero-title span,
+.gradient-text,
+.accent-word {
+    color: #2457c5 !important;
+    background: none !important;
+    -webkit-text-fill-color: #2457c5 !important;
+    font-style: normal !important;
+}
+
+p,
+.subtitle,
+.desc,
+.form-sub,
+.card-subtitle,
+.meta,
+small {
+    color: #667085 !important;
+}
+
+/* buttons */
+button,
+.btn,
+.btn-primary,
+.btn-secondary,
+.btn-outline,
+.btn-ghost,
+.cta,
+.cta-button,
+.hero-cta,
+.login-btn {
+    border-radius: 7px !important;
+    box-shadow: none !important;
+    transform: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    background-image: none !important;
+}
+
+.btn-primary,
+.cta-primary,
+.hero-cta,
+.login-btn,
+button[type="submit"] {
+    background: #2457c5 !important;
+    color: #ffffff !important;
+    border: 1px solid #2457c5 !important;
+}
+
+.btn-primary:hover,
+.cta-primary:hover,
+.hero-cta:hover,
+.login-btn:hover,
+button[type="submit"]:hover {
+    background: #1e46a0 !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+}
+
+.btn-secondary,
+.btn-outline,
+.btn-ghost {
+    background: #ffffff !important;
+    color: #344054 !important;
+    border: 1px solid #cfd6e1 !important;
+}
+
+.btn-secondary:hover,
+.btn-outline:hover,
+.btn-ghost:hover {
+    background: #f8fafc !important;
+    color: #172033 !important;
+    opacity: 1 !important;
+}
+
+/* forms */
+input,
+select,
+textarea,
+.input-wrap {
+    background: #ffffff !important;
+    color: #172033 !important;
+    border-color: #cfd6e1 !important;
+    border-radius: 7px !important;
+    box-shadow: none !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #98a2b3 !important;
+}
+
+.input-wrap:focus-within,
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #2457c5 !important;
+    outline: 2px solid rgba(36, 87, 197, .14) !important;
+    outline-offset: 0 !important;
+}
+
+/* cards and data blocks */
+.stat-card,
+.metric-card,
+.summary-card,
+.card,
+.panel,
+.students-panel,
+.turma-card,
+.task-card,
+.reward-card,
+.module-card,
+.lesson-card,
+.quiz-card,
+.setting-card,
+.settings-card {
+    background: #ffffff !important;
+    color: #172033 !important;
+    border: 1px solid #d8dee8 !important;
+}
+
+.stat-card::before,
+.card::before,
+.feature-card::before {
+    display: none !important;
+}
+
+/* status colors stay restrained */
+.badge,
+.pill,
+.tag,
+.status {
+    border-radius: 999px !important;
+    box-shadow: none !important;
+}
+
+/* landing page */
+.monetto-landing-page {
+    background: #f5f7fa !important;
+    color: #172033 !important;
+}
+
+.monetto-landing-page header,
+.monetto-landing-page .navbar,
+.monetto-landing-page nav {
+    background: #ffffff !important;
+    border-bottom: 1px solid #e3e7ee !important;
+    box-shadow: none !important;
+}
+
+.monetto-landing-page .hero,
+.monetto-landing-page .hero-shell,
+.monetto-landing-page .hero-card,
+.monetto-landing-page .section,
+.monetto-landing-page section {
+    background-image: none !important;
+}
+
+.monetto-landing-page .hero-card,
+.monetto-landing-page .hero-shell {
+    background: #ffffff !important;
+    border: 1px solid #d8dee8 !important;
+    box-shadow: 0 8px 24px rgba(16, 24, 40, .06) !important;
+}
+
+.monetto-landing-page .feature-card,
+.monetto-landing-page .how-card {
+    background: #ffffff !important;
+    border: 1px solid #d8dee8 !important;
+    box-shadow: none !important;
+}
+
+/* login */
+body.login-page,
+.login-page,
+.auth-page {
+    background: #f5f7fa !important;
+    background-image: none !important;
+}
+
+.form-box {
+    background: #ffffff !important;
+    color: #172033 !important;
+    border: 1px solid #d8dee8 !important;
+    box-shadow: 0 8px 24px rgba(16, 24, 40, .08) !important;
+    border-radius: 10px !important;
+}
+
+.form-box .logo,
+.form-box h2 {
+    color: #172033 !important;
+}
+
+.logo-icon {
+    background: #e9b949 !important;
+    color: #14213d !important;
+    border-radius: 8px !important;
+}
+
+/* remove decorative icon blocks in section triads */
+.feature-icon,
+.how-icon,
+.icon-box,
+.section-icon {
+    background: #eef3fb !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    border-radius: 7px !important;
+}
+
+/* modal */
+.modal-container,
+.overlay,
+.modal-overlay {
+    background: rgba(15, 23, 42, .54) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* consistent spacing rhythm */
+.topbar {
+    margin-bottom: 28px !important;
+}
+
+.page-header {
+    margin-bottom: 28px !important;
+}
+
+.grid,
+.cards-grid,
+.stats-grid {
+    gap: 16px !important;
+}
+
+/* kill cursor beams / decorative pointer followers when present */
+.cursor-beam,
+.beam,
+.spotlight,
+.cursor-glow,
+#cursor-beam,
+#spotlight {
+    display: none !important;
 }

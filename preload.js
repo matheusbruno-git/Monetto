@@ -66,4 +66,5 @@ contextBridge.exposeInMainWorld("api", {
   sendEmail: (dados) => ipcRenderer.invoke("sendEmail", dados),
   exportToExcel: (dados) =>
     ipcRenderer.invoke('exportToExcel', dados),
+  saveAlunosTurma: (dados) => ipcRenderer.invoke("saveAlunosTurma", dados),
 });
