@@ -1,17 +1,19 @@
+
 const mysql = require("mysql2");
 
 const db = mysql.createConnection({
-  host: "localhost",
+  host: "127.0.0.1",
+  port: 3307,
   user: "root",
-  password: "",
+  password: process.env.DB_PASSWORD || "mlsolutions",
   database: "monetto",
 });
 
 db.connect((err) => {
   if (err) {
-    console.error("❌ DB Connection Error:", err);
+    console.error("❌ DB Connection Error:", err.message);
   } else {
-    console.log("✅ MySQL Connected (backend)");
+    console.log("✅ MySQL Connected (Docker backend)");
   }
 });
 
