@@ -122,4 +122,14 @@ if not exist "%CD%\node_modules\@google\genai" (
 	)
 )
 
+$ docker build -t meu-app .
+
+$docker images
+
+$docker run meu-app
+
+$docker run meu-app:v2
+
+$docker run meu-app:latest
+
 pause
