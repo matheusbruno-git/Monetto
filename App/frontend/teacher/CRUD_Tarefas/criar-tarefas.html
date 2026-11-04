@@ -19,6 +19,12 @@
 </head>
 
 <body class="tarefas-page">
+<header class="app-header">
+  <button class="app-icon-btn" id="appMenuBtn" type="button" aria-label="Abrir menu" aria-expanded="false"><span class="menu-lines" aria-hidden="true"></span></button>
+  <a class="app-brand" href="../../user/monetto-landing/monetto-landing.html" aria-label="Monetto, página inicial"><span class="app-brand-mark" aria-hidden="true">M</span><span>Monetto</span><span class="app-brand-subtitle">Educação financeira</span></a>
+  <span class="app-spacer"></span>
+  <button class="app-icon-btn" id="appThemeBtn" type="button" aria-label="Alternar tema" title="Alternar tema"><span class="theme-mark" aria-hidden="true"></span></button>
+</header>
 
   <div id="sidebar-container"></div>
 
@@ -31,7 +37,7 @@
     <div class="form-area">
 
       <div class="form-title">
-        📝 Criar Nova Tarefa
+         Criar Nova Tarefa
       </div>
 
       <div class="form-sub">
@@ -43,15 +49,15 @@
         <div class="form-footer">
 
           <button type="button" class="btn-acc" onclick="switchTab('tarefa', this)">
-            📋 Tarefa
+             Tarefa
           </button>
 
           <button type="button" class="btn-acc" onclick="switchTab('quiz', this)">
-            🧠 Quiz
+             Quiz
           </button>
 
           <button type="button" class="btn-acc" onclick="switchTab('jogo', this)">
-            🎮 Jogo Financeiro
+             Jogo Financeiro
           </button>
 
         </div>
@@ -125,7 +131,7 @@
 
             <div class="tipo-btn selected" data-tipo="Texto / Redação" onclick="selTipo(this)">
               <div class="tipo-icon">
-                📄
+
               </div>
 
               Texto / Redação
@@ -134,7 +140,7 @@
 
             <div class="tipo-btn" data-tipo="Exercício" onclick="selTipo(this)">
               <div class="tipo-icon">
-                🔢
+
               </div>
 
               Exercício
@@ -143,7 +149,7 @@
 
             <div class="tipo-btn" data-tipo="Envio de arquivo" onclick="selTipo(this)">
               <div class="tipo-icon">
-                📎
+
               </div>
 
               Envio de arquivo
@@ -152,7 +158,7 @@
 
             <div class="tipo-btn" data-tipo="Quiz" onclick="selTipo(this)">
               <div class="tipo-icon">
-                🧠
+
               </div>
 
               Quiz
@@ -161,7 +167,7 @@
 
             <div class="tipo-btn" data-tipo="Leitura" onclick="selTipo(this)">
               <div class="tipo-icon">
-                📖
+
               </div>
 
               Leitura
@@ -170,7 +176,7 @@
 
             <div class="tipo-btn" data-tipo="Vídeo" onclick="selTipo(this)">
               <div class="tipo-icon">
-                🎥
+
               </div>
 
               Vídeo
@@ -191,17 +197,17 @@
           <div class="dif-row">
 
             <button type="button" class="btn-acc" data-dificuldade="Fácil" onclick="selDif(this, 'sel-g')">
-              🟢 Fácil
+               Fácil
             </button>
 
 
             <button type="button" class="btn-acc" data-dificuldade="Médio" onclick="selDif(this, 'sel-y')">
-              🟡 Médio
+               Médio
             </button>
 
 
             <button type="button" class="btn-acc" data-dificuldade="Difícil" onclick="selDif(this, 'sel-r')">
-              🔴 Difícil
+               Difícil
             </button>
 
           </div>
@@ -247,7 +253,7 @@
                 onchange="syncTurmaCheckbox(this)" />
 
               <span class="turma-chk-label">
-                📘 8º Ano A
+                 8º Ano A
               </span>
 
             </div>
@@ -260,7 +266,7 @@
                 onchange="syncTurmaCheckbox(this)" />
 
               <span class="turma-chk-label">
-                📗 8º Ano B
+                 8º Ano B
               </span>
 
             </div>
@@ -273,7 +279,7 @@
                 onchange="syncTurmaCheckbox(this)" />
 
               <span class="turma-chk-label">
-                📙 9º Ano A
+                 9º Ano A
               </span>
 
             </div>
@@ -286,7 +292,7 @@
                 onchange="syncTurmaCheckbox(this)" />
 
               <span class="turma-chk-label">
-                📒 9º Ano B
+                 9º Ano B
               </span>
 
             </div>
@@ -309,12 +315,12 @@
         <div class="form-footer">
 
           <button type="button" class="btn-draft" id="btnRascunhoTarefa">
-            💾 Rascunho
+             Rascunho
           </button>
 
 
           <button type="button" class="btn-acc" id="btn">
-            🚀 Publicar Tarefa
+             Publicar Tarefa
           </button>
 
         </div>
@@ -513,11 +519,11 @@
         <div class="form-footer" style="margin-top: 20px;">
 
           <button type="button" class="btn-draft">
-            💾 Rascunho
+             Rascunho
           </button>
 
           <button type="button" class="btn-acc">
-            🚀 Publicar Quiz
+             Publicar Quiz
           </button>
 
         </div>
@@ -543,7 +549,7 @@
             <div class="tipo-btn selected" data-jogo="Orçamento" onclick="selTipo(this)">
 
               <div class="tipo-icon">
-                💰
+
               </div>
 
               Orçamento
@@ -554,7 +560,7 @@
             <div class="tipo-btn" data-jogo="Bolsa Jr." onclick="selTipo(this)">
 
               <div class="tipo-icon">
-                📈
+
               </div>
 
               Bolsa Jr.
@@ -565,7 +571,7 @@
             <div class="tipo-btn" data-jogo="Mercado Virtual" onclick="selTipo(this)">
 
               <div class="tipo-icon">
-                🏪
+
               </div>
 
               Mercado Virtual
@@ -632,7 +638,7 @@
                 onchange="syncTurmaCheckbox(this)" />
 
               <span class="turma-chk-label">
-                📘 8º Ano A
+                 8º Ano A
               </span>
 
             </div>
@@ -644,7 +650,7 @@
                 onchange="syncTurmaCheckbox(this)" />
 
               <span class="turma-chk-label">
-                📗 8º Ano B
+                 8º Ano B
               </span>
 
             </div>
@@ -656,7 +662,7 @@
                 onchange="syncTurmaCheckbox(this)" />
 
               <span class="turma-chk-label">
-                📙 9º Ano A
+                 9º Ano A
               </span>
 
             </div>
@@ -668,7 +674,7 @@
                 onchange="syncTurmaCheckbox(this)" />
 
               <span class="turma-chk-label">
-                📒 9º Ano B
+                 9º Ano B
               </span>
 
             </div>
@@ -682,11 +688,11 @@
         <div class="form-footer" style="margin-top: 20px;">
 
           <button type="button" class="btn-draft">
-            💾 Rascunho
+             Rascunho
           </button>
 
           <button type="button" class="btn-acc">
-            🚀 Atribuir Jogo
+             Atribuir Jogo
           </button>
 
         </div>
@@ -705,7 +711,7 @@
       <div class="list-hd">
 
         <h3>
-          📋 Tarefas Criadas
+           Tarefas Criadas
         </h3>
 
         <span id="tarefasCount">
@@ -761,6 +767,7 @@
     }
   </script>
 
+  <script src="../../shared/monetto-shell.js"></script>
 </body>
 
 </html>

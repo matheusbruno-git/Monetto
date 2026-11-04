@@ -15,13 +15,19 @@
 </head>
 
 <body>
+<header class="app-header">
+  <button class="app-icon-btn" id="appMenuBtn" type="button" aria-label="Abrir menu" aria-expanded="false"><span class="menu-lines" aria-hidden="true"></span></button>
+  <a class="app-brand" href="../../user/monetto-landing/monetto-landing.html" aria-label="Monetto, página inicial"><span class="app-brand-mark" aria-hidden="true">M</span><span>Monetto</span><span class="app-brand-subtitle">Educação financeira</span></a>
+  <span class="app-spacer"></span>
+  <button class="app-icon-btn" id="appThemeBtn" type="button" aria-label="Alternar tema" title="Alternar tema"><span class="theme-mark" aria-hidden="true"></span></button>
+</header>
   <div id="sidebar-container"></div>
   <main class="main">
     <div class="topbar">
       <h1>Relatórios <span>da Escola</span></h1>
       <div class="top-right">
-        <button class="btn btn-outline">📥 Exportar PDF</button>
-        <button class="btn btn-primary">📊 Gerar Relatório</button>
+        <button class="btn btn-outline"> Exportar PDF</button>
+        <button class="btn btn-primary"> Gerar Relatório</button>
       </div>
     </div>
 
@@ -34,24 +40,24 @@
 
     <div class="stats-row">
       <div class="sc sc-g">
-        <div class="sc-icon">✅</div>
+        <div class="sc-icon"></div>
         <div class="sc-val">89%</div>
         <div class="sc-lbl">Taxa de conclusão</div>
         <div class="sc-sub">▲ +4% vs. mês anterior</div>
       </div>
       <div class="sc sc-y">
-        <div class="sc-icon">⚡</div>
+        <div class="sc-icon"></div>
         <div class="sc-val">34.8k</div>
         <div class="sc-lbl">XP distribuído</div>
         <div class="sc-sub">↑ 27% vs. mês anterior</div>
       </div>
       <div class="sc sc-b">
-        <div class="sc-icon">📋</div>
+        <div class="sc-icon"></div>
         <div class="sc-val">148</div>
         <div class="sc-lbl">Tarefas publicadas</div>
       </div>
       <div class="sc sc-r">
-        <div class="sc-icon">👥</div>
+        <div class="sc-icon"></div>
         <div class="sc-val">512</div>
         <div class="sc-lbl">Alunos ativos</div>
       </div>
@@ -60,7 +66,7 @@
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px">
       <div class="card">
         <div class="card-hd">
-          <h3>📈 XP por Semana – Abril</h3>
+          <h3> XP por Semana – Abril</h3>
         </div>
         <div style="display:flex;align-items:flex-end;gap:10px;height:100px;padding-top:8px">
           <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
@@ -95,7 +101,7 @@
       </div>
       <div class="card">
         <div class="card-hd">
-          <h3>📚 Conclusão por Turma</h3>
+          <h3> Conclusão por Turma</h3>
         </div>
         <div style="display:flex;flex-direction:column;gap:10px">
           <div style="display:flex;align-items:center;gap:10px;font-size:.82rem"><span style="width:60px">8ºA</span>
@@ -132,7 +138,7 @@
 
     <div class="card">
       <div class="card-hd">
-        <h3>👨‍🏫 Desempenho por Professor</h3>
+        <h3> Desempenho por Professor</h3>
       </div>
       <div class="table-head" style="grid-template-columns:1.5fr 100px 80px 80px 90px">
         <span>Professor</span><span>Matéria</span><span>Tarefas</span><span>Conclusão</span><span>Engajamento</span>
@@ -177,6 +183,7 @@
   </main>
   <script src="../main_script.js"></script>
 
+  <script src="../../shared/monetto-shell.js"></script>
 </body>
 
 </html>

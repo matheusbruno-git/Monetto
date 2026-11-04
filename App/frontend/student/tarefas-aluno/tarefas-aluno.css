@@ -506,7 +506,7 @@ textarea {
 }
 
 .check-circle.checked::after {
-  content: "✓";
+  content: "\2713";
   font-size: 0.7rem;
   font-weight: 700;
 }

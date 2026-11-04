@@ -26,6 +26,12 @@
 
 
 <body class="settings-page">
+<header class="app-header">
+  <button class="app-icon-btn" id="appMenuBtn" type="button" aria-label="Abrir menu" aria-expanded="false"><span class="menu-lines" aria-hidden="true"></span></button>
+  <a class="app-brand" href="../../user/monetto-landing/monetto-landing.html" aria-label="Monetto, página inicial"><span class="app-brand-mark" aria-hidden="true">M</span><span>Monetto</span><span class="app-brand-subtitle">Educação financeira</span></a>
+  <span class="app-spacer"></span>
+  <button class="app-icon-btn" id="appThemeBtn" type="button" aria-label="Alternar tema" title="Alternar tema"><span class="theme-mark" aria-hidden="true"></span></button>
+</header>
 
 
   <div id="sidebar-container"></div>
@@ -43,7 +49,7 @@
 
       <div class="set-nav-item active" onclick="showTab('perfil', this)">
         <span class="sni">
-          👤
+
         </span>
 
         Meu Perfil
@@ -52,7 +58,7 @@
 
       <div class="set-nav-item" onclick="showTab('notif', this)">
         <span class="sni">
-          🔔
+
         </span>
 
         Notificações
@@ -61,7 +67,7 @@
 
       <div class="set-nav-item" onclick="showTab('priv', this)">
         <span class="sni">
-          🔒
+
         </span>
 
         Privacidade
@@ -70,7 +76,7 @@
 
       <div class="set-nav-item" onclick="showTab('conta', this)">
         <span class="sni">
-          🛡️
+
         </span>
 
         Conta
@@ -88,7 +94,7 @@
         <div class="set-header">
 
           <h1>
-            👤 Meu Perfil
+             Meu Perfil
           </h1>
 
           <p>
@@ -101,10 +107,10 @@
         <div class="profile-hero">
 
           <div class="profile-big-av" id="profile-big-av">
-            😊
+
 
             <div class="av-edit">
-              ✏️
+
             </div>
           </div>
 
@@ -123,34 +129,34 @@
         <div class="set-card">
 
           <div class="set-card-title">
-            📸 Escolher Avatar
+             Escolher Avatar
           </div>
 
 
           <div class="avatar-grid">
 
-            <div class="av-opt av1 selected" data-avatar="😊">
-              😊
+            <div class="av-opt av1 selected" data-avatar="">
+
             </div>
 
-            <div class="av-opt av2" data-avatar="😎">
-              😎
+            <div class="av-opt av2" data-avatar="">
+
             </div>
 
-            <div class="av-opt av3" data-avatar="🤓">
-              🤓
+            <div class="av-opt av3" data-avatar="">
+
             </div>
 
-            <div class="av-opt av4" data-avatar="😄">
-              😄
+            <div class="av-opt av4" data-avatar="">
+
             </div>
 
-            <div class="av-opt av5" data-avatar="🥳">
-              🥳
+            <div class="av-opt av5" data-avatar="">
+
             </div>
 
-            <div class="av-opt av6" data-avatar="🤩">
-              🤩
+            <div class="av-opt av6" data-avatar="">
+
             </div>
 
           </div>
@@ -161,7 +167,7 @@
         <div class="set-card">
 
           <div class="set-card-title">
-            ✏️ Informações Pessoais
+             Informações Pessoais
           </div>
 
 
@@ -237,7 +243,7 @@
         <div class="set-card">
 
           <div class="set-card-title">
-            🔑 Alterar Senha
+             Alterar Senha
           </div>
 
 
@@ -315,7 +321,7 @@
         <div class="set-header">
 
           <h1>
-            🔔 Notificações
+             Notificações
           </h1>
 
           <p>
@@ -328,7 +334,7 @@
         <div class="set-card">
 
           <div class="set-card-title">
-            🔔 Alertas de Tarefas
+             Alertas de Tarefas
           </div>
 
 
@@ -394,7 +400,7 @@
         <div class="set-card">
 
           <div class="set-card-title">
-            🎮 Jogos e Conquistas
+             Jogos e Conquistas
           </div>
 
 
@@ -479,7 +485,7 @@
         <div class="set-card">
 
           <div class="set-card-title">
-            📧 E-mail e Resumo
+             E-mail e Resumo
           </div>
 
 
@@ -540,7 +546,7 @@
         <div class="set-header">
 
           <h1>
-            🔒 Privacidade
+             Privacidade
           </h1>
 
           <p>
@@ -553,7 +559,7 @@
         <div class="set-card">
 
           <div class="set-card-title">
-            👁️ Visibilidade do Perfil
+             Visibilidade do Perfil
           </div>
 
 
@@ -652,7 +658,7 @@
         <div class="set-header">
 
           <h1>
-            🛡️ Conta
+             Conta
           </h1>
 
           <p>
@@ -665,7 +671,7 @@
         <div class="set-card">
 
           <div class="set-card-title">
-            📊 Dados da Conta
+             Dados da Conta
           </div>
 
 
@@ -744,7 +750,7 @@
           <div class="set-card-title" style="
               color:var(--red);
             ">
-            🔐 Segurança
+             Segurança
           </div>
 
 
@@ -767,12 +773,12 @@
 
 
             <button class="btn-danger" id="exportar_dados" type="button">
-              📤 Exportar meus dados
+               Exportar meus dados
             </button>
 
 
             <button class="btn-danger" id="sair_conta" type="button">
-              🚪 Sair da conta
+               Sair da conta
             </button>
 
 
@@ -781,7 +787,7 @@
                 opacity:.45;
                 cursor:not-allowed;
               ">
-              🗑️ Excluir conta
+               Excluir conta
             </button>
 
           </div>
@@ -797,7 +803,7 @@
 
 
   <div class="toast" id="toast" style="display:none">
-    ✅ Alterações salvas com sucesso!
+     Alterações salvas com sucesso!
   </div>
 
 
@@ -842,7 +848,7 @@
       nome: "",
       email: "",
       bio: "",
-      avatar: "😊"
+      avatar: ""
     };
 
 
@@ -921,7 +927,7 @@
 
       toast.textContent =
         message ||
-        "✅ Alterações salvas com sucesso!";
+        " Alterações salvas com sucesso!";
 
 
       toast.style.display =
@@ -977,7 +983,7 @@
         document.querySelector(
           ".av-opt.selected"
         )?.dataset.avatar ||
-        "😊"
+        ""
       );
     }
 
@@ -988,7 +994,7 @@
 
       const finalAvatar =
         avatar ||
-        "😊";
+        "";
 
 
       const bigAvatar =
@@ -1003,7 +1009,7 @@
           ${finalAvatar}
 
           <div class="av-edit">
-            ✏️
+
           </div>
         `;
       }
@@ -1032,7 +1038,7 @@
         localStorage.getItem(
           avatarKey
         ) ||
-        "😊";
+        "";
 
 
       applyAvatar(
@@ -1100,7 +1106,7 @@
           localStorage.getItem(
             avatarKey
           ) ||
-          "😊"
+          ""
       };
     }
 
@@ -1364,7 +1370,7 @@
 
 
         showToast(
-          "✅ Perfil atualizado com sucesso!"
+          " Perfil atualizado com sucesso!"
         );
 
 
@@ -1455,7 +1461,7 @@
 
 
       showToast(
-        "↩️ Alterações canceladas."
+        "↩ Alterações canceladas."
       );
     }
 
@@ -1587,7 +1593,7 @@
 
 
       showToast(
-        "✅ Preferências de notificações salvas!"
+        " Preferências de notificações salvas!"
       );
     }
 
@@ -1601,7 +1607,7 @@
 
 
       showToast(
-        "✅ Configurações de privacidade salvas!"
+        " Configurações de privacidade salvas!"
       );
     }
 
@@ -1746,7 +1752,7 @@
           localStorage.getItem(
             avatarKey
           ) ||
-          "😊",
+          "",
 
 
         bio:
@@ -1823,7 +1829,7 @@
 
 
       showToast(
-        "✅ Dados exportados."
+        " Dados exportados."
       );
     }
 
@@ -2030,6 +2036,7 @@
   </script>
 
 
+  <script src="../../shared/monetto-shell.js"></script>
 </body>
 
 </html>

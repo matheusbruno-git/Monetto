@@ -10,16 +10,16 @@ function sessionId() {
   try {
     const raw = localStorage.getItem("session");
 
-    console.log("📦 SESSION RAW:", raw);
+    console.log(" SESSION RAW:", raw);
 
     if (!raw) {
-      console.error("❌ localStorage['session'] não existe.");
+      console.error(" localStorage['session'] não existe.");
       return null;
     }
 
     const s = JSON.parse(raw);
 
-    console.log("📦 SESSION OBJETO:", s);
+    console.log(" SESSION OBJETO:", s);
 
     const id =
       s.id_usuario ??
@@ -32,11 +32,11 @@ function sessionId() {
       s.userId ??
       null;
 
-    console.log("👤 ID RESOLVIDO:", id);
+    console.log(" ID RESOLVIDO:", id);
 
     return id;
   } catch (err) {
-    console.error("❌ Erro ao ler sessão:", err);
+    console.error(" Erro ao ler sessão:", err);
     return null;
   }
 }
@@ -182,7 +182,7 @@ function renderReports() {
     const status = pct >= 80 ? ["Ótimo", "sc-ok"] : pct >= 50 ? ["Atenção", "sc-warn"] : ["Em risco", "sc-bad"];
     return `<div class="al-row">
           <div class="al-user"><div class="al-av ${esc(s.avatarClass)}"></div><div class="al-name">${esc(s.name)}</div></div>
-          <div><span class="xp-chip">⚡${Number(s.xp) || 0}</span></div>
+          <div><span class="xp-chip">${Number(s.xp) || 0}</span></div>
           <div><span class="lvl-chip">Nv. ${Number(s.nivel) || 0}</span></div>
           <div style="font-size:.82rem">${Number(s.tarefasFeitas) || 0}/${Number(s.tarefasTotal) || 0}</div>
           <div><div class="prog-mini"><div class="prog-mini-f" style="width:${pct}%"></div></div></div>
@@ -203,7 +203,7 @@ function renderReports() {
   const alerts = active.filter(s => Number(s.progresso || 0) < 50).sort((a, b) => a.progresso - b.progresso).slice(0, 5);
   document.getElementById("report-alerts").innerHTML = alerts.length ? alerts.map(s => `
         <div class="at-item at-red">
-          <div class="at-icon">🔴</div>
+          <div class="at-icon"></div>
           <div class="at-body"><strong>${esc(s.name)} – ${Number(s.progresso) || 0}%</strong><span>${esc(s.turma)} · ${s.ultimoAcesso ? "último acesso " + formatDate(s.ultimoAcesso) : "sem acesso registrado"}</span></div>
         </div>`).join("") :
     `<div style="padding:12px;color:var(--muted)">Nenhum aluno abaixo de 50%.</div>`;
@@ -211,10 +211,10 @@ function renderReports() {
   // Highlights
   document.getElementById("report-highlights").innerHTML = [...active].sort((a, b) => b.xp - a.xp).slice(0, 3).map((s, i) => `
         <div class="dest-card">
-          <div class="dest-pos">${["🥇", "🥈", "🥉"][i] || "🏅"}</div>
+          <div class="dest-pos">${["", "", ""][i] || ""}</div>
           <div class="dest-av ${esc(s.avatarClass)}"></div>
           <div class="dest-name">${esc(s.name)}</div>
-          <div class="dest-xp">⚡ ${Number(s.xp) || 0} XP</div>
+          <div class="dest-xp"> ${Number(s.xp) || 0} XP</div>
           <div class="dest-info">${esc(s.turma)} · ${Number(s.tarefasFeitas) || 0} tarefas feitas</div>
         </div>`).join("") ||
     `<div style="padding:18px;color:var(--muted)">Nenhum destaque disponível.</div>`;
@@ -230,11 +230,11 @@ function populateClassFilter() {
 async function loadReports() {
   const id = sessionId();
 
-  console.log("📊 CARREGANDO RELATÓRIOS");
-  console.log("👤 currentUserId:", id);
+  console.log(" CARREGANDO RELATÓRIOS");
+  console.log(" currentUserId:", id);
 
   if (!id) {
-    console.error("❌ Não foi possível obter o ID do usuário.");
+    console.error(" Não foi possível obter o ID do usuário.");
 
     document.querySelector(".main").insertAdjacentHTML(
       "afterbegin",
@@ -254,11 +254,11 @@ async function loadReports() {
   }
 
   try {
-    console.log("📡 Chamando getAdminReports com ID:", id);
+    console.log(" Chamando getAdminReports com ID:", id);
 
     const result = await window.api.getAdminReports(id);
 
-    console.log("📥 RESPOSTA DOS RELATÓRIOS:", result);
+    console.log(" RESPOSTA DOS RELATÓRIOS:", result);
 
     if (!result?.success) {
       throw new Error(
@@ -268,13 +268,13 @@ async function loadReports() {
 
     reportState.data = result.data;
 
-    console.log("✅ Dados dos relatórios carregados:", reportState.data);
+    console.log(" Dados dos relatórios carregados:", reportState.data);
 
     populateClassFilter();
     renderReports();
 
   } catch (err) {
-    console.error("❌ Erro nos relatórios:", err);
+    console.error(" Erro nos relatórios:", err);
 
     document.querySelector(".main").insertAdjacentHTML(
       "afterbegin",

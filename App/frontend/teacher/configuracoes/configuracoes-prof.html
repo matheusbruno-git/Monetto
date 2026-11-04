@@ -18,6 +18,12 @@
 </head>
 
 <body>
+<header class="app-header">
+  <button class="app-icon-btn" id="appMenuBtn" type="button" aria-label="Abrir menu" aria-expanded="false"><span class="menu-lines" aria-hidden="true"></span></button>
+  <a class="app-brand" href="../../user/monetto-landing/monetto-landing.html" aria-label="Monetto, página inicial"><span class="app-brand-mark" aria-hidden="true">M</span><span>Monetto</span><span class="app-brand-subtitle">Educação financeira</span></a>
+  <span class="app-spacer"></span>
+  <button class="app-icon-btn" id="appThemeBtn" type="button" aria-label="Alternar tema" title="Alternar tema"><span class="theme-mark" aria-hidden="true"></span></button>
+</header>
 
   <div id="sidebar-container"></div>
 
@@ -28,12 +34,12 @@
       <div class="set-nav-title">Configurações</div>
 
       <div class="set-nav-item active" onclick="showTab('perfil', this)">
-        <span class="sni">👤</span>
+        <span class="sni"></span>
         Meu Perfil
       </div>
 
       <div class="set-nav-item" onclick="showTab('conta', this)">
-        <span class="sni">🛡️</span>
+        <span class="sni"></span>
         Conta
       </div>
     </div>
@@ -47,7 +53,7 @@
       <div id="tab-perfil">
 
         <div class="set-header">
-          <h1>👤 Meu Perfil</h1>
+          <h1> Meu Perfil</h1>
           <p>Atualize suas informações pessoais e preferências</p>
         </div>
 
@@ -55,8 +61,8 @@
         <div class="profile-hero">
 
           <div class="profile-big-av">
-            😊
-            <div class="av-edit">✏️</div>
+
+            <div class="av-edit"></div>
           </div>
 
           <div class="profile-info">
@@ -72,15 +78,15 @@
             <div class="profile-badges">
 
               <span class="pb pb-gold">
-                🛡️ Professor
+                 Professor
               </span>
 
               <span class="pb pb-green" id="profile-stats-badge">
-                🏫 — alunos
+                 — alunos
               </span>
 
               <span class="pb" id="profile-school-badge">
-                🏫 —
+                 —
               </span>
 
             </div>
@@ -91,33 +97,33 @@
         <div class="set-card">
 
           <div class="set-card-title">
-            📸 Escolher Avatar
+             Escolher Avatar
           </div>
 
           <div class="avatar-grid">
 
             <div class="av-opt av1 selected">
-              😊
+
             </div>
 
             <div class="av-opt av2">
-              😎
+
             </div>
 
             <div class="av-opt av3">
-              🤓
+
             </div>
 
             <div class="av-opt av4">
-              😄
+
             </div>
 
             <div class="av-opt av5">
-              🥳
+
             </div>
 
             <div class="av-opt av6">
-              🤩
+
             </div>
 
           </div>
@@ -127,7 +133,7 @@
         <div class="set-card">
 
           <div class="set-card-title">
-            ✏️ Informações Pessoais
+             Informações Pessoais
           </div>
 
           <div class="form-row">
@@ -200,7 +206,7 @@
         <div class="set-card">
 
           <div class="set-card-title">
-            🔑 Alterar Senha
+             Alterar Senha
           </div>
 
           <div class="form-row single">
@@ -260,7 +266,7 @@
 
         <div class="set-header">
 
-          <h1>🛡️ Conta</h1>
+          <h1> Conta</h1>
 
           <p>
             Gerencie os dados e a segurança da sua conta
@@ -273,7 +279,7 @@
         <div class="set-card">
 
           <div class="set-card-title">
-            📊 Dados da Conta
+             Dados da Conta
           </div>
 
           <div style="
@@ -361,7 +367,7 @@
         <div class="set-card">
 
           <div class="set-card-title" style="color:var(--red)">
-            ⚠️ Zona de Perigo
+             Zona de Perigo
           </div>
 
           <p style="
@@ -381,15 +387,15 @@
             ">
 
             <button class="btn-danger">
-              📤 Exportar meus dados
+               Exportar meus dados
             </button>
 
             <button class="btn-danger" onclick="sairDaConta('../../user/login-principal/login-principal.html')">
-              🚪 Sair da conta
+               Sair da conta
             </button>
 
             <button class="btn-danger" style="border-color:rgba(231,76,60,.6)">
-              🗑️ Excluir conta
+               Excluir conta
             </button>
 
           </div>
@@ -405,7 +411,7 @@
 
   <!-- TOAST -->
   <div class="toast" id="toast">
-    ✅ Alterações salvas com sucesso!
+     Alterações salvas com sucesso!
   </div>
 
 
@@ -556,8 +562,8 @@
 
       element.textContent =
         (type === "error"
-          ? "❌ "
-          : "✅ ") + message;
+          ? " "
+          : " ") + message;
 
 
       element.classList.add("show");
@@ -993,7 +999,7 @@
 
         setText(
           "profile-stats-badge",
-          `🏫 ${studentCount} alunos`
+          ` ${studentCount} alunos`
         );
 
 
@@ -1008,7 +1014,7 @@
 
         setText(
           "profile-school-badge",
-          `🏫 ${schoolName}`
+          ` ${schoolName}`
         );
 
 
@@ -1587,6 +1593,7 @@
 
   <script src="../teacher-script/main-teacher-script.js"></script>
 
+  <script src="../../shared/monetto-shell.js"></script>
 </body>
 
 </html>

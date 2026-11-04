@@ -70,13 +70,13 @@
       null;
 
     if (!studentId) {
-      return "😊";
+      return "";
     }
 
     return (
       localStorage.getItem(
         `monetto_avatar_${studentId}`,
-      ) || "😊"
+      ) || ""
     );
   }
 

@@ -11,13 +11,13 @@ function showPage(id, btn) {
     const title = document.getElementById("pageTitle");
     const sub = document.getElementById("pageSub");
     const exportBtn = document.getElementById("exportBtn");
-    if (title) title.textContent = "📊 Relatórios";
+    if (title) title.textContent = " Relatórios";
     if (sub) sub.textContent = "Análises de desempenho e engajamento";
     if (exportBtn) exportBtn.style.display = "block";
   } else {
     const title = document.getElementById("pageTitle");
     const exportBtn = document.getElementById("exportBtn");
-    if (title) title.textContent = "📋 Página de Tarefas";
+    if (title) title.textContent = " Página de Tarefas";
     if (exportBtn) exportBtn.style.display = "none";
   }
 }
@@ -73,10 +73,10 @@ function buildCard(tarefa, tipo) {
   const opacity = tipo === "expirada" ? "opacity:.7" : "";
   const footerLabel =
     tipo === "expirada"
-      ? `<span>Expirou ${formatDate(tarefa.data_vencimento)}</span><span style="color:var(--red)">🔴 Expirada</span>`
+      ? `<span>Expirou ${formatDate(tarefa.data_vencimento)}</span><span style="color:var(--red)"> Expirada</span>`
       : tipo === "vencendo"
-        ? `<span>Vence hoje 23:59</span><span style="color:var(--accent)">🟡 Atenção</span>`
-        : `<span>Vence ${formatDate(tarefa.data_vencimento)}</span><span style="color:var(--green)">🟢 OK</span>`;
+        ? `<span>Vence hoje 23:59</span><span style="color:var(--accent)"> Atenção</span>`
+        : `<span>Vence ${formatDate(tarefa.data_vencimento)}</span><span style="color:var(--green)"> OK</span>`;
 
   const disc = tarefa.disciplina ?? "Geral";
   const desc = tarefa.descricao || "";

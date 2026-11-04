@@ -80,8 +80,8 @@ function xpToLevel(xp) {
 
 function statusChip(ativo) {
   if (ativo == 1 || ativo === true)
-    return '<span class="status-chip sc-ok">✓ Ativo</span>';
-  return '<span class="status-chip sc-bad">✕ Inativo</span>';
+    return '<span class="status-chip sc-ok"> Ativo</span>';
+  return '<span class="status-chip sc-bad"> Inativo</span>';
 }
 
 function escapeHtml(str) {
@@ -111,13 +111,13 @@ function renderRow(aluno, index) {
         </div>
       </div>
       <div class="td-muted">${escapeHtml(turma)}</div>
-      <div><span class="xp-chip">⚡ ${xp}</span></div>
+      <div><span class="xp-chip"> ${xp}</span></div>
       <div><span class="lvl-chip">Nível ${nivel}</span></div>
       <div class="td-text">—</div>
       <div>${statusChip(aluno.ativo)}</div>
       <div class="td-actions">
-        <button class="act-btn" onclick="event.stopPropagation();openModalFromRow(this.closest('.tr'))">👁</button>
-        <button class="act-btn" onclick="event.stopPropagation()">✉️</button>
+        <button class="act-btn" onclick="event.stopPropagation();openModalFromRow(this.closest('.tr'))"></button>
+        <button class="act-btn" onclick="event.stopPropagation()"></button>
       </div>
     </div>`;
 }

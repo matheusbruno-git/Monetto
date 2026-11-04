@@ -118,7 +118,7 @@ async function loadTurmasList() {
 
           <div class="turma-actions">
             <button type="button" class="btn-acc" data-assign="${t.id_turma}">
-              👥 Atribuir alunos
+               Atribuir alunos
             </button>
             <button type="button" class="btn-cancel2" data-delete="${t.id_turma}">
               Excluir
@@ -176,7 +176,7 @@ async function criarTurma() {
     showMsg(err.message || "Erro ao criar turma.", false);
   } finally {
     btn.disabled = false;
-    btn.textContent = "🚀 Criar Turma";
+    btn.textContent = " Criar Turma";
   }
 }
 

@@ -1,4 +1,10 @@
 <nav class="sidebar">
+    <style>
+        .sb-link.hover {
+            background-color: #1A2A8F;
+            color: #fff;
+        }
+    </style>
     <a class="sb-logo" href="#">
         <svg viewBox="0 0 32 32" fill="none" width="26" height="26">
             <rect width="32" height="32" rx="8" fill="#1A2A8F" />
@@ -9,23 +15,23 @@
         Monetto <span class="sb-role">Prof.</span>
     </a>
     <span class="sb-section">Visão Geral</span>
-    <a class="sb-link active" href="../dashboard-professor/dashboard-professor.html"><span class="icon">🏠</span>
+    <a class="sb-link active" href="../dashboard-professor/dashboard-professor.html"><span class="icon"></span>
         Dashboard</a>
-    <a class="sb-link" href="../gerenciar-alunos/gerenciar-alunos.html"><span class="icon">👥</span> Alunos</a>
-    <a class="sb-link" href="../CRUD_Tarefas/criar-tarefas.html"><span class="icon">📝</span> Criar Tarefas</a>
-    <a class="sb-link" href="../pagina-tarefas-prof/pagina-tarefas-prof.html"><span class="icon">📋</span> Tarefas</a>
+    <a class="sb-link" href="../gerenciar-alunos/gerenciar-alunos.html"><span class="icon"></span> Alunos</a>
+    <a class="sb-link" href="../CRUD_Tarefas/criar-tarefas.html"><span class="icon"></span> Criar Tarefas</a>
+    <a class="sb-link" href="../pagina-tarefas-prof/pagina-tarefas-prof.html"><span class="icon"></span> Tarefas</a>
     <span class="sb-section">Análises</span>
-    <a class="sb-link" href="../relatorios/relatorios.html"><span class="icon">📊</span> Relatórios</a>
+    <a class="sb-link" href="../relatorios/relatorios.html"><span class="icon"></span> Relatórios</a>
     <span class="sb-section">Conta</span>
-    <a class="sb-link" href="../configuracoes/configuracoes-prof.html"><span class="icon">⚙️</span> Configurações</a>
+    <a class="sb-link" href="../configuracoes/configuracoes-prof.html"><span class="icon"></span> Configurações</a>
     <div class="sb-bottom">
         <a class="sb-link sb-logout" href="../../login/login.html"
             onclick="if (typeof sairDaConta === 'function') { sairDaConta('../../login/login.html'); return false; }">
-            <span class="icon">🚪</span>
+            <span class="icon"></span>
             Sair da conta
         </a>
         <div class="sb-user">
-            <div class="sb-av">👨‍🏫</div>
+            <div class="sb-av"></div>
             <div class="sb-user-info">
                 <strong id="sidebar-user-name">Carregando...</strong>
                 <span id="sidebar-user-info">Professor</span>

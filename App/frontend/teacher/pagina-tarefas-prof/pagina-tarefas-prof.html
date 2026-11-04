@@ -15,13 +15,19 @@
 </head>
 
 <body>
+<header class="app-header">
+  <button class="app-icon-btn" id="appMenuBtn" type="button" aria-label="Abrir menu" aria-expanded="false"><span class="menu-lines" aria-hidden="true"></span></button>
+  <a class="app-brand" href="../../user/monetto-landing/monetto-landing.html" aria-label="Monetto, página inicial"><span class="app-brand-mark" aria-hidden="true">M</span><span>Monetto</span><span class="app-brand-subtitle">Educação financeira</span></a>
+  <span class="app-spacer"></span>
+  <button class="app-icon-btn" id="appThemeBtn" type="button" aria-label="Alternar tema" title="Alternar tema"><span class="theme-mark" aria-hidden="true"></span></button>
+</header>
 
   <div id="sidebar-container"></div>
 
   <main class="main">
     <div class="topbar">
       <div>
-        <h1 id="pageTitle">📋 Página de Tarefas</h1>
+        <h1 id="pageTitle"> Página de Tarefas</h1>
         <p style="color:var(--muted);font-size:.87rem;margin-top:3px" id="pageSub">12 tarefas · 3 vencendo hoje</p>
       </div>
       <div class="top-right">
@@ -32,14 +38,14 @@
 
     <!-- PAGE TABS -->
     <div class="page-tabs">
-      <div class="ptab active" onclick="showPage('tarefas',this)">📋 Tarefas</div>
-      <div class="ptab" onclick="showPage('relatorios',this)">📊 Relatórios</div>
+      <div class="ptab active" onclick="showPage('tarefas',this)"> Tarefas</div>
+      <div class="ptab" onclick="showPage('relatorios',this)"> Relatórios</div>
     </div>
 
     <!-- TAREFAS PAGE -->
     <div id="page-tarefas">
       <div class="filter-bar">
-        <div class="search-box">🔍<input type="text" placeholder="Buscar tarefa..." /></div>
+        <div class="search-box"><input type="text" placeholder="Buscar tarefa..." /></div>
         <select class="filter-select">
           <option>Todas as turmas</option>
           <option>8º A</option>
@@ -85,14 +91,14 @@
     <div id="page-relatorios" style="display:none">
       <div class="export-row" style="margin-bottom:20px">
         <button class="exp-btn">⬇ PDF Completo</button>
-        <button class="exp-btn">📊 Excel / CSV</button>
-        <button class="exp-btn">📧 Enviar por e-mail</button>
+        <button class="exp-btn"> Excel / CSV</button>
+        <button class="exp-btn"> Enviar por e-mail</button>
       </div>
 
       <div class="relatorios-grid">
 
         <div class="rcard">
-          <div class="rcard-title">📈 Conclusões por Semana</div>
+          <div class="rcard-title"> Conclusões por Semana</div>
           <div class="bar-chart">
             <div class="bc-col">
               <div class="bc-bar blue" style="height:55px"></div>
@@ -116,7 +122,7 @@
         </div>
 
         <div class="rcard">
-          <div class="rcard-title">🎯 Taxa de Conclusão por Turma</div>
+          <div class="rcard-title"> Taxa de Conclusão por Turma</div>
           <div class="pie-wrap">
             <div class="pie-chart"></div>
             <div class="pie-legend">
@@ -145,7 +151,7 @@
         </div>
 
         <div class="rcard">
-          <div class="rcard-title">🏆 Ranking de Alunos (Geral)</div>
+          <div class="rcard-title"> Ranking de Alunos (Geral)</div>
           <div class="top-table">
             <div class="tt-row">
               <div class="tt-pos">1</div>
@@ -196,7 +202,7 @@
         </div>
 
         <div class="rcard">
-          <div class="rcard-title">⚠️ Alunos que precisam de atenção</div>
+          <div class="rcard-title"> Alunos que precisam de atenção</div>
           <div class="top-table">
             <div class="tt-row">
               <div class="tt-av"
@@ -224,7 +230,7 @@
             </div>
           </div>
           <button
-            style="width:100%;margin-top:14px;padding:10px;background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.3);border-radius:10px;color:var(--red);font-size:.82rem;cursor:pointer">⚠️
+            style="width:100%;margin-top:14px;padding:10px;background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.3);border-radius:10px;color:var(--red);font-size:.82rem;cursor:pointer">
             Alertar responsáveis</button>
         </div>
 
@@ -236,6 +242,7 @@
   <script src="script.js"></script>
 
   <script src="../teacher-script/main-teacher-script.js"></script>
+  <script src="../../shared/monetto-shell.js"></script>
 </body>
 
 </html>

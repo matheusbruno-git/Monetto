@@ -172,7 +172,7 @@ async function publicarTarefa() {
 
   if (btn) {
     btn.disabled = false;
-    btn.textContent = "🚀 Publicar Tarefa";
+    btn.textContent = " Publicar Tarefa";
   }
 
   showMsg(msgEl, result.message, result.success);

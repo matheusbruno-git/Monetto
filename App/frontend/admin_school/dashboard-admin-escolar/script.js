@@ -48,7 +48,7 @@ function renderTeachers(teachers) {
   }
   el.innerHTML = teachers.map(t => `
     <div class="teach-item">
-      <div class="tav ${t.avatarClass || 'ta1'}">${t.emoji || '👨‍🏫'}</div>
+      <div class="tav ${t.avatarClass || 'ta1'}">${t.emoji || ''}</div>
       <div class="teach-info"><strong>${t.name}</strong><span>${t.subtitle || ''}</span></div>
     </div>`).join('');
 }
@@ -109,3 +109,100 @@ function renderActivities(activities) {
       <div class="act-time">${a.time}</div>
     </div>`).join('');
 }
+
+async function loadDashboard() {
+  const userId = getCurrentUserId();
+
+  if (!userId) {
+    console.error("Usuário não encontrado na sessão.");
+    return;
+  }
+
+  try {
+    const result = await window.api.getDashboardAdminEscolar(userId);
+
+    console.log(" DASHBOARD RESULT:", result);
+
+    if (!result || !result.success) {
+      console.error(
+        "Erro ao carregar dashboard:",
+        result?.message
+      );
+      return;
+    }
+
+    const data = result.data;
+
+    // Escola
+    setText("school-name", data.school?.name || "Escola");
+    setText(
+      "school-subtitle",
+      data.school?.subtitle || "Dashboard do Administrador Escolar"
+    );
+
+    // Header
+    setText(
+      "alunos-count",
+      data.school?.stats?.[0]?.value ?? 0
+    );
+
+    setText(
+      "professores-count",
+      data.school?.stats?.[1]?.value ?? 0
+    );
+
+    setText(
+      "turmas-count",
+      data.school?.stats?.[2]?.value ?? 0
+    );
+
+    // Stats
+    setText(
+      "alunos-matriculados-count",
+      data.stats?.[0]?.value ?? 0
+    );
+
+    setText(
+      "completion-rate",
+      data.stats?.[1]?.value ?? "0%"
+    );
+
+    setText(
+      "tarefas-count",
+      data.stats?.[2]?.value ?? 0
+    );
+
+    setText(
+      "xp-distribuido-count",
+      data.stats?.[3]?.value ?? 0
+    );
+
+    // Lists
+    renderTeachers(data.teachers || []);
+    renderAlerts(data.alerts || []);
+    renderClasses(data.classes || []);
+    renderXpChart(data.xpChart || []);
+    renderActivities(data.activities || []);
+
+    // XP
+    setText(
+      "xp-month-value",
+      data.xpMonthValue ?? "0"
+    );
+
+    setText(
+      "xp-month-delta",
+      data.xpMonthDelta ?? "—"
+    );
+
+  } catch (error) {
+    console.error(
+      " Erro fatal ao carregar dashboard:",
+      error
+    );
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadDashboard();
+});

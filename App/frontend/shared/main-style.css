@@ -4960,7 +4960,7 @@ body:has(.page) {
 
 .finance-page .plan-feats .yes::before {
     color: var(--green);
-    content: '✓';
+    content: '\2713';
 }
 
 .finance-page .plan-feats .no::before {

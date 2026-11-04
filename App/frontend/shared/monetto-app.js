@@ -205,7 +205,7 @@ function renderDashboardAdminEscolar(d) {
     if (!list.length) {
       teachersEl.innerHTML = `
         <div class="teach-item">
-          <div class="tav ta1">👨‍🏫</div>
+          <div class="tav ta1"></div>
           <div class="teach-info"><strong>Nenhum professor cadastrado</strong>
             <span>Cadastre professores no menu lateral</span></div>
         </div>`;
@@ -213,7 +213,7 @@ function renderDashboardAdminEscolar(d) {
       teachersEl.innerHTML = list
         .map((t, i) => {
           const eng = Number(t.engagement) || 0;
-          const emoji = t.emoji || (i % 2 === 0 ? '👨‍🏫' : '👩‍🏫');
+          const emoji = t.emoji || (i % 2 === 0 ? '' : '');
           const av = t.avatarClass || `ta${(i % 4) + 1}`;
           return `
           <div class="teach-item">
@@ -255,7 +255,7 @@ function renderDashboardAdminEscolar(d) {
         return `
         <div class="alert-item ${level}">
           <div class="alert-icon">
-            ${a.icon || '🔵'}
+            ${a.icon || ''}
           </div>
 
           <div class="alert-body">
@@ -565,7 +565,7 @@ Equipe Monetto
       .map(
         (a) => `
       <div class="act-item">
-        <div class="act-icon ${escapeHtml(a.iconClass || 'ai-b')}">${a.icon || '📌'}</div>
+        <div class="act-icon ${escapeHtml(a.iconClass || 'ai-b')}">${a.icon || ''}</div>
         <div class="act-body">
           <strong>${escapeHtml(a.title)}</strong>
           <span>${escapeHtml(a.subtitle || '')}</span>

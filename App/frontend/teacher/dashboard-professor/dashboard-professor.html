@@ -15,37 +15,43 @@
 </head>
 
 <body>
+<header class="app-header">
+  <button class="app-icon-btn" id="appMenuBtn" type="button" aria-label="Abrir menu" aria-expanded="false"><span class="menu-lines" aria-hidden="true"></span></button>
+  <a class="app-brand" href="../../user/monetto-landing/monetto-landing.html" aria-label="Monetto, página inicial"><span class="app-brand-mark" aria-hidden="true">M</span><span>Monetto</span><span class="app-brand-subtitle">Educação financeira</span></a>
+  <span class="app-spacer"></span>
+  <button class="app-icon-btn" id="appThemeBtn" type="button" aria-label="Alternar tema" title="Alternar tema"><span class="theme-mark" aria-hidden="true"></span></button>
+</header>
 
   <div id="sidebar-container"></div>
 
   <main class="main">
     <div class="topbar">
       <div>
-        <h1>Olá, <span id="teacher-name">Carregando…</span> 👨‍🏫</h1>
+        <h1>Olá, <span id="teacher-name">Carregando…</span> </h1>
         <p id="teacher-subtitle">Dashboard do Professor</p>
       </div>
       <div class="top-actions">
         <button class="btn-primary" onclick="location.href='../CRUD_Tarefas/criar-tarefas.html'">+ Nova Tarefa</button>
-        <button class="btn-acc" onclick="location.href='../relatorios/relatorios.html'">📊 Relatório</button>
+        <button class="btn-acc" onclick="location.href='../relatorios/relatorios.html'"> Relatório</button>
       </div>
     </div>
 
     <!-- STATS -->
     <div class="stats-row">
       <div class="stat-card sc-b">
-        <div class="stat-icon">👥</div>
+        <div class="stat-icon"></div>
         <div class="stat-val" id="stat-alunos">—</div>
         <div class="stat-lbl">Alunos ativos</div>
         <div class="stat-sub" id="stat-alunos-sub">—</div>
       </div>
       <div class="stat-card sc-g">
-        <div class="stat-icon">✅</div>
+        <div class="stat-icon"></div>
         <div class="stat-val" id="stat-conclusao">—</div>
         <div class="stat-lbl">Taxa de conclusão</div>
         <div class="stat-sub" id="stat-conclusao-sub">—</div>
       </div>
       <div class="stat-card sc-y">
-        <div class="stat-icon">📝</div>
+        <div class="stat-icon"></div>
         <div class="stat-val" id="stat-tarefas">—</div>
         <div class="stat-lbl">Tarefas ativas</div>
         <div class="stat-sub" id="stat-tarefas-sub">—</div>
@@ -63,7 +69,7 @@
 
       <div class="card">
         <div class="card-hd">
-          <h3>📚 Minhas Turmas</h3>
+          <h3> Minhas Turmas</h3>
           <a href="../gerenciar-alunos/gerenciar-alunos.html">Ver todas →</a>
         </div>
         <div id="turmas-list">
@@ -76,7 +82,7 @@
 
       <div class="card">
         <div class="card-hd">
-          <h3>⚡ Atividades Recentes</h3>
+          <h3> Atividades Recentes</h3>
         </div>
         <div id="activities-list">
           <div class="act-item">
@@ -93,7 +99,7 @@
 
       <div class="card">
         <div class="card-hd">
-          <h3>📈 Conclusões por Dia</h3>
+          <h3> Conclusões por Dia</h3>
         </div>
         <div class="chart-wrap" id="completions-chart">
           <div class="bar-col">
@@ -108,7 +114,7 @@
 
       <div class="card">
         <div class="card-hd">
-          <h3>🏆 Top Alunos da Semana</h3>
+          <h3> Top Alunos da Semana</h3>
           <a href="../relatorios/relatorios.html">Ver ranking →</a>
         </div>
         <div id="top-alunos-list">
@@ -147,6 +153,7 @@
   </script>
   <script src="script.js"></script>
   <script src="../teacher-script/main-teacher-script.js"></script>
+  <script src="../../shared/monetto-shell.js"></script>
 </body>
 
 </html>

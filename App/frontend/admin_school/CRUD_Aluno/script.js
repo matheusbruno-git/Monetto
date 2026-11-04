@@ -179,7 +179,7 @@ function renderStudents(students) {
     .map(
       (s) => `
     <div class="teach-item">
-      <div class="tav ${s.avatarClass || "ta1"}">${s.emoji || "👨‍ Schüler"}</div>
+      <div class="tav ${s.avatarClass || "ta1"}">${s.emoji || " Schüler"}</div>
       <div class="teach-info"><strong>${s.name}</strong><span>${s.subtitle || ""}</span></div>
     </div>`,
     )

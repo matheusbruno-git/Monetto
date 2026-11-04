@@ -15,6 +15,12 @@
 </head>
 
 <body class="dashboard-page">
+<header class="app-header">
+  <button class="app-icon-btn" id="appMenuBtn" type="button" aria-label="Abrir menu" aria-expanded="false"><span class="menu-lines" aria-hidden="true"></span></button>
+  <a class="app-brand" href="../../user/monetto-landing/monetto-landing.html" aria-label="Monetto, página inicial"><span class="app-brand-mark" aria-hidden="true">M</span><span>Monetto</span><span class="app-brand-subtitle">Educação financeira</span></a>
+  <span class="app-spacer"></span>
+  <button class="app-icon-btn" id="appThemeBtn" type="button" aria-label="Alternar tema" title="Alternar tema"><span class="theme-mark" aria-hidden="true"></span></button>
+</header>
 
   <div id="sidebar-container"></div>
 
@@ -22,7 +28,7 @@
     <div class="topbar">
       <h1>Painel <span>Geral</span></h1>
       <div class="top-right">
-        <div class="search-bar"><span>🔄</span><input id="dashboard-status" type="text" value="Carregando dados..."
+        <div class="search-bar"><span></span><input id="dashboard-status" type="text" value="Carregando dados..."
             readonly></div>
       </div>
     </div>
@@ -30,7 +36,7 @@
     <!-- TOP BANNER -->
     <div class="top-banner">
       <div class="tb-left">
-        <h2>🌐 Monetto – Painel Geral da Plataforma</h2>
+        <h2> Monetto – Painel Geral da Plataforma</h2>
         <p>ML Solutions · Visão completa de todas as escolas · <span id="dashboard-period">carregando…</span></p>
       </div>
       <div class="tb-stats">
@@ -53,31 +59,31 @@
     <!-- STATS -->
     <div class="stats-row">
       <div class="sc sc-p">
-        <div class="sc-icon">🏫</div>
+        <div class="sc-icon"></div>
         <div class="sc-val" id="stat-escolas">—</div>
         <div class="sc-lbl">Escolas cadastradas</div>
         <div class="sc-trend">Dados do banco</div>
       </div>
       <div class="sc sc-b">
-        <div class="sc-icon">👥</div>
+        <div class="sc-icon"></div>
         <div class="sc-val" id="stat-alunos">—</div>
         <div class="sc-lbl">Alunos ativos</div>
         <div class="sc-trend up" id="stat-alunos-trend">—</div>
       </div>
       <div class="sc sc-g">
-        <div class="sc-icon">👨‍🏫</div>
+        <div class="sc-icon"></div>
         <div class="sc-val" id="stat-professores">—</div>
         <div class="sc-lbl">Professores ativos</div>
         <div class="sc-trend up" id="stat-professores-trend">—</div>
       </div>
       <div class="sc sc-y">
-        <div class="sc-icon">⚡</div>
+        <div class="sc-icon"></div>
         <div class="sc-val" id="stat-xp">—</div>
         <div class="sc-lbl">XP atual dos alunos</div>
         <div class="sc-trend">Soma de progresso_aluno</div>
       </div>
       <div class="sc sc-r">
-        <div class="sc-icon">💳</div>
+        <div class="sc-icon"></div>
         <div class="sc-val" id="stat-mrr">—</div>
         <div class="sc-lbl">Receita recebida no mês</div>
         <div class="sc-trend up" id="stat-mrr-trend">—</div>
@@ -89,7 +95,7 @@
 
       <div class="card">
         <div class="card-hd">
-          <h3>🏫 Top Escolas por Engajamento</h3><a>Ver todas →</a>
+          <h3> Top Escolas por Engajamento</h3><a>Ver todas →</a>
         </div>
         <div class="ts-row th">
           <div>#</div>
@@ -111,11 +117,11 @@
 
       <div class="card">
         <div class="card-hd">
-          <h3>💳 Pagamentos da Plataforma</h3>
+          <h3> Pagamentos da Plataforma</h3>
         </div>
         <div class="plano-grid" id="payment-summary">
           <div class="plano-card">
-            <div class="plano-icon">✅</div>
+            <div class="plano-icon"></div>
             <div class="plano-name">Pagos</div>
             <div class="plano-cnt" id="payments-paid-count">—</div>
             <div class="plano-lbl">registros</div>
@@ -127,7 +133,7 @@
             <div class="plano-lbl">registros</div>
           </div>
           <div class="plano-card">
-            <div class="plano-icon">💰</div>
+            <div class="plano-icon"></div>
             <div class="plano-name">Recebido</div>
             <div class="plano-cnt" id="payments-paid-value">—</div>
             <div class="plano-lbl">valor total</div>
@@ -151,7 +157,7 @@
 
       <div class="card">
         <div class="card-hd">
-          <h3>📈 Crescimento de Alunos</h3>
+          <h3> Crescimento de Alunos</h3>
         </div>
         <div class="bar-chart" id="student-growth-chart">
           <div class="bc">
@@ -175,7 +181,7 @@
 
       <div class="card">
         <div class="card-hd">
-          <h3>📚 Cursos mais utilizados</h3>
+          <h3> Cursos mais utilizados</h3>
         </div>
         <div id="course-usage-list" style="display:flex;flex-direction:column;gap:10px">
           <div style="font-size:.82rem;color:var(--muted)">Carregando dados…</div>
@@ -184,7 +190,7 @@
 
       <div class="card">
         <div class="card-hd">
-          <h3>⚡ Atividades recentes</h3>
+          <h3> Atividades recentes</h3>
         </div>
         <div id="activities-list">
           <div class="tl-item">
@@ -205,6 +211,7 @@
       }
     }
   </script>
+  <script src="../../shared/monetto-shell.js"></script>
 </body>
 
 </html>

@@ -121,7 +121,7 @@
       .map(
         (course) => `
           <div style="display:flex;align-items:center;gap:10px;font-size:.82rem">
-            <span style="font-size:1.1rem">📚</span>
+            <span style="font-size:1.1rem"></span>
             <div style="flex:1">
               <div style="margin-bottom:3px">${escapeHtml(course.name)}</div>
               <div style="height:4px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden">
@@ -145,9 +145,9 @@
     }
 
     const icons = {
-      school: "🏫",
-      user: "👤",
-      payment: "💳",
+      school: "",
+      user: "",
+      payment: "",
     };
 
     el.innerHTML = activities

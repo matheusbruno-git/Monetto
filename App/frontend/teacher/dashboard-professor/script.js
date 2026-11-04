@@ -48,7 +48,7 @@ function renderTurmas(turmas) {
     return;
   }
   const avatarClasses = ["ta-b", "ta-g", "ta-y", "ta-p"];
-  const emojis = ["📘", "📗", "📙", "📒"];
+  const emojis = ["", "", "", ""];
   el.innerHTML = turmas
     .map((t, i) => {
       const av = t.avatarClass || avatarClasses[i % avatarClasses.length];
@@ -122,7 +122,7 @@ function renderTopAlunos(alunos) {
       '<div class="top-aluno"><span class="ta-nm">Nenhum dado de ranking ainda</span></div>';
     return;
   }
-  const medals = ["🥇", "2", "3", "4", "5"];
+  const medals = ["", "2", "3", "4", "5"];
   const avatars = ["tav1", "tav2", "tav3", "tav4", "tav5"];
   el.innerHTML = alunos
     .map((a, i) => {

@@ -179,7 +179,7 @@
       </strong>
 
       <span>
-        ⚡ ${Number(student.xp_atual) || 0} XP
+         ${Number(student.xp_atual) || 0} XP
         · Nível ${Number(student.nivel_atual) || 1}
       </span>
     `;
@@ -388,7 +388,7 @@
                   margin-bottom:12px;
                 "
               >
-                🔔 Notificações
+                 Notificações
               </div>
 
               ${pendingTasks.length
@@ -457,7 +457,7 @@
       .forEach(
         (element) => {
           element.innerHTML = `
-            ⚡
+
             <strong>
               ${Number(student.xp_atual) || 0} XP
             </strong>
@@ -499,13 +499,13 @@
             </span>
 
             <span class="pb pb-green">
-              🔥
+
               ${Number(student.sequencia_dias) || 0}
               dias
             </span>
 
             <span class="pb">
-              🎓
+
               ${escapeHtml(student.turma || "Sem turma")}
             </span>
 
@@ -608,7 +608,7 @@
 
     container.innerHTML = `
       <div class="mc-title">
-        🔥 Sequência de Acesso
+         Sequência de Acesso
       </div>
 
       <div class="streak-days">
@@ -667,7 +667,7 @@
               Sequência atual:
               ${streak}
               dia${streak === 1 ? "" : "s"}
-              🔥
+
             `
         : "Comece sua sequência de acessos."
       }
@@ -705,7 +705,7 @@
         <span>
           ${escapeHtml(firstName)}!
         </span>
-        👋
+
       `;
     }
 
@@ -1110,7 +1110,7 @@
 
       miniCards[0].innerHTML = `
         <div class="mini-title">
-          ⚡ Progresso de Nível
+           Progresso de Nível
         </div>
 
         <div
@@ -1171,7 +1171,7 @@
       ) {
         rankingCard.innerHTML = `
           <div class="mini-title">
-            🏆 Ranking da Turma
+             Ranking da Turma
           </div>
 
           <p>
@@ -1183,7 +1183,7 @@
       ) {
         rankingCard.innerHTML = `
           <div class="mini-title">
-            🏆 Ranking da Turma
+             Ranking da Turma
           </div>
 
           <p>
@@ -1193,7 +1193,7 @@
       } else {
         rankingCard.innerHTML = `
           <div class="mini-title">
-            🏆 Ranking da Turma
+             Ranking da Turma
           </div>
 
           <div class="rank-list">
@@ -1306,12 +1306,12 @@
 
         if (type === "hoje") {
           tab.textContent =
-            `🔴 Vence hoje (${todayCount})`;
+            ` Vence hoje (${todayCount})`;
         }
 
         if (type === "concluidas") {
           tab.textContent =
-            `✅ Concluídas (${Number(stats.completedTasks) || 0})`;
+            ` Concluídas (${Number(stats.completedTasks) || 0})`;
         }
       });
 
@@ -1447,7 +1447,7 @@
                       <div
                         class="check-circle ${task.concluida ? "checked" : ""}"
                       >
-                        ${task.concluida ? "✓" : ""}
+                        ${task.concluida ? "" : ""}
                       </div>
 
                       <div class="task-body">
@@ -1474,7 +1474,7 @@
 
                         <div class="due-row">
                           <span class="due-icon">
-                            ${task.concluida ? "✅" : "📅"}
+                            ${task.concluida ? "" : ""}
                           </span>
 
                           <span>
@@ -1669,7 +1669,7 @@
 
       taskMiniCards[0].innerHTML = `
         <div class="mc-title">
-          📊 Progresso por Matéria
+           Progresso por Matéria
         </div>
 
         ${entries.length
@@ -1728,7 +1728,7 @@
 
       taskMiniCards[1].innerHTML = `
         <div class="mc-title">
-          📅 Calendário
+           Calendário
         </div>
 
         ${withDate.length
@@ -1860,9 +1860,9 @@
     }
 
     const medals = [
-      "🥇",
-      "🥈",
-      "🥉",
+      "",
+      "",
+      "",
     ];
 
     leaderboard.innerHTML =
@@ -1937,7 +1937,7 @@
       ) ||
       type === "streak"
     ) {
-      return "🔥";
+      return "";
     }
 
     if (
@@ -1950,7 +1950,7 @@
       type ===
       "habilidade"
     ) {
-      return "🧠";
+      return "";
     }
 
     if (
@@ -1960,7 +1960,7 @@
       type ===
       "atividade"
     ) {
-      return "🎯";
+      return "";
     }
 
     if (
@@ -1968,17 +1968,17 @@
         "investidor",
       )
     ) {
-      return "📈";
+      return "";
     }
 
     if (
       type ===
       "ranking"
     ) {
-      return "🏆";
+      return "";
     }
 
-    return "🏅";
+    return "";
   }
 
   function renderRewards(
@@ -2036,7 +2036,7 @@
 
     setText(
       ".xp-sub",
-      `⚡ XP Total · Nível ${Number(
+      ` XP Total · Nível ${Number(
         student.nivel_atual,
       ) || 1
       }`,
@@ -2074,7 +2074,7 @@
 
         bonus: 10,
 
-        icon: "🏅",
+        icon: "",
       },
 
       {
@@ -2086,7 +2086,7 @@
 
         bonus: 25,
 
-        icon: "🔥",
+        icon: "",
       },
 
       {
@@ -2098,7 +2098,7 @@
 
         bonus: 50,
 
-        icon: "🧠",
+        icon: "",
       },
 
       {
@@ -2110,7 +2110,7 @@
 
         bonus: 30,
 
-        icon: "🎯",
+        icon: "",
       },
     ];
 
@@ -2189,7 +2189,7 @@
               >
 
                 <span class="badge-icon">
-                  🔒
+
                 </span>
 
                 <div class="badge-name">
@@ -2338,7 +2338,7 @@
             ) || 0,
 
           icon:
-            "✅",
+            "",
         });
       },
     );
@@ -2507,7 +2507,7 @@
         </p>
 
         <div class="highlight-box">
-          💡
+
           <strong>
             Ideia principal:
           </strong>
@@ -2595,7 +2595,7 @@
         </p>
 
         <div class="formula-box">
-          💰 Saldo = Receitas − Despesas
+           Saldo = Receitas − Despesas
         </div>
 
         <h3>
@@ -2672,7 +2672,7 @@
         </ul>
 
         <div class="highlight-box">
-          🎯 Antes de comprar, pergunte:
+           Antes de comprar, pergunte:
 
           <strong>
             eu preciso disso agora
@@ -2722,7 +2722,7 @@
         </p>
 
         <div class="highlight-box">
-          💡 Uma boa meta responde:
+           Uma boa meta responde:
 
           <strong>
             quanto preciso,
@@ -2781,7 +2781,7 @@
         </p>
 
         <div class="formula-box">
-          💰 Receita − Poupança = Limite para gastos
+           Receita − Poupança = Limite para gastos
         </div>
 
         <h3>
@@ -2844,7 +2844,7 @@
         </p>
 
         <div class="highlight-box">
-          💡
+
           <strong>
             Ideia principal:
           </strong>
@@ -2901,7 +2901,7 @@
         </ul>
 
         <div class="formula-box">
-          💰 Sobra =
+           Sobra =
           Receita Total − Despesas Totais
         </div>
 
@@ -2955,7 +2955,7 @@
         </ul>
 
         <div class="highlight-box">
-          🎯
+
           <strong>
             Exemplo:
           </strong>
@@ -3034,7 +3034,7 @@
         </p>
 
         <div class="highlight-box">
-          💡 Quanto mais cedo se começa a poupar,
+           Quanto mais cedo se começa a poupar,
           maior é o tempo disponível
           para o dinheiro crescer.
         </div>
@@ -3077,7 +3077,7 @@
         </p>
 
         <div class="highlight-box">
-          🎯 Vá para
+           Vá para
 
           <strong>
             Jogos & Quiz
@@ -3360,7 +3360,7 @@
 
             if (check) {
               check.textContent =
-                "🔒";
+                "";
 
               check.className =
                 "mod-check mc-locked";
@@ -3391,7 +3391,7 @@
 
             if (check) {
               check.textContent =
-                "✓";
+                "";
 
               check.className =
                 "mod-check mc-done";
@@ -3492,17 +3492,17 @@
 
       if (badges[0]) {
         badges[0].textContent =
-          "📖 Leitura";
+          " Leitura";
       }
 
       if (badges[1]) {
         badges[1].textContent =
-          `⚡ +${lesson.xp} XP`;
+          ` +${lesson.xp} XP`;
       }
 
       if (badges[2]) {
         badges[2].textContent =
-          `🎯 ${lesson.level}`;
+          ` ${lesson.level}`;
       }
 
       if (body) {
@@ -3547,8 +3547,8 @@
 
           nextButton.textContent =
             isCompleted
-              ? "Módulo concluído ✓"
-              : "✓ Concluir módulo";
+              ? "Módulo concluído "
+              : " Concluir módulo";
 
           nextButton.dataset.action =
             "finish";
@@ -3627,7 +3627,7 @@
             updateModuleSidebar();
 
             nextButton.textContent =
-              "Módulo concluído ✓";
+              "Módulo concluído ";
 
             let message =
               document.getElementById(
@@ -3663,7 +3663,7 @@
                 "1px solid rgba(46,204,113,.4)";
 
               message.innerHTML = `
-                🎉
+
                 <strong>
                   Parabéns!
                 </strong>
