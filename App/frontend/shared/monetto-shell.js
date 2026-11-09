@@ -39,9 +39,7 @@
   });
 
   menuButton?.addEventListener("click", () => {
-    const mobile = window.innerWidth <= 800;
-    const className = mobile ? "nav-open" : "nav-closed";
-    const open = document.body.classList.toggle(className);
+    const open = document.body.classList.toggle("nav-open");
     menuButton.setAttribute("aria-expanded", String(open));
   });
 
@@ -50,6 +48,13 @@
     if (event.target.closest(".sidebar, #appMenuBtn")) return;
     document.body.classList.remove("nav-open");
     menuButton?.setAttribute("aria-expanded", "false");
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && document.body.classList.contains("nav-open")) {
+      document.body.classList.remove("nav-open");
+      menuButton?.setAttribute("aria-expanded", "false");
+      menuButton?.focus();
+    }
   });
   document.querySelectorAll(".sidebar a").forEach((link) => {
     link.addEventListener("click", () => {

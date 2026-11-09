@@ -19,9 +19,14 @@
 
 <body>
 
-  <p class="landing-link">
-    Quer conhecer a plataforma antes? <a href="../user/monetto-landing/monetto-landing.html">Ver a Landing Page →</a>
-  </p>
+  <script>
+    // Electron adds this only on a fresh app launch. Clear persisted auth while
+    // keeping the session available as the user navigates during this run.
+    if (new URLSearchParams(location.search).get("fresh") === "1") {
+      localStorage.removeItem("session");
+      history.replaceState(null, "", location.pathname);
+    }
+  </script>
 
   <div class="page">
     <!-- LEFT -->
@@ -183,6 +188,23 @@
         msgEl.className = "message error";
       }
     }
+
+    // Resume the last account only for the lifetime of the current app run.
+    (function resumeSession() {
+      let session;
+      try { session = JSON.parse(localStorage.getItem("session") || "null"); }
+      catch (_) { session = null; }
+      if (!session || !session.id_perfil) return;
+      const destinations = {
+        1: "../student/dashboard-aluno/dashboard-aluno.html",
+        2: "../teacher/dashboard-professor/dashboard-professor.html",
+        3: "../admin_school/dashboard-admin-escolar/dashboard-admin-escolar.html",
+        4: "../admin_general/dashboard-admin-geral/dashboard-admin-geral.html",
+      };
+      const destination = destinations[session.id_perfil];
+      if (destination) location.replace(destination);
+      else localStorage.removeItem("session");
+    })();
 
     async function fazerCadastro() {
       const dados = {

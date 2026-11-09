@@ -18,9 +18,9 @@ function createWindow() {
       contextIsolation: true,
     },
   });
-  win.loadFile(
-    path.join(basePath, "frontend/user/monetto-landing/monetto-landing.html"),
-  );
+  win.loadFile(path.join(basePath, "frontend/login/login.html"), {
+    query: { fresh: "1" },
+  });
   win.webContents.openDevTools();
 }
 

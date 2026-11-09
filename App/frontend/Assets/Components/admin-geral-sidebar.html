@@ -18,8 +18,8 @@
     <a class="sb-link " href="../admin-configuracoes/admin-configuracoes.html"><span class="icon"></span>
         Configurações</a>
     <div class="sb-bottom">
-        <a class="sb-link" href="#" style="color:rgba(255,255,255,.5);margin-bottom:4px;"
-            onclick="if(confirm('Sair da conta?'))window.location.href='../../user/monetto-landing/monetto-landing.html'"><span
+        <a class="sb-link sb-logout" href="../../login/login.html" style="color:rgba(255,255,255,.5);margin-bottom:4px;"
+            onclick="if (typeof sairDaConta === 'function') { sairDaConta('../../login/login.html'); return false; }"><span
                 class="icon"></span> Sair da conta</a>
         <div class="sb-user">
             <div class="sb-av"></div>
