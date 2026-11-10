@@ -710,12 +710,6 @@ async function getStudentDashboard(studentId) {
     const xpSelect = xpColumn
       ? `COALESCE(tar.${xpColumn}, 0) AS xp_recompensa`
       : "0 AS xp_recompensa";
-    const typeSelect = taskColumns.has("tipo_tarefa")
-      ? "tar.tipo_tarefa"
-      : "'exercicio' AS tipo_tarefa";
-    const difficultySelect = taskColumns.has("dificuldade")
-      ? "tar.dificuldade"
-      : "'medio' AS dificuldade";
 
     const deliveryDateSelect = deliveryDateColumn
       ? `ent.${deliveryDateColumn} AS concluida_em`
@@ -781,8 +775,6 @@ async function getStudentDashboard(studentId) {
           ${courseSelect},
           ${professorSelect},
           ${xpSelect},
-          ${typeSelect},
-          ${difficultySelect},
           ${deliveryDateSelect},
           ${deliveryXpSelect},
 
@@ -1100,14 +1092,9 @@ async function completeStudentTask(studentId, taskId) {
       taskParams.push(student.id_turma);
     }
 
-    const xpSelect = taskColumns.has("xp_recompensa")
-      ? "COALESCE(xp_recompensa, 0) AS xp_recompensa"
-      : taskColumns.has("xp")
-        ? "COALESCE(xp, 0) AS xp_recompensa"
-        : "0 AS xp_recompensa";
     const [[task]] = await db.promise().execute(
       `
-        SELECT id_tarefa, ${xpSelect}
+        SELECT id_tarefa
 
         FROM tarefas
 
@@ -1167,11 +1154,22 @@ async function completeStudentTask(studentId, taskId) {
     );
 
     if (existing.length) {
+      await db.promise().execute(
+        `
+          DELETE FROM entregas
+
+          WHERE
+            id_tarefa = ?
+            AND ${studentColumn} = ?
+        `,
+        [taskId, studentId],
+      );
+
       return {
         success: true,
-        completed: true,
-        xpAwarded: 0,
-        message: "Esta tarefa já foi concluída.",
+        completed: false,
+        message:
+          "Tarefa reaberta com sucesso!",
       };
     }
 
@@ -1196,13 +1194,6 @@ async function completeStudentTask(studentId, taskId) {
       placeholders.push("?");
     }
 
-    const xp = Math.max(0, Math.min(Number(task.xp_recompensa) || 0, 500));
-    if (columns.has("xp_ganho")) {
-      insertColumns.push("xp_ganho");
-      values.push(xp);
-      placeholders.push("?");
-    }
-
     await db.promise().execute(
       `
         INSERT INTO entregas
@@ -1214,21 +1205,9 @@ async function completeStudentTask(studentId, taskId) {
       values,
     );
 
-    if (xp > 0) {
-      const xpResult = await awardStudentXp(studentId, xp, `tarefa:${taskId}`);
-      if (!xpResult.success) {
-        await db.promise().execute(
-          `DELETE FROM entregas WHERE id_tarefa = ? AND ${studentColumn} = ?`,
-          [taskId, studentId],
-        );
-        return { success: false, message: "Tarefa concluída, mas não foi possível registrar o XP. Tente novamente." };
-      }
-    }
-
     return {
       success: true,
       completed: true,
-      xpAwarded: xp,
       message:
         "Tarefa concluída com sucesso!",
     };

@@ -16,13 +16,11 @@
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
 
+  <link href="../student-ui.css" rel="stylesheet" />
+
   <link href="jogos-quiz.css" rel="stylesheet" />
 
   <link href="../../Assets/Monetto Logo.ico" rel="icon" type="image/x-icon" />
-
-
-
-  <link rel="stylesheet" href="../../shared/redesign.css" />
 </head>
 
 
@@ -341,7 +339,7 @@
 
   <div class="quiz-overlay" id="quizOverlay">
 
-    <div class="quiz-modal">
+    <div class="quiz-modal" role="dialog" aria-modal="true" aria-labelledby="activityTitle">
 
 
 
@@ -354,7 +352,7 @@
              Quiz: Orçamento Pessoal
           </div>
 
-          <button class="quiz-close" type="button" onclick="closeActivity()">
+          <button class="quiz-close" type="button" aria-label="Fechar atividade" onclick="closeActivity()">
 
           </button>
 

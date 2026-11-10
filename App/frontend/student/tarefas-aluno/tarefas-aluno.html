@@ -14,12 +14,11 @@
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
 
+  <link href="../student-ui.css" rel="stylesheet" />
+
   <link href="tarefas-aluno.css" rel="stylesheet" />
 
   <link href="../../Assets/Monetto Logo.ico" rel="icon" type="image/x-icon" />
-
-
-  <link rel="stylesheet" href="../../shared/redesign.css" />
 </head>
 
 
@@ -61,13 +60,12 @@
 
       <div class="top-actions">
 
-        <div class="notif-btn">
+        <button class="notif-btn" type="button" aria-label="Ver notificações">
 
 
 
           <div class="notif-dot"></div>
-
-        </div>
+        </button>
 
 
         <div class="xp-topbar">
@@ -87,12 +85,12 @@
 
 
 
-        <input placeholder="Buscar tarefa ou professor..." type="text" />
+        <input aria-label="Buscar tarefa ou professor" placeholder="Buscar tarefa ou professor..." type="text" />
 
       </div>
 
 
-      <select class="filter-sel">
+      <select class="filter-sel" aria-label="Filtrar por matéria">
 
         <option value="">
           Todas as matérias
@@ -101,24 +99,24 @@
       </select>
 
 
-      <div class="ftab active" data-filter="todas">
+      <button type="button" class="ftab active" data-filter="todas">
         Todas
-      </div>
+      </button>
 
 
-      <div class="ftab" data-filter="pendentes">
+      <button type="button" class="ftab" data-filter="pendentes">
         ⏳ Pendentes
-      </div>
+      </button>
 
 
-      <div class="ftab" data-filter="hoje">
+      <button type="button" class="ftab" data-filter="hoje">
          Vence hoje
-      </div>
+      </button>
 
 
-      <div class="ftab" data-filter="concluidas">
+      <button type="button" class="ftab" data-filter="concluidas">
          Concluídas
-      </div>
+      </button>
 
     </div>
 

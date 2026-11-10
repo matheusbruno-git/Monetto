@@ -16,12 +16,11 @@
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
 
+  <link href="../student-ui.css" rel="stylesheet" />
+
   <link href="configuracoes.css" rel="stylesheet" />
 
   <link href="../../Assets/Monetto Logo.ico" rel="icon" type="image/x-icon" />
-
-
-  <link rel="stylesheet" href="../../shared/redesign.css" />
 </head>
 
 
@@ -47,40 +46,40 @@
       </div>
 
 
-      <div class="set-nav-item active" onclick="showTab('perfil', this)">
+      <button type="button" class="set-nav-item active" onclick="showTab('perfil', this)">
         <span class="sni">
 
         </span>
 
         Meu Perfil
-      </div>
+      </button>
 
 
-      <div class="set-nav-item" onclick="showTab('notif', this)">
+      <button type="button" class="set-nav-item" onclick="showTab('notif', this)">
         <span class="sni">
 
         </span>
 
         Notificações
-      </div>
+      </button>
 
 
-      <div class="set-nav-item" onclick="showTab('priv', this)">
+      <button type="button" class="set-nav-item" onclick="showTab('priv', this)">
         <span class="sni">
 
         </span>
 
         Privacidade
-      </div>
+      </button>
 
 
-      <div class="set-nav-item" onclick="showTab('conta', this)">
+      <button type="button" class="set-nav-item" onclick="showTab('conta', this)">
         <span class="sni">
 
         </span>
 
         Conta
-      </div>
+      </button>
 
     </div>
 
@@ -135,29 +134,17 @@
 
           <div class="avatar-grid">
 
-            <div class="av-opt av1 selected" data-avatar="">
+            <button type="button" class="av-opt av1 selected" data-avatar="🦉" aria-label="Avatar Coruja">🦉</button>
 
-            </div>
+            <button type="button" class="av-opt av2" data-avatar="🦊" aria-label="Avatar Raposa">🦊</button>
 
-            <div class="av-opt av2" data-avatar="">
+            <button type="button" class="av-opt av3" data-avatar="🐼" aria-label="Avatar Panda">🐼</button>
 
-            </div>
+            <button type="button" class="av-opt av4" data-avatar="🐱" aria-label="Avatar Gato">🐱</button>
 
-            <div class="av-opt av3" data-avatar="">
+            <button type="button" class="av-opt av5" data-avatar="🦁" aria-label="Avatar Leão">🦁</button>
 
-            </div>
-
-            <div class="av-opt av4" data-avatar="">
-
-            </div>
-
-            <div class="av-opt av5" data-avatar="">
-
-            </div>
-
-            <div class="av-opt av6" data-avatar="">
-
-            </div>
+            <button type="button" class="av-opt av6" data-avatar="🐧" aria-label="Avatar Pinguim">🐧</button>
 
           </div>
 
@@ -175,7 +162,7 @@
 
             <div class="field-group">
 
-              <label>
+              <label for="nome_usuario">
                 Nome
               </label>
 
@@ -186,11 +173,11 @@
 
             <div class="field-group">
 
-              <label>
+              <label for="turma_usuario">
                 Turma
               </label>
 
-              <input disabled id="turma_usuario" type="text" value="" />
+              <textarea disabled id="turma_usuario" rows="2"></textarea>
 
             </div>
 
@@ -201,7 +188,7 @@
 
             <div class="field-group">
 
-              <label>
+              <label for="email_usuario">
                 E-mail
               </label>
 
@@ -212,11 +199,11 @@
 
             <div class="field-group">
 
-              <label>
+              <label for="escola_usuario">
                 Escola
               </label>
 
-              <input disabled id="escola_usuario" type="text" value="" />
+              <textarea disabled id="escola_usuario" rows="3"></textarea>
 
             </div>
 
@@ -227,7 +214,7 @@
 
             <div class="field-group">
 
-              <label>
+              <label for="bio_usuario">
                 Bio
               </label>
 
@@ -260,7 +247,7 @@
 
             <div class="field-group">
 
-              <label>
+              <label for="senha_atual">
                 Senha atual
               </label>
 
@@ -275,7 +262,7 @@
 
             <div class="field-group">
 
-              <label>
+              <label for="nova_senha">
                 Nova senha
               </label>
 
@@ -286,7 +273,7 @@
 
             <div class="field-group">
 
-              <label>
+              <label for="confirmar_senha">
                 Confirmar nova senha
               </label>
 
@@ -352,7 +339,7 @@
 
             </div>
 
-            <div class="toggle on" data-setting="nova_tarefa"></div>
+            <button type="button" class="toggle on" data-setting="nova_tarefa" aria-label="Alternar novas tarefas"></button>
 
           </div>
 
@@ -371,7 +358,7 @@
 
             </div>
 
-            <div class="toggle on" data-setting="prazo_tarefa"></div>
+            <button type="button" class="toggle on" data-setting="prazo_tarefa" aria-label="Alternar prazo de tarefas"></button>
 
           </div>
 
@@ -390,7 +377,7 @@
 
             </div>
 
-            <div class="toggle" data-setting="tarefa_atrasada"></div>
+            <button type="button" class="toggle" data-setting="tarefa_atrasada" aria-label="Alternar tarefas atrasadas"></button>
 
           </div>
 
@@ -418,7 +405,7 @@
 
             </div>
 
-            <div class="toggle on" data-setting="nova_medalha"></div>
+            <button type="button" class="toggle on" data-setting="nova_medalha" aria-label="Alternar novas medalhas"></button>
 
           </div>
 
@@ -437,7 +424,7 @@
 
             </div>
 
-            <div class="toggle on" data-setting="novo_nivel"></div>
+            <button type="button" class="toggle on" data-setting="novo_nivel" aria-label="Alternar novo nível"></button>
 
           </div>
 
@@ -456,7 +443,7 @@
 
             </div>
 
-            <div class="toggle" data-setting="ranking"></div>
+            <button type="button" class="toggle" data-setting="ranking" aria-label="Alternar ranking"></button>
 
           </div>
 
@@ -475,7 +462,7 @@
 
             </div>
 
-            <div class="toggle on" data-setting="novo_jogo"></div>
+            <button type="button" class="toggle on" data-setting="novo_jogo" aria-label="Alternar novos jogos"></button>
 
           </div>
 
@@ -503,7 +490,7 @@
 
             </div>
 
-            <div class="toggle on" data-setting="resumo_semanal"></div>
+            <button type="button" class="toggle on" data-setting="resumo_semanal" aria-label="Alternar resumo semanal"></button>
 
           </div>
 
@@ -522,7 +509,7 @@
 
             </div>
 
-            <div class="toggle on" data-setting="lembrete_sequencia"></div>
+            <button type="button" class="toggle on" data-setting="lembrete_sequencia" aria-label="Alternar lembrete de sequência"></button>
 
           </div>
 
@@ -577,7 +564,7 @@
 
             </div>
 
-            <div class="toggle on" data-privacy="ranking"></div>
+            <button type="button" class="toggle on" data-privacy="ranking" aria-label="Alternar ranking"></button>
 
           </div>
 
@@ -596,7 +583,7 @@
 
             </div>
 
-            <div class="toggle on" data-privacy="xp"></div>
+            <button type="button" class="toggle on" data-privacy="xp" aria-label="Alternar XP"></button>
 
           </div>
 
@@ -615,7 +602,7 @@
 
             </div>
 
-            <div class="toggle" data-privacy="medalhas"></div>
+            <button type="button" class="toggle" data-privacy="medalhas" aria-label="Alternar medalhas"></button>
 
           </div>
 
@@ -634,7 +621,7 @@
 
             </div>
 
-            <div class="toggle on" data-privacy="sequencia"></div>
+            <button type="button" class="toggle on" data-privacy="sequencia" aria-label="Alternar sequência"></button>
 
           </div>
 
@@ -784,7 +771,7 @@
 
             <button class="btn-danger" id="excluir_conta" type="button" disabled
               title="Função não disponível nesta versão" style="
-                opacity:.45;
+                
                 cursor:not-allowed;
               ">
                Excluir conta

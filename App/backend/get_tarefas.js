@@ -3,8 +3,6 @@ const { resolveEscolaId } = require("./resolve_escola_id.js");
 async function getTarefas(currentUserId) {
   try {
     const db = require("./connection.js");
-    const { ensureTaskMetadataColumns } = require("./create_tarefa.js");
-    await ensureTaskMetadataColumns();
 
     const escolaId = await resolveEscolaId(currentUserId);
     if (!escolaId) {
@@ -22,9 +20,6 @@ async function getTarefas(currentUserId) {
         t.data_criacao,
         t.data_vencimento,
         t.status,
-        t.tipo_tarefa,
-        t.dificuldade,
-        t.xp_recompensa,
         c.nome AS disciplina
        FROM tarefas t
        LEFT JOIN cursos c ON t.id_curso = c.id_curso

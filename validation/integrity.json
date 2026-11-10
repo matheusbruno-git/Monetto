@@ -1,0 +1,1836 @@
+{
+  "generated_at_utc": "2026-11-10T20:29:53.173589+00:00",
+  "source_archive": {
+    "path": "C:\\Users\\LEO\\OneDrive\\Documentos\\GitHub\\Monetto\\App.zip",
+    "bytes": 682966,
+    "sha256": "5e03f3d6fb806cbb841e6fcadc507b2779cee65518b695bbe415a5ddb9302b7b"
+  },
+  "revised_root": "C:\\Users\\LEO\\.codex\\visualizations\\2026\\11\\10\\01a1c709-aa6d-7a01-8df5-78e271a5bf8f\\Monetto",
+  "files": [
+    {
+      "path": "App/.gitattributes",
+      "original_bytes": 68,
+      "original_sha256": "d8fb0de4792538f93822b2c0d235604921299d5e54a3d6ec7a6cb34536e8bf1e",
+      "final_bytes": 68,
+      "final_sha256": "d8fb0de4792538f93822b2c0d235604921299d5e54a3d6ec7a6cb34536e8bf1e",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/add_aluno_to_turma.js",
+      "original_bytes": 974,
+      "original_sha256": "ac2cb59cb4e64b8d880d22eba58a6b8c31daf3422670a524e28d6a80de895345",
+      "final_bytes": 974,
+      "final_sha256": "ac2cb59cb4e64b8d880d22eba58a6b8c31daf3422670a524e28d6a80de895345",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/add_professor_to_turma.js",
+      "original_bytes": 1130,
+      "original_sha256": "54af659de49b88579894e5a86924e4515592f8885411f6267d56a864fee984e5",
+      "final_bytes": 1130,
+      "final_sha256": "54af659de49b88579894e5a86924e4515592f8885411f6267d56a864fee984e5",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/ai_gemini.js",
+      "original_bytes": 788,
+      "original_sha256": "0bce2e92cfe98d6da54021a3e3719a48ab141b5676d2bb0326081e00dc55432b",
+      "final_bytes": 788,
+      "final_sha256": "0bce2e92cfe98d6da54021a3e3719a48ab141b5676d2bb0326081e00dc55432b",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/awardStudentXp.js",
+      "original_bytes": 154,
+      "original_sha256": "a7edc1e9793455768003a36383939dd20ec57f9693a01b97b38ad8d83b0552f5",
+      "final_bytes": 154,
+      "final_sha256": "a7edc1e9793455768003a36383939dd20ec57f9693a01b97b38ad8d83b0552f5",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/change_adminPassword.js",
+      "original_bytes": 2029,
+      "original_sha256": "860f2eb73ceb1dede4a25ed0890a1a4ab1e27cef3a55d236d827b92874a0cc3b",
+      "final_bytes": 2029,
+      "final_sha256": "860f2eb73ceb1dede4a25ed0890a1a4ab1e27cef3a55d236d827b92874a0cc3b",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/change_alunoPassword.js",
+      "original_bytes": 1896,
+      "original_sha256": "63e5d029251b09114839e0839e62e2cce3a20bdfad24c03720347581974da8bf",
+      "final_bytes": 1896,
+      "final_sha256": "63e5d029251b09114839e0839e62e2cce3a20bdfad24c03720347581974da8bf",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/completeStudentTask.js",
+      "original_bytes": 174,
+      "original_sha256": "5f6971418c1eaa58e1c076f6154844df5447a0eabd3356e128ae03abf3f6e4ec",
+      "final_bytes": 174,
+      "final_sha256": "5f6971418c1eaa58e1c076f6154844df5447a0eabd3356e128ae03abf3f6e4ec",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/connection.js",
+      "original_bytes": 427,
+      "original_sha256": "34cea34b2eee60aadd0a388e402d3fda35b83e3dd845c3c7ebe8c8367c9f7a34",
+      "final_bytes": 427,
+      "final_sha256": "34cea34b2eee60aadd0a388e402d3fda35b83e3dd845c3c7ebe8c8367c9f7a34",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/create_aluno.js",
+      "original_bytes": 2124,
+      "original_sha256": "c182057e48456b005f832cde404d1f94b028ebb2fd02d3a1c5fd315d9c2d798a",
+      "final_bytes": 2124,
+      "final_sha256": "c182057e48456b005f832cde404d1f94b028ebb2fd02d3a1c5fd315d9c2d798a",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/create_escola.js",
+      "original_bytes": 786,
+      "original_sha256": "d619ebf9567cc3549cdc758aa638d2ad9a1ce3b04a73d5dd315d2db857bf7ce9",
+      "final_bytes": 786,
+      "final_sha256": "d619ebf9567cc3549cdc758aa638d2ad9a1ce3b04a73d5dd315d2db857bf7ce9",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/create_professor.js",
+      "original_bytes": 1763,
+      "original_sha256": "d2f8c2db880e67f6d46000b9193a8be21d79ca04d12812af6d3a535208344d3e",
+      "final_bytes": 1763,
+      "final_sha256": "d2f8c2db880e67f6d46000b9193a8be21d79ca04d12812af6d3a535208344d3e",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/create_tarefa.js",
+      "original_bytes": 2436,
+      "original_sha256": "d773dc83d8bd2237297f68fcb2f918b206f2f3b40d473a0e9ce730759d2565fe",
+      "final_bytes": 2436,
+      "final_sha256": "d773dc83d8bd2237297f68fcb2f918b206f2f3b40d473a0e9ce730759d2565fe",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/create_turma.js",
+      "original_bytes": 1235,
+      "original_sha256": "9ec14e12eb35a3d2231889d691466906fb7b65eb8ca3506cb7f0200392fa2c63",
+      "final_bytes": 1235,
+      "final_sha256": "9ec14e12eb35a3d2231889d691466906fb7b65eb8ca3506cb7f0200392fa2c63",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/create_user.js",
+      "original_bytes": 1629,
+      "original_sha256": "95cbe97384ad97c1d211d6d22bb964ba30517ac54ed16fb85ac944c1f801fa93",
+      "final_bytes": 1629,
+      "final_sha256": "95cbe97384ad97c1d211d6d22bb964ba30517ac54ed16fb85ac944c1f801fa93",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/delete_turma.js",
+      "original_bytes": 595,
+      "original_sha256": "f6140cd716af29d040271d24e8b52b2152fcd3b74b60c56593a58de09e2d09fd",
+      "final_bytes": 595,
+      "final_sha256": "f6140cd716af29d040271d24e8b52b2152fcd3b74b60c56593a58de09e2d09fd",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/export_excel.js",
+      "original_bytes": 8737,
+      "original_sha256": "e54e88a421027002795455b66175570c751ba02382145be5e21396e2b9a9a953",
+      "final_bytes": 8737,
+      "final_sha256": "e54e88a421027002795455b66175570c751ba02382145be5e21396e2b9a9a953",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/get_adminProfile.js",
+      "original_bytes": 3215,
+      "original_sha256": "f332237a224b0ce083baccebcc2343d4d020d822372ecc5924bfef532c420c74",
+      "final_bytes": 3215,
+      "final_sha256": "f332237a224b0ce083baccebcc2343d4d020d822372ecc5924bfef532c420c74",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/get_adminReports.js",
+      "original_bytes": 12651,
+      "original_sha256": "3e306d32e5b09bca929137028878f4ce851df18228fce0f7e122bb0616d042ea",
+      "final_bytes": 12651,
+      "final_sha256": "3e306d32e5b09bca929137028878f4ce851df18228fce0f7e122bb0616d042ea",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/get_admins.js",
+      "original_bytes": 825,
+      "original_sha256": "bbd3e30dab9a13c775352660b1b07ae9c5d03b5966c272ba131d48860dba80e7",
+      "final_bytes": 825,
+      "final_sha256": "bbd3e30dab9a13c775352660b1b07ae9c5d03b5966c272ba131d48860dba80e7",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/get_aluno.js",
+      "original_bytes": 948,
+      "original_sha256": "66d4b66ca46ef90c6b3accb204034eedf9892c7b2dd79b53d18c969aa02a59e9",
+      "final_bytes": 948,
+      "final_sha256": "66d4b66ca46ef90c6b3accb204034eedf9892c7b2dd79b53d18c969aa02a59e9",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/get_alunos.js",
+      "original_bytes": 1482,
+      "original_sha256": "6f2a72f4bcaed59b3766e228b9eed3543f22a8664dfbda9796721f8a111892fb",
+      "final_bytes": 1482,
+      "final_sha256": "6f2a72f4bcaed59b3766e228b9eed3543f22a8664dfbda9796721f8a111892fb",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/get_alunosProfessor.js",
+      "original_bytes": 2859,
+      "original_sha256": "b6cac18ceee38412bc72dde68eb984817446640a260d7c52872c6645a481875e",
+      "final_bytes": 2859,
+      "final_sha256": "b6cac18ceee38412bc72dde68eb984817446640a260d7c52872c6645a481875e",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/get_cursos.js",
+      "original_bytes": 490,
+      "original_sha256": "9e0ca2e8ec53ffcad1eb4453b427c7f734b51d6374fcead199d313a9cc9ec789",
+      "final_bytes": 490,
+      "final_sha256": "9e0ca2e8ec53ffcad1eb4453b427c7f734b51d6374fcead199d313a9cc9ec789",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/get_dashboardAdminEscolar.js",
+      "original_bytes": 14821,
+      "original_sha256": "de9101a88bb2fa320560b3774c5677179ccab881a4481b98bda14bb60a551a43",
+      "final_bytes": 14821,
+      "final_sha256": "de9101a88bb2fa320560b3774c5677179ccab881a4481b98bda14bb60a551a43",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/get_dashboardAdminGeral.js",
+      "original_bytes": 10473,
+      "original_sha256": "d766f37b51bbe64d747ff92d9dcc5856305c3dfad3a085f5f252dace9aa27c48",
+      "final_bytes": 10473,
+      "final_sha256": "d766f37b51bbe64d747ff92d9dcc5856305c3dfad3a085f5f252dace9aa27c48",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/get_dashboardTeacher.js",
+      "original_bytes": 13854,
+      "original_sha256": "e3d06687d7567973818402142189cef87bde6113cf47cf9cbc7d18fefb5f06cd",
+      "final_bytes": 13854,
+      "final_sha256": "e3d06687d7567973818402142189cef87bde6113cf47cf9cbc7d18fefb5f06cd",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/get_niveis.js",
+      "original_bytes": 541,
+      "original_sha256": "1cbb480a566e19b0a065b27229250bebbec1828b6ff5494b58f6237eb5bee5ac",
+      "final_bytes": 541,
+      "final_sha256": "1cbb480a566e19b0a065b27229250bebbec1828b6ff5494b58f6237eb5bee5ac",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/get_professores.js",
+      "original_bytes": 1192,
+      "original_sha256": "a57f8382f21412d868c9b392d365810731874067cbbf343f1a282d97956f56d7",
+      "final_bytes": 1192,
+      "final_sha256": "a57f8382f21412d868c9b392d365810731874067cbbf343f1a282d97956f56d7",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/get_schools.js",
+      "original_bytes": 491,
+      "original_sha256": "615cd82e02d8ce385f323e0963e343564b9a8a81d8d3022181ab245736ecd2c3",
+      "final_bytes": 491,
+      "final_sha256": "615cd82e02d8ce385f323e0963e343564b9a8a81d8d3022181ab245736ecd2c3",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/get_student_dashboard.js",
+      "original_bytes": 28347,
+      "original_sha256": "bdea2f1a72b9c8d10984712f2000234d7d78c65b52e4a9957ed976abff13439b",
+      "final_bytes": 28347,
+      "final_sha256": "bdea2f1a72b9c8d10984712f2000234d7d78c65b52e4a9957ed976abff13439b",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/get_tarefas.js",
+      "original_bytes": 996,
+      "original_sha256": "2bfa201308c5ac9e8be470e2c5bd9988de6a1cfd4b42b7e65c8caf34caf5333e",
+      "final_bytes": 996,
+      "final_sha256": "2bfa201308c5ac9e8be470e2c5bd9988de6a1cfd4b42b7e65c8caf34caf5333e",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/get_turmas.js",
+      "original_bytes": 1198,
+      "original_sha256": "ad62179415f641f32aea19fd290806131d9ca8167c0672581c34bcfe6f76d46d",
+      "final_bytes": 1198,
+      "final_sha256": "ad62179415f641f32aea19fd290806131d9ca8167c0672581c34bcfe6f76d46d",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/json-content/EF05GE05.json",
+      "original_bytes": 2588,
+      "original_sha256": "1aa278a99de384d659892b55ea3254a956c99f4e363533e0771d7fd87ebf7d2d",
+      "final_bytes": 2588,
+      "final_sha256": "1aa278a99de384d659892b55ea3254a956c99f4e363533e0771d7fd87ebf7d2d",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/json-content/EF05MA06.json",
+      "original_bytes": 2543,
+      "original_sha256": "eb633d9af385464980ad33fc84c8f7171eaba820c3063b1aa89f97cba2d7878b",
+      "final_bytes": 2543,
+      "final_sha256": "eb633d9af385464980ad33fc84c8f7171eaba820c3063b1aa89f97cba2d7878b",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/json-content/EF06MA13.json",
+      "original_bytes": 2407,
+      "original_sha256": "e5a3b2b225e7556cff00a48eed336b79724846a2be5eac57328deb04e9c94885",
+      "final_bytes": 2407,
+      "final_sha256": "e5a3b2b225e7556cff00a48eed336b79724846a2be5eac57328deb04e9c94885",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/json-content/EF07GE08.json",
+      "original_bytes": 2465,
+      "original_sha256": "2cd8146d947c37e57d2a73c76532bdc8ac93c274dfb8f575ddcb6390b1f03135",
+      "final_bytes": 2465,
+      "final_sha256": "2cd8146d947c37e57d2a73c76532bdc8ac93c274dfb8f575ddcb6390b1f03135",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/json-content/EF07MA02.json",
+      "original_bytes": 2707,
+      "original_sha256": "23663bc0c7bdba8199c412b28662d1b44eafcaabbc7a21a2563d1bea499c9e45",
+      "final_bytes": 2707,
+      "final_sha256": "23663bc0c7bdba8199c412b28662d1b44eafcaabbc7a21a2563d1bea499c9e45",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/json-content/EF08MA04.json",
+      "original_bytes": 2249,
+      "original_sha256": "6d95c2d6da59bb34d24d56e917000a3f10f071ead4c9227233bf3e89a643f006",
+      "final_bytes": 2249,
+      "final_sha256": "6d95c2d6da59bb34d24d56e917000a3f10f071ead4c9227233bf3e89a643f006",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/json-content/EF09MA05.json",
+      "original_bytes": 2659,
+      "original_sha256": "825c258b1a2539caaa4dcb36ef0e5923819876f419606e8418b0decbe466409d",
+      "final_bytes": 2659,
+      "final_sha256": "825c258b1a2539caaa4dcb36ef0e5923819876f419606e8418b0decbe466409d",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/json-content/EF67LP16.json",
+      "original_bytes": 3164,
+      "original_sha256": "8195e4eac0fc474892cdf9530672cb6e2dfdb97284ef0e457ae285ca49eff8a2",
+      "final_bytes": 3164,
+      "final_sha256": "8195e4eac0fc474892cdf9530672cb6e2dfdb97284ef0e457ae285ca49eff8a2",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/json-content/EF69LP04.json",
+      "original_bytes": 2597,
+      "original_sha256": "ee2f0ed3ad1076cc83cd788c956b958e6a3e6d74101910f859f00bc71d8b662e",
+      "final_bytes": 2597,
+      "final_sha256": "ee2f0ed3ad1076cc83cd788c956b958e6a3e6d74101910f859f00bc71d8b662e",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/json-content/EM13CHS401.json",
+      "original_bytes": 2757,
+      "original_sha256": "f3652fd8a75702cb34204d3aaeaf1a0e24a0ea30342d8887ca55a03be73d5dc9",
+      "final_bytes": 2757,
+      "final_sha256": "f3652fd8a75702cb34204d3aaeaf1a0e24a0ea30342d8887ca55a03be73d5dc9",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/json-content/EM13CHS402.json",
+      "original_bytes": 2558,
+      "original_sha256": "7dc28bc40684ce48377f99f296fda60ccea2e21322f898d8860ca49b706c9f15",
+      "final_bytes": 2558,
+      "final_sha256": "7dc28bc40684ce48377f99f296fda60ccea2e21322f898d8860ca49b706c9f15",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/json-content/EM13MAT203.json",
+      "original_bytes": 2827,
+      "original_sha256": "b494096ff625b57777df1bf45e0b546d4b5e3d3a1ff902a8c29909a284016747",
+      "final_bytes": 2827,
+      "final_sha256": "b494096ff625b57777df1bf45e0b546d4b5e3d3a1ff902a8c29909a284016747",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/json-content/EM13MAT302.json",
+      "original_bytes": 2479,
+      "original_sha256": "e3efc060440ac1311513bf2c679a319c78f383260a1a656aa09c94922c97a0bc",
+      "final_bytes": 2479,
+      "final_sha256": "e3efc060440ac1311513bf2c679a319c78f383260a1a656aa09c94922c97a0bc",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/json-content/EM13MAT303.json",
+      "original_bytes": 2656,
+      "original_sha256": "cb95a1d87f0779151a928b9d84fc2ecff145a0db20447cc42d6420857b954433",
+      "final_bytes": 2656,
+      "final_sha256": "cb95a1d87f0779151a928b9d84fc2ecff145a0db20447cc42d6420857b954433",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/json-content/EM13MAT304.json",
+      "original_bytes": 2289,
+      "original_sha256": "af42fb35787fdda737ff8cbcfa491054806fdf9f8b6a3ec588162a8ce7daa348",
+      "final_bytes": 2289,
+      "final_sha256": "af42fb35787fdda737ff8cbcfa491054806fdf9f8b6a3ec588162a8ce7daa348",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/json-content/EM13MAT305.json",
+      "original_bytes": 2501,
+      "original_sha256": "51ecf942500ddb879dbad82e3969f4248e9decef3fdf2a015bcb30dcb94b594e",
+      "final_bytes": 2501,
+      "final_sha256": "51ecf942500ddb879dbad82e3969f4248e9decef3fdf2a015bcb30dcb94b594e",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/json-content/EM13MAT404.json",
+      "original_bytes": 3047,
+      "original_sha256": "9dd61b6f14abd247e2ed6143d4490c83c92b78e18b0364d8083275f2d77b0769",
+      "final_bytes": 3047,
+      "final_sha256": "9dd61b6f14abd247e2ed6143d4490c83c92b78e18b0364d8083275f2d77b0769",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/json-content/index.json",
+      "original_bytes": 10860,
+      "original_sha256": "27d571f59be6b2291cde83e69df6e272408906dec8ed11f7a0eda825e2a830b9",
+      "final_bytes": 10860,
+      "final_sha256": "27d571f59be6b2291cde83e69df6e272408906dec8ed11f7a0eda825e2a830b9",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/json-content/README.md",
+      "original_bytes": 1242,
+      "original_sha256": "630ebe8a6e33cfe2cce989b5755119e21c4262028b22eb9b8b0cf640d9981ca2",
+      "final_bytes": 1242,
+      "final_sha256": "630ebe8a6e33cfe2cce989b5755119e21c4262028b22eb9b8b0cf640d9981ca2",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/resolve_escola_id.js",
+      "original_bytes": 596,
+      "original_sha256": "c509094cf0a6256d6e47513db3ee282b10792eb02483ac118e671afab07f65b7",
+      "final_bytes": 596,
+      "final_sha256": "c509094cf0a6256d6e47513db3ee282b10792eb02483ac118e671afab07f65b7",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/save_alunos_turma.js",
+      "original_bytes": 3072,
+      "original_sha256": "b00756e7e81a311dfc1d7a8799b52e0457aae3b24ef4de977a77e4ddc7323685",
+      "final_bytes": 3072,
+      "final_sha256": "b00756e7e81a311dfc1d7a8799b52e0457aae3b24ef4de977a77e4ddc7323685",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/send_email.js",
+      "original_bytes": 1605,
+      "original_sha256": "9c3d5d18a739b1eb98966156a8289526f483eee59962b8015c3b16492c6e8776",
+      "final_bytes": 1605,
+      "final_sha256": "9c3d5d18a739b1eb98966156a8289526f483eee59962b8015c3b16492c6e8776",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/update_admin.js",
+      "original_bytes": 1279,
+      "original_sha256": "7d354808ad86c3aaf346c0da220381902082f175b9dc29bcbf325dd67dfdeb9c",
+      "final_bytes": 1279,
+      "final_sha256": "7d354808ad86c3aaf346c0da220381902082f175b9dc29bcbf325dd67dfdeb9c",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/update_aluno.js",
+      "original_bytes": 1614,
+      "original_sha256": "fcc9be6e10a9cb1f77302d176108a94f7012c5e9c585e4717e0f1b1672610e27",
+      "final_bytes": 1614,
+      "final_sha256": "fcc9be6e10a9cb1f77302d176108a94f7012c5e9c585e4717e0f1b1672610e27",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/backend/update_escola.js",
+      "original_bytes": 722,
+      "original_sha256": "1e83d6c8550aea5700b12e90476baf458e6ba7992cfc330d9b688a7c6cf2fe47",
+      "final_bytes": 722,
+      "final_sha256": "1e83d6c8550aea5700b12e90476baf458e6ba7992cfc330d9b688a7c6cf2fe47",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_general/admin-configuracoes/admin-configuracoes.html",
+      "original_bytes": 7332,
+      "original_sha256": "84e2668b08fbe184adcee8197b7bc204cd2b8095be2c31968b49917b623e996f",
+      "final_bytes": 7332,
+      "final_sha256": "84e2668b08fbe184adcee8197b7bc204cd2b8095be2c31968b49917b623e996f",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_general/admin-relatorios/admin-relatorios.html",
+      "original_bytes": 9241,
+      "original_sha256": "12f74559b72758da883c39b0b955ab4eae113b670256ce92efb27886dcd82180",
+      "final_bytes": 9241,
+      "final_sha256": "12f74559b72758da883c39b0b955ab4eae113b670256ce92efb27886dcd82180",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_general/dashboard-admin-geral/dashboard-admin-geral.html",
+      "original_bytes": 8373,
+      "original_sha256": "9c97baa7c6aa9d1d797d285ef7cb0177f1f92d91a2cec5c7a6be2e9eebc190fa",
+      "final_bytes": 8373,
+      "final_sha256": "9c97baa7c6aa9d1d797d285ef7cb0177f1f92d91a2cec5c7a6be2e9eebc190fa",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_general/dashboard-admin-geral/script.js",
+      "original_bytes": 8860,
+      "original_sha256": "39a9db41cb04a59d9de5cc0e3658c90e55768282b855e2c09f65961ed0bf679e",
+      "final_bytes": 8860,
+      "final_sha256": "39a9db41cb04a59d9de5cc0e3658c90e55768282b855e2c09f65961ed0bf679e",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_general/financeiro/financeiro.html",
+      "original_bytes": 14925,
+      "original_sha256": "fff11f83cd56ca4ee448379753dae2ef4966daeef40abcf8a5f2766977506d2d",
+      "final_bytes": 14925,
+      "final_sha256": "fff11f83cd56ca4ee448379753dae2ef4966daeef40abcf8a5f2766977506d2d",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_general/main_script.js",
+      "original_bytes": 650,
+      "original_sha256": "999735a525db9e458afb57b6e4c731fed2caa9b2f8401df14b55c3e680517bcc",
+      "final_bytes": 650,
+      "final_sha256": "999735a525db9e458afb57b6e4c731fed2caa9b2f8401df14b55c3e680517bcc",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_school/admin-alunos/admin-alunos.html",
+      "original_bytes": 7820,
+      "original_sha256": "be17f9086f1e87d51279b787329c3e1e38dfe7b919981f98760724308b8296ed",
+      "final_bytes": 7820,
+      "final_sha256": "be17f9086f1e87d51279b787329c3e1e38dfe7b919981f98760724308b8296ed",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_school/admin-alunos/script.js",
+      "original_bytes": 1544,
+      "original_sha256": "4552fd9a4e0c4cfb91ee3376e548300d9558e01af44bface80bad06d8b354bc7",
+      "final_bytes": 1544,
+      "final_sha256": "4552fd9a4e0c4cfb91ee3376e548300d9558e01af44bface80bad06d8b354bc7",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_school/admin-configuracoes/admin-configuracoes.html",
+      "original_bytes": 9544,
+      "original_sha256": "1bbf21e06355ea006115edb1cbd7cd6304b927386bf376c3b7836619619d2e49",
+      "final_bytes": 9544,
+      "final_sha256": "1bbf21e06355ea006115edb1cbd7cd6304b927386bf376c3b7836619619d2e49",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_school/admin-configuracoes/script.js",
+      "original_bytes": 2844,
+      "original_sha256": "c4db2882bafc8282f63cbd8e837aeb7a89dc6d245ead961bb615232332b194ed",
+      "final_bytes": 2844,
+      "final_sha256": "c4db2882bafc8282f63cbd8e837aeb7a89dc6d245ead961bb615232332b194ed",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_school/admin-dados-escola/admin-dados-escola.html",
+      "original_bytes": 8406,
+      "original_sha256": "2ed5b898e9908e3c20aec8d77abdf11275bbf7af3cd23e21220744bd4c46b1c2",
+      "final_bytes": 8406,
+      "final_sha256": "2ed5b898e9908e3c20aec8d77abdf11275bbf7af3cd23e21220744bd4c46b1c2",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_school/admin-dados-escola/script.js",
+      "original_bytes": 3660,
+      "original_sha256": "2b66c5e373ea51615df30ad2e2bf37cc5c7d189752304b14324825c6263dda12",
+      "final_bytes": 3660,
+      "final_sha256": "2b66c5e373ea51615df30ad2e2bf37cc5c7d189752304b14324825c6263dda12",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_school/admin-professores/admin-professores.html",
+      "original_bytes": 7874,
+      "original_sha256": "ce85eefea96ba50e55fe86dea790c53f2efd9e035968f335fc3987fb07ff0f24",
+      "final_bytes": 7874,
+      "final_sha256": "ce85eefea96ba50e55fe86dea790c53f2efd9e035968f335fc3987fb07ff0f24",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_school/admin-professores/script.js",
+      "original_bytes": 1052,
+      "original_sha256": "7104c42c0948f58629e20d10635c00183cb86028731002c8e23712918b3bad74",
+      "final_bytes": 1052,
+      "final_sha256": "7104c42c0948f58629e20d10635c00183cb86028731002c8e23712918b3bad74",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_school/admin-relatorios/admin-relatorios.html",
+      "original_bytes": 14233,
+      "original_sha256": "63751aec408233d9aba05312c2d02f0e6475d0674c9d5ac2278c37ec5c18a351",
+      "final_bytes": 14233,
+      "final_sha256": "63751aec408233d9aba05312c2d02f0e6475d0674c9d5ac2278c37ec5c18a351",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_school/CRUD_Aluno/index.html",
+      "original_bytes": 9430,
+      "original_sha256": "a195dffd9b039819a7412775c29a86b7270e790d340bc065076833313757102d",
+      "final_bytes": 9430,
+      "final_sha256": "a195dffd9b039819a7412775c29a86b7270e790d340bc065076833313757102d",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_school/CRUD_Aluno/script.js",
+      "original_bytes": 5799,
+      "original_sha256": "3d58f5de74d26b67e3ae7c903caf1920845975972dc1764f5e476929b7cb7ccc",
+      "final_bytes": 5799,
+      "final_sha256": "3d58f5de74d26b67e3ae7c903caf1920845975972dc1764f5e476929b7cb7ccc",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_school/CRUD_Aluno/style.css",
+      "original_bytes": 13115,
+      "original_sha256": "61be551f9b9e6d9883ea21a37538f49bed3517751f00b657f37934ca480e054f",
+      "final_bytes": 13115,
+      "final_sha256": "61be551f9b9e6d9883ea21a37538f49bed3517751f00b657f37934ca480e054f",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_school/CRUD_Professor/index.html",
+      "original_bytes": 2681,
+      "original_sha256": "3c10a73b775f04b1a6533c2e96bcb9c4d92f686e74e9c2206bd74f7fcdea9cc5",
+      "final_bytes": 2681,
+      "final_sha256": "3c10a73b775f04b1a6533c2e96bcb9c4d92f686e74e9c2206bd74f7fcdea9cc5",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_school/CRUD_Turmas/criar-turmas.html",
+      "original_bytes": 5763,
+      "original_sha256": "2980ab367326aa5c6587b2389ef8adc9432e9e5c2698875588df74ee13cb20f0",
+      "final_bytes": 5763,
+      "final_sha256": "2980ab367326aa5c6587b2389ef8adc9432e9e5c2698875588df74ee13cb20f0",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_school/CRUD_Turmas/script.js",
+      "original_bytes": 10807,
+      "original_sha256": "34e40a095ba7cedbab132badb22eae9d3d7cbc8422d8630f81d6ddeed31c7b8e",
+      "final_bytes": 10807,
+      "final_sha256": "34e40a095ba7cedbab132badb22eae9d3d7cbc8422d8630f81d6ddeed31c7b8e",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_school/CRUD_Turmas/style.css",
+      "original_bytes": 15870,
+      "original_sha256": "c6d6519fad95bba55f12ea98d22bd9264711a55cc6cc684f4c40ec4dc5f9cbd3",
+      "final_bytes": 15870,
+      "final_sha256": "c6d6519fad95bba55f12ea98d22bd9264711a55cc6cc684f4c40ec4dc5f9cbd3",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_school/dashboard-admin-escolar/dashboard-admin-escolar.html",
+      "original_bytes": 7419,
+      "original_sha256": "1c3901898e608f1c41e64c4d4e70246c5655620c718ef4d22fb262a4e8277c16",
+      "final_bytes": 7419,
+      "final_sha256": "1c3901898e608f1c41e64c4d4e70246c5655620c718ef4d22fb262a4e8277c16",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_school/dashboard-admin-escolar/script.js",
+      "original_bytes": 5909,
+      "original_sha256": "7f317adfb2dfbed19aa41b80a3e776acfbe991131ed40a6bf33d7942019e36cd",
+      "final_bytes": 5909,
+      "final_sha256": "7f317adfb2dfbed19aa41b80a3e776acfbe991131ed40a6bf33d7942019e36cd",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_school/gerenciar-alunos/gerenciar-alunos.html",
+      "original_bytes": 14188,
+      "original_sha256": "df34e2cbf9914329fc51b91d34bd0c07cb99f70e99811390a33739af7118ebd0",
+      "final_bytes": 14188,
+      "final_sha256": "df34e2cbf9914329fc51b91d34bd0c07cb99f70e99811390a33739af7118ebd0",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_school/gerenciar-professores/gerenciar-professores.html",
+      "original_bytes": 7244,
+      "original_sha256": "69839b612a7a694cc7d242021b9aca55a5e7ed9593e5470da94dcd2359aaec67",
+      "final_bytes": 7244,
+      "final_sha256": "69839b612a7a694cc7d242021b9aca55a5e7ed9593e5470da94dcd2359aaec67",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/admin_school/gerenciar-professores/script.js",
+      "original_bytes": 726,
+      "original_sha256": "c33a07d44424f8aa13d5d9992ee5cf279299e323b4f975122758054110da91f3",
+      "final_bytes": 726,
+      "final_sha256": "c33a07d44424f8aa13d5d9992ee5cf279299e323b4f975122758054110da91f3",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/Assets/Components/admin-geral-sidebar.html",
+      "original_bytes": 2133,
+      "original_sha256": "9710f65daec1395ab3691890ff030951968accdfeacfae23f7ffd2477543c005",
+      "final_bytes": 2133,
+      "final_sha256": "9710f65daec1395ab3691890ff030951968accdfeacfae23f7ffd2477543c005",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/Assets/Components/admin-school-sidebar.html",
+      "original_bytes": 4531,
+      "original_sha256": "7757ca8ab4f1b0f193656ea184655ea71c342093c6dfb69f773532c4ca5b279c",
+      "final_bytes": 4531,
+      "final_sha256": "7757ca8ab4f1b0f193656ea184655ea71c342093c6dfb69f773532c4ca5b279c",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/Assets/Components/student-sidebar.html",
+      "original_bytes": 2345,
+      "original_sha256": "e6c34c256cb582b7ba8bee6ec5f9bd574910e955d33e70ddc168150405da444b",
+      "final_bytes": 2345,
+      "final_sha256": "e6c34c256cb582b7ba8bee6ec5f9bd574910e955d33e70ddc168150405da444b",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/Assets/Components/teacher-sidebar.html",
+      "original_bytes": 2044,
+      "original_sha256": "fb6f31f6364e6276bc156e35102730c22e654515d8d62553e9f46f3b52604a0f",
+      "final_bytes": 2044,
+      "final_sha256": "fb6f31f6364e6276bc156e35102730c22e654515d8d62553e9f46f3b52604a0f",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/Assets/Monetto Logo.ico",
+      "original_bytes": 489724,
+      "original_sha256": "66a6f040f863549894d205c5c89438bf2ffba603631bc77944c718f80bd039d8",
+      "final_bytes": 489724,
+      "final_sha256": "66a6f040f863549894d205c5c89438bf2ffba603631bc77944c718f80bd039d8",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/Assets/Monetto Logo.png",
+      "original_bytes": 25223,
+      "original_sha256": "ddec792d4fd48e0b07d456f6f35fbf7e2fec08073b03a6448d23e030ef21b45c",
+      "final_bytes": 25223,
+      "final_sha256": "ddec792d4fd48e0b07d456f6f35fbf7e2fec08073b03a6448d23e030ef21b45c",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/login/login.css",
+      "original_bytes": 19050,
+      "original_sha256": "144edc8c5f0afe7bd0c9199e0452b1a14bad9b100dc41a55317b83b42ba3c3c7",
+      "final_bytes": 19050,
+      "final_sha256": "144edc8c5f0afe7bd0c9199e0452b1a14bad9b100dc41a55317b83b42ba3c3c7",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/login/login.html",
+      "original_bytes": 8969,
+      "original_sha256": "22bbb80650fc21d3c1586e40446938de2696cb16f8479212d0b5c7b8095e719c",
+      "final_bytes": 8969,
+      "final_sha256": "22bbb80650fc21d3c1586e40446938de2696cb16f8479212d0b5c7b8095e719c",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/login/script.js",
+      "original_bytes": 668,
+      "original_sha256": "ad1e8adc3fe4d029e5e291672ed5ecb1f82752d44c682fe1e17755f23781962c",
+      "final_bytes": 668,
+      "final_sha256": "ad1e8adc3fe4d029e5e291672ed5ecb1f82752d44c682fe1e17755f23781962c",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/shared/main-style.css",
+      "original_bytes": 103791,
+      "original_sha256": "14182f9f1b4f2e130ef5593a19b58aa50678ebe59bcc934f81968cdd65168046",
+      "final_bytes": 103791,
+      "final_sha256": "14182f9f1b4f2e130ef5593a19b58aa50678ebe59bcc934f81968cdd65168046",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/shared/monetto-app.js",
+      "original_bytes": 22009,
+      "original_sha256": "4fce4731776e053352296896581157e44b24f83bdbd0557ffef3c922efcd5635",
+      "final_bytes": 22009,
+      "final_sha256": "4fce4731776e053352296896581157e44b24f83bdbd0557ffef3c922efcd5635",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/shared/monetto-shell.js",
+      "original_bytes": 2474,
+      "original_sha256": "ab143d9225cf8d1a74169ba860e4c9a206d9f329c8b67935c3ba6c2dc52447ad",
+      "final_bytes": 2474,
+      "final_sha256": "ab143d9225cf8d1a74169ba860e4c9a206d9f329c8b67935c3ba6c2dc52447ad",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/shared/redesign.css",
+      "original_bytes": 34656,
+      "original_sha256": "757f5409b3fe8800acee7f9bc212bfd45359f6c0e420ef4f5e247e90fdf530bd",
+      "final_bytes": 34656,
+      "final_sha256": "757f5409b3fe8800acee7f9bc212bfd45359f6c0e420ef4f5e247e90fdf530bd",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/student/configuracoes/configuracoes.css",
+      "original_bytes": 21949,
+      "original_sha256": "44e8f002f59993a8534dad64c7df5290b472e530fe053cff77b042a93ce1b58c",
+      "final_bytes": 8521,
+      "final_sha256": "40d1696cbd714c22f7bd9c0ddaa2650419c410857f1bfa654eed656ba6740fdc",
+      "status": "changed"
+    },
+    {
+      "path": "App/frontend/student/configuracoes/configuracoes.html",
+      "original_bytes": 35375,
+      "original_sha256": "262714b810af4fd1544a8084fe3c8262340245e0c1560ad074fe422326480088",
+      "final_bytes": 36530,
+      "final_sha256": "91bb40f6e766aaebcca7ae8881fd9e251369adef58db18d990ef712df92f95ad",
+      "status": "changed"
+    },
+    {
+      "path": "App/frontend/student/dashboard-aluno/dashboard-aluno.css",
+      "original_bytes": 26418,
+      "original_sha256": "260343151a931ab93a508ece9dc8024d1ee0b34665f9ccbf2ebf9c26b5080f5f",
+      "final_bytes": 9684,
+      "final_sha256": "88209c8d3d15219df59ced0017911012163e9c84dbb9728feb1bce9ce25df99d",
+      "status": "changed"
+    },
+    {
+      "path": "App/frontend/student/dashboard-aluno/dashboard-aluno.html",
+      "original_bytes": 5170,
+      "original_sha256": "4c56eac8ca4ad88de52c871c44be0d7fcd8a7b2a91c2a015a5b09548489d0549",
+      "final_bytes": 5092,
+      "final_sha256": "b24c5930adb8ce885226243310f98a4c79a3026a2122c01732a88396407c2d00",
+      "status": "changed"
+    },
+    {
+      "path": "App/frontend/student/jogos-quiz/jogos-quiz.css",
+      "original_bytes": 22483,
+      "original_sha256": "e15c3e9755c79231a39032e621eff79c7204c25fe78f6c06c5484168ab5d6b7b",
+      "final_bytes": 11351,
+      "final_sha256": "d223bb517f52888f5f263209449c6f5d0ae379f0f9afeef90d68afaa8635e822",
+      "status": "changed"
+    },
+    {
+      "path": "App/frontend/student/jogos-quiz/jogos-quiz.html",
+      "original_bytes": 40998,
+      "original_sha256": "820da92f9933686556f312f048cd832da3e3f1bfe8b0507fb0ce6b55bdb7dc38",
+      "final_bytes": 41078,
+      "final_sha256": "9966c5922564e77fc631cbe3e60ca6735a26b34d41dab33fa06193c894b83b14",
+      "status": "changed"
+    },
+    {
+      "path": "App/frontend/student/modulo-aprendizado/modulo-aprendizado.css",
+      "original_bytes": 19519,
+      "original_sha256": "a0e673a2ead32f0c47d6edba5a77614cdef902c99b00765e55b907250911f9a4",
+      "final_bytes": 9318,
+      "final_sha256": "182f7635b310f26b9c2b80718a929ec16a1a580b88cbacd9e4a77a366ed3af0f",
+      "status": "changed"
+    },
+    {
+      "path": "App/frontend/student/modulo-aprendizado/modulo-aprendizado.html",
+      "original_bytes": 11243,
+      "original_sha256": "b4ad44fccb8e3f1531d77643e91b24cc27dac1d03137faf9c42c10d0a8c5de0a",
+      "final_bytes": 11235,
+      "final_sha256": "3c135f102f894e14120f413d3954dee06e735b2ace869530191d02eda29f47b7",
+      "status": "changed"
+    },
+    {
+      "path": "App/frontend/student/recompensas/recompensas.css",
+      "original_bytes": 19464,
+      "original_sha256": "c8b0b9a0cab46c0f0726d89cd8894dd748da8bff64cac357ef34b027fafca768",
+      "final_bytes": 7208,
+      "final_sha256": "e52d9070cbcde6ce7b4bc40b3f082ff38b08dc58f009b8c76b2e8c7527525df6",
+      "status": "changed"
+    },
+    {
+      "path": "App/frontend/student/recompensas/recompensas.html",
+      "original_bytes": 7295,
+      "original_sha256": "22de89ca65cf1d34612e0f6c6c2e319062ffc5e6942cee0fdba4b84c1d5cc2c9",
+      "final_bytes": 7283,
+      "final_sha256": "47381a13e5de6c21c7044e7a20419a4b322dd63d33e61b87c6417707edc52504",
+      "status": "changed"
+    },
+    {
+      "path": "App/frontend/student/student-data.js",
+      "original_bytes": 80621,
+      "original_sha256": "bb8cdb1eda939e62164da2a518887cdd1cffc19c4c1ddf39199ff842bddee46c",
+      "final_bytes": 80621,
+      "final_sha256": "bb8cdb1eda939e62164da2a518887cdd1cffc19c4c1ddf39199ff842bddee46c",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/student/student-script.js",
+      "original_bytes": 5051,
+      "original_sha256": "bd07df90518b793f5efbe63920cd6c243019332b55fc8baedb8a06acb21c4500",
+      "final_bytes": 5051,
+      "final_sha256": "bd07df90518b793f5efbe63920cd6c243019332b55fc8baedb8a06acb21c4500",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/student/tarefas-aluno/tarefas-aluno.css",
+      "original_bytes": 26365,
+      "original_sha256": "8b14d0901262889b361a7d1db943414be65b4aa6cb0163edf8ea07bb1f1d3eaf",
+      "final_bytes": 8907,
+      "final_sha256": "d19a24c35e5cf1d922ce44f86f89bfff985608c3dcf827f53f2da84938ea5b01",
+      "status": "changed"
+    },
+    {
+      "path": "App/frontend/student/tarefas-aluno/tarefas-aluno.html",
+      "original_bytes": 6237,
+      "original_sha256": "43d78f65c644268985e8d82a07968094037348fd2984b9e4fe555a24a56b38e9",
+      "final_bytes": 6428,
+      "final_sha256": "95a7c06ef5ebafee75c6f0cdaaf50be9c74f55d8ef203fed73c3f1a8b00711e2",
+      "status": "changed"
+    },
+    {
+      "path": "App/frontend/teacher/configuracoes/configuracoes-prof.html",
+      "original_bytes": 29474,
+      "original_sha256": "2386f388a1a92389586db94361563bfeed4ab6d468cdfec919d4e8ac76c5268c",
+      "final_bytes": 29474,
+      "final_sha256": "2386f388a1a92389586db94361563bfeed4ab6d468cdfec919d4e8ac76c5268c",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/teacher/CRUD_Tarefas/criar-tarefas.html",
+      "original_bytes": 17604,
+      "original_sha256": "5822facf2b832427145cf08ae7667e3b14c6e84bcce7e94c27d8da5f60f3d072",
+      "final_bytes": 17604,
+      "final_sha256": "5822facf2b832427145cf08ae7667e3b14c6e84bcce7e94c27d8da5f60f3d072",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/teacher/CRUD_Tarefas/script.js",
+      "original_bytes": 6381,
+      "original_sha256": "cd0b4060b539c5653cdf4646b1e971d9f723e5a53734822649c717aa05fd38bb",
+      "final_bytes": 6381,
+      "final_sha256": "cd0b4060b539c5653cdf4646b1e971d9f723e5a53734822649c717aa05fd38bb",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/teacher/dashboard-professor/dashboard-professor.html",
+      "original_bytes": 5987,
+      "original_sha256": "f3f4e7039497befac2af18c300d994f712eabad3577a3c3b47bd4c335c310aa4",
+      "final_bytes": 5987,
+      "final_sha256": "f3f4e7039497befac2af18c300d994f712eabad3577a3c3b47bd4c335c310aa4",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/teacher/dashboard-professor/script.js",
+      "original_bytes": 8542,
+      "original_sha256": "f698b14ceead4662251505cea71e12b418cfe26fb2b894857be0dfb4ad8ef2ca",
+      "final_bytes": 8542,
+      "final_sha256": "f698b14ceead4662251505cea71e12b418cfe26fb2b894857be0dfb4ad8ef2ca",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/teacher/dashboard-professor/test_script.js",
+      "original_bytes": 12367,
+      "original_sha256": "acd0d8ba56f50e34089933e421ca64e75b16cd083989f5388a8126bddccf1f7f",
+      "final_bytes": 12367,
+      "final_sha256": "acd0d8ba56f50e34089933e421ca64e75b16cd083989f5388a8126bddccf1f7f",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/teacher/gerenciar-alunos/gerenciar-alunos.html",
+      "original_bytes": 5833,
+      "original_sha256": "c59dc54db2fc74e379b20927fc07b9832e418eb57707903418cc4881515c3feb",
+      "final_bytes": 5833,
+      "final_sha256": "c59dc54db2fc74e379b20927fc07b9832e418eb57707903418cc4881515c3feb",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/teacher/gerenciar-alunos/script.js",
+      "original_bytes": 8830,
+      "original_sha256": "e7a146d0f3265cc44457d29e1b84b6d97c7d41770d75ea0a37039cb65b265d55",
+      "final_bytes": 8830,
+      "final_sha256": "e7a146d0f3265cc44457d29e1b84b6d97c7d41770d75ea0a37039cb65b265d55",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/teacher/login-professor-admin/login-professor-admin.html",
+      "original_bytes": 11379,
+      "original_sha256": "3797a76fe7b61603dcef363ce8338a5598a312ab211f524a88cfd6818a9596aa",
+      "final_bytes": 11379,
+      "final_sha256": "3797a76fe7b61603dcef363ce8338a5598a312ab211f524a88cfd6818a9596aa",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/teacher/pagina-tarefas-prof/pagina-tarefas-prof.html",
+      "original_bytes": 10879,
+      "original_sha256": "c312ed6f7bb291bd1a35e3a492f9b1d4e8a2a2c89eba71ac91f6d641f0e32e30",
+      "final_bytes": 10879,
+      "final_sha256": "c312ed6f7bb291bd1a35e3a492f9b1d4e8a2a2c89eba71ac91f6d641f0e32e30",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/teacher/pagina-tarefas-prof/script.js",
+      "original_bytes": 6197,
+      "original_sha256": "e5e0f96de597d51b47104e29c4711d9de6a94908dd3fc0730ac776507a62b280",
+      "final_bytes": 6197,
+      "final_sha256": "e5e0f96de597d51b47104e29c4711d9de6a94908dd3fc0730ac776507a62b280",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/teacher/relatorios/relatorios.html",
+      "original_bytes": 19235,
+      "original_sha256": "386897cd1ce0fb1dc3d203d258b99a68aef5f76f5d5fb001f790823434fb62b5",
+      "final_bytes": 19235,
+      "final_sha256": "386897cd1ce0fb1dc3d203d258b99a68aef5f76f5d5fb001f790823434fb62b5",
+      "status": "unchanged"
+    },
+    {
+      "path": "App/frontend/teacher/teacher-script/main-teacher-script.js",
+      "original_bytes": 1560,
+      "original_sha256": "d518096163718531834039a15907c1bf2ff122a874c44a3365cf6bcd7d6159a6",
+      "final_bytes": 1560,
+      "final_sha256": "d518096163718531834039a15907c1bf2ff122a874c44a3365cf6bcd7d6159a6",
+      "status": "unchanged"
+    },
+    {
+      "path": ".env.example",
+      "original_bytes": 203,
+      "original_sha256": "7bc73d25b57fe2a42f9cdb3930bf3b1389cca30dba58838472fb84f85b7755f2",
+      "final_bytes": 203,
+      "final_sha256": "7bc73d25b57fe2a42f9cdb3930bf3b1389cca30dba58838472fb84f85b7755f2",
+      "status": "unchanged"
+    },
+    {
+      "path": ".gitignore",
+      "original_bytes": 150,
+      "original_sha256": "d355970863e52f63a71fbdc9ef370380b04aad9faabf46fbd7d170e8ff8e99e0",
+      "final_bytes": 150,
+      "final_sha256": "d355970863e52f63a71fbdc9ef370380b04aad9faabf46fbd7d170e8ff8e99e0",
+      "status": "unchanged"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "original_bytes": 7684,
+      "original_sha256": "fc034a1519cdd75464744ac7703ed1fe2f9f29220b6d4a91c43bace3e8772167",
+      "final_bytes": 7684,
+      "final_sha256": "fc034a1519cdd75464744ac7703ed1fe2f9f29220b6d4a91c43bace3e8772167",
+      "status": "unchanged"
+    },
+    {
+      "path": "database.sql",
+      "original_bytes": 13085,
+      "original_sha256": "85f8789ffa439532e5f9ba65f40f85cbfa8ffd178843fad779aa7ce2cf43b17b",
+      "final_bytes": 13085,
+      "final_sha256": "85f8789ffa439532e5f9ba65f40f85cbfa8ffd178843fad779aa7ce2cf43b17b",
+      "status": "unchanged"
+    },
+    {
+      "path": "DockerFile",
+      "original_bytes": 79,
+      "original_sha256": "f56f788ff4e560edb0f02e0accce6ba96f4b323b0edc3cde97f96b8a48493913",
+      "final_bytes": 79,
+      "final_sha256": "f56f788ff4e560edb0f02e0accce6ba96f4b323b0edc3cde97f96b8a48493913",
+      "status": "unchanged"
+    },
+    {
+      "path": "main.js",
+      "original_bytes": 17329,
+      "original_sha256": "55dcf444a78c7653de1a5eb9f71e62ce80d74c2ecaa08a508496980e8bdef530",
+      "final_bytes": 17329,
+      "final_sha256": "55dcf444a78c7653de1a5eb9f71e62ce80d74c2ecaa08a508496980e8bdef530",
+      "status": "unchanged"
+    },
+    {
+      "path": "Monetto.exe",
+      "original_bytes": 616448,
+      "original_sha256": "c060efbfa66ac80f17ecf9550bdf5bf0d3019c36398e646dfb7f8cd0e30f7956",
+      "final_bytes": 616448,
+      "final_sha256": "c060efbfa66ac80f17ecf9550bdf5bf0d3019c36398e646dfb7f8cd0e30f7956",
+      "status": "unchanged"
+    },
+    {
+      "path": "monetto.sql",
+      "original_bytes": 66121,
+      "original_sha256": "8934032645d848a01e624e5719b3be636a313f6edd55c0cba4102d4244a3665d",
+      "final_bytes": 66121,
+      "final_sha256": "8934032645d848a01e624e5719b3be636a313f6edd55c0cba4102d4244a3665d",
+      "status": "unchanged"
+    },
+    {
+      "path": "package.json",
+      "original_bytes": 737,
+      "original_sha256": "713aca5cdedc590fe65d62c7d801142053963a4e8a527c554bf568711c968c2b",
+      "final_bytes": 737,
+      "final_sha256": "713aca5cdedc590fe65d62c7d801142053963a4e8a527c554bf568711c968c2b",
+      "status": "unchanged"
+    },
+    {
+      "path": "package-lock.json",
+      "original_bytes": 55683,
+      "original_sha256": "27d3ae5ac6fb914a845ab1e3955b31d236adf9bfeb1e553863325b34656a71ff",
+      "final_bytes": 55683,
+      "final_sha256": "27d3ae5ac6fb914a845ab1e3955b31d236adf9bfeb1e553863325b34656a71ff",
+      "status": "unchanged"
+    },
+    {
+      "path": "preload.js",
+      "original_bytes": 3855,
+      "original_sha256": "2dc175cf1b525289a75ec9fe057b178589b1eff93a5ff86861dc3a87b819d0e8",
+      "final_bytes": 3855,
+      "final_sha256": "2dc175cf1b525289a75ec9fe057b178589b1eff93a5ff86861dc3a87b819d0e8",
+      "status": "unchanged"
+    },
+    {
+      "path": "start.bat",
+      "original_bytes": 3239,
+      "original_sha256": "be528841d3afb85df211208b415fb94a985061800828f2b7c8d58b579c938b88",
+      "final_bytes": 3239,
+      "final_sha256": "be528841d3afb85df211208b415fb94a985061800828f2b7c8d58b579c938b88",
+      "status": "unchanged"
+    },
+    {
+      "path": "test_inserts.sql",
+      "original_bytes": 51322,
+      "original_sha256": "e075d9b76280fad71bbcd181d79a22ec304e9dca255eba930aea2c9dbda4fa23",
+      "final_bytes": 51322,
+      "final_sha256": "e075d9b76280fad71bbcd181d79a22ec304e9dca255eba930aea2c9dbda4fa23",
+      "status": "unchanged"
+    },
+    {
+      "path": ".vscode/settings.json",
+      "original_bytes": 384,
+      "original_sha256": "ff2cedc7dfb8cbd9def136125461ca5b56288f9ec486dca3de349f8220573dd1",
+      "final_bytes": 384,
+      "final_sha256": "ff2cedc7dfb8cbd9def136125461ca5b56288f9ec486dca3de349f8220573dd1",
+      "status": "unchanged"
+    }
+  ],
+  "html": [
+    {
+      "path": "App/frontend/student/configuracoes/configuracoes.html",
+      "original_stylesheet_order": [
+        "https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap",
+        "configuracoes.css",
+        "../../shared/redesign.css"
+      ],
+      "final_stylesheet_order": [
+        "https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap",
+        "../student-ui.css",
+        "configuracoes.css"
+      ],
+      "original_external_scripts": [
+        "../student-script.js",
+        "../student-data.js",
+        "../../shared/monetto-shell.js"
+      ],
+      "final_external_scripts": [
+        "../student-script.js",
+        "../student-data.js",
+        "../../shared/monetto-shell.js"
+      ],
+      "external_scripts_identical": true,
+      "inline_scripts": [
+        {
+          "index": 0,
+          "original_sha256": "2cb1ff7da81ba28a713539d491e002e61c4c009182d20ff4ac9547b4b8460409",
+          "final_sha256": "2cb1ff7da81ba28a713539d491e002e61c4c009182d20ff4ac9547b4b8460409",
+          "byte_identical": true,
+          "identical_after_crlf_normalization": true
+        }
+      ],
+      "ids_preserved": true,
+      "removed_ids": {},
+      "added_ids": {},
+      "original_id_count": 27,
+      "final_id_count": 27,
+      "class_tokens_preserved": true,
+      "removed_classes": {},
+      "added_classes": {},
+      "event_attributes_preserved": true,
+      "removed_event_attributes": [],
+      "added_event_attributes": [],
+      "data_attribute_changes": {
+        "removed": [
+          {
+            "attribute": "data-avatar",
+            "value": "",
+            "count": 6
+          }
+        ],
+        "added": [
+          {
+            "attribute": "data-avatar",
+            "value": "🐧",
+            "count": 1
+          },
+          {
+            "attribute": "data-avatar",
+            "value": "🐱",
+            "count": 1
+          },
+          {
+            "attribute": "data-avatar",
+            "value": "🐼",
+            "count": 1
+          },
+          {
+            "attribute": "data-avatar",
+            "value": "🦁",
+            "count": 1
+          },
+          {
+            "attribute": "data-avatar",
+            "value": "🦉",
+            "count": 1
+          },
+          {
+            "attribute": "data-avatar",
+            "value": "🦊",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "path": "App/frontend/student/dashboard-aluno/dashboard-aluno.html",
+      "original_stylesheet_order": [
+        "https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap",
+        "dashboard-aluno.css",
+        "../../shared/redesign.css"
+      ],
+      "final_stylesheet_order": [
+        "https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap",
+        "../student-ui.css",
+        "dashboard-aluno.css"
+      ],
+      "original_external_scripts": [
+        "../student-script.js",
+        "../student-data.js",
+        "../../shared/monetto-shell.js"
+      ],
+      "final_external_scripts": [
+        "../student-script.js",
+        "../student-data.js",
+        "../../shared/monetto-shell.js"
+      ],
+      "external_scripts_identical": true,
+      "inline_scripts": [],
+      "ids_preserved": true,
+      "removed_ids": {},
+      "added_ids": {},
+      "original_id_count": 3,
+      "final_id_count": 3,
+      "class_tokens_preserved": true,
+      "removed_classes": {},
+      "added_classes": {
+        "dashboard-aside": 1
+      },
+      "event_attributes_preserved": true,
+      "removed_event_attributes": [],
+      "added_event_attributes": [],
+      "data_attribute_changes": {
+        "removed": [],
+        "added": []
+      }
+    },
+    {
+      "path": "App/frontend/student/jogos-quiz/jogos-quiz.html",
+      "original_stylesheet_order": [
+        "https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap",
+        "jogos-quiz.css",
+        "../../shared/redesign.css"
+      ],
+      "final_stylesheet_order": [
+        "https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap",
+        "../student-ui.css",
+        "jogos-quiz.css"
+      ],
+      "original_external_scripts": [
+        "../student-script.js",
+        "../student-data.js",
+        "../../shared/monetto-shell.js"
+      ],
+      "final_external_scripts": [
+        "../student-script.js",
+        "../student-data.js",
+        "../../shared/monetto-shell.js"
+      ],
+      "external_scripts_identical": true,
+      "inline_scripts": [
+        {
+          "index": 0,
+          "original_sha256": "c3e5b1200aa3070c11597642e5654d4ba9159ec6e0b79b335e3efc70ec88688b",
+          "final_sha256": "c3e5b1200aa3070c11597642e5654d4ba9159ec6e0b79b335e3efc70ec88688b",
+          "byte_identical": true,
+          "identical_after_crlf_normalization": true
+        }
+      ],
+      "ids_preserved": true,
+      "removed_ids": {},
+      "added_ids": {},
+      "original_id_count": 24,
+      "final_id_count": 24,
+      "class_tokens_preserved": true,
+      "removed_classes": {},
+      "added_classes": {},
+      "event_attributes_preserved": true,
+      "removed_event_attributes": [],
+      "added_event_attributes": [],
+      "data_attribute_changes": {
+        "removed": [],
+        "added": []
+      }
+    },
+    {
+      "path": "App/frontend/student/modulo-aprendizado/modulo-aprendizado.html",
+      "original_stylesheet_order": [
+        "https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap",
+        "modulo-aprendizado.css",
+        "../../shared/redesign.css"
+      ],
+      "final_stylesheet_order": [
+        "https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap",
+        "../student-ui.css",
+        "modulo-aprendizado.css"
+      ],
+      "original_external_scripts": [
+        "../student-script.js",
+        "../student-data.js",
+        "../../shared/monetto-shell.js"
+      ],
+      "final_external_scripts": [
+        "../student-script.js",
+        "../student-data.js",
+        "../../shared/monetto-shell.js"
+      ],
+      "external_scripts_identical": true,
+      "inline_scripts": [],
+      "ids_preserved": true,
+      "removed_ids": {},
+      "added_ids": {},
+      "original_id_count": 3,
+      "final_id_count": 3,
+      "class_tokens_preserved": true,
+      "removed_classes": {},
+      "added_classes": {},
+      "event_attributes_preserved": true,
+      "removed_event_attributes": [],
+      "added_event_attributes": [],
+      "data_attribute_changes": {
+        "removed": [],
+        "added": []
+      }
+    },
+    {
+      "path": "App/frontend/student/recompensas/recompensas.html",
+      "original_stylesheet_order": [
+        "https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap",
+        "recompensas.css",
+        "../../shared/redesign.css"
+      ],
+      "final_stylesheet_order": [
+        "https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap",
+        "../student-ui.css",
+        "recompensas.css"
+      ],
+      "original_external_scripts": [
+        "../student-script.js",
+        "../student-data.js",
+        "../../shared/monetto-shell.js"
+      ],
+      "final_external_scripts": [
+        "../student-script.js",
+        "../student-data.js",
+        "../../shared/monetto-shell.js"
+      ],
+      "external_scripts_identical": true,
+      "inline_scripts": [],
+      "ids_preserved": true,
+      "removed_ids": {},
+      "added_ids": {},
+      "original_id_count": 3,
+      "final_id_count": 3,
+      "class_tokens_preserved": true,
+      "removed_classes": {},
+      "added_classes": {},
+      "event_attributes_preserved": true,
+      "removed_event_attributes": [],
+      "added_event_attributes": [],
+      "data_attribute_changes": {
+        "removed": [],
+        "added": []
+      }
+    },
+    {
+      "path": "App/frontend/student/tarefas-aluno/tarefas-aluno.html",
+      "original_stylesheet_order": [
+        "https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap",
+        "tarefas-aluno.css",
+        "../../shared/redesign.css"
+      ],
+      "final_stylesheet_order": [
+        "https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap",
+        "../student-ui.css",
+        "tarefas-aluno.css"
+      ],
+      "original_external_scripts": [
+        "../student-script.js",
+        "../student-data.js",
+        "../../shared/monetto-shell.js"
+      ],
+      "final_external_scripts": [
+        "../student-script.js",
+        "../student-data.js",
+        "../../shared/monetto-shell.js"
+      ],
+      "external_scripts_identical": true,
+      "inline_scripts": [],
+      "ids_preserved": true,
+      "removed_ids": {},
+      "added_ids": {},
+      "original_id_count": 4,
+      "final_id_count": 4,
+      "class_tokens_preserved": true,
+      "removed_classes": {},
+      "added_classes": {},
+      "event_attributes_preserved": true,
+      "removed_event_attributes": [],
+      "added_event_attributes": [],
+      "data_attribute_changes": {
+        "removed": [],
+        "added": []
+      }
+    }
+  ],
+  "css_inventory": {
+    "original": [
+      {
+        "path": "App/frontend/admin_school/CRUD_Aluno/style.css",
+        "bytes": 13115,
+        "sha256": "61be551f9b9e6d9883ea21a37538f49bed3517751f00b657f37934ca480e054f",
+        "important_count": 169
+      },
+      {
+        "path": "App/frontend/admin_school/CRUD_Turmas/style.css",
+        "bytes": 15870,
+        "sha256": "c6d6519fad95bba55f12ea98d22bd9264711a55cc6cc684f4c40ec4dc5f9cbd3",
+        "important_count": 169
+      },
+      {
+        "path": "App/frontend/login/login.css",
+        "bytes": 19050,
+        "sha256": "144edc8c5f0afe7bd0c9199e0452b1a14bad9b100dc41a55317b83b42ba3c3c7",
+        "important_count": 195
+      },
+      {
+        "path": "App/frontend/shared/main-style.css",
+        "bytes": 103791,
+        "sha256": "14182f9f1b4f2e130ef5593a19b58aa50678ebe59bcc934f81968cdd65168046",
+        "important_count": 171
+      },
+      {
+        "path": "App/frontend/shared/redesign.css",
+        "bytes": 34656,
+        "sha256": "757f5409b3fe8800acee7f9bc212bfd45359f6c0e420ef4f5e247e90fdf530bd",
+        "important_count": 418
+      },
+      {
+        "path": "App/frontend/student/configuracoes/configuracoes.css",
+        "bytes": 21949,
+        "sha256": "44e8f002f59993a8534dad64c7df5290b472e530fe053cff77b042a93ce1b58c",
+        "important_count": 169
+      },
+      {
+        "path": "App/frontend/student/dashboard-aluno/dashboard-aluno.css",
+        "bytes": 26418,
+        "sha256": "260343151a931ab93a508ece9dc8024d1ee0b34665f9ccbf2ebf9c26b5080f5f",
+        "important_count": 193
+      },
+      {
+        "path": "App/frontend/student/jogos-quiz/jogos-quiz.css",
+        "bytes": 22483,
+        "sha256": "e15c3e9755c79231a39032e621eff79c7204c25fe78f6c06c5484168ab5d6b7b",
+        "important_count": 169
+      },
+      {
+        "path": "App/frontend/student/modulo-aprendizado/modulo-aprendizado.css",
+        "bytes": 19519,
+        "sha256": "a0e673a2ead32f0c47d6edba5a77614cdef902c99b00765e55b907250911f9a4",
+        "important_count": 169
+      },
+      {
+        "path": "App/frontend/student/recompensas/recompensas.css",
+        "bytes": 19464,
+        "sha256": "c8b0b9a0cab46c0f0726d89cd8894dd748da8bff64cac357ef34b027fafca768",
+        "important_count": 169
+      },
+      {
+        "path": "App/frontend/student/tarefas-aluno/tarefas-aluno.css",
+        "bytes": 26365,
+        "sha256": "8b14d0901262889b361a7d1db943414be65b4aa6cb0163edf8ea07bb1f1d3eaf",
+        "important_count": 169
+      }
+    ],
+    "final": [
+      {
+        "path": "App/frontend/admin_school/CRUD_Aluno/style.css",
+        "bytes": 13115,
+        "sha256": "61be551f9b9e6d9883ea21a37538f49bed3517751f00b657f37934ca480e054f",
+        "important_count": 169
+      },
+      {
+        "path": "App/frontend/admin_school/CRUD_Turmas/style.css",
+        "bytes": 15870,
+        "sha256": "c6d6519fad95bba55f12ea98d22bd9264711a55cc6cc684f4c40ec4dc5f9cbd3",
+        "important_count": 169
+      },
+      {
+        "path": "App/frontend/login/login.css",
+        "bytes": 19050,
+        "sha256": "144edc8c5f0afe7bd0c9199e0452b1a14bad9b100dc41a55317b83b42ba3c3c7",
+        "important_count": 195
+      },
+      {
+        "path": "App/frontend/shared/main-style.css",
+        "bytes": 103791,
+        "sha256": "14182f9f1b4f2e130ef5593a19b58aa50678ebe59bcc934f81968cdd65168046",
+        "important_count": 171
+      },
+      {
+        "path": "App/frontend/shared/redesign.css",
+        "bytes": 34656,
+        "sha256": "757f5409b3fe8800acee7f9bc212bfd45359f6c0e420ef4f5e247e90fdf530bd",
+        "important_count": 418
+      },
+      {
+        "path": "App/frontend/student/configuracoes/configuracoes.css",
+        "bytes": 8521,
+        "sha256": "40d1696cbd714c22f7bd9c0ddaa2650419c410857f1bfa654eed656ba6740fdc",
+        "important_count": 0
+      },
+      {
+        "path": "App/frontend/student/dashboard-aluno/dashboard-aluno.css",
+        "bytes": 9684,
+        "sha256": "88209c8d3d15219df59ced0017911012163e9c84dbb9728feb1bce9ce25df99d",
+        "important_count": 0
+      },
+      {
+        "path": "App/frontend/student/jogos-quiz/jogos-quiz.css",
+        "bytes": 11351,
+        "sha256": "d223bb517f52888f5f263209449c6f5d0ae379f0f9afeef90d68afaa8635e822",
+        "important_count": 0
+      },
+      {
+        "path": "App/frontend/student/modulo-aprendizado/modulo-aprendizado.css",
+        "bytes": 9318,
+        "sha256": "182f7635b310f26b9c2b80718a929ec16a1a580b88cbacd9e4a77a366ed3af0f",
+        "important_count": 2
+      },
+      {
+        "path": "App/frontend/student/recompensas/recompensas.css",
+        "bytes": 7208,
+        "sha256": "e52d9070cbcde6ce7b4bc40b3f082ff38b08dc58f009b8c76b2e8c7527525df6",
+        "important_count": 2
+      },
+      {
+        "path": "App/frontend/student/student-ui.css",
+        "bytes": 11864,
+        "sha256": "d52234bef70740a67cda19ee2bb55682d2efe1a9068587f40d4e9660ea7eb15a",
+        "important_count": 12
+      },
+      {
+        "path": "App/frontend/student/tarefas-aluno/tarefas-aluno.css",
+        "bytes": 8907,
+        "sha256": "d19a24c35e5cf1d922ce44f86f89bfff985608c3dcf827f53f2da84938ea5b01",
+        "important_count": 1
+      }
+    ]
+  },
+  "added_files": [
+    {
+      "path": "App/frontend/student/student-ui.css",
+      "bytes": 11864,
+      "sha256": "d52234bef70740a67cda19ee2bb55682d2efe1a9068587f40d4e9660ea7eb15a"
+    },
+    {
+      "path": "RELATORIO-REVISAO-ALUNO.md",
+      "bytes": 11321,
+      "sha256": "bb609adced3b3691daefbd50a03a3048ffe33bece3bce448e9d372d9985fb3f5"
+    },
+    {
+      "path": "validation/check-student.cjs",
+      "bytes": 19205,
+      "sha256": "e8c53960927be70bae532496b8e8908f44eecb13a9626d85811e5610b07b84fa"
+    },
+    {
+      "path": "validation/results.json",
+      "bytes": 71662,
+      "sha256": "826d5197b9f560bbdcf16d97d51396284fbb2cd091a5c8e25070469f47b5762c"
+    },
+    {
+      "path": "validation/screenshots/configuracoes-dark-1440.png",
+      "bytes": 86552,
+      "sha256": "d2fdfbe555d4a4a95786330205fda6c60633b683e3c6b927e2e71a93aee2e76d"
+    },
+    {
+      "path": "validation/screenshots/configuracoes-dark-375.png",
+      "bytes": 78769,
+      "sha256": "fa264c214bc9dce38e05802f3c5c737a8446050fb4cd898887b232f03f13ea9d"
+    },
+    {
+      "path": "validation/screenshots/configuracoes-light-1440.png",
+      "bytes": 85748,
+      "sha256": "25ea0acfd70d9b72f3a37b4103d657fc807661616778fd863304928c1da77e49"
+    },
+    {
+      "path": "validation/screenshots/configuracoes-light-375.png",
+      "bytes": 77500,
+      "sha256": "73e19e54efabce9ef25d5e5920fd3ea6b97081638193a074dde7ea2415c0c8b0"
+    },
+    {
+      "path": "validation/screenshots/dashboard-aluno-dark-1440.png",
+      "bytes": 105817,
+      "sha256": "0002a67e90821587a93a0430d4e2e5375c611e0fdc72c4941015b6a51fbbb507"
+    },
+    {
+      "path": "validation/screenshots/dashboard-aluno-dark-375.png",
+      "bytes": 101331,
+      "sha256": "eca87a9ce713de6931cd6bc2a45f96dded7b6a23caf8b1ca80ec9ba035e9e560"
+    },
+    {
+      "path": "validation/screenshots/dashboard-aluno-light-1440.png",
+      "bytes": 104967,
+      "sha256": "fdbfea920777fa70b445023ccddca7ed140d205f5eb9d7a8849696d1d368cb97"
+    },
+    {
+      "path": "validation/screenshots/dashboard-aluno-light-375.png",
+      "bytes": 99937,
+      "sha256": "896da7161e3641ab7f4706aa0ccf71e2d45ce6245587ce18a87af0a87beea1ab"
+    },
+    {
+      "path": "validation/screenshots/jogos-quiz-dark-1440.png",
+      "bytes": 75828,
+      "sha256": "08b3ecd31bc430a27f752fd6690d56cc82725d4ef3127c0e8354faad94a458d6"
+    },
+    {
+      "path": "validation/screenshots/jogos-quiz-dark-375.png",
+      "bytes": 88903,
+      "sha256": "2ecc44ea93be9db4b9c41a44d6b1defd68d51ad4d7bf6e32ccabf98c9a2ca701"
+    },
+    {
+      "path": "validation/screenshots/jogos-quiz-light-1440.png",
+      "bytes": 75758,
+      "sha256": "b92e9d2c052ac36e2804b7942b701ecf911883962b3a3a282cde2ac04ad8874d"
+    },
+    {
+      "path": "validation/screenshots/jogos-quiz-light-375.png",
+      "bytes": 87753,
+      "sha256": "3f5d1f90f25bbc0d9d696d984ce1eb6201414172f89f5327680833f8aeebc892"
+    },
+    {
+      "path": "validation/screenshots/modulo-aprendizado-dark-1440.png",
+      "bytes": 86924,
+      "sha256": "9f9cf2f46215267c94a776ffe646860152359bc98016942f40a267040e3f3ee6"
+    },
+    {
+      "path": "validation/screenshots/modulo-aprendizado-dark-375.png",
+      "bytes": 93217,
+      "sha256": "1fdc54b381ed51d3629d79ca3b51be66dee5a1ac8db79556d479a71f4e333bc9"
+    },
+    {
+      "path": "validation/screenshots/modulo-aprendizado-light-1440.png",
+      "bytes": 86245,
+      "sha256": "00a906d77b21852b01e0e56d1cb2e294108821c5db96dd79d9498916aa330bb5"
+    },
+    {
+      "path": "validation/screenshots/modulo-aprendizado-light-375.png",
+      "bytes": 91463,
+      "sha256": "cb612071fab2d94d36a6410c538c229acc159ba8cbc005f274ad85089b9e16a7"
+    },
+    {
+      "path": "validation/screenshots/navigation-open-dark-1440.png",
+      "bytes": 85539,
+      "sha256": "e3659b72f2022f4e1a72ca2be3498c19f9671c437c20002de890038954dec283"
+    },
+    {
+      "path": "validation/screenshots/navigation-open-dark-375.png",
+      "bytes": 38104,
+      "sha256": "7287f0013962f168b4700a56306aa2010937c3268cb401b7aa503e830c7dd4b5"
+    },
+    {
+      "path": "validation/screenshots/navigation-open-light-1440.png",
+      "bytes": 87405,
+      "sha256": "acf4c9fe8c8173ae9efde80080215200cb638a4cc8641358626e08c1daba0fd2"
+    },
+    {
+      "path": "validation/screenshots/navigation-open-light-375.png",
+      "bytes": 38997,
+      "sha256": "6321cd217e78b04f7c50eb1a3939f5f7b1813c8c88d629259fc1e94f57e71251"
+    },
+    {
+      "path": "validation/screenshots/quiz-dialog-dark-1440.png",
+      "bytes": 78492,
+      "sha256": "7dad25352e89c3773cdbc2d8a3cd94d4c251466d4068bcffb078dfc42b6d4bbc"
+    },
+    {
+      "path": "validation/screenshots/quiz-dialog-dark-375.png",
+      "bytes": 35926,
+      "sha256": "3afaffe5da23cf2f12b14c7c6573236ae4fb61387e305b5f9ed0f3abcb4598be"
+    },
+    {
+      "path": "validation/screenshots/quiz-dialog-light-1440.png",
+      "bytes": 84095,
+      "sha256": "5402c4380b8afa44bbce86d13c5a62500163dc86463313cafe29d37670d959aa"
+    },
+    {
+      "path": "validation/screenshots/quiz-dialog-light-375.png",
+      "bytes": 39041,
+      "sha256": "57fc62371b74ae79c6668a26e3f5518e2de2f773a001a9b528540a0def968d7f"
+    },
+    {
+      "path": "validation/screenshots/quiz-feedback-dark-375.png",
+      "bytes": 35448,
+      "sha256": "0fb0b4b54541bffc2468def1de9648a7e1fdf85febe72bbc3dbceffd6c3957b2"
+    },
+    {
+      "path": "validation/screenshots/quiz-score-dark-375.png",
+      "bytes": 38421,
+      "sha256": "088b6398de9f583c878676c95a3e39edea48cde0a509dd46d3aa2c0a2fd191fa"
+    },
+    {
+      "path": "validation/screenshots/recompensas-dark-1440.png",
+      "bytes": 87300,
+      "sha256": "e560739062d9ac4fef62c7d2ce73b4c17577cfb9d3cd070249fe8362d20ee1e3"
+    },
+    {
+      "path": "validation/screenshots/recompensas-dark-375.png",
+      "bytes": 92942,
+      "sha256": "2857a4f8f42197b974f23ff60cb334199b129a220d9119df353ae51165c83c50"
+    },
+    {
+      "path": "validation/screenshots/recompensas-light-1440.png",
+      "bytes": 86919,
+      "sha256": "1ac3214f090b0ba55cc07f012e9411e3abd2b53db436da5d37eb286358b7a993"
+    },
+    {
+      "path": "validation/screenshots/recompensas-light-375.png",
+      "bytes": 92088,
+      "sha256": "0cf293e2969a1bcf2d70d5ac80ed1e4dcb239128d26e865b965737ef354d32d5"
+    },
+    {
+      "path": "validation/screenshots/tarefas-aluno-dark-1440.png",
+      "bytes": 149341,
+      "sha256": "f63dce0f18fe8ae5f541d8f6759b66c02debd7930ab8bea79ae51ccccdf30e6c"
+    },
+    {
+      "path": "validation/screenshots/tarefas-aluno-dark-375.png",
+      "bytes": 144304,
+      "sha256": "a8bdaf0e403659273927317959425d1ca28080ffb922543289ad7c61e3c191eb"
+    },
+    {
+      "path": "validation/screenshots/tarefas-aluno-light-1440.png",
+      "bytes": 148654,
+      "sha256": "46c4830bdab3b7ea7609bd359eb5e25036c81397bc1a3a61875247e82251bbba"
+    },
+    {
+      "path": "validation/screenshots/tarefas-aluno-light-375.png",
+      "bytes": 142145,
+      "sha256": "2b93531b993d91bf42ecdbb6c6008ec861d1daf7e8e731a664378ea53dbbff79"
+    }
+  ],
+  "protected_areas": {
+    "all_original_javascript": {
+      "original_file_count": 61,
+      "all_original_files_byte_identical": true,
+      "altered_files": []
+    },
+    "backend": {
+      "original_file_count": 57,
+      "all_original_files_byte_identical": true,
+      "altered_files": []
+    },
+    "login": {
+      "original_file_count": 3,
+      "all_original_files_byte_identical": true,
+      "altered_files": []
+    },
+    "administration": {
+      "original_file_count": 27,
+      "all_original_files_byte_identical": true,
+      "altered_files": []
+    },
+    "teachers": {
+      "original_file_count": 13,
+      "all_original_files_byte_identical": true,
+      "altered_files": []
+    },
+    "shared": {
+      "original_file_count": 4,
+      "all_original_files_byte_identical": true,
+      "altered_files": []
+    },
+    "shared_components": {
+      "original_file_count": 4,
+      "all_original_files_byte_identical": true,
+      "altered_files": []
+    }
+  },
+  "summary": {
+    "original_file_count": 139,
+    "unchanged_original_file_count": 127,
+    "changed_original_file_count": 12,
+    "missing_original_file_count": 0,
+    "changed_original_files": [
+      "App/frontend/student/configuracoes/configuracoes.css",
+      "App/frontend/student/configuracoes/configuracoes.html",
+      "App/frontend/student/dashboard-aluno/dashboard-aluno.css",
+      "App/frontend/student/dashboard-aluno/dashboard-aluno.html",
+      "App/frontend/student/jogos-quiz/jogos-quiz.css",
+      "App/frontend/student/jogos-quiz/jogos-quiz.html",
+      "App/frontend/student/modulo-aprendizado/modulo-aprendizado.css",
+      "App/frontend/student/modulo-aprendizado/modulo-aprendizado.html",
+      "App/frontend/student/recompensas/recompensas.css",
+      "App/frontend/student/recompensas/recompensas.html",
+      "App/frontend/student/tarefas-aluno/tarefas-aluno.css",
+      "App/frontend/student/tarefas-aluno/tarefas-aluno.html"
+    ],
+    "unexpected_changes": [],
+    "new_application_files": [
+      "App/frontend/student/student-ui.css"
+    ],
+    "all_inline_scripts_byte_identical": true,
+    "all_inline_scripts_identical_after_crlf_normalization": true,
+    "all_html_ids_preserved": true,
+    "all_html_classes_preserved": true,
+    "all_html_event_attributes_preserved": true,
+    "all_external_scripts_preserved": true,
+    "original_css_count": 11,
+    "final_css_count": 12
+  },
+  "passed": true,
+  "verification_method": {
+    "method": "SHA-256 comparison against original-file manifest previously verified from source ZIP",
+    "original_archive_available_at_refresh": false,
+    "note": "The original ZIP was unavailable during this refresh. Original hashes and source-archive hash are retained from the previous direct ZIP audit. All current file hashes were recalculated.",
+    "original_files_changed_since_previous_audit": [],
+    "html_dom_and_inline_script_checks": "HTML and JavaScript hashes match prior audited versions, so previous DOM and inline-script results remain valid.",
+    "application_css_changed_since_previous_audit": [
+      "App/frontend/student/student-ui.css"
+    ]
+  }
+}

@@ -945,10 +945,6 @@
                             ${escapeHtml(task.curso || "Sem matéria")}
                           </span>
 
-                          <span class="task-subject">
-                            ${escapeHtml(({ texto: "Texto", exercicio: "Exercício", arquivo: "Arquivo", leitura: "Leitura", video: "Vídeo", outro: "Outro" })[task.tipo_tarefa] || "Exercício")}
-                          </span>
-
                           <span class="task-due">
                             ${task.concluida
                   ? "Concluída"
@@ -963,7 +959,9 @@
                       <span class="task-xp">
                         ${task.concluida
                   ? "Concluída"
-                  : `+${Number(task.xp_recompensa) || 0} XP`
+                  : Number(task.xp_recompensa)
+                    ? `+${Number(task.xp_recompensa)} XP`
+                    : "Tarefa"
                 }
                       </span>
 

@@ -1,0 +1,3574 @@
+{
+  "date": "2026-11-10T20:27:53.701Z",
+  "fixture": true,
+  "cases": [
+    {
+      "name": "dashboard-aluno",
+      "theme": "light",
+      "width": 1920,
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1920
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "dashboard-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "dashboard-aluno",
+      "theme": "light",
+      "width": 1440,
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1440
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "dashboard-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "dashboard-aluno",
+      "theme": "light",
+      "width": 1366,
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1366
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "dashboard-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "dashboard-aluno",
+      "theme": "light",
+      "width": 1024,
+      "viewport": 1024,
+      "scrollWidth": 1024,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1024
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "dashboard-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "dashboard-aluno",
+      "theme": "light",
+      "width": 768,
+      "viewport": 768,
+      "scrollWidth": 768,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 768
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "dashboard-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "dashboard-aluno",
+      "theme": "light",
+      "width": 480,
+      "viewport": 480,
+      "scrollWidth": 480,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 480
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "dashboard-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "dashboard-aluno",
+      "theme": "light",
+      "width": 375,
+      "viewport": 375,
+      "scrollWidth": 375,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 375
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "dashboard-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "dashboard-aluno",
+      "theme": "dark",
+      "width": 1920,
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1920
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "dashboard-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "dashboard-aluno",
+      "theme": "dark",
+      "width": 1440,
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1440
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "dashboard-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "dashboard-aluno",
+      "theme": "dark",
+      "width": 1366,
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1366
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "dashboard-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "dashboard-aluno",
+      "theme": "dark",
+      "width": 1024,
+      "viewport": 1024,
+      "scrollWidth": 1024,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1024
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "dashboard-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "dashboard-aluno",
+      "theme": "dark",
+      "width": 768,
+      "viewport": 768,
+      "scrollWidth": 768,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 768
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "dashboard-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "dashboard-aluno",
+      "theme": "dark",
+      "width": 480,
+      "viewport": 480,
+      "scrollWidth": 480,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 480
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "dashboard-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "dashboard-aluno",
+      "theme": "dark",
+      "width": 375,
+      "viewport": 375,
+      "scrollWidth": 375,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 375
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "dashboard-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "tarefas-aluno",
+      "theme": "light",
+      "width": 1920,
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1920
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "tarefas-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "tarefas-aluno",
+      "theme": "light",
+      "width": 1440,
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1440
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "tarefas-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "tarefas-aluno",
+      "theme": "light",
+      "width": 1366,
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1366
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "tarefas-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "tarefas-aluno",
+      "theme": "light",
+      "width": 1024,
+      "viewport": 1024,
+      "scrollWidth": 1024,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1024
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "tarefas-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "tarefas-aluno",
+      "theme": "light",
+      "width": 768,
+      "viewport": 768,
+      "scrollWidth": 768,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 768
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "tarefas-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "tarefas-aluno",
+      "theme": "light",
+      "width": 480,
+      "viewport": 480,
+      "scrollWidth": 480,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 480
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "tarefas-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "tarefas-aluno",
+      "theme": "light",
+      "width": 375,
+      "viewport": 375,
+      "scrollWidth": 375,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 375
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "tarefas-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "tarefas-aluno",
+      "theme": "dark",
+      "width": 1920,
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1920
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "tarefas-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "tarefas-aluno",
+      "theme": "dark",
+      "width": 1440,
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1440
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "tarefas-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "tarefas-aluno",
+      "theme": "dark",
+      "width": 1366,
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1366
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "tarefas-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "tarefas-aluno",
+      "theme": "dark",
+      "width": 1024,
+      "viewport": 1024,
+      "scrollWidth": 1024,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1024
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "tarefas-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "tarefas-aluno",
+      "theme": "dark",
+      "width": 768,
+      "viewport": 768,
+      "scrollWidth": 768,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 768
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "tarefas-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "tarefas-aluno",
+      "theme": "dark",
+      "width": 480,
+      "viewport": 480,
+      "scrollWidth": 480,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 480
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "tarefas-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "tarefas-aluno",
+      "theme": "dark",
+      "width": 375,
+      "viewport": 375,
+      "scrollWidth": 375,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 375
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "tarefas-aluno.css",
+          "loaded": true,
+          "rules": 57
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "modulo-aprendizado",
+      "theme": "light",
+      "width": 1920,
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1920
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "modulo-aprendizado.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "modulo-aprendizado",
+      "theme": "light",
+      "width": 1440,
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1440
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "modulo-aprendizado.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "modulo-aprendizado",
+      "theme": "light",
+      "width": 1366,
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1366
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "modulo-aprendizado.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "modulo-aprendizado",
+      "theme": "light",
+      "width": 1024,
+      "viewport": 1024,
+      "scrollWidth": 1024,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1024
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "modulo-aprendizado.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "modulo-aprendizado",
+      "theme": "light",
+      "width": 768,
+      "viewport": 768,
+      "scrollWidth": 768,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 768
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "modulo-aprendizado.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "modulo-aprendizado",
+      "theme": "light",
+      "width": 480,
+      "viewport": 480,
+      "scrollWidth": 480,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 480
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "modulo-aprendizado.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "modulo-aprendizado",
+      "theme": "light",
+      "width": 375,
+      "viewport": 375,
+      "scrollWidth": 375,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 375
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "modulo-aprendizado.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "modulo-aprendizado",
+      "theme": "dark",
+      "width": 1920,
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1920
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "modulo-aprendizado.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "modulo-aprendizado",
+      "theme": "dark",
+      "width": 1440,
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1440
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "modulo-aprendizado.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "modulo-aprendizado",
+      "theme": "dark",
+      "width": 1366,
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1366
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "modulo-aprendizado.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "modulo-aprendizado",
+      "theme": "dark",
+      "width": 1024,
+      "viewport": 1024,
+      "scrollWidth": 1024,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1024
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "modulo-aprendizado.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "modulo-aprendizado",
+      "theme": "dark",
+      "width": 768,
+      "viewport": 768,
+      "scrollWidth": 768,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 768
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "modulo-aprendizado.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "modulo-aprendizado",
+      "theme": "dark",
+      "width": 480,
+      "viewport": 480,
+      "scrollWidth": 480,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 480
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "modulo-aprendizado.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "modulo-aprendizado",
+      "theme": "dark",
+      "width": 375,
+      "viewport": 375,
+      "scrollWidth": 375,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 375
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "modulo-aprendizado.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "jogos-quiz",
+      "theme": "light",
+      "width": 1920,
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1920
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "jogos-quiz.css",
+          "loaded": true,
+          "rules": 75
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "jogos-quiz",
+      "theme": "light",
+      "width": 1440,
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1440
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "jogos-quiz.css",
+          "loaded": true,
+          "rules": 75
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "jogos-quiz",
+      "theme": "light",
+      "width": 1366,
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1366
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "jogos-quiz.css",
+          "loaded": true,
+          "rules": 75
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "jogos-quiz",
+      "theme": "light",
+      "width": 1024,
+      "viewport": 1024,
+      "scrollWidth": 1024,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1024
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "jogos-quiz.css",
+          "loaded": true,
+          "rules": 75
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "jogos-quiz",
+      "theme": "light",
+      "width": 768,
+      "viewport": 768,
+      "scrollWidth": 768,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 768
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "jogos-quiz.css",
+          "loaded": true,
+          "rules": 75
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "jogos-quiz",
+      "theme": "light",
+      "width": 480,
+      "viewport": 480,
+      "scrollWidth": 480,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 480
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "jogos-quiz.css",
+          "loaded": true,
+          "rules": 75
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "jogos-quiz",
+      "theme": "light",
+      "width": 375,
+      "viewport": 375,
+      "scrollWidth": 375,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 375
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "jogos-quiz.css",
+          "loaded": true,
+          "rules": 75
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "jogos-quiz",
+      "theme": "dark",
+      "width": 1920,
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1920
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "jogos-quiz.css",
+          "loaded": true,
+          "rules": 75
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "jogos-quiz",
+      "theme": "dark",
+      "width": 1440,
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1440
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "jogos-quiz.css",
+          "loaded": true,
+          "rules": 75
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "jogos-quiz",
+      "theme": "dark",
+      "width": 1366,
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1366
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "jogos-quiz.css",
+          "loaded": true,
+          "rules": 75
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "jogos-quiz",
+      "theme": "dark",
+      "width": 1024,
+      "viewport": 1024,
+      "scrollWidth": 1024,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1024
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "jogos-quiz.css",
+          "loaded": true,
+          "rules": 75
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "jogos-quiz",
+      "theme": "dark",
+      "width": 768,
+      "viewport": 768,
+      "scrollWidth": 768,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 768
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "jogos-quiz.css",
+          "loaded": true,
+          "rules": 75
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "jogos-quiz",
+      "theme": "dark",
+      "width": 480,
+      "viewport": 480,
+      "scrollWidth": 480,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 480
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "jogos-quiz.css",
+          "loaded": true,
+          "rules": 75
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "jogos-quiz",
+      "theme": "dark",
+      "width": 375,
+      "viewport": 375,
+      "scrollWidth": 375,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 375
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "jogos-quiz.css",
+          "loaded": true,
+          "rules": 75
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "recompensas",
+      "theme": "light",
+      "width": 1920,
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1920
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "recompensas.css",
+          "loaded": true,
+          "rules": 52
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "recompensas",
+      "theme": "light",
+      "width": 1440,
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1440
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "recompensas.css",
+          "loaded": true,
+          "rules": 52
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "recompensas",
+      "theme": "light",
+      "width": 1366,
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1366
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "recompensas.css",
+          "loaded": true,
+          "rules": 52
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "recompensas",
+      "theme": "light",
+      "width": 1024,
+      "viewport": 1024,
+      "scrollWidth": 1024,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1024
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "recompensas.css",
+          "loaded": true,
+          "rules": 52
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "recompensas",
+      "theme": "light",
+      "width": 768,
+      "viewport": 768,
+      "scrollWidth": 768,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 768
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "recompensas.css",
+          "loaded": true,
+          "rules": 52
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "recompensas",
+      "theme": "light",
+      "width": 480,
+      "viewport": 480,
+      "scrollWidth": 480,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 480
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "recompensas.css",
+          "loaded": true,
+          "rules": 52
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "recompensas",
+      "theme": "light",
+      "width": 375,
+      "viewport": 375,
+      "scrollWidth": 375,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 375
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "recompensas.css",
+          "loaded": true,
+          "rules": 52
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "recompensas",
+      "theme": "dark",
+      "width": 1920,
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1920
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "recompensas.css",
+          "loaded": true,
+          "rules": 52
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "recompensas",
+      "theme": "dark",
+      "width": 1440,
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1440
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "recompensas.css",
+          "loaded": true,
+          "rules": 52
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "recompensas",
+      "theme": "dark",
+      "width": 1366,
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1366
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "recompensas.css",
+          "loaded": true,
+          "rules": 52
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "recompensas",
+      "theme": "dark",
+      "width": 1024,
+      "viewport": 1024,
+      "scrollWidth": 1024,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1024
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "recompensas.css",
+          "loaded": true,
+          "rules": 52
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "recompensas",
+      "theme": "dark",
+      "width": 768,
+      "viewport": 768,
+      "scrollWidth": 768,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 768
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "recompensas.css",
+          "loaded": true,
+          "rules": 52
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "recompensas",
+      "theme": "dark",
+      "width": 480,
+      "viewport": 480,
+      "scrollWidth": 480,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 480
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "recompensas.css",
+          "loaded": true,
+          "rules": 52
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "recompensas",
+      "theme": "dark",
+      "width": 375,
+      "viewport": 375,
+      "scrollWidth": 375,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 375
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "recompensas.css",
+          "loaded": true,
+          "rules": 52
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "configuracoes",
+      "theme": "light",
+      "width": 1920,
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1920
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "configuracoes.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "configuracoes",
+      "theme": "light",
+      "width": 1440,
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1440
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "configuracoes.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "configuracoes",
+      "theme": "light",
+      "width": 1366,
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1366
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "configuracoes.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "configuracoes",
+      "theme": "light",
+      "width": 1024,
+      "viewport": 1024,
+      "scrollWidth": 1024,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1024
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "configuracoes.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "configuracoes",
+      "theme": "light",
+      "width": 768,
+      "viewport": 768,
+      "scrollWidth": 768,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 768
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "configuracoes.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "configuracoes",
+      "theme": "light",
+      "width": 480,
+      "viewport": 480,
+      "scrollWidth": 480,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 480
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "configuracoes.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "configuracoes",
+      "theme": "light",
+      "width": 375,
+      "viewport": 375,
+      "scrollWidth": 375,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 375
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "configuracoes.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "configuracoes",
+      "theme": "dark",
+      "width": 1920,
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1920
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "configuracoes.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "configuracoes",
+      "theme": "dark",
+      "width": 1440,
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1440
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "configuracoes.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "configuracoes",
+      "theme": "dark",
+      "width": 1366,
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1366
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "configuracoes.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "configuracoes",
+      "theme": "dark",
+      "width": 1024,
+      "viewport": 1024,
+      "scrollWidth": 1024,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 1024
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "configuracoes.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "configuracoes",
+      "theme": "dark",
+      "width": 768,
+      "viewport": 768,
+      "scrollWidth": 768,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 768
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "configuracoes.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "configuracoes",
+      "theme": "dark",
+      "width": 480,
+      "viewport": 480,
+      "scrollWidth": 480,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 480
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "configuracoes.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    },
+    {
+      "name": "configuracoes",
+      "theme": "dark",
+      "width": 375,
+      "viewport": 375,
+      "scrollWidth": 375,
+      "overflow": [],
+      "main": {
+        "left": 0,
+        "top": 64,
+        "width": 375
+      },
+      "styles": [
+        {
+          "href": "../student-ui.css",
+          "loaded": true,
+          "rules": 74
+        },
+        {
+          "href": "configuracoes.css",
+          "loaded": true,
+          "rules": 67
+        }
+      ],
+      "navigation": {
+        "hidden": true,
+        "buttonVisible": true,
+        "expanded": "false"
+      },
+      "activeLinks": 1,
+      "pass": true
+    }
+  ],
+  "interactions": [
+    {
+      "name": "navigation: animated opening 1920 light",
+      "pass": true,
+      "detail": {
+        "running": true,
+        "duration": 0.16
+      }
+    },
+    {
+      "name": "navigation: opens on icon 1920 light",
+      "pass": true,
+      "detail": {
+        "x": 0,
+        "y": 64,
+        "width": 248,
+        "height": 836
+      }
+    },
+    {
+      "name": "navigation: icon closes drawer 1920 light",
+      "pass": true
+    },
+    {
+      "name": "navigation: animated opening 1440 light",
+      "pass": true,
+      "detail": {
+        "running": true,
+        "duration": 0.16
+      }
+    },
+    {
+      "name": "navigation: opens on icon 1440 light",
+      "pass": true,
+      "detail": {
+        "x": 0,
+        "y": 64,
+        "width": 248,
+        "height": 836
+      }
+    },
+    {
+      "name": "navigation: icon closes drawer 1440 light",
+      "pass": true
+    },
+    {
+      "name": "navigation: outside click closes light",
+      "pass": true
+    },
+    {
+      "name": "navigation: animated opening 1366 light",
+      "pass": true,
+      "detail": {
+        "running": true,
+        "duration": 0.16
+      }
+    },
+    {
+      "name": "navigation: opens on icon 1366 light",
+      "pass": true,
+      "detail": {
+        "x": 0,
+        "y": 64,
+        "width": 248,
+        "height": 836
+      }
+    },
+    {
+      "name": "navigation: icon closes drawer 1366 light",
+      "pass": true
+    },
+    {
+      "name": "navigation: animated opening 1024 light",
+      "pass": true,
+      "detail": {
+        "running": true,
+        "duration": 0.16
+      }
+    },
+    {
+      "name": "navigation: opens on icon 1024 light",
+      "pass": true,
+      "detail": {
+        "x": 0,
+        "y": 64,
+        "width": 248,
+        "height": 836
+      }
+    },
+    {
+      "name": "navigation: icon closes drawer 1024 light",
+      "pass": true
+    },
+    {
+      "name": "navigation: animated opening 768 light",
+      "pass": true,
+      "detail": {
+        "running": true,
+        "duration": 0.16
+      }
+    },
+    {
+      "name": "navigation: opens on icon 768 light",
+      "pass": true,
+      "detail": {
+        "x": 0,
+        "y": 64,
+        "width": 248,
+        "height": 748
+      }
+    },
+    {
+      "name": "navigation: icon closes drawer 768 light",
+      "pass": true
+    },
+    {
+      "name": "navigation: animated opening 480 light",
+      "pass": true,
+      "detail": {
+        "running": true,
+        "duration": 0.16
+      }
+    },
+    {
+      "name": "navigation: opens on icon 480 light",
+      "pass": true,
+      "detail": {
+        "x": 0,
+        "y": 64,
+        "width": 248,
+        "height": 748
+      }
+    },
+    {
+      "name": "navigation: icon closes drawer 480 light",
+      "pass": true
+    },
+    {
+      "name": "navigation: animated opening 375 light",
+      "pass": true,
+      "detail": {
+        "running": true,
+        "duration": 0.16
+      }
+    },
+    {
+      "name": "navigation: opens on icon 375 light",
+      "pass": true,
+      "detail": {
+        "x": 0,
+        "y": 64,
+        "width": 248,
+        "height": 748
+      }
+    },
+    {
+      "name": "navigation: icon closes drawer 375 light",
+      "pass": true
+    },
+    {
+      "name": "navigation: animated opening 1920 dark",
+      "pass": true,
+      "detail": {
+        "running": true,
+        "duration": 0.16
+      }
+    },
+    {
+      "name": "navigation: opens on icon 1920 dark",
+      "pass": true,
+      "detail": {
+        "x": 0,
+        "y": 64,
+        "width": 248,
+        "height": 836
+      }
+    },
+    {
+      "name": "navigation: icon closes drawer 1920 dark",
+      "pass": true
+    },
+    {
+      "name": "navigation: animated opening 1440 dark",
+      "pass": true,
+      "detail": {
+        "running": true,
+        "duration": 0.16
+      }
+    },
+    {
+      "name": "navigation: opens on icon 1440 dark",
+      "pass": true,
+      "detail": {
+        "x": 0,
+        "y": 64,
+        "width": 248,
+        "height": 836
+      }
+    },
+    {
+      "name": "navigation: icon closes drawer 1440 dark",
+      "pass": true
+    },
+    {
+      "name": "navigation: outside click closes dark",
+      "pass": true
+    },
+    {
+      "name": "navigation: animated opening 1366 dark",
+      "pass": true,
+      "detail": {
+        "running": true,
+        "duration": 0.16
+      }
+    },
+    {
+      "name": "navigation: opens on icon 1366 dark",
+      "pass": true,
+      "detail": {
+        "x": 0,
+        "y": 64,
+        "width": 248,
+        "height": 836
+      }
+    },
+    {
+      "name": "navigation: icon closes drawer 1366 dark",
+      "pass": true
+    },
+    {
+      "name": "navigation: animated opening 1024 dark",
+      "pass": true,
+      "detail": {
+        "running": true,
+        "duration": 0.16
+      }
+    },
+    {
+      "name": "navigation: opens on icon 1024 dark",
+      "pass": true,
+      "detail": {
+        "x": 0,
+        "y": 64,
+        "width": 248,
+        "height": 836
+      }
+    },
+    {
+      "name": "navigation: icon closes drawer 1024 dark",
+      "pass": true
+    },
+    {
+      "name": "navigation: animated opening 768 dark",
+      "pass": true,
+      "detail": {
+        "running": true,
+        "duration": 0.16
+      }
+    },
+    {
+      "name": "navigation: opens on icon 768 dark",
+      "pass": true,
+      "detail": {
+        "x": 0,
+        "y": 64,
+        "width": 248,
+        "height": 748
+      }
+    },
+    {
+      "name": "navigation: icon closes drawer 768 dark",
+      "pass": true
+    },
+    {
+      "name": "navigation: animated opening 480 dark",
+      "pass": true,
+      "detail": {
+        "running": true,
+        "duration": 0.16
+      }
+    },
+    {
+      "name": "navigation: opens on icon 480 dark",
+      "pass": true,
+      "detail": {
+        "x": 0,
+        "y": 64,
+        "width": 248,
+        "height": 748
+      }
+    },
+    {
+      "name": "navigation: icon closes drawer 480 dark",
+      "pass": true
+    },
+    {
+      "name": "navigation: animated opening 375 dark",
+      "pass": true,
+      "detail": {
+        "running": true,
+        "duration": 0.16
+      }
+    },
+    {
+      "name": "navigation: opens on icon 375 dark",
+      "pass": true,
+      "detail": {
+        "x": 0,
+        "y": 64,
+        "width": 248,
+        "height": 748
+      }
+    },
+    {
+      "name": "navigation: icon closes drawer 375 dark",
+      "pass": true
+    },
+    {
+      "name": "dashboard-aluno: mobile menu opens",
+      "pass": true
+    },
+    {
+      "name": "dashboard-aluno: Escape closes menu",
+      "pass": true
+    },
+    {
+      "name": "dashboard-aluno: theme toggle",
+      "pass": true
+    },
+    {
+      "name": "dashboard-aluno: saved theme survives reload",
+      "pass": true
+    },
+    {
+      "name": "dashboard-aluno: notification fits mobile",
+      "pass": true,
+      "detail": {
+        "x": 39,
+        "y": 80,
+        "width": 320,
+        "height": 374.1875
+      }
+    },
+    {
+      "name": "tarefas-aluno: mobile menu opens",
+      "pass": true
+    },
+    {
+      "name": "tarefas-aluno: Escape closes menu",
+      "pass": true
+    },
+    {
+      "name": "tarefas-aluno: theme toggle",
+      "pass": true
+    },
+    {
+      "name": "tarefas-aluno: saved theme survives reload",
+      "pass": true
+    },
+    {
+      "name": "tarefas-aluno: notification fits mobile",
+      "pass": true,
+      "detail": {
+        "x": 39,
+        "y": 80,
+        "width": 320,
+        "height": 374.1875
+      }
+    },
+    {
+      "name": "tasks: search keeps matching item",
+      "pass": true
+    },
+    {
+      "name": "tasks: completed filter",
+      "pass": true
+    },
+    {
+      "name": "tasks: completion handler",
+      "pass": true
+    },
+    {
+      "name": "modulo-aprendizado: mobile menu opens",
+      "pass": true
+    },
+    {
+      "name": "modulo-aprendizado: Escape closes menu",
+      "pass": true
+    },
+    {
+      "name": "modulo-aprendizado: theme toggle",
+      "pass": true
+    },
+    {
+      "name": "modulo-aprendizado: saved theme survives reload",
+      "pass": true
+    },
+    {
+      "name": "learning: lesson rendered",
+      "pass": true
+    },
+    {
+      "name": "learning: next changes lesson",
+      "pass": true
+    },
+    {
+      "name": "learning: existing local progress saved",
+      "pass": true
+    },
+    {
+      "name": "jogos-quiz: mobile menu opens",
+      "pass": true
+    },
+    {
+      "name": "jogos-quiz: Escape closes menu",
+      "pass": true
+    },
+    {
+      "name": "jogos-quiz: theme toggle",
+      "pass": true
+    },
+    {
+      "name": "jogos-quiz: saved theme survives reload",
+      "pass": true
+    },
+    {
+      "name": "quiz: dialog fits 1920 light",
+      "pass": true,
+      "detail": {
+        "x": 650,
+        "y": 179.90625,
+        "width": 620,
+        "height": 540.1875
+      }
+    },
+    {
+      "name": "quiz: dialog fits 1440 light",
+      "pass": true,
+      "detail": {
+        "x": 410,
+        "y": 179.90625,
+        "width": 620,
+        "height": 540.1875
+      }
+    },
+    {
+      "name": "quiz: dialog fits 1366 light",
+      "pass": true,
+      "detail": {
+        "x": 373,
+        "y": 179.90625,
+        "width": 620,
+        "height": 540.1875
+      }
+    },
+    {
+      "name": "quiz: dialog fits 1024 light",
+      "pass": true,
+      "detail": {
+        "x": 202,
+        "y": 179.90625,
+        "width": 620,
+        "height": 540.1875
+      }
+    },
+    {
+      "name": "quiz: dialog fits 768 light",
+      "pass": true,
+      "detail": {
+        "x": 74,
+        "y": 135.90625,
+        "width": 620,
+        "height": 540.1875
+      }
+    },
+    {
+      "name": "quiz: dialog fits 480 light",
+      "pass": true,
+      "detail": {
+        "x": 14.390625,
+        "y": 139.96875,
+        "width": 451.21875,
+        "height": 532.046875
+      }
+    },
+    {
+      "name": "quiz: dialog fits 375 light",
+      "pass": true,
+      "detail": {
+        "x": 11.25,
+        "y": 127.578125,
+        "width": 352.5,
+        "height": 556.84375
+      }
+    },
+    {
+      "name": "quiz: dialog fits 1920 dark",
+      "pass": true,
+      "detail": {
+        "x": 650,
+        "y": 179.90625,
+        "width": 620,
+        "height": 540.1875
+      }
+    },
+    {
+      "name": "quiz: dialog fits 1440 dark",
+      "pass": true,
+      "detail": {
+        "x": 410,
+        "y": 179.90625,
+        "width": 620,
+        "height": 540.1875
+      }
+    },
+    {
+      "name": "quiz: dialog fits 1366 dark",
+      "pass": true,
+      "detail": {
+        "x": 373,
+        "y": 179.90625,
+        "width": 620,
+        "height": 540.1875
+      }
+    },
+    {
+      "name": "quiz: dialog fits 1024 dark",
+      "pass": true,
+      "detail": {
+        "x": 202,
+        "y": 179.90625,
+        "width": 620,
+        "height": 540.1875
+      }
+    },
+    {
+      "name": "quiz: dialog fits 768 dark",
+      "pass": true,
+      "detail": {
+        "x": 74,
+        "y": 135.90625,
+        "width": 620,
+        "height": 540.1875
+      }
+    },
+    {
+      "name": "quiz: dialog fits 480 dark",
+      "pass": true,
+      "detail": {
+        "x": 14.390625,
+        "y": 139.96875,
+        "width": 451.21875,
+        "height": 532.046875
+      }
+    },
+    {
+      "name": "quiz: dialog fits 375 dark",
+      "pass": true,
+      "detail": {
+        "x": 11.25,
+        "y": 127.578125,
+        "width": 352.5,
+        "height": 556.84375
+      }
+    },
+    {
+      "name": "quiz: answer feedback",
+      "pass": true
+    },
+    {
+      "name": "quiz: score screen",
+      "pass": true
+    },
+    {
+      "name": "quiz: XP handler preserved",
+      "pass": true
+    },
+    {
+      "name": "quiz: retry works",
+      "pass": true
+    },
+    {
+      "name": "quiz: close works",
+      "pass": true
+    },
+    {
+      "name": "recompensas: mobile menu opens",
+      "pass": true
+    },
+    {
+      "name": "recompensas: Escape closes menu",
+      "pass": true
+    },
+    {
+      "name": "recompensas: theme toggle",
+      "pass": true
+    },
+    {
+      "name": "recompensas: saved theme survives reload",
+      "pass": true
+    },
+    {
+      "name": "configuracoes: mobile menu opens",
+      "pass": true
+    },
+    {
+      "name": "configuracoes: Escape closes menu",
+      "pass": true
+    },
+    {
+      "name": "configuracoes: theme toggle",
+      "pass": true
+    },
+    {
+      "name": "configuracoes: saved theme survives reload",
+      "pass": true
+    },
+    {
+      "name": "settings: avatar preview",
+      "pass": true
+    },
+    {
+      "name": "settings: notif tab fits mobile",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "settings: notification toggle keyboard",
+      "pass": true
+    },
+    {
+      "name": "settings: toast fits mobile",
+      "pass": true,
+      "detail": {
+        "x": 51,
+        "y": 734.75,
+        "width": 273,
+        "height": 53.25
+      }
+    },
+    {
+      "name": "settings: priv tab fits mobile",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "settings: conta tab fits mobile",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "settings: perfil tab fits mobile",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "settings: labels associated",
+      "pass": true
+    },
+    {
+      "name": "settings: full school and class visible",
+      "pass": true
+    }
+  ],
+  "contrast": [
+    {
+      "theme": "light",
+      "foreground": "text",
+      "background": "surface",
+      "ratio": 14.87,
+      "pass": true
+    },
+    {
+      "theme": "light",
+      "foreground": "muted",
+      "background": "surface",
+      "ratio": 5.86,
+      "pass": true
+    },
+    {
+      "theme": "light",
+      "foreground": "muted",
+      "background": "surface-2",
+      "ratio": 5.17,
+      "pass": true
+    },
+    {
+      "theme": "light",
+      "foreground": "brand",
+      "background": "brand-soft",
+      "ratio": 6.21,
+      "pass": true
+    },
+    {
+      "theme": "light",
+      "foreground": "brand-ink",
+      "background": "brand",
+      "ratio": 7.19,
+      "pass": true
+    },
+    {
+      "theme": "light",
+      "foreground": "nav-text",
+      "background": "nav-bg",
+      "ratio": 14.01,
+      "pass": true
+    },
+    {
+      "theme": "light",
+      "foreground": "nav-muted",
+      "background": "nav-bg",
+      "ratio": 8.83,
+      "pass": true
+    },
+    {
+      "theme": "light",
+      "foreground": "gold",
+      "background": "surface",
+      "ratio": 5.64,
+      "pass": true
+    },
+    {
+      "theme": "light",
+      "foreground": "danger",
+      "background": "surface",
+      "ratio": 6.71,
+      "pass": true
+    },
+    {
+      "theme": "light",
+      "foreground": "ok",
+      "background": "surface",
+      "ratio": 6.98,
+      "pass": true
+    },
+    {
+      "theme": "dark",
+      "foreground": "text",
+      "background": "surface",
+      "ratio": 13.18,
+      "pass": true
+    },
+    {
+      "theme": "dark",
+      "foreground": "muted",
+      "background": "surface",
+      "ratio": 8.08,
+      "pass": true
+    },
+    {
+      "theme": "dark",
+      "foreground": "muted",
+      "background": "surface-2",
+      "ratio": 6.84,
+      "pass": true
+    },
+    {
+      "theme": "dark",
+      "foreground": "brand",
+      "background": "brand-soft",
+      "ratio": 6.57,
+      "pass": true
+    },
+    {
+      "theme": "dark",
+      "foreground": "brand-ink",
+      "background": "brand",
+      "ratio": 8.43,
+      "pass": true
+    },
+    {
+      "theme": "dark",
+      "foreground": "nav-text",
+      "background": "nav-bg",
+      "ratio": 14.01,
+      "pass": true
+    },
+    {
+      "theme": "dark",
+      "foreground": "nav-muted",
+      "background": "nav-bg",
+      "ratio": 8.83,
+      "pass": true
+    },
+    {
+      "theme": "dark",
+      "foreground": "gold",
+      "background": "surface",
+      "ratio": 9.62,
+      "pass": true
+    },
+    {
+      "theme": "dark",
+      "foreground": "danger",
+      "background": "surface",
+      "ratio": 7.63,
+      "pass": true
+    },
+    {
+      "theme": "dark",
+      "foreground": "ok",
+      "background": "surface",
+      "ratio": 9.08,
+      "pass": true
+    }
+  ],
+  "textContrast": [
+    {
+      "name": "dashboard-aluno",
+      "theme": "light",
+      "failures": []
+    },
+    {
+      "name": "dashboard-aluno",
+      "theme": "dark",
+      "failures": []
+    },
+    {
+      "name": "tarefas-aluno",
+      "theme": "light",
+      "failures": []
+    },
+    {
+      "name": "tarefas-aluno",
+      "theme": "dark",
+      "failures": []
+    },
+    {
+      "name": "modulo-aprendizado",
+      "theme": "light",
+      "failures": []
+    },
+    {
+      "name": "modulo-aprendizado",
+      "theme": "dark",
+      "failures": []
+    },
+    {
+      "name": "jogos-quiz",
+      "theme": "light",
+      "failures": []
+    },
+    {
+      "name": "jogos-quiz",
+      "theme": "dark",
+      "failures": []
+    },
+    {
+      "name": "recompensas",
+      "theme": "light",
+      "failures": []
+    },
+    {
+      "name": "recompensas",
+      "theme": "dark",
+      "failures": []
+    },
+    {
+      "name": "configuracoes",
+      "theme": "light",
+      "failures": []
+    },
+    {
+      "name": "configuracoes",
+      "theme": "dark",
+      "failures": []
+    }
+  ],
+  "errors": [],
+  "browser": "157.0.8103.40",
+  "summary": {
+    "cases": 84,
+    "passed": 84,
+    "interactions": 104,
+    "interactionsPassed": 104,
+    "contrast": 20,
+    "contrastPassed": 20,
+    "textContrastFailures": 0,
+    "errors": 0
+  }
+}
