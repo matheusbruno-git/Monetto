@@ -1322,3 +1322,93 @@ body.login-page,
 #spotlight {
   display: none !important;
 }
+
+
+/* =========================================================
+   MONETTO STUDENT DASHBOARD — FULL WIDTH LAYOUT
+   Align dashboard with the My Tasks page.
+   ========================================================= */
+
+/* Remove the artificial sidebar offset */
+body.student-dashboard-page {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 100vh;
+  overflow-x: hidden !important;
+}
+
+/* Main dashboard container */
+body.student-dashboard-page .main {
+  position: relative !important;
+  inset: auto !important;
+
+  width: 100% !important;
+  max-width: 1680px !important;
+
+  min-width: 0 !important;
+  min-height: 100vh;
+
+  margin: 0 auto !important;
+  padding: 28px 32px 48px !important;
+
+  overflow: visible !important;
+}
+
+/* Header */
+body.student-dashboard-page .topbar {
+  width: 100%;
+  margin-bottom: 28px !important;
+}
+
+/* Statistics: four equally sized columns */
+body.student-dashboard-page .stats-row {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  width: 100%;
+  gap: 16px !important;
+}
+
+/* Main content: tasks + right-side information */
+body.student-dashboard-page .section-row {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.6fr) minmax(320px, 1fr) !important;
+  width: 100%;
+  gap: 20px !important;
+  align-items: start;
+}
+
+/* Prevent cards from overflowing */
+body.student-dashboard-page .card,
+body.student-dashboard-page .mini-card,
+body.student-dashboard-page .stat-card {
+  min-width: 0;
+  width: 100%;
+}
+
+/* Responsive layout */
+@media (max-width: 1100px) {
+  body.student-dashboard-page .section-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  body.student-dashboard-page .stats-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  body.student-dashboard-page .main {
+    padding: 20px 16px !important;
+  }
+
+  body.student-dashboard-page .stats-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  body.student-dashboard-page .stats-row {
+    grid-template-columns: 1fr !important;
+  }
+}
