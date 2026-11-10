@@ -8,7 +8,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dev": "electron ."
+    "dev": "electron .",
+    "build": "electron-builder"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
@@ -17,6 +18,14 @@
     "mysql2": "^3.22.3",
     "nodemailer": "^10.0.13",
     "uuid": "^14.0.0"
+  },
+  "build": {
+    "appId": "com.mlsolutions.monetto",
+    "productName": "Monetto",
+    "files": ["**/*"],
+    "win": { "target": "nsis" },
+    "mac": { "target": "dmg" },
+    "linux": { "target": "AppImage" }
   },
   "devDependencies": {
     "electron": "^42.2.0"

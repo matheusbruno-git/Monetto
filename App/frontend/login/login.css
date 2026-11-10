@@ -778,3 +778,113 @@ body.login-page,
 #spotlight {
     display: none !important;
 }
+
+/* ===== Login page: theme-safe overrides ===== */
+:root {
+    --lg-page: #f5f7fa;
+    --lg-card: #ffffff;
+    --lg-field: #ffffff;
+    --lg-border: #cfd6e1;
+    --lg-text: #172033;
+    --lg-muted: #667085;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --lg-page: #1a202a;
+        --lg-card: #212836;
+        --lg-field: #161b24;
+        --lg-border: #323b4d;
+        --lg-text: #f2f5fa;
+        --lg-muted: #9aa5b8;
+    }
+}
+
+:root[data-theme="dark"],
+:root.dark,
+body.dark,
+body[data-theme="dark"] {
+    --lg-page: #1a202a;
+    --lg-card: #212836;
+    --lg-field: #161b24;
+    --lg-border: #323b4d;
+    --lg-text: #f2f5fa;
+    --lg-muted: #9aa5b8;
+}
+
+html,
+body {
+    background: var(--lg-page) !important;
+}
+
+body .form-box {
+    background: var(--lg-card) !important;
+    border: 1px solid var(--lg-border) !important;
+    color: var(--lg-text) !important;
+}
+
+body .form-box .logo,
+body .form-box h2,
+body .form-box .form-group label {
+    color: var(--lg-text) !important;
+    -webkit-text-fill-color: var(--lg-text) !important;
+}
+
+body .form-box .subtitle {
+    padding-left: 62px;
+    /* 50px logo + 12px gap */
+    margin-top: -2px;
+}
+
+body .form-box .desc,
+body .form-box .toggle {
+    color: var(--lg-muted) !important;
+}
+
+/* One surface only: the wrapper draws the field, the input is transparent */
+body .form-box .input-wrap {
+    background: var(--lg-field) !important;
+    border: 1.5px solid var(--lg-border) !important;
+    border-radius: 8px !important;
+    padding: 0 14px !important;
+}
+
+body .form-box .input-wrap input,
+body .form-box .input-wrap select {
+    background: transparent !important;
+    color: var(--lg-text) !important;
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+
+body .form-box .input-wrap input::placeholder {
+    color: var(--lg-muted) !important;
+}
+
+body .form-box .input-wrap select option {
+    background: var(--lg-card);
+    color: var(--lg-text);
+}
+
+body .form-box .input-wrap:focus-within {
+    border-color: #4c78dd !important;
+    outline: 2px solid rgba(76, 120, 221, .25) !important;
+}
+
+/* Primary button, regardless of the type attribute */
+body .form-box .btn {
+    background: #2457c5 !important;
+    color: #fff !important;
+    border: 1px solid #2457c5 !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+}
+
+body .form-box .btn:hover {
+    background: #1e46a0 !important;
+}
+
+body .form-box .toggle a {
+    color: #e9b949 !important;
+}
