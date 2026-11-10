@@ -1,17 +1,20 @@
 const db = require("./connection.js");
-const bcrypt = require("bcryptjs");
+const { resolveEscolaId } = require("./resolve_escola_id.js");
 
-async function resolveEscolaId(dbConnection, idUsuario) {
-  try {
-    const [rows] = await dbConnection
-      .promise()
-      .execute("SELECT id_escola FROM usuarios WHERE id = ? LIMIT 1", [
-        idUsuario,
-      ]);
-    return rows[0] ? rows[0].id_escola : null;
-  } catch (error) {
-    console.error("resolveEscolaId Error:", error);
-    return null;
+async function ensureTaskMetadataColumns() {
+  const columns = [
+    ["tipo_tarefa", "VARCHAR(50) NOT NULL DEFAULT 'exercicio'"],
+    ["dificuldade", "VARCHAR(20) NOT NULL DEFAULT 'medio'"],
+    ["xp_recompensa", "INT NOT NULL DEFAULT 50"],
+  ];
+  for (const [name, definition] of columns) {
+    const [found] = await db.promise().execute(
+      "SELECT 1 FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'tarefas' AND COLUMN_NAME = ? LIMIT 1",
+      [name],
+    );
+    if (!found.length) {
+      await db.promise().query(`ALTER TABLE tarefas ADD COLUMN ${name} ${definition}`);
+    }
   }
 }
 
@@ -26,7 +29,7 @@ async function registerTarefa(dados) {
 
     let idEscola = dados.id_escola || null;
     if (!idEscola && dados.id_usuario) {
-      idEscola = await resolveEscolaId(db, dados.id_usuario);
+      idEscola = await resolveEscolaId(dados.id_usuario);
     }
     if (!idEscola) {
       return {
@@ -35,49 +38,45 @@ async function registerTarefa(dados) {
       };
     }
 
-    const baseParams = [
-      idEscola,
-      dados.id_curso,
-      dados.titulo,
-      dados.descricao || null,
-      dados.data_vencimento,
-    ];
+    await ensureTaskMetadataColumns();
 
-    try {
-      const [result] = await db.promise().execute(
-        `INSERT INTO tarefas (id_escola, id_curso, titulo, descricao, data_criacao, data_vencimento, status, id_professor, id_usuario)
-         VALUES (?, ?, ?, ?, CURDATE(), ?, 'pendente', ?, ?)`,
-        [
-          ...baseParams,
-          dados.id_professor || dados.id_usuario || null,
-          dados.id_usuario || null,
-        ],
-      );
-      return {
-        success: true,
-        message: "Tarefa criada com sucesso!",
-        id: result.insertId,
-      };
-    } catch (colErr) {
-      console.warn(
-        "registerTarefa extended insert failed, using minimal columns:",
-        colErr.message,
-      );
-      const [result] = await db.promise().execute(
-        `INSERT INTO tarefas (id_escola, id_curso, titulo, descricao, data_criacao, data_vencimento, status)
-         VALUES (?, ?, ?, ?, CURDATE(), ?, 'pendente')`,
-        baseParams,
-      );
-      return {
-        success: true,
-        message: "Tarefa criada com sucesso!",
-        id: result.insertId,
-      };
-    }
+    const tipoTarefa = ["texto", "exercicio", "arquivo", "leitura", "video", "outro"].includes(dados.tipo_tarefa)
+      ? dados.tipo_tarefa
+      : "exercicio";
+    const dificuldade = ["facil", "medio", "dificil"].includes(dados.dificuldade)
+      ? dados.dificuldade
+      : "medio";
+    const xp = Math.max(0, Math.min(500, Math.round(Number(dados.xp_recompensa) || 0)));
+    const [columnRows] = await db.promise().query("SHOW COLUMNS FROM tarefas");
+    const columns = new Set(columnRows.map((column) => column.Field));
+    const fields = [
+      ["id_escola", idEscola],
+      ["id_curso", dados.id_curso],
+      ["titulo", dados.titulo],
+      ["descricao", dados.descricao || null],
+      ["data_criacao", null, "CURDATE()"],
+      ["data_vencimento", dados.data_vencimento],
+      ["status", "pendente"],
+      ["id_professor", dados.id_professor || dados.id_usuario || null],
+      ["id_usuario", dados.id_usuario || null],
+      ["tipo_tarefa", tipoTarefa],
+      ["dificuldade", dificuldade],
+      ["xp_recompensa", xp],
+    ].filter(([name]) => columns.has(name));
+    const values = fields.filter(([, , expression]) => !expression).map(([, value]) => value);
+    const [result] = await db.promise().execute(
+      `INSERT INTO tarefas (${fields.map(([name]) => `\`${name}\``).join(", ")}) VALUES (${fields.map(([, , expression]) => expression || "?").join(", ")})`,
+      values,
+    );
+    return {
+      success: true,
+      message: "Tarefa criada com sucesso!",
+      id: result.insertId,
+    };
   } catch (err) {
     console.error("registerTarefa Error:", err);
     return { success: false, message: "Erro ao criar tarefa." };
   }
 }
 
-module.exports = { registerTarefa };
+module.exports = { registerTarefa, ensureTaskMetadataColumns };

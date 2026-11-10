@@ -313,6 +313,9 @@ CREATE TABLE IF NOT EXISTS tarefas (
     data_criacao DATE,
     data_vencimento DATE,
     status VARCHAR(30) DEFAULT 'pendente',
+    tipo_tarefa VARCHAR(50) NOT NULL DEFAULT 'exercicio',
+    dificuldade VARCHAR(20) NOT NULL DEFAULT 'medio',
+    xp_recompensa INT NOT NULL DEFAULT 50,
 
     FOREIGN KEY (id_escola) REFERENCES escolas(id_escola),
     FOREIGN KEY (id_curso) REFERENCES cursos(id_curso)
@@ -421,6 +424,9 @@ CREATE TABLE IF NOT EXISTS tarefas (
     data_criacao DATE,
     data_vencimento DATE,
     status VARCHAR(30) DEFAULT 'pendente',
+    tipo_tarefa VARCHAR(50) NOT NULL DEFAULT 'exercicio',
+    dificuldade VARCHAR(20) NOT NULL DEFAULT 'medio',
+    xp_recompensa INT NOT NULL DEFAULT 50,
 
     FOREIGN KEY (id_escola) REFERENCES escolas(id_escola),
     FOREIGN KEY (id_curso) REFERENCES cursos(id_curso)
