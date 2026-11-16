@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 
 async function registerUser(dados) {
   try {
-    console.log("📝 Tentando cadastrar usuário:", dados.email);
+    console.log("Tentando cadastrar usuário:", dados.email);
 
     if (!dados.nome || !dados.email || !dados.senha || !dados.id_perfil) {
       return { success: false, message: "Todos os campos são obrigatórios." };
@@ -42,14 +42,14 @@ async function registerUser(dados) {
         dados.id_escola || null,
       ]);
 
-    console.log("✅ Usuário criado com sucesso!");
+    console.log("Usuário criado com sucesso!");
 
     return {
       success: true,
       message: "Conta criada com sucesso! Você já pode fazer login.",
     };
   } catch (err) {
-    console.error("❌ ERRO AO CADASTRAR:", err);
+    console.error("ERRO AO CADASTRAR:", err);
     return {
       success: false,
       message: "Erro ao criar conta. Tente novamente.",
