@@ -9,109 +9,162 @@
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="../../shared/main-style.css" />
-  <link rel="icon" type="image/x-icon" href="../../Assets/Monetto Logo.ico">
-
+  <link rel="icon" type="image/x-icon" href="../../Assets/Monetto Logo.ico" />
   <link rel="stylesheet" href="../../shared/redesign.css" />
 </head>
 
 <body>
-<header class="app-header">
-  <button class="app-icon-btn" id="appMenuBtn" type="button" aria-label="Abrir menu" aria-expanded="false"><span class="menu-lines" aria-hidden="true"></span></button>
-  <a class="app-brand" href="../../login/login.html" aria-label="Monetto, página inicial"><span class="app-brand-mark" aria-hidden="true">M</span><span>Monetto</span><span class="app-brand-subtitle">Educação financeira</span></a>
-  <span class="app-spacer"></span>
-  <button class="app-icon-btn" id="appThemeBtn" type="button" aria-label="Alternar tema" title="Alternar tema"><span class="theme-mark" aria-hidden="true"></span></button>
-</header>
+  <header class="app-header">
+    <button class="app-icon-btn" id="appMenuBtn" type="button" aria-label="Abrir menu" aria-expanded="false">
+      <span class="menu-lines" aria-hidden="true"></span>
+    </button>
+    <a class="app-brand" href="../../login/login.html" aria-label="Monetto, página inicial">
+      <span class="app-brand-mark" aria-hidden="true">M</span><span>Monetto</span>
+      <span class="app-brand-subtitle">Educação financeira</span>
+    </a>
+    <span class="app-spacer"></span>
+    <button class="app-icon-btn" id="appThemeBtn" type="button" aria-label="Alternar tema" title="Alternar tema">
+      <span class="theme-mark" aria-hidden="true"></span>
+    </button>
+  </header>
+
   <div id="sidebar-container"></div>
+
   <main class="main">
     <div class="topbar">
       <h1>Configurações <span>Admin</span></h1>
       <div class="top-right">
-        <button class="btn btn-primary"> Salvar</button>
+        <button class="btn btn-primary" id="save-btn">Salvar</button>
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:200px 1fr;gap:0;height:calc(100vh - 130px);overflow:hidden">
-      <div style="border-right:1px solid var(--border);padding:20px 0;overflow-y:auto">
-        <div
-          style="font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:0 16px;margin-bottom:8px">
-          Seções</div>
-        <div
-          style="display:flex;align-items:center;gap:8px;padding:10px 16px;cursor:pointer;font-size:.85rem;font-weight:600;color:var(--white);background:rgba(255,215,0,.07);border-left:3px solid var(--accent)">
-           Meu Perfil</div>
-        <div
-          style="display:flex;align-items:center;gap:8px;padding:10px 16px;cursor:pointer;font-size:.85rem;font-weight:500;color:var(--muted);border-left:3px solid transparent">
-           Notificações</div>
-        <div
-          style="display:flex;align-items:center;gap:8px;padding:10px 16px;cursor:pointer;font-size:.85rem;font-weight:500;color:var(--muted);border-left:3px solid transparent">
-           Segurança</div>
-        <div
-          style="display:flex;align-items:center;gap:8px;padding:10px 16px;cursor:pointer;font-size:.85rem;font-weight:500;color:var(--muted);border-left:3px solid transparent">
-           Aparência</div>
+    <div style="padding:28px 32px;overflow-y:auto">
+
+      <div style="margin-bottom:24px">
+        <h2 style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:4px">
+          Perfil do Administrador
+        </h2>
+        <p style="font-size:.82rem;color:var(--muted)">Gerencie suas informações de acesso</p>
       </div>
-      <div style="padding:28px 32px;overflow-y:auto">
-        <div style="margin-bottom:24px">
-          <h2 style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:4px"> Perfil do
-            Administrador</h2>
-          <p style="font-size:.82rem;color:var(--muted)">Gerencie suas informações de acesso</p>
-        </div>
 
+      <!-- PROFILE HERO -->
+      <div
+        style="background:linear-gradient(135deg,#111a5c,#1a2a8f);border:1px solid var(--border);border-radius:20px;padding:22px;display:flex;align-items:center;gap:20px;margin-bottom:22px;position:relative;overflow:hidden">
         <div
-          style="background:linear-gradient(135deg,#111a5c,#1a2a8f);border:1px solid var(--border);border-radius:20px;padding:22px;display:flex;align-items:center;gap:20px;margin-bottom:22px;position:relative;overflow:hidden">
-          <div
-            style="position:absolute;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(255,215,0,.07),transparent 70%);top:-60px;right:-30px">
-          </div>
-          <div
-            style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#c0392b,#8b0000);display:flex;align-items:center;justify-content:center;font-size:1.8rem">
-            </div>
-          <div>
-            <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:4px">Admin Escolar
-            </div>
-            <div style="font-size:.8rem;color:var(--muted);margin-bottom:8px">admin@escola.edu · E.E. São Paulo –
-              Unidade Centro</div>
-            <span class="badge badge-red">Super Administrador</span>
-          </div>
+          style="position:absolute;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(255,215,0,.07),transparent 70%);top:-60px;right:-30px">
         </div>
 
-        <div class="card">
-          <div class="card-hd">
-            <h3> Informações Pessoais</h3>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-            <div class="field-group"><label>Nome</label><input type="text" value="Admin"
-                style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none" />
-            </div>
-            <div class="field-group"><label>Sobrenome</label><input type="text" value="Escolar"
-                style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none" />
-            </div>
-            <div class="field-group"><label>E-mail</label><input type="email" value="admin@escola.edu"
-                style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none" />
-            </div>
-            <div class="field-group"><label>Cargo</label><input type="text" value="Diretor Administrativo"
-                style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none" />
-            </div>
-          </div>
+        <div class="photo-drop" id="admin-photo" tabindex="0" role="button" title="Clique para alterar a foto"
+          style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#c0392b,#8b0000);display:flex;align-items:center;justify-content:center;font-size:1.8rem;overflow:hidden;cursor:pointer;flex-shrink:0">
         </div>
 
-        <div class="card">
-          <div class="card-hd">
-            <h3> Alterar Senha</h3>
+        <div>
+          <div id="school-name" style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:4px">
+            Carregando…
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
-            <div class="field-group"><label>Senha atual</label><input type="password" placeholder="••••••••"
-                style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none" />
-            </div>
-            <div class="field-group"><label>Nova senha</label><input type="password" placeholder="••••••••"
-                style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none" />
-            </div>
-            <div class="field-group"><label>Confirmar senha</label><input type="password" placeholder="••••••••"
-                style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none" />
-            </div>
+          <div id="perfil-email-escola" style="font-size:.8rem;color:var(--muted);margin-bottom:8px">—</div>
+          <span class="badge badge-red">Administrador</span>
+        </div>
+      </div>
+
+      <!-- PERSONAL INFO -->
+      <div class="card">
+        <div class="card-hd">
+          <h3> Informações Pessoais</h3>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div class="field-group">
+            <label>Nome</label>
+            <input type="text" id="campo-nome" value=""
+              style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none" />
+          </div>
+          <div class="field-group">
+            <label>E-mail</label>
+            <input type="email" id="campo-email" value=""
+              style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none" />
           </div>
         </div>
       </div>
+
+      <!-- PASSWORD -->
+      <div class="card">
+        <div class="card-hd" style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+          <h3> Alterar Senha</h3>
+          <button type="button" id="save-password" class="btn btn-primary"
+            style="padding:10px 16px;font-size:.8rem">Salvar senha</button>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+          <div class="field-group">
+            <label>Senha atual</label>
+            <input id="senha-atual" type="password" placeholder="••••••••"
+              style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none" />
+          </div>
+          <div class="field-group">
+            <label>Nova senha</label>
+            <input id="nova-senha" type="password" placeholder="••••••••"
+              style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none" />
+          </div>
+          <div class="field-group">
+            <label>Confirmar senha</label>
+            <input id="confirmar-senha" type="password" placeholder="••••••••"
+              style="background:rgba(255,255,255,.07);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;color:var(--white);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none" />
+          </div>
+        </div>
+      </div>
+
     </div>
   </main>
-  <script src="../main_script.js"></script>
+
+  <script src="script.js"></script>
+  <script src="../../shared/photo-uploader.js"></script>
+
+  <script>
+    function showToast(msg, tipo) {
+      if (typeof MonettoUI !== "undefined") {
+        MonettoUI.toast(msg || "Ação realizada!", tipo || "success");
+      } else {
+        alert(msg);
+      }
+    }
+
+    function currentUserIdFromSession() {
+      const session = JSON.parse(localStorage.getItem("session") || "{}");
+      return session.id_usuario || session.id || null;
+    }
+
+    async function initAdminSettings() {
+      const id = currentUserIdFromSession();
+      if (!id) return;
+
+      // Profile photo
+      if (window.MonettoPhoto) {
+        const el = document.getElementById("admin-photo");
+        if (el) {
+          window.MonettoPhoto.attach(el, { id_usuario: id }).load();
+        }
+      }
+
+      // Populate name/email from backend (same source script.js uses)
+      if (window.api?.getAdminProfile) {
+        try {
+          const result = await window.api.getAdminProfile(id);
+          if (result?.success) {
+            const profile = result.data || {};
+            const schoolEl = document.getElementById("school-name");
+            const emailEl = document.getElementById("perfil-email-escola");
+            if (schoolEl) schoolEl.textContent = profile.escola?.nome || "Escola";
+            if (emailEl) emailEl.textContent = profile.email || "—";
+          }
+        } catch (err) {
+          console.warn("getAdminProfile:", err);
+        }
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", initAdminSettings);
+  </script>
+
+  <script src="../../shared/monetto-app.js"></script>
   <script src="../../shared/monetto-shell.js"></script>
 </body>
 

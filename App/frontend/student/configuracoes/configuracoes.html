@@ -1,2059 +1,795 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 
 <head>
-
   <meta charset="utf-8" />
-
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-
-  <title>
-    Monetto – Configurações
-  </title>
+  <title>Monetto – Configurações</title>
 
   <link
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
 
   <link href="../student-ui.css" rel="stylesheet" />
-
   <link href="configuracoes.css" rel="stylesheet" />
-
   <link href="../../Assets/Monetto Logo.ico" rel="icon" type="image/x-icon" />
 </head>
 
-
 <body class="settings-page">
-  <header class="app-header">
-    <button class="app-icon-btn" id="appMenuBtn" type="button" aria-label="Abrir menu" aria-expanded="false"><span
-        class="menu-lines" aria-hidden="true"></span></button>
-    <a class="app-brand" href="../../login/login.html" aria-label="Monetto, página inicial"><span class="app-brand-mark"
-        aria-hidden="true">M</span><span>Monetto</span><span class="app-brand-subtitle">Educação financeira</span></a>
-    <span class="app-spacer"></span>
-    <button class="app-icon-btn" id="appThemeBtn" type="button" aria-label="Alternar tema" title="Alternar tema"><span
-        class="theme-mark" aria-hidden="true"></span></button>
-  </header>
 
+  <header class="app-header">
+    <button class="app-icon-btn" id="appMenuBtn" type="button" aria-label="Abrir menu" aria-expanded="false">
+      <span class="menu-lines" aria-hidden="true"></span>
+    </button>
+    <a class="app-brand" href="../../login/login.html" aria-label="Monetto, página inicial">
+      <span class="app-brand-mark" aria-hidden="true">M</span><span>Monetto</span>
+      <span class="app-brand-subtitle">Educação financeira</span>
+    </a>
+    <span class="app-spacer"></span>
+    <button class="app-icon-btn" id="appThemeBtn" type="button" aria-label="Alternar tema" title="Alternar tema">
+      <span class="theme-mark" aria-hidden="true"></span>
+    </button>
+  </header>
 
   <div id="sidebar-container"></div>
 
-
   <div class="main">
 
-
     <div class="set-nav">
-
-      <div class="set-nav-title">
-        Configurações
-      </div>
-
+      <div class="set-nav-title">Configurações</div>
 
       <button type="button" class="set-nav-item active" onclick="showTab('perfil', this)">
-        <span class="sni">
-
-        </span>
-
-        Meu Perfil
+        <span class="sni"></span> Meu Perfil
       </button>
-
-
       <button type="button" class="set-nav-item" onclick="showTab('notif', this)">
-        <span class="sni">
-
-        </span>
-
-        Notificações
+        <span class="sni"></span> Notificações
       </button>
-
-
       <button type="button" class="set-nav-item" onclick="showTab('priv', this)">
-        <span class="sni">
-
-        </span>
-
-        Privacidade
+        <span class="sni"></span> Privacidade
       </button>
-
-
       <button type="button" class="set-nav-item" onclick="showTab('conta', this)">
-        <span class="sni">
-
-        </span>
-
-        Conta
+        <span class="sni"></span> Conta
       </button>
-
     </div>
-
 
     <div class="set-content">
 
-
+      <!-- =========================
+           PERFIL
+      ========================== -->
       <div id="tab-perfil">
 
-
         <div class="set-header">
-
-          <h1>
-            Meu Perfil
-          </h1>
-
-          <p>
-            Atualize suas informações pessoais
-          </p>
-
+          <h1> Meu Perfil</h1>
+          <p>Atualize suas informações pessoais</p>
         </div>
 
-
+        <!-- PROFILE HERO -->
         <div class="profile-hero">
-
           <div class="profile-big-av photo-drop" id="profile-big-av" tabindex="0" role="button"
             title="Clique para enviar uma foto">
             <div class="av-edit"></div>
           </div>
 
-
           <div class="profile-info">
-
-            <strong>
-              Carregando perfil...
-            </strong>
-
+            <strong id="profile-display-name">Carregando perfil...</strong>
+            <span id="profile-display-email">—</span>
           </div>
-
         </div>
 
-
-        <div class="set-card">
-
-          <div class="set-card-title">
-            Escolher Avatar
-          </div>
-
-
+        <!-- AVATAR -->
+        <div class="set-card" id="avatar-card">
+          <div class="set-card-title"> Escolher Avatar</div>
           <div class="avatar-grid">
-
             <button type="button" class="av-opt av1 selected" data-avatar="🦉" aria-label="Avatar Coruja">🦉</button>
-
             <button type="button" class="av-opt av2" data-avatar="🦊" aria-label="Avatar Raposa">🦊</button>
-
             <button type="button" class="av-opt av3" data-avatar="🐼" aria-label="Avatar Panda">🐼</button>
-
             <button type="button" class="av-opt av4" data-avatar="🐱" aria-label="Avatar Gato">🐱</button>
-
             <button type="button" class="av-opt av5" data-avatar="🦁" aria-label="Avatar Leão">🦁</button>
-
             <button type="button" class="av-opt av6" data-avatar="🐧" aria-label="Avatar Pinguim">🐧</button>
-
           </div>
-
         </div>
 
-
+        <!-- PERSONAL INFO -->
         <div class="set-card">
-
-          <div class="set-card-title">
-            Informações Pessoais
-          </div>
-
+          <div class="set-card-title"> Informações Pessoais</div>
 
           <div class="form-row">
-
             <div class="field-group">
-
-              <label for="nome_usuario">
-                Nome
-              </label>
-
+              <label for="nome_usuario">Nome</label>
               <input id="nome_usuario" type="text" value="" />
-
             </div>
-
-
             <div class="field-group">
-
-              <label for="turma_usuario">
-                Turma
-              </label>
-
+              <label for="turma_usuario">Turma</label>
               <textarea disabled id="turma_usuario" rows="2"></textarea>
-
             </div>
-
           </div>
-
 
           <div class="form-row">
-
             <div class="field-group">
-
-              <label for="email_usuario">
-                E-mail
-              </label>
-
+              <label for="email_usuario">E-mail</label>
               <input id="email_usuario" type="email" value="" />
-
             </div>
-
-
             <div class="field-group">
-
-              <label for="escola_usuario">
-                Escola
-              </label>
-
+              <label for="escola_usuario">Escola</label>
               <textarea disabled id="escola_usuario" rows="3"></textarea>
-
             </div>
-
           </div>
-
 
           <div class="form-row single">
-
             <div class="field-group">
-
-              <label for="bio_usuario">
-                Bio
-              </label>
-
+              <label for="bio_usuario">Bio</label>
               <input id="bio_usuario" maxlength="120" placeholder="Conte um pouco sobre você..." type="text" value="" />
-
             </div>
-
           </div>
-
         </div>
 
-
+        <!-- PASSWORD -->
         <div class="set-card">
-
-          <div class="set-card-title">
-            Alterar Senha
-          </div>
-
-
-          <p style="
-              font-size:.85rem;
-              color:var(--muted);
-              margin-bottom:16px;
-            ">
+          <div class="set-card-title"> Alterar Senha</div>
+          <p style="font-size:.85rem;color:var(--muted);margin-bottom:16px">
             Só preencha os campos abaixo caso queira alterar sua senha.
           </p>
 
-
           <div class="form-row single">
-
             <div class="field-group">
-
-              <label for="senha_atual">
-                Senha atual
-              </label>
-
+              <label for="senha_atual">Senha atual</label>
               <input id="senha_atual" placeholder="••••••••" type="password" />
-
             </div>
-
           </div>
-
 
           <div class="form-row">
-
             <div class="field-group">
-
-              <label for="nova_senha">
-                Nova senha
-              </label>
-
+              <label for="nova_senha">Nova senha</label>
               <input id="nova_senha" placeholder="••••••••" type="password" />
-
             </div>
-
-
             <div class="field-group">
-
-              <label for="confirmar_senha">
-                Confirmar nova senha
-              </label>
-
+              <label for="confirmar_senha">Confirmar nova senha</label>
               <input id="confirmar_senha" placeholder="••••••••" type="password" />
-
             </div>
-
           </div>
-
         </div>
 
-
+        <!-- SAVE -->
         <div class="save-row">
-
-          <button class="btn-save" id="salvar_perfil" type="button">
-            Salvar alterações
-          </button>
-
-
-          <button class="btn-cancel" id="cancelar_perfil" type="button">
-            Cancelar
-          </button>
-
+          <button class="btn-save" id="salvar_perfil" type="button">Salvar alterações</button>
+          <button class="btn-cancel" id="cancelar_perfil" type="button">Cancelar</button>
         </div>
-
       </div>
 
-
+      <!-- =========================
+           NOTIFICAÇÕES
+      ========================== -->
       <div id="tab-notif" style="display:none">
-
-
         <div class="set-header">
-
-          <h1>
-            Notificações
-          </h1>
-
-          <p>
-            Controle o que você quer ser notificado
-          </p>
-
+          <h1> Notificações</h1>
+          <p>Controle o que você quer ser notificado</p>
         </div>
-
 
         <div class="set-card">
-
-          <div class="set-card-title">
-            Alertas de Tarefas
-          </div>
-
+          <div class="set-card-title"> Alertas de Tarefas</div>
 
           <div class="toggle-row">
-
             <div class="toggle-info">
-
-              <strong>
-                Nova tarefa do professor
-              </strong>
-
-              <span>
-                Avise quando o professor adicionar uma nova tarefa
-              </span>
-
+              <strong>Nova tarefa do professor</strong>
+              <span>Avise quando o professor adicionar uma nova tarefa</span>
             </div>
-
-            <button type="button" class="toggle on" data-setting="nova_tarefa"
-              aria-label="Alternar novas tarefas"></button>
-
+            <button type="button" class="toggle on" data-setting="nova_tarefa"></button>
           </div>
-
 
           <div class="toggle-row">
-
             <div class="toggle-info">
-
-              <strong>
-                Tarefa próxima do prazo
-              </strong>
-
-              <span>
-                Lembrete antes do prazo
-              </span>
-
+              <strong>Tarefa próxima do prazo</strong>
+              <span>Lembrete antes do prazo</span>
             </div>
-
-            <button type="button" class="toggle on" data-setting="prazo_tarefa"
-              aria-label="Alternar prazo de tarefas"></button>
-
+            <button type="button" class="toggle on" data-setting="prazo_tarefa"></button>
           </div>
-
 
           <div class="toggle-row">
-
             <div class="toggle-info">
-
-              <strong>
-                Tarefa atrasada
-              </strong>
-
-              <span>
-                Aviso quando uma tarefa passar do prazo
-              </span>
-
+              <strong>Tarefa atrasada</strong>
+              <span>Aviso quando uma tarefa passar do prazo</span>
             </div>
-
-            <button type="button" class="toggle" data-setting="tarefa_atrasada"
-              aria-label="Alternar tarefas atrasadas"></button>
-
+            <button type="button" class="toggle" data-setting="tarefa_atrasada"></button>
           </div>
-
         </div>
-
 
         <div class="set-card">
-
-          <div class="set-card-title">
-            Jogos e Conquistas
-          </div>
-
+          <div class="set-card-title"> Jogos e Conquistas</div>
 
           <div class="toggle-row">
-
             <div class="toggle-info">
-
-              <strong>
-                Nova medalha desbloqueada
-              </strong>
-
-              <span>
-                Aviso quando uma nova conquista for registrada
-              </span>
-
+              <strong>Nova medalha desbloqueada</strong>
+              <span>Aviso quando uma nova conquista for registrada</span>
             </div>
-
-            <button type="button" class="toggle on" data-setting="nova_medalha"
-              aria-label="Alternar novas medalhas"></button>
-
+            <button type="button" class="toggle on" data-setting="nova_medalha"></button>
           </div>
-
 
           <div class="toggle-row">
-
             <div class="toggle-info">
-
-              <strong>
-                Subir de nível
-              </strong>
-
-              <span>
-                Notificação ao atingir um novo nível
-              </span>
-
+              <strong>Subir de nível</strong>
+              <span>Notificação ao atingir um novo nível</span>
             </div>
-
-            <button type="button" class="toggle on" data-setting="novo_nivel" aria-label="Alternar novo nível"></button>
-
+            <button type="button" class="toggle on" data-setting="novo_nivel"></button>
           </div>
-
 
           <div class="toggle-row">
-
             <div class="toggle-info">
-
-              <strong>
-                Ranking atualizado
-              </strong>
-
-              <span>
-                Acompanhe sua posição na turma
-              </span>
-
+              <strong>Ranking atualizado</strong>
+              <span>Acompanhe sua posição na turma</span>
             </div>
-
-            <button type="button" class="toggle" data-setting="ranking" aria-label="Alternar ranking"></button>
-
+            <button type="button" class="toggle" data-setting="ranking"></button>
           </div>
-
 
           <div class="toggle-row">
-
             <div class="toggle-info">
-
-              <strong>
-                Novo jogo disponível
-              </strong>
-
-              <span>
-                Aviso quando uma nova atividade for disponibilizada
-              </span>
-
+              <strong>Novo jogo disponível</strong>
+              <span>Aviso quando uma nova atividade for disponibilizada</span>
             </div>
-
-            <button type="button" class="toggle on" data-setting="novo_jogo" aria-label="Alternar novos jogos"></button>
-
+            <button type="button" class="toggle on" data-setting="novo_jogo"></button>
           </div>
-
         </div>
-
 
         <div class="set-card">
-
-          <div class="set-card-title">
-            E-mail e Resumo
-          </div>
-
+          <div class="set-card-title"> E-mail e Resumo</div>
 
           <div class="toggle-row">
-
             <div class="toggle-info">
-
-              <strong>
-                Resumo semanal
-              </strong>
-
-              <span>
-                Manter um resumo semanal das atividades
-              </span>
-
+              <strong>Resumo semanal</strong>
+              <span>Manter um resumo semanal das atividades</span>
             </div>
-
-            <button type="button" class="toggle on" data-setting="resumo_semanal"
-              aria-label="Alternar resumo semanal"></button>
-
+            <button type="button" class="toggle on" data-setting="resumo_semanal"></button>
           </div>
-
 
           <div class="toggle-row">
-
             <div class="toggle-info">
-
-              <strong>
-                Lembrete de sequência
-              </strong>
-
-              <span>
-                Não perca sua sequência de acesso
-              </span>
-
+              <strong>Lembrete de sequência</strong>
+              <span>Não perca sua sequência de acesso</span>
             </div>
-
-            <button type="button" class="toggle on" data-setting="lembrete_sequencia"
-              aria-label="Alternar lembrete de sequência"></button>
-
+            <button type="button" class="toggle on" data-setting="lembrete_sequencia"></button>
           </div>
-
         </div>
-
 
         <div class="save-row">
-
-          <button class="btn-save" id="salvar_notificacoes" type="button">
-            Salvar preferências
-          </button>
-
+          <button class="btn-save" id="salvar_notificacoes" type="button">Salvar preferências</button>
         </div>
-
       </div>
 
-
+      <!-- =========================
+           PRIVACIDADE
+      ========================== -->
       <div id="tab-priv" style="display:none">
-
-
         <div class="set-header">
-
-          <h1>
-            Privacidade
-          </h1>
-
-          <p>
-            Preferências de exibição do perfil
-          </p>
-
+          <h1> Privacidade</h1>
+          <p>Preferências de exibição do perfil</p>
         </div>
-
 
         <div class="set-card">
-
-          <div class="set-card-title">
-            Visibilidade do Perfil
-          </div>
-
+          <div class="set-card-title"> Visibilidade do Perfil</div>
 
           <div class="toggle-row">
-
             <div class="toggle-info">
-
-              <strong>
-                Mostrar no ranking da turma
-              </strong>
-
-              <span>
-                Seu nome aparece no ranking dos colegas
-              </span>
-
+              <strong>Mostrar no ranking da turma</strong>
+              <span>Seu nome aparece no ranking dos colegas</span>
             </div>
-
-            <button type="button" class="toggle on" data-privacy="ranking" aria-label="Alternar ranking"></button>
-
+            <button type="button" class="toggle on" data-privacy="ranking"></button>
           </div>
-
 
           <div class="toggle-row">
-
             <div class="toggle-info">
-
-              <strong>
-                Mostrar XP e nível
-              </strong>
-
-              <span>
-                Colegas podem visualizar sua pontuação
-              </span>
-
+              <strong>Mostrar XP e nível</strong>
+              <span>Colegas podem visualizar sua pontuação</span>
             </div>
-
-            <button type="button" class="toggle on" data-privacy="xp" aria-label="Alternar XP"></button>
-
+            <button type="button" class="toggle on" data-privacy="xp"></button>
           </div>
-
 
           <div class="toggle-row">
-
             <div class="toggle-info">
-
-              <strong>
-                Mostrar medalhas
-              </strong>
-
-              <span>
-                Suas conquistas ficam visíveis
-              </span>
-
+              <strong>Mostrar medalhas</strong>
+              <span>Suas conquistas ficam visíveis</span>
             </div>
-
-            <button type="button" class="toggle" data-privacy="medalhas" aria-label="Alternar medalhas"></button>
-
+            <button type="button" class="toggle" data-privacy="medalhas"></button>
           </div>
-
 
           <div class="toggle-row">
-
             <div class="toggle-info">
-
-              <strong>
-                Mostrar sequência de acesso
-              </strong>
-
-              <span>
-                Outros alunos podem ver sua sequência de dias
-              </span>
-
+              <strong>Mostrar sequência de acesso</strong>
+              <span>Outros alunos podem ver sua sequência de dias</span>
             </div>
-
-            <button type="button" class="toggle on" data-privacy="sequencia" aria-label="Alternar sequência"></button>
-
+            <button type="button" class="toggle on" data-privacy="sequencia"></button>
           </div>
-
         </div>
-
 
         <div class="save-row">
-
-          <button class="btn-save" id="salvar_privacidade" type="button">
-            Salvar configurações
-          </button>
-
+          <button class="btn-save" id="salvar_privacidade" type="button">Salvar configurações</button>
         </div>
-
       </div>
 
-
+      <!-- =========================
+           CONTA
+      ========================== -->
       <div id="tab-conta" style="display:none">
-
-
         <div class="set-header">
-
-          <h1>
-            Conta
-          </h1>
-
-          <p>
-            Dados da sua conta Monetto
-          </p>
-
+          <h1> Conta</h1>
+          <p>Dados da sua conta Monetto</p>
         </div>
 
-
         <div class="set-card">
-
-          <div class="set-card-title">
-            Dados da Conta
+          <div class="set-card-title"> Dados da Conta</div>
+          <div style="font-size:.85rem;display:flex;flex-direction:column;gap:12px">
+            <div
+              style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--border)">
+              <span style="color:var(--muted)">E-mail</span>
+              <span id="conta_email">Carregando...</span>
+            </div>
+            <div
+              style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--border)">
+              <span style="color:var(--muted)">Tipo de conta</span>
+              <span id="conta_tipo">Aluno</span>
+            </div>
+            <div style="display:flex;justify-content:space-between">
+              <span style="color:var(--muted)">Escola vinculada</span>
+              <span id="conta_escola">Carregando...</span>
+            </div>
           </div>
-
-
-          <div style="
-              font-size:.85rem;
-              display:flex;
-              flex-direction:column;
-              gap:12px;
-            ">
-
-
-            <div style="
-                display:flex;
-                justify-content:space-between;
-                padding-bottom:12px;
-                border-bottom:1px solid var(--border);
-              ">
-
-              <span style="
-                  color:var(--muted);
-                ">
-                E-mail
-              </span>
-
-              <span id="conta_email">
-                Carregando...
-              </span>
-
-            </div>
-
-
-            <div style="
-                display:flex;
-                justify-content:space-between;
-                padding-bottom:12px;
-                border-bottom:1px solid var(--border);
-              ">
-
-              <span style="
-                  color:var(--muted);
-                ">
-                Tipo de conta
-              </span>
-
-              <span id="conta_tipo">
-                Aluno
-              </span>
-
-            </div>
-
-
-            <div style="
-                display:flex;
-                justify-content:space-between;
-              ">
-
-              <span style="
-                  color:var(--muted);
-                ">
-                Escola vinculada
-              </span>
-
-              <span id="conta_escola">
-                Carregando...
-              </span>
-
-            </div>
-
-          </div>
-
         </div>
 
-
         <div class="set-card">
-
-          <div class="set-card-title" style="
-              color:var(--red);
-            ">
-            Segurança
-          </div>
-
-
-          <p style="
-              font-size:.85rem;
-              color:var(--muted);
-              margin-bottom:16px;
-              line-height:1.6;
-            ">
-            Você pode exportar uma cópia das suas informações
-            ou encerrar a sessão deste computador.
+          <div class="set-card-title" style="color:var(--red)"> Segurança</div>
+          <p style="font-size:.85rem;color:var(--muted);margin-bottom:16px;line-height:1.6">
+            Você pode exportar uma cópia das suas informações ou encerrar a sessão deste computador.
           </p>
-
-
-          <div style="
-              display:flex;
-              gap:12px;
-              flex-wrap:wrap;
-            ">
-
-
-            <button class="btn-danger" id="exportar_dados" type="button">
-              Exportar meus dados
-            </button>
-
-
-            <button class="btn-danger" id="sair_conta" type="button">
-              Sair da conta
-            </button>
-
-
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <button class="btn-danger" id="exportar_dados" type="button"> Exportar meus dados</button>
+            <button class="btn-danger" id="sair_conta" type="button"> Sair da conta</button>
             <button class="btn-danger" id="excluir_conta" type="button" disabled
-              title="Função não disponível nesta versão" style="
-                
-                cursor:not-allowed;
-              ">
-              Excluir conta
-            </button>
-
+              title="Função não disponível nesta versão" style="cursor:not-allowed"> Excluir conta</button>
           </div>
-
         </div>
-
       </div>
-
 
     </div>
-
   </div>
 
-
-  <div class="toast" id="toast" style="display:none">
-    Alterações salvas com sucesso!
-  </div>
-
+  <div class="toast" id="toast" style="display:none"> Alterações salvas com sucesso!</div>
 
   <script src="../student-script.js"></script>
-
   <script src="../student-data.js"></script>
   <script src="../../shared/photo-uploader.js"></script>
 
   <script>
+    /* ============================================================
+       SESSION / STORAGE KEYS
+    ============================================================ */
+    const configSession = JSON.parse(localStorage.getItem("session") || "{}");
+    const configStudentId = configSession.id_usuario || configSession.id || null;
 
-    const configSession =
-      JSON.parse(
-        localStorage.getItem(
-          "session"
-        ) || "{}"
-      );
+    const avatarKey = `monetto_avatar_${configStudentId}`;
+    const bioKey = `monetto_bio_${configStudentId}`;
+    const notificationKey = `monetto_notifications_${configStudentId}`;
+    const privacyKey = `monetto_privacy_${configStudentId}`;
 
+    let originalProfile = { nome: "", email: "", bio: "", avatar: "" };
+    let studentPhotoCtl = null;
 
-    const configStudentId =
-      configSession.id_usuario ||
-      configSession.id ||
-      null;
-
-
-    const avatarKey =
-      `monetto_avatar_${configStudentId}`;
-
-
-    const bioKey =
-      `monetto_bio_${configStudentId}`;
-
-
-    const notificationKey =
-      `monetto_notifications_${configStudentId}`;
-
-
-    const privacyKey =
-      `monetto_privacy_${configStudentId}`;
-
-
-    let originalProfile = {
-      nome: "",
-      email: "",
-      bio: "",
-      avatar: ""
-    };
-
-    if (window.MonettoPhoto) {
-      const photoEl = document.getElementById("profile-big-av");
-      if (photoEl) {
-        const photoCtl = window.MonettoPhoto.attach(photoEl, {
-          id_usuario: configStudentId,
-        });
-        photoCtl.load().then((foto) => {
-          if (foto) {
-            const grid = document.querySelector(".avatar-grid");
-            if (grid) grid.style.display = "none";
-          }
-        });
-      }
+    /* ============================================================
+       TABS
+    ============================================================ */
+    function showTab(id, element) {
+      document.querySelectorAll('[id^="tab-"]').forEach(tab => { tab.style.display = "none"; });
+      document.querySelectorAll(".set-nav-item").forEach(item => item.classList.remove("active"));
+      const target = document.getElementById(`tab-${id}`);
+      if (target) target.style.display = "block";
+      if (element) element.classList.add("active");
+      if (id === "conta") updateAccountData();
     }
 
-
-    function showTab(
-      id,
-      element
-    ) {
-
-      document
-        .querySelectorAll(
-          '[id^="tab-"]'
-        )
-        .forEach(
-          (tab) => {
-            tab.style.display =
-              "none";
-          }
-        );
-
-
-      document
-        .querySelectorAll(
-          ".set-nav-item"
-        )
-        .forEach(
-          (item) => {
-            item.classList.remove(
-              "active"
-            );
-          }
-        );
-
-
-      const target =
-        document.getElementById(
-          `tab-${id}`
-        );
-
-
-      if (target) {
-        target.style.display =
-          "block";
-      }
-
-
-      if (element) {
-        element.classList.add(
-          "active"
-        );
-      }
-
-
-      if (
-        id ===
-        "conta"
-      ) {
-        updateAccountData();
-      }
+    /* ============================================================
+       TOAST
+    ============================================================ */
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      if (!toast) return;
+      toast.textContent = message || " Alterações salvas com sucesso!";
+      toast.style.display = "block";
+      toast.classList.add("show");
+      clearTimeout(window.monettoToastTimer);
+      window.monettoToastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => { toast.style.display = "none"; }, 300);
+      }, 2500);
     }
 
-
-    function showToast(
-      message
-    ) {
-
-      const toast =
-        document.getElementById(
-          "toast"
-        );
-
-
-      if (!toast) {
-        return;
-      }
-
-
-      toast.textContent =
-        message ||
-        " Alterações salvas com sucesso!";
-
-
-      toast.style.display =
-        "block";
-
-
-      toast.classList.add(
-        "show"
-      );
-
-
-      clearTimeout(
-        window.monettoToastTimer
-      );
-
-
-      window.monettoToastTimer =
-        setTimeout(
-          () => {
-
-            toast.classList.remove(
-              "show"
-            );
-
-
-            setTimeout(
-              () => {
-                toast.style.display =
-                  "none";
-              },
-              300
-            );
-
-          },
-          2500
-        );
-    }
-
-
+    /* ============================================================
+       HELPERS
+    ============================================================ */
     function getCurrentStudent() {
-
-      return (
-        window.studentData
-          ?.student ||
-        {}
-      );
+      return window.studentData?.student || {};
     }
-
 
     function getSelectedAvatar() {
-
-      return (
-        document.querySelector(
-          ".av-opt.selected"
-        )?.dataset.avatar ||
-        ""
-      );
+      return document.querySelector(".av-opt.selected")?.dataset.avatar || "";
     }
 
+    function safeJson(key) {
+      try { return JSON.parse(localStorage.getItem(key) || "{}"); } catch (_) { return {}; }
+    }
 
-    function applyAvatar(
-      avatar
-    ) {
-
-      const finalAvatar =
-        avatar ||
-        "";
-
-
-      const bigAvatar =
-        document.getElementById(
-          "profile-big-av"
-        );
-
+    /* ============================================================
+       AVATAR (EMOJI)
+    ============================================================ */
+    function applyAvatar(avatar) {
+      const finalAvatar = avatar || "";
+      const bigAvatar = document.getElementById("profile-big-av");
 
       if (bigAvatar) {
-
-        bigAvatar.innerHTML = `
-          ${finalAvatar}
-
-          <div class="av-edit">
-
-          </div>
-        `;
+        // Only show the emoji if there is no photo set
+        const hasPhoto = bigAvatar.classList.contains("has-photo");
+        if (!hasPhoto) {
+          bigAvatar.innerHTML = `${finalAvatar}<div class="av-edit"></div>`;
+        }
       }
 
-
-      document
-        .querySelectorAll(
-          ".av-opt"
-        )
-        .forEach(
-          (item) => {
-
-            item.classList.toggle(
-              "selected",
-              item.dataset.avatar ===
-              finalAvatar
-            );
-          }
-        );
+      document.querySelectorAll(".av-opt").forEach(item => {
+        item.classList.toggle("selected", item.dataset.avatar === finalAvatar);
+      });
     }
 
-
     function loadAvatar() {
-
-      const avatar =
-        localStorage.getItem(
-          avatarKey
-        ) ||
-        "";
-
-
-      applyAvatar(
-        avatar
-      );
-
-
+      const avatar = localStorage.getItem(avatarKey) || "";
+      applyAvatar(avatar);
       return avatar;
     }
 
-
+    /* ============================================================
+       BIO
+    ============================================================ */
     function loadBio() {
-
-      const bio =
-        localStorage.getItem(
-          bioKey
-        ) ||
-        "";
-
-
-      const input =
-        document.getElementById(
-          "bio_usuario"
-        );
-
-
-      if (input) {
-        input.value =
-          bio;
-      }
-
-
+      const bio = localStorage.getItem(bioKey) || "";
+      const input = document.getElementById("bio_usuario");
+      if (input) input.value = bio;
       return bio;
     }
 
-
+    /* ============================================================
+       ORIGINAL PROFILE (for Cancel)
+    ============================================================ */
     function captureOriginalProfile() {
-
-      const nome =
-        document.getElementById(
-          "nome_usuario"
-        )?.value ||
-        "";
-
-
-      const email =
-        document.getElementById(
-          "email_usuario"
-        )?.value ||
-        "";
-
-
-      const bio =
-        document.getElementById(
-          "bio_usuario"
-        )?.value ||
-        "";
-
-
       originalProfile = {
-        nome,
-        email,
-        bio,
-        avatar:
-          localStorage.getItem(
-            avatarKey
-          ) ||
-          ""
+        nome: document.getElementById("nome_usuario")?.value || "",
+        email: document.getElementById("email_usuario")?.value || "",
+        bio: document.getElementById("bio_usuario")?.value || "",
+        avatar: localStorage.getItem(avatarKey) || "",
       };
     }
 
+    /* ============================================================
+       PHOTO UPLOADER
+    ============================================================ */
+    function initPhotoUploader() {
+      if (!window.MonettoPhoto) return;
+      const el = document.getElementById("profile-big-av");
+      if (!el) return;
 
+      studentPhotoCtl = window.MonettoPhoto.attach(el, {
+        id_usuario: configStudentId,
+      });
+
+      studentPhotoCtl.load().then((foto) => {
+        const avatarCard = document.getElementById("avatar-card");
+        if (foto) {
+          if (avatarCard) avatarCard.style.display = "none";
+        } else {
+          if (avatarCard) avatarCard.style.display = "";
+        }
+      });
+
+      // Re-render emoji on top of the photo slot when removed
+      document.addEventListener("user:photo-updated", (e) => {
+        const foto = e.detail?.foto || null;
+        const avatarCard = document.getElementById("avatar-card");
+        if (foto) {
+          if (avatarCard) avatarCard.style.display = "none";
+        } else {
+          if (avatarCard) avatarCard.style.display = "";
+          applyAvatar(localStorage.getItem(avatarKey) || "");
+        }
+      });
+    }
+
+    /* ============================================================
+       SAVE PROFILE
+    ============================================================ */
     async function salvarPerfilAluno() {
-
       if (!configStudentId) {
-
-        alert(
-          "Sessão do aluno não encontrada."
-        );
-
+        alert("Sessão do aluno não encontrada.");
         return;
       }
 
+      const nome = document.getElementById("nome_usuario").value.trim();
+      const email = document.getElementById("email_usuario").value.trim();
+      const bio = document.getElementById("bio_usuario").value.trim();
 
-      const nome =
-        document
-          .getElementById(
-            "nome_usuario"
-          )
-          .value
-          .trim();
+      const senhaAtual = document.getElementById("senha_atual").value;
+      const novaSenha = document.getElementById("nova_senha").value;
+      const confirmar = document.getElementById("confirmar_senha").value;
 
+      if (!nome) { alert("Informe seu nome."); return; }
+      if (!email) { alert("Informe seu e-mail."); return; }
 
-      const email =
-        document
-          .getElementById(
-            "email_usuario"
-          )
-          .value
-          .trim();
-
-
-      const bio =
-        document
-          .getElementById(
-            "bio_usuario"
-          )
-          .value
-          .trim();
-
-
-      const senhaAtual =
-        document.getElementById(
-          "senha_atual"
-        ).value;
-
-
-      const novaSenha =
-        document.getElementById(
-          "nova_senha"
-        ).value;
-
-
-      const confirmar =
-        document.getElementById(
-          "confirmar_senha"
-        ).value;
-
-
-      if (!nome) {
-
-        alert(
-          "Informe seu nome."
-        );
-
+      if (!window.api?.updateAluno) {
+        alert("A função de atualização do aluno não está disponível.");
         return;
       }
-
-
-      if (!email) {
-
-        alert(
-          "Informe seu e-mail."
-        );
-
-        return;
-      }
-
-
-      if (
-        !window.api
-          ?.updateAluno
-      ) {
-
-        alert(
-          "A função de atualização do aluno não está disponível."
-        );
-
-        return;
-      }
-
 
       try {
+        const perfil = await window.api.updateAluno({
+          id_usuario: configStudentId,
+          nome,
+          email,
+        });
 
-        const perfil =
-          await window.api
-            .updateAluno({
-              id_usuario:
-                configStudentId,
-
-              nome,
-
-              email
-            });
-
-
-        if (
-          !perfil?.success
-        ) {
-
-          alert(
-            perfil?.message ||
-            "Erro ao atualizar perfil."
-          );
-
+        if (!perfil?.success) {
+          alert(perfil?.message || "Erro ao atualizar perfil.");
           return;
         }
 
-
-        if (
-          senhaAtual ||
-          novaSenha ||
-          confirmar
-        ) {
-
-          if (
-            !senhaAtual ||
-            !novaSenha ||
-            !confirmar
-          ) {
-
-            alert(
-              "Preencha os três campos de senha."
-            );
-
+        if (senhaAtual || novaSenha || confirmar) {
+          if (!senhaAtual || !novaSenha || !confirmar) {
+            alert("Preencha os três campos de senha.");
+            return;
+          }
+          if (novaSenha !== confirmar) {
+            alert("A confirmação da nova senha não confere.");
+            return;
+          }
+          if (novaSenha.length < 4) {
+            alert("A nova senha deve possuir pelo menos 4 caracteres.");
+            return;
+          }
+          if (!window.api?.changeAlunoPassword) {
+            alert("A função de alteração de senha não está disponível.");
             return;
           }
 
+          const senha = await window.api.changeAlunoPassword({
+            id_usuario: configStudentId,
+            senhaAtual,
+            novaSenha,
+          });
 
-          if (
-            novaSenha !==
-            confirmar
-          ) {
-
-            alert(
-              "A confirmação da nova senha não confere."
-            );
-
-            return;
-          }
-
-
-          if (
-            novaSenha.length <
-            4
-          ) {
-
-            alert(
-              "A nova senha deve possuir pelo menos 4 caracteres."
-            );
-
-            return;
-          }
-
-
-          if (
-            !window.api
-              ?.changeAlunoPassword
-          ) {
-
-            alert(
-              "A função de alteração de senha não está disponível."
-            );
-
-            return;
-          }
-
-
-          const senha =
-            await window.api
-              .changeAlunoPassword({
-                id_usuario:
-                  configStudentId,
-
-                senhaAtual,
-
-                novaSenha
-              });
-
-
-          if (
-            !senha?.success
-          ) {
-
-            alert(
-              senha?.message ||
-              "Erro ao alterar senha."
-            );
-
+          if (!senha?.success) {
+            alert(senha?.message || "Erro ao alterar senha.");
             return;
           }
         }
 
+        const avatar = getSelectedAvatar();
+        localStorage.setItem(avatarKey, avatar);
+        document.dispatchEvent(new CustomEvent("student:avatar-updated"));
+        localStorage.setItem(bioKey, bio);
 
-        const avatar =
-          getSelectedAvatar();
+        configSession.nome = nome;
+        configSession.email = email;
+        localStorage.setItem("session", JSON.stringify(configSession));
 
-
-        localStorage.setItem(
-          avatarKey,
-          avatar
-        );
-
-        document.dispatchEvent(
-          new CustomEvent(
-            "student:avatar-updated",
-          ),
-        );
-
-
-        localStorage.setItem(
-          bioKey,
-          bio
-        );
-
-
-        configSession.nome =
-          nome;
-
-
-        configSession.email =
-          email;
-
-
-        localStorage.setItem(
-          "session",
-          JSON.stringify(
-            configSession
-          )
-        );
-
-
-        document.getElementById(
-          "senha_atual"
-        ).value = "";
-
-
-        document.getElementById(
-          "nova_senha"
-        ).value = "";
-
-
-        document.getElementById(
-          "confirmar_senha"
-        ).value = "";
-
+        document.getElementById("senha_atual").value = "";
+        document.getElementById("nova_senha").value = "";
+        document.getElementById("confirmar_senha").value = "";
 
         captureOriginalProfile();
+        showToast(" Perfil atualizado com sucesso!");
 
-
-        showToast(
-          " Perfil atualizado com sucesso!"
-        );
-
-
-        if (
-          window.reloadStudentData
-        ) {
-
-          await window
-            .reloadStudentData();
-        }
-
-
+        if (window.reloadStudentData) await window.reloadStudentData();
         updateAccountData();
 
-      } catch (
-      error
-      ) {
-
-        console.error(
-          "Erro ao salvar perfil:",
-          error
-        );
-
-
-        alert(
-          "Não foi possível salvar as alterações."
-        );
+      } catch (error) {
+        console.error("Erro ao salvar perfil:", error);
+        alert("Não foi possível salvar as alterações.");
       }
     }
-
 
     function cancelarPerfil() {
+      const nome = document.getElementById("nome_usuario");
+      const email = document.getElementById("email_usuario");
+      const bio = document.getElementById("bio_usuario");
 
-      const nome =
-        document.getElementById(
-          "nome_usuario"
-        );
+      if (nome) nome.value = originalProfile.nome;
+      if (email) email.value = originalProfile.email;
+      if (bio) bio.value = originalProfile.bio;
 
+      applyAvatar(originalProfile.avatar);
 
-      const email =
-        document.getElementById(
-          "email_usuario"
-        );
+      document.getElementById("senha_atual").value = "";
+      document.getElementById("nova_senha").value = "";
+      document.getElementById("confirmar_senha").value = "";
 
-
-      const bio =
-        document.getElementById(
-          "bio_usuario"
-        );
-
-
-      if (nome) {
-        nome.value =
-          originalProfile.nome;
-      }
-
-
-      if (email) {
-        email.value =
-          originalProfile.email;
-      }
-
-
-      if (bio) {
-        bio.value =
-          originalProfile.bio;
-      }
-
-
-      applyAvatar(
-        originalProfile.avatar
-      );
-
-
-      document.getElementById(
-        "senha_atual"
-      ).value = "";
-
-
-      document.getElementById(
-        "nova_senha"
-      ).value = "";
-
-
-      document.getElementById(
-        "confirmar_senha"
-      ).value = "";
-
-
-      showToast(
-        "↩ Alterações canceladas."
-      );
+      showToast("↩ Alterações canceladas.");
     }
 
-
-    function toggleElement(
-      element
-    ) {
-
-      element.classList.toggle(
-        "on"
-      );
+    /* ============================================================
+       TOGGLES
+    ============================================================ */
+    function toggleElement(element) {
+      element.classList.toggle("on");
     }
 
-
-    function saveToggleGroup(
-      selector,
-      storageKey
-    ) {
-
-      const values =
-        {};
-
-
-      document
-        .querySelectorAll(
-          selector
-        )
-        .forEach(
-          (toggle) => {
-
-            const name =
-              toggle.dataset.setting ||
-              toggle.dataset.privacy;
-
-
-            if (!name) {
-              return;
-            }
-
-
-            values[name] =
-              toggle.classList.contains(
-                "on"
-              );
-          }
-        );
-
-
-      localStorage.setItem(
-        storageKey,
-        JSON.stringify(
-          values
-        )
-      );
+    function saveToggleGroup(selector, storageKey) {
+      const values = {};
+      document.querySelectorAll(selector).forEach(toggle => {
+        const name = toggle.dataset.setting || toggle.dataset.privacy;
+        if (!name) return;
+        values[name] = toggle.classList.contains("on");
+      });
+      localStorage.setItem(storageKey, JSON.stringify(values));
     }
 
-
-    function loadToggleGroup(
-      selector,
-      storageKey
-    ) {
-
-      const saved =
-        localStorage.getItem(
-          storageKey
-        );
-
-
-      if (!saved) {
-        return;
-      }
-
-
+    function loadToggleGroup(selector, storageKey) {
+      const saved = localStorage.getItem(storageKey);
+      if (!saved) return;
       try {
-
-        const values =
-          JSON.parse(
-            saved
-          );
-
-
-        document
-          .querySelectorAll(
-            selector
-          )
-          .forEach(
-            (toggle) => {
-
-              const name =
-                toggle.dataset.setting ||
-                toggle.dataset.privacy;
-
-
-              if (
-                typeof values[
-                name
-                ] !==
-                "boolean"
-              ) {
-                return;
-              }
-
-
-              toggle.classList.toggle(
-                "on",
-                values[name]
-              );
-            }
-          );
-
-      } catch (
-      error
-      ) {
-
-        console.error(
-          "Erro ao carregar preferências:",
-          error
-        );
+        const values = JSON.parse(saved);
+        document.querySelectorAll(selector).forEach(toggle => {
+          const name = toggle.dataset.setting || toggle.dataset.privacy;
+          if (typeof values[name] !== "boolean") return;
+          toggle.classList.toggle("on", values[name]);
+        });
+      } catch (error) {
+        console.error("Erro ao carregar preferências:", error);
       }
     }
-
 
     function salvarNotificacoes() {
-
-      saveToggleGroup(
-        "#tab-notif .toggle",
-        notificationKey
-      );
-
-
-      showToast(
-        " Preferências de notificações salvas!"
-      );
+      saveToggleGroup("#tab-notif .toggle", notificationKey);
+      showToast(" Preferências de notificações salvas!");
     }
-
 
     function salvarPrivacidade() {
-
-      saveToggleGroup(
-        "#tab-priv .toggle",
-        privacyKey
-      );
-
-
-      showToast(
-        " Configurações de privacidade salvas!"
-      );
+      saveToggleGroup("#tab-priv .toggle", privacyKey);
+      showToast(" Configurações de privacidade salvas!");
     }
 
-
+    /* ============================================================
+       ACCOUNT DATA
+    ============================================================ */
     function updateAccountData() {
+      const student = getCurrentStudent();
+      const sessionNow = JSON.parse(localStorage.getItem("session") || "{}");
+      const email = student.email || sessionNow.email || "Não informado";
+      const school = student.escola || "Não vinculada";
 
-      const student =
-        getCurrentStudent();
+      const emailElement = document.getElementById("conta_email");
+      const schoolElement = document.getElementById("conta_escola");
+      const typeElement = document.getElementById("conta_tipo");
 
-
-      const sessionNow =
-        JSON.parse(
-          localStorage.getItem(
-            "session"
-          ) || "{}"
-        );
-
-
-      const email =
-        student.email ||
-        sessionNow.email ||
-        "Não informado";
-
-
-      const school =
-        student.escola ||
-        "Não vinculada";
-
-
-      const emailElement =
-        document.getElementById(
-          "conta_email"
-        );
-
-
-      const schoolElement =
-        document.getElementById(
-          "conta_escola"
-        );
-
-
-      const typeElement =
-        document.getElementById(
-          "conta_tipo"
-        );
-
-
-      if (emailElement) {
-
-        emailElement.textContent =
-          email;
-      }
-
-
-      if (schoolElement) {
-
-        schoolElement.textContent =
-          school;
-      }
-
-
-      if (typeElement) {
-
-        typeElement.textContent =
-          "Aluno";
-      }
+      if (emailElement) emailElement.textContent = email;
+      if (schoolElement) schoolElement.textContent = school;
+      if (typeElement) typeElement.textContent = "Aluno";
     }
 
-
-    function safeJson(
-      key
-    ) {
-
-      try {
-
-        return JSON.parse(
-          localStorage.getItem(
-            key
-          ) ||
-          "{}"
-        );
-
-      } catch (_) {
-
-        return {};
-      }
-    }
-
-
+    /* ============================================================
+       EXPORT DATA
+    ============================================================ */
     function exportarDados() {
-
-      const student =
-        getCurrentStudent();
-
+      const student = getCurrentStudent();
 
       const data = {
-
-        nome:
-          student.nome ||
-          configSession.nome ||
-          "",
-
-
-        email:
-          student.email ||
-          configSession.email ||
-          "",
-
-
-        escola:
-          student.escola ||
-          null,
-
-
-        turma:
-          student.turma ||
-          null,
-
-
-        nivel:
-          Number(
-            student.nivel_atual
-          ) ||
-          1,
-
-
-        xp:
-          Number(
-            student.xp_atual
-          ) ||
-          0,
-
-
-        sequencia:
-          Number(
-            student.sequencia_dias
-          ) ||
-          0,
-
-
-        avatar:
-          localStorage.getItem(
-            avatarKey
-          ) ||
-          "",
-
-
-        bio:
-          localStorage.getItem(
-            bioKey
-          ) ||
-          "",
-
-
-        notificacoes:
-          safeJson(
-            notificationKey
-          ),
-
-
-        privacidade:
-          safeJson(
-            privacyKey
-          )
-
+        nome: student.nome || configSession.nome || "",
+        email: student.email || configSession.email || "",
+        escola: student.escola || null,
+        turma: student.turma || null,
+        nivel: Number(student.nivel_atual) || 1,
+        xp: Number(student.xp_atual) || 0,
+        sequencia: Number(student.sequencia_dias) || 0,
+        avatar: localStorage.getItem(avatarKey) || "",
+        bio: localStorage.getItem(bioKey) || "",
+        notificacoes: safeJson(notificationKey),
+        privacidade: safeJson(privacyKey),
       };
 
-
-      const blob =
-        new Blob(
-          [
-            JSON.stringify(
-              data,
-              null,
-              2
-            )
-          ],
-          {
-            type:
-              "application/json"
-          }
-        );
-
-
-      const url =
-        URL.createObjectURL(
-          blob
-        );
-
-
-      const link =
-        document.createElement(
-          "a"
-        );
-
-
-      link.href =
-        url;
-
-
-      link.download =
-        "monetto-meus-dados.json";
-
-
-      document.body.appendChild(
-        link
-      );
-
-
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "monetto-meus-dados.json";
+      document.body.appendChild(link);
       link.click();
-
-
       link.remove();
+      URL.revokeObjectURL(url);
 
-
-      URL.revokeObjectURL(
-        url
-      );
-
-
-      showToast(
-        " Dados exportados."
-      );
+      showToast(" Dados exportados.");
     }
 
-
+    /* ============================================================
+       LOGOUT
+    ============================================================ */
     function logoutConfig() {
-
-      const confirmar =
-        confirm(
-          "Tem certeza que deseja sair da conta?"
-        );
-
-
-      if (!confirmar) {
-        return;
-      }
-
-
-      localStorage.removeItem(
-        "session"
-      );
-
-
+      const confirmar = confirm("Tem certeza que deseja sair da conta?");
+      if (!confirmar) return;
+      localStorage.removeItem("session");
       sessionStorage.clear();
-
-
-      window.location.href =
-        "../../login/login.html";
+      window.location.href = "../../login/login.html";
     }
 
-
+    /* ============================================================
+       INIT
+    ============================================================ */
     function initializeSettings() {
-
       loadAvatar();
-
-      if (window.MonettoPhoto) {
-        window.MonettoPhoto.removePhoto({ id_usuario: configStudentId });
-      }
-      const grid = document.querySelector(".avatar-grid");
-      if (grid) grid.style.display = "";
-      const big = document.getElementById("profile-big-av");
-      if (big) {
-        big.style.backgroundImage = "";
-        big.classList.remove("has-photo");
-      }
-
       loadBio();
+      initPhotoUploader();
 
+      loadToggleGroup("#tab-notif .toggle", notificationKey);
+      loadToggleGroup("#tab-priv .toggle", privacyKey);
 
-      loadToggleGroup(
-        "#tab-notif .toggle",
-        notificationKey
-      );
+      // Emoji avatar selection
+      document.querySelectorAll(".av-opt").forEach(avatar => {
+        avatar.addEventListener("click", async () => {
+          document.querySelectorAll(".av-opt").forEach(item => item.classList.remove("selected"));
+          avatar.classList.add("selected");
+          applyAvatar(avatar.dataset.avatar);
 
-
-      loadToggleGroup(
-        "#tab-priv .toggle",
-        privacyKey
-      );
-
-
-      document
-        .querySelectorAll(
-          ".av-opt"
-        )
-        .forEach(
-          (avatar) => {
-
-            avatar.addEventListener(
-              "click",
-              () => {
-
-                document
-                  .querySelectorAll(
-                    ".av-opt"
-                  )
-                  .forEach(
-                    (item) => {
-
-                      item.classList.remove(
-                        "selected"
-                      );
-                    }
-                  );
-
-
-                avatar.classList.add(
-                  "selected"
-                );
-
-
-                applyAvatar(
-                  avatar.dataset.avatar
-                );
-              }
-            );
+          // Choosing an emoji removes the uploaded photo
+          if (window.MonettoPhoto) {
+            await window.MonettoPhoto.removePhoto({ id_usuario: configStudentId });
           }
-        );
 
-
-      document
-        .querySelectorAll(
-          "#tab-notif .toggle, #tab-priv .toggle"
-        )
-        .forEach(
-          (toggle) => {
-
-            toggle.addEventListener(
-              "click",
-              () => {
-
-                toggleElement(
-                  toggle
-                );
-              }
-            );
+          const bigAvatar = document.getElementById("profile-big-av");
+          if (bigAvatar) {
+            bigAvatar.classList.remove("has-photo");
+            bigAvatar.style.backgroundImage = "";
           }
-        );
 
+          const avatarCard = document.getElementById("avatar-card");
+          if (avatarCard) avatarCard.style.display = "";
 
-      document
-        .getElementById(
-          "salvar_perfil"
-        )
-        ?.addEventListener(
-          "click",
-          salvarPerfilAluno
-        );
+          applyAvatar(avatar.dataset.avatar);
+        });
+      });
 
+      // Toggles
+      document.querySelectorAll("#tab-notif .toggle, #tab-priv .toggle").forEach(toggle => {
+        toggle.addEventListener("click", () => toggleElement(toggle));
+      });
 
-      document
-        .getElementById(
-          "cancelar_perfil"
-        )
-        ?.addEventListener(
-          "click",
-          cancelarPerfil
-        );
+      // Buttons
+      document.getElementById("salvar_perfil")?.addEventListener("click", salvarPerfilAluno);
+      document.getElementById("cancelar_perfil")?.addEventListener("click", cancelarPerfil);
+      document.getElementById("salvar_notificacoes")?.addEventListener("click", salvarNotificacoes);
+      document.getElementById("salvar_privacidade")?.addEventListener("click", salvarPrivacidade);
+      document.getElementById("exportar_dados")?.addEventListener("click", exportarDados);
+      document.getElementById("sair_conta")?.addEventListener("click", logoutConfig);
 
+      // Populate name/email once studentData is ready
+      setTimeout(() => {
+        const student = getCurrentStudent();
+        const nomeEl = document.getElementById("nome_usuario");
+        const emailEl = document.getElementById("email_usuario");
+        const turmaEl = document.getElementById("turma_usuario");
+        const escolaEl = document.getElementById("escola_usuario");
+        const displayName = document.getElementById("profile-display-name");
+        const displayEmail = document.getElementById("profile-display-email");
 
-      document
-        .getElementById(
-          "salvar_notificacoes"
-        )
-        ?.addEventListener(
-          "click",
-          salvarNotificacoes
-        );
+        if (nomeEl && !nomeEl.value) nomeEl.value = student.nome || configSession.nome || "";
+        if (emailEl && !emailEl.value) emailEl.value = student.email || configSession.email || "";
+        if (turmaEl) turmaEl.value = student.turma || "—";
+        if (escolaEl) escolaEl.value = student.escola || "—";
+        if (displayName) displayName.textContent = student.nome || configSession.nome || "Aluno";
+        if (displayEmail) displayEmail.textContent = student.email || configSession.email || "—";
 
-
-      document
-        .getElementById(
-          "salvar_privacidade"
-        )
-        ?.addEventListener(
-          "click",
-          salvarPrivacidade
-        );
-
-
-      document
-        .getElementById(
-          "exportar_dados"
-        )
-        ?.addEventListener(
-          "click",
-          exportarDados
-        );
-
-
-      document
-        .getElementById(
-          "sair_conta"
-        )
-        ?.addEventListener(
-          "click",
-          logoutConfig
-        );
-
-
-      setTimeout(
-        () => {
-
-          loadBio();
-
-          loadAvatar();
-
-          updateAccountData();
-
-          captureOriginalProfile();
-
-        },
-        700
-      );
+        loadBio();
+        loadAvatar();
+        updateAccountData();
+        captureOriginalProfile();
+      }, 700);
     }
 
-
-    if (
-      document.readyState ===
-      "loading"
-    ) {
-
-      document.addEventListener(
-        "DOMContentLoaded",
-        initializeSettings,
-        {
-          once: true
-        }
-      );
-
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initializeSettings, { once: true });
     } else {
-
       initializeSettings();
     }
-
   </script>
-
 
   <script src="../../shared/monetto-shell.js"></script>
 </body>
