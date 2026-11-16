@@ -210,6 +210,11 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
+ALTER TABLE usuarios
+MODIFY COLUMN foto_url LONGTEXT NULL;
+ALTER TABLE usuarios
+ADD COLUMN IF NOT EXISTS bio VARCHAR(120) NULL;
+
 -- ============================================================
 -- CONFIGURAÇÕES ESCOLA
 -- ============================================================

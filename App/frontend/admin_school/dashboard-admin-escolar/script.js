@@ -4,6 +4,34 @@
 
   const sidebar = "../../Assets/Components/admin-school-sidebar.html";
 
+  const toggleSidebar = () => {
+    const isHidden = container.hidden;
+    container.hidden = !isHidden;
+    container.setAttribute("aria-hidden", String(isHidden));
+    document.body.classList.toggle("sidebar-open", isHidden);
+  };
+
+  const menuTriggers = Array.from(
+    document.querySelectorAll(
+      "#menu, #menu-toggle, #sidebar-toggle, #menu-button, .menu-toggle, .sidebar-toggle, .menu-btn, [data-sidebar-toggle]"
+    )
+  );
+
+  const initializeSidebarState = () => {
+    container.hidden = true;
+    container.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("sidebar-open");
+  };
+
+  initializeSidebarState();
+
+  menuTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", (event) => {
+      event.preventDefault();
+      toggleSidebar();
+    });
+  });
+
   console.log(`Loading sidebar from: ${sidebar}`);
 
   fetch(sidebar, { cache: "no-store" })
@@ -15,16 +43,13 @@
     })
     .then((html) => {
       container.innerHTML = html;
+      initializeSidebarState();
     })
     .catch((err) => {
       console.error(err);
     });
 })();
 
-// Reads the logged-in user saved at login time (see main.js's 'login' handler).
-// We only ever send this user's id to the backend; the backend re-derives
-// id_escola from it server-side, so this admin can never pull another
-// school's data even if localStorage were tampered with.
 function getCurrentUserId() {
   try {
     const session = JSON.parse(localStorage.getItem('session') || '{}');

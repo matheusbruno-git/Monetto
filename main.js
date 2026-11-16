@@ -238,6 +238,30 @@ ipcMain.handle("deleteTurma", async (event, dados) => {
   }
 });
 
+ipcMain.handle("updateUserPhoto", async (event, dados) => {
+  try {
+    const { updateFoto } = require(
+      path.join(basePath, "backend/update_foto.js"),
+    );
+    return await updateFoto(dados);
+  } catch (err) {
+    console.error("updateUserPhoto Error:", err);
+    return { success: false, message: "Erro ao atualizar a foto." };
+  }
+});
+
+ipcMain.handle("getUserPhoto", async (event, idUsuario) => {
+  try {
+    const { getUserPhoto } = require(
+      path.join(basePath, "backend/get_user_photo.js"),
+    );
+    return await getUserPhoto(idUsuario);
+  } catch (err) {
+    console.error("getUserPhoto Error:", err);
+    return { success: false, message: "Erro ao buscar a foto." };
+  }
+});
+
 ipcMain.handle("getAdminReports", async (event, currentUserId) => {
   try {
     console.log("🔥 MAIN: getAdminReports");

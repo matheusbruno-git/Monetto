@@ -67,4 +67,6 @@ contextBridge.exposeInMainWorld("api", {
   exportToExcel: (dados) =>
     ipcRenderer.invoke('exportToExcel', dados),
   saveAlunosTurma: (dados) => ipcRenderer.invoke("saveAlunosTurma", dados),
+  updateUserPhoto: (dados) => ipcRenderer.invoke("updateUserPhoto", dados),
+  getUserPhoto: (idUsuario) => ipcRenderer.invoke("getUserPhoto", idUsuario),
 });

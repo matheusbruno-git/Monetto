@@ -15,12 +15,18 @@
 </head>
 
 <body>
-<header class="app-header">
-  <button class="app-icon-btn" id="appMenuBtn" type="button" aria-label="Abrir menu" aria-expanded="false"><span class="menu-lines" aria-hidden="true"></span></button>
-  <a class="app-brand" href="../../login/login.html" aria-label="Monetto, página inicial"><span class="app-brand-mark" aria-hidden="true">M</span><span>Monetto</span><span class="app-brand-subtitle">Educação financeira</span></a>
-  <span class="app-spacer"></span>
-  <button class="app-icon-btn" id="appThemeBtn" type="button" aria-label="Alternar tema" title="Alternar tema"><span class="theme-mark" aria-hidden="true"></span></button>
-</header>
+  <header class="app-header">
+    <button class="app-icon-btn" id="appMenuBtn" type="button" aria-label="Abrir menu" aria-expanded="false"><span
+        class="menu-lines" aria-hidden="true"></span></button>
+    <a class="app-brand" href="../../login/login.html" aria-label="Monetto, página inicial"><span class="app-brand-mark"
+        aria-hidden="true">M</span><span>Monetto</span><span class="app-brand-subtitle">Educação financeira</span></a>
+    <span class="app-spacer"></span>
+    <div
+      style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#c0392b,#8b0000);display:flex;align-items:center;justify-content:center;font-size:1.8rem;overflow:hidden;cursor:pointer"
+      class="photo-drop" id="admin-photo" tabindex="0" role="button" title="Clique para alterar a foto"></div>
+    <button class="app-icon-btn" id="appThemeBtn" type="button" aria-label="Alternar tema" title="Alternar tema"><span
+        class="theme-mark" aria-hidden="true"></span></button>
+  </header>
   <div id="sidebar-container"></div>
   <main class="main">
     <div class="topbar">
@@ -45,7 +51,7 @@
         </div>
         <div
           style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#c0392b,#8b0000);display:flex;align-items:center;justify-content:center;font-size:1.8rem">
-          </div>
+        </div>
         <div>
           <div id="school-name" style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:4px">
             Carregando…
@@ -97,17 +103,37 @@
 
 
   <script src="script.js"></script>
-
+  <script src="../../shared/photo-uploader.js"></script>
   <script>
     function showToast(msg, tipo) {
-      if (typeof MonettoUI !== 'undefined') {
-        MonettoUI.toast(msg || 'Ação realizada!', tipo || 'success');
+      if (typeof MonettoUI !== "undefined") {
+        MonettoUI.toast(msg || "Ação realizada!", tipo || "success");
+      } else {
+        alert(msg);
       }
     }
 
-    // Only ever ask for this logged-in admin's own school — the backend
-    // re-derives id_escola from the user id server-side, so nothing here
-    // can accidentally show another school's data.
+    function currentUserIdFromSession() {
+      const session = JSON.parse(localStorage.getItem("session") || "{}");
+      return session.id_usuario || session.id || null;
+    }
+
+    async function loadDadosAdmin() {
+      const id = currentUserIdFromSession();
+      if (!id) return;
+
+      // Photo
+      if (window.MonettoPhoto) {
+        const el = document.getElementById("admin-photo");
+        if (el) window.MonettoPhoto.attach(el, { id_usuario: id }).load();
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", loadDadosAdmin);
+  </script>
+
+  <script>
+
     async function loadDadosEscola() {
       const session = JSON.parse(localStorage.getItem("session") || "{}");
       const currentUserId = session.id_usuario || session.id;
