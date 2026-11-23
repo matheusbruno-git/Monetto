@@ -78,6 +78,8 @@ set PATH=%CD%\node-v24.19.0-win-x64;%PATH%
 node install nodemailler
 npm install exceljs
 npm install @google/genai dotenv
+npm install --save-dev electron-builder
+
 
 
 echo Starting MySQL...

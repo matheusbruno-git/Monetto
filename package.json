@@ -9,11 +9,13 @@
   "scripts": {
     "start": "electron .",
     "dev": "electron .",
-    "build": "electron-builder"
+    "build": "electron-builder",
+    "dist": "electron-builder"
   },
   "dependencies": {
+    "@google/genai": "^3.6.1",
     "bcryptjs": "^3.0.3",
-    "dotenv": "^18.0.5",
+    "dotenv": "^18.0.10",
     "exceljs": "^4.4.0",
     "mysql2": "^3.22.3",
     "nodemailer": "^10.0.13",
@@ -22,12 +24,21 @@
   "build": {
     "appId": "com.mlsolutions.monetto",
     "productName": "Monetto",
-    "files": ["**/*"],
-    "win": { "target": "nsis" },
-    "mac": { "target": "dmg" },
-    "linux": { "target": "AppImage" }
+    "files": [
+      "**/*"
+    ],
+    "win": {
+      "target": ["nsis", "portable", "msi"]
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
   },
   "devDependencies": {
-    "electron": "^42.2.0"
+    "electron": "^42.2.0",
+    "electron-builder": "^26.18.0"
   }
 }

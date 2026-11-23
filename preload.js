@@ -69,4 +69,6 @@ contextBridge.exposeInMainWorld("api", {
   saveAlunosTurma: (dados) => ipcRenderer.invoke("saveAlunosTurma", dados),
   updateUserPhoto: (dados) => ipcRenderer.invoke("updateUserPhoto", dados),
   getUserPhoto: (idUsuario) => ipcRenderer.invoke("getUserPhoto", idUsuario),
+  generateLesson: (moduleCode) =>
+    ipcRenderer.invoke("generateLesson", moduleCode),
 });

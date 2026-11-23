@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const bcrypt = require("bcryptjs");
 const { v4: uuidv4 } = require("uuid");
+const fs = require("fs/promises");
 
 const basePath = path.join(__dirname, "App");
 require(path.join(basePath, "./backend/connection.js"));
@@ -249,6 +250,63 @@ ipcMain.handle("updateUserPhoto", async (event, dados) => {
     return { success: false, message: "Erro ao atualizar a foto." };
   }
 });
+
+ipcMain.handle("generateLesson", async (event, moduleCode) => {
+  try {
+    // Validate the BNCC code
+    if (
+      typeof moduleCode !== "string" ||
+      !/^(EF|EM)\d{2}[A-Z]{2,3}\d{2,3}$/.test(moduleCode)
+    ) {
+      return {
+        success: false,
+        message: "Código BNCC inválido."
+      };
+    }
+
+    // Locate the JSON module
+    const modulePath = path.join(
+      basePath,
+      "backend",
+      "json-content",
+      `${moduleCode}.json`
+    );
+
+    // Read the JSON file
+    const file = await fs.readFile(modulePath, "utf8");
+
+    const moduleData = JSON.parse(file);
+
+    // Call Gemini
+    const { generateLearningContent } = require(
+      path.join(basePath, "backend", "ai_gemini.js")
+    );
+
+    const content = await generateLearningContent(moduleData);
+
+    return {
+      success: true,
+      moduleCode,
+      content
+    };
+
+  } catch (error) {
+    console.error("generateLesson Error:", error);
+
+    if (error.code === "ENOENT") {
+      return {
+        success: false,
+        message: "Módulo de aprendizagem não encontrado."
+      };
+    }
+
+    return {
+      success: false,
+      message: "Erro ao gerar conteúdo educacional."
+    };
+  }
+});
+
 
 ipcMain.handle("getUserPhoto", async (event, idUsuario) => {
   try {
