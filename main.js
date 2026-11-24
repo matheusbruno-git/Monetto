@@ -22,7 +22,6 @@ function createWindow() {
   win.loadFile(path.join(basePath, "frontend/login/login.html"), {
     query: { fresh: "1" },
   });
-  win.webContents.openDevTools();
 }
 
 app.whenReady().then(createWindow);
