@@ -1,19 +1,6 @@
 const db = require("./connection.js");
 const bcrypt = require("bcryptjs");
-
-async function resolveEscolaId(dbConnection, idUsuario) {
-  try {
-    const [rows] = await dbConnection
-      .promise()
-      .execute("SELECT id_escola FROM usuarios WHERE id = ? LIMIT 1", [
-        idUsuario,
-      ]);
-    return rows[0] ? rows[0].id_escola : null;
-  } catch (error) {
-    console.error("resolveEscolaId Error:", error);
-    return null;
-  }
-}
+const { resolveEscolaId } = require("./resolve_escola_id.js");
 
 async function registerTarefa(dados) {
   try {
@@ -26,7 +13,7 @@ async function registerTarefa(dados) {
 
     let idEscola = dados.id_escola || null;
     if (!idEscola && dados.id_usuario) {
-      idEscola = await resolveEscolaId(db, dados.id_usuario);
+      idEscola = await resolveEscolaId(dados.id_usuario);
     }
     if (!idEscola) {
       return {

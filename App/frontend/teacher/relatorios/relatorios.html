@@ -12,6 +12,16 @@
   <link rel="icon" type="image/x-icon" href="../../Assets/Monetto Logo.ico">
 
   <link rel="stylesheet" href="../../shared/redesign.css" />
+  <style>
+    :root[data-theme="dark"] body .main .card,
+    :root[data-theme="dark"] body .main .kpi {
+      background: var(--surface) !important;
+      color: var(--text) !important;
+      border-color: var(--border) !important;
+    }
+    :root[data-theme="dark"] body .main :is(.kpi-val,.kpi-lbl,.kpi-delta,.card-hd h3,.al-head,.al-row,.al-name,.ta-info strong,.ta-info span,.ta-pct,.at-body strong,.at-body span,.dest-name,.dest-info,.dest-xp) { color: var(--text) !important; }
+    :root[data-theme="dark"] body .main :is(.card-hd span,.pl-label,.pl-count,.task-ana-item,.al-row > div) { color: var(--text) !important; }
+  </style>
 </head>
 
 <body>

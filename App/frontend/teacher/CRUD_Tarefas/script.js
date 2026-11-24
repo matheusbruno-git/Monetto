@@ -1,213 +1,102 @@
-function switchTab(id, btn) {
-  document.querySelectorAll(".ttab").forEach((t) => t.classList.remove("active"));
-  ["tarefa", "quiz", "jogo"].forEach((t) => {
-    const el = document.getElementById("tab-" + t);
-    if (el) el.style.display = "none";
-  });
-  if (btn) btn.classList.add("active");
-  const target = document.getElementById("tab-" + id);
-  if (target) target.style.display = "block";
-}
+(() => {
+  const $ = (selector) => document.querySelector(selector);
+  const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
 
-function selTipo(el) {
-  el.closest(".tipo-grid")
-    ?.querySelectorAll(".tipo-btn")
-    .forEach((b) => b.classList.remove("selected"));
-  el.classList.add("selected");
-}
-
-function selDif(el, cls) {
-  document.querySelectorAll(".dif-btn").forEach((b) => {
-    b.classList.remove("sel-g", "sel-y", "sel-r");
-  });
-  el.classList.add(cls);
-}
-
-function sairDaConta(destino) {
-  if (confirm("Tem certeza que deseja sair da conta?")) {
-    localStorage.removeItem("session");
-    window.location.href = destino;
+  function getSession() {
+    try { return JSON.parse(localStorage.getItem("session") || "{}"); }
+    catch (_) { return {}; }
   }
-}
 
-function getCurrentUserId() {
-  try {
-    const session = JSON.parse(localStorage.getItem("session") || "{}");
-    return session.id_usuario || session.id || null;
-  } catch (e) {
-    return null;
+  function showMessage(message, success) {
+    const element = $("#formMsg");
+    if (!element) return;
+    element.textContent = message;
+    element.className = `form-message ${success ? "is-success" : "is-error"}`;
   }
-}
 
-function getSession() {
-  try {
-    return JSON.parse(localStorage.getItem("session") || "{}");
-  } catch (e) {
-    return {};
+  async function loadCursos() {
+    const select = $("#disciplinaTarefa");
+    if (!select || !window.api?.getCursos) return;
+    try {
+      const result = await window.api.getCursos();
+      if (!result?.success) throw new Error(result?.message || "Não foi possível carregar disciplinas.");
+      const courses = result.data || [];
+      select.innerHTML = '<option value="">Selecione a disciplina</option>' + courses.map((course) => `<option value="${escapeHtml(course.id_curso)}">${escapeHtml(course.nome)}</option>`).join("");
+      if (!courses.length) select.innerHTML = '<option value="">Nenhuma disciplina disponível</option>';
+    } catch (error) {
+      select.innerHTML = '<option value="">Erro ao carregar disciplinas</option>';
+      showMessage(error.message, false);
+    }
   }
-}
 
-async function loadCursos() {
-  try {
-    if (!window.api?.getCursos) return;
-
-    const result = await window.api.getCursos();
-    if (!result.success) return;
-
-    const selects = document.querySelectorAll("select[data-cursos]");
-    selects.forEach((sel) => {
-      sel.innerHTML = (result.data || [])
-        .map((c) => `<option value="${c.id_curso}">${c.nome}</option>`)
-        .join("");
-    });
-  } catch (err) {
-    console.error("loadCursos:", err);
-  }
-}
-
-async function loadTarefasList() {
-  const listArea = document.getElementById("tarefasList");
-  if (!listArea) return;
-
-  listArea.innerHTML =
-    '<div style="color:var(--muted);font-size:.82rem;padding:8px 0">Carregando...</div>';
-
-  try {
-    const currentUserId = getCurrentUserId();
-    if (!currentUserId) {
-      listArea.innerHTML =
-        '<div style="color:red;font-size:.82rem;padding:8px 0">Sessão inválida. Faça login novamente.</div>';
+  async function loadTarefasList() {
+    const list = $("#tarefasList");
+    const count = $("#tarefasCount");
+    if (!list) return;
+    const session = getSession();
+    const id = session.id_usuario || session.id;
+    if (!id || !window.api?.getTarefas) {
+      list.innerHTML = '<div class="list-empty">Entre novamente para consultar suas tarefas.</div>';
+      if (count) count.textContent = "";
       return;
     }
-
-    const result = await window.api.getTarefas(currentUserId);
-    if (!result.success) {
-      listArea.innerHTML = `<div style="color:red;font-size:.82rem;padding:8px 0">${result.message || "Erro ao carregar tarefas."}</div>`;
-      return;
+    try {
+      const result = await window.api.getTarefas(id);
+      if (!result?.success) throw new Error(result?.message || "Não foi possível carregar tarefas.");
+      const tasks = result.data || [];
+      if (count) count.textContent = `${tasks.length} tarefa${tasks.length === 1 ? "" : "s"}`;
+      if (!tasks.length) {
+        list.innerHTML = '<div class="list-empty">Você ainda não publicou uma tarefa.</div>';
+        return;
+      }
+      list.innerHTML = tasks.slice(0, 8).map((task) => {
+        const due = task.data_vencimento ? new Date(`${String(task.data_vencimento).slice(0, 10)}T12:00:00`).toLocaleDateString("pt-BR") : "Sem prazo";
+        return `<div class="task-list-item"><span class="task-list-icon">▤</span><div class="task-list-copy"><strong>${escapeHtml(task.titulo || "Tarefa")}</strong><span>${escapeHtml(task.disciplina || "Geral")} · ${due}</span></div></div>`;
+      }).join("");
+    } catch (error) {
+      list.innerHTML = `<div class="list-empty">${escapeHtml(error.message)}</div>`;
+      if (count) count.textContent = "";
     }
-    if (!result.data || !result.data.length) {
-      listArea.innerHTML =
-        '<div style="color:var(--muted);font-size:.82rem;padding:8px 0">Nenhuma tarefa criada ainda.</div>';
-      return;
+  }
+
+  async function publishTask(event) {
+    event.preventDefault();
+    const button = $("#btn");
+    const session = getSession();
+    const id = session.id_usuario || session.id;
+    const title = $("#tituloTarefa").value.trim();
+    const course = $("#disciplinaTarefa").value;
+    const due = $("#prazoTarefa").value;
+    if (!id) return showMessage("Sessão inválida. Faça login novamente.", false);
+    if (!title || !course || !due) return showMessage("Preencha o título, a disciplina e o prazo.", false);
+    if (!window.api?.registerTarefa) return showMessage("Serviço de publicação indisponível.", false);
+    button.disabled = true;
+    button.querySelector("span").textContent = "Publicando…";
+    try {
+      const result = await window.api.registerTarefa({
+        id_escola: session.id_escola || undefined,
+        id_usuario: id,
+        id_professor: id,
+        id_curso: Number(course),
+        titulo: title,
+        descricao: $("#descricaoTarefa").value.trim(),
+        data_vencimento: due,
+      });
+      if (!result?.success) throw new Error(result?.message || "Erro ao publicar tarefa.");
+      showMessage(result.message || "Tarefa publicada com sucesso.", true);
+      $("#taskForm").reset();
+      await loadTarefasList();
+    } catch (error) {
+      showMessage(error.message, false);
+    } finally {
+      button.disabled = false;
+      button.querySelector("span").textContent = "Publicar tarefa";
     }
-
-    listArea.innerHTML = result.data
-      .map((t) => {
-        const vence = t.data_vencimento
-          ? new Date(t.data_vencimento).toLocaleDateString("pt-BR")
-          : "—";
-        const disc = t.disciplina ?? "—";
-        return `
-        <div style="padding:12px 0;border-bottom:1px solid var(--border)">
-          <div style="font-weight:600;font-size:.88rem;margin-bottom:3px">${t.titulo || "Sem título"}</div>
-          <div style="font-size:.75rem;color:var(--muted)">${disc} · Vence ${vence}</div>
-        </div>`;
-      })
-      .join("");
-
-    const countEl = document.querySelector(".list-hd span");
-    if (countEl) countEl.textContent = result.data.length + " tarefas";
-  } catch (err) {
-    listArea.innerHTML = `<div style="color:red;font-size:.82rem">Erro: ${err.message}</div>`;
-  }
-}
-
-async function publicarTarefa() {
-  const btn = document.getElementById("btn");
-  const msgEl = document.getElementById("formMsg");
-
-  const titulo =
-    document
-      .querySelector(
-        '#tab-tarefa input[placeholder*="Título"], #tab-tarefa input[placeholder*="Exercícios"]',
-      )
-      ?.value.trim() ||
-    document.querySelector("#tab-tarefa .fg:first-child input")?.value.trim();
-  const descricao = document.querySelector("#tab-tarefa textarea")?.value.trim();
-  const id_curso = document.querySelector(
-    "#tab-tarefa select[data-cursos]",
-  )?.value;
-  const data_venc = document.querySelector(
-    '#tab-tarefa input[type="datetime-local"]',
-  )?.value;
-
-  if (!titulo) {
-    showMsg(msgEl, "O título é obrigatório.", false);
-    return;
-  }
-  if (!id_curso) {
-    showMsg(msgEl, "Selecione uma disciplina.", false);
-    return;
-  }
-  if (!data_venc) {
-    showMsg(msgEl, "Defina um prazo de entrega.", false);
-    return;
   }
 
-  const session = getSession();
-  const id_usuario = session.id_usuario || session.id || null;
-  const id_escola = session.id_escola || null;
-
-  if (!id_usuario) {
-    showMsg(msgEl, "Sessão inválida. Faça login novamente.", false);
-    return;
-  }
-
-  const data_vencimento = data_venc.split("T")[0];
-
-  if (btn) {
-    btn.disabled = true;
-    btn.textContent = "⏳ Publicando...";
-  }
-
-  const result = await window.api.registerTarefa({
-    id_escola: id_escola || undefined,
-    id_usuario,
-    id_professor: id_usuario,
-    id_curso: parseInt(id_curso, 10),
-    titulo,
-    descricao,
-    data_vencimento,
-  });
-
-  if (btn) {
-    btn.disabled = false;
-    btn.textContent = " Publicar Tarefa";
-  }
-
-  showMsg(msgEl, result.message, result.success);
-
-  if (result.success) {
-    const titleInput =
-      document.querySelector("#tab-tarefa .fg:first-child input") ||
-      document.querySelector(
-        '#tab-tarefa input[placeholder*="Título"], #tab-tarefa input[placeholder*="Exercícios"]',
-      );
-    if (titleInput) titleInput.value = "";
-    const ta = document.querySelector("#tab-tarefa textarea");
-    if (ta) ta.value = "";
-    const dt = document.querySelector('#tab-tarefa input[type="datetime-local"]');
-    if (dt) dt.value = "";
+  document.addEventListener("DOMContentLoaded", () => {
+    loadCursos();
     loadTarefasList();
-  }
-}
-
-function showMsg(el, text, success) {
-  if (!el) {
-    alert(text);
-    return;
-  }
-  el.textContent = text;
-  el.style.color = success ? "var(--green)" : "var(--red)";
-  el.style.display = "block";
-  setTimeout(() => {
-    el.style.display = "none";
-  }, 3500);
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  loadCursos();
-  loadTarefasList();
-  const btn = document.getElementById("btn");
-  if (btn) btn.addEventListener("click", publicarTarefa);
-});
+    $("#taskForm")?.addEventListener("submit", publishTask);
+  });
+})();

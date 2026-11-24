@@ -47,10 +47,30 @@ function loadTeacherSidebar() {
     .then((html) => {
       container.innerHTML = html;
       updateSidebarActiveLink();
+      loadTeacherSidebarUser();
     })
     .catch((err) => {
       console.error("Erro ao carregar sidebar:", err);
     });
+}
+
+async function loadTeacherSidebarUser() {
+  const nameEl = document.getElementById("sidebar-user-name");
+  const infoEl = document.getElementById("sidebar-user-info");
+  let session = {};
+  try { session = JSON.parse(localStorage.getItem("session") || "{}"); } catch (_) {}
+  if (nameEl) nameEl.textContent = session.nome || "Professor";
+  if (!window.api?.getDashboardTeacher) return;
+  const id = session.id_usuario || session.id;
+  if (!id) return;
+  try {
+    const result = await window.api.getDashboardTeacher(id);
+    const name = result?.data?.teacher?.name || session.nome || "Professor";
+    if (nameEl) nameEl.textContent = name;
+    if (infoEl) infoEl.textContent = result?.data?.school?.name || "Professor";
+  } catch (error) {
+    console.error("Erro ao carregar o nome do professor:", error);
+  }
 }
 
 loadTeacherSidebar();

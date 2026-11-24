@@ -13,6 +13,15 @@
   <link rel="stylesheet" href="../../shared/main-style.css" />
   <link rel="icon" type="image/x-icon" href="../../Assets/Monetto Logo.ico" />
   <link rel="stylesheet" href="../../shared/redesign.css" />
+  <style>
+    :root[data-theme="dark"] body .set-content,
+    :root[data-theme="dark"] body .set-content .set-card,
+    :root[data-theme="dark"] body .set-content .profile-hero,
+    :root[data-theme="dark"] body .set-nav { background-color: var(--surface) !important; color: var(--text) !important; border-color: var(--border) !important; }
+    :root[data-theme="dark"] body .set-content :is(h1,h2,h3,h4,strong,label,.set-card-title,.profile-info span,.profile-info strong),
+    :root[data-theme="dark"] body #tab-conta > .set-card > div > div > span:last-child { color: var(--text) !important; }
+    :root[data-theme="dark"] body .set-content input { background: var(--surface-2) !important; color: var(--text) !important; border-color: var(--border) !important; }
+  </style>
 </head>
 
 <body>
@@ -565,6 +574,7 @@
     });
   </script>
 
+  <script src="../teacher-script/main-teacher-script.js"></script>
   <script src="../../shared/monetto-shell.js"></script>
 </body>
 

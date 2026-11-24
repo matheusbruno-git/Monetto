@@ -432,3 +432,27 @@
     padding-top: 0;
   }
 }
+
+/* Dark theme foreground colors for legacy dashboard widgets. */
+:root[data-theme="dark"] body.student-dashboard-page .stat-card,
+:root[data-theme="dark"] body.student-dashboard-page .mini-card,
+:root[data-theme="dark"] body.student-dashboard-page .card,
+:root[data-theme="dark"] body.student-dashboard-page .task-item,
+:root[data-theme="dark"] body.student-dashboard-page .task-name,
+:root[data-theme="dark"] body.student-dashboard-page .task-xp,
+:root[data-theme="dark"] body.student-dashboard-page .mini-title,
+:root[data-theme="dark"] body.student-dashboard-page .task-meta,
+:root[data-theme="dark"] body.student-dashboard-page .task-due {
+  color: var(--text) !important;
+}
+
+:root[data-theme="dark"] body.student-dashboard-page .stat-card p,
+:root[data-theme="dark"] body.student-dashboard-page .mini-card p,
+:root[data-theme="dark"] body.student-dashboard-page .muted,
+:root[data-theme="dark"] body.student-dashboard-page .card-subtitle {
+  color: var(--muted) !important;
+}
+
+:root[data-theme="dark"] body.student-dashboard-page .task-item {
+  background: var(--surface-2) !important;
+}

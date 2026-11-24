@@ -296,7 +296,8 @@
 
         button.addEventListener(
           "click",
-          () => {
+          (event) => {
+            event.stopPropagation();
             const existing =
               document.querySelector(
                 "#student-notification-popup",
@@ -345,11 +346,9 @@
             popup.style.position =
               "fixed";
 
-            popup.style.top =
-              "80px";
-
-            popup.style.right =
-              "35px";
+            const buttonRect = button.getBoundingClientRect();
+            popup.style.top = `${Math.max(12, buttonRect.bottom + 10)}px`;
+            popup.style.right = `${Math.max(12, window.innerWidth - buttonRect.right)}px`;
 
             popup.style.width =
               "320px";
@@ -439,6 +438,21 @@
             document.body.appendChild(
               popup,
             );
+            popup.addEventListener("click", (popupEvent) => popupEvent.stopPropagation());
+            setTimeout(() => {
+              document.addEventListener("click", function closeNotification(clickEvent) {
+                if (!popup.contains(clickEvent.target) && !button.contains(clickEvent.target)) {
+                  popup.remove();
+                  document.removeEventListener("click", closeNotification);
+                }
+              });
+              document.addEventListener("keydown", function closeOnEscape(keyEvent) {
+                if (keyEvent.key === "Escape") {
+                  popup.remove();
+                  document.removeEventListener("keydown", closeOnEscape);
+                }
+              }, { once: true });
+            }, 0);
           },
         );
       },
@@ -3207,6 +3221,11 @@
     const body =
       document.querySelector(".lesson-body");
 
+    const generateLessonButton =
+      document.getElementById("generateLessonBtn");
+
+    const generatedLessons = new Map();
+
     const previousButton =
       document.querySelector(".btn-prev");
 
@@ -3245,7 +3264,7 @@
       }
     }
 
-    function completeLesson(lesson) {
+    async function completeLesson(lesson) {
       if (
         !lesson ||
         lesson.locked ||
@@ -3254,9 +3273,26 @@
         return;
       }
 
+      try {
+        const result = await window.api?.awardStudentXp?.(studentId, lesson.xp, `aula:${lesson.id}`);
+        if (!result?.success) {
+          console.error("Não foi possível registrar o XP da aula:", result?.message || "API de XP indisponível.");
+          return false;
+        }
+        const xp = document.querySelector(".xp-topbar");
+        if (xp && result.xp_atual != null) xp.textContent = `${result.xp_atual} XP · Nível ${result.nivel_atual || 1}`;
+        if (window.studentData?.student && result.xp_atual != null) {
+          window.studentData.student.xp_atual = result.xp_atual;
+          window.studentData.student.nivel_atual = result.nivel_atual || window.studentData.student.nivel_atual;
+          updateSidebar(window.studentData.student);
+        }
+      } catch (error) {
+        console.error("Não foi possível registrar o XP da aula:", error);
+        return false;
+      }
       completedLessons.push(lesson.id);
-
       saveProgress();
+      return true;
     }
 
     function updateProgress() {
@@ -3506,8 +3542,15 @@
       }
 
       if (body) {
-        body.innerHTML =
-          lesson.content;
+        body.replaceChildren();
+        if (generatedLessons.has(lesson.id)) {
+          const generated = document.createElement("div");
+          generated.className = "ai-generated-content";
+          generated.textContent = generatedLessons.get(lesson.id);
+          body.appendChild(generated);
+        } else {
+          body.innerHTML = lesson.content;
+        }
       }
 
       const previousIndex =
@@ -3568,6 +3611,33 @@
       updateProgress();
     }
 
+    if (generateLessonButton && generateLessonButton.dataset.ready !== "true") {
+      generateLessonButton.dataset.ready = "true";
+      generateLessonButton.addEventListener("click", async () => {
+        const lesson = learningLessons[currentIndex];
+        const codeByLesson = {
+          m1a1: "EF06MA13", m1a2: "EF05MA06", m1a3: "EF07MA02",
+          m2a1: "EF07MA02", m2a2: "EF05MA06", m2a3: "EF05MA06",
+          m2a4: "EM13MAT304", m2a5: "EM13MAT303",
+        };
+        const code = codeByLesson[lesson?.id];
+        if (!code || !window.api?.generateLesson) return;
+        generateLessonButton.disabled = true;
+        generateLessonButton.textContent = "Gerando sua aula…";
+        try {
+          const result = await window.api.generateLesson(code);
+          if (!result?.success || !result.content) throw new Error(result?.message || "Não foi possível gerar esta aula.");
+          generatedLessons.set(lesson.id, result.content);
+          renderCurrentLesson();
+          generateLessonButton.textContent = "✦ Versão de IA gerada";
+        } catch (error) {
+          generateLessonButton.textContent = error.message || "Erro ao gerar aula";
+        } finally {
+          generateLessonButton.disabled = false;
+        }
+      });
+    }
+
     if (
       previousButton &&
       previousButton.dataset.learningProgressReady !==
@@ -3611,13 +3681,26 @@
 
       nextButton.addEventListener(
         "click",
-        () => {
+        async () => {
+          if (nextButton.dataset.awardingXp === "true") return;
           const currentLesson =
             learningLessons[currentIndex];
 
-          completeLesson(
+          nextButton.dataset.awardingXp = "true";
+          nextButton.disabled = true;
+          const xpAwarded = await completeLesson(
             currentLesson,
           );
+          nextButton.dataset.awardingXp = "false";
+          nextButton.disabled = false;
+          if (!xpAwarded && currentLesson && !completedLessons.includes(currentLesson.id)) {
+            const message = document.getElementById("learning-complete-message") || document.createElement("div");
+            message.id = "learning-complete-message";
+            message.className = "learning-complete-message";
+            message.textContent = "Não foi possível registrar seus XP. Verifique sua conexão e tente novamente.";
+            if (!message.parentNode) document.querySelector(".lesson-nav")?.before(message);
+            return;
+          }
 
           if (
             nextButton.dataset.action ===

@@ -251,7 +251,17 @@ ipcMain.handle("updateUserPhoto", async (event, dados) => {
   }
 });
 
-ipcMain.handle("generateLesson", async (event, moduleCode) => {
+ipcMain.handle("generateLesson", async (event, request) => {
+  const moduleCode = typeof request === "string" ? request : request?.moduleCode;
+  const model = typeof request === "string" ? "gemini-4-hydrogen" : request?.model || "gemini-4-hydrogen";
+  const supportedModels = new Set([
+    "gemini-4-hydrogen",
+    "gemini-4-neon",
+    "gemini-4-carbon",
+    "gemini-decision-1",
+    "gemini-nano-banana-2.1",
+  ]);
+
   try {
     // Validate the BNCC code
     if (
@@ -262,6 +272,10 @@ ipcMain.handle("generateLesson", async (event, moduleCode) => {
         success: false,
         message: "Código BNCC inválido."
       };
+    }
+
+    if (!supportedModels.has(model)) {
+      return { success: false, message: "Modelo de IA inválido. Selecione uma das opções disponíveis." };
     }
 
     // Locate the JSON module
@@ -282,12 +296,13 @@ ipcMain.handle("generateLesson", async (event, moduleCode) => {
       path.join(basePath, "backend", "ai_gemini.js")
     );
 
-    const content = await generateLearningContent(moduleData);
+    const generated = await generateLearningContent(moduleData, model);
 
     return {
       success: true,
       moduleCode,
-      content
+      model,
+      ...generated
     };
 
   } catch (error) {
@@ -300,9 +315,32 @@ ipcMain.handle("generateLesson", async (event, moduleCode) => {
       };
     }
 
+    const statusCode = Number(error.statusCode || error.status || error.error?.error?.code) || null;
+    const detail = String(error.error?.error?.message || error.message || "Erro sem descrição.");
+    const normalized = detail.toLowerCase();
+    let message = detail;
+
+    if (detail.includes("GEMINI_API_KEY")) {
+      message = "A chave GEMINI_API_KEY não foi encontrada no arquivo .env do projeto.";
+    } else if (statusCode === 503 || normalized.includes("high demand") || normalized.includes("overload") || normalized.includes("capacity")) {
+      message = `O modelo está temporariamente com alta demanda. Aguarde um pouco ou tente outro modelo. Detalhes: ${detail}`;
+    } else if (statusCode === 429 || normalized.includes("resource_exhausted") || normalized.includes("quota")) {
+      message = `O limite de uso deste modelo foi atingido. Aguarde e tente novamente ou escolha outro modelo; cada modelo pode ter limites diferentes. Detalhes: ${detail}`;
+    } else if (statusCode === 402) {
+      message = "Este modelo exige créditos ou faturamento ativo para a sua chave Gemini.";
+    } else if (statusCode === 403) {
+      message = "Sua chave Gemini não tem acesso a este modelo. Escolha outro modelo ou confira o acesso habilitado no Google AI Studio.";
+    } else if (statusCode) {
+      message = `A Gemini recusou a solicitação (HTTP ${statusCode}): ${detail}`;
+    } else {
+      message = `Não foi possível gerar com ${model}: ${detail}`;
+    }
+
     return {
       success: false,
-      message: "Erro ao gerar conteúdo educacional."
+      message,
+      errorCode: statusCode,
+      model,
     };
   }
 });
@@ -368,6 +406,16 @@ ipcMain.handle("getAdminProfile", async (event, currentUserId) => {
       success: false,
       message: "Erro ao carregar perfil: " + err.message
     };
+  }
+});
+
+ipcMain.handle("getProfessorProfile", async (event, currentUserId) => {
+  try {
+    const { getProfessorProfile } = require(path.join(basePath, "backend/get_professorProfile.js"));
+    return await getProfessorProfile(currentUserId);
+  } catch (err) {
+    console.error("getProfessorProfile Error:", err);
+    return { success: false, message: "Erro ao carregar perfil do professor." };
   }
 });
 

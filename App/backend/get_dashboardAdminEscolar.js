@@ -1,32 +1,30 @@
 const { resolveEscolaId } = require("./resolve_escola_id.js");
+const db = require("./connection.js");
 
 function formatRelative(dateValue) {
   if (!dateValue) return "—";
-  const d = new Date(dateValue);
-  if (Number.isNaN(d.getTime())) return "—";
+  const date = new Date(dateValue);
+  if (Number.isNaN(date.getTime())) return "—";
 
-  const now = new Date();
-  const diffMs = now - d;
-  const diffMin = Math.floor(diffMs / 60000);
-  const diffH = Math.floor(diffMs / 3600000);
-  const diffD = Math.floor(diffMs / 86400000);
+  const elapsed = Date.now() - date.getTime();
+  const minutes = Math.floor(elapsed / 60000);
+  const hours = Math.floor(elapsed / 3600000);
+  const days = Math.floor(elapsed / 86400000);
 
-  if (diffMin < 1) return "agora";
-  if (diffMin < 60) return `há ${diffMin} min`;
-  if (diffH < 24) return `há ${diffH}h`;
-  if (diffD === 1) return "ontem";
-  if (diffD < 7) return `há ${diffD} dias`;
-  return d.toLocaleDateString("pt-BR");
+  if (minutes < 1) return "agora";
+  if (minutes < 60) return `há ${minutes} min`;
+  if (hours < 24) return `há ${hours}h`;
+  if (days === 1) return "ontem";
+  if (days < 7) return `há ${days} dias`;
+  return date.toLocaleDateString("pt-BR");
 }
 
-async function getDashboardTeacher(currentUserId) {
+async function getDashboardAdminEscolar(currentUserId) {
+  if (!currentUserId) {
+    return { success: false, message: "ID do usuário não informado." };
+  }
+
   try {
-    const db = require("./connection.js");
-
-    if (!currentUserId) {
-      return { success: false, message: "ID do usuário não informado." };
-    }
-
     const escolaId = await resolveEscolaId(currentUserId);
     if (!escolaId) {
       return {
@@ -35,424 +33,191 @@ async function getDashboardTeacher(currentUserId) {
       };
     }
 
-    async function safeCount(sql, params = []) {
-      try {
-        const [[row]] = await db.promise().execute(sql, params);
-        return Number(row.total) || 0;
-      } catch (e) {
-        console.warn("safeCount failed:", e.sqlMessage || e.message);
-        return 0;
-      }
-    }
+    const query = async (sql, params = []) => {
+      const [rows] = await db.promise().execute(sql, params);
+      return rows;
+    };
 
-    async function safeQuery(sql, params = []) {
-      try {
-        const [rows] = await db.promise().execute(sql, params);
-        return rows;
-      } catch (e) {
-        console.warn("safeQuery failed:", e.sqlMessage || e.message);
-        return [];
-      }
-    }
+    const count = async (sql, params = []) => {
+      const rows = await query(sql, params);
+      return Number(rows[0]?.total) || 0;
+    };
 
-    let teacherName = "Professor";
-    let teacherSub = "Dashboard do Professor";
-    try {
-      const [users] = await db
-        .promise()
-        .execute(
-          `SELECT nome, email FROM usuarios WHERE id_usuario = ? LIMIT 1`,
-          [currentUserId],
-        );
-      if (users[0]) {
-        teacherName = users[0].nome || teacherName;
-      }
-    } catch (e) {
-      console.warn("usuario lookup failed:", e.sqlMessage || e.message);
-    }
-
-    const turmasTotal = await safeCount(
-      `SELECT COUNT(*) AS total FROM turmas
-       WHERE status = 'ativa' AND id_escola = ? AND id_professor = ?`,
-      [escolaId, currentUserId],
-    );
-
-    // Conta apenas alunos ativos das turmas deste professor (não de toda a escola)
-    const alunosAtivos = await safeCount(
-      `SELECT COUNT(*) AS total
-       FROM usuarios u
-       INNER JOIN turmas t ON u.id_turma = t.id_turma
-       WHERE u.id_perfil = 1
-         AND u.ativo = 1
-         AND u.id_escola = ?
-         AND t.id_professor = ?
-         AND t.id_escola = ?`,
-      [escolaId, currentUserId, escolaId],
-    );
-
-    const tarefasAtivas = await safeCount(
-      `SELECT COUNT(*) AS total FROM tarefas
-       WHERE id_escola = ? AND (id_professor = ? OR id_usuario = ?)`,
-      [escolaId, currentUserId, currentUserId],
-    );
-
-    let taxaConclusao = 0;
-    let taxaSub = "Alunos nas suas turmas";
-    if (alunosAtivos > 0) {
-      const comEntrega = await safeCount(
-        `SELECT COUNT(DISTINCT e.id_usuario) AS total
-         FROM entregas e
-         INNER JOIN usuarios u ON u.id_usuario = e.id_usuario
-         INNER JOIN turmas t ON u.id_turma = t.id_turma
-         WHERE t.id_professor = ? AND t.id_escola = ?
-           AND u.id_perfil = 1 AND u.ativo = 1`,
-        [currentUserId, escolaId],
-      );
-<<<<<<< Updated upstream
-      taxaConclusao = Math.round((comTurma / alunosTotal) * 100);
-    }
-
-    let escolaNome = "";
-    let escolaSub = "";
-    let escolaEmail = "";
-
-    try {
-      const [escolas] = await db.promise().execute(
-        `SELECT nome, cidade, estado, email
-     FROM escolas
-     WHERE id_escola = ?
-     LIMIT 1`,
-        [escolaId]
-      );
-
-      if (escolas.length > 0) {
-        escolaNome = escolas[0].nome || "";
-        escolaEmail = escolas[0].email || "";
-        escolaSub = [escolas[0].cidade, escolas[0].estado]
-          .filter(Boolean)
-          .join(" · ");
-      }
-    } catch (e) {
-      console.warn("Erro ao carregar escola:", e.sqlMessage || e.message);
-=======
-      if (comEntrega > 0) {
-        taxaConclusao = Math.round((comEntrega / alunosAtivos) * 100);
-        taxaSub = "Com entregas registradas";
-      } else {
-        taxaConclusao = 0;
-        taxaSub = "Nenhuma entrega ainda";
-      }
->>>>>>> Stashed changes
-    }
-
-    let avaliacaoMedia = "—";
-    let avaliacaoSub = "Nota dos alunos";
-    const avgRow = await safeQuery(
-      `SELECT ROUND(AVG(nota), 1) AS media FROM avaliacoes_professor
-       WHERE id_professor = ?`,
-      [currentUserId],
-    );
-    if (avgRow[0] && avgRow[0].media != null) {
-      avaliacaoMedia = String(avgRow[0].media);
-    }
-
-    teacherSub = `${turmasTotal} turma${turmasTotal === 1 ? "" : "s"} · ${alunosAtivos} aluno${alunosAtivos === 1 ? "" : "s"}`;
-
-    const turmaRows = await safeQuery(
-      `SELECT t.id_turma, t.nome_turma, t.status, t.sala,
-              (SELECT COUNT(*) FROM usuarios u
-               WHERE u.id_turma = t.id_turma
-                 AND u.id_perfil = 1 AND u.ativo = 1 AND u.id_escola = ?) AS alunos_count
-       FROM turmas t
-       WHERE t.id_escola = ? AND t.id_professor = ?
-       ORDER BY t.nome_turma ASC
-       LIMIT 10`,
-      [escolaId, escolaId, currentUserId],
-    );
-
-    const turmas = turmaRows.map((t) => {
-      const nAlunos = Number(t.alunos_count) || 0;
-      let engagement = t.status === "ativa" ? 75 : 40;
-      if (nAlunos === 0) engagement = 0;
-      else if (nAlunos >= 30) engagement = 92;
-      else if (nAlunos >= 20) engagement = 85;
-      else if (nAlunos >= 10) engagement = 78;
-
-      const sala = t.sala ? `Sala ${t.sala}` : "";
-      const subtitle = [nAlunos ? `${nAlunos} alunos` : "Sem alunos", sala]
-        .filter(Boolean)
-        .join(" · ");
-
-      return {
-        id: t.id_turma,
-        name: t.nome_turma,
-        subtitle,
-        engagement,
-        students: nAlunos,
-      };
-    });
-<<<<<<< Updated upstream
-    const inactiveStudents = await safeQuery(
-      `SELECT id_usuario, nome, email, ultimo_acesso
-   FROM usuarios
-   WHERE id_perfil = 1
-     AND ativo = 1
-     AND id_escola = ?
-     AND (ultimo_acesso IS NULL OR DATEDIFF(CURDATE(), ultimo_acesso) > 7)
-     AND email IS NOT NULL
-     AND email <> ''
-   ORDER BY nome ASC`,
+    const [[school]] = await db.promise().execute(
+      `SELECT nome, cidade, estado FROM escolas WHERE id_escola = ? LIMIT 1`,
       [escolaId],
     );
-    const alerts = [];
-    if (deactivatedAlunosTotal > 0) {
-      alerts.push({
-        id: "inactive-students",
-        type: "inactive-students",
-        level: "red",
-        icon: "🔴",
-        title: `${deactivatedAlunosTotal} aluno(s) sem acesso há +7 dias`,
-        subtitle: "Enviar lembrete para os alunos",
-        action: "Alertar",
+    const [counts] = await db.promise().execute(
+      `SELECT
+         SUM(p.nome = 'aluno' AND u.ativo = 1) AS students,
+         SUM(p.nome = 'professor' AND u.ativo = 1) AS teachers
+       FROM usuarios u
+       INNER JOIN perfis p ON p.id_perfil = u.id_perfil
+       WHERE u.id_escola = ?`,
+      [escolaId],
+    );
 
-        recipients: inactiveStudents.map((student) => ({
-          id: student.id_usuario,
-          name: student.nome,
-          email: student.email,
-        })),
+    const students = Number(counts[0]?.students) || 0;
+    const teachers = Number(counts[0]?.teachers) || 0;
+    const classes = await count(
+      `SELECT COUNT(*) AS total FROM turmas WHERE id_escola = ?`,
+      [escolaId],
+    );
+    const tasks = await count(
+      `SELECT COUNT(*) AS total FROM tarefas WHERE id_escola = ?`,
+      [escolaId],
+    );
+    const xpTotalRows = await query(
+      `SELECT COALESCE(SUM(e.xp_ganho), 0) AS total
+       FROM entregas e
+       INNER JOIN tarefas t ON t.id_tarefa = e.id_tarefa
+       WHERE t.id_escola = ?`,
+      [escolaId],
+    );
+    const xpTotal = Number(xpTotalRows[0]?.total) || 0;
+    const [submittedRows] = await db.promise().execute(
+      `SELECT COUNT(DISTINCT e.id_usuario) AS total
+       FROM entregas e
+       INNER JOIN tarefas task ON task.id_tarefa = e.id_tarefa
+       INNER JOIN usuarios u ON u.id_usuario = e.id_usuario
+       WHERE task.id_escola = ? AND u.id_escola = ?
+         AND u.ativo = 1 AND u.id_perfil = 1`,
+      [escolaId, escolaId],
+    );
+    const completion = students
+      ? Math.round((Number(submittedRows[0]?.total || 0) / students) * 100)
+      : 0;
+
+    const teacherRows = await query(
+      `SELECT u.nome, COUNT(DISTINCT t.id_turma) AS classes
+       FROM usuarios u
+       INNER JOIN perfis p ON p.id_perfil = u.id_perfil AND p.nome = 'professor'
+       LEFT JOIN turmas t ON t.id_professor = u.id_usuario AND t.id_escola = u.id_escola
+       WHERE u.id_escola = ? AND u.ativo = 1
+       GROUP BY u.id_usuario, u.nome
+       ORDER BY u.nome ASC
+       LIMIT 6`,
+      [escolaId],
+    );
+
+    const classRows = await query(
+      `SELECT t.id_turma, t.nome_turma, t.status,
+         COUNT(DISTINCT CASE WHEN p.nome = 'aluno' AND u.ativo = 1 THEN u.id_usuario END) AS students,
+         COALESCE(ROUND(AVG(CASE WHEN p.nome = 'aluno' AND u.ativo = 1
+           THEN pa.percentual_conclusao END)), 0) AS completion
+       FROM turmas t
+       LEFT JOIN usuarios u ON u.id_turma = t.id_turma AND u.id_escola = t.id_escola
+       LEFT JOIN perfis p ON p.id_perfil = u.id_perfil
+       LEFT JOIN progresso_aluno pa ON pa.id_aluno = u.id_usuario
+       WHERE t.id_escola = ?
+       GROUP BY t.id_turma, t.nome_turma, t.status
+       ORDER BY t.nome_turma ASC
+       LIMIT 8`,
+      [escolaId],
+    );
+
+    const [weeklyXpRows] = await db.promise().execute(
+      `SELECT DATE(e.criado_em) AS day, COALESCE(SUM(e.xp_ganho), 0) AS total
+       FROM entregas e
+       INNER JOIN tarefas t ON t.id_tarefa = e.id_tarefa
+       WHERE t.id_escola = ? AND e.criado_em >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
+       GROUP BY DATE(e.criado_em)`,
+      [escolaId],
+    );
+    const xpByDay = new Map(
+      weeklyXpRows.map((row) => [new Date(row.day).toDateString(), Number(row.total) || 0]),
+    );
+    const xpChart = [];
+    for (let offset = 6; offset >= 0; offset -= 1) {
+      const day = new Date();
+      day.setHours(0, 0, 0, 0);
+      day.setDate(day.getDate() - offset);
+      xpChart.push({
+        label: day.toLocaleDateString("pt-BR", { weekday: "short" }).replace(".", ""),
+        height: xpByDay.get(day.toDateString()) || 0,
       });
     }
-    if (professoresTotal === 0) {
-      alerts.push({
-        level: "yellow",
-        icon: "🟡",
-        title: "Nenhum professor cadastrado",
-        subtitle: "Cadastre professores para começar",
-        action: "Cadastrar",
-      });
+    const maxXp = Math.max(...xpChart.map((day) => day.height), 1);
+    xpChart.forEach((day) => {
+      day.height = Math.max(4, Math.round((day.height / maxXp) * 90));
+    });
+
+    const [activityRows] = await db.promise().execute(
+      `SELECT u.nome AS student_name, t.titulo AS task_title, e.criado_em, e.xp_ganho
+       FROM entregas e
+       INNER JOIN usuarios u ON u.id_usuario = e.id_usuario
+       INNER JOIN tarefas t ON t.id_tarefa = e.id_tarefa
+       WHERE u.id_escola = ?
+       ORDER BY e.criado_em DESC
+       LIMIT 6`,
+      [escolaId],
+    );
+
+    const alerts = [];
+    if (!teachers) {
+      alerts.push({ level: "yellow", icon: "🟡", title: "Nenhum professor cadastrado", subtitle: "Cadastre professores para começar" });
     }
-    if (turmasTotal === 0) {
-      alerts.push({
-        level: "blue",
-        icon: "🔵",
-        title: "Nenhuma turma ativa",
-        subtitle: "Crie turmas e vincule alunos",
-        action: "Criar",
-      });
+    if (!classes) {
+      alerts.push({ level: "blue", icon: "🔵", title: "Nenhuma turma cadastrada", subtitle: "Crie turmas e vincule alunos" });
     }
-    if (alunosTotal === 0) {
-      alerts.push({
-        level: "yellow",
-        icon: "🟡",
-        title: "Nenhum aluno matriculado",
-        subtitle: "Cadastre ou importe alunos",
-        action: "Cadastrar",
-      });
+    if (!students) {
+      alerts.push({ level: "yellow", icon: "🟡", title: "Nenhum aluno matriculado", subtitle: "Cadastre alunos para começar" });
     }
     if (!alerts.length) {
-      alerts.push({
-        level: "blue",
-        icon: "🔵",
-        title: "Tudo em ordem",
-        subtitle: "Nenhum alerta crítico no momento",
-        action: "OK",
-=======
-
-    const activities = [];
-
-    const recentEntregas = await safeQuery(
-      `SELECT u.nome AS aluno_nome, tar.titulo AS tarefa_titulo, e.criado_em,
-              t.nome_turma, e.xp_ganho
-       FROM entregas e
-       INNER JOIN usuarios u ON u.id_usuario = e.id_usuario
-       INNER JOIN tarefas tar ON tar.id_tarefa = e.id_tarefa
-       INNER JOIN turmas t ON u.id_turma = t.id_turma
-       WHERE t.id_professor = ? AND t.id_escola = ?
-       ORDER BY e.criado_em DESC
-       LIMIT 5`,
-      [currentUserId, escolaId],
-    );
-    for (const r of recentEntregas) {
-      const xp = r.xp_ganho != null ? ` · +${r.xp_ganho} XP` : "";
-      activities.push({
-        title: `${r.aluno_nome} concluiu "${r.tarefa_titulo || "tarefa"}"`,
-        subtitle: `${r.nome_turma || ""}${xp}`.trim(),
-        time: formatRelative(r.criado_em),
-        dotClass: "ad-g",
->>>>>>> Stashed changes
-      });
+      alerts.push({ level: "blue", icon: "🔵", title: "Tudo em ordem", subtitle: "Nenhum alerta crítico no momento" });
     }
-
-    const recentTarefas = await safeQuery(
-      `SELECT titulo, criado_em FROM tarefas
-       WHERE id_escola = ? AND (id_professor = ? OR id_usuario = ?)
-       ORDER BY criado_em DESC LIMIT 3`,
-      [escolaId, currentUserId, currentUserId],
-    );
-    for (const r of recentTarefas) {
-      if (activities.length >= 6) break;
-      activities.push({
-        title: `Nova tarefa: ${r.titulo || "sem título"}`,
-        subtitle: "Publicada por você",
-        time: formatRelative(r.criado_em),
-        dotClass: "ad-b",
-      });
-    }
-
-    if (!activities.length) {
-      activities.push({
-        title: "Dashboard atualizado",
-        subtitle: "Dados das suas turmas",
-        time: "agora",
-        dotClass: "ad-b",
-      });
-    }
-
-    const dayLabels = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
-    const completionsByDay = await safeQuery(
-      `SELECT DAYOFWEEK(e.criado_em) AS dow, COUNT(*) AS total
-       FROM entregas e
-       INNER JOIN usuarios u ON u.id_usuario = e.id_usuario
-       INNER JOIN turmas t ON u.id_turma = t.id_turma
-       WHERE t.id_professor = ? AND t.id_escola = ?
-         AND e.criado_em >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
-       GROUP BY DAYOFWEEK(e.criado_em)`,
-      [currentUserId, escolaId],
-    );
-    const byDow = {};
-    for (const r of completionsByDay) {
-      byDow[Number(r.dow)] = Number(r.total) || 0;
-    }
-    const completionsChart = [];
-    for (let i = 6; i >= 0; i--) {
-      const d = new Date();
-      d.setDate(d.getDate() - i);
-      const mysqlDow = d.getDay() + 1;
-      const label = dayLabels[d.getDay()];
-      completionsChart.push({
-        label,
-        height: byDow[mysqlDow] || 0,
-        value: byDow[mysqlDow] || 0,
-      });
-    }
-
-    const schoolName = await safeQuery(
-      `SELECT nome FROM escolas WHERE id_escola = ? LIMIT 1`,
-      [escolaId],
-    );
-    const schoolTitle = schoolName[0] ? schoolName[0].nome : "Escola";
-
-    const topRows = await safeQuery(
-      `SELECT u.nome, t.nome_turma,
-              COALESCE(SUM(e.xp_ganho), 0) AS xp
-       FROM usuarios u
-       INNER JOIN turmas t ON u.id_turma = t.id_turma
-       LEFT JOIN entregas e ON e.id_usuario = u.id_usuario
-         AND e.criado_em >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
-       WHERE u.id_perfil = 1 AND u.ativo = 1 AND u.id_escola = ?
-         AND t.id_professor = ?
-       GROUP BY u.id_usuario, u.nome, t.nome_turma
-       ORDER BY xp DESC
-       LIMIT 5`,
-      [escolaId, currentUserId],
-    );
-    const topAlunos = topRows.map((r) => ({
-      name: r.nome,
-      turma: r.nome_turma,
-      xp: Number(r.xp) || 0,
-    }));
-
-    const pendingRows = await safeQuery(
-      `SELECT tar.id_tarefa, tar.titulo, tar.data_entrega,
-              t.nome_turma,
-              (SELECT COUNT(*) FROM usuarios u
-               WHERE u.id_turma = t.id_turma AND u.id_perfil = 1 AND u.ativo = 1) AS total_alunos,
-              (SELECT COUNT(DISTINCT e.id_usuario) FROM entregas e
-               WHERE e.id_tarefa = tar.id_tarefa) AS entregues
-       FROM tarefas tar
-       INNER JOIN turmas t ON t.id_turma = tar.id_turma
-       WHERE tar.id_escola = ?
-         AND t.id_professor = ?
-         AND (tar.data_entrega IS NULL OR tar.data_entrega >= DATE_SUB(CURDATE(), INTERVAL 1 DAY))
-       ORDER BY tar.data_entrega ASC
-       LIMIT 6`,
-      [escolaId, currentUserId],
-    );
-
-    const pending = pendingRows.map((r) => {
-      const total = Number(r.total_alunos) || 0;
-      const entregues = Number(r.entregues) || 0;
-      const faltam = Math.max(0, total - entregues);
-      let urgency = "pu-y";
-      let chip = "em prazo";
-      let when = "Sem prazo";
-      if (r.data_entrega) {
-        const deadline = new Date(r.data_entrega);
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        const diffDays = Math.floor((deadline - today) / (1000 * 60 * 60 * 24));
-        if (diffDays < 0) {
-          urgency = "pu-r";
-          chip = "atrasada";
-          when = `Atrasada · ${faltam} pendentes`;
-        } else if (diffDays === 0) {
-          urgency = "pu-r";
-          chip = "urgente";
-          when = `Hoje · ${faltam} não entregaram`;
-        } else if (diffDays <= 2) {
-          urgency = "pu-y";
-          chip = "em prazo";
-          when = `${deadline.toLocaleDateString("pt-BR")} · ${faltam} pendentes`;
-        } else {
-          urgency = "pu-g";
-          chip = "tranquilo";
-          when = `${deadline.toLocaleDateString("pt-BR")} · ${faltam} pendentes`;
-        }
-      } else {
-        when = `${faltam} pendentes`;
-      }
-      return {
-        title: r.titulo || "Tarefa",
-        subtitle: r.nome_turma ? `${r.nome_turma} · ${when}` : when,
-        urgency,
-        chip,
-      };
-    });
 
     return {
       success: true,
       data: {
-        teacher: {
-          name: teacherName,
-          subtitle: teacherSub,
+        school: {
+          name: school?.nome || "Escola",
+          subtitle: [school?.cidade, school?.estado].filter(Boolean).join(" · ") || "Dashboard do Administrador Escolar",
+          stats: [
+            { value: students },
+            { value: teachers },
+            { value: classes },
+          ],
         },
         stats: [
-          {
-            value: String(alunosAtivos),
-            sub: `${turmasTotal} turma${turmasTotal === 1 ? "" : "s"}`,
-          },
-          { value: taxaConclusao + "%", sub: taxaSub },
-          { value: String(tarefasAtivas), sub: "Publicadas por você" },
-          { value: avaliacaoMedia, sub: avaliacaoSub },
+          { value: students },
+          { value: `${completion}%` },
+          { value: tasks },
+          { value: xpTotal },
         ],
-        turmas,
-        school: {
-          name: schoolName[0] ? schoolName[0].nome : "Escola",
-          subtitle: schoolTitle,
-        },
-        activities,
-        completionsChart,
-        topAlunos,
-        pending,
+        teachers: teacherRows.map((teacher, index) => ({
+          name: teacher.nome,
+          subtitle: `${Number(teacher.classes) || 0} turma(s)`,
+          avatarClass: `ta${(index % 4) + 1}`,
+          emoji: "👩‍🏫",
+        })),
+        alerts,
+        classes: classRows.map((item) => ({
+          name: item.nome_turma,
+          students: Number(item.students) || 0,
+          completion: Number(item.completion) || 0,
+          statusClass: item.status === "ativa" ? "sd-g" : "sd-y",
+          statusLabel: item.status || "—",
+        })),
+        xpChart,
+        activities: activityRows.map((item, index) => ({
+          title: `${item.student_name} concluiu “${item.task_title || "tarefa"}”`,
+          subtitle: `+${Number(item.xp_ganho) || 0} XP`,
+          time: formatRelative(item.criado_em),
+          iconClass: index % 2 ? "ai-g" : "ai-b",
+          icon: "✓",
+        })),
+        xpMonthValue: xpTotal,
+        xpMonthDelta: "—",
       },
     };
-  } catch (err) {
-    console.error("getDashboardTeacher Error:", err);
+  } catch (error) {
+    console.error("Erro ao carregar dashboard do administrador escolar:", error);
     return {
       success: false,
-      message: "Erro ao carregar dashboard: " + err.message,
+      message: `Erro ao carregar dashboard: ${error.message}`,
     };
   }
 }
 
-module.exports = { getDashboardTeacher };
+module.exports = { getDashboardAdminEscolar };
