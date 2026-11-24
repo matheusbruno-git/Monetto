@@ -233,6 +233,12 @@ if not exist "%CD%\node_modules\@google\genai" (
     if errorlevel 1 goto ERROR
 )
 
+if not exist "%CD%\node_modules\groq-sdk" (
+    echo Installing groq-sdk...
+    call node "%NPM_CLI%" install groq-sdk
+    if errorlevel 1 goto ERROR
+)
+
 if not exist "%CD%\node_modules\dotenv" (
     echo Installing dotenv...
     call node "%NPM_CLI%" install dotenv

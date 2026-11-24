@@ -252,14 +252,13 @@ ipcMain.handle("updateUserPhoto", async (event, dados) => {
 });
 
 ipcMain.handle("generateLesson", async (event, request) => {
+  const defaultModel = "openai/gpt-oss-120b";
   const moduleCode = typeof request === "string" ? request : request?.moduleCode;
-  const model = typeof request === "string" ? "gemini-4-hydrogen" : request?.model || "gemini-4-hydrogen";
+  const model = typeof request === "string" ? defaultModel : request?.model || defaultModel;
   const supportedModels = new Set([
-    "gemini-4-hydrogen",
-    "gemini-4-neon",
-    "gemini-4-carbon",
-    "gemini-decision-1",
-    "gemini-nano-banana-2.1",
+    "openai/gpt-oss-120b",
+    "llama-3.3-70b-versatile",
+    "llama-3.1-8b-instant",
   ]);
 
   try {
@@ -291,10 +290,8 @@ ipcMain.handle("generateLesson", async (event, request) => {
 
     const moduleData = JSON.parse(file);
 
-    // Call Gemini
-    const { generateLearningContent } = require(
-      path.join(basePath, "backend", "ai_gemini.js")
-    );
+    // Call Groq
+    const { generateLearningContent } = require(path.join(basePath, "backend/ai_groq.js"),);
 
     const generated = await generateLearningContent(moduleData, model);
 
@@ -320,18 +317,18 @@ ipcMain.handle("generateLesson", async (event, request) => {
     const normalized = detail.toLowerCase();
     let message = detail;
 
-    if (detail.includes("GEMINI_API_KEY")) {
-      message = "A chave GEMINI_API_KEY não foi encontrada no arquivo .env do projeto.";
+    if (detail.includes("GROQ_API_KEY")) {
+      message = "A chave GROQ_API_KEY não foi encontrada no arquivo .env do projeto.";
     } else if (statusCode === 503 || normalized.includes("high demand") || normalized.includes("overload") || normalized.includes("capacity")) {
       message = `O modelo está temporariamente com alta demanda. Aguarde um pouco ou tente outro modelo. Detalhes: ${detail}`;
-    } else if (statusCode === 429 || normalized.includes("resource_exhausted") || normalized.includes("quota")) {
+    } else if (statusCode === 429 || normalized.includes("resource_exhausted") || normalized.includes("quota") || normalized.includes("rate limit")) {
       message = `O limite de uso deste modelo foi atingido. Aguarde e tente novamente ou escolha outro modelo; cada modelo pode ter limites diferentes. Detalhes: ${detail}`;
     } else if (statusCode === 402) {
-      message = "Este modelo exige créditos ou faturamento ativo para a sua chave Gemini.";
-    } else if (statusCode === 403) {
-      message = "Sua chave Gemini não tem acesso a este modelo. Escolha outro modelo ou confira o acesso habilitado no Google AI Studio.";
+      message = "Este modelo exige créditos ou faturamento ativo na sua conta Groq.";
+    } else if (statusCode === 401 || statusCode === 403) {
+      message = "Sua chave GROQ_API_KEY é inválida ou não tem acesso a este modelo.";
     } else if (statusCode) {
-      message = `A Gemini recusou a solicitação (HTTP ${statusCode}): ${detail}`;
+      message = `A Groq recusou a solicitação (HTTP ${statusCode}): ${detail}`;
     } else {
       message = `Não foi possível gerar com ${model}: ${detail}`;
     }
