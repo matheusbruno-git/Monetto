@@ -58,7 +58,7 @@ async function loadTeacherSidebarUser() {
   const nameEl = document.getElementById("sidebar-user-name");
   const infoEl = document.getElementById("sidebar-user-info");
   let session = {};
-  try { session = JSON.parse(localStorage.getItem("session") || "{}"); } catch (_) {}
+  try { session = JSON.parse(localStorage.getItem("session") || "{}"); } catch (_) { }
   if (nameEl) nameEl.textContent = session.nome || "Professor";
   if (!window.api?.getDashboardTeacher) return;
   const id = session.id_usuario || session.id;
@@ -72,6 +72,21 @@ async function loadTeacherSidebarUser() {
     console.error("Erro ao carregar o nome do professor:", error);
   }
 }
+
+function sairDaConta(destino) {
+  if (!confirm("Tem certeza que deseja sair da conta?")) return;
+
+  try {
+    localStorage.removeItem("session");
+    sessionStorage.clear();
+  } catch (_) { }
+
+  const loginUrl = new URL(destino || "../../login/login.html", window.location.href);
+  loginUrl.searchParams.set("fresh", "1");
+  window.location.replace(loginUrl.href);
+}
+
+window.sairDaConta = sairDaConta;
 
 loadTeacherSidebar();
 updateSidebarActiveLink();

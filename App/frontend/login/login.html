@@ -21,12 +21,14 @@
       overflow: auto;
       background: var(--bg) !important;
     }
+
     body.login-page .page {
       min-height: 100vh;
       align-items: center;
       justify-content: center;
       padding: 32px 20px;
     }
+
     body.login-page .page .left {
       flex: none;
       width: 100%;
@@ -34,20 +36,24 @@
       padding: 0;
       background: transparent !important;
     }
+
     body.login-page .form-box {
       width: min(100%, 440px);
       max-width: 440px;
       padding: 36px;
       border-radius: 16px !important;
     }
+
     body.login-page .form-box .logo {
       color: var(--text) !important;
       font-size: 1.6rem;
     }
+
     body.login-page .form-box .subtitle {
       color: var(--muted) !important;
       margin-bottom: 30px;
     }
+
     body.login-page .form-box h2 {
       margin: 0 0 6px;
       color: var(--text) !important;
@@ -58,23 +64,28 @@
       text-decoration-line: none !important;
       -webkit-text-fill-color: var(--text) !important;
     }
+
     body.login-page .form-box .desc {
       color: var(--muted) !important;
       margin-bottom: 24px;
     }
+
     body.login-page .form-box .form-group label {
       color: var(--text) !important;
     }
+
     body.login-page .form-box .input-wrap {
       padding: 0 12px;
       background: var(--surface-2) !important;
       border: 1px solid var(--border) !important;
       border-radius: 9px;
     }
+
     body.login-page .form-box .input-wrap:focus-within {
       border-color: var(--brand) !important;
       box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 16%, transparent);
     }
+
     body.login-page .form-box .input-wrap input {
       min-height: 46px;
       padding: 11px 0;
@@ -85,14 +96,23 @@
       box-shadow: none !important;
       outline: 0;
     }
+
     body.login-page .form-box .input-wrap input::placeholder {
       color: var(--muted) !important;
     }
+
+    body.login-page .form-box .input-wrap input:focus-visible {
+      outline: none !important;
+      outline-offset: 0;
+      box-shadow: none !important;
+    }
+
     body.login-page .form-box .btn {
       min-height: 46px;
       margin-top: 8px;
       border-radius: 9px !important;
     }
+
     body.login-page .login-note {
       margin: 16px 0 0;
       color: var(--muted) !important;
@@ -100,10 +120,19 @@
       line-height: 1.5;
       text-align: center;
     }
-    body.login-page .message { line-height: 1.45; }
+
+    body.login-page .message {
+      line-height: 1.45;
+    }
+
     @media (max-width: 480px) {
-      body.login-page .page { padding: 18px 14px; }
-      body.login-page .form-box { padding: 28px 22px; }
+      body.login-page .page {
+        padding: 18px 14px;
+      }
+
+      body.login-page .form-box {
+        padding: 28px 22px;
+      }
     }
   </style>
 </head>
@@ -154,7 +183,8 @@
           <button class="btn" type="submit">
             Entrar e jogar
           </button>
-          <p class="login-note">Seu acesso é fornecido pela escola. Se precisar de uma conta, fale com o administrador.</p>
+          <p class="login-note">Seu acesso é fornecido pela escola. Se precisar de uma conta, fale com o administrador.
+          </p>
         </form>
 
         <div id="msg" class="message" role="status" aria-live="polite"></div>

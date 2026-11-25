@@ -215,14 +215,14 @@
       return;
     }
 
-    localStorage.removeItem(
-      "session",
-    );
+    try {
+      localStorage.removeItem("session");
+      sessionStorage.clear();
+    } catch (_) { }
 
-    sessionStorage.clear();
-
-    window.location.href =
-      destino;
+    const loginUrl = new URL(destino, window.location.href);
+    loginUrl.searchParams.set("fresh", "1");
+    window.location.replace(loginUrl.href);
   }
 
   window.normalizePath =
