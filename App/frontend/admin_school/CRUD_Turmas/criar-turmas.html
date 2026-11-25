@@ -59,6 +59,104 @@
       color: var(--text) !important;
       border-color: var(--border) !important;
     }
+
+    .page-intro {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      margin: 0 0 24px;
+    }
+    .page-eyebrow {
+      color: var(--brand) !important;
+      font-size: .72rem;
+      font-weight: 750;
+      letter-spacing: .1em;
+    }
+    .page-intro h1 {
+      margin: 5px 0 4px;
+      color: var(--text) !important;
+      font-size: clamp(1.65rem, 3vw, 2.2rem);
+      letter-spacing: -.04em;
+    }
+    .page-intro p {
+      margin: 0;
+      color: var(--muted) !important;
+      max-width: 620px;
+    }
+    .live-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 11px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      background: var(--surface);
+      font-size: .78rem;
+      white-space: nowrap;
+    }
+    .live-indicator span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--ok);
+    }
+    .main .form-area,
+    .main .list-area {
+      background: var(--surface) !important;
+      color: var(--text) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 14px !important;
+      box-shadow: var(--shadow) !important;
+    }
+    .main .form-area .form-title,
+    .main .list-area .list-hd h3,
+    .main .turma-card h4,
+    .main .turma-meta,
+    .main .student-option,
+    .main .student-option strong {
+      color: var(--text) !important;
+    }
+    .main .form-area .form-sub,
+    .main .turma-meta span,
+    .main .student-option small {
+      color: var(--muted) !important;
+    }
+    .main .turma-card,
+    .main .modal,
+    .main .student-select {
+      background: var(--surface) !important;
+      color: var(--text) !important;
+      border-color: var(--border) !important;
+    }
+    .main .turma-card {
+      padding: 18px !important;
+      border-radius: 12px !important;
+      box-shadow: none !important;
+    }
+    .main .student-option {
+      border-color: var(--border) !important;
+    }
+    .main .form-area input,
+    .main .form-area select,
+    .main .modal input {
+      background: var(--surface-2) !important;
+      color: var(--text) !important;
+      border-color: var(--border) !important;
+    }
+    .main #turmasCount {
+      padding: 5px 10px;
+      border-radius: 999px;
+      color: var(--brand) !important;
+      background: var(--brand-soft);
+      font-size: .78rem;
+      font-weight: 700;
+    }
+    @media (max-width: 700px) {
+      .page-intro { align-items: flex-start; flex-direction: column; }
+      .live-indicator { white-space: normal; }
+    }
   </style>
 </head>
 <body>
@@ -71,6 +169,14 @@
   <div id="sidebar-container"></div>
 
   <div class="main">
+    <section class="page-intro" aria-labelledby="pageTitle">
+      <div>
+        <span class="page-eyebrow">GESTÃO ESCOLAR</span>
+        <h1 id="pageTitle">Turmas</h1>
+        <p>Organize as turmas da escola e acompanhe os alunos vinculados em um só lugar.</p>
+      </div>
+      <span class="live-indicator"><span aria-hidden="true"></span>Atualização automática</span>
+    </section>
     <div class="page-grid">
       <div class="form-area">
         <div class="form-title"> Criar Nova Turma</div>
@@ -98,7 +204,7 @@
       <div class="list-area">
         <div class="list-hd">
           <h3> Turmas Criadas</h3>
-          <span id="turmasCount">0 turmas</span>
+          <span id="turmasCount" aria-live="polite">0 turmas</span>
         </div>
         <div id="turmasListBody">
           <div class="empty-state">Carregando...</div>

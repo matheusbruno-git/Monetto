@@ -40,18 +40,6 @@ async function resolveEscolaId(db, currentUserId) {
   return rows[0] && rows[0].id_escola ? rows[0].id_escola : null;
 }
 
-ipcMain.handle("registerUser", async (event, dados) => {
-  try {
-    const { registerUser } = require(
-      path.join(basePath, "backend/create_user.js"),
-    );
-    return await registerUser(dados);
-  } catch (err) {
-    console.error("registerUser Error:", err);
-    return { success: false, message: "Erro ao cadastrar usuário." };
-  }
-});
-
 ipcMain.handle("login", async (event, { email, senha }) => {
   try {
     const db = require(path.join(basePath, "backend/connection.js"));

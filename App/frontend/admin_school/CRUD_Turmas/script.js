@@ -6,6 +6,8 @@ let turmas = [];
 let alunos = [];
 let turmaSelecionadaId = null;
 let alunosSelecionados = new Set();
+let refreshInProgress = false;
+let refreshPending = false;
 
 function getSession() {
   try {
@@ -65,12 +67,12 @@ async function loadAlunos() {
   }
 }
 
-async function loadTurmasList() {
+async function loadTurmasList({ silent = false } = {}) {
   const body = document.getElementById("turmasListBody");
   const count = document.getElementById("turmasCount");
   if (!body) return;
 
-  body.innerHTML = '<div class="empty-state">Carregando...</div>';
+  if (!silent) body.innerHTML = '<div class="empty-state">Carregando turmas...</div>';
 
   const id = currentUserId();
   if (!id) {
@@ -141,6 +143,25 @@ async function loadTurmasList() {
   }
 }
 
+async function refreshTurmasData({ silent = true } = {}) {
+  if (document.hidden) return;
+  if (refreshInProgress) {
+    refreshPending = true;
+    return;
+  }
+  refreshInProgress = true;
+  try {
+    await loadAlunos();
+    await loadTurmasList({ silent });
+  } finally {
+    refreshInProgress = false;
+    if (refreshPending && !document.hidden) {
+      refreshPending = false;
+      await refreshTurmasData();
+    }
+  }
+}
+
 async function criarTurma() {
   const btn = document.getElementById("btn");
   const nome_turma = document.getElementById("nomeTurma")?.value.trim();
@@ -169,8 +190,7 @@ async function criarTurma() {
     document.getElementById("nivelSelect").value = "";
     showMsg("Turma criada com sucesso.", true);
 
-    await loadAlunos();
-    await loadTurmasList();
+    await refreshTurmasData({ silent: false });
   } catch (err) {
     console.error("criarTurma:", err);
     showMsg(err.message || "Erro ao criar turma.", false);
@@ -265,8 +285,7 @@ async function saveStudents() {
     if (!result.success) throw new Error(result.message || "Erro ao salvar alunos.");
 
     closeStudentModal();
-    await loadAlunos();
-    await loadTurmasList();
+    await refreshTurmasData({ silent: false });
   } catch (err) {
     console.error("saveStudents:", err);
     alert(err.message || "Erro ao salvar alunos.");
@@ -282,8 +301,7 @@ async function deleteTurma(id_turma) {
   try {
     const result = await window.api.deleteTurma(id_turma);
     if (!result.success) throw new Error(result.message || "Erro ao excluir turma.");
-    await loadAlunos();
-    await loadTurmasList();
+    await refreshTurmasData({ silent: false });
   } catch (err) {
     console.error("deleteTurma:", err);
     alert(err.message || "Erro ao excluir turma.");
@@ -315,6 +333,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("studentSearch")?.addEventListener("input", renderStudentOptions);
 
   await loadNiveis();
-  await loadAlunos();
-  await loadTurmasList();
+  await refreshTurmasData({ silent: false });
+
+  // Keep this view current when another admin changes classes or assignments.
+  window.setInterval(() => refreshTurmasData(), 15000);
+  window.addEventListener("focus", () => refreshTurmasData());
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) refreshTurmasData();
+  });
 });

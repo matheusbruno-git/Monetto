@@ -16,11 +16,9 @@ async function registerTurma(dados) {
     };
   }
 
-  const conn = await db.promise().getConnection();
-
   try {
     // Professor is optional at creation time. The admin can assign one later.
-    const [result] = await conn.execute(
+    const [result] = await db.promise().execute(
       `INSERT INTO turmas
        (id_escola, id_professor, id_nivel, nome_turma, ano_letivo, status)
        VALUES (?, ?, ?, ?, ?, 'ativa')`,
@@ -36,8 +34,6 @@ async function registerTurma(dados) {
   } catch (err) {
     console.error("registerTurma:", err);
     return { success: false, message: "Erro ao criar turma: " + err.message };
-  } finally {
-    conn.release();
   }
 }
 

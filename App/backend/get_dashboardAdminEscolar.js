@@ -59,6 +59,15 @@ async function getDashboardAdminEscolar(currentUserId) {
 
     const students = Number(counts[0]?.students) || 0;
     const teachers = Number(counts[0]?.teachers) || 0;
+    const studentRows = await query(
+      `SELECT u.id_usuario, u.nome, u.serie
+       FROM usuarios u
+       INNER JOIN perfis p ON p.id_perfil = u.id_perfil AND p.nome = 'aluno'
+       WHERE u.id_escola = ? AND u.ativo = 1
+       ORDER BY u.nome ASC
+       LIMIT 100`,
+      [escolaId],
+    );
     const classes = await count(
       `SELECT COUNT(*) AS total FROM turmas WHERE id_escola = ?`,
       [escolaId],
@@ -190,6 +199,12 @@ async function getDashboardAdminEscolar(currentUserId) {
           subtitle: `${Number(teacher.classes) || 0} turma(s)`,
           avatarClass: `ta${(index % 4) + 1}`,
           emoji: "👩‍🏫",
+        })),
+        students: studentRows.map((student) => ({
+          id: student.id_usuario,
+          name: student.nome,
+          subtitle: student.serie || "Aluno ativo",
+          emoji: "🎓",
         })),
         alerts,
         classes: classRows.map((item) => ({

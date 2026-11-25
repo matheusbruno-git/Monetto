@@ -20,11 +20,13 @@ document.getElementById("btn")?.addEventListener("click", async () => {
   const dados = {
     id_escola: session.id_escola,
     nome: document.getElementById("nome").value?.trim(),
+    email: document.getElementById("email-aluno").value?.trim(),
+    senha: document.getElementById("senha").value,
     data_nascimento: document.getElementById("data").value,
     cpf: document.getElementById("cpf").value?.trim(),
     responsavel: document.getElementById("resp").value?.trim(),
     telefone_responsavel: document.getElementById("tel").value?.trim(),
-    email_responsavel: document.getElementById("email").value?.trim(),
+    email_responsavel: document.getElementById("email-responsavel").value?.trim(),
     serie: document.getElementById("serie").value?.trim(),
   };
 
@@ -52,12 +54,15 @@ document.getElementById("btn")?.addEventListener("click", async () => {
   // Basic validation for required fields
   if (
     !dados.nome ||
+    !dados.email ||
+    !dados.senha ||
+    !dados.id_escola ||
     !dados.data_nascimento ||
     !dados.cpf ||
     !dados.responsavel
   ) {
     showFormMsg(
-      "Preencha todos os campos obrigatórios (nome, data, CPF, responsável).",
+      "Preencha os campos obrigatórios: nome, email, senha, data, CPF e responsável.",
       "err",
     );
     return;
@@ -75,13 +80,24 @@ document.getElementById("btn")?.addEventListener("click", async () => {
       if (successMsg) successMsg.style.display = "block";
 
       // Clear form fields
-      ["nome", "data", "cpf", "resp", "tel", "email", "serie"].forEach((id) => {
+      [
+        "nome",
+        "email-aluno",
+        "senha",
+        "data",
+        "cpf",
+        "resp",
+        "tel",
+        "email-responsavel",
+        "serie",
+      ].forEach((id) => {
         const el = document.getElementById(id);
         if (el) el.value = "";
       });
 
       // Reload dashboard/list so the new aluno appears
-      if (typeof loadDashboard === "function") loadDashboard();
+      if (typeof loadDashboard === "function") await loadDashboard();
+      btn.disabled = false;
 
       // hide success text after a short delay
       setTimeout(() => {
@@ -178,7 +194,7 @@ function renderStudents(students) {
   el.innerHTML = students
     .map(
       (s) => `
-    <div class="teach-item">
+    <div class="teach-item" data-student-id="${s.id || ""}">
       <div class="tav ${s.avatarClass || "ta1"}">${s.emoji || " Schüler"}</div>
       <div class="teach-info"><strong>${s.name}</strong><span>${s.subtitle || ""}</span></div>
     </div>`,

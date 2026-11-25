@@ -15,9 +15,100 @@
 
 
   <link rel="stylesheet" href="../shared/redesign.css" />
+  <style>
+    body.login-page {
+      min-height: 100vh;
+      overflow: auto;
+      background: var(--bg) !important;
+    }
+    body.login-page .page {
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 20px;
+    }
+    body.login-page .page .left {
+      flex: none;
+      width: 100%;
+      min-height: 0;
+      padding: 0;
+      background: transparent !important;
+    }
+    body.login-page .form-box {
+      width: min(100%, 440px);
+      max-width: 440px;
+      padding: 36px;
+      border-radius: 16px !important;
+    }
+    body.login-page .form-box .logo {
+      color: var(--text) !important;
+      font-size: 1.6rem;
+    }
+    body.login-page .form-box .subtitle {
+      color: var(--muted) !important;
+      margin-bottom: 30px;
+    }
+    body.login-page .form-box h2 {
+      margin: 0 0 6px;
+      color: var(--text) !important;
+      font-family: inherit;
+      font-size: 1.55rem;
+      font-weight: 700;
+      text-decoration: none !important;
+      text-decoration-line: none !important;
+      -webkit-text-fill-color: var(--text) !important;
+    }
+    body.login-page .form-box .desc {
+      color: var(--muted) !important;
+      margin-bottom: 24px;
+    }
+    body.login-page .form-box .form-group label {
+      color: var(--text) !important;
+    }
+    body.login-page .form-box .input-wrap {
+      padding: 0 12px;
+      background: var(--surface-2) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 9px;
+    }
+    body.login-page .form-box .input-wrap:focus-within {
+      border-color: var(--brand) !important;
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 16%, transparent);
+    }
+    body.login-page .form-box .input-wrap input {
+      min-height: 46px;
+      padding: 11px 0;
+      background: transparent !important;
+      color: var(--text) !important;
+      border: 0 !important;
+      border-radius: 0;
+      box-shadow: none !important;
+      outline: 0;
+    }
+    body.login-page .form-box .input-wrap input::placeholder {
+      color: var(--muted) !important;
+    }
+    body.login-page .form-box .btn {
+      min-height: 46px;
+      margin-top: 8px;
+      border-radius: 9px !important;
+    }
+    body.login-page .login-note {
+      margin: 16px 0 0;
+      color: var(--muted) !important;
+      font-size: .82rem;
+      line-height: 1.5;
+      text-align: center;
+    }
+    body.login-page .message { line-height: 1.45; }
+    @media (max-width: 480px) {
+      body.login-page .page { padding: 18px 14px; }
+      body.login-page .form-box { padding: 28px 22px; }
+    }
+  </style>
 </head>
 
-<body>
+<body class="login-page">
 
   <script>
     // Electron adds this only on a fresh app launch. Clear persisted auth while
@@ -40,108 +131,33 @@
 
         <p class="subtitle">Educação Financeira Inteligente</p>
 
-        <div id="login-form">
-          <h2>Entrar </h2>
+        <form id="login-form" onsubmit="event.preventDefault(); fazerLogin();">
+          <h2>Entrar</h2>
           <p class="desc">Acesse sua conta e continue evoluindo</p>
 
           <div class="form-group">
-            <label>Email</label>
+            <label for="email">Email</label>
 
             <div class="input-wrap">
-              <input type="email" id="email" placeholder="seu@email.com" />
+              <input type="email" id="email" placeholder="seu@email.com" autocomplete="username" required autofocus />
             </div>
           </div>
 
           <div class="form-group">
-            <label>Senha</label>
+            <label for="senha">Senha</label>
 
             <div class="input-wrap">
-              <input type="password" id="senha" placeholder="••••••••" />
+              <input type="password" id="senha" placeholder="••••••••" autocomplete="current-password" required />
             </div>
           </div>
 
-          <button class="btn" onclick="fazerLogin()">
+          <button class="btn" type="submit">
             Entrar e jogar
           </button>
+          <p class="login-note">Seu acesso é fornecido pela escola. Se precisar de uma conta, fale com o administrador.</p>
+        </form>
 
-          <div class="toggle">
-            Não tem conta?
-            <a href="#" onclick="showRegister()">Criar conta</a>
-          </div>
-        </div>
-
-        <!-- REGISTER -->
-
-        <div id="register-form" style="display: none">
-          <h2>Criar Conta </h2>
-          <p class="desc">Comece sua jornada financeira</p>
-
-          <div class="form-group">
-            <label>Nome Completo</label>
-
-            <div class="input-wrap">
-              <input type="text" id="nome" placeholder="Seu nome" />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Email</label>
-
-            <div class="input-wrap">
-              <input type="email" id="reg_email" placeholder="seu@email.com" />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Senha</label>
-
-            <div class="input-wrap">
-              <input type="password" id="reg_senha" placeholder="Crie uma senha" />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Tipo de Usuário</label>
-
-            <div class="input-wrap">
-
-              <select id="id_perfil">
-                <option value="1">Aluno</option>
-                <option value="2">Professor</option>
-                <option value="3">Escola</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Escola</label>
-
-            <div class="input-wrap">
-              <select id="id_escola">
-                <option value="">Selecione uma escola</option>
-              </select>
-            </div>
-          </div>
-
-          <button class="btn" onclick="fazerCadastro()">
-            Criar conta
-          </button>
-
-          <div class="toggle">
-            Já possui conta?
-            <a href="#" onclick="showLogin()">Fazer login</a>
-          </div>
-
-          <div id="g_id_onload"
-            data-client_id="731708419688-3fmc106b98nv1lsb0vallfijb2fnfako.apps.googleusercontent.com"
-            data-callback="handleCredentialResponse"></div>
-
-          <div class="g_id_signin"></div>
-
-          <script src="https://accounts.google.com/gsi/client" async defer></script>
-        </div>
-
-        <div id="msg" class="message"></div>
+        <div id="msg" class="message" role="status" aria-live="polite"></div>
       </div>
     </div>
 
@@ -199,90 +215,6 @@
       else localStorage.removeItem("session");
     })();
 
-    async function fazerCadastro() {
-      const dados = {
-        nome: document.getElementById("nome").value.trim(),
-        email: document.getElementById("reg_email").value.trim(),
-        senha: document.getElementById("reg_senha").value,
-        id_perfil: parseInt(document.getElementById("id_perfil").value),
-        id_escola: parseInt(document.getElementById("id_escola").value) || null,
-      };
-
-      const msgElement = document.getElementById("msg");
-
-      try {
-        const result = await window.api.registerUser(dados);
-
-        msgElement.textContent = result.message;
-
-        msgElement.className =
-          "message " + (result.success ? "success" : "error");
-
-        if (result.success) {
-          setTimeout(() => {
-            showLogin();
-          }, 1800);
-        }
-      } catch (err) {
-        console.error(err);
-
-        msgElement.textContent = "Erro de comunicação com o servidor.";
-
-        msgElement.className = "message error";
-      }
-    }
-
-    function showRegister() {
-      document.getElementById("login-form").style.display = "none";
-
-      document.getElementById("register-form").style.display = "block";
-
-      document.getElementById("msg").textContent = "";
-    }
-
-    function showLogin() {
-      document.getElementById("login-form").style.display = "block";
-
-      document.getElementById("register-form").style.display = "none";
-
-      document.getElementById("msg").textContent = "";
-    }
-    // Ativa login ao pressionar Enter nos campos de e-mail ou senha do formulário principal
-    (function () {
-      const email = document.getElementById('email');
-      const senha = document.getElementById('senha');
-      if (email || senha) {
-        document.body.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter') fazerLogin();
-        });
-      }
-    })();
-
-    async function loadSchools() {
-      const select = document.getElementById("id_escola");
-
-      try {
-        const schools = await window.api.getSchools();
-
-        console.log(schools);
-
-        select.innerHTML = '<option value="">Selecione uma escola</option>';
-
-        schools.forEach(escola => {
-          const option = document.createElement("option");
-
-          option.value = escola.id_escola;
-          option.textContent = escola.nome;
-
-          select.appendChild(option);
-        });
-
-      } catch (error) {
-        console.error("Erro ao carregar escolas:", error);
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", loadSchools);
   </script>
   <script src="script.js"></script>
   <script src="../shared/monetto-shell.js"></script>
