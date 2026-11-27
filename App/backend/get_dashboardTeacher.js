@@ -110,13 +110,13 @@ async function getDashboardTeacher(currentUserId) {
       [escolaId, currentUserId],
     );
 
+    // Teacher reports are school-wide, so keep the dashboard's headline
+    // student metrics on the same scope (including students without a class).
     const alunosAtivos = await safeCount(
       `SELECT COUNT(*) AS total
        FROM usuarios u
-       INNER JOIN turmas t ON t.id_turma = u.id_turma
-       WHERE u.id_perfil = 1 AND u.ativo = 1 AND u.id_escola = ?
-         AND t.id_escola = ? AND t.id_professor = ?`,
-      [escolaId, escolaId, currentUserId],
+       WHERE u.id_perfil = 1 AND u.ativo = 1 AND u.id_escola = ?`,
+      [escolaId],
     );
 
     const tarefasAtivas = await safeCount(
@@ -132,10 +132,8 @@ async function getDashboardTeacher(currentUserId) {
         `SELECT COUNT(DISTINCT e.id_usuario) AS total
          FROM entregas e
          INNER JOIN usuarios u ON u.id_usuario = e.id_usuario
-         INNER JOIN turmas t ON u.id_turma = t.id_turma
-         WHERE t.id_professor = ? AND t.id_escola = ?
-           AND u.id_perfil = 1 AND u.ativo = 1`,
-        [currentUserId, escolaId],
+         WHERE u.id_escola = ? AND u.id_perfil = 1 AND u.ativo = 1`,
+        [escolaId],
       );
       if (comEntrega > 0) {
         taxaConclusao = Math.round((comEntrega / alunosAtivos) * 100);
@@ -203,11 +201,11 @@ async function getDashboardTeacher(currentUserId) {
        FROM entregas e
        INNER JOIN usuarios u ON u.id_usuario = e.id_usuario
        INNER JOIN tarefas tar ON tar.id_tarefa = e.id_tarefa
-       INNER JOIN turmas t ON u.id_turma = t.id_turma
-       WHERE t.id_professor = ? AND t.id_escola = ?
+       LEFT JOIN turmas t ON u.id_turma = t.id_turma
+       WHERE u.id_escola = ?
        ORDER BY e.criado_em DESC
        LIMIT 5`,
-      [currentUserId, escolaId],
+      [escolaId],
     );
     for (const r of recentEntregas) {
       const xp = r.xp_ganho != null ? ` · +${r.xp_ganho} XP` : "";
@@ -249,11 +247,11 @@ async function getDashboardTeacher(currentUserId) {
       `SELECT DAYOFWEEK(e.criado_em) AS dow, COUNT(*) AS total
        FROM entregas e
        INNER JOIN usuarios u ON u.id_usuario = e.id_usuario
-       INNER JOIN turmas t ON u.id_turma = t.id_turma
-       WHERE t.id_professor = ? AND t.id_escola = ?
+       LEFT JOIN turmas t ON u.id_turma = t.id_turma
+       WHERE u.id_escola = ?
          AND e.criado_em >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
        GROUP BY DAYOFWEEK(e.criado_em)`,
-      [currentUserId, escolaId],
+      [escolaId],
     );
     const byDow = {};
     for (const r of completionsByDay) {
@@ -282,15 +280,14 @@ async function getDashboardTeacher(currentUserId) {
       `SELECT u.nome, t.nome_turma,
               COALESCE(SUM(${xpEntrega}), 0) AS xp
        FROM usuarios u
-       INNER JOIN turmas t ON u.id_turma = t.id_turma
+       LEFT JOIN turmas t ON t.id_turma = u.id_turma
        LEFT JOIN entregas e ON e.id_usuario = u.id_usuario
          AND e.criado_em >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
        WHERE u.id_perfil = 1 AND u.ativo = 1 AND u.id_escola = ?
-         AND t.id_professor = ?
        GROUP BY u.id_usuario, u.nome, t.nome_turma
        ORDER BY xp DESC
        LIMIT 5`,
-      [escolaId, currentUserId],
+      [escolaId],
     );
     const topAlunos = topRows.map((r) => ({
       name: r.nome,

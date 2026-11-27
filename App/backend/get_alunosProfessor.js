@@ -24,12 +24,11 @@ async function getAlunosProfessor(currentUserId) {
                 t.id_turma, t.nome_turma AS turma,
                 COALESCE(pa.xp_atual, 0) AS xp
          FROM usuarios u
-         INNER JOIN turmas t ON u.id_turma = t.id_turma
+         LEFT JOIN turmas t ON u.id_turma = t.id_turma
          LEFT JOIN progresso_aluno pa ON pa.id_aluno = u.id_usuario
          WHERE u.id_perfil = 1 AND u.id_escola = ?
-           AND t.id_professor = ? AND t.id_escola = ?
          ORDER BY t.nome_turma ASC, u.nome ASC`,
-                [escolaId, currentUserId, escolaId],
+                [escolaId],
             );
             rows = r;
         } catch (e) {
@@ -38,11 +37,10 @@ async function getAlunosProfessor(currentUserId) {
                 `SELECT u.id_usuario, u.nome, u.email, u.ativo,
                 t.id_turma, t.nome_turma AS turma
          FROM usuarios u
-         INNER JOIN turmas t ON u.id_turma = t.id_turma
+         LEFT JOIN turmas t ON u.id_turma = t.id_turma
          WHERE u.id_perfil = 1 AND u.id_escola = ?
-           AND t.id_professor = ?
          ORDER BY u.nome ASC`,
-                [escolaId, currentUserId],
+                [escolaId],
             );
             rows = r;
         }
